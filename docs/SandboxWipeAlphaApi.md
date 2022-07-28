@@ -55,14 +55,14 @@ Other parameters are passed through a pointer to a apiWipeWorkspaceRequest struc
 
 ### Authorization
 
-[bearerAuth](../../README.md#bearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
 - **Accept**: application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
-[[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 

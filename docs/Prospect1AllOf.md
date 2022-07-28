@@ -420,6 +420,6 @@ HasWaitlistPosition returns a boolean if a field has been set.
 
 UnsetWaitlistPosition ensures that no value is present for WaitlistPosition, not even an explicit nil
 
-[[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 
