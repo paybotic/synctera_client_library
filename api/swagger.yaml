@@ -11546,10 +11546,6 @@ components:
       - SAVING
       - CHECKING
       - LINE_OF_CREDIT
-      x-enumDescriptions:
-      - SAVING: Savings account
-      - CHECKING: Checking account
-      - LINE_OF_CREDIT: Line of Credit account
     account_verification:
       title: Information about the account verification process
       type: object
