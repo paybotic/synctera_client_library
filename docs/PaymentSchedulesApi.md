@@ -1,4 +1,4 @@
-# {{classname}}
+# \PaymentSchedulesApi
 
 All URIs are relative to *https://api.synctera.com/v0*
 
@@ -9,22 +9,60 @@ Method | HTTP request | Description
 [**ListPayments**](PaymentSchedulesApi.md#ListPayments) | **Get** /payment_schedules/payments | List payments
 [**PatchPaymentSchedule**](PaymentSchedulesApi.md#PatchPaymentSchedule) | **Patch** /payment_schedules/{payment_schedule_id} | Update a payment schedule
 
-# **CreatePaymentSchedule**
-> PaymentSchedule CreatePaymentSchedule(ctx, body)
-Create a payment schedule
+
+
+## CreatePaymentSchedule
+
+> PaymentSchedule CreatePaymentSchedule(ctx).PaymentSchedule(paymentSchedule).Execute()
 
 Create a payment schedule
 
-### Required Parameters
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    "time"
+    openapiclient "./openapi"
+)
+
+func main() {
+    paymentSchedule := *openapiclient.NewPaymentSchedule("Description_example", openapiclient.payment_instruction{AchInstruction: openapiclient.NewAchInstruction(*openapiclient.NewOutgoingAchRequest(int32(607), "USD", "bd6fb05d-a0ba-4105-b280-51afdbc09e02", "debit", "ced6ad36-d1cd-4e73-90f5-11a07331406b", "f48a96a4-3921-4e11-a062-270697d24bec"), "Type_example")}, *openapiclient.NewScheduleConfig("Frequency_example", int32(123), time.Now())) // PaymentSchedule | payment schedule to create
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentSchedulesApi.CreatePaymentSchedule(context.Background()).PaymentSchedule(paymentSchedule).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PaymentSchedulesApi.CreatePaymentSchedule``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreatePaymentSchedule`: PaymentSchedule
+    fmt.Fprintf(os.Stdout, "Response from `PaymentSchedulesApi.CreatePaymentSchedule`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreatePaymentScheduleRequest struct via the builder pattern
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**PaymentSchedule**](PaymentSchedule.md)| payment schedule to create | 
+ **paymentSchedule** | [**PaymentSchedule**](PaymentSchedule.md) | payment schedule to create | 
 
 ### Return type
 
-[**PaymentSchedule**](payment_schedule.md)
+[**PaymentSchedule**](PaymentSchedule.md)
 
 ### Authorization
 
@@ -32,37 +70,73 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json, application/problem+json
+- **Content-Type**: application/json
+- **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **ListPaymentSchedules**
-> PaymentScheduleList ListPaymentSchedules(ctx, optional)
+
+## ListPaymentSchedules
+
+> PaymentScheduleList ListPaymentSchedules(ctx).Limit(limit).PageToken(pageToken).Id(id).AccountId(accountId).CustomerId(customerId).Execute()
+
 List payment schedules
 
-Get paginated list of payment schedules
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    limit := int32(100) // int32 |  (optional) (default to 100)
+    pageToken := "xwsfu1mkaq" // string |  (optional)
+    id := []string{"Inner_example"} // []string | IDs. Multiple IDs can be provided as a comma-separated list. (optional)
+    accountId := []string{"Inner_example"} // []string | Originating account IDs. Multiple IDs can be provided as a comma-separated list. (optional)
+    customerId := []string{"Inner_example"} // []string | The IDs of customers who created the payment schedules. Multiple IDs can be provided as a comma-separated list. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentSchedulesApi.ListPaymentSchedules(context.Background()).Limit(limit).PageToken(pageToken).Id(id).AccountId(accountId).CustomerId(customerId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PaymentSchedulesApi.ListPaymentSchedules``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListPaymentSchedules`: PaymentScheduleList
+    fmt.Fprintf(os.Stdout, "Response from `PaymentSchedulesApi.ListPaymentSchedules`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListPaymentSchedulesRequest struct via the builder pattern
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***PaymentSchedulesApiListPaymentSchedulesOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a PaymentSchedulesApiListPaymentSchedulesOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **optional.Int32**|  | [default to 100]
- **pageToken** | **optional.String**|  | 
- **id** | [**optional.Interface of []string**](.md)| IDs. Multiple IDs can be provided as a comma-separated list. | 
- **accountId** | [**optional.Interface of []string**](.md)| Originating account IDs. Multiple IDs can be provided as a comma-separated list. | 
- **customerId** | [**optional.Interface of []string**](.md)| The IDs of customers who created the payment schedules. Multiple IDs can be provided as a comma-separated list. | 
+ **limit** | **int32** |  | [default to 100]
+ **pageToken** | **string** |  | 
+ **id** | **[]string** | IDs. Multiple IDs can be provided as a comma-separated list. | 
+ **accountId** | **[]string** | Originating account IDs. Multiple IDs can be provided as a comma-separated list. | 
+ **customerId** | **[]string** | The IDs of customers who created the payment schedules. Multiple IDs can be provided as a comma-separated list. | 
 
 ### Return type
 
-[**PaymentScheduleList**](payment_schedule_list.md)
+[**PaymentScheduleList**](PaymentScheduleList.md)
 
 ### Authorization
 
@@ -70,38 +144,75 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/problem+json
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **ListPayments**
-> PaymentList ListPayments(ctx, optional)
+
+## ListPayments
+
+> PaymentList ListPayments(ctx).Limit(limit).PageToken(pageToken).Id(id).ScheduleId(scheduleId).AccountId(accountId).CustomerId(customerId).Execute()
+
 List payments
 
-Get paginated list of payments
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    limit := int32(100) // int32 |  (optional) (default to 100)
+    pageToken := "xwsfu1mkaq" // string |  (optional)
+    id := []string{"Inner_example"} // []string | IDs. Multiple IDs can be provided as a comma-separated list. (optional)
+    scheduleId := []string{"Inner_example"} // []string | Payment schedule IDs. Multiple IDs can be provided as a comma-separated list. (optional)
+    accountId := []string{"Inner_example"} // []string | Originating account IDs. Multiple IDs can be provided as a comma-separated list. (optional)
+    customerId := []string{"Inner_example"} // []string | The IDs of customers who created the payment schedules. Multiple IDs can be provided as a comma-separated list. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentSchedulesApi.ListPayments(context.Background()).Limit(limit).PageToken(pageToken).Id(id).ScheduleId(scheduleId).AccountId(accountId).CustomerId(customerId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PaymentSchedulesApi.ListPayments``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListPayments`: PaymentList
+    fmt.Fprintf(os.Stdout, "Response from `PaymentSchedulesApi.ListPayments`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListPaymentsRequest struct via the builder pattern
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***PaymentSchedulesApiListPaymentsOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a PaymentSchedulesApiListPaymentsOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **optional.Int32**|  | [default to 100]
- **pageToken** | **optional.String**|  | 
- **id** | [**optional.Interface of []string**](.md)| IDs. Multiple IDs can be provided as a comma-separated list. | 
- **scheduleId** | [**optional.Interface of []string**](.md)| Payment schedule IDs. Multiple IDs can be provided as a comma-separated list. | 
- **accountId** | [**optional.Interface of []string**](.md)| Originating account IDs. Multiple IDs can be provided as a comma-separated list. | 
- **customerId** | [**optional.Interface of []string**](.md)| The IDs of customers who created the payment schedules. Multiple IDs can be provided as a comma-separated list. | 
+ **limit** | **int32** |  | [default to 100]
+ **pageToken** | **string** |  | 
+ **id** | **[]string** | IDs. Multiple IDs can be provided as a comma-separated list. | 
+ **scheduleId** | **[]string** | Payment schedule IDs. Multiple IDs can be provided as a comma-separated list. | 
+ **accountId** | **[]string** | Originating account IDs. Multiple IDs can be provided as a comma-separated list. | 
+ **customerId** | **[]string** | The IDs of customers who created the payment schedules. Multiple IDs can be provided as a comma-separated list. | 
 
 ### Return type
 
-[**PaymentList**](payment_list.md)
+[**PaymentList**](PaymentList.md)
 
 ### Authorization
 
@@ -109,28 +220,71 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/problem+json
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **PatchPaymentSchedule**
-> PaymentSchedule PatchPaymentSchedule(ctx, body, paymentScheduleId)
+
+## PatchPaymentSchedule
+
+> PaymentSchedule PatchPaymentSchedule(ctx, paymentScheduleId).PatchPaymentSchedule(patchPaymentSchedule).Execute()
+
 Update a payment schedule
 
-Update a payment schedule
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    paymentScheduleId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Payment schedule ID
+    patchPaymentSchedule := *openapiclient.NewPatchPaymentSchedule() // PatchPaymentSchedule | payment schedule to update
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentSchedulesApi.PatchPaymentSchedule(context.Background(), paymentScheduleId).PatchPaymentSchedule(patchPaymentSchedule).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PaymentSchedulesApi.PatchPaymentSchedule``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchPaymentSchedule`: PaymentSchedule
+    fmt.Fprintf(os.Stdout, "Response from `PaymentSchedulesApi.PatchPaymentSchedule`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**PatchPaymentSchedule**](PatchPaymentSchedule.md)| payment schedule to update | 
-  **paymentScheduleId** | [**string**](.md)| Payment schedule ID | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**paymentScheduleId** | **string** | Payment schedule ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchPaymentScheduleRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **patchPaymentSchedule** | [**PatchPaymentSchedule**](PatchPaymentSchedule.md) | payment schedule to update | 
 
 ### Return type
 
-[**PaymentSchedule**](payment_schedule.md)
+[**PaymentSchedule**](PaymentSchedule.md)
 
 ### Authorization
 
@@ -138,8 +292,10 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json, application/problem+json
+- **Content-Type**: application/json
+- **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 

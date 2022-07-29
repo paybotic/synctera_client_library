@@ -1,4 +1,4 @@
-# {{classname}}
+# \ExternalCardsAlphaApi
 
 All URIs are relative to *https://api.synctera.com/v0*
 
@@ -11,22 +11,59 @@ Method | HTTP request | Description
 [**ListExternalCardTransfers**](ExternalCardsAlphaApi.md#ListExternalCardTransfers) | **Get** /external_cards/transfers | List external transfers
 [**ListExternalCards**](ExternalCardsAlphaApi.md#ListExternalCards) | **Get** /external_cards | List external cards
 
-# **CreateExternalCardFromToken**
-> ExternalCardResponse CreateExternalCardFromToken(ctx, body)
+
+
+## CreateExternalCardFromToken
+
+> ExternalCardResponse CreateExternalCardFromToken(ctx).ExternalCardRequest(externalCardRequest).Execute()
+
 Create external card from token
 
-Create an external card from token - You must first tokenize the external card using the external card iframe. You will receive a token for the external card upon successful completion. This endpoint will persist the external card and associate it to a customer. The customer's name and address should match that of the external card as entered in the iframe. <br>NB: Tokens should be associated right away. Tokens not associated within 30 mins of creation will be invalidated.</br> NB: If a valid business_id is provided, the address verification for the external card will be done against the address of the business. Otherwise, the address of the customer will be used. In either case, the name of the customer will be used to match the name of the cardholder. 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    externalCardRequest := *openapiclient.NewExternalCardRequest("37a054b8-fbdb-44c6-ae20-091f94ada475", "Token_example") // ExternalCardRequest | Details of the card to create
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ExternalCardsAlphaApi.CreateExternalCardFromToken(context.Background()).ExternalCardRequest(externalCardRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ExternalCardsAlphaApi.CreateExternalCardFromToken``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateExternalCardFromToken`: ExternalCardResponse
+    fmt.Fprintf(os.Stdout, "Response from `ExternalCardsAlphaApi.CreateExternalCardFromToken`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateExternalCardFromTokenRequest struct via the builder pattern
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**ExternalCardRequest**](ExternalCardRequest.md)| Details of the card to create | 
+ **externalCardRequest** | [**ExternalCardRequest**](ExternalCardRequest.md) | Details of the card to create | 
 
 ### Return type
 
-[**ExternalCardResponse**](external_card_response.md)
+[**ExternalCardResponse**](ExternalCardResponse.md)
 
 ### Authorization
 
@@ -34,27 +71,65 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json, application/problem+json
+- **Content-Type**: application/json
+- **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **CreateExternalCardTransfer**
-> TransferResponse CreateExternalCardTransfer(ctx, body)
+
+## CreateExternalCardTransfer
+
+> TransferResponse CreateExternalCardTransfer(ctx).TransferRequest(transferRequest).Execute()
+
 Create external card transfer
 
-Create a external card transfer 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    transferRequest := *openapiclient.NewTransferRequest(int32(123), "USD", "b542b637-ce49-4be6-a26d-973f050985b9", "d3b3de70-661d-4c72-be44-3ca8d696d969", openapiclient.transfer_type("PULL")) // TransferRequest | Details of the transfer to create
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ExternalCardsAlphaApi.CreateExternalCardTransfer(context.Background()).TransferRequest(transferRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ExternalCardsAlphaApi.CreateExternalCardTransfer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateExternalCardTransfer`: TransferResponse
+    fmt.Fprintf(os.Stdout, "Response from `ExternalCardsAlphaApi.CreateExternalCardTransfer`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateExternalCardTransferRequest struct via the builder pattern
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**TransferRequest**](TransferRequest.md)| Details of the transfer to create | 
+ **transferRequest** | [**TransferRequest**](TransferRequest.md) | Details of the transfer to create | 
 
 ### Return type
 
-[**TransferResponse**](transfer_response.md)
+[**TransferResponse**](TransferResponse.md)
 
 ### Authorization
 
@@ -62,27 +137,69 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json, application/problem+json
+- **Content-Type**: application/json
+- **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **GetExternalCard**
-> ExternalCardResponse GetExternalCard(ctx, externalCardId)
+
+## GetExternalCard
+
+> ExternalCardResponse GetExternalCard(ctx, externalCardId).Execute()
+
 Get a external card
 
-Get an external card 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    externalCardId := "4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5" // string | The unique identifier of an external card
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ExternalCardsAlphaApi.GetExternalCard(context.Background(), externalCardId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ExternalCardsAlphaApi.GetExternalCard``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetExternalCard`: ExternalCardResponse
+    fmt.Fprintf(os.Stdout, "Response from `ExternalCardsAlphaApi.GetExternalCard`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **externalCardId** | [**string**](.md)| The unique identifier of an external card | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**externalCardId** | **string** | The unique identifier of an external card | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetExternalCardRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
-[**ExternalCardResponse**](external_card_response.md)
+[**ExternalCardResponse**](ExternalCardResponse.md)
 
 ### Authorization
 
@@ -90,27 +207,69 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/problem+json
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **GetExternalCardTransfer**
-> TransferResponse GetExternalCardTransfer(ctx, transferId)
+
+## GetExternalCardTransfer
+
+> TransferResponse GetExternalCardTransfer(ctx, transferId).Execute()
+
 Get an external card transfer
 
-Get an external transfer 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    transferId := "ddcacaa4-e0e4-4652-ae9f-5ef7f1b7d7e1" // string | The unique identifier of a transfer
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ExternalCardsAlphaApi.GetExternalCardTransfer(context.Background(), transferId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ExternalCardsAlphaApi.GetExternalCardTransfer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetExternalCardTransfer`: TransferResponse
+    fmt.Fprintf(os.Stdout, "Response from `ExternalCardsAlphaApi.GetExternalCardTransfer`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **transferId** | [**string**](.md)| The unique identifier of a transfer | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**transferId** | **string** | The unique identifier of a transfer | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetExternalCardTransferRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
-[**TransferResponse**](transfer_response.md)
+[**TransferResponse**](TransferResponse.md)
 
 ### Authorization
 
@@ -118,38 +277,75 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/problem+json
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **ListExternalCardTransfers**
-> TransferListResponse ListExternalCardTransfers(ctx, optional)
+
+## ListExternalCardTransfers
+
+> TransferListResponse ListExternalCardTransfers(ctx).Limit(limit).PageToken(pageToken).CustomerId(customerId).ExternalCardId(externalCardId).OriginatingAccountId(originatingAccountId).Type_(type_).Execute()
+
 List external transfers
 
-List external card transfer 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    limit := int32(100) // int32 |  (optional) (default to 100)
+    pageToken := "xwsfu1mkaq" // string |  (optional)
+    customerId := []string{"37a054b8-fbdb-44c6-ae20-091f94ada475"} // []string |  (optional)
+    externalCardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+    originatingAccountId := []string{"e85e7aeb-712d-4e9c-b2eb-d65fce19507b"} // []string |  (optional)
+    type_ := openapiclient.transfer_type("PULL") // TransferType | The type of an external transfer (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ExternalCardsAlphaApi.ListExternalCardTransfers(context.Background()).Limit(limit).PageToken(pageToken).CustomerId(customerId).ExternalCardId(externalCardId).OriginatingAccountId(originatingAccountId).Type_(type_).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ExternalCardsAlphaApi.ListExternalCardTransfers``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListExternalCardTransfers`: TransferListResponse
+    fmt.Fprintf(os.Stdout, "Response from `ExternalCardsAlphaApi.ListExternalCardTransfers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListExternalCardTransfersRequest struct via the builder pattern
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***ExternalCardsAlphaApiListExternalCardTransfersOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a ExternalCardsAlphaApiListExternalCardTransfersOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **optional.Int32**|  | [default to 100]
- **pageToken** | **optional.String**|  | 
- **customerId** | [**optional.Interface of []string**](string.md)|  | 
- **externalCardId** | [**optional.Interface of string**](.md)|  | 
- **originatingAccountId** | [**optional.Interface of []string**](string.md)|  | 
- **type_** | [**optional.Interface of TransferType**](.md)| The type of an external transfer | 
+ **limit** | **int32** |  | [default to 100]
+ **pageToken** | **string** |  | 
+ **customerId** | **[]string** |  | 
+ **externalCardId** | **string** |  | 
+ **originatingAccountId** | **[]string** |  | 
+ **type_** | [**TransferType**](TransferType.md) | The type of an external transfer | 
 
 ### Return type
 
-[**TransferListResponse**](transfer_list_response.md)
+[**TransferListResponse**](TransferListResponse.md)
 
 ### Authorization
 
@@ -157,35 +353,69 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/problem+json
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **ListExternalCards**
-> ExternalCardListResponse ListExternalCards(ctx, optional)
+
+## ListExternalCards
+
+> ExternalCardListResponse ListExternalCards(ctx).Limit(limit).PageToken(pageToken).CustomerId(customerId).Execute()
+
 List external cards
 
-List external cards 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    limit := int32(100) // int32 |  (optional) (default to 100)
+    pageToken := "xwsfu1mkaq" // string |  (optional)
+    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ExternalCardsAlphaApi.ListExternalCards(context.Background()).Limit(limit).PageToken(pageToken).CustomerId(customerId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ExternalCardsAlphaApi.ListExternalCards``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListExternalCards`: ExternalCardListResponse
+    fmt.Fprintf(os.Stdout, "Response from `ExternalCardsAlphaApi.ListExternalCards`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListExternalCardsRequest struct via the builder pattern
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***ExternalCardsAlphaApiListExternalCardsOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a ExternalCardsAlphaApiListExternalCardsOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **optional.Int32**|  | [default to 100]
- **pageToken** | **optional.String**|  | 
- **customerId** | [**optional.Interface of string**](.md)|  | 
+ **limit** | **int32** |  | [default to 100]
+ **pageToken** | **string** |  | 
+ **customerId** | **string** |  | 
 
 ### Return type
 
-[**ExternalCardListResponse**](external_card_list_response.md)
+[**ExternalCardListResponse**](ExternalCardListResponse.md)
 
 ### Authorization
 
@@ -193,8 +423,10 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/problem+json
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 

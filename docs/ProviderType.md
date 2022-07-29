@@ -1,8 +1,13 @@
 # ProviderType
 
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+## Enum
+
+
+* `IDOLOGY` (value: `"IDOLOGY"`)
+
+* `SOCURE` (value: `"SOCURE"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 
