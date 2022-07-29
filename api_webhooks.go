@@ -29,7 +29,7 @@ type ApiCreateSecretRequest struct {
 	ApiService *WebhooksApiService
 }
 
-func (r ApiCreateSecretRequest) Execute() (*InlineResponse201, *http.Response, error) {
+func (r ApiCreateSecretRequest) Execute() (*CreateSecret201Response, *http.Response, error) {
 	return r.ApiService.CreateSecretExecute(r)
 }
 
@@ -49,13 +49,13 @@ func (a *WebhooksApiService) CreateSecret(ctx context.Context) ApiCreateSecretRe
 }
 
 // Execute executes the request
-//  @return InlineResponse201
-func (a *WebhooksApiService) CreateSecretExecute(r ApiCreateSecretRequest) (*InlineResponse201, *http.Response, error) {
+//  @return CreateSecret201Response
+func (a *WebhooksApiService) CreateSecretExecute(r ApiCreateSecretRequest) (*CreateSecret201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *InlineResponse201
+		localVarReturnValue  *CreateSecret201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.CreateSecret")
@@ -1012,15 +1012,15 @@ func (a *WebhooksApiService) ListWebhooks1Execute(r ApiListWebhooks1Request) (*W
 type ApiReplaceSecretRequest struct {
 	ctx context.Context
 	ApiService *WebhooksApiService
-	webhooksSecretBody *WebhooksSecretBody
+	replaceSecretRequest *ReplaceSecretRequest
 }
 
-func (r ApiReplaceSecretRequest) WebhooksSecretBody(webhooksSecretBody WebhooksSecretBody) ApiReplaceSecretRequest {
-	r.webhooksSecretBody = &webhooksSecretBody
+func (r ApiReplaceSecretRequest) ReplaceSecretRequest(replaceSecretRequest ReplaceSecretRequest) ApiReplaceSecretRequest {
+	r.replaceSecretRequest = &replaceSecretRequest
 	return r
 }
 
-func (r ApiReplaceSecretRequest) Execute() (*InlineResponse2001, *http.Response, error) {
+func (r ApiReplaceSecretRequest) Execute() (*ReplaceSecret200Response, *http.Response, error) {
 	return r.ApiService.ReplaceSecretExecute(r)
 }
 
@@ -1040,13 +1040,13 @@ func (a *WebhooksApiService) ReplaceSecret(ctx context.Context) ApiReplaceSecret
 }
 
 // Execute executes the request
-//  @return InlineResponse2001
-func (a *WebhooksApiService) ReplaceSecretExecute(r ApiReplaceSecretRequest) (*InlineResponse2001, *http.Response, error) {
+//  @return ReplaceSecret200Response
+func (a *WebhooksApiService) ReplaceSecretExecute(r ApiReplaceSecretRequest) (*ReplaceSecret200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *InlineResponse2001
+		localVarReturnValue  *ReplaceSecret200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.ReplaceSecret")
@@ -1059,8 +1059,8 @@ func (a *WebhooksApiService) ReplaceSecretExecute(r ApiReplaceSecretRequest) (*I
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.webhooksSecretBody == nil {
-		return localVarReturnValue, nil, reportError("webhooksSecretBody is required and must be specified")
+	if r.replaceSecretRequest == nil {
+		return localVarReturnValue, nil, reportError("replaceSecretRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1081,7 +1081,7 @@ func (a *WebhooksApiService) ReplaceSecretExecute(r ApiReplaceSecretRequest) (*I
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.webhooksSecretBody
+	localVarPostBody = r.replaceSecretRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1423,12 +1423,12 @@ func (a *WebhooksApiService) RevokeSecretExecute(r ApiRevokeSecretRequest) (*htt
 type ApiTriggerEventRequest struct {
 	ctx context.Context
 	ApiService *WebhooksApiService
-	webhooksTriggerBody *WebhooksTriggerBody
+	triggerEventRequest *TriggerEventRequest
 }
 
 // Provide an event type to trigger
-func (r ApiTriggerEventRequest) WebhooksTriggerBody(webhooksTriggerBody WebhooksTriggerBody) ApiTriggerEventRequest {
-	r.webhooksTriggerBody = &webhooksTriggerBody
+func (r ApiTriggerEventRequest) TriggerEventRequest(triggerEventRequest TriggerEventRequest) ApiTriggerEventRequest {
+	r.triggerEventRequest = &triggerEventRequest
 	return r
 }
 
@@ -1471,8 +1471,8 @@ func (a *WebhooksApiService) TriggerEventExecute(r ApiTriggerEventRequest) (*Eve
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.webhooksTriggerBody == nil {
-		return localVarReturnValue, nil, reportError("webhooksTriggerBody is required and must be specified")
+	if r.triggerEventRequest == nil {
+		return localVarReturnValue, nil, reportError("triggerEventRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1493,7 +1493,7 @@ func (a *WebhooksApiService) TriggerEventExecute(r ApiTriggerEventRequest) (*Eve
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.webhooksTriggerBody
+	localVarPostBody = r.triggerEventRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

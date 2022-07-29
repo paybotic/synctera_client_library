@@ -505,7 +505,7 @@ type ApiGetCardBarcodeRequest struct {
 	cardId string
 }
 
-func (r ApiGetCardBarcodeRequest) Execute() (*InlineResponse200, *http.Response, error) {
+func (r ApiGetCardBarcodeRequest) Execute() (*GetCardBarcode200Response, *http.Response, error) {
 	return r.ApiService.GetCardBarcodeExecute(r)
 }
 
@@ -528,13 +528,13 @@ func (a *CardsApiService) GetCardBarcode(ctx context.Context, cardId string) Api
 }
 
 // Execute executes the request
-//  @return InlineResponse200
-func (a *CardsApiService) GetCardBarcodeExecute(r ApiGetCardBarcodeRequest) (*InlineResponse200, *http.Response, error) {
+//  @return GetCardBarcode200Response
+func (a *CardsApiService) GetCardBarcodeExecute(r ApiGetCardBarcodeRequest) (*GetCardBarcode200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *InlineResponse200
+		localVarReturnValue  *GetCardBarcode200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CardsApiService.GetCardBarcode")

@@ -228,7 +228,7 @@ Name | Type | Description  | Notes
 
 ## GetCardBarcode
 
-> InlineResponse200 GetCardBarcode(ctx, cardId).Execute()
+> GetCardBarcode200Response GetCardBarcode(ctx, cardId).Execute()
 
 Get Card Barcode
 
@@ -256,7 +256,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetCardBarcode``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetCardBarcode`: InlineResponse200
+    // response from `GetCardBarcode`: GetCardBarcode200Response
     fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetCardBarcode`: %v\n", resp)
 }
 ```
@@ -280,7 +280,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**GetCardBarcode200Response**](GetCardBarcode200Response.md)
 
 ### Authorization
 

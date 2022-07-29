@@ -174,7 +174,7 @@ func main() {
     id := []string{"Inner_example"} // []string | Unique identifier for the resource. Multiple IDs can be provided as a comma-separated list.  (optional)
     firstName := "Alice" // string |  (optional)
     lastName := "Smith" // string |  (optional)
-    phoneNumber := "12065550100" // string |  (optional)
+    phoneNumber := "+12065550100" // string |  (optional)
     email := "john.doe@example.com" // string |  (optional)
     status := openapiclient.status1("ACTIVE") // Status1 |  (optional)
     isCustomer := true // bool | If true, show only customers. If false, show non-customer parties. (optional)

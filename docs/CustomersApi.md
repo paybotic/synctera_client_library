@@ -620,7 +620,7 @@ func main() {
     id := []string{"63ea71cb-7f86-44c1-956b-77f6cbd6ecf7"} // []string | Unique resource identifier (optional)
     firstName := "Alice" // string |  (optional)
     lastName := "Smith" // string |  (optional)
-    phoneNumber := "12065550100" // string |  (optional)
+    phoneNumber := "+12065550100" // string |  (optional)
     email := "john.doe@example.com" // string |  (optional)
     ssnLast4 := "6789" // string |  (optional)
     status := "ACTIVE" // string |  (optional)

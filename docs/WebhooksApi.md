@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 ## CreateSecret
 
-> InlineResponse201 CreateSecret(ctx).Execute()
+> CreateSecret201Response CreateSecret(ctx).Execute()
 
 Create a secret
 
@@ -48,7 +48,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.CreateSecret``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateSecret`: InlineResponse201
+    // response from `CreateSecret`: CreateSecret201Response
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.CreateSecret`: %v\n", resp)
 }
 ```
@@ -64,7 +64,7 @@ Other parameters are passed through a pointer to a apiCreateSecretRequest struct
 
 ### Return type
 
-[**InlineResponse201**](InlineResponse201.md)
+[**CreateSecret201Response**](CreateSecret201Response.md)
 
 ### Authorization
 
@@ -514,7 +514,7 @@ Name | Type | Description  | Notes
 
 ## ReplaceSecret
 
-> InlineResponse2001 ReplaceSecret(ctx).WebhooksSecretBody(webhooksSecretBody).Execute()
+> ReplaceSecret200Response ReplaceSecret(ctx).ReplaceSecretRequest(replaceSecretRequest).Execute()
 
 Replace an existing secret
 
@@ -533,16 +533,16 @@ import (
 )
 
 func main() {
-    webhooksSecretBody := *openapiclient.NewWebhooksSecretBody() // WebhooksSecretBody | 
+    replaceSecretRequest := *openapiclient.NewReplaceSecretRequest() // ReplaceSecretRequest | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.ReplaceSecret(context.Background()).WebhooksSecretBody(webhooksSecretBody).Execute()
+    resp, r, err := apiClient.WebhooksApi.ReplaceSecret(context.Background()).ReplaceSecretRequest(replaceSecretRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.ReplaceSecret``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReplaceSecret`: InlineResponse2001
+    // response from `ReplaceSecret`: ReplaceSecret200Response
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.ReplaceSecret`: %v\n", resp)
 }
 ```
@@ -558,11 +558,11 @@ Other parameters are passed through a pointer to a apiReplaceSecretRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **webhooksSecretBody** | [**WebhooksSecretBody**](WebhooksSecretBody.md) |  | 
+ **replaceSecretRequest** | [**ReplaceSecretRequest**](ReplaceSecretRequest.md) |  | 
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**ReplaceSecret200Response**](ReplaceSecret200Response.md)
 
 ### Authorization
 
@@ -719,7 +719,7 @@ Name | Type | Description  | Notes
 
 ## TriggerEvent
 
-> EventTrigger TriggerEvent(ctx).WebhooksTriggerBody(webhooksTriggerBody).Execute()
+> EventTrigger TriggerEvent(ctx).TriggerEventRequest(triggerEventRequest).Execute()
 
 Trigger an event
 
@@ -738,11 +738,11 @@ import (
 )
 
 func main() {
-    webhooksTriggerBody := *openapiclient.NewWebhooksTriggerBody() // WebhooksTriggerBody | Provide an event type to trigger
+    triggerEventRequest := *openapiclient.NewTriggerEventRequest() // TriggerEventRequest | Provide an event type to trigger
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.TriggerEvent(context.Background()).WebhooksTriggerBody(webhooksTriggerBody).Execute()
+    resp, r, err := apiClient.WebhooksApi.TriggerEvent(context.Background()).TriggerEventRequest(triggerEventRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.TriggerEvent``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -763,7 +763,7 @@ Other parameters are passed through a pointer to a apiTriggerEventRequest struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **webhooksTriggerBody** | [**WebhooksTriggerBody**](WebhooksTriggerBody.md) | Provide an event type to trigger | 
+ **triggerEventRequest** | [**TriggerEventRequest**](TriggerEventRequest.md) | Provide an event type to trigger | 
 
 ### Return type
 

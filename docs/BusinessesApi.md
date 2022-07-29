@@ -172,7 +172,7 @@ import (
 func main() {
     id := []string{"Inner_example"} // []string | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  (optional)
     entityName := "Apex Corporation" // string |  (optional)
-    phoneNumber := "12065550100" // string |  (optional)
+    phoneNumber := "+12065550100" // string |  (optional)
     status := "status_example" // string |  (optional)
     isCustomer := true // bool | If true, show only customers. If false, show non-customer parties. (optional)
     sortBy := []string{"SortBy_example"} // []string | Specifies the sort order for the returned businesses.  (optional)

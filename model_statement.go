@@ -28,13 +28,13 @@ type Statement struct {
 	IssueDate *string `json:"issue_date,omitempty"`
 	// The date indicating the begining of the time interval covered by the statement
 	StartDate *string `json:"start_date,omitempty"`
-	AccountSummary *AccountSummary `json:"account_summary,omitempty"`
+	AccountSummary AccountSummary `json:"account_summary,omitempty"`
 	AuthorizedSigner []Person1 `json:"authorized_signer,omitempty"`
 	Disclosure *string `json:"disclosure,omitempty"`
 	JointAccountHolders []Person1 `json:"joint_account_holders,omitempty"`
 	PrimaryAccountHolderBusiness *Business1 `json:"primary_account_holder_business,omitempty"`
-	PrimaryAccountHolderPersonal *Person1 `json:"primary_account_holder_personal,omitempty"`
-	SavingsSummary *SavingsSummary `json:"savings_summary,omitempty"`
+	PrimaryAccountHolderPersonal Person1 `json:"primary_account_holder_personal,omitempty"`
+	SavingsSummary SavingsSummary `json:"savings_summary,omitempty"`
 	Transactions []Transaction `json:"transactions,omitempty"`
 }
 
@@ -253,12 +253,12 @@ func (o *Statement) GetAccountSummary() AccountSummary {
 		var ret AccountSummary
 		return ret
 	}
-	return *o.AccountSummary
+	return o.AccountSummary
 }
 
 // GetAccountSummaryOk returns a tuple with the AccountSummary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Statement) GetAccountSummaryOk() (*AccountSummary, bool) {
+func (o *Statement) GetAccountSummaryOk() (AccountSummary, bool) {
 	if o == nil || o.AccountSummary == nil {
 		return nil, false
 	}
@@ -276,7 +276,7 @@ func (o *Statement) HasAccountSummary() bool {
 
 // SetAccountSummary gets a reference to the given AccountSummary and assigns it to the AccountSummary field.
 func (o *Statement) SetAccountSummary(v AccountSummary) {
-	o.AccountSummary = &v
+	o.AccountSummary = v
 }
 
 // GetAuthorizedSigner returns the AuthorizedSigner field value if set, zero value otherwise.
@@ -413,12 +413,12 @@ func (o *Statement) GetPrimaryAccountHolderPersonal() Person1 {
 		var ret Person1
 		return ret
 	}
-	return *o.PrimaryAccountHolderPersonal
+	return o.PrimaryAccountHolderPersonal
 }
 
 // GetPrimaryAccountHolderPersonalOk returns a tuple with the PrimaryAccountHolderPersonal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Statement) GetPrimaryAccountHolderPersonalOk() (*Person1, bool) {
+func (o *Statement) GetPrimaryAccountHolderPersonalOk() (Person1, bool) {
 	if o == nil || o.PrimaryAccountHolderPersonal == nil {
 		return nil, false
 	}
@@ -436,7 +436,7 @@ func (o *Statement) HasPrimaryAccountHolderPersonal() bool {
 
 // SetPrimaryAccountHolderPersonal gets a reference to the given Person1 and assigns it to the PrimaryAccountHolderPersonal field.
 func (o *Statement) SetPrimaryAccountHolderPersonal(v Person1) {
-	o.PrimaryAccountHolderPersonal = &v
+	o.PrimaryAccountHolderPersonal = v
 }
 
 // GetSavingsSummary returns the SavingsSummary field value if set, zero value otherwise.
@@ -445,12 +445,12 @@ func (o *Statement) GetSavingsSummary() SavingsSummary {
 		var ret SavingsSummary
 		return ret
 	}
-	return *o.SavingsSummary
+	return o.SavingsSummary
 }
 
 // GetSavingsSummaryOk returns a tuple with the SavingsSummary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Statement) GetSavingsSummaryOk() (*SavingsSummary, bool) {
+func (o *Statement) GetSavingsSummaryOk() (SavingsSummary, bool) {
 	if o == nil || o.SavingsSummary == nil {
 		return nil, false
 	}
@@ -468,7 +468,7 @@ func (o *Statement) HasSavingsSummary() bool {
 
 // SetSavingsSummary gets a reference to the given SavingsSummary and assigns it to the SavingsSummary field.
 func (o *Statement) SetSavingsSummary(v SavingsSummary) {
-	o.SavingsSummary = &v
+	o.SavingsSummary = v
 }
 
 // GetTransactions returns the Transactions field value if set, zero value otherwise.

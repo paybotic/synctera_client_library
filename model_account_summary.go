@@ -31,7 +31,7 @@ type AccountSummary struct {
 	Currency *string `json:"currency,omitempty"`
 	// Customer type
 	CustomerType *string `json:"customer_type,omitempty"`
-	FinancialInstitution *FinancialInstitution `json:"financial_institution,omitempty"`
+	FinancialInstitution FinancialInstitution `json:"financial_institution,omitempty"`
 	// The unique identifier of the account the statement belongs to
 	Id *string `json:"id,omitempty"`
 	// Account last modification time
@@ -319,12 +319,12 @@ func (o *AccountSummary) GetFinancialInstitution() FinancialInstitution {
 		var ret FinancialInstitution
 		return ret
 	}
-	return *o.FinancialInstitution
+	return o.FinancialInstitution
 }
 
 // GetFinancialInstitutionOk returns a tuple with the FinancialInstitution field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountSummary) GetFinancialInstitutionOk() (*FinancialInstitution, bool) {
+func (o *AccountSummary) GetFinancialInstitutionOk() (FinancialInstitution, bool) {
 	if o == nil || o.FinancialInstitution == nil {
 		return nil, false
 	}
@@ -342,7 +342,7 @@ func (o *AccountSummary) HasFinancialInstitution() bool {
 
 // SetFinancialInstitution gets a reference to the given FinancialInstitution and assigns it to the FinancialInstitution field.
 func (o *AccountSummary) SetFinancialInstitution(v FinancialInstitution) {
-	o.FinancialInstitution = &v
+	o.FinancialInstitution = v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.

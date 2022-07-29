@@ -1729,7 +1729,7 @@ paths:
           description: "Only return resources where the phone_number field matches\
             \ the specified string. Phone numbers use the E.164 format e.g. +19178675309.\
             \ Any * characters in the string are wildcards, and match any characters."
-          example: "12065550100"
+          example: +12065550100
           type: string
         style: form
         x-external: true
@@ -2443,7 +2443,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/getCardBarcode_200_response'
           description: Barcode
         "400":
           content:
@@ -3987,7 +3987,7 @@ paths:
           description: "Only return resources where the phone_number field matches\
             \ the specified string. Phone numbers use the E.164 format e.g. +19178675309.\
             \ Any * characters in the string are wildcards, and match any characters."
-          example: "12065550100"
+          example: +12065550100
           type: string
         style: form
         x-external: true
@@ -7774,7 +7774,7 @@ paths:
           description: "Only return resources where the phone_number field matches\
             \ the specified string. Phone numbers use the E.164 format e.g. +19178675309.\
             \ Any * characters in the string are wildcards, and match any characters."
-          example: "12065550100"
+          example: +12065550100
           type: string
         style: form
         x-external: true
@@ -10349,7 +10349,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_201'
+                $ref: '#/components/schemas/createSecret_201_response'
           description: Webhook secret response
         "401":
           content:
@@ -10381,14 +10381,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/webhooks_secret_body'
+              $ref: '#/components/schemas/replaceSecret_request'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
+                $ref: '#/components/schemas/replaceSecret_200_response'
           description: Webhook secret response
         "401":
           content:
@@ -10420,7 +10420,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/webhooks_trigger_body'
+              $ref: '#/components/schemas/triggerEvent_request'
         description: Provide an event type to trigger
         required: true
       responses:
@@ -11762,7 +11762,7 @@ components:
         description: "Only return resources where the phone_number field matches the\
           \ specified string. Phone numbers use the E.164 format e.g. +19178675309.\
           \ Any * characters in the string are wildcards, and match any characters."
-        example: "12065550100"
+        example: +12065550100
         type: string
       style: form
       x-external: true
@@ -12932,7 +12932,7 @@ components:
           billing_period:
             frequency: ANNUALLY
             start_date: 2000-01-23T04:56:07.000+00:00
-          account_type: null
+          account_type: account_type
           interest_product_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           overdraft_limit: 0
           fee_product_ids:
@@ -14111,7 +14111,7 @@ components:
           description: Business's phone number with country code in E.164 format.
             Must have a valid country code. Area code and local phone number are not
             validated.
-          example: "14374570680"
+          example: +14374570680
           pattern: "^\\+[1-9]\\d{1,14}$"
           type: string
         status:
@@ -14361,7 +14361,7 @@ components:
           description: Customer's mobile phone number with country code in E.164 format.
             Must have a valid country code. Area code and local phone number are not
             validated.
-          example: "14374570680"
+          example: +14374570680
           pattern: "^\\+[1-9]\\d{1,14}$"
           type: string
         related_customers:
@@ -14437,7 +14437,7 @@ components:
           description: Person's mobile phone number with country code in E.164 format.
             Must have a valid country code. Area code and local phone number are not
             validated
-          example: "14374570680"
+          example: +14374570680
           pattern: "^\\+[1-9]\\d{1,14}$"
           type: string
         shipping_address:
@@ -18244,7 +18244,7 @@ components:
           description: Customer's mobile phone number with country code in E.164 format.
             Must have a valid country code. Area code and local phone number are not
             validated.
-          example: "14374570680"
+          example: +14374570680
           pattern: "^\\+[1-9]\\d{1,14}$"
           type: string
         shipping_address:
@@ -20606,7 +20606,7 @@ components:
         billing_period:
           frequency: ANNUALLY
           start_date: 2000-01-23T04:56:07.000+00:00
-        account_type: null
+        account_type: account_type
         interest_product_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         overdraft_limit: 0
         fee_product_ids:
@@ -22007,7 +22007,7 @@ components:
     workspace_list:
       allOf:
       - $ref: '#/components/schemas/workspace_list_allOf'
-    inline_response_200:
+    getCardBarcode_200_response:
       example:
         barcode: barcode
       properties:
@@ -22015,14 +22015,14 @@ components:
           description: Barcode of the card
           type: string
       type: object
-    webhooks_secret_body:
+    replaceSecret_request:
       properties:
         is_rolling_secret:
           description: Set true to let the current secret expire in the next 24 hours.
             Set false to let the current secret expire immediately.
           type: boolean
       type: object
-    inline_response_200_1:
+    replaceSecret_200_response:
       example:
         delete_at: 2000-01-23T04:56:07.000+00:00
         secret: secret
@@ -22038,7 +22038,7 @@ components:
           minLength: 64
           type: string
       type: object
-    inline_response_201:
+    createSecret_201_response:
       example:
         secret: secret
       properties:
@@ -22049,42 +22049,10 @@ components:
           minLength: 64
           type: string
       type: object
-    webhooks_trigger_body:
+    triggerEvent_request:
       properties:
         event:
           $ref: '#/components/schemas/event_type1'
-      type: object
-    account_summary_balance_ceiling:
-      properties:
-        balance:
-          description: Maximum balance in the account's currency. Unit in cents.
-          format: int64
-          type: integer
-      type: object
-    account_summary_balance_floor:
-      properties:
-        balance:
-          description: Minimum balance in the account's currency. Unit in cents.
-          format: int64
-          type: integer
-      type: object
-    socure_match_comments:
-      properties:
-        relatedURL:
-          items:
-            type: string
-          type: array
-      type: object
-    spending_limits_transaction:
-      description: Individual transaction limit
-      example:
-        amount: 0
-      properties:
-        amount:
-          description: Maximum amount allowed. Unit in cents.
-          format: int64
-          minimum: 0
-          type: integer
       type: object
     account_creation_allOf:
       properties:
@@ -22174,6 +22142,20 @@ components:
           type: array
       required:
       - account_ranges
+      type: object
+    account_summary_balance_ceiling:
+      properties:
+        balance:
+          description: Maximum balance in the account's currency. Unit in cents.
+          format: int64
+          type: integer
+      type: object
+    account_summary_balance_floor:
+      properties:
+        balance:
+          description: Minimum balance in the account's currency. Unit in cents.
+          format: int64
+          type: integer
       type: object
     application_list_allOf:
       properties:
@@ -23105,6 +23087,24 @@ components:
           type: array
       required:
       - risk_ratings
+      type: object
+    socure_match_comments:
+      properties:
+        relatedURL:
+          items:
+            type: string
+          type: array
+      type: object
+    spending_limits_transaction:
+      description: Individual transaction limit
+      example:
+        amount: 0
+      properties:
+        amount:
+          description: Maximum amount allowed. Unit in cents.
+          format: int64
+          minimum: 0
+          type: integer
       type: object
     statement_allOf:
       properties:
