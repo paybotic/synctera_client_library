@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.17.0
 */
@@ -16,13 +16,13 @@ import (
 
 // StatementAllOf struct for StatementAllOf
 type StatementAllOf struct {
-	AccountSummary AccountSummary `json:"account_summary,omitempty"`
+	AccountSummary *AccountSummary `json:"account_summary,omitempty"`
 	AuthorizedSigner []Person1 `json:"authorized_signer,omitempty"`
 	Disclosure *string `json:"disclosure,omitempty"`
 	JointAccountHolders []Person1 `json:"joint_account_holders,omitempty"`
 	PrimaryAccountHolderBusiness *Business1 `json:"primary_account_holder_business,omitempty"`
-	PrimaryAccountHolderPersonal Person1 `json:"primary_account_holder_personal,omitempty"`
-	SavingsSummary SavingsSummary `json:"savings_summary,omitempty"`
+	PrimaryAccountHolderPersonal *Person1 `json:"primary_account_holder_personal,omitempty"`
+	SavingsSummary *SavingsSummary `json:"savings_summary,omitempty"`
 	Transactions []Transaction `json:"transactions,omitempty"`
 }
 
@@ -49,12 +49,12 @@ func (o *StatementAllOf) GetAccountSummary() AccountSummary {
 		var ret AccountSummary
 		return ret
 	}
-	return o.AccountSummary
+	return *o.AccountSummary
 }
 
 // GetAccountSummaryOk returns a tuple with the AccountSummary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StatementAllOf) GetAccountSummaryOk() (AccountSummary, bool) {
+func (o *StatementAllOf) GetAccountSummaryOk() (*AccountSummary, bool) {
 	if o == nil || o.AccountSummary == nil {
 		return nil, false
 	}
@@ -72,7 +72,7 @@ func (o *StatementAllOf) HasAccountSummary() bool {
 
 // SetAccountSummary gets a reference to the given AccountSummary and assigns it to the AccountSummary field.
 func (o *StatementAllOf) SetAccountSummary(v AccountSummary) {
-	o.AccountSummary = v
+	o.AccountSummary = &v
 }
 
 // GetAuthorizedSigner returns the AuthorizedSigner field value if set, zero value otherwise.
@@ -209,12 +209,12 @@ func (o *StatementAllOf) GetPrimaryAccountHolderPersonal() Person1 {
 		var ret Person1
 		return ret
 	}
-	return o.PrimaryAccountHolderPersonal
+	return *o.PrimaryAccountHolderPersonal
 }
 
 // GetPrimaryAccountHolderPersonalOk returns a tuple with the PrimaryAccountHolderPersonal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StatementAllOf) GetPrimaryAccountHolderPersonalOk() (Person1, bool) {
+func (o *StatementAllOf) GetPrimaryAccountHolderPersonalOk() (*Person1, bool) {
 	if o == nil || o.PrimaryAccountHolderPersonal == nil {
 		return nil, false
 	}
@@ -232,7 +232,7 @@ func (o *StatementAllOf) HasPrimaryAccountHolderPersonal() bool {
 
 // SetPrimaryAccountHolderPersonal gets a reference to the given Person1 and assigns it to the PrimaryAccountHolderPersonal field.
 func (o *StatementAllOf) SetPrimaryAccountHolderPersonal(v Person1) {
-	o.PrimaryAccountHolderPersonal = v
+	o.PrimaryAccountHolderPersonal = &v
 }
 
 // GetSavingsSummary returns the SavingsSummary field value if set, zero value otherwise.
@@ -241,12 +241,12 @@ func (o *StatementAllOf) GetSavingsSummary() SavingsSummary {
 		var ret SavingsSummary
 		return ret
 	}
-	return o.SavingsSummary
+	return *o.SavingsSummary
 }
 
 // GetSavingsSummaryOk returns a tuple with the SavingsSummary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StatementAllOf) GetSavingsSummaryOk() (SavingsSummary, bool) {
+func (o *StatementAllOf) GetSavingsSummaryOk() (*SavingsSummary, bool) {
 	if o == nil || o.SavingsSummary == nil {
 		return nil, false
 	}
@@ -264,7 +264,7 @@ func (o *StatementAllOf) HasSavingsSummary() bool {
 
 // SetSavingsSummary gets a reference to the given SavingsSummary and assigns it to the SavingsSummary field.
 func (o *StatementAllOf) SetSavingsSummary(v SavingsSummary) {
-	o.SavingsSummary = v
+	o.SavingsSummary = &v
 }
 
 // GetTransactions returns the Transactions field value if set, zero value otherwise.
