@@ -24,19 +24,19 @@ import (
 // CardsApiService CardsApi service
 type CardsApiService service
 
-type ApiActivateCardRequest struct {
+type CardsApiActivateCardRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	cardActivationRequest *CardActivationRequest
 }
 
 // Card activation code
-func (r ApiActivateCardRequest) CardActivationRequest(cardActivationRequest CardActivationRequest) ApiActivateCardRequest {
+func (r CardsApiActivateCardRequest) CardActivationRequest(cardActivationRequest CardActivationRequest) CardsApiActivateCardRequest {
 	r.cardActivationRequest = &cardActivationRequest
 	return r
 }
 
-func (r ApiActivateCardRequest) Execute() (*CardResponse, *http.Response, error) {
+func (r CardsApiActivateCardRequest) Execute() (*CardResponse, *http.Response, error) {
 	return r.ApiService.ActivateCardExecute(r)
 }
 
@@ -47,10 +47,10 @@ Activate a card
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiActivateCardRequest
+ @return CardsApiActivateCardRequest
 */
-func (a *CardsApiService) ActivateCard(ctx context.Context) ApiActivateCardRequest {
-	return ApiActivateCardRequest{
+func (a *CardsApiService) ActivateCard(ctx context.Context) CardsApiActivateCardRequest {
+	return CardsApiActivateCardRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -58,7 +58,7 @@ func (a *CardsApiService) ActivateCard(ctx context.Context) ApiActivateCardReque
 
 // Execute executes the request
 //  @return CardResponse
-func (a *CardsApiService) ActivateCardExecute(r ApiActivateCardRequest) (*CardResponse, *http.Response, error) {
+func (a *CardsApiService) ActivateCardExecute(r CardsApiActivateCardRequest) (*CardResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -185,19 +185,19 @@ func (a *CardsApiService) ActivateCardExecute(r ApiActivateCardRequest) (*CardRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateCardImageRequest struct {
+type CardsApiCreateCardImageRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	createCardImageRequest *CreateCardImageRequest
 }
 
 // Details of the image to create
-func (r ApiCreateCardImageRequest) CreateCardImageRequest(createCardImageRequest CreateCardImageRequest) ApiCreateCardImageRequest {
+func (r CardsApiCreateCardImageRequest) CreateCardImageRequest(createCardImageRequest CreateCardImageRequest) CardsApiCreateCardImageRequest {
 	r.createCardImageRequest = &createCardImageRequest
 	return r
 }
 
-func (r ApiCreateCardImageRequest) Execute() (*CardImageDetails, *http.Response, error) {
+func (r CardsApiCreateCardImageRequest) Execute() (*CardImageDetails, *http.Response, error) {
 	return r.ApiService.CreateCardImageExecute(r)
 }
 
@@ -208,10 +208,10 @@ Create a card image entity. Note that this does not include the image data itsel
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCardImageRequest
+ @return CardsApiCreateCardImageRequest
 */
-func (a *CardsApiService) CreateCardImage(ctx context.Context) ApiCreateCardImageRequest {
-	return ApiCreateCardImageRequest{
+func (a *CardsApiService) CreateCardImage(ctx context.Context) CardsApiCreateCardImageRequest {
+	return CardsApiCreateCardImageRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -219,7 +219,7 @@ func (a *CardsApiService) CreateCardImage(ctx context.Context) ApiCreateCardImag
 
 // Execute executes the request
 //  @return CardImageDetails
-func (a *CardsApiService) CreateCardImageExecute(r ApiCreateCardImageRequest) (*CardImageDetails, *http.Response, error) {
+func (a *CardsApiService) CreateCardImageExecute(r CardsApiCreateCardImageRequest) (*CardImageDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -346,13 +346,13 @@ func (a *CardsApiService) CreateCardImageExecute(r ApiCreateCardImageRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCardRequest struct {
+type CardsApiGetCardRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	cardId string
 }
 
-func (r ApiGetCardRequest) Execute() (*CardResponse, *http.Response, error) {
+func (r CardsApiGetCardRequest) Execute() (*CardResponse, *http.Response, error) {
 	return r.ApiService.GetCardExecute(r)
 }
 
@@ -364,10 +364,10 @@ Get the details about a card that has been issued
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param cardId
- @return ApiGetCardRequest
+ @return CardsApiGetCardRequest
 */
-func (a *CardsApiService) GetCard(ctx context.Context, cardId string) ApiGetCardRequest {
-	return ApiGetCardRequest{
+func (a *CardsApiService) GetCard(ctx context.Context, cardId string) CardsApiGetCardRequest {
+	return CardsApiGetCardRequest{
 		ApiService: a,
 		ctx: ctx,
 		cardId: cardId,
@@ -376,7 +376,7 @@ func (a *CardsApiService) GetCard(ctx context.Context, cardId string) ApiGetCard
 
 // Execute executes the request
 //  @return CardResponse
-func (a *CardsApiService) GetCardExecute(r ApiGetCardRequest) (*CardResponse, *http.Response, error) {
+func (a *CardsApiService) GetCardExecute(r CardsApiGetCardRequest) (*CardResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -499,13 +499,13 @@ func (a *CardsApiService) GetCardExecute(r ApiGetCardRequest) (*CardResponse, *h
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCardBarcodeRequest struct {
+type CardsApiGetCardBarcodeRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	cardId string
 }
 
-func (r ApiGetCardBarcodeRequest) Execute() (*GetCardBarcode200Response, *http.Response, error) {
+func (r CardsApiGetCardBarcodeRequest) Execute() (*GetCardBarcode200Response, *http.Response, error) {
 	return r.ApiService.GetCardBarcodeExecute(r)
 }
 
@@ -517,10 +517,10 @@ This endpoint is for testing environment only to provide access to barcode of a 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param cardId
- @return ApiGetCardBarcodeRequest
+ @return CardsApiGetCardBarcodeRequest
 */
-func (a *CardsApiService) GetCardBarcode(ctx context.Context, cardId string) ApiGetCardBarcodeRequest {
-	return ApiGetCardBarcodeRequest{
+func (a *CardsApiService) GetCardBarcode(ctx context.Context, cardId string) CardsApiGetCardBarcodeRequest {
+	return CardsApiGetCardBarcodeRequest{
 		ApiService: a,
 		ctx: ctx,
 		cardId: cardId,
@@ -529,7 +529,7 @@ func (a *CardsApiService) GetCardBarcode(ctx context.Context, cardId string) Api
 
 // Execute executes the request
 //  @return GetCardBarcode200Response
-func (a *CardsApiService) GetCardBarcodeExecute(r ApiGetCardBarcodeRequest) (*GetCardBarcode200Response, *http.Response, error) {
+func (a *CardsApiService) GetCardBarcodeExecute(r CardsApiGetCardBarcodeRequest) (*GetCardBarcode200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -652,13 +652,13 @@ func (a *CardsApiService) GetCardBarcodeExecute(r ApiGetCardBarcodeRequest) (*Ge
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCardImageDataRequest struct {
+type CardsApiGetCardImageDataRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	cardImageId string
 }
 
-func (r ApiGetCardImageDataRequest) Execute() (**os.File, *http.Response, error) {
+func (r CardsApiGetCardImageDataRequest) Execute() (**os.File, *http.Response, error) {
 	return r.ApiService.GetCardImageDataExecute(r)
 }
 
@@ -669,10 +669,10 @@ Get card image data
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param cardImageId
- @return ApiGetCardImageDataRequest
+ @return CardsApiGetCardImageDataRequest
 */
-func (a *CardsApiService) GetCardImageData(ctx context.Context, cardImageId string) ApiGetCardImageDataRequest {
-	return ApiGetCardImageDataRequest{
+func (a *CardsApiService) GetCardImageData(ctx context.Context, cardImageId string) CardsApiGetCardImageDataRequest {
+	return CardsApiGetCardImageDataRequest{
 		ApiService: a,
 		ctx: ctx,
 		cardImageId: cardImageId,
@@ -681,7 +681,7 @@ func (a *CardsApiService) GetCardImageData(ctx context.Context, cardImageId stri
 
 // Execute executes the request
 //  @return *os.File
-func (a *CardsApiService) GetCardImageDataExecute(r ApiGetCardImageDataRequest) (**os.File, *http.Response, error) {
+func (a *CardsApiService) GetCardImageDataExecute(r CardsApiGetCardImageDataRequest) (**os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -784,13 +784,13 @@ func (a *CardsApiService) GetCardImageDataExecute(r ApiGetCardImageDataRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCardImageDetailsRequest struct {
+type CardsApiGetCardImageDetailsRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	cardImageId string
 }
 
-func (r ApiGetCardImageDetailsRequest) Execute() (*CardImageDetails, *http.Response, error) {
+func (r CardsApiGetCardImageDetailsRequest) Execute() (*CardImageDetails, *http.Response, error) {
 	return r.ApiService.GetCardImageDetailsExecute(r)
 }
 
@@ -801,10 +801,10 @@ Get card image details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param cardImageId
- @return ApiGetCardImageDetailsRequest
+ @return CardsApiGetCardImageDetailsRequest
 */
-func (a *CardsApiService) GetCardImageDetails(ctx context.Context, cardImageId string) ApiGetCardImageDetailsRequest {
-	return ApiGetCardImageDetailsRequest{
+func (a *CardsApiService) GetCardImageDetails(ctx context.Context, cardImageId string) CardsApiGetCardImageDetailsRequest {
+	return CardsApiGetCardImageDetailsRequest{
 		ApiService: a,
 		ctx: ctx,
 		cardImageId: cardImageId,
@@ -813,7 +813,7 @@ func (a *CardsApiService) GetCardImageDetails(ctx context.Context, cardImageId s
 
 // Execute executes the request
 //  @return CardImageDetails
-func (a *CardsApiService) GetCardImageDetailsExecute(r ApiGetCardImageDetailsRequest) (*CardImageDetails, *http.Response, error) {
+func (a *CardsApiService) GetCardImageDetailsExecute(r CardsApiGetCardImageDetailsRequest) (*CardImageDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -916,7 +916,7 @@ func (a *CardsApiService) GetCardImageDetailsExecute(r ApiGetCardImageDetailsReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCardWidgetURLRequest struct {
+type CardsApiGetCardWidgetURLRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	widgetType *WidgetType
@@ -926,28 +926,28 @@ type ApiGetCardWidgetURLRequest struct {
 }
 
 // The type of widget for which to construct the URL
-func (r ApiGetCardWidgetURLRequest) WidgetType(widgetType WidgetType) ApiGetCardWidgetURLRequest {
+func (r CardsApiGetCardWidgetURLRequest) WidgetType(widgetType WidgetType) CardsApiGetCardWidgetURLRequest {
 	r.widgetType = &widgetType
 	return r
 }
 
-func (r ApiGetCardWidgetURLRequest) CustomerId(customerId string) ApiGetCardWidgetURLRequest {
+func (r CardsApiGetCardWidgetURLRequest) CustomerId(customerId string) CardsApiGetCardWidgetURLRequest {
 	r.customerId = &customerId
 	return r
 }
 
-func (r ApiGetCardWidgetURLRequest) AccountId(accountId string) ApiGetCardWidgetURLRequest {
+func (r CardsApiGetCardWidgetURLRequest) AccountId(accountId string) CardsApiGetCardWidgetURLRequest {
 	r.accountId = &accountId
 	return r
 }
 
 // The ID of the card (required for set PIN widget)
-func (r ApiGetCardWidgetURLRequest) CardId(cardId string) ApiGetCardWidgetURLRequest {
+func (r CardsApiGetCardWidgetURLRequest) CardId(cardId string) CardsApiGetCardWidgetURLRequest {
 	r.cardId = &cardId
 	return r
 }
 
-func (r ApiGetCardWidgetURLRequest) Execute() (*CardWidgetUrlResponse, *http.Response, error) {
+func (r CardsApiGetCardWidgetURLRequest) Execute() (*CardWidgetUrlResponse, *http.Response, error) {
 	return r.ApiService.GetCardWidgetURLExecute(r)
 }
 
@@ -958,10 +958,10 @@ This endpoint returns a URL address of the specified widget for a given card
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCardWidgetURLRequest
+ @return CardsApiGetCardWidgetURLRequest
 */
-func (a *CardsApiService) GetCardWidgetURL(ctx context.Context) ApiGetCardWidgetURLRequest {
-	return ApiGetCardWidgetURLRequest{
+func (a *CardsApiService) GetCardWidgetURL(ctx context.Context) CardsApiGetCardWidgetURLRequest {
+	return CardsApiGetCardWidgetURLRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -969,7 +969,7 @@ func (a *CardsApiService) GetCardWidgetURL(ctx context.Context) ApiGetCardWidget
 
 // Execute executes the request
 //  @return CardWidgetUrlResponse
-func (a *CardsApiService) GetCardWidgetURLExecute(r ApiGetCardWidgetURLRequest) (*CardWidgetUrlResponse, *http.Response, error) {
+func (a *CardsApiService) GetCardWidgetURLExecute(r CardsApiGetCardWidgetURLRequest) (*CardWidgetUrlResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1064,13 +1064,13 @@ func (a *CardsApiService) GetCardWidgetURLExecute(r ApiGetCardWidgetURLRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetClientAccessTokenRequest struct {
+type CardsApiGetClientAccessTokenRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	cardId string
 }
 
-func (r ApiGetClientAccessTokenRequest) Execute() (*ClientToken, *http.Response, error) {
+func (r CardsApiGetClientAccessTokenRequest) Execute() (*ClientToken, *http.Response, error) {
 	return r.ApiService.GetClientAccessTokenExecute(r)
 }
 
@@ -1082,10 +1082,10 @@ Create a client access token for interacting with a card.  This token will be us
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param cardId
- @return ApiGetClientAccessTokenRequest
+ @return CardsApiGetClientAccessTokenRequest
 */
-func (a *CardsApiService) GetClientAccessToken(ctx context.Context, cardId string) ApiGetClientAccessTokenRequest {
-	return ApiGetClientAccessTokenRequest{
+func (a *CardsApiService) GetClientAccessToken(ctx context.Context, cardId string) CardsApiGetClientAccessTokenRequest {
+	return CardsApiGetClientAccessTokenRequest{
 		ApiService: a,
 		ctx: ctx,
 		cardId: cardId,
@@ -1094,7 +1094,7 @@ func (a *CardsApiService) GetClientAccessToken(ctx context.Context, cardId strin
 
 // Execute executes the request
 //  @return ClientToken
-func (a *CardsApiService) GetClientAccessTokenExecute(r ApiGetClientAccessTokenRequest) (*ClientToken, *http.Response, error) {
+func (a *CardsApiService) GetClientAccessTokenExecute(r CardsApiGetClientAccessTokenRequest) (*ClientToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1217,19 +1217,19 @@ func (a *CardsApiService) GetClientAccessTokenExecute(r ApiGetClientAccessTokenR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetClientSingleUseTokenRequest struct {
+type CardsApiGetClientSingleUseTokenRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	singleUseTokenRequest *SingleUseTokenRequest
 }
 
 // User token details
-func (r ApiGetClientSingleUseTokenRequest) SingleUseTokenRequest(singleUseTokenRequest SingleUseTokenRequest) ApiGetClientSingleUseTokenRequest {
+func (r CardsApiGetClientSingleUseTokenRequest) SingleUseTokenRequest(singleUseTokenRequest SingleUseTokenRequest) CardsApiGetClientSingleUseTokenRequest {
 	r.singleUseTokenRequest = &singleUseTokenRequest
 	return r
 }
 
-func (r ApiGetClientSingleUseTokenRequest) Execute() (*SingleUseTokenResponse, *http.Response, error) {
+func (r CardsApiGetClientSingleUseTokenRequest) Execute() (*SingleUseTokenResponse, *http.Response, error) {
 	return r.ApiService.GetClientSingleUseTokenExecute(r)
 }
 
@@ -1240,10 +1240,10 @@ This endpoint returns a single-use access token. This type of token authorizes a
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetClientSingleUseTokenRequest
+ @return CardsApiGetClientSingleUseTokenRequest
 */
-func (a *CardsApiService) GetClientSingleUseToken(ctx context.Context) ApiGetClientSingleUseTokenRequest {
-	return ApiGetClientSingleUseTokenRequest{
+func (a *CardsApiService) GetClientSingleUseToken(ctx context.Context) CardsApiGetClientSingleUseTokenRequest {
+	return CardsApiGetClientSingleUseTokenRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1251,7 +1251,7 @@ func (a *CardsApiService) GetClientSingleUseToken(ctx context.Context) ApiGetCli
 
 // Execute executes the request
 //  @return SingleUseTokenResponse
-func (a *CardsApiService) GetClientSingleUseTokenExecute(r ApiGetClientSingleUseTokenRequest) (*SingleUseTokenResponse, *http.Response, error) {
+func (a *CardsApiService) GetClientSingleUseTokenExecute(r CardsApiGetClientSingleUseTokenRequest) (*SingleUseTokenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1378,19 +1378,19 @@ func (a *CardsApiService) GetClientSingleUseTokenExecute(r ApiGetClientSingleUse
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiIssueCardRequest struct {
+type CardsApiIssueCardRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	cardIssuanceRequest *CardIssuanceRequest
 }
 
 // Card to issue
-func (r ApiIssueCardRequest) CardIssuanceRequest(cardIssuanceRequest CardIssuanceRequest) ApiIssueCardRequest {
+func (r CardsApiIssueCardRequest) CardIssuanceRequest(cardIssuanceRequest CardIssuanceRequest) CardsApiIssueCardRequest {
 	r.cardIssuanceRequest = &cardIssuanceRequest
 	return r
 }
 
-func (r ApiIssueCardRequest) Execute() (*CardResponse, *http.Response, error) {
+func (r CardsApiIssueCardRequest) Execute() (*CardResponse, *http.Response, error) {
 	return r.ApiService.IssueCardExecute(r)
 }
 
@@ -1401,10 +1401,10 @@ Issue or reissue a new card for a customer
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiIssueCardRequest
+ @return CardsApiIssueCardRequest
 */
-func (a *CardsApiService) IssueCard(ctx context.Context) ApiIssueCardRequest {
-	return ApiIssueCardRequest{
+func (a *CardsApiService) IssueCard(ctx context.Context) CardsApiIssueCardRequest {
+	return CardsApiIssueCardRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1412,7 +1412,7 @@ func (a *CardsApiService) IssueCard(ctx context.Context) ApiIssueCardRequest {
 
 // Execute executes the request
 //  @return CardResponse
-func (a *CardsApiService) IssueCardExecute(r ApiIssueCardRequest) (*CardResponse, *http.Response, error) {
+func (a *CardsApiService) IssueCardExecute(r CardsApiIssueCardRequest) (*CardResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1539,18 +1539,18 @@ func (a *CardsApiService) IssueCardExecute(r ApiIssueCardRequest) (*CardResponse
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListCardImageDetailsRequest struct {
+type CardsApiListCardImageDetailsRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	customerId *string
 }
 
-func (r ApiListCardImageDetailsRequest) CustomerId(customerId string) ApiListCardImageDetailsRequest {
+func (r CardsApiListCardImageDetailsRequest) CustomerId(customerId string) CardsApiListCardImageDetailsRequest {
 	r.customerId = &customerId
 	return r
 }
 
-func (r ApiListCardImageDetailsRequest) Execute() (*CardImageDetailsList, *http.Response, error) {
+func (r CardsApiListCardImageDetailsRequest) Execute() (*CardImageDetailsList, *http.Response, error) {
 	return r.ApiService.ListCardImageDetailsExecute(r)
 }
 
@@ -1561,10 +1561,10 @@ List all card image details
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListCardImageDetailsRequest
+ @return CardsApiListCardImageDetailsRequest
 */
-func (a *CardsApiService) ListCardImageDetails(ctx context.Context) ApiListCardImageDetailsRequest {
-	return ApiListCardImageDetailsRequest{
+func (a *CardsApiService) ListCardImageDetails(ctx context.Context) CardsApiListCardImageDetailsRequest {
+	return CardsApiListCardImageDetailsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1572,7 +1572,7 @@ func (a *CardsApiService) ListCardImageDetails(ctx context.Context) ApiListCardI
 
 // Execute executes the request
 //  @return CardImageDetailsList
-func (a *CardsApiService) ListCardImageDetailsExecute(r ApiListCardImageDetailsRequest) (*CardImageDetailsList, *http.Response, error) {
+func (a *CardsApiService) ListCardImageDetailsExecute(r CardsApiListCardImageDetailsRequest) (*CardImageDetailsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1678,24 +1678,24 @@ func (a *CardsApiService) ListCardImageDetailsExecute(r ApiListCardImageDetailsR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListCardProductsRequest struct {
+type CardsApiListCardProductsRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	limit *int32
 	pageToken *string
 }
 
-func (r ApiListCardProductsRequest) Limit(limit int32) ApiListCardProductsRequest {
+func (r CardsApiListCardProductsRequest) Limit(limit int32) CardsApiListCardProductsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiListCardProductsRequest) PageToken(pageToken string) ApiListCardProductsRequest {
+func (r CardsApiListCardProductsRequest) PageToken(pageToken string) CardsApiListCardProductsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListCardProductsRequest) Execute() (*CardProductListResponse, *http.Response, error) {
+func (r CardsApiListCardProductsRequest) Execute() (*CardProductListResponse, *http.Response, error) {
 	return r.ApiService.ListCardProductsExecute(r)
 }
 
@@ -1703,10 +1703,10 @@ func (r ApiListCardProductsRequest) Execute() (*CardProductListResponse, *http.R
 ListCardProducts List Card Products
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListCardProductsRequest
+ @return CardsApiListCardProductsRequest
 */
-func (a *CardsApiService) ListCardProducts(ctx context.Context) ApiListCardProductsRequest {
-	return ApiListCardProductsRequest{
+func (a *CardsApiService) ListCardProducts(ctx context.Context) CardsApiListCardProductsRequest {
+	return CardsApiListCardProductsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1714,7 +1714,7 @@ func (a *CardsApiService) ListCardProducts(ctx context.Context) ApiListCardProdu
 
 // Execute executes the request
 //  @return CardProductListResponse
-func (a *CardsApiService) ListCardProductsExecute(r ApiListCardProductsRequest) (*CardProductListResponse, *http.Response, error) {
+func (a *CardsApiService) ListCardProductsExecute(r CardsApiListCardProductsRequest) (*CardProductListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1822,7 +1822,7 @@ func (a *CardsApiService) ListCardProductsExecute(r ApiListCardProductsRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListCardsRequest struct {
+type CardsApiListCardsRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	customerId *string
@@ -1841,86 +1841,86 @@ type ApiListCardsRequest struct {
 	sortBy *[]string
 }
 
-func (r ApiListCardsRequest) CustomerId(customerId string) ApiListCardsRequest {
+func (r CardsApiListCardsRequest) CustomerId(customerId string) CardsApiListCardsRequest {
 	r.customerId = &customerId
 	return r
 }
 
-func (r ApiListCardsRequest) AccountId(accountId string) ApiListCardsRequest {
+func (r CardsApiListCardsRequest) AccountId(accountId string) CardsApiListCardsRequest {
 	r.accountId = &accountId
 	return r
 }
 
 // emboss name
-func (r ApiListCardsRequest) EmbossName(embossName string) ApiListCardsRequest {
+func (r CardsApiListCardsRequest) EmbossName(embossName string) CardsApiListCardsRequest {
 	r.embossName = &embossName
 	return r
 }
 
 // The last 4 digits of the card PAN
-func (r ApiListCardsRequest) LastFour(lastFour string) ApiListCardsRequest {
+func (r CardsApiListCardsRequest) LastFour(lastFour string) CardsApiListCardsRequest {
 	r.lastFour = &lastFour
 	return r
 }
 
 // The date representing when the card would expire at
-func (r ApiListCardsRequest) ExpirationDate(expirationDate string) ApiListCardsRequest {
+func (r CardsApiListCardsRequest) ExpirationDate(expirationDate string) CardsApiListCardsRequest {
 	r.expirationDate = &expirationDate
 	return r
 }
 
 // Indicates the type of card
-func (r ApiListCardsRequest) CardType(cardType string) ApiListCardsRequest {
+func (r CardsApiListCardsRequest) CardType(cardType string) CardsApiListCardsRequest {
 	r.cardType = &cardType
 	return r
 }
 
 // The brand of a card product
-func (r ApiListCardsRequest) CardBrand(cardBrand CardBrand) ApiListCardsRequest {
+func (r CardsApiListCardsRequest) CardBrand(cardBrand CardBrand) CardsApiListCardsRequest {
 	r.cardBrand = &cardBrand
 	return r
 }
 
 // The format of the card
-func (r ApiListCardsRequest) Form(form Form) ApiListCardsRequest {
+func (r CardsApiListCardsRequest) Form(form Form) CardsApiListCardsRequest {
 	r.form = &form
 	return r
 }
 
-func (r ApiListCardsRequest) CardProductId(cardProductId string) ApiListCardsRequest {
+func (r CardsApiListCardsRequest) CardProductId(cardProductId string) CardsApiListCardsRequest {
 	r.cardProductId = &cardProductId
 	return r
 }
 
 // The status of a card
-func (r ApiListCardsRequest) CardStatus(cardStatus CardStatus) ApiListCardsRequest {
+func (r CardsApiListCardsRequest) CardStatus(cardStatus CardStatus) CardsApiListCardsRequest {
 	r.cardStatus = &cardStatus
 	return r
 }
 
 // The postal code of a card user
-func (r ApiListCardsRequest) PostalCode(postalCode string) ApiListCardsRequest {
+func (r CardsApiListCardsRequest) PostalCode(postalCode string) CardsApiListCardsRequest {
 	r.postalCode = &postalCode
 	return r
 }
 
-func (r ApiListCardsRequest) Limit(limit int32) ApiListCardsRequest {
+func (r CardsApiListCardsRequest) Limit(limit int32) CardsApiListCardsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiListCardsRequest) PageToken(pageToken string) ApiListCardsRequest {
+func (r CardsApiListCardsRequest) PageToken(pageToken string) CardsApiListCardsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Specifies the sort order for the returned cards. 
-func (r ApiListCardsRequest) SortBy(sortBy []string) ApiListCardsRequest {
+func (r CardsApiListCardsRequest) SortBy(sortBy []string) CardsApiListCardsRequest {
 	r.sortBy = &sortBy
 	return r
 }
 
-func (r ApiListCardsRequest) Execute() (*CardListResponse, *http.Response, error) {
+func (r CardsApiListCardsRequest) Execute() (*CardListResponse, *http.Response, error) {
 	return r.ApiService.ListCardsExecute(r)
 }
 
@@ -1931,10 +1931,10 @@ List of cards matching query parameters
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListCardsRequest
+ @return CardsApiListCardsRequest
 */
-func (a *CardsApiService) ListCards(ctx context.Context) ApiListCardsRequest {
-	return ApiListCardsRequest{
+func (a *CardsApiService) ListCards(ctx context.Context) CardsApiListCardsRequest {
+	return CardsApiListCardsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1942,7 +1942,7 @@ func (a *CardsApiService) ListCards(ctx context.Context) ApiListCardsRequest {
 
 // Execute executes the request
 //  @return CardListResponse
-func (a *CardsApiService) ListCardsExecute(r ApiListCardsRequest) (*CardListResponse, *http.Response, error) {
+func (a *CardsApiService) ListCardsExecute(r CardsApiListCardsRequest) (*CardListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -2106,13 +2106,13 @@ func (a *CardsApiService) ListCardsExecute(r ApiListCardsRequest) (*CardListResp
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListChangesRequest struct {
+type CardsApiListChangesRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	cardId string
 }
 
-func (r ApiListChangesRequest) Execute() (*CardChangesList, *http.Response, error) {
+func (r CardsApiListChangesRequest) Execute() (*CardChangesList, *http.Response, error) {
 	return r.ApiService.ListChangesExecute(r)
 }
 
@@ -2124,10 +2124,10 @@ List card change history
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param cardId
- @return ApiListChangesRequest
+ @return CardsApiListChangesRequest
 */
-func (a *CardsApiService) ListChanges(ctx context.Context, cardId string) ApiListChangesRequest {
-	return ApiListChangesRequest{
+func (a *CardsApiService) ListChanges(ctx context.Context, cardId string) CardsApiListChangesRequest {
+	return CardsApiListChangesRequest{
 		ApiService: a,
 		ctx: ctx,
 		cardId: cardId,
@@ -2136,7 +2136,7 @@ func (a *CardsApiService) ListChanges(ctx context.Context, cardId string) ApiLis
 
 // Execute executes the request
 //  @return CardChangesList
-func (a *CardsApiService) ListChangesExecute(r ApiListChangesRequest) (*CardChangesList, *http.Response, error) {
+func (a *CardsApiService) ListChangesExecute(r CardsApiListChangesRequest) (*CardChangesList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -2259,7 +2259,7 @@ func (a *CardsApiService) ListChangesExecute(r ApiListChangesRequest) (*CardChan
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateCardRequest struct {
+type CardsApiUpdateCardRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	cardId string
@@ -2267,12 +2267,12 @@ type ApiUpdateCardRequest struct {
 }
 
 // Card edits
-func (r ApiUpdateCardRequest) CardEditRequest(cardEditRequest CardEditRequest) ApiUpdateCardRequest {
+func (r CardsApiUpdateCardRequest) CardEditRequest(cardEditRequest CardEditRequest) CardsApiUpdateCardRequest {
 	r.cardEditRequest = &cardEditRequest
 	return r
 }
 
-func (r ApiUpdateCardRequest) Execute() (*CardResponse, *http.Response, error) {
+func (r CardsApiUpdateCardRequest) Execute() (*CardResponse, *http.Response, error) {
 	return r.ApiService.UpdateCardExecute(r)
 }
 
@@ -2284,10 +2284,10 @@ Integrators can update the card resource to change status, update shipping (if t
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param cardId
- @return ApiUpdateCardRequest
+ @return CardsApiUpdateCardRequest
 */
-func (a *CardsApiService) UpdateCard(ctx context.Context, cardId string) ApiUpdateCardRequest {
-	return ApiUpdateCardRequest{
+func (a *CardsApiService) UpdateCard(ctx context.Context, cardId string) CardsApiUpdateCardRequest {
+	return CardsApiUpdateCardRequest{
 		ApiService: a,
 		ctx: ctx,
 		cardId: cardId,
@@ -2296,7 +2296,7 @@ func (a *CardsApiService) UpdateCard(ctx context.Context, cardId string) ApiUpda
 
 // Execute executes the request
 //  @return CardResponse
-func (a *CardsApiService) UpdateCardExecute(r ApiUpdateCardRequest) (*CardResponse, *http.Response, error) {
+func (a *CardsApiService) UpdateCardExecute(r CardsApiUpdateCardRequest) (*CardResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -2424,7 +2424,7 @@ func (a *CardsApiService) UpdateCardExecute(r ApiUpdateCardRequest) (*CardRespon
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateCardImageDetailsRequest struct {
+type CardsApiUpdateCardImageDetailsRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	cardImageId string
@@ -2432,12 +2432,12 @@ type ApiUpdateCardImageDetailsRequest struct {
 }
 
 // Details of the image to create
-func (r ApiUpdateCardImageDetailsRequest) UpdateCardImageRequest(updateCardImageRequest UpdateCardImageRequest) ApiUpdateCardImageDetailsRequest {
+func (r CardsApiUpdateCardImageDetailsRequest) UpdateCardImageRequest(updateCardImageRequest UpdateCardImageRequest) CardsApiUpdateCardImageDetailsRequest {
 	r.updateCardImageRequest = &updateCardImageRequest
 	return r
 }
 
-func (r ApiUpdateCardImageDetailsRequest) Execute() (*CardImageDetails, *http.Response, error) {
+func (r CardsApiUpdateCardImageDetailsRequest) Execute() (*CardImageDetails, *http.Response, error) {
 	return r.ApiService.UpdateCardImageDetailsExecute(r)
 }
 
@@ -2448,10 +2448,10 @@ Update card image details. The only detail that can be updated is the card statu
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param cardImageId
- @return ApiUpdateCardImageDetailsRequest
+ @return CardsApiUpdateCardImageDetailsRequest
 */
-func (a *CardsApiService) UpdateCardImageDetails(ctx context.Context, cardImageId string) ApiUpdateCardImageDetailsRequest {
-	return ApiUpdateCardImageDetailsRequest{
+func (a *CardsApiService) UpdateCardImageDetails(ctx context.Context, cardImageId string) CardsApiUpdateCardImageDetailsRequest {
+	return CardsApiUpdateCardImageDetailsRequest{
 		ApiService: a,
 		ctx: ctx,
 		cardImageId: cardImageId,
@@ -2460,7 +2460,7 @@ func (a *CardsApiService) UpdateCardImageDetails(ctx context.Context, cardImageI
 
 // Execute executes the request
 //  @return CardImageDetails
-func (a *CardsApiService) UpdateCardImageDetailsExecute(r ApiUpdateCardImageDetailsRequest) (*CardImageDetails, *http.Response, error) {
+func (a *CardsApiService) UpdateCardImageDetailsExecute(r CardsApiUpdateCardImageDetailsRequest) (*CardImageDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -2568,7 +2568,7 @@ func (a *CardsApiService) UpdateCardImageDetailsExecute(r ApiUpdateCardImageDeta
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUploadCardImageDataRequest struct {
+type CardsApiUploadCardImageDataRequest struct {
 	ctx context.Context
 	ApiService *CardsApiService
 	cardImageId string
@@ -2576,12 +2576,12 @@ type ApiUploadCardImageDataRequest struct {
 }
 
 // Binary image data
-func (r ApiUploadCardImageDataRequest) Body(body *os.File) ApiUploadCardImageDataRequest {
+func (r CardsApiUploadCardImageDataRequest) Body(body *os.File) CardsApiUploadCardImageDataRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiUploadCardImageDataRequest) Execute() (*CardImageDetails, *http.Response, error) {
+func (r CardsApiUploadCardImageDataRequest) Execute() (*CardImageDetails, *http.Response, error) {
 	return r.ApiService.UploadCardImageDataExecute(r)
 }
 
@@ -2592,10 +2592,10 @@ Upload card image data
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param cardImageId
- @return ApiUploadCardImageDataRequest
+ @return CardsApiUploadCardImageDataRequest
 */
-func (a *CardsApiService) UploadCardImageData(ctx context.Context, cardImageId string) ApiUploadCardImageDataRequest {
-	return ApiUploadCardImageDataRequest{
+func (a *CardsApiService) UploadCardImageData(ctx context.Context, cardImageId string) CardsApiUploadCardImageDataRequest {
+	return CardsApiUploadCardImageDataRequest{
 		ApiService: a,
 		ctx: ctx,
 		cardImageId: cardImageId,
@@ -2604,7 +2604,7 @@ func (a *CardsApiService) UploadCardImageData(ctx context.Context, cardImageId s
 
 // Execute executes the request
 //  @return CardImageDetails
-func (a *CardsApiService) UploadCardImageDataExecute(r ApiUploadCardImageDataRequest) (*CardImageDetails, *http.Response, error) {
+func (a *CardsApiService) UploadCardImageDataExecute(r CardsApiUploadCardImageDataRequest) (*CardImageDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

@@ -23,19 +23,19 @@ import (
 // PaymentSchedulesApiService PaymentSchedulesApi service
 type PaymentSchedulesApiService service
 
-type ApiCreatePaymentScheduleRequest struct {
+type PaymentSchedulesApiCreatePaymentScheduleRequest struct {
 	ctx context.Context
 	ApiService *PaymentSchedulesApiService
 	paymentSchedule *PaymentSchedule
 }
 
 // payment schedule to create
-func (r ApiCreatePaymentScheduleRequest) PaymentSchedule(paymentSchedule PaymentSchedule) ApiCreatePaymentScheduleRequest {
+func (r PaymentSchedulesApiCreatePaymentScheduleRequest) PaymentSchedule(paymentSchedule PaymentSchedule) PaymentSchedulesApiCreatePaymentScheduleRequest {
 	r.paymentSchedule = &paymentSchedule
 	return r
 }
 
-func (r ApiCreatePaymentScheduleRequest) Execute() (*PaymentSchedule, *http.Response, error) {
+func (r PaymentSchedulesApiCreatePaymentScheduleRequest) Execute() (*PaymentSchedule, *http.Response, error) {
 	return r.ApiService.CreatePaymentScheduleExecute(r)
 }
 
@@ -45,10 +45,10 @@ CreatePaymentSchedule Create a payment schedule
 Create a payment schedule
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreatePaymentScheduleRequest
+ @return PaymentSchedulesApiCreatePaymentScheduleRequest
 */
-func (a *PaymentSchedulesApiService) CreatePaymentSchedule(ctx context.Context) ApiCreatePaymentScheduleRequest {
-	return ApiCreatePaymentScheduleRequest{
+func (a *PaymentSchedulesApiService) CreatePaymentSchedule(ctx context.Context) PaymentSchedulesApiCreatePaymentScheduleRequest {
+	return PaymentSchedulesApiCreatePaymentScheduleRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -56,7 +56,7 @@ func (a *PaymentSchedulesApiService) CreatePaymentSchedule(ctx context.Context) 
 
 // Execute executes the request
 //  @return PaymentSchedule
-func (a *PaymentSchedulesApiService) CreatePaymentScheduleExecute(r ApiCreatePaymentScheduleRequest) (*PaymentSchedule, *http.Response, error) {
+func (a *PaymentSchedulesApiService) CreatePaymentScheduleExecute(r PaymentSchedulesApiCreatePaymentScheduleRequest) (*PaymentSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -183,7 +183,7 @@ func (a *PaymentSchedulesApiService) CreatePaymentScheduleExecute(r ApiCreatePay
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListPaymentSchedulesRequest struct {
+type PaymentSchedulesApiListPaymentSchedulesRequest struct {
 	ctx context.Context
 	ApiService *PaymentSchedulesApiService
 	limit *int32
@@ -193,35 +193,35 @@ type ApiListPaymentSchedulesRequest struct {
 	customerId *[]string
 }
 
-func (r ApiListPaymentSchedulesRequest) Limit(limit int32) ApiListPaymentSchedulesRequest {
+func (r PaymentSchedulesApiListPaymentSchedulesRequest) Limit(limit int32) PaymentSchedulesApiListPaymentSchedulesRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiListPaymentSchedulesRequest) PageToken(pageToken string) ApiListPaymentSchedulesRequest {
+func (r PaymentSchedulesApiListPaymentSchedulesRequest) PageToken(pageToken string) PaymentSchedulesApiListPaymentSchedulesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // IDs. Multiple IDs can be provided as a comma-separated list.
-func (r ApiListPaymentSchedulesRequest) Id(id []string) ApiListPaymentSchedulesRequest {
+func (r PaymentSchedulesApiListPaymentSchedulesRequest) Id(id []string) PaymentSchedulesApiListPaymentSchedulesRequest {
 	r.id = &id
 	return r
 }
 
 // Originating account IDs. Multiple IDs can be provided as a comma-separated list.
-func (r ApiListPaymentSchedulesRequest) AccountId(accountId []string) ApiListPaymentSchedulesRequest {
+func (r PaymentSchedulesApiListPaymentSchedulesRequest) AccountId(accountId []string) PaymentSchedulesApiListPaymentSchedulesRequest {
 	r.accountId = &accountId
 	return r
 }
 
 // The IDs of customers who created the payment schedules. Multiple IDs can be provided as a comma-separated list.
-func (r ApiListPaymentSchedulesRequest) CustomerId(customerId []string) ApiListPaymentSchedulesRequest {
+func (r PaymentSchedulesApiListPaymentSchedulesRequest) CustomerId(customerId []string) PaymentSchedulesApiListPaymentSchedulesRequest {
 	r.customerId = &customerId
 	return r
 }
 
-func (r ApiListPaymentSchedulesRequest) Execute() (*PaymentScheduleList, *http.Response, error) {
+func (r PaymentSchedulesApiListPaymentSchedulesRequest) Execute() (*PaymentScheduleList, *http.Response, error) {
 	return r.ApiService.ListPaymentSchedulesExecute(r)
 }
 
@@ -231,10 +231,10 @@ ListPaymentSchedules List payment schedules
 Get paginated list of payment schedules
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListPaymentSchedulesRequest
+ @return PaymentSchedulesApiListPaymentSchedulesRequest
 */
-func (a *PaymentSchedulesApiService) ListPaymentSchedules(ctx context.Context) ApiListPaymentSchedulesRequest {
-	return ApiListPaymentSchedulesRequest{
+func (a *PaymentSchedulesApiService) ListPaymentSchedules(ctx context.Context) PaymentSchedulesApiListPaymentSchedulesRequest {
+	return PaymentSchedulesApiListPaymentSchedulesRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -242,7 +242,7 @@ func (a *PaymentSchedulesApiService) ListPaymentSchedules(ctx context.Context) A
 
 // Execute executes the request
 //  @return PaymentScheduleList
-func (a *PaymentSchedulesApiService) ListPaymentSchedulesExecute(r ApiListPaymentSchedulesRequest) (*PaymentScheduleList, *http.Response, error) {
+func (a *PaymentSchedulesApiService) ListPaymentSchedulesExecute(r PaymentSchedulesApiListPaymentSchedulesRequest) (*PaymentScheduleList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -359,7 +359,7 @@ func (a *PaymentSchedulesApiService) ListPaymentSchedulesExecute(r ApiListPaymen
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListPaymentsRequest struct {
+type PaymentSchedulesApiListPaymentsRequest struct {
 	ctx context.Context
 	ApiService *PaymentSchedulesApiService
 	limit *int32
@@ -370,41 +370,41 @@ type ApiListPaymentsRequest struct {
 	customerId *[]string
 }
 
-func (r ApiListPaymentsRequest) Limit(limit int32) ApiListPaymentsRequest {
+func (r PaymentSchedulesApiListPaymentsRequest) Limit(limit int32) PaymentSchedulesApiListPaymentsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiListPaymentsRequest) PageToken(pageToken string) ApiListPaymentsRequest {
+func (r PaymentSchedulesApiListPaymentsRequest) PageToken(pageToken string) PaymentSchedulesApiListPaymentsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // IDs. Multiple IDs can be provided as a comma-separated list.
-func (r ApiListPaymentsRequest) Id(id []string) ApiListPaymentsRequest {
+func (r PaymentSchedulesApiListPaymentsRequest) Id(id []string) PaymentSchedulesApiListPaymentsRequest {
 	r.id = &id
 	return r
 }
 
 // Payment schedule IDs. Multiple IDs can be provided as a comma-separated list.
-func (r ApiListPaymentsRequest) ScheduleId(scheduleId []string) ApiListPaymentsRequest {
+func (r PaymentSchedulesApiListPaymentsRequest) ScheduleId(scheduleId []string) PaymentSchedulesApiListPaymentsRequest {
 	r.scheduleId = &scheduleId
 	return r
 }
 
 // Originating account IDs. Multiple IDs can be provided as a comma-separated list.
-func (r ApiListPaymentsRequest) AccountId(accountId []string) ApiListPaymentsRequest {
+func (r PaymentSchedulesApiListPaymentsRequest) AccountId(accountId []string) PaymentSchedulesApiListPaymentsRequest {
 	r.accountId = &accountId
 	return r
 }
 
 // The IDs of customers who created the payment schedules. Multiple IDs can be provided as a comma-separated list.
-func (r ApiListPaymentsRequest) CustomerId(customerId []string) ApiListPaymentsRequest {
+func (r PaymentSchedulesApiListPaymentsRequest) CustomerId(customerId []string) PaymentSchedulesApiListPaymentsRequest {
 	r.customerId = &customerId
 	return r
 }
 
-func (r ApiListPaymentsRequest) Execute() (*PaymentList, *http.Response, error) {
+func (r PaymentSchedulesApiListPaymentsRequest) Execute() (*PaymentList, *http.Response, error) {
 	return r.ApiService.ListPaymentsExecute(r)
 }
 
@@ -414,10 +414,10 @@ ListPayments List payments
 Get paginated list of payments
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListPaymentsRequest
+ @return PaymentSchedulesApiListPaymentsRequest
 */
-func (a *PaymentSchedulesApiService) ListPayments(ctx context.Context) ApiListPaymentsRequest {
-	return ApiListPaymentsRequest{
+func (a *PaymentSchedulesApiService) ListPayments(ctx context.Context) PaymentSchedulesApiListPaymentsRequest {
+	return PaymentSchedulesApiListPaymentsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -425,7 +425,7 @@ func (a *PaymentSchedulesApiService) ListPayments(ctx context.Context) ApiListPa
 
 // Execute executes the request
 //  @return PaymentList
-func (a *PaymentSchedulesApiService) ListPaymentsExecute(r ApiListPaymentsRequest) (*PaymentList, *http.Response, error) {
+func (a *PaymentSchedulesApiService) ListPaymentsExecute(r PaymentSchedulesApiListPaymentsRequest) (*PaymentList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -545,7 +545,7 @@ func (a *PaymentSchedulesApiService) ListPaymentsExecute(r ApiListPaymentsReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPatchPaymentScheduleRequest struct {
+type PaymentSchedulesApiPatchPaymentScheduleRequest struct {
 	ctx context.Context
 	ApiService *PaymentSchedulesApiService
 	paymentScheduleId string
@@ -553,12 +553,12 @@ type ApiPatchPaymentScheduleRequest struct {
 }
 
 // payment schedule to update
-func (r ApiPatchPaymentScheduleRequest) PatchPaymentSchedule(patchPaymentSchedule PatchPaymentSchedule) ApiPatchPaymentScheduleRequest {
+func (r PaymentSchedulesApiPatchPaymentScheduleRequest) PatchPaymentSchedule(patchPaymentSchedule PatchPaymentSchedule) PaymentSchedulesApiPatchPaymentScheduleRequest {
 	r.patchPaymentSchedule = &patchPaymentSchedule
 	return r
 }
 
-func (r ApiPatchPaymentScheduleRequest) Execute() (*PaymentSchedule, *http.Response, error) {
+func (r PaymentSchedulesApiPatchPaymentScheduleRequest) Execute() (*PaymentSchedule, *http.Response, error) {
 	return r.ApiService.PatchPaymentScheduleExecute(r)
 }
 
@@ -569,10 +569,10 @@ Update a payment schedule
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param paymentScheduleId Payment schedule ID
- @return ApiPatchPaymentScheduleRequest
+ @return PaymentSchedulesApiPatchPaymentScheduleRequest
 */
-func (a *PaymentSchedulesApiService) PatchPaymentSchedule(ctx context.Context, paymentScheduleId string) ApiPatchPaymentScheduleRequest {
-	return ApiPatchPaymentScheduleRequest{
+func (a *PaymentSchedulesApiService) PatchPaymentSchedule(ctx context.Context, paymentScheduleId string) PaymentSchedulesApiPatchPaymentScheduleRequest {
+	return PaymentSchedulesApiPatchPaymentScheduleRequest{
 		ApiService: a,
 		ctx: ctx,
 		paymentScheduleId: paymentScheduleId,
@@ -581,7 +581,7 @@ func (a *PaymentSchedulesApiService) PatchPaymentSchedule(ctx context.Context, p
 
 // Execute executes the request
 //  @return PaymentSchedule
-func (a *PaymentSchedulesApiService) PatchPaymentScheduleExecute(r ApiPatchPaymentScheduleRequest) (*PaymentSchedule, *http.Response, error) {
+func (a *PaymentSchedulesApiService) PatchPaymentScheduleExecute(r PaymentSchedulesApiPatchPaymentScheduleRequest) (*PaymentSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}

@@ -23,13 +23,13 @@ import (
 // StatementsApiService StatementsApi service
 type StatementsApiService service
 
-type ApiGetStatementRequest struct {
+type StatementsApiGetStatementRequest struct {
 	ctx context.Context
 	ApiService *StatementsApiService
 	statementId string
 }
 
-func (r ApiGetStatementRequest) Execute() (*Statement, *http.Response, error) {
+func (r StatementsApiGetStatementRequest) Execute() (*Statement, *http.Response, error) {
 	return r.ApiService.GetStatementExecute(r)
 }
 
@@ -40,10 +40,10 @@ Get a statement
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param statementId The unique identifier of a statement
- @return ApiGetStatementRequest
+ @return StatementsApiGetStatementRequest
 */
-func (a *StatementsApiService) GetStatement(ctx context.Context, statementId string) ApiGetStatementRequest {
-	return ApiGetStatementRequest{
+func (a *StatementsApiService) GetStatement(ctx context.Context, statementId string) StatementsApiGetStatementRequest {
+	return StatementsApiGetStatementRequest{
 		ApiService: a,
 		ctx: ctx,
 		statementId: statementId,
@@ -52,7 +52,7 @@ func (a *StatementsApiService) GetStatement(ctx context.Context, statementId str
 
 // Execute executes the request
 //  @return Statement
-func (a *StatementsApiService) GetStatementExecute(r ApiGetStatementRequest) (*Statement, *http.Response, error) {
+func (a *StatementsApiService) GetStatementExecute(r StatementsApiGetStatementRequest) (*Statement, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -165,19 +165,19 @@ func (a *StatementsApiService) GetStatementExecute(r ApiGetStatementRequest) (*S
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListStatementsRequest struct {
+type StatementsApiListStatementsRequest struct {
 	ctx context.Context
 	ApiService *StatementsApiService
 	accountId *string
 }
 
 // The account&#39;s unique identifier provided by Synctera
-func (r ApiListStatementsRequest) AccountId(accountId string) ApiListStatementsRequest {
+func (r StatementsApiListStatementsRequest) AccountId(accountId string) StatementsApiListStatementsRequest {
 	r.accountId = &accountId
 	return r
 }
 
-func (r ApiListStatementsRequest) Execute() (*StatementList, *http.Response, error) {
+func (r StatementsApiListStatementsRequest) Execute() (*StatementList, *http.Response, error) {
 	return r.ApiService.ListStatementsExecute(r)
 }
 
@@ -187,10 +187,10 @@ ListStatements List statements
 Get list of statements
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListStatementsRequest
+ @return StatementsApiListStatementsRequest
 */
-func (a *StatementsApiService) ListStatements(ctx context.Context) ApiListStatementsRequest {
-	return ApiListStatementsRequest{
+func (a *StatementsApiService) ListStatements(ctx context.Context) StatementsApiListStatementsRequest {
+	return StatementsApiListStatementsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -198,7 +198,7 @@ func (a *StatementsApiService) ListStatements(ctx context.Context) ApiListStatem
 
 // Execute executes the request
 //  @return StatementList
-func (a *StatementsApiService) ListStatementsExecute(r ApiListStatementsRequest) (*StatementList, *http.Response, error) {
+func (a *StatementsApiService) ListStatementsExecute(r StatementsApiListStatementsRequest) (*StatementList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}

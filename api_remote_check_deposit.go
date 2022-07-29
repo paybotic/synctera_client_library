@@ -23,19 +23,19 @@ import (
 // RemoteCheckDepositApiService RemoteCheckDepositApi service
 type RemoteCheckDepositApiService service
 
-type ApiCreateRdcDepositRequest struct {
+type RemoteCheckDepositApiCreateRdcDepositRequest struct {
 	ctx context.Context
 	ApiService *RemoteCheckDepositApiService
 	deposit *Deposit
 }
 
 // Attributes of the Remote Check Deposit to create
-func (r ApiCreateRdcDepositRequest) Deposit(deposit Deposit) ApiCreateRdcDepositRequest {
+func (r RemoteCheckDepositApiCreateRdcDepositRequest) Deposit(deposit Deposit) RemoteCheckDepositApiCreateRdcDepositRequest {
 	r.deposit = &deposit
 	return r
 }
 
-func (r ApiCreateRdcDepositRequest) Execute() (*Deposit, *http.Response, error) {
+func (r RemoteCheckDepositApiCreateRdcDepositRequest) Execute() (*Deposit, *http.Response, error) {
 	return r.ApiService.CreateRdcDepositExecute(r)
 }
 
@@ -46,10 +46,10 @@ Create a new deposit using remote deposit capture to an account
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateRdcDepositRequest
+ @return RemoteCheckDepositApiCreateRdcDepositRequest
 */
-func (a *RemoteCheckDepositApiService) CreateRdcDeposit(ctx context.Context) ApiCreateRdcDepositRequest {
-	return ApiCreateRdcDepositRequest{
+func (a *RemoteCheckDepositApiService) CreateRdcDeposit(ctx context.Context) RemoteCheckDepositApiCreateRdcDepositRequest {
+	return RemoteCheckDepositApiCreateRdcDepositRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -57,7 +57,7 @@ func (a *RemoteCheckDepositApiService) CreateRdcDeposit(ctx context.Context) Api
 
 // Execute executes the request
 //  @return Deposit
-func (a *RemoteCheckDepositApiService) CreateRdcDepositExecute(r ApiCreateRdcDepositRequest) (*Deposit, *http.Response, error) {
+func (a *RemoteCheckDepositApiService) CreateRdcDepositExecute(r RemoteCheckDepositApiCreateRdcDepositRequest) (*Deposit, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -161,13 +161,13 @@ func (a *RemoteCheckDepositApiService) CreateRdcDepositExecute(r ApiCreateRdcDep
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetRdcDepositRequest struct {
+type RemoteCheckDepositApiGetRdcDepositRequest struct {
 	ctx context.Context
 	ApiService *RemoteCheckDepositApiService
 	depositId string
 }
 
-func (r ApiGetRdcDepositRequest) Execute() (*Deposit, *http.Response, error) {
+func (r RemoteCheckDepositApiGetRdcDepositRequest) Execute() (*Deposit, *http.Response, error) {
 	return r.ApiService.GetRdcDepositExecute(r)
 }
 
@@ -178,10 +178,10 @@ Retrieves one deposit made using remote deposit capture associated with an accou
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param depositId ID of a deposit for a remote deposit capture
- @return ApiGetRdcDepositRequest
+ @return RemoteCheckDepositApiGetRdcDepositRequest
 */
-func (a *RemoteCheckDepositApiService) GetRdcDeposit(ctx context.Context, depositId string) ApiGetRdcDepositRequest {
-	return ApiGetRdcDepositRequest{
+func (a *RemoteCheckDepositApiService) GetRdcDeposit(ctx context.Context, depositId string) RemoteCheckDepositApiGetRdcDepositRequest {
+	return RemoteCheckDepositApiGetRdcDepositRequest{
 		ApiService: a,
 		ctx: ctx,
 		depositId: depositId,
@@ -190,7 +190,7 @@ func (a *RemoteCheckDepositApiService) GetRdcDeposit(ctx context.Context, deposi
 
 // Execute executes the request
 //  @return Deposit
-func (a *RemoteCheckDepositApiService) GetRdcDepositExecute(r ApiGetRdcDepositRequest) (*Deposit, *http.Response, error) {
+func (a *RemoteCheckDepositApiService) GetRdcDepositExecute(r RemoteCheckDepositApiGetRdcDepositRequest) (*Deposit, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -293,24 +293,24 @@ func (a *RemoteCheckDepositApiService) GetRdcDepositExecute(r ApiGetRdcDepositRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListRdcDepositsRequest struct {
+type RemoteCheckDepositApiListRdcDepositsRequest struct {
 	ctx context.Context
 	ApiService *RemoteCheckDepositApiService
 	limit *int32
 	pageToken *string
 }
 
-func (r ApiListRdcDepositsRequest) Limit(limit int32) ApiListRdcDepositsRequest {
+func (r RemoteCheckDepositApiListRdcDepositsRequest) Limit(limit int32) RemoteCheckDepositApiListRdcDepositsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiListRdcDepositsRequest) PageToken(pageToken string) ApiListRdcDepositsRequest {
+func (r RemoteCheckDepositApiListRdcDepositsRequest) PageToken(pageToken string) RemoteCheckDepositApiListRdcDepositsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListRdcDepositsRequest) Execute() (*DepositList, *http.Response, error) {
+func (r RemoteCheckDepositApiListRdcDepositsRequest) Execute() (*DepositList, *http.Response, error) {
 	return r.ApiService.ListRdcDepositsExecute(r)
 }
 
@@ -320,10 +320,10 @@ ListRdcDeposits List Remote Check Deposits
 Retrieves a paginated list of the deposits made using remote deposit capture associated with an account
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListRdcDepositsRequest
+ @return RemoteCheckDepositApiListRdcDepositsRequest
 */
-func (a *RemoteCheckDepositApiService) ListRdcDeposits(ctx context.Context) ApiListRdcDepositsRequest {
-	return ApiListRdcDepositsRequest{
+func (a *RemoteCheckDepositApiService) ListRdcDeposits(ctx context.Context) RemoteCheckDepositApiListRdcDepositsRequest {
+	return RemoteCheckDepositApiListRdcDepositsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -331,7 +331,7 @@ func (a *RemoteCheckDepositApiService) ListRdcDeposits(ctx context.Context) ApiL
 
 // Execute executes the request
 //  @return DepositList
-func (a *RemoteCheckDepositApiService) ListRdcDepositsExecute(r ApiListRdcDepositsRequest) (*DepositList, *http.Response, error) {
+func (a *RemoteCheckDepositApiService) ListRdcDepositsExecute(r RemoteCheckDepositApiListRdcDepositsRequest) (*DepositList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}

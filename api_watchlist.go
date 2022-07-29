@@ -23,14 +23,14 @@ import (
 // WatchlistApiService WatchlistApi service
 type WatchlistApiService service
 
-type ApiGetWatchlistAlertRequest struct {
+type WatchlistApiGetWatchlistAlertRequest struct {
 	ctx context.Context
 	ApiService *WatchlistApiService
 	customerId string
 	alertId string
 }
 
-func (r ApiGetWatchlistAlertRequest) Execute() (*WatchlistAlert, *http.Response, error) {
+func (r WatchlistApiGetWatchlistAlertRequest) Execute() (*WatchlistAlert, *http.Response, error) {
 	return r.ApiService.GetWatchlistAlertExecute(r)
 }
 
@@ -40,10 +40,10 @@ GetWatchlistAlert Retrieve watchlist monitoring alert
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param customerId The customer's unique identifier
  @param alertId Unique identifier for this watchlist alert.
- @return ApiGetWatchlistAlertRequest
+ @return WatchlistApiGetWatchlistAlertRequest
 */
-func (a *WatchlistApiService) GetWatchlistAlert(ctx context.Context, customerId string, alertId string) ApiGetWatchlistAlertRequest {
-	return ApiGetWatchlistAlertRequest{
+func (a *WatchlistApiService) GetWatchlistAlert(ctx context.Context, customerId string, alertId string) WatchlistApiGetWatchlistAlertRequest {
+	return WatchlistApiGetWatchlistAlertRequest{
 		ApiService: a,
 		ctx: ctx,
 		customerId: customerId,
@@ -53,7 +53,7 @@ func (a *WatchlistApiService) GetWatchlistAlert(ctx context.Context, customerId 
 
 // Execute executes the request
 //  @return WatchlistAlert
-func (a *WatchlistApiService) GetWatchlistAlertExecute(r ApiGetWatchlistAlertRequest) (*WatchlistAlert, *http.Response, error) {
+func (a *WatchlistApiService) GetWatchlistAlertExecute(r WatchlistApiGetWatchlistAlertRequest) (*WatchlistAlert, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -177,14 +177,14 @@ func (a *WatchlistApiService) GetWatchlistAlertExecute(r ApiGetWatchlistAlertReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetWatchlistSubscriptionRequest struct {
+type WatchlistApiGetWatchlistSubscriptionRequest struct {
 	ctx context.Context
 	ApiService *WatchlistApiService
 	customerId string
 	subscriptionId string
 }
 
-func (r ApiGetWatchlistSubscriptionRequest) Execute() (*WatchlistSubscription, *http.Response, error) {
+func (r WatchlistApiGetWatchlistSubscriptionRequest) Execute() (*WatchlistSubscription, *http.Response, error) {
 	return r.ApiService.GetWatchlistSubscriptionExecute(r)
 }
 
@@ -194,10 +194,10 @@ GetWatchlistSubscription Retrieve watchlist monitoring subscription
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param customerId The customer's unique identifier
  @param subscriptionId Watchlist monitoring subscription ID
- @return ApiGetWatchlistSubscriptionRequest
+ @return WatchlistApiGetWatchlistSubscriptionRequest
 */
-func (a *WatchlistApiService) GetWatchlistSubscription(ctx context.Context, customerId string, subscriptionId string) ApiGetWatchlistSubscriptionRequest {
-	return ApiGetWatchlistSubscriptionRequest{
+func (a *WatchlistApiService) GetWatchlistSubscription(ctx context.Context, customerId string, subscriptionId string) WatchlistApiGetWatchlistSubscriptionRequest {
+	return WatchlistApiGetWatchlistSubscriptionRequest{
 		ApiService: a,
 		ctx: ctx,
 		customerId: customerId,
@@ -207,7 +207,7 @@ func (a *WatchlistApiService) GetWatchlistSubscription(ctx context.Context, cust
 
 // Execute executes the request
 //  @return WatchlistSubscription
-func (a *WatchlistApiService) GetWatchlistSubscriptionExecute(r ApiGetWatchlistSubscriptionRequest) (*WatchlistSubscription, *http.Response, error) {
+func (a *WatchlistApiService) GetWatchlistSubscriptionExecute(r WatchlistApiGetWatchlistSubscriptionRequest) (*WatchlistSubscription, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -331,13 +331,13 @@ func (a *WatchlistApiService) GetWatchlistSubscriptionExecute(r ApiGetWatchlistS
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListWatchlistAlertsRequest struct {
+type WatchlistApiListWatchlistAlertsRequest struct {
 	ctx context.Context
 	ApiService *WatchlistApiService
 	customerId string
 }
 
-func (r ApiListWatchlistAlertsRequest) Execute() (*WatchlistAlertList, *http.Response, error) {
+func (r WatchlistApiListWatchlistAlertsRequest) Execute() (*WatchlistAlertList, *http.Response, error) {
 	return r.ApiService.ListWatchlistAlertsExecute(r)
 }
 
@@ -346,10 +346,10 @@ ListWatchlistAlerts List watchlist monitoring alerts for a customer
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param customerId The customer's unique identifier
- @return ApiListWatchlistAlertsRequest
+ @return WatchlistApiListWatchlistAlertsRequest
 */
-func (a *WatchlistApiService) ListWatchlistAlerts(ctx context.Context, customerId string) ApiListWatchlistAlertsRequest {
-	return ApiListWatchlistAlertsRequest{
+func (a *WatchlistApiService) ListWatchlistAlerts(ctx context.Context, customerId string) WatchlistApiListWatchlistAlertsRequest {
+	return WatchlistApiListWatchlistAlertsRequest{
 		ApiService: a,
 		ctx: ctx,
 		customerId: customerId,
@@ -358,7 +358,7 @@ func (a *WatchlistApiService) ListWatchlistAlerts(ctx context.Context, customerI
 
 // Execute executes the request
 //  @return WatchlistAlertList
-func (a *WatchlistApiService) ListWatchlistAlertsExecute(r ApiListWatchlistAlertsRequest) (*WatchlistAlertList, *http.Response, error) {
+func (a *WatchlistApiService) ListWatchlistAlertsExecute(r WatchlistApiListWatchlistAlertsRequest) (*WatchlistAlertList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -481,13 +481,13 @@ func (a *WatchlistApiService) ListWatchlistAlertsExecute(r ApiListWatchlistAlert
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListWatchlistSubscriptionsRequest struct {
+type WatchlistApiListWatchlistSubscriptionsRequest struct {
 	ctx context.Context
 	ApiService *WatchlistApiService
 	customerId string
 }
 
-func (r ApiListWatchlistSubscriptionsRequest) Execute() (*WatchlistSubscriptionList, *http.Response, error) {
+func (r WatchlistApiListWatchlistSubscriptionsRequest) Execute() (*WatchlistSubscriptionList, *http.Response, error) {
 	return r.ApiService.ListWatchlistSubscriptionsExecute(r)
 }
 
@@ -496,10 +496,10 @@ ListWatchlistSubscriptions List watchlist monitoring subscriptions for a custome
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param customerId The customer's unique identifier
- @return ApiListWatchlistSubscriptionsRequest
+ @return WatchlistApiListWatchlistSubscriptionsRequest
 */
-func (a *WatchlistApiService) ListWatchlistSubscriptions(ctx context.Context, customerId string) ApiListWatchlistSubscriptionsRequest {
-	return ApiListWatchlistSubscriptionsRequest{
+func (a *WatchlistApiService) ListWatchlistSubscriptions(ctx context.Context, customerId string) WatchlistApiListWatchlistSubscriptionsRequest {
+	return WatchlistApiListWatchlistSubscriptionsRequest{
 		ApiService: a,
 		ctx: ctx,
 		customerId: customerId,
@@ -508,7 +508,7 @@ func (a *WatchlistApiService) ListWatchlistSubscriptions(ctx context.Context, cu
 
 // Execute executes the request
 //  @return WatchlistSubscriptionList
-func (a *WatchlistApiService) ListWatchlistSubscriptionsExecute(r ApiListWatchlistSubscriptionsRequest) (*WatchlistSubscriptionList, *http.Response, error) {
+func (a *WatchlistApiService) ListWatchlistSubscriptionsExecute(r WatchlistApiListWatchlistSubscriptionsRequest) (*WatchlistSubscriptionList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -631,7 +631,7 @@ func (a *WatchlistApiService) ListWatchlistSubscriptionsExecute(r ApiListWatchli
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSuppressWatchlistEntityAlertRequest struct {
+type WatchlistApiSuppressWatchlistEntityAlertRequest struct {
 	ctx context.Context
 	ApiService *WatchlistApiService
 	customerId string
@@ -640,18 +640,18 @@ type ApiSuppressWatchlistEntityAlertRequest struct {
 }
 
 // A watchlist suppression object
-func (r ApiSuppressWatchlistEntityAlertRequest) WatchlistSuppress(watchlistSuppress WatchlistSuppress) ApiSuppressWatchlistEntityAlertRequest {
+func (r WatchlistApiSuppressWatchlistEntityAlertRequest) WatchlistSuppress(watchlistSuppress WatchlistSuppress) WatchlistApiSuppressWatchlistEntityAlertRequest {
 	r.watchlistSuppress = &watchlistSuppress
 	return r
 }
 
 // An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key
-func (r ApiSuppressWatchlistEntityAlertRequest) IdempotencyKey(idempotencyKey string) ApiSuppressWatchlistEntityAlertRequest {
+func (r WatchlistApiSuppressWatchlistEntityAlertRequest) IdempotencyKey(idempotencyKey string) WatchlistApiSuppressWatchlistEntityAlertRequest {
 	r.idempotencyKey = &idempotencyKey
 	return r
 }
 
-func (r ApiSuppressWatchlistEntityAlertRequest) Execute() (*http.Response, error) {
+func (r WatchlistApiSuppressWatchlistEntityAlertRequest) Execute() (*http.Response, error) {
 	return r.ApiService.SuppressWatchlistEntityAlertExecute(r)
 }
 
@@ -660,10 +660,10 @@ SuppressWatchlistEntityAlert Suppress entity alert
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param customerId The customer's unique identifier
- @return ApiSuppressWatchlistEntityAlertRequest
+ @return WatchlistApiSuppressWatchlistEntityAlertRequest
 */
-func (a *WatchlistApiService) SuppressWatchlistEntityAlert(ctx context.Context, customerId string) ApiSuppressWatchlistEntityAlertRequest {
-	return ApiSuppressWatchlistEntityAlertRequest{
+func (a *WatchlistApiService) SuppressWatchlistEntityAlert(ctx context.Context, customerId string) WatchlistApiSuppressWatchlistEntityAlertRequest {
+	return WatchlistApiSuppressWatchlistEntityAlertRequest{
 		ApiService: a,
 		ctx: ctx,
 		customerId: customerId,
@@ -671,7 +671,7 @@ func (a *WatchlistApiService) SuppressWatchlistEntityAlert(ctx context.Context, 
 }
 
 // Execute executes the request
-func (a *WatchlistApiService) SuppressWatchlistEntityAlertExecute(r ApiSuppressWatchlistEntityAlertRequest) (*http.Response, error) {
+func (a *WatchlistApiService) SuppressWatchlistEntityAlertExecute(r WatchlistApiSuppressWatchlistEntityAlertRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -792,7 +792,7 @@ func (a *WatchlistApiService) SuppressWatchlistEntityAlertExecute(r ApiSuppressW
 	return localVarHTTPResponse, nil
 }
 
-type ApiUpdateWatchlistAlertRequest struct {
+type WatchlistApiUpdateWatchlistAlertRequest struct {
 	ctx context.Context
 	ApiService *WatchlistApiService
 	customerId string
@@ -801,12 +801,12 @@ type ApiUpdateWatchlistAlertRequest struct {
 }
 
 // A watchlist body
-func (r ApiUpdateWatchlistAlertRequest) WatchlistAlert(watchlistAlert WatchlistAlert) ApiUpdateWatchlistAlertRequest {
+func (r WatchlistApiUpdateWatchlistAlertRequest) WatchlistAlert(watchlistAlert WatchlistAlert) WatchlistApiUpdateWatchlistAlertRequest {
 	r.watchlistAlert = &watchlistAlert
 	return r
 }
 
-func (r ApiUpdateWatchlistAlertRequest) Execute() (*http.Response, error) {
+func (r WatchlistApiUpdateWatchlistAlertRequest) Execute() (*http.Response, error) {
 	return r.ApiService.UpdateWatchlistAlertExecute(r)
 }
 
@@ -816,10 +816,10 @@ UpdateWatchlistAlert Update watchlist alert
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param customerId The customer's unique identifier
  @param alertId Unique identifier for this watchlist alert.
- @return ApiUpdateWatchlistAlertRequest
+ @return WatchlistApiUpdateWatchlistAlertRequest
 */
-func (a *WatchlistApiService) UpdateWatchlistAlert(ctx context.Context, customerId string, alertId string) ApiUpdateWatchlistAlertRequest {
-	return ApiUpdateWatchlistAlertRequest{
+func (a *WatchlistApiService) UpdateWatchlistAlert(ctx context.Context, customerId string, alertId string) WatchlistApiUpdateWatchlistAlertRequest {
+	return WatchlistApiUpdateWatchlistAlertRequest{
 		ApiService: a,
 		ctx: ctx,
 		customerId: customerId,
@@ -828,7 +828,7 @@ func (a *WatchlistApiService) UpdateWatchlistAlert(ctx context.Context, customer
 }
 
 // Execute executes the request
-func (a *WatchlistApiService) UpdateWatchlistAlertExecute(r ApiUpdateWatchlistAlertRequest) (*http.Response, error) {
+func (a *WatchlistApiService) UpdateWatchlistAlertExecute(r WatchlistApiUpdateWatchlistAlertRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -947,7 +947,7 @@ func (a *WatchlistApiService) UpdateWatchlistAlertExecute(r ApiUpdateWatchlistAl
 	return localVarHTTPResponse, nil
 }
 
-type ApiUpdateWatchlistSubscriptionRequest struct {
+type WatchlistApiUpdateWatchlistSubscriptionRequest struct {
 	ctx context.Context
 	ApiService *WatchlistApiService
 	customerId string
@@ -956,12 +956,12 @@ type ApiUpdateWatchlistSubscriptionRequest struct {
 }
 
 // Watchlist monitoring subscription to be updated. The only field that matters is &#x60;status&#x60;; all other fields are ignored. 
-func (r ApiUpdateWatchlistSubscriptionRequest) WatchlistSubscription(watchlistSubscription WatchlistSubscription) ApiUpdateWatchlistSubscriptionRequest {
+func (r WatchlistApiUpdateWatchlistSubscriptionRequest) WatchlistSubscription(watchlistSubscription WatchlistSubscription) WatchlistApiUpdateWatchlistSubscriptionRequest {
 	r.watchlistSubscription = &watchlistSubscription
 	return r
 }
 
-func (r ApiUpdateWatchlistSubscriptionRequest) Execute() (*WatchlistSubscription, *http.Response, error) {
+func (r WatchlistApiUpdateWatchlistSubscriptionRequest) Execute() (*WatchlistSubscription, *http.Response, error) {
 	return r.ApiService.UpdateWatchlistSubscriptionExecute(r)
 }
 
@@ -971,10 +971,10 @@ UpdateWatchlistSubscription Update watchlist monitoring subscription
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param customerId The customer's unique identifier
  @param subscriptionId Watchlist monitoring subscription ID
- @return ApiUpdateWatchlistSubscriptionRequest
+ @return WatchlistApiUpdateWatchlistSubscriptionRequest
 */
-func (a *WatchlistApiService) UpdateWatchlistSubscription(ctx context.Context, customerId string, subscriptionId string) ApiUpdateWatchlistSubscriptionRequest {
-	return ApiUpdateWatchlistSubscriptionRequest{
+func (a *WatchlistApiService) UpdateWatchlistSubscription(ctx context.Context, customerId string, subscriptionId string) WatchlistApiUpdateWatchlistSubscriptionRequest {
+	return WatchlistApiUpdateWatchlistSubscriptionRequest{
 		ApiService: a,
 		ctx: ctx,
 		customerId: customerId,
@@ -984,7 +984,7 @@ func (a *WatchlistApiService) UpdateWatchlistSubscription(ctx context.Context, c
 
 // Execute executes the request
 //  @return WatchlistSubscription
-func (a *WatchlistApiService) UpdateWatchlistSubscriptionExecute(r ApiUpdateWatchlistSubscriptionRequest) (*WatchlistSubscription, *http.Response, error) {
+func (a *WatchlistApiService) UpdateWatchlistSubscriptionExecute(r WatchlistApiUpdateWatchlistSubscriptionRequest) (*WatchlistSubscription, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -1113,7 +1113,7 @@ func (a *WatchlistApiService) UpdateWatchlistSubscriptionExecute(r ApiUpdateWatc
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiWatchlistSubscribeRequest struct {
+type WatchlistApiWatchlistSubscribeRequest struct {
 	ctx context.Context
 	ApiService *WatchlistApiService
 	customerId string
@@ -1122,18 +1122,18 @@ type ApiWatchlistSubscribeRequest struct {
 }
 
 // A watchlist subscription
-func (r ApiWatchlistSubscribeRequest) WatchlistSubscription(watchlistSubscription WatchlistSubscription) ApiWatchlistSubscribeRequest {
+func (r WatchlistApiWatchlistSubscribeRequest) WatchlistSubscription(watchlistSubscription WatchlistSubscription) WatchlistApiWatchlistSubscribeRequest {
 	r.watchlistSubscription = &watchlistSubscription
 	return r
 }
 
 // An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key
-func (r ApiWatchlistSubscribeRequest) IdempotencyKey(idempotencyKey string) ApiWatchlistSubscribeRequest {
+func (r WatchlistApiWatchlistSubscribeRequest) IdempotencyKey(idempotencyKey string) WatchlistApiWatchlistSubscribeRequest {
 	r.idempotencyKey = &idempotencyKey
 	return r
 }
 
-func (r ApiWatchlistSubscribeRequest) Execute() (*WatchlistSubscription, *http.Response, error) {
+func (r WatchlistApiWatchlistSubscribeRequest) Execute() (*WatchlistSubscription, *http.Response, error) {
 	return r.ApiService.WatchlistSubscribeExecute(r)
 }
 
@@ -1142,10 +1142,10 @@ WatchlistSubscribe Subscribe a customer to watchlist monitoring
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param customerId The customer's unique identifier
- @return ApiWatchlistSubscribeRequest
+ @return WatchlistApiWatchlistSubscribeRequest
 */
-func (a *WatchlistApiService) WatchlistSubscribe(ctx context.Context, customerId string) ApiWatchlistSubscribeRequest {
-	return ApiWatchlistSubscribeRequest{
+func (a *WatchlistApiService) WatchlistSubscribe(ctx context.Context, customerId string) WatchlistApiWatchlistSubscribeRequest {
+	return WatchlistApiWatchlistSubscribeRequest{
 		ApiService: a,
 		ctx: ctx,
 		customerId: customerId,
@@ -1154,7 +1154,7 @@ func (a *WatchlistApiService) WatchlistSubscribe(ctx context.Context, customerId
 
 // Execute executes the request
 //  @return WatchlistSubscription
-func (a *WatchlistApiService) WatchlistSubscribeExecute(r ApiWatchlistSubscribeRequest) (*WatchlistSubscription, *http.Response, error) {
+func (a *WatchlistApiService) WatchlistSubscribeExecute(r WatchlistApiWatchlistSubscribeRequest) (*WatchlistSubscription, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

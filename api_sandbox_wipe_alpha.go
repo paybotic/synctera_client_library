@@ -22,12 +22,12 @@ import (
 // SandboxWipeAlphaApiService SandboxWipeAlphaApi service
 type SandboxWipeAlphaApiService service
 
-type ApiWipeWorkspaceRequest struct {
+type SandboxWipeAlphaApiWipeWorkspaceRequest struct {
 	ctx context.Context
 	ApiService *SandboxWipeAlphaApiService
 }
 
-func (r ApiWipeWorkspaceRequest) Execute() (*http.Response, error) {
+func (r SandboxWipeAlphaApiWipeWorkspaceRequest) Execute() (*http.Response, error) {
 	return r.ApiService.WipeWorkspaceExecute(r)
 }
 
@@ -69,17 +69,17 @@ Data associated with below resources will be retained:
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiWipeWorkspaceRequest
+ @return SandboxWipeAlphaApiWipeWorkspaceRequest
 */
-func (a *SandboxWipeAlphaApiService) WipeWorkspace(ctx context.Context) ApiWipeWorkspaceRequest {
-	return ApiWipeWorkspaceRequest{
+func (a *SandboxWipeAlphaApiService) WipeWorkspace(ctx context.Context) SandboxWipeAlphaApiWipeWorkspaceRequest {
+	return SandboxWipeAlphaApiWipeWorkspaceRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *SandboxWipeAlphaApiService) WipeWorkspaceExecute(r ApiWipeWorkspaceRequest) (*http.Response, error) {
+func (a *SandboxWipeAlphaApiService) WipeWorkspaceExecute(r SandboxWipeAlphaApiWipeWorkspaceRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

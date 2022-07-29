@@ -23,7 +23,7 @@ import (
 // DigitalWalletTokensApiService DigitalWalletTokensApi service
 type DigitalWalletTokensApiService service
 
-type ApiCreateDigitalWalletAppleRequest struct {
+type DigitalWalletTokensApiCreateDigitalWalletAppleRequest struct {
 	ctx context.Context
 	ApiService *DigitalWalletTokensApiService
 	cardId string
@@ -31,12 +31,12 @@ type ApiCreateDigitalWalletAppleRequest struct {
 }
 
 // Request to provision digital wallet card data to pass to Apple Pay digital wallet
-func (r ApiCreateDigitalWalletAppleRequest) AppleDigitalWalletProvisionRequest(appleDigitalWalletProvisionRequest AppleDigitalWalletProvisionRequest) ApiCreateDigitalWalletAppleRequest {
+func (r DigitalWalletTokensApiCreateDigitalWalletAppleRequest) AppleDigitalWalletProvisionRequest(appleDigitalWalletProvisionRequest AppleDigitalWalletProvisionRequest) DigitalWalletTokensApiCreateDigitalWalletAppleRequest {
 	r.appleDigitalWalletProvisionRequest = &appleDigitalWalletProvisionRequest
 	return r
 }
 
-func (r ApiCreateDigitalWalletAppleRequest) Execute() (*AppleDigitalWalletProvisionResponse, *http.Response, error) {
+func (r DigitalWalletTokensApiCreateDigitalWalletAppleRequest) Execute() (*AppleDigitalWalletProvisionResponse, *http.Response, error) {
 	return r.ApiService.CreateDigitalWalletAppleExecute(r)
 }
 
@@ -45,10 +45,10 @@ CreateDigitalWalletApple Create digital wallet token provision request for Apple
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param cardId
- @return ApiCreateDigitalWalletAppleRequest
+ @return DigitalWalletTokensApiCreateDigitalWalletAppleRequest
 */
-func (a *DigitalWalletTokensApiService) CreateDigitalWalletApple(ctx context.Context, cardId string) ApiCreateDigitalWalletAppleRequest {
-	return ApiCreateDigitalWalletAppleRequest{
+func (a *DigitalWalletTokensApiService) CreateDigitalWalletApple(ctx context.Context, cardId string) DigitalWalletTokensApiCreateDigitalWalletAppleRequest {
+	return DigitalWalletTokensApiCreateDigitalWalletAppleRequest{
 		ApiService: a,
 		ctx: ctx,
 		cardId: cardId,
@@ -57,7 +57,7 @@ func (a *DigitalWalletTokensApiService) CreateDigitalWalletApple(ctx context.Con
 
 // Execute executes the request
 //  @return AppleDigitalWalletProvisionResponse
-func (a *DigitalWalletTokensApiService) CreateDigitalWalletAppleExecute(r ApiCreateDigitalWalletAppleRequest) (*AppleDigitalWalletProvisionResponse, *http.Response, error) {
+func (a *DigitalWalletTokensApiService) CreateDigitalWalletAppleExecute(r DigitalWalletTokensApiCreateDigitalWalletAppleRequest) (*AppleDigitalWalletProvisionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -185,7 +185,7 @@ func (a *DigitalWalletTokensApiService) CreateDigitalWalletAppleExecute(r ApiCre
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateDigitalWalletGoogleRequest struct {
+type DigitalWalletTokensApiCreateDigitalWalletGoogleRequest struct {
 	ctx context.Context
 	ApiService *DigitalWalletTokensApiService
 	cardId string
@@ -193,12 +193,12 @@ type ApiCreateDigitalWalletGoogleRequest struct {
 }
 
 // Request to provision digital wallet card data to pass to Google Pay digital wallet
-func (r ApiCreateDigitalWalletGoogleRequest) GoogleDigitalWalletProvisionRequest(googleDigitalWalletProvisionRequest GoogleDigitalWalletProvisionRequest) ApiCreateDigitalWalletGoogleRequest {
+func (r DigitalWalletTokensApiCreateDigitalWalletGoogleRequest) GoogleDigitalWalletProvisionRequest(googleDigitalWalletProvisionRequest GoogleDigitalWalletProvisionRequest) DigitalWalletTokensApiCreateDigitalWalletGoogleRequest {
 	r.googleDigitalWalletProvisionRequest = &googleDigitalWalletProvisionRequest
 	return r
 }
 
-func (r ApiCreateDigitalWalletGoogleRequest) Execute() (*GoogleDigitalWalletProvisionResponse, *http.Response, error) {
+func (r DigitalWalletTokensApiCreateDigitalWalletGoogleRequest) Execute() (*GoogleDigitalWalletProvisionResponse, *http.Response, error) {
 	return r.ApiService.CreateDigitalWalletGoogleExecute(r)
 }
 
@@ -207,10 +207,10 @@ CreateDigitalWalletGoogle Create digital wallet token provision request for Goog
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param cardId
- @return ApiCreateDigitalWalletGoogleRequest
+ @return DigitalWalletTokensApiCreateDigitalWalletGoogleRequest
 */
-func (a *DigitalWalletTokensApiService) CreateDigitalWalletGoogle(ctx context.Context, cardId string) ApiCreateDigitalWalletGoogleRequest {
-	return ApiCreateDigitalWalletGoogleRequest{
+func (a *DigitalWalletTokensApiService) CreateDigitalWalletGoogle(ctx context.Context, cardId string) DigitalWalletTokensApiCreateDigitalWalletGoogleRequest {
+	return DigitalWalletTokensApiCreateDigitalWalletGoogleRequest{
 		ApiService: a,
 		ctx: ctx,
 		cardId: cardId,
@@ -219,7 +219,7 @@ func (a *DigitalWalletTokensApiService) CreateDigitalWalletGoogle(ctx context.Co
 
 // Execute executes the request
 //  @return GoogleDigitalWalletProvisionResponse
-func (a *DigitalWalletTokensApiService) CreateDigitalWalletGoogleExecute(r ApiCreateDigitalWalletGoogleRequest) (*GoogleDigitalWalletProvisionResponse, *http.Response, error) {
+func (a *DigitalWalletTokensApiService) CreateDigitalWalletGoogleExecute(r DigitalWalletTokensApiCreateDigitalWalletGoogleRequest) (*GoogleDigitalWalletProvisionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -347,13 +347,13 @@ func (a *DigitalWalletTokensApiService) CreateDigitalWalletGoogleExecute(r ApiCr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetDigitalWalletTokenRequest struct {
+type DigitalWalletTokensApiGetDigitalWalletTokenRequest struct {
 	ctx context.Context
 	ApiService *DigitalWalletTokensApiService
 	digitalWalletTokenId string
 }
 
-func (r ApiGetDigitalWalletTokenRequest) Execute() (*DigitalWalletTokenResponse, *http.Response, error) {
+func (r DigitalWalletTokensApiGetDigitalWalletTokenRequest) Execute() (*DigitalWalletTokenResponse, *http.Response, error) {
 	return r.ApiService.GetDigitalWalletTokenExecute(r)
 }
 
@@ -365,10 +365,10 @@ Get the details about the digital wallet token of a card
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param digitalWalletTokenId
- @return ApiGetDigitalWalletTokenRequest
+ @return DigitalWalletTokensApiGetDigitalWalletTokenRequest
 */
-func (a *DigitalWalletTokensApiService) GetDigitalWalletToken(ctx context.Context, digitalWalletTokenId string) ApiGetDigitalWalletTokenRequest {
-	return ApiGetDigitalWalletTokenRequest{
+func (a *DigitalWalletTokensApiService) GetDigitalWalletToken(ctx context.Context, digitalWalletTokenId string) DigitalWalletTokensApiGetDigitalWalletTokenRequest {
+	return DigitalWalletTokensApiGetDigitalWalletTokenRequest{
 		ApiService: a,
 		ctx: ctx,
 		digitalWalletTokenId: digitalWalletTokenId,
@@ -377,7 +377,7 @@ func (a *DigitalWalletTokensApiService) GetDigitalWalletToken(ctx context.Contex
 
 // Execute executes the request
 //  @return DigitalWalletTokenResponse
-func (a *DigitalWalletTokensApiService) GetDigitalWalletTokenExecute(r ApiGetDigitalWalletTokenRequest) (*DigitalWalletTokenResponse, *http.Response, error) {
+func (a *DigitalWalletTokensApiService) GetDigitalWalletTokenExecute(r DigitalWalletTokensApiGetDigitalWalletTokenRequest) (*DigitalWalletTokenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -500,7 +500,7 @@ func (a *DigitalWalletTokensApiService) GetDigitalWalletTokenExecute(r ApiGetDig
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListDigitalWalletTokensRequest struct {
+type DigitalWalletTokensApiListDigitalWalletTokensRequest struct {
 	ctx context.Context
 	ApiService *DigitalWalletTokensApiService
 	cardId *string
@@ -509,28 +509,28 @@ type ApiListDigitalWalletTokensRequest struct {
 	pageToken *string
 }
 
-func (r ApiListDigitalWalletTokensRequest) CardId(cardId string) ApiListDigitalWalletTokensRequest {
+func (r DigitalWalletTokensApiListDigitalWalletTokensRequest) CardId(cardId string) DigitalWalletTokensApiListDigitalWalletTokensRequest {
 	r.cardId = &cardId
 	return r
 }
 
 // The status of the Digital Wallet Token
-func (r ApiListDigitalWalletTokensRequest) TokenState(tokenState DigitalWalletTokenState) ApiListDigitalWalletTokensRequest {
+func (r DigitalWalletTokensApiListDigitalWalletTokensRequest) TokenState(tokenState DigitalWalletTokenState) DigitalWalletTokensApiListDigitalWalletTokensRequest {
 	r.tokenState = &tokenState
 	return r
 }
 
-func (r ApiListDigitalWalletTokensRequest) Limit(limit int32) ApiListDigitalWalletTokensRequest {
+func (r DigitalWalletTokensApiListDigitalWalletTokensRequest) Limit(limit int32) DigitalWalletTokensApiListDigitalWalletTokensRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiListDigitalWalletTokensRequest) PageToken(pageToken string) ApiListDigitalWalletTokensRequest {
+func (r DigitalWalletTokensApiListDigitalWalletTokensRequest) PageToken(pageToken string) DigitalWalletTokensApiListDigitalWalletTokensRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListDigitalWalletTokensRequest) Execute() (*TokenListResponse, *http.Response, error) {
+func (r DigitalWalletTokensApiListDigitalWalletTokensRequest) Execute() (*TokenListResponse, *http.Response, error) {
 	return r.ApiService.ListDigitalWalletTokensExecute(r)
 }
 
@@ -541,10 +541,10 @@ List Digital Wallet Tokens
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListDigitalWalletTokensRequest
+ @return DigitalWalletTokensApiListDigitalWalletTokensRequest
 */
-func (a *DigitalWalletTokensApiService) ListDigitalWalletTokens(ctx context.Context) ApiListDigitalWalletTokensRequest {
-	return ApiListDigitalWalletTokensRequest{
+func (a *DigitalWalletTokensApiService) ListDigitalWalletTokens(ctx context.Context) DigitalWalletTokensApiListDigitalWalletTokensRequest {
+	return DigitalWalletTokensApiListDigitalWalletTokensRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -552,7 +552,7 @@ func (a *DigitalWalletTokensApiService) ListDigitalWalletTokens(ctx context.Cont
 
 // Execute executes the request
 //  @return TokenListResponse
-func (a *DigitalWalletTokensApiService) ListDigitalWalletTokensExecute(r ApiListDigitalWalletTokensRequest) (*TokenListResponse, *http.Response, error) {
+func (a *DigitalWalletTokensApiService) ListDigitalWalletTokensExecute(r DigitalWalletTokensApiListDigitalWalletTokensRequest) (*TokenListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -686,7 +686,7 @@ func (a *DigitalWalletTokensApiService) ListDigitalWalletTokensExecute(r ApiList
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateDigitalWalletTokenStatusRequest struct {
+type DigitalWalletTokensApiUpdateDigitalWalletTokenStatusRequest struct {
 	ctx context.Context
 	ApiService *DigitalWalletTokensApiService
 	digitalWalletTokenId string
@@ -694,12 +694,12 @@ type ApiUpdateDigitalWalletTokenStatusRequest struct {
 }
 
 // Update Digital wallet token status
-func (r ApiUpdateDigitalWalletTokenStatusRequest) DigitalWalletTokenEditRequest(digitalWalletTokenEditRequest DigitalWalletTokenEditRequest) ApiUpdateDigitalWalletTokenStatusRequest {
+func (r DigitalWalletTokensApiUpdateDigitalWalletTokenStatusRequest) DigitalWalletTokenEditRequest(digitalWalletTokenEditRequest DigitalWalletTokenEditRequest) DigitalWalletTokensApiUpdateDigitalWalletTokenStatusRequest {
 	r.digitalWalletTokenEditRequest = &digitalWalletTokenEditRequest
 	return r
 }
 
-func (r ApiUpdateDigitalWalletTokenStatusRequest) Execute() (*DigitalWalletTokenResponse, *http.Response, error) {
+func (r DigitalWalletTokensApiUpdateDigitalWalletTokenStatusRequest) Execute() (*DigitalWalletTokenResponse, *http.Response, error) {
 	return r.ApiService.UpdateDigitalWalletTokenStatusExecute(r)
 }
 
@@ -711,10 +711,10 @@ The status of a digital wallet token can be updated as, ACTIVE to SUSPENDED, SUS
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param digitalWalletTokenId
- @return ApiUpdateDigitalWalletTokenStatusRequest
+ @return DigitalWalletTokensApiUpdateDigitalWalletTokenStatusRequest
 */
-func (a *DigitalWalletTokensApiService) UpdateDigitalWalletTokenStatus(ctx context.Context, digitalWalletTokenId string) ApiUpdateDigitalWalletTokenStatusRequest {
-	return ApiUpdateDigitalWalletTokenStatusRequest{
+func (a *DigitalWalletTokensApiService) UpdateDigitalWalletTokenStatus(ctx context.Context, digitalWalletTokenId string) DigitalWalletTokensApiUpdateDigitalWalletTokenStatusRequest {
+	return DigitalWalletTokensApiUpdateDigitalWalletTokenStatusRequest{
 		ApiService: a,
 		ctx: ctx,
 		digitalWalletTokenId: digitalWalletTokenId,
@@ -723,7 +723,7 @@ func (a *DigitalWalletTokensApiService) UpdateDigitalWalletTokenStatus(ctx conte
 
 // Execute executes the request
 //  @return DigitalWalletTokenResponse
-func (a *DigitalWalletTokensApiService) UpdateDigitalWalletTokenStatusExecute(r ApiUpdateDigitalWalletTokenStatusRequest) (*DigitalWalletTokenResponse, *http.Response, error) {
+func (a *DigitalWalletTokensApiService) UpdateDigitalWalletTokenStatusExecute(r DigitalWalletTokensApiUpdateDigitalWalletTokenStatusRequest) (*DigitalWalletTokenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}

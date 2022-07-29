@@ -23,7 +23,7 @@ import (
 // CardWebhookSimulationsApiService CardWebhookSimulationsApi service
 type CardWebhookSimulationsApiService service
 
-type ApiSimulateCardFulfillmentEventRequest struct {
+type CardWebhookSimulationsApiSimulateCardFulfillmentEventRequest struct {
 	ctx context.Context
 	ApiService *CardWebhookSimulationsApiService
 	cardId string
@@ -31,12 +31,12 @@ type ApiSimulateCardFulfillmentEventRequest struct {
 }
 
 // Desired simulated fulfillment status change value
-func (r ApiSimulateCardFulfillmentEventRequest) SimulateCardFulfillment(simulateCardFulfillment SimulateCardFulfillment) ApiSimulateCardFulfillmentEventRequest {
+func (r CardWebhookSimulationsApiSimulateCardFulfillmentEventRequest) SimulateCardFulfillment(simulateCardFulfillment SimulateCardFulfillment) CardWebhookSimulationsApiSimulateCardFulfillmentEventRequest {
 	r.simulateCardFulfillment = &simulateCardFulfillment
 	return r
 }
 
-func (r ApiSimulateCardFulfillmentEventRequest) Execute() (*SimulateCardFulfillment, *http.Response, error) {
+func (r CardWebhookSimulationsApiSimulateCardFulfillmentEventRequest) Execute() (*SimulateCardFulfillment, *http.Response, error) {
 	return r.ApiService.SimulateCardFulfillmentEventExecute(r)
 }
 
@@ -48,10 +48,10 @@ This endpoint is for testing environment only to trigger a simulated change in c
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param cardId
- @return ApiSimulateCardFulfillmentEventRequest
+ @return CardWebhookSimulationsApiSimulateCardFulfillmentEventRequest
 */
-func (a *CardWebhookSimulationsApiService) SimulateCardFulfillmentEvent(ctx context.Context, cardId string) ApiSimulateCardFulfillmentEventRequest {
-	return ApiSimulateCardFulfillmentEventRequest{
+func (a *CardWebhookSimulationsApiService) SimulateCardFulfillmentEvent(ctx context.Context, cardId string) CardWebhookSimulationsApiSimulateCardFulfillmentEventRequest {
+	return CardWebhookSimulationsApiSimulateCardFulfillmentEventRequest{
 		ApiService: a,
 		ctx: ctx,
 		cardId: cardId,
@@ -60,7 +60,7 @@ func (a *CardWebhookSimulationsApiService) SimulateCardFulfillmentEvent(ctx cont
 
 // Execute executes the request
 //  @return SimulateCardFulfillment
-func (a *CardWebhookSimulationsApiService) SimulateCardFulfillmentEventExecute(r ApiSimulateCardFulfillmentEventRequest) (*SimulateCardFulfillment, *http.Response, error) {
+func (a *CardWebhookSimulationsApiService) SimulateCardFulfillmentEventExecute(r CardWebhookSimulationsApiSimulateCardFulfillmentEventRequest) (*SimulateCardFulfillment, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
