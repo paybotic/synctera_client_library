@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.17.0
 */
@@ -21,7 +21,7 @@ type AccountSummary struct {
 	AccountNumber *string `json:"account_number,omitempty"`
 	// Account Status
 	AccountStatus *string `json:"account_status,omitempty"`
-	// The type of the account. In lead mode, this always takes the value of the template. If not specified in shadow mode, CHECKING will be assumed. 
+	// The type of the account. In lead mode, this always takes the value of the template. If not specified in shadow mode, CHECKING will be assumed.
 	AccountType *string `json:"account_type,omitempty"`
 	BalanceCeiling *AccountSummaryBalanceCeiling `json:"balance_ceiling,omitempty"`
 	BalanceFloor *AccountSummaryBalanceFloor `json:"balance_floor,omitempty"`
@@ -31,7 +31,7 @@ type AccountSummary struct {
 	Currency *string `json:"currency,omitempty"`
 	// Customer type
 	CustomerType *string `json:"customer_type,omitempty"`
-	FinancialInstitution FinancialInstitution `json:"financial_institution,omitempty"`
+	FinancialInstitution *FinancialInstitution `json:"financial_institution,omitempty"`
 	// The unique identifier of the account the statement belongs to
 	Id *string `json:"id,omitempty"`
 	// Account last modification time
@@ -319,12 +319,12 @@ func (o *AccountSummary) GetFinancialInstitution() FinancialInstitution {
 		var ret FinancialInstitution
 		return ret
 	}
-	return o.FinancialInstitution
+	return *o.FinancialInstitution
 }
 
 // GetFinancialInstitutionOk returns a tuple with the FinancialInstitution field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountSummary) GetFinancialInstitutionOk() (FinancialInstitution, bool) {
+func (o *AccountSummary) GetFinancialInstitutionOk() (*FinancialInstitution, bool) {
 	if o == nil || o.FinancialInstitution == nil {
 		return nil, false
 	}
@@ -342,7 +342,7 @@ func (o *AccountSummary) HasFinancialInstitution() bool {
 
 // SetFinancialInstitution gets a reference to the given FinancialInstitution and assigns it to the FinancialInstitution field.
 func (o *AccountSummary) SetFinancialInstitution(v FinancialInstitution) {
-	o.FinancialInstitution = v
+	o.FinancialInstitution = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
