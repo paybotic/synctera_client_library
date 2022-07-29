@@ -40,146 +40,44 @@ func ProspectAsCustomerInPath(v *Prospect) CustomerInPath {
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CustomerInPath) UnmarshalJSON(data []byte) error {
 	var err error
-	// use discriminator value to speed up the lookup
-	var jsonDict map[string]interface{}
-	err = newStrictDecoder(data).Decode(&jsonDict)
-	if err != nil {
-		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
-	}
-
-	// check if the discriminator value is 'ACTIVE'
-	if jsonDict["status"] == "ACTIVE" {
-		// try to unmarshal JSON data into Customer
-		err = json.Unmarshal(data, &dst.Customer)
-		if err == nil {
-			return nil // data stored in dst.Customer, return on the first match
-		} else {
+	match := 0
+	// try to unmarshal data into Customer
+	err = newStrictDecoder(data).Decode(&dst.Customer)
+	if err == nil {
+		jsonCustomer, _ := json.Marshal(dst.Customer)
+		if string(jsonCustomer) == "{}" { // empty struct
 			dst.Customer = nil
-			return fmt.Errorf("Failed to unmarshal CustomerInPath as Customer: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.Customer = nil
 	}
 
-	// check if the discriminator value is 'DECEASED'
-	if jsonDict["status"] == "DECEASED" {
-		// try to unmarshal JSON data into Customer
-		err = json.Unmarshal(data, &dst.Customer)
-		if err == nil {
-			return nil // data stored in dst.Customer, return on the first match
-		} else {
-			dst.Customer = nil
-			return fmt.Errorf("Failed to unmarshal CustomerInPath as Customer: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'DENIED'
-	if jsonDict["status"] == "DENIED" {
-		// try to unmarshal JSON data into Customer
-		err = json.Unmarshal(data, &dst.Customer)
-		if err == nil {
-			return nil // data stored in dst.Customer, return on the first match
-		} else {
-			dst.Customer = nil
-			return fmt.Errorf("Failed to unmarshal CustomerInPath as Customer: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'DORMANT'
-	if jsonDict["status"] == "DORMANT" {
-		// try to unmarshal JSON data into Customer
-		err = json.Unmarshal(data, &dst.Customer)
-		if err == nil {
-			return nil // data stored in dst.Customer, return on the first match
-		} else {
-			dst.Customer = nil
-			return fmt.Errorf("Failed to unmarshal CustomerInPath as Customer: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'ESCHEAT'
-	if jsonDict["status"] == "ESCHEAT" {
-		// try to unmarshal JSON data into Customer
-		err = json.Unmarshal(data, &dst.Customer)
-		if err == nil {
-			return nil // data stored in dst.Customer, return on the first match
-		} else {
-			dst.Customer = nil
-			return fmt.Errorf("Failed to unmarshal CustomerInPath as Customer: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'FROZEN'
-	if jsonDict["status"] == "FROZEN" {
-		// try to unmarshal JSON data into Customer
-		err = json.Unmarshal(data, &dst.Customer)
-		if err == nil {
-			return nil // data stored in dst.Customer, return on the first match
-		} else {
-			dst.Customer = nil
-			return fmt.Errorf("Failed to unmarshal CustomerInPath as Customer: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'INACTIVE'
-	if jsonDict["status"] == "INACTIVE" {
-		// try to unmarshal JSON data into Customer
-		err = json.Unmarshal(data, &dst.Customer)
-		if err == nil {
-			return nil // data stored in dst.Customer, return on the first match
-		} else {
-			dst.Customer = nil
-			return fmt.Errorf("Failed to unmarshal CustomerInPath as Customer: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'PROSPECT'
-	if jsonDict["status"] == "PROSPECT" {
-		// try to unmarshal JSON data into Prospect
-		err = json.Unmarshal(data, &dst.Prospect)
-		if err == nil {
-			return nil // data stored in dst.Prospect, return on the first match
-		} else {
+	// try to unmarshal data into Prospect
+	err = newStrictDecoder(data).Decode(&dst.Prospect)
+	if err == nil {
+		jsonProspect, _ := json.Marshal(dst.Prospect)
+		if string(jsonProspect) == "{}" { // empty struct
 			dst.Prospect = nil
-			return fmt.Errorf("Failed to unmarshal CustomerInPath as Prospect: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'SANCTION'
-	if jsonDict["status"] == "SANCTION" {
-		// try to unmarshal JSON data into Customer
-		err = json.Unmarshal(data, &dst.Customer)
-		if err == nil {
-			return nil // data stored in dst.Customer, return on the first match
 		} else {
-			dst.Customer = nil
-			return fmt.Errorf("Failed to unmarshal CustomerInPath as Customer: %s", err.Error())
+			match++
 		}
+	} else {
+		dst.Prospect = nil
 	}
 
-	// check if the discriminator value is 'customer'
-	if jsonDict["status"] == "customer" {
-		// try to unmarshal JSON data into Customer
-		err = json.Unmarshal(data, &dst.Customer)
-		if err == nil {
-			return nil // data stored in dst.Customer, return on the first match
-		} else {
-			dst.Customer = nil
-			return fmt.Errorf("Failed to unmarshal CustomerInPath as Customer: %s", err.Error())
-		}
-	}
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.Customer = nil
+		dst.Prospect = nil
 
-	// check if the discriminator value is 'prospect'
-	if jsonDict["status"] == "prospect" {
-		// try to unmarshal JSON data into Prospect
-		err = json.Unmarshal(data, &dst.Prospect)
-		if err == nil {
-			return nil // data stored in dst.Prospect, return on the first match
-		} else {
-			dst.Prospect = nil
-			return fmt.Errorf("Failed to unmarshal CustomerInPath as Prospect: %s", err.Error())
-		}
+		return fmt.Errorf("Data matches more than one schema in oneOf(CustomerInPath)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("Data failed to match schemas in oneOf(CustomerInPath)")
 	}
-
-	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

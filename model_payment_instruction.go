@@ -39,62 +39,44 @@ func InternalTransferInstructionAsPaymentInstruction(v *InternalTransferInstruct
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *PaymentInstruction) UnmarshalJSON(data []byte) error {
 	var err error
-	// use discriminator value to speed up the lookup
-	var jsonDict map[string]interface{}
-	err = newStrictDecoder(data).Decode(&jsonDict)
-	if err != nil {
-		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
-	}
-
-	// check if the discriminator value is 'ACH'
-	if jsonDict["type"] == "ACH" {
-		// try to unmarshal JSON data into AchInstruction
-		err = json.Unmarshal(data, &dst.AchInstruction)
-		if err == nil {
-			return nil // data stored in dst.AchInstruction, return on the first match
-		} else {
+	match := 0
+	// try to unmarshal data into AchInstruction
+	err = newStrictDecoder(data).Decode(&dst.AchInstruction)
+	if err == nil {
+		jsonAchInstruction, _ := json.Marshal(dst.AchInstruction)
+		if string(jsonAchInstruction) == "{}" { // empty struct
 			dst.AchInstruction = nil
-			return fmt.Errorf("Failed to unmarshal PaymentInstruction as AchInstruction: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.AchInstruction = nil
 	}
 
-	// check if the discriminator value is 'INTERNAL_TRANSFER'
-	if jsonDict["type"] == "INTERNAL_TRANSFER" {
-		// try to unmarshal JSON data into InternalTransferInstruction
-		err = json.Unmarshal(data, &dst.InternalTransferInstruction)
-		if err == nil {
-			return nil // data stored in dst.InternalTransferInstruction, return on the first match
-		} else {
+	// try to unmarshal data into InternalTransferInstruction
+	err = newStrictDecoder(data).Decode(&dst.InternalTransferInstruction)
+	if err == nil {
+		jsonInternalTransferInstruction, _ := json.Marshal(dst.InternalTransferInstruction)
+		if string(jsonInternalTransferInstruction) == "{}" { // empty struct
 			dst.InternalTransferInstruction = nil
-			return fmt.Errorf("Failed to unmarshal PaymentInstruction as InternalTransferInstruction: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'ach_instruction'
-	if jsonDict["type"] == "ach_instruction" {
-		// try to unmarshal JSON data into AchInstruction
-		err = json.Unmarshal(data, &dst.AchInstruction)
-		if err == nil {
-			return nil // data stored in dst.AchInstruction, return on the first match
 		} else {
-			dst.AchInstruction = nil
-			return fmt.Errorf("Failed to unmarshal PaymentInstruction as AchInstruction: %s", err.Error())
+			match++
 		}
+	} else {
+		dst.InternalTransferInstruction = nil
 	}
 
-	// check if the discriminator value is 'internal_transfer_instruction'
-	if jsonDict["type"] == "internal_transfer_instruction" {
-		// try to unmarshal JSON data into InternalTransferInstruction
-		err = json.Unmarshal(data, &dst.InternalTransferInstruction)
-		if err == nil {
-			return nil // data stored in dst.InternalTransferInstruction, return on the first match
-		} else {
-			dst.InternalTransferInstruction = nil
-			return fmt.Errorf("Failed to unmarshal PaymentInstruction as InternalTransferInstruction: %s", err.Error())
-		}
-	}
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.AchInstruction = nil
+		dst.InternalTransferInstruction = nil
 
-	return nil
+		return fmt.Errorf("Data matches more than one schema in oneOf(PaymentInstruction)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("Data failed to match schemas in oneOf(PaymentInstruction)")
+	}
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

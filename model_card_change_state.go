@@ -47,58 +47,58 @@ func CardStatusAsCardChangeState(v *CardStatus) CardChangeState {
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CardChangeState) UnmarshalJSON(data []byte) error {
 	var err error
-        match := 0
-        // try to unmarshal data into CardFulfillmentStatus
-        err = json.Unmarshal(data, &dst.CardFulfillmentStatus)
-        if err == nil {
-                jsonCardFulfillmentStatus, _ := json.Marshal(dst.CardFulfillmentStatus)
-                if string(jsonCardFulfillmentStatus) == "{}" { // empty struct
-                        dst.CardFulfillmentStatus = nil
-                } else {
-                        match++
-                }
-        } else {
-                dst.CardFulfillmentStatus = nil
-        }
+	match := 0
+	// try to unmarshal data into CardFulfillmentStatus
+	err = newStrictDecoder(data).Decode(&dst.CardFulfillmentStatus)
+	if err == nil {
+		jsonCardFulfillmentStatus, _ := json.Marshal(dst.CardFulfillmentStatus)
+		if string(jsonCardFulfillmentStatus) == "{}" { // empty struct
+			dst.CardFulfillmentStatus = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.CardFulfillmentStatus = nil
+	}
 
-        // try to unmarshal data into CardPinStatus
-        err = json.Unmarshal(data, &dst.CardPinStatus)
-        if err == nil {
-                jsonCardPinStatus, _ := json.Marshal(dst.CardPinStatus)
-                if string(jsonCardPinStatus) == "{}" { // empty struct
-                        dst.CardPinStatus = nil
-                } else {
-                        match++
-                }
-        } else {
-                dst.CardPinStatus = nil
-        }
+	// try to unmarshal data into CardPinStatus
+	err = newStrictDecoder(data).Decode(&dst.CardPinStatus)
+	if err == nil {
+		jsonCardPinStatus, _ := json.Marshal(dst.CardPinStatus)
+		if string(jsonCardPinStatus) == "{}" { // empty struct
+			dst.CardPinStatus = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.CardPinStatus = nil
+	}
 
-        // try to unmarshal data into CardStatus
-        err = json.Unmarshal(data, &dst.CardStatus)
-        if err == nil {
-                jsonCardStatus, _ := json.Marshal(dst.CardStatus)
-                if string(jsonCardStatus) == "{}" { // empty struct
-                        dst.CardStatus = nil
-                } else {
-                        match++
-                }
-        } else {
-                dst.CardStatus = nil
-        }
+	// try to unmarshal data into CardStatus
+	err = newStrictDecoder(data).Decode(&dst.CardStatus)
+	if err == nil {
+		jsonCardStatus, _ := json.Marshal(dst.CardStatus)
+		if string(jsonCardStatus) == "{}" { // empty struct
+			dst.CardStatus = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.CardStatus = nil
+	}
 
-        if match > 1 { // more than 1 match
-                // reset to nil
-                dst.CardFulfillmentStatus = nil
-                dst.CardPinStatus = nil
-                dst.CardStatus = nil
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.CardFulfillmentStatus = nil
+		dst.CardPinStatus = nil
+		dst.CardStatus = nil
 
-                return fmt.Errorf("Data matches more than one schema in oneOf(CardChangeState)")
-        } else if match == 1 {
-                return nil // exactly one match
-        } else { // no match
-                return fmt.Errorf("Data failed to match schemas in oneOf(CardChangeState)")
-        }
+		return fmt.Errorf("Data matches more than one schema in oneOf(CardChangeState)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("Data failed to match schemas in oneOf(CardChangeState)")
+	}
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

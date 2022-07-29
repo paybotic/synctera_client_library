@@ -39,44 +39,44 @@ func EventTypeWildcardAsEventType1(v *EventTypeWildcard) EventType1 {
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *EventType1) UnmarshalJSON(data []byte) error {
 	var err error
-        match := 0
-        // try to unmarshal data into EventTypeExplicit
-        err = json.Unmarshal(data, &dst.EventTypeExplicit)
-        if err == nil {
-                jsonEventTypeExplicit, _ := json.Marshal(dst.EventTypeExplicit)
-                if string(jsonEventTypeExplicit) == "{}" { // empty struct
-                        dst.EventTypeExplicit = nil
-                } else {
-                        match++
-                }
-        } else {
-                dst.EventTypeExplicit = nil
-        }
+	match := 0
+	// try to unmarshal data into EventTypeExplicit
+	err = newStrictDecoder(data).Decode(&dst.EventTypeExplicit)
+	if err == nil {
+		jsonEventTypeExplicit, _ := json.Marshal(dst.EventTypeExplicit)
+		if string(jsonEventTypeExplicit) == "{}" { // empty struct
+			dst.EventTypeExplicit = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.EventTypeExplicit = nil
+	}
 
-        // try to unmarshal data into EventTypeWildcard
-        err = json.Unmarshal(data, &dst.EventTypeWildcard)
-        if err == nil {
-                jsonEventTypeWildcard, _ := json.Marshal(dst.EventTypeWildcard)
-                if string(jsonEventTypeWildcard) == "{}" { // empty struct
-                        dst.EventTypeWildcard = nil
-                } else {
-                        match++
-                }
-        } else {
-                dst.EventTypeWildcard = nil
-        }
+	// try to unmarshal data into EventTypeWildcard
+	err = newStrictDecoder(data).Decode(&dst.EventTypeWildcard)
+	if err == nil {
+		jsonEventTypeWildcard, _ := json.Marshal(dst.EventTypeWildcard)
+		if string(jsonEventTypeWildcard) == "{}" { // empty struct
+			dst.EventTypeWildcard = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.EventTypeWildcard = nil
+	}
 
-        if match > 1 { // more than 1 match
-                // reset to nil
-                dst.EventTypeExplicit = nil
-                dst.EventTypeWildcard = nil
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.EventTypeExplicit = nil
+		dst.EventTypeWildcard = nil
 
-                return fmt.Errorf("Data matches more than one schema in oneOf(EventType1)")
-        } else if match == 1 {
-                return nil // exactly one match
-        } else { // no match
-                return fmt.Errorf("Data failed to match schemas in oneOf(EventType1)")
-        }
+		return fmt.Errorf("Data matches more than one schema in oneOf(EventType1)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("Data failed to match schemas in oneOf(EventType1)")
+	}
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

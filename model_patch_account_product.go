@@ -39,62 +39,44 @@ func PatchInterestAsPatchAccountProduct(v *PatchInterest) PatchAccountProduct {
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *PatchAccountProduct) UnmarshalJSON(data []byte) error {
 	var err error
-	// use discriminator value to speed up the lookup
-	var jsonDict map[string]interface{}
-	err = newStrictDecoder(data).Decode(&jsonDict)
-	if err != nil {
-		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
-	}
-
-	// check if the discriminator value is 'FEE'
-	if jsonDict["product_type"] == "FEE" {
-		// try to unmarshal JSON data into Fee
-		err = json.Unmarshal(data, &dst.Fee)
-		if err == nil {
-			return nil // data stored in dst.Fee, return on the first match
-		} else {
+	match := 0
+	// try to unmarshal data into Fee
+	err = newStrictDecoder(data).Decode(&dst.Fee)
+	if err == nil {
+		jsonFee, _ := json.Marshal(dst.Fee)
+		if string(jsonFee) == "{}" { // empty struct
 			dst.Fee = nil
-			return fmt.Errorf("Failed to unmarshal PatchAccountProduct as Fee: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.Fee = nil
 	}
 
-	// check if the discriminator value is 'INTEREST'
-	if jsonDict["product_type"] == "INTEREST" {
-		// try to unmarshal JSON data into PatchInterest
-		err = json.Unmarshal(data, &dst.PatchInterest)
-		if err == nil {
-			return nil // data stored in dst.PatchInterest, return on the first match
-		} else {
+	// try to unmarshal data into PatchInterest
+	err = newStrictDecoder(data).Decode(&dst.PatchInterest)
+	if err == nil {
+		jsonPatchInterest, _ := json.Marshal(dst.PatchInterest)
+		if string(jsonPatchInterest) == "{}" { // empty struct
 			dst.PatchInterest = nil
-			return fmt.Errorf("Failed to unmarshal PatchAccountProduct as PatchInterest: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'fee'
-	if jsonDict["product_type"] == "fee" {
-		// try to unmarshal JSON data into Fee
-		err = json.Unmarshal(data, &dst.Fee)
-		if err == nil {
-			return nil // data stored in dst.Fee, return on the first match
 		} else {
-			dst.Fee = nil
-			return fmt.Errorf("Failed to unmarshal PatchAccountProduct as Fee: %s", err.Error())
+			match++
 		}
+	} else {
+		dst.PatchInterest = nil
 	}
 
-	// check if the discriminator value is 'patch_interest'
-	if jsonDict["product_type"] == "patch_interest" {
-		// try to unmarshal JSON data into PatchInterest
-		err = json.Unmarshal(data, &dst.PatchInterest)
-		if err == nil {
-			return nil // data stored in dst.PatchInterest, return on the first match
-		} else {
-			dst.PatchInterest = nil
-			return fmt.Errorf("Failed to unmarshal PatchAccountProduct as PatchInterest: %s", err.Error())
-		}
-	}
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.Fee = nil
+		dst.PatchInterest = nil
 
-	return nil
+		return fmt.Errorf("Data matches more than one schema in oneOf(PatchAccountProduct)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("Data failed to match schemas in oneOf(PatchAccountProduct)")
+	}
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

@@ -31,38 +31,30 @@ func MinimumPaymentRateOrAmountAsMinimumPayment(v *MinimumPaymentRateOrAmount) M
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *MinimumPayment) UnmarshalJSON(data []byte) error {
 	var err error
-	// use discriminator value to speed up the lookup
-	var jsonDict map[string]interface{}
-	err = newStrictDecoder(data).Decode(&jsonDict)
-	if err != nil {
-		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
-	}
-
-	// check if the discriminator value is 'RATE_OR_AMOUNT'
-	if jsonDict["type"] == "RATE_OR_AMOUNT" {
-		// try to unmarshal JSON data into MinimumPaymentRateOrAmount
-		err = json.Unmarshal(data, &dst.MinimumPaymentRateOrAmount)
-		if err == nil {
-			return nil // data stored in dst.MinimumPaymentRateOrAmount, return on the first match
-		} else {
+	match := 0
+	// try to unmarshal data into MinimumPaymentRateOrAmount
+	err = newStrictDecoder(data).Decode(&dst.MinimumPaymentRateOrAmount)
+	if err == nil {
+		jsonMinimumPaymentRateOrAmount, _ := json.Marshal(dst.MinimumPaymentRateOrAmount)
+		if string(jsonMinimumPaymentRateOrAmount) == "{}" { // empty struct
 			dst.MinimumPaymentRateOrAmount = nil
-			return fmt.Errorf("Failed to unmarshal MinimumPayment as MinimumPaymentRateOrAmount: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'minimum_payment_rate_or_amount'
-	if jsonDict["type"] == "minimum_payment_rate_or_amount" {
-		// try to unmarshal JSON data into MinimumPaymentRateOrAmount
-		err = json.Unmarshal(data, &dst.MinimumPaymentRateOrAmount)
-		if err == nil {
-			return nil // data stored in dst.MinimumPaymentRateOrAmount, return on the first match
 		} else {
-			dst.MinimumPaymentRateOrAmount = nil
-			return fmt.Errorf("Failed to unmarshal MinimumPayment as MinimumPaymentRateOrAmount: %s", err.Error())
+			match++
 		}
+	} else {
+		dst.MinimumPaymentRateOrAmount = nil
 	}
 
-	return nil
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.MinimumPaymentRateOrAmount = nil
+
+		return fmt.Errorf("Data matches more than one schema in oneOf(MinimumPayment)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("Data failed to match schemas in oneOf(MinimumPayment)")
+	}
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
