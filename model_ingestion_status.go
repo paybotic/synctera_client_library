@@ -20,9 +20,9 @@ type IngestionStatus string
 
 // List of ingestion_status
 const (
-	IN_PROCESS IngestionStatus = "IN_PROCESS"
-	COMPLETED IngestionStatus = "COMPLETED"
-	FAILED IngestionStatus = "FAILED"
+	INGESTIONSTATUS_IN_PROCESS IngestionStatus = "IN_PROCESS"
+	INGESTIONSTATUS_COMPLETED IngestionStatus = "COMPLETED"
+	INGESTIONSTATUS_FAILED IngestionStatus = "FAILED"
 )
 
 // All allowed values of IngestionStatus enum

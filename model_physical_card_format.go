@@ -20,11 +20,11 @@ type PhysicalCardFormat string
 
 // List of physical_card_format
 const (
-	MAGNETIC_STRIPE PhysicalCardFormat = "MAGNETIC_STRIPE"
-	CHIP PhysicalCardFormat = "CHIP"
-	CONTACT PhysicalCardFormat = "CONTACT"
-	CONTACTLESS PhysicalCardFormat = "CONTACTLESS"
-	PHYSICAL_COMBO PhysicalCardFormat = "PHYSICAL_COMBO"
+	PHYSICALCARDFORMAT_MAGNETIC_STRIPE PhysicalCardFormat = "MAGNETIC_STRIPE"
+	PHYSICALCARDFORMAT_CHIP PhysicalCardFormat = "CHIP"
+	PHYSICALCARDFORMAT_CONTACT PhysicalCardFormat = "CONTACT"
+	PHYSICALCARDFORMAT_CONTACTLESS PhysicalCardFormat = "CONTACTLESS"
+	PHYSICALCARDFORMAT_PHYSICAL_COMBO PhysicalCardFormat = "PHYSICAL_COMBO"
 )
 
 // All allowed values of PhysicalCardFormat enum

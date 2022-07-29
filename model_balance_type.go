@@ -20,8 +20,8 @@ type BalanceType string
 
 // List of balance_type
 const (
-	ACCOUNT_BALANCE BalanceType = "ACCOUNT_BALANCE"
-	AVAILABLE_BALANCE BalanceType = "AVAILABLE_BALANCE"
+	BALANCETYPE_ACCOUNT_BALANCE BalanceType = "ACCOUNT_BALANCE"
+	BALANCETYPE_AVAILABLE_BALANCE BalanceType = "AVAILABLE_BALANCE"
 )
 
 // All allowed values of BalanceType enum

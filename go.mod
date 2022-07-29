@@ -1,4 +1,4 @@
-module github.com/paybotic/synctera_client_library
+module github.com/GIT_USER_ID/GIT_REPO_ID
 
 go 1.13
 

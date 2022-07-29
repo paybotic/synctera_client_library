@@ -20,13 +20,13 @@ type CardFulfillmentStatus string
 
 // List of card_fulfillment_status
 const (
-	ISSUED CardFulfillmentStatus = "ISSUED"
-	REISSUED CardFulfillmentStatus = "REISSUED"
-	ORDERED CardFulfillmentStatus = "ORDERED"
-	REJECTED CardFulfillmentStatus = "REJECTED"
-	REORDERED CardFulfillmentStatus = "REORDERED"
-	SHIPPED CardFulfillmentStatus = "SHIPPED"
-	DIGITALLY_PRESENTED CardFulfillmentStatus = "DIGITALLY_PRESENTED"
+	CARDFULFILLMENTSTATUS_ISSUED CardFulfillmentStatus = "ISSUED"
+	CARDFULFILLMENTSTATUS_REISSUED CardFulfillmentStatus = "REISSUED"
+	CARDFULFILLMENTSTATUS_ORDERED CardFulfillmentStatus = "ORDERED"
+	CARDFULFILLMENTSTATUS_REJECTED CardFulfillmentStatus = "REJECTED"
+	CARDFULFILLMENTSTATUS_REORDERED CardFulfillmentStatus = "REORDERED"
+	CARDFULFILLMENTSTATUS_SHIPPED CardFulfillmentStatus = "SHIPPED"
+	CARDFULFILLMENTSTATUS_DIGITALLY_PRESENTED CardFulfillmentStatus = "DIGITALLY_PRESENTED"
 )
 
 // All allowed values of CardFulfillmentStatus enum

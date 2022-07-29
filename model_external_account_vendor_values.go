@@ -20,8 +20,8 @@ type ExternalAccountVendorValues string
 
 // List of external_account_vendor_values
 const (
-	PLAID ExternalAccountVendorValues = "PLAID"
-	FINICITY ExternalAccountVendorValues = "FINICITY"
+	EXTERNALACCOUNTVENDORVALUES_PLAID ExternalAccountVendorValues = "PLAID"
+	EXTERNALACCOUNTVENDORVALUES_FINICITY ExternalAccountVendorValues = "FINICITY"
 )
 
 // All allowed values of ExternalAccountVendorValues enum

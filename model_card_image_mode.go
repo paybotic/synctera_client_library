@@ -20,8 +20,8 @@ type CardImageMode string
 
 // List of card_image_mode
 const (
-	REQUIRED CardImageMode = "REQUIRED"
-	REQUIRED_APPROVED_FIRST CardImageMode = "REQUIRED_APPROVED_FIRST"
+	CARDIMAGEMODE_REQUIRED CardImageMode = "REQUIRED"
+	CARDIMAGEMODE_REQUIRED_APPROVED_FIRST CardImageMode = "REQUIRED_APPROVED_FIRST"
 )
 
 // All allowed values of CardImageMode enum

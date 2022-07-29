@@ -20,19 +20,19 @@ type VerificationType string
 
 // List of verification_type
 const (
-	FRAUD VerificationType = "fraud"
-	SYNTHETIC VerificationType = "synthetic"
-	EMAILRISK VerificationType = "emailrisk"
-	PHONERISK VerificationType = "phonerisk"
-	ADDRESSRISK VerificationType = "addressrisk"
-	KYC VerificationType = "kyc"
-	SOCIAL VerificationType = "social"
-	WATCHLISTSTANDARD VerificationType = "watchliststandard"
-	WATCHLISTPREMIER VerificationType = "watchlistpremier"
-	WATCHLISTPLUS VerificationType = "watchlistplus"
-	DOCUMENTVERIFICATION VerificationType = "documentverification"
-	ALERTLIST VerificationType = "alertlist"
-	DECISION VerificationType = "decision"
+	VERIFICATIONTYPE_FRAUD VerificationType = "fraud"
+	VERIFICATIONTYPE_SYNTHETIC VerificationType = "synthetic"
+	VERIFICATIONTYPE_EMAILRISK VerificationType = "emailrisk"
+	VERIFICATIONTYPE_PHONERISK VerificationType = "phonerisk"
+	VERIFICATIONTYPE_ADDRESSRISK VerificationType = "addressrisk"
+	VERIFICATIONTYPE_KYC VerificationType = "kyc"
+	VERIFICATIONTYPE_SOCIAL VerificationType = "social"
+	VERIFICATIONTYPE_WATCHLISTSTANDARD VerificationType = "watchliststandard"
+	VERIFICATIONTYPE_WATCHLISTPREMIER VerificationType = "watchlistpremier"
+	VERIFICATIONTYPE_WATCHLISTPLUS VerificationType = "watchlistplus"
+	VERIFICATIONTYPE_DOCUMENTVERIFICATION VerificationType = "documentverification"
+	VERIFICATIONTYPE_ALERTLIST VerificationType = "alertlist"
+	VERIFICATIONTYPE_DECISION VerificationType = "decision"
 )
 
 // All allowed values of VerificationType enum

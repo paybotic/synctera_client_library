@@ -20,7 +20,7 @@ type CalculationMethod string
 
 // List of calculation_method
 const (
-	COMPOUNDED_MONTHLY CalculationMethod = "COMPOUNDED_MONTHLY"
+	CALCULATIONMETHOD_COMPOUNDED_MONTHLY CalculationMethod = "COMPOUNDED_MONTHLY"
 )
 
 // All allowed values of CalculationMethod enum

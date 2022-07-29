@@ -20,11 +20,11 @@ type DigitalWalletTokenState string
 
 // List of digital_wallet_token_state
 const (
-	REQUESTED DigitalWalletTokenState = "REQUESTED"
-	REQUEST_DECLINED DigitalWalletTokenState = "REQUEST_DECLINED"
-	ACTIVE DigitalWalletTokenState = "ACTIVE"
-	SUSPENDED DigitalWalletTokenState = "SUSPENDED"
-	TERMINATED DigitalWalletTokenState = "TERMINATED"
+	DIGITALWALLETTOKENSTATE_REQUESTED DigitalWalletTokenState = "REQUESTED"
+	DIGITALWALLETTOKENSTATE_REQUEST_DECLINED DigitalWalletTokenState = "REQUEST_DECLINED"
+	DIGITALWALLETTOKENSTATE_ACTIVE DigitalWalletTokenState = "ACTIVE"
+	DIGITALWALLETTOKENSTATE_SUSPENDED DigitalWalletTokenState = "SUSPENDED"
+	DIGITALWALLETTOKENSTATE_TERMINATED DigitalWalletTokenState = "TERMINATED"
 )
 
 // All allowed values of DigitalWalletTokenState enum

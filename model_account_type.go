@@ -20,9 +20,9 @@ type AccountType string
 
 // List of account_type
 const (
-	SAVING AccountType = "SAVING"
-	CHECKING AccountType = "CHECKING"
-	LINE_OF_CREDIT AccountType = "LINE_OF_CREDIT"
+	ACCOUNTTYPE_SAVING AccountType = "SAVING"
+	ACCOUNTTYPE_CHECKING AccountType = "CHECKING"
+	ACCOUNTTYPE_LINE_OF_CREDIT AccountType = "LINE_OF_CREDIT"
 )
 
 // All allowed values of AccountType enum

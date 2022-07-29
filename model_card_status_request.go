@@ -20,9 +20,9 @@ type CardStatusRequest string
 
 // List of card_status_request
 const (
-	ACTIVE CardStatusRequest = "ACTIVE"
-	SUSPENDED CardStatusRequest = "SUSPENDED"
-	TERMINATED CardStatusRequest = "TERMINATED"
+	CARDSTATUSREQUEST_ACTIVE CardStatusRequest = "ACTIVE"
+	CARDSTATUSREQUEST_SUSPENDED CardStatusRequest = "SUSPENDED"
+	CARDSTATUSREQUEST_TERMINATED CardStatusRequest = "TERMINATED"
 )
 
 // All allowed values of CardStatusRequest enum

@@ -20,12 +20,12 @@ type VerificationStatus string
 
 // List of verification_status
 const (
-	UNVERIFIED VerificationStatus = "UNVERIFIED"
-	PENDING VerificationStatus = "PENDING"
-	PROVISIONAL VerificationStatus = "PROVISIONAL"
-	ACCEPTED VerificationStatus = "ACCEPTED"
-	REVIEW VerificationStatus = "REVIEW"
-	REJECTED VerificationStatus = "REJECTED"
+	VERIFICATIONSTATUS_UNVERIFIED VerificationStatus = "UNVERIFIED"
+	VERIFICATIONSTATUS_PENDING VerificationStatus = "PENDING"
+	VERIFICATIONSTATUS_PROVISIONAL VerificationStatus = "PROVISIONAL"
+	VERIFICATIONSTATUS_ACCEPTED VerificationStatus = "ACCEPTED"
+	VERIFICATIONSTATUS_REVIEW VerificationStatus = "REVIEW"
+	VERIFICATIONSTATUS_REJECTED VerificationStatus = "REJECTED"
 )
 
 // All allowed values of VerificationStatus enum

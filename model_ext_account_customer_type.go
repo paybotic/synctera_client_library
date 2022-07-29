@@ -20,8 +20,8 @@ type ExtAccountCustomerType string
 
 // List of ext_account_customer_type
 const (
-	PERSONAL ExtAccountCustomerType = "PERSONAL"
-	BUSINESS ExtAccountCustomerType = "BUSINESS"
+	EXTACCOUNTCUSTOMERTYPE_PERSONAL ExtAccountCustomerType = "PERSONAL"
+	EXTACCOUNTCUSTOMERTYPE_BUSINESS ExtAccountCustomerType = "BUSINESS"
 )
 
 // All allowed values of ExtAccountCustomerType enum

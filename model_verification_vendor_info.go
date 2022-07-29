@@ -39,44 +39,62 @@ func VerificationVendorXmlAsVerificationVendorInfo(v *VerificationVendorXml) Ver
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *VerificationVendorInfo) UnmarshalJSON(data []byte) error {
 	var err error
-	match := 0
-	// try to unmarshal data into VerificationVendorJson
-	err = newStrictDecoder(data).Decode(&dst.VerificationVendorJson)
-	if err == nil {
-		jsonVerificationVendorJson, _ := json.Marshal(dst.VerificationVendorJson)
-		if string(jsonVerificationVendorJson) == "{}" { // empty struct
+	// use discriminator value to speed up the lookup
+	var jsonDict map[string]interface{}
+	err = newStrictDecoder(data).Decode(&jsonDict)
+	if err != nil {
+		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
+	}
+
+	// check if the discriminator value is 'application/json'
+	if jsonDict["content_type"] == "application/json" {
+		// try to unmarshal JSON data into VerificationVendorJson
+		err = json.Unmarshal(data, &dst.VerificationVendorJson)
+		if err == nil {
+			return nil // data stored in dst.VerificationVendorJson, return on the first match
+		} else {
 			dst.VerificationVendorJson = nil
-		} else {
-			match++
+			return fmt.Errorf("Failed to unmarshal VerificationVendorInfo as VerificationVendorJson: %s", err.Error())
 		}
-	} else {
-		dst.VerificationVendorJson = nil
 	}
 
-	// try to unmarshal data into VerificationVendorXml
-	err = newStrictDecoder(data).Decode(&dst.VerificationVendorXml)
-	if err == nil {
-		jsonVerificationVendorXml, _ := json.Marshal(dst.VerificationVendorXml)
-		if string(jsonVerificationVendorXml) == "{}" { // empty struct
+	// check if the discriminator value is 'text/xml'
+	if jsonDict["content_type"] == "text/xml" {
+		// try to unmarshal JSON data into VerificationVendorXml
+		err = json.Unmarshal(data, &dst.VerificationVendorXml)
+		if err == nil {
+			return nil // data stored in dst.VerificationVendorXml, return on the first match
+		} else {
 			dst.VerificationVendorXml = nil
-		} else {
-			match++
+			return fmt.Errorf("Failed to unmarshal VerificationVendorInfo as VerificationVendorXml: %s", err.Error())
 		}
-	} else {
-		dst.VerificationVendorXml = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.VerificationVendorJson = nil
-		dst.VerificationVendorXml = nil
-
-		return fmt.Errorf("Data matches more than one schema in oneOf(VerificationVendorInfo)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("Data failed to match schemas in oneOf(VerificationVendorInfo)")
+	// check if the discriminator value is 'verification_vendor_json'
+	if jsonDict["content_type"] == "verification_vendor_json" {
+		// try to unmarshal JSON data into VerificationVendorJson
+		err = json.Unmarshal(data, &dst.VerificationVendorJson)
+		if err == nil {
+			return nil // data stored in dst.VerificationVendorJson, return on the first match
+		} else {
+			dst.VerificationVendorJson = nil
+			return fmt.Errorf("Failed to unmarshal VerificationVendorInfo as VerificationVendorJson: %s", err.Error())
+		}
 	}
+
+	// check if the discriminator value is 'verification_vendor_xml'
+	if jsonDict["content_type"] == "verification_vendor_xml" {
+		// try to unmarshal JSON data into VerificationVendorXml
+		err = json.Unmarshal(data, &dst.VerificationVendorXml)
+		if err == nil {
+			return nil // data stored in dst.VerificationVendorXml, return on the first match
+		} else {
+			dst.VerificationVendorXml = nil
+			return fmt.Errorf("Failed to unmarshal VerificationVendorInfo as VerificationVendorXml: %s", err.Error())
+		}
+	}
+
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

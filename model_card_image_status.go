@@ -20,10 +20,10 @@ type CardImageStatus string
 
 // List of card_image_status
 const (
-	NOT_UPLOADED CardImageStatus = "NOT_UPLOADED"
-	UNREVIEWED CardImageStatus = "UNREVIEWED"
-	APPROVED CardImageStatus = "APPROVED"
-	REJECTED CardImageStatus = "REJECTED"
+	CARDIMAGESTATUS_NOT_UPLOADED CardImageStatus = "NOT_UPLOADED"
+	CARDIMAGESTATUS_UNREVIEWED CardImageStatus = "UNREVIEWED"
+	CARDIMAGESTATUS_APPROVED CardImageStatus = "APPROVED"
+	CARDIMAGESTATUS_REJECTED CardImageStatus = "REJECTED"
 )
 
 // All allowed values of CardImageStatus enum

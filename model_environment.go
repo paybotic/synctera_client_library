@@ -20,10 +20,10 @@ type Environment string
 
 // List of environment
 const (
-	SANDBOX Environment = "SANDBOX"
-	LIVE_TESTING Environment = "LIVE_TESTING"
-	PROD_LITE Environment = "PROD_LITE"
-	PROD Environment = "PROD"
+	ENVIRONMENT_SANDBOX Environment = "SANDBOX"
+	ENVIRONMENT_LIVE_TESTING Environment = "LIVE_TESTING"
+	ENVIRONMENT_PROD_LITE Environment = "PROD_LITE"
+	ENVIRONMENT_PROD Environment = "PROD"
 )
 
 // All allowed values of Environment enum

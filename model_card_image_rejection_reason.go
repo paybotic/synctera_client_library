@@ -20,12 +20,12 @@ type CardImageRejectionReason string
 
 // List of card_image_rejection_reason
 const (
-	COPYRIGHT CardImageRejectionReason = "COPYRIGHT"
-	TRADEMARK CardImageRejectionReason = "TRADEMARK"
-	BRANDED CardImageRejectionReason = "BRANDED"
-	PROMOTIONAL CardImageRejectionReason = "PROMOTIONAL"
-	INAPPROPRIATE CardImageRejectionReason = "INAPPROPRIATE"
-	OTHER CardImageRejectionReason = "OTHER"
+	CARDIMAGEREJECTIONREASON_COPYRIGHT CardImageRejectionReason = "COPYRIGHT"
+	CARDIMAGEREJECTIONREASON_TRADEMARK CardImageRejectionReason = "TRADEMARK"
+	CARDIMAGEREJECTIONREASON_BRANDED CardImageRejectionReason = "BRANDED"
+	CARDIMAGEREJECTIONREASON_PROMOTIONAL CardImageRejectionReason = "PROMOTIONAL"
+	CARDIMAGEREJECTIONREASON_INAPPROPRIATE CardImageRejectionReason = "INAPPROPRIATE"
+	CARDIMAGEREJECTIONREASON_OTHER CardImageRejectionReason = "OTHER"
 )
 
 // All allowed values of CardImageRejectionReason enum

@@ -20,9 +20,9 @@ type CardProductType string
 
 // List of card_product_type
 const (
-	DEBIT CardProductType = "DEBIT"
-	CREDIT CardProductType = "CREDIT"
-	PREPAID CardProductType = "PREPAID"
+	CARDPRODUCTTYPE_DEBIT CardProductType = "DEBIT"
+	CARDPRODUCTTYPE_CREDIT CardProductType = "CREDIT"
+	CARDPRODUCTTYPE_PREPAID CardProductType = "PREPAID"
 )
 
 // All allowed values of CardProductType enum

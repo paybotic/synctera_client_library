@@ -20,8 +20,8 @@ type DcSign string
 
 // List of dc_sign
 const (
-	DEBIT DcSign = "debit"
-	CREDIT DcSign = "credit"
+	DCSIGN_DEBIT DcSign = "debit"
+	DCSIGN_CREDIT DcSign = "credit"
 )
 
 // All allowed values of DcSign enum

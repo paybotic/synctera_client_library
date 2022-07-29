@@ -20,12 +20,12 @@ type CustomerKycStatus string
 
 // List of customer_kyc_status
 const (
-	UNVERIFIED CustomerKycStatus = "UNVERIFIED"
-	REVIEW CustomerKycStatus = "REVIEW"
-	PROVIDER_FAILURE CustomerKycStatus = "PROVIDER_FAILURE"
-	ACCEPTED CustomerKycStatus = "ACCEPTED"
-	REJECTED CustomerKycStatus = "REJECTED"
-	PROVISIONAL CustomerKycStatus = "PROVISIONAL"
+	CUSTOMERKYCSTATUS_UNVERIFIED CustomerKycStatus = "UNVERIFIED"
+	CUSTOMERKYCSTATUS_REVIEW CustomerKycStatus = "REVIEW"
+	CUSTOMERKYCSTATUS_PROVIDER_FAILURE CustomerKycStatus = "PROVIDER_FAILURE"
+	CUSTOMERKYCSTATUS_ACCEPTED CustomerKycStatus = "ACCEPTED"
+	CUSTOMERKYCSTATUS_REJECTED CustomerKycStatus = "REJECTED"
+	CUSTOMERKYCSTATUS_PROVISIONAL CustomerKycStatus = "PROVISIONAL"
 )
 
 // All allowed values of CustomerKycStatus enum

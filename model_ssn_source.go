@@ -20,8 +20,8 @@ type SsnSource string
 
 // List of ssn_source
 const (
-	MANUAL SsnSource = "MANUAL"
-	PREFILL SsnSource = "PREFILL"
+	SSNSOURCE_MANUAL SsnSource = "MANUAL"
+	SSNSOURCE_PREFILL SsnSource = "PREFILL"
 )
 
 // All allowed values of SsnSource enum

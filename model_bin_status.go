@@ -20,8 +20,8 @@ type BinStatus string
 
 // List of bin_status
 const (
-	ACTIVE BinStatus = "ACTIVE"
-	INACTIVE BinStatus = "INACTIVE"
+	BINSTATUS_ACTIVE BinStatus = "ACTIVE"
+	BINSTATUS_INACTIVE BinStatus = "INACTIVE"
 )
 
 // All allowed values of BinStatus enum

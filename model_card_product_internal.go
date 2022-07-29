@@ -75,7 +75,7 @@ func NewCardProductInternal(form string, active bool, cardProgramId string, name
 	this.CardProgramId = cardProgramId
 	this.Name = name
 	this.StartDate = startDate
-	var txnEnhancer TxnEnhancer = NONE
+	var txnEnhancer TxnEnhancer = TXNENHANCER_NONE
 	this.TxnEnhancer = &txnEnhancer
 	this.AccountRangeId = accountRangeId
 	this.AutoAllocateRange = autoAllocateRange
@@ -91,7 +91,7 @@ func NewCardProductInternal(form string, active bool, cardProgramId string, name
 // but it doesn't guarantee that properties required by API are set
 func NewCardProductInternalWithDefaults() *CardProductInternal {
 	this := CardProductInternal{}
-	var txnEnhancer TxnEnhancer = NONE
+	var txnEnhancer TxnEnhancer = TXNENHANCER_NONE
 	this.TxnEnhancer = &txnEnhancer
 	return &this
 }

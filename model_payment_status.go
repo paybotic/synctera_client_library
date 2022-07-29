@@ -20,8 +20,8 @@ type PaymentStatus string
 
 // List of payment_status
 const (
-	COMPLETED PaymentStatus = "COMPLETED"
-	ERROR PaymentStatus = "ERROR"
+	PAYMENTSTATUS_COMPLETED PaymentStatus = "COMPLETED"
+	PAYMENTSTATUS_ERROR PaymentStatus = "ERROR"
 )
 
 // All allowed values of PaymentStatus enum

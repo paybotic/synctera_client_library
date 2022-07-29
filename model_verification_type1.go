@@ -20,10 +20,10 @@ type VerificationType1 string
 
 // List of verification_type1
 const (
-	IDENTITY VerificationType1 = "IDENTITY"
-	WATCHLIST VerificationType1 = "WATCHLIST"
-	RELATED_ENTITIES VerificationType1 = "RELATED_ENTITIES"
-	MANUAL_REVIEW VerificationType1 = "MANUAL_REVIEW"
+	VERIFICATIONTYPE1_IDENTITY VerificationType1 = "IDENTITY"
+	VERIFICATIONTYPE1_WATCHLIST VerificationType1 = "WATCHLIST"
+	VERIFICATIONTYPE1_RELATED_ENTITIES VerificationType1 = "RELATED_ENTITIES"
+	VERIFICATIONTYPE1_MANUAL_REVIEW VerificationType1 = "MANUAL_REVIEW"
 )
 
 // All allowed values of VerificationType1 enum

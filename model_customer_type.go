@@ -20,8 +20,8 @@ type CustomerType string
 
 // List of customer_type
 const (
-	BUSINESS CustomerType = "BUSINESS"
-	PERSONAL CustomerType = "PERSONAL"
+	CUSTOMERTYPE_BUSINESS CustomerType = "BUSINESS"
+	CUSTOMERTYPE_PERSONAL CustomerType = "PERSONAL"
 )
 
 // All allowed values of CustomerType enum

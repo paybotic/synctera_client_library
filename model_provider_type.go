@@ -20,8 +20,8 @@ type ProviderType string
 
 // List of provider_type
 const (
-	IDOLOGY ProviderType = "IDOLOGY"
-	SOCURE ProviderType = "SOCURE"
+	PROVIDERTYPE_IDOLOGY ProviderType = "IDOLOGY"
+	PROVIDERTYPE_SOCURE ProviderType = "SOCURE"
 )
 
 // All allowed values of ProviderType enum

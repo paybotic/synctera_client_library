@@ -20,8 +20,8 @@ type TransferType string
 
 // List of transfer_type
 const (
-	PULL TransferType = "PULL"
-	PUSH TransferType = "PUSH"
+	TRANSFERTYPE_PULL TransferType = "PULL"
+	TRANSFERTYPE_PUSH TransferType = "PUSH"
 )
 
 // All allowed values of TransferType enum

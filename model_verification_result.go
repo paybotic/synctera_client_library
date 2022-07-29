@@ -20,12 +20,12 @@ type VerificationResult string
 
 // List of verification_result
 const (
-	PENDING VerificationResult = "PENDING"
-	PROVISIONAL VerificationResult = "PROVISIONAL"
-	ACCEPTED VerificationResult = "ACCEPTED"
-	REVIEW VerificationResult = "REVIEW"
-	VENDOR_ERROR VerificationResult = "VENDOR_ERROR"
-	REJECTED VerificationResult = "REJECTED"
+	VERIFICATIONRESULT_PENDING VerificationResult = "PENDING"
+	VERIFICATIONRESULT_PROVISIONAL VerificationResult = "PROVISIONAL"
+	VERIFICATIONRESULT_ACCEPTED VerificationResult = "ACCEPTED"
+	VERIFICATIONRESULT_REVIEW VerificationResult = "REVIEW"
+	VERIFICATIONRESULT_VENDOR_ERROR VerificationResult = "VENDOR_ERROR"
+	VERIFICATIONRESULT_REJECTED VerificationResult = "REJECTED"
 )
 
 // All allowed values of VerificationResult enum

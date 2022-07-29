@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **PhysicalCardFormat** | Pointer to [**PhysicalCardFormat**](PhysicalCardFormat.md) |  | [optional] 
 **ReturnAddress** | Pointer to [**Shipping**](Shipping.md) |  | [optional] 
 **StartDate** | **time.Time** | The time when the Card Product goes live | 
-**TxnEnhancer** | Pointer to [**TxnEnhancer**](TxnEnhancer.md) |  | [optional] [default to NONE]
+**TxnEnhancer** | Pointer to [**TxnEnhancer**](TxnEnhancer.md) |  | [optional] [default to TXNENHANCER_NONE]
 **AccountRangeId** | **string** | Account Range ID | 
 **AutoAllocateRange** | **bool** | Identifies whether a new account range will be automatically allocated | 
 **BankId** | **int32** | Bank ID | 

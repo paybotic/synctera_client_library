@@ -20,8 +20,8 @@ type WidgetType string
 
 // List of widget_type
 const (
-	SET_PIN WidgetType = "set_pin"
-	ACTIVATE_CARD WidgetType = "activate_card"
+	WIDGETTYPE_SET_PIN WidgetType = "set_pin"
+	WIDGETTYPE_ACTIVATE_CARD WidgetType = "activate_card"
 )
 
 // All allowed values of WidgetType enum

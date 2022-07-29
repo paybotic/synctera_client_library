@@ -20,10 +20,10 @@ type ProspectStatus string
 
 // List of prospect_status
 const (
-	CREATED ProspectStatus = "CREATED"
-	VERIFIED ProspectStatus = "VERIFIED"
-	ADMITTED ProspectStatus = "ADMITTED"
-	WITHDRAWN ProspectStatus = "WITHDRAWN"
+	PROSPECTSTATUS_CREATED ProspectStatus = "CREATED"
+	PROSPECTSTATUS_VERIFIED ProspectStatus = "VERIFIED"
+	PROSPECTSTATUS_ADMITTED ProspectStatus = "ADMITTED"
+	PROSPECTSTATUS_WITHDRAWN ProspectStatus = "WITHDRAWN"
 )
 
 // All allowed values of ProspectStatus enum

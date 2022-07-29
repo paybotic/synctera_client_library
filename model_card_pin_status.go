@@ -20,8 +20,8 @@ type CardPinStatus string
 
 // List of card_pin_status
 const (
-	SET CardPinStatus = "SET"
-	CHANGED CardPinStatus = "CHANGED"
+	CARDPINSTATUS_SET CardPinStatus = "SET"
+	CARDPINSTATUS_CHANGED CardPinStatus = "CHANGED"
 )
 
 // All allowed values of CardPinStatus enum

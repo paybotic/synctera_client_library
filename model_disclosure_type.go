@@ -20,13 +20,13 @@ type DisclosureType string
 
 // List of disclosure_type
 const (
-	REG_DD DisclosureType = "REG_DD"
-	KYC_DATA_COLLECTION DisclosureType = "KYC_DATA_COLLECTION"
-	REG_E DisclosureType = "REG_E"
-	REG_CC DisclosureType = "REG_CC"
-	E_SIGN DisclosureType = "E_SIGN"
-	PRIVACY_NOTICE DisclosureType = "PRIVACY_NOTICE"
-	TERMS_AND_CONDITIONS DisclosureType = "TERMS_AND_CONDITIONS"
+	DISCLOSURETYPE_REG_DD DisclosureType = "REG_DD"
+	DISCLOSURETYPE_KYC_DATA_COLLECTION DisclosureType = "KYC_DATA_COLLECTION"
+	DISCLOSURETYPE_REG_E DisclosureType = "REG_E"
+	DISCLOSURETYPE_REG_CC DisclosureType = "REG_CC"
+	DISCLOSURETYPE_E_SIGN DisclosureType = "E_SIGN"
+	DISCLOSURETYPE_PRIVACY_NOTICE DisclosureType = "PRIVACY_NOTICE"
+	DISCLOSURETYPE_TERMS_AND_CONDITIONS DisclosureType = "TERMS_AND_CONDITIONS"
 )
 
 // All allowed values of DisclosureType enum

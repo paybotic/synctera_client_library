@@ -20,8 +20,8 @@ type Form string
 
 // List of form
 const (
-	PHYSICAL Form = "PHYSICAL"
-	VIRTUAL Form = "VIRTUAL"
+	FORM_PHYSICAL Form = "PHYSICAL"
+	FORM_VIRTUAL Form = "VIRTUAL"
 )
 
 // All allowed values of Form enum

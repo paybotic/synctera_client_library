@@ -20,8 +20,8 @@ type AccrualPayoutSchedule string
 
 // List of accrual_payout_schedule
 const (
-	NONE AccrualPayoutSchedule = "NONE"
-	MONTHLY AccrualPayoutSchedule = "MONTHLY"
+	ACCRUALPAYOUTSCHEDULE_NONE AccrualPayoutSchedule = "NONE"
+	ACCRUALPAYOUTSCHEDULE_MONTHLY AccrualPayoutSchedule = "MONTHLY"
 )
 
 // All allowed values of AccrualPayoutSchedule enum

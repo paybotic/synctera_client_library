@@ -68,7 +68,7 @@ func NewCardProductResponse(form string, active bool, cardProgramId string, crea
 	this.LastModifiedTime = lastModifiedTime
 	this.Name = name
 	this.StartDate = startDate
-	var txnEnhancer TxnEnhancer = NONE
+	var txnEnhancer TxnEnhancer = TXNENHANCER_NONE
 	this.TxnEnhancer = &txnEnhancer
 	return &this
 }
@@ -78,7 +78,7 @@ func NewCardProductResponse(form string, active bool, cardProgramId string, crea
 // but it doesn't guarantee that properties required by API are set
 func NewCardProductResponseWithDefaults() *CardProductResponse {
 	this := CardProductResponse{}
-	var txnEnhancer TxnEnhancer = NONE
+	var txnEnhancer TxnEnhancer = TXNENHANCER_NONE
 	this.TxnEnhancer = &txnEnhancer
 	return &this
 }

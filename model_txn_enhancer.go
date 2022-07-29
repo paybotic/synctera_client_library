@@ -20,8 +20,8 @@ type TxnEnhancer string
 
 // List of txn_enhancer
 const (
-	NONE TxnEnhancer = "NONE"
-	MX TxnEnhancer = "MX"
+	TXNENHANCER_NONE TxnEnhancer = "NONE"
+	TXNENHANCER_MX TxnEnhancer = "MX"
 )
 
 // All allowed values of TxnEnhancer enum

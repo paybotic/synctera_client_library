@@ -20,8 +20,8 @@ type AccountAccessStatus string
 
 // List of account_access_status
 const (
-	ACTIVE AccountAccessStatus = "ACTIVE"
-	FROZEN AccountAccessStatus = "FROZEN"
+	ACCOUNTACCESSSTATUS_ACTIVE AccountAccessStatus = "ACTIVE"
+	ACCOUNTACCESSSTATUS_FROZEN AccountAccessStatus = "FROZEN"
 )
 
 // All allowed values of AccountAccessStatus enum

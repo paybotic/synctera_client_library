@@ -20,7 +20,7 @@ type MinimumPaymentType string
 
 // List of minimum_payment_type
 const (
-	RATE_OR_AMOUNT MinimumPaymentType = "RATE_OR_AMOUNT"
+	MINIMUMPAYMENTTYPE_RATE_OR_AMOUNT MinimumPaymentType = "RATE_OR_AMOUNT"
 )
 
 // All allowed values of MinimumPaymentType enum

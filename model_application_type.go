@@ -20,7 +20,7 @@ type ApplicationType string
 
 // List of application_type
 const (
-	LINE_OF_CREDIT ApplicationType = "LINE_OF_CREDIT"
+	APPLICATIONTYPE_LINE_OF_CREDIT ApplicationType = "LINE_OF_CREDIT"
 )
 
 // All allowed values of ApplicationType enum

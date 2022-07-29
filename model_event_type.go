@@ -20,16 +20,16 @@ type EventType string
 
 // List of event_type
 const (
-	USERTRANSITION EventType = "usertransition"
-	BUSINESSTRANSITION EventType = "businesstransition"
-	CARDTRANSITION EventType = "cardtransition"
-	TRANSACTION EventType = "transaction"
-	DIGITALWALLETTOKENTRANSITION EventType = "digitalwallettokentransition"
-	CHARGEBACKTRANSITION EventType = "chargebacktransition"
-	COMMANDOMODETRANSITION EventType = "commandomodetransition"
-	CASETRANSITION EventType = "casetransition"
-	DIRECTDEPOSITTRANSITION EventType = "directdeposittransition"
-	BANKTRANSFERTRANSITION EventType = "banktransfertransition"
+	EVENTTYPE_USERTRANSITION EventType = "usertransition"
+	EVENTTYPE_BUSINESSTRANSITION EventType = "businesstransition"
+	EVENTTYPE_CARDTRANSITION EventType = "cardtransition"
+	EVENTTYPE_TRANSACTION EventType = "transaction"
+	EVENTTYPE_DIGITALWALLETTOKENTRANSITION EventType = "digitalwallettokentransition"
+	EVENTTYPE_CHARGEBACKTRANSITION EventType = "chargebacktransition"
+	EVENTTYPE_COMMANDOMODETRANSITION EventType = "commandomodetransition"
+	EVENTTYPE_CASETRANSITION EventType = "casetransition"
+	EVENTTYPE_DIRECTDEPOSITTRANSITION EventType = "directdeposittransition"
+	EVENTTYPE_BANKTRANSFERTRANSITION EventType = "banktransfertransition"
 )
 
 // All allowed values of EventType enum

@@ -20,10 +20,10 @@ type ChangeChannel string
 
 // List of change_channel
 const (
-	API ChangeChannel = "API"
-	ADMIN ChangeChannel = "ADMIN"
-	SYSTEM ChangeChannel = "SYSTEM"
-	FRAUD ChangeChannel = "FRAUD"
+	CHANGECHANNEL_API ChangeChannel = "API"
+	CHANGECHANNEL_ADMIN ChangeChannel = "ADMIN"
+	CHANGECHANNEL_SYSTEM ChangeChannel = "SYSTEM"
+	CHANGECHANNEL_FRAUD ChangeChannel = "FRAUD"
 )
 
 // All allowed values of ChangeChannel enum

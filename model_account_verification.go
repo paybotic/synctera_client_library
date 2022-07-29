@@ -53,58 +53,86 @@ func (dst *AccountVerification) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	match := 0
-	// try to unmarshal data into FinicityAccountVerification
-	err = newStrictDecoder(data).Decode(&dst.FinicityAccountVerification)
-	if err == nil {
-		jsonFinicityAccountVerification, _ := json.Marshal(dst.FinicityAccountVerification)
-		if string(jsonFinicityAccountVerification) == "{}" { // empty struct
+	// use discriminator value to speed up the lookup
+	var jsonDict map[string]interface{}
+	err = newStrictDecoder(data).Decode(&jsonDict)
+	if err != nil {
+		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
+	}
+
+	// check if the discriminator value is 'FINICITY'
+	if jsonDict["vendor"] == "FINICITY" {
+		// try to unmarshal JSON data into FinicityAccountVerification
+		err = json.Unmarshal(data, &dst.FinicityAccountVerification)
+		if err == nil {
+			return nil // data stored in dst.FinicityAccountVerification, return on the first match
+		} else {
 			dst.FinicityAccountVerification = nil
-		} else {
-			match++
+			return fmt.Errorf("Failed to unmarshal AccountVerification as FinicityAccountVerification: %s", err.Error())
 		}
-	} else {
-		dst.FinicityAccountVerification = nil
 	}
 
-	// try to unmarshal data into ManualAccountVerification
-	err = newStrictDecoder(data).Decode(&dst.ManualAccountVerification)
-	if err == nil {
-		jsonManualAccountVerification, _ := json.Marshal(dst.ManualAccountVerification)
-		if string(jsonManualAccountVerification) == "{}" { // empty struct
+	// check if the discriminator value is 'MANUAL'
+	if jsonDict["vendor"] == "MANUAL" {
+		// try to unmarshal JSON data into ManualAccountVerification
+		err = json.Unmarshal(data, &dst.ManualAccountVerification)
+		if err == nil {
+			return nil // data stored in dst.ManualAccountVerification, return on the first match
+		} else {
 			dst.ManualAccountVerification = nil
-		} else {
-			match++
+			return fmt.Errorf("Failed to unmarshal AccountVerification as ManualAccountVerification: %s", err.Error())
 		}
-	} else {
-		dst.ManualAccountVerification = nil
 	}
 
-	// try to unmarshal data into PlaidAccountVerification
-	err = newStrictDecoder(data).Decode(&dst.PlaidAccountVerification)
-	if err == nil {
-		jsonPlaidAccountVerification, _ := json.Marshal(dst.PlaidAccountVerification)
-		if string(jsonPlaidAccountVerification) == "{}" { // empty struct
+	// check if the discriminator value is 'PLAID'
+	if jsonDict["vendor"] == "PLAID" {
+		// try to unmarshal JSON data into PlaidAccountVerification
+		err = json.Unmarshal(data, &dst.PlaidAccountVerification)
+		if err == nil {
+			return nil // data stored in dst.PlaidAccountVerification, return on the first match
+		} else {
 			dst.PlaidAccountVerification = nil
-		} else {
-			match++
+			return fmt.Errorf("Failed to unmarshal AccountVerification as PlaidAccountVerification: %s", err.Error())
 		}
-	} else {
-		dst.PlaidAccountVerification = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.FinicityAccountVerification = nil
-		dst.ManualAccountVerification = nil
-		dst.PlaidAccountVerification = nil
-
-		return fmt.Errorf("Data matches more than one schema in oneOf(AccountVerification)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("Data failed to match schemas in oneOf(AccountVerification)")
+	// check if the discriminator value is 'finicity_account_verification'
+	if jsonDict["vendor"] == "finicity_account_verification" {
+		// try to unmarshal JSON data into FinicityAccountVerification
+		err = json.Unmarshal(data, &dst.FinicityAccountVerification)
+		if err == nil {
+			return nil // data stored in dst.FinicityAccountVerification, return on the first match
+		} else {
+			dst.FinicityAccountVerification = nil
+			return fmt.Errorf("Failed to unmarshal AccountVerification as FinicityAccountVerification: %s", err.Error())
+		}
 	}
+
+	// check if the discriminator value is 'manual_account_verification'
+	if jsonDict["vendor"] == "manual_account_verification" {
+		// try to unmarshal JSON data into ManualAccountVerification
+		err = json.Unmarshal(data, &dst.ManualAccountVerification)
+		if err == nil {
+			return nil // data stored in dst.ManualAccountVerification, return on the first match
+		} else {
+			dst.ManualAccountVerification = nil
+			return fmt.Errorf("Failed to unmarshal AccountVerification as ManualAccountVerification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'plaid_account_verification'
+	if jsonDict["vendor"] == "plaid_account_verification" {
+		// try to unmarshal JSON data into PlaidAccountVerification
+		err = json.Unmarshal(data, &dst.PlaidAccountVerification)
+		if err == nil {
+			return nil // data stored in dst.PlaidAccountVerification, return on the first match
+		} else {
+			dst.PlaidAccountVerification = nil
+			return fmt.Errorf("Failed to unmarshal AccountVerification as PlaidAccountVerification: %s", err.Error())
+		}
+	}
+
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

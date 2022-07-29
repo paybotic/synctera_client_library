@@ -20,9 +20,9 @@ type ChangeType string
 
 // List of change_type
 const (
-	STATUS ChangeType = "STATUS"
-	FULFILLMENT ChangeType = "FULFILLMENT"
-	PIN ChangeType = "PIN"
+	CHANGETYPE_STATUS ChangeType = "STATUS"
+	CHANGETYPE_FULFILLMENT ChangeType = "FULFILLMENT"
+	CHANGETYPE_PIN ChangeType = "PIN"
 )
 
 // All allowed values of ChangeType enum

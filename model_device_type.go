@@ -20,9 +20,9 @@ type DeviceType string
 
 // List of device_type
 const (
-	MOBILE_PHONE DeviceType = "MOBILE_PHONE"
-	WATCH DeviceType = "WATCH"
-	TABLET DeviceType = "TABLET"
+	DEVICETYPE_MOBILE_PHONE DeviceType = "MOBILE_PHONE"
+	DEVICETYPE_WATCH DeviceType = "WATCH"
+	DEVICETYPE_TABLET DeviceType = "TABLET"
 )
 
 // All allowed values of DeviceType enum

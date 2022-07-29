@@ -20,17 +20,17 @@ type EventTypeWildcard string
 
 // List of event_type_wildcard
 const (
-	ACCOUNT EventTypeWildcard = "ACCOUNT.*"
-	CARD EventTypeWildcard = "CARD.*"
-	CUSTOMER EventTypeWildcard = "CUSTOMER.*"
-	BUSINESS EventTypeWildcard = "BUSINESS.*"
-	PERSON EventTypeWildcard = "PERSON.*"
-	INTEREST EventTypeWildcard = "INTEREST.*"
-	INTERNAL_TRANSFER EventTypeWildcard = "INTERNAL_TRANSFER.*"
-	TRANSACTION EventTypeWildcard = "TRANSACTION.*"
-	PAYMENT_SCHEDULE EventTypeWildcard = "PAYMENT_SCHEDULE.*"
-	STATEMENT EventTypeWildcard = "STATEMENT.*"
-	EXTERNAL_CARD EventTypeWildcard = "EXTERNAL_CARD.*"
+	EVENTTYPEWILDCARD_ACCOUNT EventTypeWildcard = "ACCOUNT.*"
+	EVENTTYPEWILDCARD_CARD EventTypeWildcard = "CARD.*"
+	EVENTTYPEWILDCARD_CUSTOMER EventTypeWildcard = "CUSTOMER.*"
+	EVENTTYPEWILDCARD_BUSINESS EventTypeWildcard = "BUSINESS.*"
+	EVENTTYPEWILDCARD_PERSON EventTypeWildcard = "PERSON.*"
+	EVENTTYPEWILDCARD_INTEREST EventTypeWildcard = "INTEREST.*"
+	EVENTTYPEWILDCARD_INTERNAL_TRANSFER EventTypeWildcard = "INTERNAL_TRANSFER.*"
+	EVENTTYPEWILDCARD_TRANSACTION EventTypeWildcard = "TRANSACTION.*"
+	EVENTTYPEWILDCARD_PAYMENT_SCHEDULE EventTypeWildcard = "PAYMENT_SCHEDULE.*"
+	EVENTTYPEWILDCARD_STATEMENT EventTypeWildcard = "STATEMENT.*"
+	EVENTTYPEWILDCARD_EXTERNAL_CARD EventTypeWildcard = "EXTERNAL_CARD.*"
 )
 
 // All allowed values of EventTypeWildcard enum

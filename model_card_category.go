@@ -20,8 +20,8 @@ type CardCategory string
 
 // List of card_category
 const (
-	CONSUMER CardCategory = "CONSUMER"
-	COMMERCIAL CardCategory = "COMMERCIAL"
+	CARDCATEGORY_CONSUMER CardCategory = "CONSUMER"
+	CARDCATEGORY_COMMERCIAL CardCategory = "COMMERCIAL"
 )
 
 // All allowed values of CardCategory enum

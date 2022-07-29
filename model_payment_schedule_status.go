@@ -20,9 +20,9 @@ type PaymentScheduleStatus string
 
 // List of payment_schedule_status
 const (
-	ACTIVE PaymentScheduleStatus = "ACTIVE"
-	EXPIRED PaymentScheduleStatus = "EXPIRED"
-	CANCELLED PaymentScheduleStatus = "CANCELLED"
+	PAYMENTSCHEDULESTATUS_ACTIVE PaymentScheduleStatus = "ACTIVE"
+	PAYMENTSCHEDULESTATUS_EXPIRED PaymentScheduleStatus = "EXPIRED"
+	PAYMENTSCHEDULESTATUS_CANCELLED PaymentScheduleStatus = "CANCELLED"
 )
 
 // All allowed values of PaymentScheduleStatus enum

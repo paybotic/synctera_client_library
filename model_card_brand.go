@@ -20,8 +20,8 @@ type CardBrand string
 
 // List of card_brand
 const (
-	MASTERCARD CardBrand = "MASTERCARD"
-	VISA CardBrand = "VISA"
+	CARDBRAND_MASTERCARD CardBrand = "MASTERCARD"
+	CARDBRAND_VISA CardBrand = "VISA"
 )
 
 // All allowed values of CardBrand enum

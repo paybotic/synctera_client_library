@@ -20,10 +20,10 @@ type AccountRelationshipType string
 
 // List of account_relationship_type
 const (
-	ACCOUNT_HOLDER AccountRelationshipType = "ACCOUNT_HOLDER"
-	PRIMARY_ACCOUNT_HOLDER AccountRelationshipType = "PRIMARY_ACCOUNT_HOLDER"
-	JOINT_ACCOUNT_HOLDER AccountRelationshipType = "JOINT_ACCOUNT_HOLDER"
-	AUTHORIZED_SIGNER AccountRelationshipType = "AUTHORIZED_SIGNER"
+	ACCOUNTRELATIONSHIPTYPE_ACCOUNT_HOLDER AccountRelationshipType = "ACCOUNT_HOLDER"
+	ACCOUNTRELATIONSHIPTYPE_PRIMARY_ACCOUNT_HOLDER AccountRelationshipType = "PRIMARY_ACCOUNT_HOLDER"
+	ACCOUNTRELATIONSHIPTYPE_JOINT_ACCOUNT_HOLDER AccountRelationshipType = "JOINT_ACCOUNT_HOLDER"
+	ACCOUNTRELATIONSHIPTYPE_AUTHORIZED_SIGNER AccountRelationshipType = "AUTHORIZED_SIGNER"
 )
 
 // All allowed values of AccountRelationshipType enum

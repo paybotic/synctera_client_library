@@ -40,44 +40,62 @@ func VirtualCardIssuanceRequestAsCardIssuanceRequest(v *VirtualCardIssuanceReque
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CardIssuanceRequest) UnmarshalJSON(data []byte) error {
 	var err error
-	match := 0
-	// try to unmarshal data into PhysicalCardIssuanceRequest
-	err = newStrictDecoder(data).Decode(&dst.PhysicalCardIssuanceRequest)
-	if err == nil {
-		jsonPhysicalCardIssuanceRequest, _ := json.Marshal(dst.PhysicalCardIssuanceRequest)
-		if string(jsonPhysicalCardIssuanceRequest) == "{}" { // empty struct
+	// use discriminator value to speed up the lookup
+	var jsonDict map[string]interface{}
+	err = newStrictDecoder(data).Decode(&jsonDict)
+	if err != nil {
+		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
+	}
+
+	// check if the discriminator value is 'PHYSICAL'
+	if jsonDict["form"] == "PHYSICAL" {
+		// try to unmarshal JSON data into PhysicalCardIssuanceRequest
+		err = json.Unmarshal(data, &dst.PhysicalCardIssuanceRequest)
+		if err == nil {
+			return nil // data stored in dst.PhysicalCardIssuanceRequest, return on the first match
+		} else {
 			dst.PhysicalCardIssuanceRequest = nil
-		} else {
-			match++
+			return fmt.Errorf("Failed to unmarshal CardIssuanceRequest as PhysicalCardIssuanceRequest: %s", err.Error())
 		}
-	} else {
-		dst.PhysicalCardIssuanceRequest = nil
 	}
 
-	// try to unmarshal data into VirtualCardIssuanceRequest
-	err = newStrictDecoder(data).Decode(&dst.VirtualCardIssuanceRequest)
-	if err == nil {
-		jsonVirtualCardIssuanceRequest, _ := json.Marshal(dst.VirtualCardIssuanceRequest)
-		if string(jsonVirtualCardIssuanceRequest) == "{}" { // empty struct
+	// check if the discriminator value is 'VIRTUAL'
+	if jsonDict["form"] == "VIRTUAL" {
+		// try to unmarshal JSON data into VirtualCardIssuanceRequest
+		err = json.Unmarshal(data, &dst.VirtualCardIssuanceRequest)
+		if err == nil {
+			return nil // data stored in dst.VirtualCardIssuanceRequest, return on the first match
+		} else {
 			dst.VirtualCardIssuanceRequest = nil
-		} else {
-			match++
+			return fmt.Errorf("Failed to unmarshal CardIssuanceRequest as VirtualCardIssuanceRequest: %s", err.Error())
 		}
-	} else {
-		dst.VirtualCardIssuanceRequest = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.PhysicalCardIssuanceRequest = nil
-		dst.VirtualCardIssuanceRequest = nil
-
-		return fmt.Errorf("Data matches more than one schema in oneOf(CardIssuanceRequest)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("Data failed to match schemas in oneOf(CardIssuanceRequest)")
+	// check if the discriminator value is 'physical_card_issuance_request'
+	if jsonDict["form"] == "physical_card_issuance_request" {
+		// try to unmarshal JSON data into PhysicalCardIssuanceRequest
+		err = json.Unmarshal(data, &dst.PhysicalCardIssuanceRequest)
+		if err == nil {
+			return nil // data stored in dst.PhysicalCardIssuanceRequest, return on the first match
+		} else {
+			dst.PhysicalCardIssuanceRequest = nil
+			return fmt.Errorf("Failed to unmarshal CardIssuanceRequest as PhysicalCardIssuanceRequest: %s", err.Error())
+		}
 	}
+
+	// check if the discriminator value is 'virtual_card_issuance_request'
+	if jsonDict["form"] == "virtual_card_issuance_request" {
+		// try to unmarshal JSON data into VirtualCardIssuanceRequest
+		err = json.Unmarshal(data, &dst.VirtualCardIssuanceRequest)
+		if err == nil {
+			return nil // data stored in dst.VirtualCardIssuanceRequest, return on the first match
+		} else {
+			dst.VirtualCardIssuanceRequest = nil
+			return fmt.Errorf("Failed to unmarshal CardIssuanceRequest as VirtualCardIssuanceRequest: %s", err.Error())
+		}
+	}
+
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

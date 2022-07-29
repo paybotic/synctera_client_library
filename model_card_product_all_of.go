@@ -60,7 +60,7 @@ func NewCardProductAllOf(active bool, cardProgramId string, name string, startDa
 	this.CardProgramId = cardProgramId
 	this.Name = name
 	this.StartDate = startDate
-	var txnEnhancer TxnEnhancer = NONE
+	var txnEnhancer TxnEnhancer = TXNENHANCER_NONE
 	this.TxnEnhancer = &txnEnhancer
 	return &this
 }
@@ -70,7 +70,7 @@ func NewCardProductAllOf(active bool, cardProgramId string, name string, startDa
 // but it doesn't guarantee that properties required by API are set
 func NewCardProductAllOfWithDefaults() *CardProductAllOf {
 	this := CardProductAllOf{}
-	var txnEnhancer TxnEnhancer = NONE
+	var txnEnhancer TxnEnhancer = TXNENHANCER_NONE
 	this.TxnEnhancer = &txnEnhancer
 	return &this
 }

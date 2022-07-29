@@ -20,9 +20,9 @@ type RelationshipRole string
 
 // List of relationship_role
 const (
-	CUSTODIAN RelationshipRole = "CUSTODIAN"
-	BENEFICIARY RelationshipRole = "BENEFICIARY"
-	PARTNER RelationshipRole = "PARTNER"
+	RELATIONSHIPROLE_CUSTODIAN RelationshipRole = "CUSTODIAN"
+	RELATIONSHIPROLE_BENEFICIARY RelationshipRole = "BENEFICIARY"
+	RELATIONSHIPROLE_PARTNER RelationshipRole = "PARTNER"
 )
 
 // All allowed values of RelationshipRole enum
