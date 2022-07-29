@@ -1,17 +1,8 @@
 # CardImageStatus
 
-## Enum
-
-
-* `NOT_UPLOADED` (value: `"NOT_UPLOADED"`)
-
-* `UNREVIEWED` (value: `"UNREVIEWED"`)
-
-* `APPROVED` (value: `"APPROVED"`)
-
-* `REJECTED` (value: `"REJECTED"`)
-
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
 

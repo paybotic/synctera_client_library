@@ -1,4 +1,4 @@
-# \DigitalWalletTokensApi
+# {{classname}}
 
 All URIs are relative to *https://api.synctera.com/v0*
 
@@ -8,65 +8,23 @@ Method | HTTP request | Description
 [**CreateDigitalWalletGoogle**](DigitalWalletTokensApi.md#CreateDigitalWalletGoogle) | **Post** /cards/{card_id}/digital_wallet_tokens/googlepay | Create digital wallet token provision request for Google Pay
 [**GetDigitalWalletToken**](DigitalWalletTokensApi.md#GetDigitalWalletToken) | **Get** /cards/digital_wallet_tokens/{digital_wallet_token_id} | Get Digital Wallet Token
 [**ListDigitalWalletTokens**](DigitalWalletTokensApi.md#ListDigitalWalletTokens) | **Get** /cards/digital_wallet_tokens | List Digital Wallet Tokens
-[**UpdateDigitalWalletTokenStatus**](DigitalWalletTokensApi.md#UpdateDigitalWalletTokenStatus) | **Patch** /cards/digital_wallet_tokens/{digital_wallet_token_id} | Update Digital Wallet Token&#39;s life cycle status
+[**UpdateDigitalWalletTokenStatus**](DigitalWalletTokensApi.md#UpdateDigitalWalletTokenStatus) | **Patch** /cards/digital_wallet_tokens/{digital_wallet_token_id} | Update Digital Wallet Token&#x27;s life cycle status
 
-
-
-## CreateDigitalWalletApple
-
-> AppleDigitalWalletProvisionResponse CreateDigitalWalletApple(ctx, cardId).AppleDigitalWalletProvisionRequest(appleDigitalWalletProvisionRequest).Execute()
-
+# **CreateDigitalWalletApple**
+> AppleDigitalWalletProvisionResponse CreateDigitalWalletApple(ctx, body, cardId)
 Create digital wallet token provision request for Apple Pay
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    appleDigitalWalletProvisionRequest := *openapiclient.NewAppleDigitalWalletProvisionRequest([]string{"Certificates_example"}, openapiclient.device_type("MOBILE_PHONE"), "Nonce_example", "NonceSignature_example", "ProvisioningAppVersion_example") // AppleDigitalWalletProvisionRequest | Request to provision digital wallet card data to pass to Apple Pay digital wallet
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DigitalWalletTokensApi.CreateDigitalWalletApple(context.Background(), cardId).AppleDigitalWalletProvisionRequest(appleDigitalWalletProvisionRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DigitalWalletTokensApi.CreateDigitalWalletApple``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateDigitalWalletApple`: AppleDigitalWalletProvisionResponse
-    fmt.Fprintf(os.Stdout, "Response from `DigitalWalletTokensApi.CreateDigitalWalletApple`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cardId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateDigitalWalletAppleRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **appleDigitalWalletProvisionRequest** | [**AppleDigitalWalletProvisionRequest**](AppleDigitalWalletProvisionRequest.md) | Request to provision digital wallet card data to pass to Apple Pay digital wallet | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**AppleDigitalWalletProvisionRequest**](AppleDigitalWalletProvisionRequest.md)| Request to provision digital wallet card data to pass to Apple Pay digital wallet | 
+  **cardId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**AppleDigitalWalletProvisionResponse**](AppleDigitalWalletProvisionResponse.md)
+[**AppleDigitalWalletProvisionResponse**](apple_digital_wallet_provision_response.md)
 
 ### Authorization
 
@@ -74,69 +32,26 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## CreateDigitalWalletGoogle
-
-> GoogleDigitalWalletProvisionResponse CreateDigitalWalletGoogle(ctx, cardId).GoogleDigitalWalletProvisionRequest(googleDigitalWalletProvisionRequest).Execute()
-
+# **CreateDigitalWalletGoogle**
+> GoogleDigitalWalletProvisionResponse CreateDigitalWalletGoogle(ctx, body, cardId)
 Create digital wallet token provision request for Google Pay
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    googleDigitalWalletProvisionRequest := *openapiclient.NewGoogleDigitalWalletProvisionRequest("DeviceId_example", openapiclient.device_type("MOBILE_PHONE"), "ProvisioningAppVersion_example", "WalletAccountId_example") // GoogleDigitalWalletProvisionRequest | Request to provision digital wallet card data to pass to Google Pay digital wallet
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DigitalWalletTokensApi.CreateDigitalWalletGoogle(context.Background(), cardId).GoogleDigitalWalletProvisionRequest(googleDigitalWalletProvisionRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DigitalWalletTokensApi.CreateDigitalWalletGoogle``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateDigitalWalletGoogle`: GoogleDigitalWalletProvisionResponse
-    fmt.Fprintf(os.Stdout, "Response from `DigitalWalletTokensApi.CreateDigitalWalletGoogle`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cardId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateDigitalWalletGoogleRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **googleDigitalWalletProvisionRequest** | [**GoogleDigitalWalletProvisionRequest**](GoogleDigitalWalletProvisionRequest.md) | Request to provision digital wallet card data to pass to Google Pay digital wallet | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**GoogleDigitalWalletProvisionRequest**](GoogleDigitalWalletProvisionRequest.md)| Request to provision digital wallet card data to pass to Google Pay digital wallet | 
+  **cardId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**GoogleDigitalWalletProvisionResponse**](GoogleDigitalWalletProvisionResponse.md)
+[**GoogleDigitalWalletProvisionResponse**](google_digital_wallet_provision_response.md)
 
 ### Authorization
 
@@ -144,69 +59,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## GetDigitalWalletToken
-
-> DigitalWalletTokenResponse GetDigitalWalletToken(ctx, digitalWalletTokenId).Execute()
-
+# **GetDigitalWalletToken**
+> DigitalWalletTokenResponse GetDigitalWalletToken(ctx, digitalWalletTokenId)
 Get Digital Wallet Token
 
+Get the details about the digital wallet token of a card 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    digitalWalletTokenId := "digitalWalletTokenId_example" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DigitalWalletTokensApi.GetDigitalWalletToken(context.Background(), digitalWalletTokenId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DigitalWalletTokensApi.GetDigitalWalletToken``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetDigitalWalletToken`: DigitalWalletTokenResponse
-    fmt.Fprintf(os.Stdout, "Response from `DigitalWalletTokensApi.GetDigitalWalletToken`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**digitalWalletTokenId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetDigitalWalletTokenRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **digitalWalletTokenId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**DigitalWalletTokenResponse**](DigitalWalletTokenResponse.md)
+[**DigitalWalletTokenResponse**](digital_wallet_token_response.md)
 
 ### Authorization
 
@@ -214,71 +87,36 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## ListDigitalWalletTokens
-
-> TokenListResponse ListDigitalWalletTokens(ctx).CardId(cardId).TokenState(tokenState).Limit(limit).PageToken(pageToken).Execute()
-
+# **ListDigitalWalletTokens**
+> TokenListResponse ListDigitalWalletTokens(ctx, optional)
 List Digital Wallet Tokens
 
+List Digital Wallet Tokens 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
-    tokenState := openapiclient.digital_wallet_token_state("REQUESTED") // DigitalWalletTokenState | The status of the Digital Wallet Token (optional)
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "xwsfu1mkaq" // string |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DigitalWalletTokensApi.ListDigitalWalletTokens(context.Background()).CardId(cardId).TokenState(tokenState).Limit(limit).PageToken(pageToken).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DigitalWalletTokensApi.ListDigitalWalletTokens``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListDigitalWalletTokens`: TokenListResponse
-    fmt.Fprintf(os.Stdout, "Response from `DigitalWalletTokensApi.ListDigitalWalletTokens`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListDigitalWalletTokensRequest struct via the builder pattern
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cardId** | **string** |  | 
- **tokenState** | [**DigitalWalletTokenState**](DigitalWalletTokenState.md) | The status of the Digital Wallet Token | 
- **limit** | **int32** |  | [default to 100]
- **pageToken** | **string** |  | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***DigitalWalletTokensApiListDigitalWalletTokensOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a DigitalWalletTokensApiListDigitalWalletTokensOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cardId** | [**optional.Interface of string**](.md)|  | 
+ **tokenState** | [**optional.Interface of DigitalWalletTokenState**](.md)| The status of the Digital Wallet Token | 
+ **limit** | **optional.Int32**|  | [default to 100]
+ **pageToken** | **optional.String**|  | 
 
 ### Return type
 
-[**TokenListResponse**](TokenListResponse.md)
+[**TokenListResponse**](token_list_response.md)
 
 ### Authorization
 
@@ -286,71 +124,28 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## UpdateDigitalWalletTokenStatus
-
-> DigitalWalletTokenResponse UpdateDigitalWalletTokenStatus(ctx, digitalWalletTokenId).DigitalWalletTokenEditRequest(digitalWalletTokenEditRequest).Execute()
-
+# **UpdateDigitalWalletTokenStatus**
+> DigitalWalletTokenResponse UpdateDigitalWalletTokenStatus(ctx, body, digitalWalletTokenId)
 Update Digital Wallet Token's life cycle status
 
+The status of a digital wallet token can be updated as, ACTIVE to SUSPENDED, SUSPENDED to ACTIVE, ACTIVE to TERMINATED or SUSPENDED to TERMINATED. 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    digitalWalletTokenId := "digitalWalletTokenId_example" // string | 
-    digitalWalletTokenEditRequest := *openapiclient.NewDigitalWalletTokenEditRequest("TokenStatus_example") // DigitalWalletTokenEditRequest | Update Digital wallet token status
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DigitalWalletTokensApi.UpdateDigitalWalletTokenStatus(context.Background(), digitalWalletTokenId).DigitalWalletTokenEditRequest(digitalWalletTokenEditRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DigitalWalletTokensApi.UpdateDigitalWalletTokenStatus``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateDigitalWalletTokenStatus`: DigitalWalletTokenResponse
-    fmt.Fprintf(os.Stdout, "Response from `DigitalWalletTokensApi.UpdateDigitalWalletTokenStatus`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**digitalWalletTokenId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateDigitalWalletTokenStatusRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **digitalWalletTokenEditRequest** | [**DigitalWalletTokenEditRequest**](DigitalWalletTokenEditRequest.md) | Update Digital wallet token status | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**DigitalWalletTokenEditRequest**](DigitalWalletTokenEditRequest.md)| Update Digital wallet token status | 
+  **digitalWalletTokenId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**DigitalWalletTokenResponse**](DigitalWalletTokenResponse.md)
+[**DigitalWalletTokenResponse**](digital_wallet_token_response.md)
 
 ### Authorization
 
@@ -358,10 +153,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

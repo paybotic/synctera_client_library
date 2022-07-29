@@ -1,4 +1,4 @@
-# \CardsApi
+# {{classname}}
 
 All URIs are relative to *https://api.synctera.com/v0*
 
@@ -22,59 +22,22 @@ Method | HTTP request | Description
 [**UpdateCardImageDetails**](CardsApi.md#UpdateCardImageDetails) | **Patch** /cards/images/{card_image_id} | Update Card Image Details
 [**UploadCardImageData**](CardsApi.md#UploadCardImageData) | **Post** /cards/images/{card_image_id}/data | Upload Card Image
 
-
-
-## ActivateCard
-
-> CardResponse ActivateCard(ctx).CardActivationRequest(cardActivationRequest).Execute()
-
+# **ActivateCard**
+> CardResponse ActivateCard(ctx, body)
 Activate a card
 
+Activate a card 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cardActivationRequest := *openapiclient.NewCardActivationRequest("ActivationCode_example", "29b106d0-8201-48a9-a517-40c9c01a01e2") // CardActivationRequest | Card activation code
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.ActivateCard(context.Background()).CardActivationRequest(cardActivationRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.ActivateCard``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ActivateCard`: CardResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.ActivateCard`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiActivateCardRequest struct via the builder pattern
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cardActivationRequest** | [**CardActivationRequest**](CardActivationRequest.md) | Card activation code | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**CardActivationRequest**](CardActivationRequest.md)| Card activation code | 
 
 ### Return type
 
-[**CardResponse**](CardResponse.md)
+[**CardResponse**](card_response.md)
 
 ### Authorization
 
@@ -82,65 +45,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## CreateCardImage
-
-> CardImageDetails CreateCardImage(ctx).CreateCardImageRequest(createCardImageRequest).Execute()
-
+# **CreateCardImage**
+> CardImageDetails CreateCardImage(ctx, body)
 Create Card Image
 
+Create a card image entity. Note that this does not include the image data itself. You can upload the image data via a subsequent uploadCardImageData request using the ID created here. 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    createCardImageRequest := *openapiclient.NewCreateCardImageRequest("c88a1c5f-67b5-4ebd-a833-202c7ae80c87", "37a054b8-fbdb-44c6-ae20-091f94ada475") // CreateCardImageRequest | Details of the image to create
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.CreateCardImage(context.Background()).CreateCardImageRequest(createCardImageRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.CreateCardImage``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateCardImage`: CardImageDetails
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.CreateCardImage`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateCardImageRequest struct via the builder pattern
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createCardImageRequest** | [**CreateCardImageRequest**](CreateCardImageRequest.md) | Details of the image to create | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**CreateCardImageRequest**](CreateCardImageRequest.md)| Details of the image to create | 
 
 ### Return type
 
-[**CardImageDetails**](CardImageDetails.md)
+[**CardImageDetails**](card_image_details.md)
 
 ### Authorization
 
@@ -148,69 +73,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## GetCard
-
-> CardResponse GetCard(ctx, cardId).Execute()
-
+# **GetCard**
+> CardResponse GetCard(ctx, cardId)
 Get Card
 
+Get the details about a card that has been issued 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetCard(context.Background(), cardId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetCard``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetCard`: CardResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetCard`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cardId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetCardRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **cardId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**CardResponse**](CardResponse.md)
+[**CardResponse**](card_response.md)
 
 ### Authorization
 
@@ -218,69 +101,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## GetCardBarcode
-
-> GetCardBarcode200Response GetCardBarcode(ctx, cardId).Execute()
-
+# **GetCardBarcode**
+> InlineResponse200 GetCardBarcode(ctx, cardId)
 Get Card Barcode
 
+This endpoint is for testing environment only to provide access to barcode of a test card 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetCardBarcode(context.Background(), cardId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetCardBarcode``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetCardBarcode`: GetCardBarcode200Response
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetCardBarcode`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cardId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetCardBarcodeRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **cardId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**GetCardBarcode200Response**](GetCardBarcode200Response.md)
+[**InlineResponse200**](inline_response_200.md)
 
 ### Authorization
 
@@ -288,65 +129,23 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## GetCardImageData
-
-> *os.File GetCardImageData(ctx, cardImageId).Execute()
-
+# **GetCardImageData**
+> *os.File GetCardImageData(ctx, cardImageId)
 Get Card Image Data
 
+Get card image data
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cardImageId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetCardImageData(context.Background(), cardImageId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetCardImageData``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetCardImageData`: *os.File
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetCardImageData`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cardImageId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetCardImageDataRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **cardImageId** | [**string**](.md)|  | 
 
 ### Return type
 
@@ -358,69 +157,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: image/jpeg, application/problem+json
+ - **Content-Type**: Not defined
+ - **Accept**: image/jpeg, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## GetCardImageDetails
-
-> CardImageDetails GetCardImageDetails(ctx, cardImageId).Execute()
-
+# **GetCardImageDetails**
+> CardImageDetails GetCardImageDetails(ctx, cardImageId)
 Get Card Image Details
 
+Get card image details
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cardImageId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetCardImageDetails(context.Background(), cardImageId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetCardImageDetails``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetCardImageDetails`: CardImageDetails
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetCardImageDetails`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cardImageId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetCardImageDetailsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **cardImageId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**CardImageDetails**](CardImageDetails.md)
+[**CardImageDetails**](card_image_details.md)
 
 ### Authorization
 
@@ -428,71 +185,39 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## GetCardWidgetURL
-
-> CardWidgetUrlResponse GetCardWidgetURL(ctx).WidgetType(widgetType).CustomerId(customerId).AccountId(accountId).CardId(cardId).Execute()
-
+# **GetCardWidgetURL**
+> CardWidgetUrlResponse GetCardWidgetURL(ctx, widgetType, customerId, accountId, optional)
 Get card widget URL
 
+This endpoint returns a URL address of the specified widget for a given card 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    widgetType := openapiclient.widget_type("set_pin") // WidgetType | The type of widget for which to construct the URL
-    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the card (required for set PIN widget) (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetCardWidgetURL(context.Background()).WidgetType(widgetType).CustomerId(customerId).AccountId(accountId).CardId(cardId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetCardWidgetURL``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetCardWidgetURL`: CardWidgetUrlResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetCardWidgetURL`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetCardWidgetURLRequest struct via the builder pattern
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **widgetType** | [**WidgetType**](WidgetType.md) | The type of widget for which to construct the URL | 
- **customerId** | **string** |  | 
- **accountId** | **string** |  | 
- **cardId** | **string** | The ID of the card (required for set PIN widget) | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **widgetType** | [**WidgetType**](.md)| The type of widget for which to construct the URL | 
+  **customerId** | [**string**](.md)|  | 
+  **accountId** | [**string**](.md)|  | 
+ **optional** | ***CardsApiGetCardWidgetURLOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a CardsApiGetCardWidgetURLOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **cardId** | [**optional.Interface of string**](.md)| The ID of the card (required for set PIN widget) | 
 
 ### Return type
 
-[**CardWidgetUrlResponse**](CardWidgetUrlResponse.md)
+[**CardWidgetUrlResponse**](card_widget_url_response.md)
 
 ### Authorization
 
@@ -500,69 +225,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## GetClientAccessToken
-
-> ClientToken GetClientAccessToken(ctx, cardId).Execute()
-
+# **GetClientAccessToken**
+> ClientToken GetClientAccessToken(ctx, cardId)
 Get a client token
 
+Create a client access token for interacting with a card.  This token will be used on the client to identify the card for flows like viewing Full PAN or setting the PIN in a PCI compliant manner. 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetClientAccessToken(context.Background(), cardId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetClientAccessToken``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetClientAccessToken`: ClientToken
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetClientAccessToken`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cardId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetClientAccessTokenRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **cardId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**ClientToken**](ClientToken.md)
+[**ClientToken**](client_token.md)
 
 ### Authorization
 
@@ -570,65 +253,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## GetClientSingleUseToken
-
-> SingleUseTokenResponse GetClientSingleUseToken(ctx).SingleUseTokenRequest(singleUseTokenRequest).Execute()
-
+# **GetClientSingleUseToken**
+> SingleUseTokenResponse GetClientSingleUseToken(ctx, body)
 Get single-use token
 
+This endpoint returns a single-use access token. This type of token authorizes a single request to access API endpoints and data associated with a particular user 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    singleUseTokenRequest := *openapiclient.NewSingleUseTokenRequest("dd227f31-7fdf-4eb4-ab0a-0fa7eca1a56b", "7f32f8c4-691a-4586-b0c4-9fc172f019ab") // SingleUseTokenRequest | User token details
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetClientSingleUseToken(context.Background()).SingleUseTokenRequest(singleUseTokenRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetClientSingleUseToken``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetClientSingleUseToken`: SingleUseTokenResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetClientSingleUseToken`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetClientSingleUseTokenRequest struct via the builder pattern
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **singleUseTokenRequest** | [**SingleUseTokenRequest**](SingleUseTokenRequest.md) | User token details | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**SingleUseTokenRequest**](SingleUseTokenRequest.md)| User token details | 
 
 ### Return type
 
-[**SingleUseTokenResponse**](SingleUseTokenResponse.md)
+[**SingleUseTokenResponse**](single_use_token_response.md)
 
 ### Authorization
 
@@ -636,65 +281,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## IssueCard
-
-> CardResponse IssueCard(ctx).CardIssuanceRequest(cardIssuanceRequest).Execute()
-
+# **IssueCard**
+> CardResponse IssueCard(ctx, body)
 Issue a Card
 
+Issue or reissue a new card for a customer 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cardIssuanceRequest := openapiclient.card_issuance_request{PhysicalCardIssuanceRequest: openapiclient.NewPhysicalCardIssuanceRequest("Form_example", "7bbd3567-dfc3-4b9b-9311-5a6e667ff3ab", "31dbb03f-7960-4b36-a670-046b6c23e1f9", "15047152-4b0f-48ce-8318-862807352003", "Type_example")} // CardIssuanceRequest | Card to issue
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.IssueCard(context.Background()).CardIssuanceRequest(cardIssuanceRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.IssueCard``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `IssueCard`: CardResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.IssueCard`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiIssueCardRequest struct via the builder pattern
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cardIssuanceRequest** | [**CardIssuanceRequest**](CardIssuanceRequest.md) | Card to issue | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**CardIssuanceRequest**](CardIssuanceRequest.md)| Card to issue | 
 
 ### Return type
 
-[**CardResponse**](CardResponse.md)
+[**CardResponse**](card_response.md)
 
 ### Authorization
 
@@ -702,65 +309,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## ListCardImageDetails
-
-> CardImageDetailsList ListCardImageDetails(ctx).CustomerId(customerId).Execute()
-
+# **ListCardImageDetails**
+> CardImageDetailsList ListCardImageDetails(ctx, customerId)
 List Card Image Details
 
+List all card image details 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.ListCardImageDetails(context.Background()).CustomerId(customerId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.ListCardImageDetails``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListCardImageDetails`: CardImageDetailsList
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.ListCardImageDetails`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListCardImageDetailsRequest struct via the builder pattern
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **customerId** | **string** |  | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **customerId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**CardImageDetailsList**](CardImageDetailsList.md)
+[**CardImageDetailsList**](card_image_details_list.md)
 
 ### Authorization
 
@@ -768,65 +337,32 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## ListCardProducts
-
-> CardProductListResponse ListCardProducts(ctx).Limit(limit).PageToken(pageToken).Execute()
-
+# **ListCardProducts**
+> CardProductListResponse ListCardProducts(ctx, optional)
 List Card Products
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "xwsfu1mkaq" // string |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.ListCardProducts(context.Background()).Limit(limit).PageToken(pageToken).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.ListCardProducts``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListCardProducts`: CardProductListResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.ListCardProducts`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListCardProductsRequest struct via the builder pattern
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int32** |  | [default to 100]
- **pageToken** | **string** |  | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***CardsApiListCardProductsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a CardsApiListCardProductsOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **optional.Int32**|  | [default to 100]
+ **pageToken** | **optional.String**|  | 
 
 ### Return type
 
-[**CardProductListResponse**](CardProductListResponse.md)
+[**CardProductListResponse**](card_product_list_response.md)
 
 ### Authorization
 
@@ -834,92 +370,46 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## ListCards
-
-> CardListResponse ListCards(ctx).CustomerId(customerId).AccountId(accountId).EmbossName(embossName).LastFour(lastFour).ExpirationDate(expirationDate).CardType(cardType).CardBrand(cardBrand).Form(form).CardProductId(cardProductId).CardStatus(cardStatus).PostalCode(postalCode).Limit(limit).PageToken(pageToken).SortBy(sortBy).Execute()
-
+# **ListCards**
+> CardListResponse ListCards(ctx, optional)
 List Cards
 
+List of cards matching query parameters 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    "time"
-    openapiclient "./openapi"
-)
-
-func main() {
-    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
-    accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
-    embossName := "embossName_example" // string | emboss name (optional)
-    lastFour := "1234" // string | The last 4 digits of the card PAN (optional)
-    expirationDate := time.Now() // string | The date representing when the card would expire at (optional)
-    cardType := "cardType_example" // string | Indicates the type of card (optional)
-    cardBrand := openapiclient.card_brand("MASTERCARD") // CardBrand | The brand of a card product (optional)
-    form := openapiclient.form("PHYSICAL") // Form | The format of the card (optional)
-    cardProductId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
-    cardStatus := openapiclient.card_status("ACTIVE") // CardStatus | The status of a card (optional)
-    postalCode := "49633" // string | The postal code of a card user (optional)
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "xwsfu1mkaq" // string |  (optional)
-    sortBy := []string{"SortBy_example"} // []string | Specifies the sort order for the returned cards.  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.ListCards(context.Background()).CustomerId(customerId).AccountId(accountId).EmbossName(embossName).LastFour(lastFour).ExpirationDate(expirationDate).CardType(cardType).CardBrand(cardBrand).Form(form).CardProductId(cardProductId).CardStatus(cardStatus).PostalCode(postalCode).Limit(limit).PageToken(pageToken).SortBy(sortBy).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.ListCards``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListCards`: CardListResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.ListCards`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListCardsRequest struct via the builder pattern
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **customerId** | **string** |  | 
- **accountId** | **string** |  | 
- **embossName** | **string** | emboss name | 
- **lastFour** | **string** | The last 4 digits of the card PAN | 
- **expirationDate** | **string** | The date representing when the card would expire at | 
- **cardType** | **string** | Indicates the type of card | 
- **cardBrand** | [**CardBrand**](CardBrand.md) | The brand of a card product | 
- **form** | [**Form**](Form.md) | The format of the card | 
- **cardProductId** | **string** |  | 
- **cardStatus** | [**CardStatus**](CardStatus.md) | The status of a card | 
- **postalCode** | **string** | The postal code of a card user | 
- **limit** | **int32** |  | [default to 100]
- **pageToken** | **string** |  | 
- **sortBy** | **[]string** | Specifies the sort order for the returned cards.  | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***CardsApiListCardsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a CardsApiListCardsOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **customerId** | [**optional.Interface of string**](.md)|  | 
+ **accountId** | [**optional.Interface of string**](.md)|  | 
+ **embossName** | **optional.String**| emboss name | 
+ **lastFour** | **optional.String**| The last 4 digits of the card PAN | 
+ **expirationDate** | **optional.String**| The date representing when the card would expire at | 
+ **cardType** | **optional.String**| Indicates the type of card | 
+ **cardBrand** | [**optional.Interface of CardBrand**](.md)| The brand of a card product | 
+ **form** | [**optional.Interface of Form**](.md)| The format of the card | 
+ **cardProductId** | [**optional.Interface of string**](.md)|  | 
+ **cardStatus** | [**optional.Interface of CardStatus**](.md)| The status of a card | 
+ **postalCode** | **optional.String**| The postal code of a card user | 
+ **limit** | **optional.Int32**|  | [default to 100]
+ **pageToken** | **optional.String**|  | 
+ **sortBy** | [**optional.Interface of []string**](string.md)| Specifies the sort order for the returned cards.  | 
 
 ### Return type
 
-[**CardListResponse**](CardListResponse.md)
+[**CardListResponse**](card_list_response.md)
 
 ### Authorization
 
@@ -927,69 +417,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## ListChanges
-
-> CardChangesList ListChanges(ctx, cardId).Execute()
-
+# **ListChanges**
+> CardChangesList ListChanges(ctx, cardId)
 List Card Changes
 
+List card change history 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.ListChanges(context.Background(), cardId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.ListChanges``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListChanges`: CardChangesList
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.ListChanges`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cardId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListChangesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **cardId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**CardChangesList**](CardChangesList.md)
+[**CardChangesList**](card_changes_list.md)
 
 ### Authorization
 
@@ -997,71 +445,28 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## UpdateCard
-
-> CardResponse UpdateCard(ctx, cardId).CardEditRequest(cardEditRequest).Execute()
-
+# **UpdateCard**
+> CardResponse UpdateCard(ctx, body, cardId)
 Update Card
 
+Integrators can update the card resource to change status, update shipping (if the card hasn't been shipped) or edit metadata. 
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    cardEditRequest := *openapiclient.NewCardEditRequest() // CardEditRequest | Card edits
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.UpdateCard(context.Background(), cardId).CardEditRequest(cardEditRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.UpdateCard``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateCard`: CardResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.UpdateCard`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cardId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateCardRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **cardEditRequest** | [**CardEditRequest**](CardEditRequest.md) | Card edits | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**CardEditRequest**](CardEditRequest.md)| Card edits | 
+  **cardId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**CardResponse**](CardResponse.md)
+[**CardResponse**](card_response.md)
 
 ### Authorization
 
@@ -1069,71 +474,28 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## UpdateCardImageDetails
-
-> CardImageDetails UpdateCardImageDetails(ctx, cardImageId).UpdateCardImageRequest(updateCardImageRequest).Execute()
-
+# **UpdateCardImageDetails**
+> CardImageDetails UpdateCardImageDetails(ctx, body, cardImageId)
 Update Card Image Details
 
+Update card image details. The only detail that can be updated is the card status as APPROVED or REJECTED.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cardImageId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    updateCardImageRequest := *openapiclient.NewUpdateCardImageRequest(openapiclient.card_image_status("NOT_UPLOADED")) // UpdateCardImageRequest | Details of the image to create
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.UpdateCardImageDetails(context.Background(), cardImageId).UpdateCardImageRequest(updateCardImageRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.UpdateCardImageDetails``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateCardImageDetails`: CardImageDetails
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.UpdateCardImageDetails`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cardImageId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateCardImageDetailsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **updateCardImageRequest** | [**UpdateCardImageRequest**](UpdateCardImageRequest.md) | Details of the image to create | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**UpdateCardImageRequest**](UpdateCardImageRequest.md)| Details of the image to create | 
+  **cardImageId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**CardImageDetails**](CardImageDetails.md)
+[**CardImageDetails**](card_image_details.md)
 
 ### Authorization
 
@@ -1141,71 +503,28 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-
-## UploadCardImageData
-
-> CardImageDetails UploadCardImageData(ctx, cardImageId).Body(body).Execute()
-
+# **UploadCardImageData**
+> CardImageDetails UploadCardImageData(ctx, body, cardImageId)
 Upload Card Image
 
+Upload card image data
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cardImageId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    body := os.NewFile(1234, "some_file") // *os.File | Binary image data
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.UploadCardImageData(context.Background(), cardImageId).Body(body).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.UploadCardImageData``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UploadCardImageData`: CardImageDetails
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.UploadCardImageData`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
+### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cardImageId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUploadCardImageDataRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **body** | ***os.File** | Binary image data | 
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**Object**](Object.md)| Binary image data | 
+  **cardImageId** | [**string**](.md)|  | 
 
 ### Return type
 
-[**CardImageDetails**](CardImageDetails.md)
+[**CardImageDetails**](card_image_details.md)
 
 ### Authorization
 
@@ -1213,10 +532,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: image/jpeg
-- **Accept**: application/json, application/problem+json
+ - **Content-Type**: image/jpeg
+ - **Accept**: application/json, application/problem+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
