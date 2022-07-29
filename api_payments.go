@@ -23,19 +23,19 @@ import (
 // PaymentsApiService PaymentsApi service
 type PaymentsApiService service
 
-type PaymentsApiAddTransactionOutRequest struct {
+type ApiAddTransactionOutRequest struct {
 	ctx context.Context
 	ApiService *PaymentsApiService
 	outgoingAchRequest *OutgoingAchRequest
 }
 
 // Outgoing ACH
-func (r PaymentsApiAddTransactionOutRequest) OutgoingAchRequest(outgoingAchRequest OutgoingAchRequest) PaymentsApiAddTransactionOutRequest {
+func (r ApiAddTransactionOutRequest) OutgoingAchRequest(outgoingAchRequest OutgoingAchRequest) ApiAddTransactionOutRequest {
 	r.outgoingAchRequest = &outgoingAchRequest
 	return r
 }
 
-func (r PaymentsApiAddTransactionOutRequest) Execute() (*OutgoingAch, *http.Response, error) {
+func (r ApiAddTransactionOutRequest) Execute() (*OutgoingAch, *http.Response, error) {
 	return r.ApiService.AddTransactionOutExecute(r)
 }
 
@@ -46,10 +46,10 @@ Create an outgoing ACH
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return PaymentsApiAddTransactionOutRequest
+ @return ApiAddTransactionOutRequest
 */
-func (a *PaymentsApiService) AddTransactionOut(ctx context.Context) PaymentsApiAddTransactionOutRequest {
-	return PaymentsApiAddTransactionOutRequest{
+func (a *PaymentsApiService) AddTransactionOut(ctx context.Context) ApiAddTransactionOutRequest {
+	return ApiAddTransactionOutRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -57,7 +57,7 @@ func (a *PaymentsApiService) AddTransactionOut(ctx context.Context) PaymentsApiA
 
 // Execute executes the request
 //  @return OutgoingAch
-func (a *PaymentsApiService) AddTransactionOutExecute(r PaymentsApiAddTransactionOutRequest) (*OutgoingAch, *http.Response, error) {
+func (a *PaymentsApiService) AddTransactionOutExecute(r ApiAddTransactionOutRequest) (*OutgoingAch, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -184,13 +184,13 @@ func (a *PaymentsApiService) AddTransactionOutExecute(r PaymentsApiAddTransactio
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type PaymentsApiGetTransactionOutRequest struct {
+type ApiGetTransactionOutRequest struct {
 	ctx context.Context
 	ApiService *PaymentsApiService
 	transactionId string
 }
 
-func (r PaymentsApiGetTransactionOutRequest) Execute() (*OutgoingAch, *http.Response, error) {
+func (r ApiGetTransactionOutRequest) Execute() (*OutgoingAch, *http.Response, error) {
 	return r.ApiService.GetTransactionOutExecute(r)
 }
 
@@ -201,10 +201,10 @@ Get a single outgoing ACH transaction
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param transactionId Transaction ID in the ledger
- @return PaymentsApiGetTransactionOutRequest
+ @return ApiGetTransactionOutRequest
 */
-func (a *PaymentsApiService) GetTransactionOut(ctx context.Context, transactionId string) PaymentsApiGetTransactionOutRequest {
-	return PaymentsApiGetTransactionOutRequest{
+func (a *PaymentsApiService) GetTransactionOut(ctx context.Context, transactionId string) ApiGetTransactionOutRequest {
+	return ApiGetTransactionOutRequest{
 		ApiService: a,
 		ctx: ctx,
 		transactionId: transactionId,
@@ -213,7 +213,7 @@ func (a *PaymentsApiService) GetTransactionOut(ctx context.Context, transactionI
 
 // Execute executes the request
 //  @return OutgoingAch
-func (a *PaymentsApiService) GetTransactionOutExecute(r PaymentsApiGetTransactionOutRequest) (*OutgoingAch, *http.Response, error) {
+func (a *PaymentsApiService) GetTransactionOutExecute(r ApiGetTransactionOutRequest) (*OutgoingAch, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -336,24 +336,24 @@ func (a *PaymentsApiService) GetTransactionOutExecute(r PaymentsApiGetTransactio
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type PaymentsApiListTransactionsOutRequest struct {
+type ApiListTransactionsOutRequest struct {
 	ctx context.Context
 	ApiService *PaymentsApiService
 	limit *int32
 	pageToken *string
 }
 
-func (r PaymentsApiListTransactionsOutRequest) Limit(limit int32) PaymentsApiListTransactionsOutRequest {
+func (r ApiListTransactionsOutRequest) Limit(limit int32) ApiListTransactionsOutRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r PaymentsApiListTransactionsOutRequest) PageToken(pageToken string) PaymentsApiListTransactionsOutRequest {
+func (r ApiListTransactionsOutRequest) PageToken(pageToken string) ApiListTransactionsOutRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r PaymentsApiListTransactionsOutRequest) Execute() (*OutgoingAchList, *http.Response, error) {
+func (r ApiListTransactionsOutRequest) Execute() (*OutgoingAchList, *http.Response, error) {
 	return r.ApiService.ListTransactionsOutExecute(r)
 }
 
@@ -363,10 +363,10 @@ ListTransactionsOut List outgoing ACH transactions
 List outgoing ACH transactions
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return PaymentsApiListTransactionsOutRequest
+ @return ApiListTransactionsOutRequest
 */
-func (a *PaymentsApiService) ListTransactionsOut(ctx context.Context) PaymentsApiListTransactionsOutRequest {
-	return PaymentsApiListTransactionsOutRequest{
+func (a *PaymentsApiService) ListTransactionsOut(ctx context.Context) ApiListTransactionsOutRequest {
+	return ApiListTransactionsOutRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -374,7 +374,7 @@ func (a *PaymentsApiService) ListTransactionsOut(ctx context.Context) PaymentsAp
 
 // Execute executes the request
 //  @return OutgoingAchList
-func (a *PaymentsApiService) ListTransactionsOutExecute(r PaymentsApiListTransactionsOutRequest) (*OutgoingAchList, *http.Response, error) {
+func (a *PaymentsApiService) ListTransactionsOutExecute(r ApiListTransactionsOutRequest) (*OutgoingAchList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -482,7 +482,7 @@ func (a *PaymentsApiService) ListTransactionsOutExecute(r PaymentsApiListTransac
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type PaymentsApiPatchTransactionOutRequest struct {
+type ApiPatchTransactionOutRequest struct {
 	ctx context.Context
 	ApiService *PaymentsApiService
 	transactionId string
@@ -490,12 +490,12 @@ type PaymentsApiPatchTransactionOutRequest struct {
 }
 
 // Outgoing ACH update request
-func (r PaymentsApiPatchTransactionOutRequest) OutgoingAchPatch(outgoingAchPatch OutgoingAchPatch) PaymentsApiPatchTransactionOutRequest {
+func (r ApiPatchTransactionOutRequest) OutgoingAchPatch(outgoingAchPatch OutgoingAchPatch) ApiPatchTransactionOutRequest {
 	r.outgoingAchPatch = &outgoingAchPatch
 	return r
 }
 
-func (r PaymentsApiPatchTransactionOutRequest) Execute() (*http.Response, error) {
+func (r ApiPatchTransactionOutRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PatchTransactionOutExecute(r)
 }
 
@@ -506,10 +506,10 @@ Update outgoing ACH transaction (either status or funds availability)
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param transactionId Transaction ID in the ledger
- @return PaymentsApiPatchTransactionOutRequest
+ @return ApiPatchTransactionOutRequest
 */
-func (a *PaymentsApiService) PatchTransactionOut(ctx context.Context, transactionId string) PaymentsApiPatchTransactionOutRequest {
-	return PaymentsApiPatchTransactionOutRequest{
+func (a *PaymentsApiService) PatchTransactionOut(ctx context.Context, transactionId string) ApiPatchTransactionOutRequest {
+	return ApiPatchTransactionOutRequest{
 		ApiService: a,
 		ctx: ctx,
 		transactionId: transactionId,
@@ -517,7 +517,7 @@ func (a *PaymentsApiService) PatchTransactionOut(ctx context.Context, transactio
 }
 
 // Execute executes the request
-func (a *PaymentsApiService) PatchTransactionOutExecute(r PaymentsApiPatchTransactionOutRequest) (*http.Response, error) {
+func (a *PaymentsApiService) PatchTransactionOutExecute(r ApiPatchTransactionOutRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}

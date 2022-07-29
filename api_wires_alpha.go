@@ -23,7 +23,7 @@ import (
 // WiresAlphaApiService WiresAlphaApi service
 type WiresAlphaApiService service
 
-type WiresAlphaApiCancelWireRequest struct {
+type ApiCancelWireRequest struct {
 	ctx context.Context
 	ApiService *WiresAlphaApiService
 	wireId string
@@ -31,12 +31,12 @@ type WiresAlphaApiCancelWireRequest struct {
 }
 
 // wire to update
-func (r WiresAlphaApiCancelWireRequest) UpdateTransfer(updateTransfer UpdateTransfer) WiresAlphaApiCancelWireRequest {
+func (r ApiCancelWireRequest) UpdateTransfer(updateTransfer UpdateTransfer) ApiCancelWireRequest {
 	r.updateTransfer = &updateTransfer
 	return r
 }
 
-func (r WiresAlphaApiCancelWireRequest) Execute() (*Wire, *http.Response, error) {
+func (r ApiCancelWireRequest) Execute() (*Wire, *http.Response, error) {
 	return r.ApiService.CancelWireExecute(r)
 }
 
@@ -47,10 +47,10 @@ Cancel an outgoing tranfer
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param wireId The unique identifier of a wire
- @return WiresAlphaApiCancelWireRequest
+ @return ApiCancelWireRequest
 */
-func (a *WiresAlphaApiService) CancelWire(ctx context.Context, wireId string) WiresAlphaApiCancelWireRequest {
-	return WiresAlphaApiCancelWireRequest{
+func (a *WiresAlphaApiService) CancelWire(ctx context.Context, wireId string) ApiCancelWireRequest {
+	return ApiCancelWireRequest{
 		ApiService: a,
 		ctx: ctx,
 		wireId: wireId,
@@ -59,7 +59,7 @@ func (a *WiresAlphaApiService) CancelWire(ctx context.Context, wireId string) Wi
 
 // Execute executes the request
 //  @return Wire
-func (a *WiresAlphaApiService) CancelWireExecute(r WiresAlphaApiCancelWireRequest) (*Wire, *http.Response, error) {
+func (a *WiresAlphaApiService) CancelWireExecute(r ApiCancelWireRequest) (*Wire, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -187,19 +187,19 @@ func (a *WiresAlphaApiService) CancelWireExecute(r WiresAlphaApiCancelWireReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WiresAlphaApiCreateWireRequest struct {
+type ApiCreateWireRequest struct {
 	ctx context.Context
 	ApiService *WiresAlphaApiService
 	wireRequest *WireRequest
 }
 
 // Wire transfer request
-func (r WiresAlphaApiCreateWireRequest) WireRequest(wireRequest WireRequest) WiresAlphaApiCreateWireRequest {
+func (r ApiCreateWireRequest) WireRequest(wireRequest WireRequest) ApiCreateWireRequest {
 	r.wireRequest = &wireRequest
 	return r
 }
 
-func (r WiresAlphaApiCreateWireRequest) Execute() (*Wire, *http.Response, error) {
+func (r ApiCreateWireRequest) Execute() (*Wire, *http.Response, error) {
 	return r.ApiService.CreateWireExecute(r)
 }
 
@@ -209,10 +209,10 @@ CreateWire Send a wire
 Create an outgoing wire transfer
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return WiresAlphaApiCreateWireRequest
+ @return ApiCreateWireRequest
 */
-func (a *WiresAlphaApiService) CreateWire(ctx context.Context) WiresAlphaApiCreateWireRequest {
-	return WiresAlphaApiCreateWireRequest{
+func (a *WiresAlphaApiService) CreateWire(ctx context.Context) ApiCreateWireRequest {
+	return ApiCreateWireRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -220,7 +220,7 @@ func (a *WiresAlphaApiService) CreateWire(ctx context.Context) WiresAlphaApiCrea
 
 // Execute executes the request
 //  @return Wire
-func (a *WiresAlphaApiService) CreateWireExecute(r WiresAlphaApiCreateWireRequest) (*Wire, *http.Response, error) {
+func (a *WiresAlphaApiService) CreateWireExecute(r ApiCreateWireRequest) (*Wire, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -347,13 +347,13 @@ func (a *WiresAlphaApiService) CreateWireExecute(r WiresAlphaApiCreateWireReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WiresAlphaApiGetWireRequest struct {
+type ApiGetWireRequest struct {
 	ctx context.Context
 	ApiService *WiresAlphaApiService
 	wireId string
 }
 
-func (r WiresAlphaApiGetWireRequest) Execute() (*Wire, *http.Response, error) {
+func (r ApiGetWireRequest) Execute() (*Wire, *http.Response, error) {
 	return r.ApiService.GetWireExecute(r)
 }
 
@@ -364,10 +364,10 @@ Get a wire by id
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param wireId The unique identifier of a wire
- @return WiresAlphaApiGetWireRequest
+ @return ApiGetWireRequest
 */
-func (a *WiresAlphaApiService) GetWire(ctx context.Context, wireId string) WiresAlphaApiGetWireRequest {
-	return WiresAlphaApiGetWireRequest{
+func (a *WiresAlphaApiService) GetWire(ctx context.Context, wireId string) ApiGetWireRequest {
+	return ApiGetWireRequest{
 		ApiService: a,
 		ctx: ctx,
 		wireId: wireId,
@@ -376,7 +376,7 @@ func (a *WiresAlphaApiService) GetWire(ctx context.Context, wireId string) Wires
 
 // Execute executes the request
 //  @return Wire
-func (a *WiresAlphaApiService) GetWireExecute(r WiresAlphaApiGetWireRequest) (*Wire, *http.Response, error) {
+func (a *WiresAlphaApiService) GetWireExecute(r ApiGetWireRequest) (*Wire, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -489,7 +489,7 @@ func (a *WiresAlphaApiService) GetWireExecute(r WiresAlphaApiGetWireRequest) (*W
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WiresAlphaApiListWiresRequest struct {
+type ApiListWiresRequest struct {
 	ctx context.Context
 	ApiService *WiresAlphaApiService
 	limit *int32
@@ -500,37 +500,37 @@ type WiresAlphaApiListWiresRequest struct {
 	receivingAccountId *string
 }
 
-func (r WiresAlphaApiListWiresRequest) Limit(limit int32) WiresAlphaApiListWiresRequest {
+func (r ApiListWiresRequest) Limit(limit int32) ApiListWiresRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r WiresAlphaApiListWiresRequest) PageToken(pageToken string) WiresAlphaApiListWiresRequest {
+func (r ApiListWiresRequest) PageToken(pageToken string) ApiListWiresRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r WiresAlphaApiListWiresRequest) Status(status string) WiresAlphaApiListWiresRequest {
+func (r ApiListWiresRequest) Status(status string) ApiListWiresRequest {
 	r.status = &status
 	return r
 }
 
-func (r WiresAlphaApiListWiresRequest) CustomerId(customerId string) WiresAlphaApiListWiresRequest {
+func (r ApiListWiresRequest) CustomerId(customerId string) ApiListWiresRequest {
 	r.customerId = &customerId
 	return r
 }
 
-func (r WiresAlphaApiListWiresRequest) OriginatingAccountId(originatingAccountId string) WiresAlphaApiListWiresRequest {
+func (r ApiListWiresRequest) OriginatingAccountId(originatingAccountId string) ApiListWiresRequest {
 	r.originatingAccountId = &originatingAccountId
 	return r
 }
 
-func (r WiresAlphaApiListWiresRequest) ReceivingAccountId(receivingAccountId string) WiresAlphaApiListWiresRequest {
+func (r ApiListWiresRequest) ReceivingAccountId(receivingAccountId string) ApiListWiresRequest {
 	r.receivingAccountId = &receivingAccountId
 	return r
 }
 
-func (r WiresAlphaApiListWiresRequest) Execute() (*WireList, *http.Response, error) {
+func (r ApiListWiresRequest) Execute() (*WireList, *http.Response, error) {
 	return r.ApiService.ListWiresExecute(r)
 }
 
@@ -540,10 +540,10 @@ ListWires List wires
 Get paginated list of wires
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return WiresAlphaApiListWiresRequest
+ @return ApiListWiresRequest
 */
-func (a *WiresAlphaApiService) ListWires(ctx context.Context) WiresAlphaApiListWiresRequest {
-	return WiresAlphaApiListWiresRequest{
+func (a *WiresAlphaApiService) ListWires(ctx context.Context) ApiListWiresRequest {
+	return ApiListWiresRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -551,7 +551,7 @@ func (a *WiresAlphaApiService) ListWires(ctx context.Context) WiresAlphaApiListW
 
 // Execute executes the request
 //  @return WireList
-func (a *WiresAlphaApiService) ListWiresExecute(r WiresAlphaApiListWiresRequest) (*WireList, *http.Response, error) {
+func (a *WiresAlphaApiService) ListWiresExecute(r ApiListWiresRequest) (*WireList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}

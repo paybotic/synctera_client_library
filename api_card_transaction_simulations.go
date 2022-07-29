@@ -22,19 +22,19 @@ import (
 // CardTransactionSimulationsApiService CardTransactionSimulationsApi service
 type CardTransactionSimulationsApiService service
 
-type CardTransactionSimulationsApiSimulateAuthorizationRequest struct {
+type ApiSimulateAuthorizationRequest struct {
 	ctx context.Context
 	ApiService *CardTransactionSimulationsApiService
 	authRequestModel *AuthRequestModel
 }
 
 // Authorization details
-func (r CardTransactionSimulationsApiSimulateAuthorizationRequest) AuthRequestModel(authRequestModel AuthRequestModel) CardTransactionSimulationsApiSimulateAuthorizationRequest {
+func (r ApiSimulateAuthorizationRequest) AuthRequestModel(authRequestModel AuthRequestModel) ApiSimulateAuthorizationRequest {
 	r.authRequestModel = &authRequestModel
 	return r
 }
 
-func (r CardTransactionSimulationsApiSimulateAuthorizationRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiSimulateAuthorizationRequest) Execute() (map[string]interface{}, *http.Response, error) {
 	return r.ApiService.SimulateAuthorizationExecute(r)
 }
 
@@ -45,10 +45,10 @@ Simulate an `authorization` type transaction by including the `card_token` and o
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CardTransactionSimulationsApiSimulateAuthorizationRequest
+ @return ApiSimulateAuthorizationRequest
 */
-func (a *CardTransactionSimulationsApiService) SimulateAuthorization(ctx context.Context) CardTransactionSimulationsApiSimulateAuthorizationRequest {
-	return CardTransactionSimulationsApiSimulateAuthorizationRequest{
+func (a *CardTransactionSimulationsApiService) SimulateAuthorization(ctx context.Context) ApiSimulateAuthorizationRequest {
+	return ApiSimulateAuthorizationRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -56,7 +56,7 @@ func (a *CardTransactionSimulationsApiService) SimulateAuthorization(ctx context
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *CardTransactionSimulationsApiService) SimulateAuthorizationExecute(r CardTransactionSimulationsApiSimulateAuthorizationRequest) (map[string]interface{}, *http.Response, error) {
+func (a *CardTransactionSimulationsApiService) SimulateAuthorizationExecute(r ApiSimulateAuthorizationRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -170,19 +170,19 @@ func (a *CardTransactionSimulationsApiService) SimulateAuthorizationExecute(r Ca
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type CardTransactionSimulationsApiSimulateAuthorizationAdviceRequest struct {
+type ApiSimulateAuthorizationAdviceRequest struct {
 	ctx context.Context
 	ApiService *CardTransactionSimulationsApiService
 	authorizationAdviceModel *AuthorizationAdviceModel
 }
 
 // Authorization advice details
-func (r CardTransactionSimulationsApiSimulateAuthorizationAdviceRequest) AuthorizationAdviceModel(authorizationAdviceModel AuthorizationAdviceModel) CardTransactionSimulationsApiSimulateAuthorizationAdviceRequest {
+func (r ApiSimulateAuthorizationAdviceRequest) AuthorizationAdviceModel(authorizationAdviceModel AuthorizationAdviceModel) ApiSimulateAuthorizationAdviceRequest {
 	r.authorizationAdviceModel = &authorizationAdviceModel
 	return r
 }
 
-func (r CardTransactionSimulationsApiSimulateAuthorizationAdviceRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiSimulateAuthorizationAdviceRequest) Execute() (map[string]interface{}, *http.Response, error) {
 	return r.ApiService.SimulateAuthorizationAdviceExecute(r)
 }
 
@@ -195,10 +195,10 @@ Simulate an `authorization.advice` type transaction by including the `original_t
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CardTransactionSimulationsApiSimulateAuthorizationAdviceRequest
+ @return ApiSimulateAuthorizationAdviceRequest
 */
-func (a *CardTransactionSimulationsApiService) SimulateAuthorizationAdvice(ctx context.Context) CardTransactionSimulationsApiSimulateAuthorizationAdviceRequest {
-	return CardTransactionSimulationsApiSimulateAuthorizationAdviceRequest{
+func (a *CardTransactionSimulationsApiService) SimulateAuthorizationAdvice(ctx context.Context) ApiSimulateAuthorizationAdviceRequest {
+	return ApiSimulateAuthorizationAdviceRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -206,7 +206,7 @@ func (a *CardTransactionSimulationsApiService) SimulateAuthorizationAdvice(ctx c
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *CardTransactionSimulationsApiService) SimulateAuthorizationAdviceExecute(r CardTransactionSimulationsApiSimulateAuthorizationAdviceRequest) (map[string]interface{}, *http.Response, error) {
+func (a *CardTransactionSimulationsApiService) SimulateAuthorizationAdviceExecute(r ApiSimulateAuthorizationAdviceRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -320,19 +320,19 @@ func (a *CardTransactionSimulationsApiService) SimulateAuthorizationAdviceExecut
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type CardTransactionSimulationsApiSimulateBalanceInquiryRequest struct {
+type ApiSimulateBalanceInquiryRequest struct {
 	ctx context.Context
 	ApiService *CardTransactionSimulationsApiService
 	balanceInquiryRequestModel *BalanceInquiryRequestModel
 }
 
 // Balance inquiry details
-func (r CardTransactionSimulationsApiSimulateBalanceInquiryRequest) BalanceInquiryRequestModel(balanceInquiryRequestModel BalanceInquiryRequestModel) CardTransactionSimulationsApiSimulateBalanceInquiryRequest {
+func (r ApiSimulateBalanceInquiryRequest) BalanceInquiryRequestModel(balanceInquiryRequestModel BalanceInquiryRequestModel) ApiSimulateBalanceInquiryRequest {
 	r.balanceInquiryRequestModel = &balanceInquiryRequestModel
 	return r
 }
 
-func (r CardTransactionSimulationsApiSimulateBalanceInquiryRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiSimulateBalanceInquiryRequest) Execute() (map[string]interface{}, *http.Response, error) {
 	return r.ApiService.SimulateBalanceInquiryExecute(r)
 }
 
@@ -343,10 +343,10 @@ Simulate a `pindebit.balanceinquiry` type transaction by sending a POST request 
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CardTransactionSimulationsApiSimulateBalanceInquiryRequest
+ @return ApiSimulateBalanceInquiryRequest
 */
-func (a *CardTransactionSimulationsApiService) SimulateBalanceInquiry(ctx context.Context) CardTransactionSimulationsApiSimulateBalanceInquiryRequest {
-	return CardTransactionSimulationsApiSimulateBalanceInquiryRequest{
+func (a *CardTransactionSimulationsApiService) SimulateBalanceInquiry(ctx context.Context) ApiSimulateBalanceInquiryRequest {
+	return ApiSimulateBalanceInquiryRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -354,7 +354,7 @@ func (a *CardTransactionSimulationsApiService) SimulateBalanceInquiry(ctx contex
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *CardTransactionSimulationsApiService) SimulateBalanceInquiryExecute(r CardTransactionSimulationsApiSimulateBalanceInquiryRequest) (map[string]interface{}, *http.Response, error) {
+func (a *CardTransactionSimulationsApiService) SimulateBalanceInquiryExecute(r ApiSimulateBalanceInquiryRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -471,19 +471,19 @@ func (a *CardTransactionSimulationsApiService) SimulateBalanceInquiryExecute(r C
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type CardTransactionSimulationsApiSimulateClearingRequest struct {
+type ApiSimulateClearingRequest struct {
 	ctx context.Context
 	ApiService *CardTransactionSimulationsApiService
 	clearingModel *ClearingModel
 }
 
 // Transaction clearing or refund details
-func (r CardTransactionSimulationsApiSimulateClearingRequest) ClearingModel(clearingModel ClearingModel) CardTransactionSimulationsApiSimulateClearingRequest {
+func (r ApiSimulateClearingRequest) ClearingModel(clearingModel ClearingModel) ApiSimulateClearingRequest {
 	r.clearingModel = &clearingModel
 	return r
 }
 
-func (r CardTransactionSimulationsApiSimulateClearingRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiSimulateClearingRequest) Execute() (map[string]interface{}, *http.Response, error) {
 	return r.ApiService.SimulateClearingExecute(r)
 }
 
@@ -494,10 +494,10 @@ Simulate an `authorization.clearing` type transaction by including the `original
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CardTransactionSimulationsApiSimulateClearingRequest
+ @return ApiSimulateClearingRequest
 */
-func (a *CardTransactionSimulationsApiService) SimulateClearing(ctx context.Context) CardTransactionSimulationsApiSimulateClearingRequest {
-	return CardTransactionSimulationsApiSimulateClearingRequest{
+func (a *CardTransactionSimulationsApiService) SimulateClearing(ctx context.Context) ApiSimulateClearingRequest {
+	return ApiSimulateClearingRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -505,7 +505,7 @@ func (a *CardTransactionSimulationsApiService) SimulateClearing(ctx context.Cont
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *CardTransactionSimulationsApiService) SimulateClearingExecute(r CardTransactionSimulationsApiSimulateClearingRequest) (map[string]interface{}, *http.Response, error) {
+func (a *CardTransactionSimulationsApiService) SimulateClearingExecute(r ApiSimulateClearingRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -619,19 +619,19 @@ func (a *CardTransactionSimulationsApiService) SimulateClearingExecute(r CardTra
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type CardTransactionSimulationsApiSimulateFinancialRequest struct {
+type ApiSimulateFinancialRequest struct {
 	ctx context.Context
 	ApiService *CardTransactionSimulationsApiService
 	financialRequestModel *FinancialRequestModel
 }
 
 // Financial details
-func (r CardTransactionSimulationsApiSimulateFinancialRequest) FinancialRequestModel(financialRequestModel FinancialRequestModel) CardTransactionSimulationsApiSimulateFinancialRequest {
+func (r ApiSimulateFinancialRequest) FinancialRequestModel(financialRequestModel FinancialRequestModel) ApiSimulateFinancialRequest {
 	r.financialRequestModel = &financialRequestModel
 	return r
 }
 
-func (r CardTransactionSimulationsApiSimulateFinancialRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiSimulateFinancialRequest) Execute() (map[string]interface{}, *http.Response, error) {
 	return r.ApiService.SimulateFinancialExecute(r)
 }
 
@@ -644,10 +644,10 @@ Simulate a `pindebit` type transaction by including the `card_token` and `amount
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CardTransactionSimulationsApiSimulateFinancialRequest
+ @return ApiSimulateFinancialRequest
 */
-func (a *CardTransactionSimulationsApiService) SimulateFinancial(ctx context.Context) CardTransactionSimulationsApiSimulateFinancialRequest {
-	return CardTransactionSimulationsApiSimulateFinancialRequest{
+func (a *CardTransactionSimulationsApiService) SimulateFinancial(ctx context.Context) ApiSimulateFinancialRequest {
+	return ApiSimulateFinancialRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -655,7 +655,7 @@ func (a *CardTransactionSimulationsApiService) SimulateFinancial(ctx context.Con
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *CardTransactionSimulationsApiService) SimulateFinancialExecute(r CardTransactionSimulationsApiSimulateFinancialRequest) (map[string]interface{}, *http.Response, error) {
+func (a *CardTransactionSimulationsApiService) SimulateFinancialExecute(r ApiSimulateFinancialRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -772,19 +772,19 @@ func (a *CardTransactionSimulationsApiService) SimulateFinancialExecute(r CardTr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type CardTransactionSimulationsApiSimulateFinancialAdviceRequest struct {
+type ApiSimulateFinancialAdviceRequest struct {
 	ctx context.Context
 	ApiService *CardTransactionSimulationsApiService
 	authorizationAdviceModel *AuthorizationAdviceModel
 }
 
 // Financial advice details
-func (r CardTransactionSimulationsApiSimulateFinancialAdviceRequest) AuthorizationAdviceModel(authorizationAdviceModel AuthorizationAdviceModel) CardTransactionSimulationsApiSimulateFinancialAdviceRequest {
+func (r ApiSimulateFinancialAdviceRequest) AuthorizationAdviceModel(authorizationAdviceModel AuthorizationAdviceModel) ApiSimulateFinancialAdviceRequest {
 	r.authorizationAdviceModel = &authorizationAdviceModel
 	return r
 }
 
-func (r CardTransactionSimulationsApiSimulateFinancialAdviceRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiSimulateFinancialAdviceRequest) Execute() (map[string]interface{}, *http.Response, error) {
 	return r.ApiService.SimulateFinancialAdviceExecute(r)
 }
 
@@ -795,10 +795,10 @@ Simulate a financial advice by including the `original_transaction_token` and ot
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CardTransactionSimulationsApiSimulateFinancialAdviceRequest
+ @return ApiSimulateFinancialAdviceRequest
 */
-func (a *CardTransactionSimulationsApiService) SimulateFinancialAdvice(ctx context.Context) CardTransactionSimulationsApiSimulateFinancialAdviceRequest {
-	return CardTransactionSimulationsApiSimulateFinancialAdviceRequest{
+func (a *CardTransactionSimulationsApiService) SimulateFinancialAdvice(ctx context.Context) ApiSimulateFinancialAdviceRequest {
+	return ApiSimulateFinancialAdviceRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -806,7 +806,7 @@ func (a *CardTransactionSimulationsApiService) SimulateFinancialAdvice(ctx conte
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *CardTransactionSimulationsApiService) SimulateFinancialAdviceExecute(r CardTransactionSimulationsApiSimulateFinancialAdviceRequest) (map[string]interface{}, *http.Response, error) {
+func (a *CardTransactionSimulationsApiService) SimulateFinancialAdviceExecute(r ApiSimulateFinancialAdviceRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -923,19 +923,19 @@ func (a *CardTransactionSimulationsApiService) SimulateFinancialAdviceExecute(r 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type CardTransactionSimulationsApiSimulateOriginalCreditRequest struct {
+type ApiSimulateOriginalCreditRequest struct {
 	ctx context.Context
 	ApiService *CardTransactionSimulationsApiService
 	originalCreditRequestModel *OriginalCreditRequestModel
 }
 
 // OCT details
-func (r CardTransactionSimulationsApiSimulateOriginalCreditRequest) OriginalCreditRequestModel(originalCreditRequestModel OriginalCreditRequestModel) CardTransactionSimulationsApiSimulateOriginalCreditRequest {
+func (r ApiSimulateOriginalCreditRequest) OriginalCreditRequestModel(originalCreditRequestModel OriginalCreditRequestModel) ApiSimulateOriginalCreditRequest {
 	r.originalCreditRequestModel = &originalCreditRequestModel
 	return r
 }
 
-func (r CardTransactionSimulationsApiSimulateOriginalCreditRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiSimulateOriginalCreditRequest) Execute() (map[string]interface{}, *http.Response, error) {
 	return r.ApiService.SimulateOriginalCreditExecute(r)
 }
 
@@ -948,10 +948,10 @@ Simulate an OCT by including the `card_token`, `amount`, `mid`, and `type` in yo
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CardTransactionSimulationsApiSimulateOriginalCreditRequest
+ @return ApiSimulateOriginalCreditRequest
 */
-func (a *CardTransactionSimulationsApiService) SimulateOriginalCredit(ctx context.Context) CardTransactionSimulationsApiSimulateOriginalCreditRequest {
-	return CardTransactionSimulationsApiSimulateOriginalCreditRequest{
+func (a *CardTransactionSimulationsApiService) SimulateOriginalCredit(ctx context.Context) ApiSimulateOriginalCreditRequest {
+	return ApiSimulateOriginalCreditRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -959,7 +959,7 @@ func (a *CardTransactionSimulationsApiService) SimulateOriginalCredit(ctx contex
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *CardTransactionSimulationsApiService) SimulateOriginalCreditExecute(r CardTransactionSimulationsApiSimulateOriginalCreditRequest) (map[string]interface{}, *http.Response, error) {
+func (a *CardTransactionSimulationsApiService) SimulateOriginalCreditExecute(r ApiSimulateOriginalCreditRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1076,19 +1076,19 @@ func (a *CardTransactionSimulationsApiService) SimulateOriginalCreditExecute(r C
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type CardTransactionSimulationsApiSimulateReversalRequest struct {
+type ApiSimulateReversalRequest struct {
 	ctx context.Context
 	ApiService *CardTransactionSimulationsApiService
 	reversalModel *ReversalModel
 }
 
 // Reversal details
-func (r CardTransactionSimulationsApiSimulateReversalRequest) ReversalModel(reversalModel ReversalModel) CardTransactionSimulationsApiSimulateReversalRequest {
+func (r ApiSimulateReversalRequest) ReversalModel(reversalModel ReversalModel) ApiSimulateReversalRequest {
 	r.reversalModel = &reversalModel
 	return r
 }
 
-func (r CardTransactionSimulationsApiSimulateReversalRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiSimulateReversalRequest) Execute() (map[string]interface{}, *http.Response, error) {
 	return r.ApiService.SimulateReversalExecute(r)
 }
 
@@ -1101,10 +1101,10 @@ Simulate an `authorization.reversal` type transaction by including the `original
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CardTransactionSimulationsApiSimulateReversalRequest
+ @return ApiSimulateReversalRequest
 */
-func (a *CardTransactionSimulationsApiService) SimulateReversal(ctx context.Context) CardTransactionSimulationsApiSimulateReversalRequest {
-	return CardTransactionSimulationsApiSimulateReversalRequest{
+func (a *CardTransactionSimulationsApiService) SimulateReversal(ctx context.Context) ApiSimulateReversalRequest {
+	return ApiSimulateReversalRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1112,7 +1112,7 @@ func (a *CardTransactionSimulationsApiService) SimulateReversal(ctx context.Cont
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *CardTransactionSimulationsApiService) SimulateReversalExecute(r CardTransactionSimulationsApiSimulateReversalRequest) (map[string]interface{}, *http.Response, error) {
+func (a *CardTransactionSimulationsApiService) SimulateReversalExecute(r ApiSimulateReversalRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1229,19 +1229,19 @@ func (a *CardTransactionSimulationsApiService) SimulateReversalExecute(r CardTra
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type CardTransactionSimulationsApiSimulateWithdrawalRequest struct {
+type ApiSimulateWithdrawalRequest struct {
 	ctx context.Context
 	ApiService *CardTransactionSimulationsApiService
 	withdrawalRequestModel *WithdrawalRequestModel
 }
 
 // ATM withdrawal details
-func (r CardTransactionSimulationsApiSimulateWithdrawalRequest) WithdrawalRequestModel(withdrawalRequestModel WithdrawalRequestModel) CardTransactionSimulationsApiSimulateWithdrawalRequest {
+func (r ApiSimulateWithdrawalRequest) WithdrawalRequestModel(withdrawalRequestModel WithdrawalRequestModel) ApiSimulateWithdrawalRequest {
 	r.withdrawalRequestModel = &withdrawalRequestModel
 	return r
 }
 
-func (r CardTransactionSimulationsApiSimulateWithdrawalRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiSimulateWithdrawalRequest) Execute() (map[string]interface{}, *http.Response, error) {
 	return r.ApiService.SimulateWithdrawalExecute(r)
 }
 
@@ -1252,10 +1252,10 @@ Simulate a `pindebit.atm.withdrawal` type transaction by including the `card_tok
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CardTransactionSimulationsApiSimulateWithdrawalRequest
+ @return ApiSimulateWithdrawalRequest
 */
-func (a *CardTransactionSimulationsApiService) SimulateWithdrawal(ctx context.Context) CardTransactionSimulationsApiSimulateWithdrawalRequest {
-	return CardTransactionSimulationsApiSimulateWithdrawalRequest{
+func (a *CardTransactionSimulationsApiService) SimulateWithdrawal(ctx context.Context) ApiSimulateWithdrawalRequest {
+	return ApiSimulateWithdrawalRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1263,7 +1263,7 @@ func (a *CardTransactionSimulationsApiService) SimulateWithdrawal(ctx context.Co
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *CardTransactionSimulationsApiService) SimulateWithdrawalExecute(r CardTransactionSimulationsApiSimulateWithdrawalRequest) (map[string]interface{}, *http.Response, error) {
+func (a *CardTransactionSimulationsApiService) SimulateWithdrawalExecute(r ApiSimulateWithdrawalRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

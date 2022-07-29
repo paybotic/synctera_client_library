@@ -23,19 +23,19 @@ import (
 // ReconciliationsApiService ReconciliationsApi service
 type ReconciliationsApiService service
 
-type ReconciliationsApiCreateReconciliationRequest struct {
+type ApiCreateReconciliationRequest struct {
 	ctx context.Context
 	ApiService *ReconciliationsApiService
 	reconciliationInput *ReconciliationInput
 }
 
 // Reconciliation to perform
-func (r ReconciliationsApiCreateReconciliationRequest) ReconciliationInput(reconciliationInput ReconciliationInput) ReconciliationsApiCreateReconciliationRequest {
+func (r ApiCreateReconciliationRequest) ReconciliationInput(reconciliationInput ReconciliationInput) ApiCreateReconciliationRequest {
 	r.reconciliationInput = &reconciliationInput
 	return r
 }
 
-func (r ReconciliationsApiCreateReconciliationRequest) Execute() (*Reconciliation, *http.Response, error) {
+func (r ApiCreateReconciliationRequest) Execute() (*Reconciliation, *http.Response, error) {
 	return r.ApiService.CreateReconciliationExecute(r)
 }
 
@@ -46,10 +46,10 @@ Create a new reconciliation job
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ReconciliationsApiCreateReconciliationRequest
+ @return ApiCreateReconciliationRequest
 */
-func (a *ReconciliationsApiService) CreateReconciliation(ctx context.Context) ReconciliationsApiCreateReconciliationRequest {
-	return ReconciliationsApiCreateReconciliationRequest{
+func (a *ReconciliationsApiService) CreateReconciliation(ctx context.Context) ApiCreateReconciliationRequest {
+	return ApiCreateReconciliationRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -57,7 +57,7 @@ func (a *ReconciliationsApiService) CreateReconciliation(ctx context.Context) Re
 
 // Execute executes the request
 //  @return Reconciliation
-func (a *ReconciliationsApiService) CreateReconciliationExecute(r ReconciliationsApiCreateReconciliationRequest) (*Reconciliation, *http.Response, error) {
+func (a *ReconciliationsApiService) CreateReconciliationExecute(r ApiCreateReconciliationRequest) (*Reconciliation, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -171,13 +171,13 @@ func (a *ReconciliationsApiService) CreateReconciliationExecute(r Reconciliation
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ReconciliationsApiGetReconciliationRequest struct {
+type ApiGetReconciliationRequest struct {
 	ctx context.Context
 	ApiService *ReconciliationsApiService
 	reconciliationId string
 }
 
-func (r ReconciliationsApiGetReconciliationRequest) Execute() (*Reconciliation, *http.Response, error) {
+func (r ApiGetReconciliationRequest) Execute() (*Reconciliation, *http.Response, error) {
 	return r.ApiService.GetReconciliationExecute(r)
 }
 
@@ -188,10 +188,10 @@ Retrieves one reconciliation by id
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param reconciliationId Reconciliation id
- @return ReconciliationsApiGetReconciliationRequest
+ @return ApiGetReconciliationRequest
 */
-func (a *ReconciliationsApiService) GetReconciliation(ctx context.Context, reconciliationId string) ReconciliationsApiGetReconciliationRequest {
-	return ReconciliationsApiGetReconciliationRequest{
+func (a *ReconciliationsApiService) GetReconciliation(ctx context.Context, reconciliationId string) ApiGetReconciliationRequest {
+	return ApiGetReconciliationRequest{
 		ApiService: a,
 		ctx: ctx,
 		reconciliationId: reconciliationId,
@@ -200,7 +200,7 @@ func (a *ReconciliationsApiService) GetReconciliation(ctx context.Context, recon
 
 // Execute executes the request
 //  @return Reconciliation
-func (a *ReconciliationsApiService) GetReconciliationExecute(r ReconciliationsApiGetReconciliationRequest) (*Reconciliation, *http.Response, error) {
+func (a *ReconciliationsApiService) GetReconciliationExecute(r ApiGetReconciliationRequest) (*Reconciliation, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -303,24 +303,24 @@ func (a *ReconciliationsApiService) GetReconciliationExecute(r ReconciliationsAp
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ReconciliationsApiListReconciliationsRequest struct {
+type ApiListReconciliationsRequest struct {
 	ctx context.Context
 	ApiService *ReconciliationsApiService
 	limit *int32
 	pageToken *string
 }
 
-func (r ReconciliationsApiListReconciliationsRequest) Limit(limit int32) ReconciliationsApiListReconciliationsRequest {
+func (r ApiListReconciliationsRequest) Limit(limit int32) ApiListReconciliationsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ReconciliationsApiListReconciliationsRequest) PageToken(pageToken string) ReconciliationsApiListReconciliationsRequest {
+func (r ApiListReconciliationsRequest) PageToken(pageToken string) ApiListReconciliationsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ReconciliationsApiListReconciliationsRequest) Execute() (*ReconciliationList, *http.Response, error) {
+func (r ApiListReconciliationsRequest) Execute() (*ReconciliationList, *http.Response, error) {
 	return r.ApiService.ListReconciliationsExecute(r)
 }
 
@@ -330,10 +330,10 @@ ListReconciliations List reconciliations
 Retrieves paginated list of reconciliations
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ReconciliationsApiListReconciliationsRequest
+ @return ApiListReconciliationsRequest
 */
-func (a *ReconciliationsApiService) ListReconciliations(ctx context.Context) ReconciliationsApiListReconciliationsRequest {
-	return ReconciliationsApiListReconciliationsRequest{
+func (a *ReconciliationsApiService) ListReconciliations(ctx context.Context) ApiListReconciliationsRequest {
+	return ApiListReconciliationsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -341,7 +341,7 @@ func (a *ReconciliationsApiService) ListReconciliations(ctx context.Context) Rec
 
 // Execute executes the request
 //  @return ReconciliationList
-func (a *ReconciliationsApiService) ListReconciliationsExecute(r ReconciliationsApiListReconciliationsRequest) (*ReconciliationList, *http.Response, error) {
+func (a *ReconciliationsApiService) ListReconciliationsExecute(r ApiListReconciliationsRequest) (*ReconciliationList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}

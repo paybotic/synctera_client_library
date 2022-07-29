@@ -24,12 +24,12 @@ import (
 // WebhooksApiService WebhooksApi service
 type WebhooksApiService service
 
-type WebhooksApiCreateSecretRequest struct {
+type ApiCreateSecretRequest struct {
 	ctx context.Context
 	ApiService *WebhooksApiService
 }
 
-func (r WebhooksApiCreateSecretRequest) Execute() (*CreateSecret201Response, *http.Response, error) {
+func (r ApiCreateSecretRequest) Execute() (*CreateSecret201Response, *http.Response, error) {
 	return r.ApiService.CreateSecretExecute(r)
 }
 
@@ -39,10 +39,10 @@ CreateSecret Create a secret
 Create a webhook secret. The secret will be used to verify all subsequent webhook request signature.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return WebhooksApiCreateSecretRequest
+ @return ApiCreateSecretRequest
 */
-func (a *WebhooksApiService) CreateSecret(ctx context.Context) WebhooksApiCreateSecretRequest {
-	return WebhooksApiCreateSecretRequest{
+func (a *WebhooksApiService) CreateSecret(ctx context.Context) ApiCreateSecretRequest {
+	return ApiCreateSecretRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -50,7 +50,7 @@ func (a *WebhooksApiService) CreateSecret(ctx context.Context) WebhooksApiCreate
 
 // Execute executes the request
 //  @return CreateSecret201Response
-func (a *WebhooksApiService) CreateSecretExecute(r WebhooksApiCreateSecretRequest) (*CreateSecret201Response, *http.Response, error) {
+func (a *WebhooksApiService) CreateSecretExecute(r ApiCreateSecretRequest) (*CreateSecret201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -152,19 +152,19 @@ func (a *WebhooksApiService) CreateSecretExecute(r WebhooksApiCreateSecretReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksApiCreateWebhook1Request struct {
+type ApiCreateWebhook1Request struct {
 	ctx context.Context
 	ApiService *WebhooksApiService
 	webhook *Webhook
 }
 
 // Webhook to create
-func (r WebhooksApiCreateWebhook1Request) Webhook(webhook Webhook) WebhooksApiCreateWebhook1Request {
+func (r ApiCreateWebhook1Request) Webhook(webhook Webhook) ApiCreateWebhook1Request {
 	r.webhook = &webhook
 	return r
 }
 
-func (r WebhooksApiCreateWebhook1Request) Execute() (*Webhook, *http.Response, error) {
+func (r ApiCreateWebhook1Request) Execute() (*Webhook, *http.Response, error) {
 	return r.ApiService.CreateWebhook1Execute(r)
 }
 
@@ -174,10 +174,10 @@ CreateWebhook1 Create a webhook
 Create a webhook
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return WebhooksApiCreateWebhook1Request
+ @return ApiCreateWebhook1Request
 */
-func (a *WebhooksApiService) CreateWebhook1(ctx context.Context) WebhooksApiCreateWebhook1Request {
-	return WebhooksApiCreateWebhook1Request{
+func (a *WebhooksApiService) CreateWebhook1(ctx context.Context) ApiCreateWebhook1Request {
+	return ApiCreateWebhook1Request{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -185,7 +185,7 @@ func (a *WebhooksApiService) CreateWebhook1(ctx context.Context) WebhooksApiCrea
 
 // Execute executes the request
 //  @return Webhook
-func (a *WebhooksApiService) CreateWebhook1Execute(r WebhooksApiCreateWebhook1Request) (*Webhook, *http.Response, error) {
+func (a *WebhooksApiService) CreateWebhook1Execute(r ApiCreateWebhook1Request) (*Webhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -282,13 +282,13 @@ func (a *WebhooksApiService) CreateWebhook1Execute(r WebhooksApiCreateWebhook1Re
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksApiDeleteWebhookRequest struct {
+type ApiDeleteWebhookRequest struct {
 	ctx context.Context
 	ApiService *WebhooksApiService
 	webhookId string
 }
 
-func (r WebhooksApiDeleteWebhookRequest) Execute() (*DeleteResponse, *http.Response, error) {
+func (r ApiDeleteWebhookRequest) Execute() (*DeleteResponse, *http.Response, error) {
 	return r.ApiService.DeleteWebhookExecute(r)
 }
 
@@ -299,10 +299,10 @@ Delete a webhook
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param webhookId Webhook ID
- @return WebhooksApiDeleteWebhookRequest
+ @return ApiDeleteWebhookRequest
 */
-func (a *WebhooksApiService) DeleteWebhook(ctx context.Context, webhookId string) WebhooksApiDeleteWebhookRequest {
-	return WebhooksApiDeleteWebhookRequest{
+func (a *WebhooksApiService) DeleteWebhook(ctx context.Context, webhookId string) ApiDeleteWebhookRequest {
+	return ApiDeleteWebhookRequest{
 		ApiService: a,
 		ctx: ctx,
 		webhookId: webhookId,
@@ -311,7 +311,7 @@ func (a *WebhooksApiService) DeleteWebhook(ctx context.Context, webhookId string
 
 // Execute executes the request
 //  @return DeleteResponse
-func (a *WebhooksApiService) DeleteWebhookExecute(r WebhooksApiDeleteWebhookRequest) (*DeleteResponse, *http.Response, error) {
+func (a *WebhooksApiService) DeleteWebhookExecute(r ApiDeleteWebhookRequest) (*DeleteResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -414,14 +414,14 @@ func (a *WebhooksApiService) DeleteWebhookExecute(r WebhooksApiDeleteWebhookRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksApiGetEventRequest struct {
+type ApiGetEventRequest struct {
 	ctx context.Context
 	ApiService *WebhooksApiService
 	webhookId string
 	eventId string
 }
 
-func (r WebhooksApiGetEventRequest) Execute() (*Event, *http.Response, error) {
+func (r ApiGetEventRequest) Execute() (*Event, *http.Response, error) {
 	return r.ApiService.GetEventExecute(r)
 }
 
@@ -433,10 +433,10 @@ Get webhook event by ID
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param webhookId Webhook ID
  @param eventId Webhook event ID
- @return WebhooksApiGetEventRequest
+ @return ApiGetEventRequest
 */
-func (a *WebhooksApiService) GetEvent(ctx context.Context, webhookId string, eventId string) WebhooksApiGetEventRequest {
-	return WebhooksApiGetEventRequest{
+func (a *WebhooksApiService) GetEvent(ctx context.Context, webhookId string, eventId string) ApiGetEventRequest {
+	return ApiGetEventRequest{
 		ApiService: a,
 		ctx: ctx,
 		webhookId: webhookId,
@@ -446,7 +446,7 @@ func (a *WebhooksApiService) GetEvent(ctx context.Context, webhookId string, eve
 
 // Execute executes the request
 //  @return Event
-func (a *WebhooksApiService) GetEventExecute(r WebhooksApiGetEventRequest) (*Event, *http.Response, error) {
+func (a *WebhooksApiService) GetEventExecute(r ApiGetEventRequest) (*Event, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -550,13 +550,13 @@ func (a *WebhooksApiService) GetEventExecute(r WebhooksApiGetEventRequest) (*Eve
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksApiGetWebhook1Request struct {
+type ApiGetWebhook1Request struct {
 	ctx context.Context
 	ApiService *WebhooksApiService
 	webhookId string
 }
 
-func (r WebhooksApiGetWebhook1Request) Execute() (*Webhook, *http.Response, error) {
+func (r ApiGetWebhook1Request) Execute() (*Webhook, *http.Response, error) {
 	return r.ApiService.GetWebhook1Execute(r)
 }
 
@@ -567,10 +567,10 @@ Get a webhook
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param webhookId Webhook ID
- @return WebhooksApiGetWebhook1Request
+ @return ApiGetWebhook1Request
 */
-func (a *WebhooksApiService) GetWebhook1(ctx context.Context, webhookId string) WebhooksApiGetWebhook1Request {
-	return WebhooksApiGetWebhook1Request{
+func (a *WebhooksApiService) GetWebhook1(ctx context.Context, webhookId string) ApiGetWebhook1Request {
+	return ApiGetWebhook1Request{
 		ApiService: a,
 		ctx: ctx,
 		webhookId: webhookId,
@@ -579,7 +579,7 @@ func (a *WebhooksApiService) GetWebhook1(ctx context.Context, webhookId string) 
 
 // Execute executes the request
 //  @return Webhook
-func (a *WebhooksApiService) GetWebhook1Execute(r WebhooksApiGetWebhook1Request) (*Webhook, *http.Response, error) {
+func (a *WebhooksApiService) GetWebhook1Execute(r ApiGetWebhook1Request) (*Webhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -682,7 +682,7 @@ func (a *WebhooksApiService) GetWebhook1Execute(r WebhooksApiGetWebhook1Request)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksApiListEventsRequest struct {
+type ApiListEventsRequest struct {
 	ctx context.Context
 	ApiService *WebhooksApiService
 	webhookId string
@@ -696,41 +696,41 @@ type WebhooksApiListEventsRequest struct {
 
 // Start date of date range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.. start_date is alias of start_time and is deprecated. Please use start_time instead.
 // Deprecated
-func (r WebhooksApiListEventsRequest) StartDate(startDate string) WebhooksApiListEventsRequest {
+func (r ApiListEventsRequest) StartDate(startDate string) ApiListEventsRequest {
 	r.startDate = &startDate
 	return r
 }
 
 // End date of date range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.. end_date is alias of end_time and is deprecated. Please use end_time instead.
 // Deprecated
-func (r WebhooksApiListEventsRequest) EndDate(endDate string) WebhooksApiListEventsRequest {
+func (r ApiListEventsRequest) EndDate(endDate string) ApiListEventsRequest {
 	r.endDate = &endDate
 	return r
 }
 
 // Start time of date-time range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.
-func (r WebhooksApiListEventsRequest) StartTime(startTime time.Time) WebhooksApiListEventsRequest {
+func (r ApiListEventsRequest) StartTime(startTime time.Time) ApiListEventsRequest {
 	r.startTime = &startTime
 	return r
 }
 
 // End time of date-time range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.
-func (r WebhooksApiListEventsRequest) EndTime(endTime time.Time) WebhooksApiListEventsRequest {
+func (r ApiListEventsRequest) EndTime(endTime time.Time) ApiListEventsRequest {
 	r.endTime = &endTime
 	return r
 }
 
-func (r WebhooksApiListEventsRequest) Limit(limit int32) WebhooksApiListEventsRequest {
+func (r ApiListEventsRequest) Limit(limit int32) ApiListEventsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r WebhooksApiListEventsRequest) PageToken(pageToken string) WebhooksApiListEventsRequest {
+func (r ApiListEventsRequest) PageToken(pageToken string) ApiListEventsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r WebhooksApiListEventsRequest) Execute() (*EventList, *http.Response, error) {
+func (r ApiListEventsRequest) Execute() (*EventList, *http.Response, error) {
 	return r.ApiService.ListEventsExecute(r)
 }
 
@@ -741,10 +741,10 @@ List webhook events. This response will not associate with the event response hi
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param webhookId Webhook ID
- @return WebhooksApiListEventsRequest
+ @return ApiListEventsRequest
 */
-func (a *WebhooksApiService) ListEvents(ctx context.Context, webhookId string) WebhooksApiListEventsRequest {
-	return WebhooksApiListEventsRequest{
+func (a *WebhooksApiService) ListEvents(ctx context.Context, webhookId string) ApiListEventsRequest {
+	return ApiListEventsRequest{
 		ApiService: a,
 		ctx: ctx,
 		webhookId: webhookId,
@@ -753,7 +753,7 @@ func (a *WebhooksApiService) ListEvents(ctx context.Context, webhookId string) W
 
 // Execute executes the request
 //  @return EventList
-func (a *WebhooksApiService) ListEventsExecute(r WebhooksApiListEventsRequest) (*EventList, *http.Response, error) {
+func (a *WebhooksApiService) ListEventsExecute(r ApiListEventsRequest) (*EventList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -864,7 +864,7 @@ func (a *WebhooksApiService) ListEventsExecute(r WebhooksApiListEventsRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksApiListWebhooks1Request struct {
+type ApiListWebhooks1Request struct {
 	ctx context.Context
 	ApiService *WebhooksApiService
 	limit *int32
@@ -872,22 +872,22 @@ type WebhooksApiListWebhooks1Request struct {
 	isEnabledOnly *bool
 }
 
-func (r WebhooksApiListWebhooks1Request) Limit(limit int32) WebhooksApiListWebhooks1Request {
+func (r ApiListWebhooks1Request) Limit(limit int32) ApiListWebhooks1Request {
 	r.limit = &limit
 	return r
 }
 
-func (r WebhooksApiListWebhooks1Request) PageToken(pageToken string) WebhooksApiListWebhooks1Request {
+func (r ApiListWebhooks1Request) PageToken(pageToken string) ApiListWebhooks1Request {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r WebhooksApiListWebhooks1Request) IsEnabledOnly(isEnabledOnly bool) WebhooksApiListWebhooks1Request {
+func (r ApiListWebhooks1Request) IsEnabledOnly(isEnabledOnly bool) ApiListWebhooks1Request {
 	r.isEnabledOnly = &isEnabledOnly
 	return r
 }
 
-func (r WebhooksApiListWebhooks1Request) Execute() (*WebhookList, *http.Response, error) {
+func (r ApiListWebhooks1Request) Execute() (*WebhookList, *http.Response, error) {
 	return r.ApiService.ListWebhooks1Execute(r)
 }
 
@@ -897,10 +897,10 @@ ListWebhooks1 List webhooks
 List all webhooks
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return WebhooksApiListWebhooks1Request
+ @return ApiListWebhooks1Request
 */
-func (a *WebhooksApiService) ListWebhooks1(ctx context.Context) WebhooksApiListWebhooks1Request {
-	return WebhooksApiListWebhooks1Request{
+func (a *WebhooksApiService) ListWebhooks1(ctx context.Context) ApiListWebhooks1Request {
+	return ApiListWebhooks1Request{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -908,7 +908,7 @@ func (a *WebhooksApiService) ListWebhooks1(ctx context.Context) WebhooksApiListW
 
 // Execute executes the request
 //  @return WebhookList
-func (a *WebhooksApiService) ListWebhooks1Execute(r WebhooksApiListWebhooks1Request) (*WebhookList, *http.Response, error) {
+func (a *WebhooksApiService) ListWebhooks1Execute(r ApiListWebhooks1Request) (*WebhookList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1009,18 +1009,18 @@ func (a *WebhooksApiService) ListWebhooks1Execute(r WebhooksApiListWebhooks1Requ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksApiReplaceSecretRequest struct {
+type ApiReplaceSecretRequest struct {
 	ctx context.Context
 	ApiService *WebhooksApiService
 	replaceSecretRequest *ReplaceSecretRequest
 }
 
-func (r WebhooksApiReplaceSecretRequest) ReplaceSecretRequest(replaceSecretRequest ReplaceSecretRequest) WebhooksApiReplaceSecretRequest {
+func (r ApiReplaceSecretRequest) ReplaceSecretRequest(replaceSecretRequest ReplaceSecretRequest) ApiReplaceSecretRequest {
 	r.replaceSecretRequest = &replaceSecretRequest
 	return r
 }
 
-func (r WebhooksApiReplaceSecretRequest) Execute() (*ReplaceSecret200Response, *http.Response, error) {
+func (r ApiReplaceSecretRequest) Execute() (*ReplaceSecret200Response, *http.Response, error) {
 	return r.ApiService.ReplaceSecretExecute(r)
 }
 
@@ -1030,10 +1030,10 @@ ReplaceSecret Replace an existing secret
 Replace an existing webhook secret immediately or as part of rotation. This new secret will be used to verify all subsequent webhook request signature.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return WebhooksApiReplaceSecretRequest
+ @return ApiReplaceSecretRequest
 */
-func (a *WebhooksApiService) ReplaceSecret(ctx context.Context) WebhooksApiReplaceSecretRequest {
-	return WebhooksApiReplaceSecretRequest{
+func (a *WebhooksApiService) ReplaceSecret(ctx context.Context) ApiReplaceSecretRequest {
+	return ApiReplaceSecretRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1041,7 +1041,7 @@ func (a *WebhooksApiService) ReplaceSecret(ctx context.Context) WebhooksApiRepla
 
 // Execute executes the request
 //  @return ReplaceSecret200Response
-func (a *WebhooksApiService) ReplaceSecretExecute(r WebhooksApiReplaceSecretRequest) (*ReplaceSecret200Response, *http.Response, error) {
+func (a *WebhooksApiService) ReplaceSecretExecute(r ApiReplaceSecretRequest) (*ReplaceSecret200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -1148,7 +1148,7 @@ func (a *WebhooksApiService) ReplaceSecretExecute(r WebhooksApiReplaceSecretRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksApiResendEventRequest struct {
+type ApiResendEventRequest struct {
 	ctx context.Context
 	ApiService *WebhooksApiService
 	webhookId string
@@ -1157,12 +1157,12 @@ type WebhooksApiResendEventRequest struct {
 }
 
 // Delay the event triggering in seconds
-func (r WebhooksApiResendEventRequest) Delay(delay int32) WebhooksApiResendEventRequest {
+func (r ApiResendEventRequest) Delay(delay int32) ApiResendEventRequest {
 	r.delay = &delay
 	return r
 }
 
-func (r WebhooksApiResendEventRequest) Execute() (*Event, *http.Response, error) {
+func (r ApiResendEventRequest) Execute() (*Event, *http.Response, error) {
 	return r.ApiService.ResendEventExecute(r)
 }
 
@@ -1174,10 +1174,10 @@ Resend a webhook event
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param webhookId Webhook ID
  @param eventId Webhook event ID
- @return WebhooksApiResendEventRequest
+ @return ApiResendEventRequest
 */
-func (a *WebhooksApiService) ResendEvent(ctx context.Context, webhookId string, eventId string) WebhooksApiResendEventRequest {
-	return WebhooksApiResendEventRequest{
+func (a *WebhooksApiService) ResendEvent(ctx context.Context, webhookId string, eventId string) ApiResendEventRequest {
+	return ApiResendEventRequest{
 		ApiService: a,
 		ctx: ctx,
 		webhookId: webhookId,
@@ -1187,7 +1187,7 @@ func (a *WebhooksApiService) ResendEvent(ctx context.Context, webhookId string, 
 
 // Execute executes the request
 //  @return Event
-func (a *WebhooksApiService) ResendEventExecute(r WebhooksApiResendEventRequest) (*Event, *http.Response, error) {
+func (a *WebhooksApiService) ResendEventExecute(r ApiResendEventRequest) (*Event, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1294,18 +1294,18 @@ func (a *WebhooksApiService) ResendEventExecute(r WebhooksApiResendEventRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksApiRevokeSecretRequest struct {
+type ApiRevokeSecretRequest struct {
 	ctx context.Context
 	ApiService *WebhooksApiService
 	oldSecretOnly *bool
 }
 
-func (r WebhooksApiRevokeSecretRequest) OldSecretOnly(oldSecretOnly bool) WebhooksApiRevokeSecretRequest {
+func (r ApiRevokeSecretRequest) OldSecretOnly(oldSecretOnly bool) ApiRevokeSecretRequest {
 	r.oldSecretOnly = &oldSecretOnly
 	return r
 }
 
-func (r WebhooksApiRevokeSecretRequest) Execute() (*http.Response, error) {
+func (r ApiRevokeSecretRequest) Execute() (*http.Response, error) {
 	return r.ApiService.RevokeSecretExecute(r)
 }
 
@@ -1315,17 +1315,17 @@ RevokeSecret Revoke the secret
 Revoke the existing webhook secret. If this is called at the rolling secret time, then both old and new secrets will be revoked
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return WebhooksApiRevokeSecretRequest
+ @return ApiRevokeSecretRequest
 */
-func (a *WebhooksApiService) RevokeSecret(ctx context.Context) WebhooksApiRevokeSecretRequest {
-	return WebhooksApiRevokeSecretRequest{
+func (a *WebhooksApiService) RevokeSecret(ctx context.Context) ApiRevokeSecretRequest {
+	return ApiRevokeSecretRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *WebhooksApiService) RevokeSecretExecute(r WebhooksApiRevokeSecretRequest) (*http.Response, error) {
+func (a *WebhooksApiService) RevokeSecretExecute(r ApiRevokeSecretRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -1420,19 +1420,19 @@ func (a *WebhooksApiService) RevokeSecretExecute(r WebhooksApiRevokeSecretReques
 	return localVarHTTPResponse, nil
 }
 
-type WebhooksApiTriggerEventRequest struct {
+type ApiTriggerEventRequest struct {
 	ctx context.Context
 	ApiService *WebhooksApiService
 	triggerEventRequest *TriggerEventRequest
 }
 
 // Provide an event type to trigger
-func (r WebhooksApiTriggerEventRequest) TriggerEventRequest(triggerEventRequest TriggerEventRequest) WebhooksApiTriggerEventRequest {
+func (r ApiTriggerEventRequest) TriggerEventRequest(triggerEventRequest TriggerEventRequest) ApiTriggerEventRequest {
 	r.triggerEventRequest = &triggerEventRequest
 	return r
 }
 
-func (r WebhooksApiTriggerEventRequest) Execute() (*EventTrigger, *http.Response, error) {
+func (r ApiTriggerEventRequest) Execute() (*EventTrigger, *http.Response, error) {
 	return r.ApiService.TriggerEventExecute(r)
 }
 
@@ -1442,10 +1442,10 @@ TriggerEvent Trigger an event
 Trigger an specific event for webhook testing purpose
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return WebhooksApiTriggerEventRequest
+ @return ApiTriggerEventRequest
 */
-func (a *WebhooksApiService) TriggerEvent(ctx context.Context) WebhooksApiTriggerEventRequest {
-	return WebhooksApiTriggerEventRequest{
+func (a *WebhooksApiService) TriggerEvent(ctx context.Context) ApiTriggerEventRequest {
+	return ApiTriggerEventRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1453,7 +1453,7 @@ func (a *WebhooksApiService) TriggerEvent(ctx context.Context) WebhooksApiTrigge
 
 // Execute executes the request
 //  @return EventTrigger
-func (a *WebhooksApiService) TriggerEventExecute(r WebhooksApiTriggerEventRequest) (*EventTrigger, *http.Response, error) {
+func (a *WebhooksApiService) TriggerEventExecute(r ApiTriggerEventRequest) (*EventTrigger, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1550,7 +1550,7 @@ func (a *WebhooksApiService) TriggerEventExecute(r WebhooksApiTriggerEventReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksApiUpdateWebhookRequest struct {
+type ApiUpdateWebhookRequest struct {
 	ctx context.Context
 	ApiService *WebhooksApiService
 	webhookId string
@@ -1558,12 +1558,12 @@ type WebhooksApiUpdateWebhookRequest struct {
 }
 
 // Webhook to update
-func (r WebhooksApiUpdateWebhookRequest) Webhook(webhook Webhook) WebhooksApiUpdateWebhookRequest {
+func (r ApiUpdateWebhookRequest) Webhook(webhook Webhook) ApiUpdateWebhookRequest {
 	r.webhook = &webhook
 	return r
 }
 
-func (r WebhooksApiUpdateWebhookRequest) Execute() (*Webhook, *http.Response, error) {
+func (r ApiUpdateWebhookRequest) Execute() (*Webhook, *http.Response, error) {
 	return r.ApiService.UpdateWebhookExecute(r)
 }
 
@@ -1574,10 +1574,10 @@ Update a webhook
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param webhookId Webhook ID
- @return WebhooksApiUpdateWebhookRequest
+ @return ApiUpdateWebhookRequest
 */
-func (a *WebhooksApiService) UpdateWebhook(ctx context.Context, webhookId string) WebhooksApiUpdateWebhookRequest {
-	return WebhooksApiUpdateWebhookRequest{
+func (a *WebhooksApiService) UpdateWebhook(ctx context.Context, webhookId string) ApiUpdateWebhookRequest {
+	return ApiUpdateWebhookRequest{
 		ApiService: a,
 		ctx: ctx,
 		webhookId: webhookId,
@@ -1586,7 +1586,7 @@ func (a *WebhooksApiService) UpdateWebhook(ctx context.Context, webhookId string
 
 // Execute executes the request
 //  @return Webhook
-func (a *WebhooksApiService) UpdateWebhookExecute(r WebhooksApiUpdateWebhookRequest) (*Webhook, *http.Response, error) {
+func (a *WebhooksApiService) UpdateWebhookExecute(r ApiUpdateWebhookRequest) (*Webhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
