@@ -48,58 +48,86 @@ func PersonBusinessRelationshipAsRelationshipIn(v *PersonBusinessRelationship) R
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *RelationshipIn) UnmarshalJSON(data []byte) error {
 	var err error
-	match := 0
-	// try to unmarshal data into BusinessBusinessOwnerRelationship
-	err = newStrictDecoder(data).Decode(&dst.BusinessBusinessOwnerRelationship)
-	if err == nil {
-		jsonBusinessBusinessOwnerRelationship, _ := json.Marshal(dst.BusinessBusinessOwnerRelationship)
-		if string(jsonBusinessBusinessOwnerRelationship) == "{}" { // empty struct
-			dst.BusinessBusinessOwnerRelationship = nil
-		} else {
-			match++
-		}
-	} else {
-		dst.BusinessBusinessOwnerRelationship = nil
+	// use discriminator value to speed up the lookup
+	var jsonDict map[string]interface{}
+	err = newStrictDecoder(data).Decode(&jsonDict)
+	if err != nil {
+		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
 	}
 
-	// try to unmarshal data into PersonBusinessOwnerRelationship
-	err = newStrictDecoder(data).Decode(&dst.PersonBusinessOwnerRelationship)
-	if err == nil {
-		jsonPersonBusinessOwnerRelationship, _ := json.Marshal(dst.PersonBusinessOwnerRelationship)
-		if string(jsonPersonBusinessOwnerRelationship) == "{}" { // empty struct
+	// check if the discriminator value is 'BENEFICIAL_OWNER_OF'
+	if jsonDict["relationship_type"] == "BENEFICIAL_OWNER_OF" {
+		// try to unmarshal JSON data into PersonBusinessOwnerRelationship
+		err = json.Unmarshal(data, &dst.PersonBusinessOwnerRelationship)
+		if err == nil {
+			return nil // data stored in dst.PersonBusinessOwnerRelationship, return on the first match
+		} else {
 			dst.PersonBusinessOwnerRelationship = nil
-		} else {
-			match++
+			return fmt.Errorf("Failed to unmarshal RelationshipIn as PersonBusinessOwnerRelationship: %s", err.Error())
 		}
-	} else {
-		dst.PersonBusinessOwnerRelationship = nil
 	}
 
-	// try to unmarshal data into PersonBusinessRelationship
-	err = newStrictDecoder(data).Decode(&dst.PersonBusinessRelationship)
-	if err == nil {
-		jsonPersonBusinessRelationship, _ := json.Marshal(dst.PersonBusinessRelationship)
-		if string(jsonPersonBusinessRelationship) == "{}" { // empty struct
+	// check if the discriminator value is 'MANAGING_PERSON_OF'
+	if jsonDict["relationship_type"] == "MANAGING_PERSON_OF" {
+		// try to unmarshal JSON data into PersonBusinessRelationship
+		err = json.Unmarshal(data, &dst.PersonBusinessRelationship)
+		if err == nil {
+			return nil // data stored in dst.PersonBusinessRelationship, return on the first match
+		} else {
 			dst.PersonBusinessRelationship = nil
-		} else {
-			match++
+			return fmt.Errorf("Failed to unmarshal RelationshipIn as PersonBusinessRelationship: %s", err.Error())
 		}
-	} else {
-		dst.PersonBusinessRelationship = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.BusinessBusinessOwnerRelationship = nil
-		dst.PersonBusinessOwnerRelationship = nil
-		dst.PersonBusinessRelationship = nil
-
-		return fmt.Errorf("Data matches more than one schema in oneOf(RelationshipIn)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("Data failed to match schemas in oneOf(RelationshipIn)")
+	// check if the discriminator value is 'OWNER_OF'
+	if jsonDict["relationship_type"] == "OWNER_OF" {
+		// try to unmarshal JSON data into BusinessBusinessOwnerRelationship
+		err = json.Unmarshal(data, &dst.BusinessBusinessOwnerRelationship)
+		if err == nil {
+			return nil // data stored in dst.BusinessBusinessOwnerRelationship, return on the first match
+		} else {
+			dst.BusinessBusinessOwnerRelationship = nil
+			return fmt.Errorf("Failed to unmarshal RelationshipIn as BusinessBusinessOwnerRelationship: %s", err.Error())
+		}
 	}
+
+	// check if the discriminator value is 'business_business_owner_relationship'
+	if jsonDict["relationship_type"] == "business_business_owner_relationship" {
+		// try to unmarshal JSON data into BusinessBusinessOwnerRelationship
+		err = json.Unmarshal(data, &dst.BusinessBusinessOwnerRelationship)
+		if err == nil {
+			return nil // data stored in dst.BusinessBusinessOwnerRelationship, return on the first match
+		} else {
+			dst.BusinessBusinessOwnerRelationship = nil
+			return fmt.Errorf("Failed to unmarshal RelationshipIn as BusinessBusinessOwnerRelationship: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'person_business_owner_relationship'
+	if jsonDict["relationship_type"] == "person_business_owner_relationship" {
+		// try to unmarshal JSON data into PersonBusinessOwnerRelationship
+		err = json.Unmarshal(data, &dst.PersonBusinessOwnerRelationship)
+		if err == nil {
+			return nil // data stored in dst.PersonBusinessOwnerRelationship, return on the first match
+		} else {
+			dst.PersonBusinessOwnerRelationship = nil
+			return fmt.Errorf("Failed to unmarshal RelationshipIn as PersonBusinessOwnerRelationship: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'person_business_relationship'
+	if jsonDict["relationship_type"] == "person_business_relationship" {
+		// try to unmarshal JSON data into PersonBusinessRelationship
+		err = json.Unmarshal(data, &dst.PersonBusinessRelationship)
+		if err == nil {
+			return nil // data stored in dst.PersonBusinessRelationship, return on the first match
+		} else {
+			dst.PersonBusinessRelationship = nil
+			return fmt.Errorf("Failed to unmarshal RelationshipIn as PersonBusinessRelationship: %s", err.Error())
+		}
+	}
+
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

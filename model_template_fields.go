@@ -39,44 +39,74 @@ func TemplateFieldsLineOfCreditAsTemplateFields(v *TemplateFieldsLineOfCredit) T
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TemplateFields) UnmarshalJSON(data []byte) error {
 	var err error
-	match := 0
-	// try to unmarshal data into TemplateFieldsDepository
-	err = newStrictDecoder(data).Decode(&dst.TemplateFieldsDepository)
-	if err == nil {
-		jsonTemplateFieldsDepository, _ := json.Marshal(dst.TemplateFieldsDepository)
-		if string(jsonTemplateFieldsDepository) == "{}" { // empty struct
+	// use discriminator value to speed up the lookup
+	var jsonDict map[string]interface{}
+	err = newStrictDecoder(data).Decode(&jsonDict)
+	if err != nil {
+		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
+	}
+
+	// check if the discriminator value is 'CHECKING'
+	if jsonDict["account_type"] == "CHECKING" {
+		// try to unmarshal JSON data into TemplateFieldsDepository
+		err = json.Unmarshal(data, &dst.TemplateFieldsDepository)
+		if err == nil {
+			return nil // data stored in dst.TemplateFieldsDepository, return on the first match
+		} else {
 			dst.TemplateFieldsDepository = nil
-		} else {
-			match++
+			return fmt.Errorf("Failed to unmarshal TemplateFields as TemplateFieldsDepository: %s", err.Error())
 		}
-	} else {
-		dst.TemplateFieldsDepository = nil
 	}
 
-	// try to unmarshal data into TemplateFieldsLineOfCredit
-	err = newStrictDecoder(data).Decode(&dst.TemplateFieldsLineOfCredit)
-	if err == nil {
-		jsonTemplateFieldsLineOfCredit, _ := json.Marshal(dst.TemplateFieldsLineOfCredit)
-		if string(jsonTemplateFieldsLineOfCredit) == "{}" { // empty struct
+	// check if the discriminator value is 'LINE_OF_CREDIT'
+	if jsonDict["account_type"] == "LINE_OF_CREDIT" {
+		// try to unmarshal JSON data into TemplateFieldsLineOfCredit
+		err = json.Unmarshal(data, &dst.TemplateFieldsLineOfCredit)
+		if err == nil {
+			return nil // data stored in dst.TemplateFieldsLineOfCredit, return on the first match
+		} else {
 			dst.TemplateFieldsLineOfCredit = nil
-		} else {
-			match++
+			return fmt.Errorf("Failed to unmarshal TemplateFields as TemplateFieldsLineOfCredit: %s", err.Error())
 		}
-	} else {
-		dst.TemplateFieldsLineOfCredit = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.TemplateFieldsDepository = nil
-		dst.TemplateFieldsLineOfCredit = nil
-
-		return fmt.Errorf("Data matches more than one schema in oneOf(TemplateFields)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("Data failed to match schemas in oneOf(TemplateFields)")
+	// check if the discriminator value is 'SAVING'
+	if jsonDict["account_type"] == "SAVING" {
+		// try to unmarshal JSON data into TemplateFieldsDepository
+		err = json.Unmarshal(data, &dst.TemplateFieldsDepository)
+		if err == nil {
+			return nil // data stored in dst.TemplateFieldsDepository, return on the first match
+		} else {
+			dst.TemplateFieldsDepository = nil
+			return fmt.Errorf("Failed to unmarshal TemplateFields as TemplateFieldsDepository: %s", err.Error())
+		}
 	}
+
+	// check if the discriminator value is 'template_fields_depository'
+	if jsonDict["account_type"] == "template_fields_depository" {
+		// try to unmarshal JSON data into TemplateFieldsDepository
+		err = json.Unmarshal(data, &dst.TemplateFieldsDepository)
+		if err == nil {
+			return nil // data stored in dst.TemplateFieldsDepository, return on the first match
+		} else {
+			dst.TemplateFieldsDepository = nil
+			return fmt.Errorf("Failed to unmarshal TemplateFields as TemplateFieldsDepository: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'template_fields_line_of_credit'
+	if jsonDict["account_type"] == "template_fields_line_of_credit" {
+		// try to unmarshal JSON data into TemplateFieldsLineOfCredit
+		err = json.Unmarshal(data, &dst.TemplateFieldsLineOfCredit)
+		if err == nil {
+			return nil // data stored in dst.TemplateFieldsLineOfCredit, return on the first match
+		} else {
+			dst.TemplateFieldsLineOfCredit = nil
+			return fmt.Errorf("Failed to unmarshal TemplateFields as TemplateFieldsLineOfCredit: %s", err.Error())
+		}
+	}
+
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
