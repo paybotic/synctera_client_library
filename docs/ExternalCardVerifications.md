@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Cvv2Result** | Pointer to **string** | Card Verification Value results  Status | Description --- | --- VERIFIED | CVV and expiration dates verified INCORRECT | Either CVV or expiration date is incorrect NOT_SUPPORTED |  Issuer does not participate in CVV2 service  | [optional] 
 **FastFundsIndicator** | Pointer to **bool** | Indicates if card is Fast Funds eligible (i.e. if the funds will settle in 30 mins or less). If not eligible, typically funds will settle within 2 business days. | [optional] 
 **OnlineGamblingBlockIndicator** | Pointer to **bool** | Indicates if the card can receive push-payments for online gambling payouts. | [optional] 
-**Processor** | Pointer to **string** | The name of the processor | [optional] 
+**Processor** | Pointer to [**Processor**](Processor.md) |  | [optional] 
 **PushFundsBlockIndicator** | Pointer to **bool** | Indicates if the associated card can receive push-to-card disbursements. | [optional] 
 **State** | Pointer to **string** |  | [optional] 
 
@@ -159,20 +159,20 @@ HasOnlineGamblingBlockIndicator returns a boolean if a field has been set.
 
 ### GetProcessor
 
-`func (o *ExternalCardVerifications) GetProcessor() string`
+`func (o *ExternalCardVerifications) GetProcessor() Processor`
 
 GetProcessor returns the Processor field if non-nil, zero value otherwise.
 
 ### GetProcessorOk
 
-`func (o *ExternalCardVerifications) GetProcessorOk() (*string, bool)`
+`func (o *ExternalCardVerifications) GetProcessorOk() (*Processor, bool)`
 
 GetProcessorOk returns a tuple with the Processor field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProcessor
 
-`func (o *ExternalCardVerifications) SetProcessor(v string)`
+`func (o *ExternalCardVerifications) SetProcessor(v Processor)`
 
 SetProcessor sets Processor field to given value.
 

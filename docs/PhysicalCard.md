@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **ExpirationTime** | Pointer to **time.Time** | The timestamp representing when the card would expire at | [optional] [readonly] 
 **ExpirationYear** | Pointer to **string** |  | [optional] [readonly] 
 **Id** | Pointer to **string** | Card ID | [optional] [readonly] 
+**IsPinSet** | Pointer to **bool** | indicates whether a pin has been set on the card | [optional] [readonly] [default to false]
 **LastFour** | Pointer to **string** | The last 4 digits of the card PAN | [optional] [readonly] 
 **LastModifiedTime** | Pointer to **time.Time** | The timestamp representing when the card was last modified at | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]string** | Additional data to include in the request structured as key-value pairs | [optional] 
@@ -24,7 +25,6 @@ Name | Type | Description | Notes
 **ReissuedToId** | Pointer to **string** | If this card was reissued, this ID refers to the card that replaced it. | [optional] [readonly] 
 **Type** | Pointer to **string** | Indicates the type of card to be issued | [optional] 
 **CardImageId** | Pointer to **string** | The ID of the custom card image used for this card | [optional] 
-**IsPinSet** | Pointer to **bool** | indicates whether a pin has been set on the card | [optional] [readonly] [default to false]
 **Shipping** | Pointer to [**Shipping**](Shipping.md) |  | [optional] 
 
 ## Methods
@@ -341,6 +341,31 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
+### GetIsPinSet
+
+`func (o *PhysicalCard) GetIsPinSet() bool`
+
+GetIsPinSet returns the IsPinSet field if non-nil, zero value otherwise.
+
+### GetIsPinSetOk
+
+`func (o *PhysicalCard) GetIsPinSetOk() (*bool, bool)`
+
+GetIsPinSetOk returns a tuple with the IsPinSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPinSet
+
+`func (o *PhysicalCard) SetIsPinSet(v bool)`
+
+SetIsPinSet sets IsPinSet field to given value.
+
+### HasIsPinSet
+
+`func (o *PhysicalCard) HasIsPinSet() bool`
+
+HasIsPinSet returns a boolean if a field has been set.
+
 ### GetLastFour
 
 `func (o *PhysicalCard) GetLastFour() string`
@@ -540,31 +565,6 @@ SetCardImageId sets CardImageId field to given value.
 `func (o *PhysicalCard) HasCardImageId() bool`
 
 HasCardImageId returns a boolean if a field has been set.
-
-### GetIsPinSet
-
-`func (o *PhysicalCard) GetIsPinSet() bool`
-
-GetIsPinSet returns the IsPinSet field if non-nil, zero value otherwise.
-
-### GetIsPinSetOk
-
-`func (o *PhysicalCard) GetIsPinSetOk() (*bool, bool)`
-
-GetIsPinSetOk returns a tuple with the IsPinSet field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsPinSet
-
-`func (o *PhysicalCard) SetIsPinSet(v bool)`
-
-SetIsPinSet sets IsPinSet field to given value.
-
-### HasIsPinSet
-
-`func (o *PhysicalCard) HasIsPinSet() bool`
-
-HasIsPinSet returns a boolean if a field has been set.
 
 ### GetShipping
 

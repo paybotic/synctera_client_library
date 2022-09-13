@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **CustomerConsent** | **bool** | Whether this customer has consented to a KYC check.  | 
 **CustomerIpAddress** | Pointer to **string** | IP address of the customer being verified. | [optional] 
 **DocumentId** | Pointer to **string** | The ID of the uploaded government-issued identification document provided by the Socure SDK.  | [optional] 
-**VerificationType** | [**[]VerificationType**](VerificationType.md) | List of possible checks to run on a customer. | 
+**VerificationType** | Pointer to [**[]VerificationType**](VerificationType.md) | List of possible checks to run on a customer. This is a legacy field that is now ignored.  | [optional] 
 
 ## Methods
 
 ### NewCustomerVerification
 
-`func NewCustomerVerification(customerConsent bool, verificationType []VerificationType, ) *CustomerVerification`
+`func NewCustomerVerification(customerConsent bool, ) *CustomerVerification`
 
 NewCustomerVerification instantiates a new CustomerVerification object
 This constructor will assign default values to properties that have it defined,
@@ -117,6 +117,11 @@ and a boolean to check if the value has been set.
 
 SetVerificationType sets VerificationType field to given value.
 
+### HasVerificationType
+
+`func (o *CustomerVerification) HasVerificationType() bool`
+
+HasVerificationType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

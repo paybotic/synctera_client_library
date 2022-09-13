@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **Memo** | Pointer to **string** | Additional details about the reason for the status change | [optional] 
 **StatusReason** | [**CardStatusReasonCode**](CardStatusReasonCode.md) |  | 
 **CardFulfillmentStatus** | [**CardFulfillmentStatus**](CardFulfillmentStatus.md) |  | 
-**TrackingNumber** | Pointer to **string** | The tracking number | [optional] [readonly] 
+**FulfillmentDetails** | Pointer to [**FulfillmentDetails**](FulfillmentDetails.md) |  | [optional] 
+**TrackingNumber** | Pointer to **string** | This contains all shipping details as provided by the card fulfillment provider, including the tracking number. This field is deprecated. Instead, please use the fulfillment_details object, which includes a field for just the tracking number.  | [optional] [readonly] 
 
 ## Methods
 
@@ -113,6 +114,31 @@ and a boolean to check if the value has been set.
 
 SetCardFulfillmentStatus sets CardFulfillmentStatus field to given value.
 
+
+### GetFulfillmentDetails
+
+`func (o *PhysicalCardResponseStatus) GetFulfillmentDetails() FulfillmentDetails`
+
+GetFulfillmentDetails returns the FulfillmentDetails field if non-nil, zero value otherwise.
+
+### GetFulfillmentDetailsOk
+
+`func (o *PhysicalCardResponseStatus) GetFulfillmentDetailsOk() (*FulfillmentDetails, bool)`
+
+GetFulfillmentDetailsOk returns a tuple with the FulfillmentDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFulfillmentDetails
+
+`func (o *PhysicalCardResponseStatus) SetFulfillmentDetails(v FulfillmentDetails)`
+
+SetFulfillmentDetails sets FulfillmentDetails field to given value.
+
+### HasFulfillmentDetails
+
+`func (o *PhysicalCardResponseStatus) HasFulfillmentDetails() bool`
+
+HasFulfillmentDetails returns a boolean if a field has been set.
 
 ### GetTrackingNumber
 

@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CardImageId** | Pointer to **string** | The ID of the custom card image used for this card | [optional] 
-**IsPinSet** | Pointer to **bool** | indicates whether a pin has been set on the card | [optional] [readonly] [default to false]
 **Shipping** | Pointer to [**Shipping**](Shipping.md) |  | [optional] 
 
 ## Methods
@@ -51,31 +50,6 @@ SetCardImageId sets CardImageId field to given value.
 `func (o *PhysicalCardAllOf) HasCardImageId() bool`
 
 HasCardImageId returns a boolean if a field has been set.
-
-### GetIsPinSet
-
-`func (o *PhysicalCardAllOf) GetIsPinSet() bool`
-
-GetIsPinSet returns the IsPinSet field if non-nil, zero value otherwise.
-
-### GetIsPinSetOk
-
-`func (o *PhysicalCardAllOf) GetIsPinSetOk() (*bool, bool)`
-
-GetIsPinSetOk returns a tuple with the IsPinSet field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsPinSet
-
-`func (o *PhysicalCardAllOf) SetIsPinSet(v bool)`
-
-SetIsPinSet sets IsPinSet field to given value.
-
-### HasIsPinSet
-
-`func (o *PhysicalCardAllOf) HasIsPinSet() bool`
-
-HasIsPinSet returns a boolean if a field has been set.
 
 ### GetShipping
 

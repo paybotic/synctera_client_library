@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Active** | **bool** | Current status of the Authorization gateway | 
+**CardProducts** | **[]string** | List of Card Product unique identifiers that will utilize the Gateway | 
 **CreationTime** | **time.Time** | The timestamp representing when the gateway config request was made | [readonly] 
 **CustomHeaders** | Pointer to **map[string]string** | Custom Headers of the Authorization gateway | [optional] 
 **Id** | **string** | Gateway ID | 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewGatewayResponse
 
-`func NewGatewayResponse(active bool, creationTime time.Time, id string, lastModifiedTime time.Time, url string, ) *GatewayResponse`
+`func NewGatewayResponse(active bool, cardProducts []string, creationTime time.Time, id string, lastModifiedTime time.Time, url string, ) *GatewayResponse`
 
 NewGatewayResponse instantiates a new GatewayResponse object
 This constructor will assign default values to properties that have it defined,
@@ -48,6 +49,26 @@ and a boolean to check if the value has been set.
 `func (o *GatewayResponse) SetActive(v bool)`
 
 SetActive sets Active field to given value.
+
+
+### GetCardProducts
+
+`func (o *GatewayResponse) GetCardProducts() []string`
+
+GetCardProducts returns the CardProducts field if non-nil, zero value otherwise.
+
+### GetCardProductsOk
+
+`func (o *GatewayResponse) GetCardProductsOk() (*[]string, bool)`
+
+GetCardProductsOk returns a tuple with the CardProducts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCardProducts
+
+`func (o *GatewayResponse) SetCardProducts(v []string)`
+
+SetCardProducts sets CardProducts field to given value.
 
 
 ### GetCreationTime

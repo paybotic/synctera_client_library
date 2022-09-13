@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BanStatus** | Pointer to [**BanStatus**](BanStatus.md) |  | [optional] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
 **Email** | Pointer to **string** | Customer&#39;s email | [optional] 
 **Id** | Pointer to **string** | Customer unique identifier | [optional] [readonly] 
@@ -38,6 +39,31 @@ will change when the set of required properties is changed
 NewBasePersonWithDefaults instantiates a new BasePerson object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBanStatus
+
+`func (o *BasePerson) GetBanStatus() BanStatus`
+
+GetBanStatus returns the BanStatus field if non-nil, zero value otherwise.
+
+### GetBanStatusOk
+
+`func (o *BasePerson) GetBanStatusOk() (*BanStatus, bool)`
+
+GetBanStatusOk returns a tuple with the BanStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBanStatus
+
+`func (o *BasePerson) SetBanStatus(v BanStatus)`
+
+SetBanStatus sets BanStatus field to given value.
+
+### HasBanStatus
+
+`func (o *BasePerson) HasBanStatus() bool`
+
+HasBanStatus returns a boolean if a field has been set.
 
 ### GetCreationTime
 

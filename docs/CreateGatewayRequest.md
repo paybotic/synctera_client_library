@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Active** | Pointer to **bool** | Current status of the Authorization gateway | [optional] [default to true]
+**CardProducts** | **[]string** | List of Card Product unique identifiers that will utilize the Gateway | 
 **CustomHeaders** | Pointer to **map[string]string** | Custom Headers of the Authorization gateway | [optional] 
 **Url** | **string** | URL of the Authorization gateway | 
 
@@ -12,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewCreateGatewayRequest
 
-`func NewCreateGatewayRequest(url string, ) *CreateGatewayRequest`
+`func NewCreateGatewayRequest(cardProducts []string, url string, ) *CreateGatewayRequest`
 
 NewCreateGatewayRequest instantiates a new CreateGatewayRequest object
 This constructor will assign default values to properties that have it defined,
@@ -51,6 +52,26 @@ SetActive sets Active field to given value.
 `func (o *CreateGatewayRequest) HasActive() bool`
 
 HasActive returns a boolean if a field has been set.
+
+### GetCardProducts
+
+`func (o *CreateGatewayRequest) GetCardProducts() []string`
+
+GetCardProducts returns the CardProducts field if non-nil, zero value otherwise.
+
+### GetCardProductsOk
+
+`func (o *CreateGatewayRequest) GetCardProductsOk() (*[]string, bool)`
+
+GetCardProductsOk returns a tuple with the CardProducts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCardProducts
+
+`func (o *CreateGatewayRequest) SetCardProducts(v []string)`
+
+SetCardProducts sets CardProducts field to given value.
+
 
 ### GetCustomHeaders
 

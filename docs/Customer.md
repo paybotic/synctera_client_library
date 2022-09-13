@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **FirstName** | Pointer to **string** | Customer&#39;s first name | [optional] 
 **LastName** | Pointer to **string** | Customer&#39;s last name | [optional] 
 **Status** | **string** | Customer&#39;s status | 
+**BanStatus** | Pointer to [**BanStatus**](BanStatus.md) |  | [optional] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
 **Email** | Pointer to **string** | Customer&#39;s email | [optional] 
 **Id** | Pointer to **string** | Customer unique identifier | [optional] [readonly] 
@@ -137,6 +138,31 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
+
+### GetBanStatus
+
+`func (o *Customer) GetBanStatus() BanStatus`
+
+GetBanStatus returns the BanStatus field if non-nil, zero value otherwise.
+
+### GetBanStatusOk
+
+`func (o *Customer) GetBanStatusOk() (*BanStatus, bool)`
+
+GetBanStatusOk returns a tuple with the BanStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBanStatus
+
+`func (o *Customer) SetBanStatus(v BanStatus)`
+
+SetBanStatus sets BanStatus field to given value.
+
+### HasBanStatus
+
+`func (o *Customer) HasBanStatus() bool`
+
+HasBanStatus returns a boolean if a field has been set.
 
 ### GetCreationTime
 

@@ -4,80 +4,16 @@ All URIs are relative to *https://api.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateSecret**](WebhooksApi.md#CreateSecret) | **Post** /webhooks/secret | Create a secret
 [**CreateWebhook1**](WebhooksApi.md#CreateWebhook1) | **Post** /webhooks | Create a webhook
 [**DeleteWebhook**](WebhooksApi.md#DeleteWebhook) | **Delete** /webhooks/{webhook_id} | Delete a webhook
 [**GetEvent**](WebhooksApi.md#GetEvent) | **Get** /webhooks/{webhook_id}/events/{event_id} | Get webhook event
 [**GetWebhook1**](WebhooksApi.md#GetWebhook1) | **Get** /webhooks/{webhook_id} | Get a webhook
 [**ListEvents**](WebhooksApi.md#ListEvents) | **Get** /webhooks/{webhook_id}/events | List webhook events
 [**ListWebhooks1**](WebhooksApi.md#ListWebhooks1) | **Get** /webhooks | List webhooks
-[**ReplaceSecret**](WebhooksApi.md#ReplaceSecret) | **Put** /webhooks/secret | Replace an existing secret
 [**ResendEvent**](WebhooksApi.md#ResendEvent) | **Post** /webhooks/{webhook_id}/events/{event_id}/resend | Resend an event
-[**RevokeSecret**](WebhooksApi.md#RevokeSecret) | **Delete** /webhooks/secret | Revoke the secret
 [**TriggerEvent**](WebhooksApi.md#TriggerEvent) | **Post** /webhooks/trigger | Trigger an event
 [**UpdateWebhook**](WebhooksApi.md#UpdateWebhook) | **Put** /webhooks/{webhook_id} | Update a webhook
 
-
-
-## CreateSecret
-
-> CreateSecret201Response CreateSecret(ctx).Execute()
-
-Create a secret
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.CreateSecret(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.CreateSecret``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateSecret`: CreateSecret201Response
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.CreateSecret`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateSecretRequest struct via the builder pattern
-
-
-### Return type
-
-[**CreateSecret201Response**](CreateSecret201Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/problem+json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## CreateWebhook1
@@ -167,7 +103,7 @@ import (
 )
 
 func main() {
-    webhookId := "1b7767fe-7dcd-43d5-85cf-c4392bb3e830" // string | Webhook ID
+    webhookId := "97e074c8-188e-4cfb-8e34-16099909c595" // string | Webhook ID
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -237,8 +173,8 @@ import (
 )
 
 func main() {
-    webhookId := "1b7767fe-7dcd-43d5-85cf-c4392bb3e830" // string | Webhook ID
-    eventId := "7379b0b0-5bb4-4981-a29c-93efe72df042" // string | Webhook event ID
+    webhookId := "97e074c8-188e-4cfb-8e34-16099909c595" // string | Webhook ID
+    eventId := "30b341b8-8445-459a-8349-b3548b2aff53" // string | Webhook event ID
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -310,7 +246,7 @@ import (
 )
 
 func main() {
-    webhookId := "1b7767fe-7dcd-43d5-85cf-c4392bb3e830" // string | Webhook ID
+    webhookId := "97e074c8-188e-4cfb-8e34-16099909c595" // string | Webhook ID
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -381,13 +317,13 @@ import (
 )
 
 func main() {
-    webhookId := "1b7767fe-7dcd-43d5-85cf-c4392bb3e830" // string | Webhook ID
+    webhookId := "97e074c8-188e-4cfb-8e34-16099909c595" // string | Webhook ID
     startDate := time.Now() // string | Start date of date range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.. start_date is alias of start_time and is deprecated. Please use start_time instead. (optional)
     endDate := time.Now() // string | End date of date range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.. end_date is alias of end_time and is deprecated. Please use end_time instead. (optional)
     startTime := time.Now() // time.Time | Start time of date-time range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00. (optional)
     endTime := time.Now() // time.Time | End time of date-time range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00. (optional)
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "xwsfu1mkaq" // string |  (optional)
+    pageToken := "h50ffqz9q5" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -464,7 +400,7 @@ import (
 
 func main() {
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "xwsfu1mkaq" // string |  (optional)
+    pageToken := "h50ffqz9q5" // string |  (optional)
     isEnabledOnly := true // bool |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -512,72 +448,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ReplaceSecret
-
-> ReplaceSecret200Response ReplaceSecret(ctx).ReplaceSecretRequest(replaceSecretRequest).Execute()
-
-Replace an existing secret
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    replaceSecretRequest := *openapiclient.NewReplaceSecretRequest() // ReplaceSecretRequest | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.ReplaceSecret(context.Background()).ReplaceSecretRequest(replaceSecretRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.ReplaceSecret``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReplaceSecret`: ReplaceSecret200Response
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.ReplaceSecret`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiReplaceSecretRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **replaceSecretRequest** | [**ReplaceSecretRequest**](ReplaceSecretRequest.md) |  | 
-
-### Return type
-
-[**ReplaceSecret200Response**](ReplaceSecret200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json, application/problem+json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## ResendEvent
 
 > Event ResendEvent(ctx, webhookId, eventId).Delay(delay).Execute()
@@ -599,8 +469,8 @@ import (
 )
 
 func main() {
-    webhookId := "1b7767fe-7dcd-43d5-85cf-c4392bb3e830" // string | Webhook ID
-    eventId := "f3e6e378-b3ad-4d00-85b0-7c907b5fff54" // string | Webhook event ID
+    webhookId := "97e074c8-188e-4cfb-8e34-16099909c595" // string | Webhook ID
+    eventId := "9e57eb8e-1795-4496-b3c5-06fcfdc7329f" // string | Webhook event ID
     delay := int32(56) // int32 | Delay the event triggering in seconds (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -647,70 +517,6 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/json, application/problem+json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## RevokeSecret
-
-> RevokeSecret(ctx).OldSecretOnly(oldSecretOnly).Execute()
-
-Revoke the secret
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    oldSecretOnly := true // bool |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.RevokeSecret(context.Background()).OldSecretOnly(oldSecretOnly).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.RevokeSecret``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRevokeSecretRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **oldSecretOnly** | **bool** |  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/problem+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -804,7 +610,7 @@ import (
 )
 
 func main() {
-    webhookId := "1b7767fe-7dcd-43d5-85cf-c4392bb3e830" // string | Webhook ID
+    webhookId := "97e074c8-188e-4cfb-8e34-16099909c595" // string | Webhook ID
     webhook := *openapiclient.NewWebhook([]openapiclient.EventType1{openapiclient.event_type1{EventTypeExplicit: penapiclient.event_type_explicit("ACCOUNT.CREATED")}}, false, "Url_example") // Webhook | Webhook to update
 
     configuration := openapiclient.NewConfiguration()

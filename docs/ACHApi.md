@@ -1,13 +1,13 @@
-# \PaymentsApi
+# \ACHApi
 
 All URIs are relative to *https://api.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddTransactionOut**](PaymentsApi.md#AddTransactionOut) | **Post** /ach | Create an outgoing ACH
-[**GetTransactionOut**](PaymentsApi.md#GetTransactionOut) | **Get** /ach/{transaction_id} | Get an outgoing ACH transaction
-[**ListTransactionsOut**](PaymentsApi.md#ListTransactionsOut) | **Get** /ach | List outgoing ACH transactions
-[**PatchTransactionOut**](PaymentsApi.md#PatchTransactionOut) | **Patch** /ach/{transaction_id} | Update outgoing ACH transaction
+[**AddTransactionOut**](ACHApi.md#AddTransactionOut) | **Post** /ach | Send an ACH
+[**GetTransactionOut**](ACHApi.md#GetTransactionOut) | **Get** /ach/{transaction_id} | Get a sent ACH transaction
+[**ListTransactionsOut**](ACHApi.md#ListTransactionsOut) | **Get** /ach | List sent ACH transactions
+[**PatchTransactionOut**](ACHApi.md#PatchTransactionOut) | **Patch** /ach/{transaction_id} | Update a sent ACH transaction
 
 
 
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 > OutgoingAch AddTransactionOut(ctx).OutgoingAchRequest(outgoingAchRequest).Execute()
 
-Create an outgoing ACH
+Send an ACH
 
 
 
@@ -32,17 +32,17 @@ import (
 )
 
 func main() {
-    outgoingAchRequest := *openapiclient.NewOutgoingAchRequest(int32(607), "USD", "bd6fb05d-a0ba-4105-b280-51afdbc09e02", "debit", "ced6ad36-d1cd-4e73-90f5-11a07331406b", "f48a96a4-3921-4e11-a062-270697d24bec") // OutgoingAchRequest | Outgoing ACH
+    outgoingAchRequest := *openapiclient.NewOutgoingAchRequest(int32(607), "USD", "2071f55a-0aeb-4f62-85a9-68f72856d463", "debit", "4394f57f-3396-4661-bd03-27684791611f", "18b1f30b-227f-4720-9956-4c6805e5cdfa") // OutgoingAchRequest | Send ACH request
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PaymentsApi.AddTransactionOut(context.Background()).OutgoingAchRequest(outgoingAchRequest).Execute()
+    resp, r, err := apiClient.ACHApi.AddTransactionOut(context.Background()).OutgoingAchRequest(outgoingAchRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PaymentsApi.AddTransactionOut``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ACHApi.AddTransactionOut``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `AddTransactionOut`: OutgoingAch
-    fmt.Fprintf(os.Stdout, "Response from `PaymentsApi.AddTransactionOut`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `ACHApi.AddTransactionOut`: %v\n", resp)
 }
 ```
 
@@ -57,7 +57,7 @@ Other parameters are passed through a pointer to a apiAddTransactionOutRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **outgoingAchRequest** | [**OutgoingAchRequest**](OutgoingAchRequest.md) | Outgoing ACH | 
+ **outgoingAchRequest** | [**OutgoingAchRequest**](OutgoingAchRequest.md) | Send ACH request | 
 
 ### Return type
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 > OutgoingAch GetTransactionOut(ctx, transactionId).Execute()
 
-Get an outgoing ACH transaction
+Get a sent ACH transaction
 
 
 
@@ -98,17 +98,17 @@ import (
 )
 
 func main() {
-    transactionId := "25ae35db-92b9-4b74-82d9-140a07eece71" // string | Transaction ID in the ledger
+    transactionId := "0cf88729-42fe-482d-904f-2f0508252858" // string | Transaction ID in the ledger
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PaymentsApi.GetTransactionOut(context.Background(), transactionId).Execute()
+    resp, r, err := apiClient.ACHApi.GetTransactionOut(context.Background(), transactionId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PaymentsApi.GetTransactionOut``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ACHApi.GetTransactionOut``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetTransactionOut`: OutgoingAch
-    fmt.Fprintf(os.Stdout, "Response from `PaymentsApi.GetTransactionOut`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `ACHApi.GetTransactionOut`: %v\n", resp)
 }
 ```
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 > OutgoingAchList ListTransactionsOut(ctx).Limit(limit).PageToken(pageToken).Execute()
 
-List outgoing ACH transactions
+List sent ACH transactions
 
 
 
@@ -169,17 +169,17 @@ import (
 
 func main() {
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "xwsfu1mkaq" // string |  (optional)
+    pageToken := "h50ffqz9q5" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PaymentsApi.ListTransactionsOut(context.Background()).Limit(limit).PageToken(pageToken).Execute()
+    resp, r, err := apiClient.ACHApi.ListTransactionsOut(context.Background()).Limit(limit).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PaymentsApi.ListTransactionsOut``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ACHApi.ListTransactionsOut``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListTransactionsOut`: OutgoingAchList
-    fmt.Fprintf(os.Stdout, "Response from `PaymentsApi.ListTransactionsOut`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `ACHApi.ListTransactionsOut`: %v\n", resp)
 }
 ```
 
@@ -217,9 +217,9 @@ Name | Type | Description  | Notes
 
 ## PatchTransactionOut
 
-> PatchTransactionOut(ctx, transactionId).OutgoingAchPatch(outgoingAchPatch).Execute()
+> OutgoingAch PatchTransactionOut(ctx, transactionId).OutgoingAchPatch(outgoingAchPatch).Execute()
 
-Update outgoing ACH transaction
+Update a sent ACH transaction
 
 
 
@@ -236,16 +236,18 @@ import (
 )
 
 func main() {
-    transactionId := "25ae35db-92b9-4b74-82d9-140a07eece71" // string | Transaction ID in the ledger
-    outgoingAchPatch := *openapiclient.NewOutgoingAchPatch() // OutgoingAchPatch | Outgoing ACH update request
+    transactionId := "0cf88729-42fe-482d-904f-2f0508252858" // string | Transaction ID in the ledger
+    outgoingAchPatch := *openapiclient.NewOutgoingAchPatch() // OutgoingAchPatch | Update sent ach transaction
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PaymentsApi.PatchTransactionOut(context.Background(), transactionId).OutgoingAchPatch(outgoingAchPatch).Execute()
+    resp, r, err := apiClient.ACHApi.PatchTransactionOut(context.Background(), transactionId).OutgoingAchPatch(outgoingAchPatch).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PaymentsApi.PatchTransactionOut``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ACHApi.PatchTransactionOut``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
+    // response from `PatchTransactionOut`: OutgoingAch
+    fmt.Fprintf(os.Stdout, "Response from `ACHApi.PatchTransactionOut`: %v\n", resp)
 }
 ```
 
@@ -265,11 +267,11 @@ Other parameters are passed through a pointer to a apiPatchTransactionOutRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **outgoingAchPatch** | [**OutgoingAchPatch**](OutgoingAchPatch.md) | Outgoing ACH update request | 
+ **outgoingAchPatch** | [**OutgoingAchPatch**](OutgoingAchPatch.md) | Update sent ach transaction | 
 
 ### Return type
 
- (empty response body)
+[**OutgoingAch**](OutgoingAch.md)
 
 ### Authorization
 
@@ -278,7 +280,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/problem+json
+- **Accept**: application/json, application/problem+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

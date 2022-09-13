@@ -1,4 +1,4 @@
-# CustomerInPath
+# CustomerInBody
 
 ## Properties
 
@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **FirstName** | Pointer to **string** | Customer&#39;s first name | [optional] 
 **LastName** | Pointer to **string** | Customer&#39;s last name | [optional] 
 **Status** | **string** | Customer&#39;s status | 
+**BanStatus** | Pointer to [**BanStatus**](BanStatus.md) |  | [optional] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
 **Email** | Pointer to **string** | Customer&#39;s email | [optional] 
 **Id** | Pointer to **string** | Customer unique identifier | [optional] [readonly] 
@@ -26,490 +27,515 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewCustomerInPath
+### NewCustomerInBody
 
-`func NewCustomerInPath(status string, ) *CustomerInPath`
+`func NewCustomerInBody(status string, ) *CustomerInBody`
 
-NewCustomerInPath instantiates a new CustomerInPath object
+NewCustomerInBody instantiates a new CustomerInBody object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewCustomerInPathWithDefaults
+### NewCustomerInBodyWithDefaults
 
-`func NewCustomerInPathWithDefaults() *CustomerInPath`
+`func NewCustomerInBodyWithDefaults() *CustomerInBody`
 
-NewCustomerInPathWithDefaults instantiates a new CustomerInPath object
+NewCustomerInBodyWithDefaults instantiates a new CustomerInBody object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetDob
 
-`func (o *CustomerInPath) GetDob() string`
+`func (o *CustomerInBody) GetDob() string`
 
 GetDob returns the Dob field if non-nil, zero value otherwise.
 
 ### GetDobOk
 
-`func (o *CustomerInPath) GetDobOk() (*string, bool)`
+`func (o *CustomerInBody) GetDobOk() (*string, bool)`
 
 GetDobOk returns a tuple with the Dob field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDob
 
-`func (o *CustomerInPath) SetDob(v string)`
+`func (o *CustomerInBody) SetDob(v string)`
 
 SetDob sets Dob field to given value.
 
 ### HasDob
 
-`func (o *CustomerInPath) HasDob() bool`
+`func (o *CustomerInBody) HasDob() bool`
 
 HasDob returns a boolean if a field has been set.
 
 ### GetFirstName
 
-`func (o *CustomerInPath) GetFirstName() string`
+`func (o *CustomerInBody) GetFirstName() string`
 
 GetFirstName returns the FirstName field if non-nil, zero value otherwise.
 
 ### GetFirstNameOk
 
-`func (o *CustomerInPath) GetFirstNameOk() (*string, bool)`
+`func (o *CustomerInBody) GetFirstNameOk() (*string, bool)`
 
 GetFirstNameOk returns a tuple with the FirstName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFirstName
 
-`func (o *CustomerInPath) SetFirstName(v string)`
+`func (o *CustomerInBody) SetFirstName(v string)`
 
 SetFirstName sets FirstName field to given value.
 
 ### HasFirstName
 
-`func (o *CustomerInPath) HasFirstName() bool`
+`func (o *CustomerInBody) HasFirstName() bool`
 
 HasFirstName returns a boolean if a field has been set.
 
 ### GetLastName
 
-`func (o *CustomerInPath) GetLastName() string`
+`func (o *CustomerInBody) GetLastName() string`
 
 GetLastName returns the LastName field if non-nil, zero value otherwise.
 
 ### GetLastNameOk
 
-`func (o *CustomerInPath) GetLastNameOk() (*string, bool)`
+`func (o *CustomerInBody) GetLastNameOk() (*string, bool)`
 
 GetLastNameOk returns a tuple with the LastName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLastName
 
-`func (o *CustomerInPath) SetLastName(v string)`
+`func (o *CustomerInBody) SetLastName(v string)`
 
 SetLastName sets LastName field to given value.
 
 ### HasLastName
 
-`func (o *CustomerInPath) HasLastName() bool`
+`func (o *CustomerInBody) HasLastName() bool`
 
 HasLastName returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *CustomerInPath) GetStatus() string`
+`func (o *CustomerInBody) GetStatus() string`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *CustomerInPath) GetStatusOk() (*string, bool)`
+`func (o *CustomerInBody) GetStatusOk() (*string, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *CustomerInPath) SetStatus(v string)`
+`func (o *CustomerInBody) SetStatus(v string)`
 
 SetStatus sets Status field to given value.
 
 
+### GetBanStatus
+
+`func (o *CustomerInBody) GetBanStatus() BanStatus`
+
+GetBanStatus returns the BanStatus field if non-nil, zero value otherwise.
+
+### GetBanStatusOk
+
+`func (o *CustomerInBody) GetBanStatusOk() (*BanStatus, bool)`
+
+GetBanStatusOk returns a tuple with the BanStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBanStatus
+
+`func (o *CustomerInBody) SetBanStatus(v BanStatus)`
+
+SetBanStatus sets BanStatus field to given value.
+
+### HasBanStatus
+
+`func (o *CustomerInBody) HasBanStatus() bool`
+
+HasBanStatus returns a boolean if a field has been set.
+
 ### GetCreationTime
 
-`func (o *CustomerInPath) GetCreationTime() time.Time`
+`func (o *CustomerInBody) GetCreationTime() time.Time`
 
 GetCreationTime returns the CreationTime field if non-nil, zero value otherwise.
 
 ### GetCreationTimeOk
 
-`func (o *CustomerInPath) GetCreationTimeOk() (*time.Time, bool)`
+`func (o *CustomerInBody) GetCreationTimeOk() (*time.Time, bool)`
 
 GetCreationTimeOk returns a tuple with the CreationTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreationTime
 
-`func (o *CustomerInPath) SetCreationTime(v time.Time)`
+`func (o *CustomerInBody) SetCreationTime(v time.Time)`
 
 SetCreationTime sets CreationTime field to given value.
 
 ### HasCreationTime
 
-`func (o *CustomerInPath) HasCreationTime() bool`
+`func (o *CustomerInBody) HasCreationTime() bool`
 
 HasCreationTime returns a boolean if a field has been set.
 
 ### GetEmail
 
-`func (o *CustomerInPath) GetEmail() string`
+`func (o *CustomerInBody) GetEmail() string`
 
 GetEmail returns the Email field if non-nil, zero value otherwise.
 
 ### GetEmailOk
 
-`func (o *CustomerInPath) GetEmailOk() (*string, bool)`
+`func (o *CustomerInBody) GetEmailOk() (*string, bool)`
 
 GetEmailOk returns a tuple with the Email field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEmail
 
-`func (o *CustomerInPath) SetEmail(v string)`
+`func (o *CustomerInBody) SetEmail(v string)`
 
 SetEmail sets Email field to given value.
 
 ### HasEmail
 
-`func (o *CustomerInPath) HasEmail() bool`
+`func (o *CustomerInBody) HasEmail() bool`
 
 HasEmail returns a boolean if a field has been set.
 
 ### GetId
 
-`func (o *CustomerInPath) GetId() string`
+`func (o *CustomerInBody) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *CustomerInPath) GetIdOk() (*string, bool)`
+`func (o *CustomerInBody) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *CustomerInPath) SetId(v string)`
+`func (o *CustomerInBody) SetId(v string)`
 
 SetId sets Id field to given value.
 
 ### HasId
 
-`func (o *CustomerInPath) HasId() bool`
+`func (o *CustomerInBody) HasId() bool`
 
 HasId returns a boolean if a field has been set.
 
 ### GetKycExempt
 
-`func (o *CustomerInPath) GetKycExempt() bool`
+`func (o *CustomerInBody) GetKycExempt() bool`
 
 GetKycExempt returns the KycExempt field if non-nil, zero value otherwise.
 
 ### GetKycExemptOk
 
-`func (o *CustomerInPath) GetKycExemptOk() (*bool, bool)`
+`func (o *CustomerInBody) GetKycExemptOk() (*bool, bool)`
 
 GetKycExemptOk returns a tuple with the KycExempt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKycExempt
 
-`func (o *CustomerInPath) SetKycExempt(v bool)`
+`func (o *CustomerInBody) SetKycExempt(v bool)`
 
 SetKycExempt sets KycExempt field to given value.
 
 ### HasKycExempt
 
-`func (o *CustomerInPath) HasKycExempt() bool`
+`func (o *CustomerInBody) HasKycExempt() bool`
 
 HasKycExempt returns a boolean if a field has been set.
 
 ### GetKycLastRun
 
-`func (o *CustomerInPath) GetKycLastRun() time.Time`
+`func (o *CustomerInBody) GetKycLastRun() time.Time`
 
 GetKycLastRun returns the KycLastRun field if non-nil, zero value otherwise.
 
 ### GetKycLastRunOk
 
-`func (o *CustomerInPath) GetKycLastRunOk() (*time.Time, bool)`
+`func (o *CustomerInBody) GetKycLastRunOk() (*time.Time, bool)`
 
 GetKycLastRunOk returns a tuple with the KycLastRun field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKycLastRun
 
-`func (o *CustomerInPath) SetKycLastRun(v time.Time)`
+`func (o *CustomerInBody) SetKycLastRun(v time.Time)`
 
 SetKycLastRun sets KycLastRun field to given value.
 
 ### HasKycLastRun
 
-`func (o *CustomerInPath) HasKycLastRun() bool`
+`func (o *CustomerInBody) HasKycLastRun() bool`
 
 HasKycLastRun returns a boolean if a field has been set.
 
 ### GetKycStatus
 
-`func (o *CustomerInPath) GetKycStatus() CustomerKycStatus`
+`func (o *CustomerInBody) GetKycStatus() CustomerKycStatus`
 
 GetKycStatus returns the KycStatus field if non-nil, zero value otherwise.
 
 ### GetKycStatusOk
 
-`func (o *CustomerInPath) GetKycStatusOk() (*CustomerKycStatus, bool)`
+`func (o *CustomerInBody) GetKycStatusOk() (*CustomerKycStatus, bool)`
 
 GetKycStatusOk returns a tuple with the KycStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKycStatus
 
-`func (o *CustomerInPath) SetKycStatus(v CustomerKycStatus)`
+`func (o *CustomerInBody) SetKycStatus(v CustomerKycStatus)`
 
 SetKycStatus sets KycStatus field to given value.
 
 ### HasKycStatus
 
-`func (o *CustomerInPath) HasKycStatus() bool`
+`func (o *CustomerInBody) HasKycStatus() bool`
 
 HasKycStatus returns a boolean if a field has been set.
 
 ### GetLastUpdatedTime
 
-`func (o *CustomerInPath) GetLastUpdatedTime() time.Time`
+`func (o *CustomerInBody) GetLastUpdatedTime() time.Time`
 
 GetLastUpdatedTime returns the LastUpdatedTime field if non-nil, zero value otherwise.
 
 ### GetLastUpdatedTimeOk
 
-`func (o *CustomerInPath) GetLastUpdatedTimeOk() (*time.Time, bool)`
+`func (o *CustomerInBody) GetLastUpdatedTimeOk() (*time.Time, bool)`
 
 GetLastUpdatedTimeOk returns a tuple with the LastUpdatedTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLastUpdatedTime
 
-`func (o *CustomerInPath) SetLastUpdatedTime(v time.Time)`
+`func (o *CustomerInBody) SetLastUpdatedTime(v time.Time)`
 
 SetLastUpdatedTime sets LastUpdatedTime field to given value.
 
 ### HasLastUpdatedTime
 
-`func (o *CustomerInPath) HasLastUpdatedTime() bool`
+`func (o *CustomerInBody) HasLastUpdatedTime() bool`
 
 HasLastUpdatedTime returns a boolean if a field has been set.
 
 ### GetLegalAddress
 
-`func (o *CustomerInPath) GetLegalAddress() Address`
+`func (o *CustomerInBody) GetLegalAddress() Address`
 
 GetLegalAddress returns the LegalAddress field if non-nil, zero value otherwise.
 
 ### GetLegalAddressOk
 
-`func (o *CustomerInPath) GetLegalAddressOk() (*Address, bool)`
+`func (o *CustomerInBody) GetLegalAddressOk() (*Address, bool)`
 
 GetLegalAddressOk returns a tuple with the LegalAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLegalAddress
 
-`func (o *CustomerInPath) SetLegalAddress(v Address)`
+`func (o *CustomerInBody) SetLegalAddress(v Address)`
 
 SetLegalAddress sets LegalAddress field to given value.
 
 ### HasLegalAddress
 
-`func (o *CustomerInPath) HasLegalAddress() bool`
+`func (o *CustomerInBody) HasLegalAddress() bool`
 
 HasLegalAddress returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *CustomerInPath) GetMetadata() map[string]interface{}`
+`func (o *CustomerInBody) GetMetadata() map[string]interface{}`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *CustomerInPath) GetMetadataOk() (*map[string]interface{}, bool)`
+`func (o *CustomerInBody) GetMetadataOk() (*map[string]interface{}, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *CustomerInPath) SetMetadata(v map[string]interface{})`
+`func (o *CustomerInBody) SetMetadata(v map[string]interface{})`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *CustomerInPath) HasMetadata() bool`
+`func (o *CustomerInBody) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 
 ### GetMiddleName
 
-`func (o *CustomerInPath) GetMiddleName() string`
+`func (o *CustomerInBody) GetMiddleName() string`
 
 GetMiddleName returns the MiddleName field if non-nil, zero value otherwise.
 
 ### GetMiddleNameOk
 
-`func (o *CustomerInPath) GetMiddleNameOk() (*string, bool)`
+`func (o *CustomerInBody) GetMiddleNameOk() (*string, bool)`
 
 GetMiddleNameOk returns a tuple with the MiddleName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMiddleName
 
-`func (o *CustomerInPath) SetMiddleName(v string)`
+`func (o *CustomerInBody) SetMiddleName(v string)`
 
 SetMiddleName sets MiddleName field to given value.
 
 ### HasMiddleName
 
-`func (o *CustomerInPath) HasMiddleName() bool`
+`func (o *CustomerInBody) HasMiddleName() bool`
 
 HasMiddleName returns a boolean if a field has been set.
 
 ### GetPhoneNumber
 
-`func (o *CustomerInPath) GetPhoneNumber() string`
+`func (o *CustomerInBody) GetPhoneNumber() string`
 
 GetPhoneNumber returns the PhoneNumber field if non-nil, zero value otherwise.
 
 ### GetPhoneNumberOk
 
-`func (o *CustomerInPath) GetPhoneNumberOk() (*string, bool)`
+`func (o *CustomerInBody) GetPhoneNumberOk() (*string, bool)`
 
 GetPhoneNumberOk returns a tuple with the PhoneNumber field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPhoneNumber
 
-`func (o *CustomerInPath) SetPhoneNumber(v string)`
+`func (o *CustomerInBody) SetPhoneNumber(v string)`
 
 SetPhoneNumber sets PhoneNumber field to given value.
 
 ### HasPhoneNumber
 
-`func (o *CustomerInPath) HasPhoneNumber() bool`
+`func (o *CustomerInBody) HasPhoneNumber() bool`
 
 HasPhoneNumber returns a boolean if a field has been set.
 
 ### GetRelatedCustomers
 
-`func (o *CustomerInPath) GetRelatedCustomers() []Relationship1`
+`func (o *CustomerInBody) GetRelatedCustomers() []Relationship1`
 
 GetRelatedCustomers returns the RelatedCustomers field if non-nil, zero value otherwise.
 
 ### GetRelatedCustomersOk
 
-`func (o *CustomerInPath) GetRelatedCustomersOk() (*[]Relationship1, bool)`
+`func (o *CustomerInBody) GetRelatedCustomersOk() (*[]Relationship1, bool)`
 
 GetRelatedCustomersOk returns a tuple with the RelatedCustomers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRelatedCustomers
 
-`func (o *CustomerInPath) SetRelatedCustomers(v []Relationship1)`
+`func (o *CustomerInBody) SetRelatedCustomers(v []Relationship1)`
 
 SetRelatedCustomers sets RelatedCustomers field to given value.
 
 ### HasRelatedCustomers
 
-`func (o *CustomerInPath) HasRelatedCustomers() bool`
+`func (o *CustomerInBody) HasRelatedCustomers() bool`
 
 HasRelatedCustomers returns a boolean if a field has been set.
 
 ### GetShippingAddress
 
-`func (o *CustomerInPath) GetShippingAddress() Address`
+`func (o *CustomerInBody) GetShippingAddress() Address`
 
 GetShippingAddress returns the ShippingAddress field if non-nil, zero value otherwise.
 
 ### GetShippingAddressOk
 
-`func (o *CustomerInPath) GetShippingAddressOk() (*Address, bool)`
+`func (o *CustomerInBody) GetShippingAddressOk() (*Address, bool)`
 
 GetShippingAddressOk returns a tuple with the ShippingAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetShippingAddress
 
-`func (o *CustomerInPath) SetShippingAddress(v Address)`
+`func (o *CustomerInBody) SetShippingAddress(v Address)`
 
 SetShippingAddress sets ShippingAddress field to given value.
 
 ### HasShippingAddress
 
-`func (o *CustomerInPath) HasShippingAddress() bool`
+`func (o *CustomerInBody) HasShippingAddress() bool`
 
 HasShippingAddress returns a boolean if a field has been set.
 
 ### GetSsn
 
-`func (o *CustomerInPath) GetSsn() string`
+`func (o *CustomerInBody) GetSsn() string`
 
 GetSsn returns the Ssn field if non-nil, zero value otherwise.
 
 ### GetSsnOk
 
-`func (o *CustomerInPath) GetSsnOk() (*string, bool)`
+`func (o *CustomerInBody) GetSsnOk() (*string, bool)`
 
 GetSsnOk returns a tuple with the Ssn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSsn
 
-`func (o *CustomerInPath) SetSsn(v string)`
+`func (o *CustomerInBody) SetSsn(v string)`
 
 SetSsn sets Ssn field to given value.
 
 ### HasSsn
 
-`func (o *CustomerInPath) HasSsn() bool`
+`func (o *CustomerInBody) HasSsn() bool`
 
 HasSsn returns a boolean if a field has been set.
 
 ### GetSsnSource
 
-`func (o *CustomerInPath) GetSsnSource() SsnSource`
+`func (o *CustomerInBody) GetSsnSource() SsnSource`
 
 GetSsnSource returns the SsnSource field if non-nil, zero value otherwise.
 
 ### GetSsnSourceOk
 
-`func (o *CustomerInPath) GetSsnSourceOk() (*SsnSource, bool)`
+`func (o *CustomerInBody) GetSsnSourceOk() (*SsnSource, bool)`
 
 GetSsnSourceOk returns a tuple with the SsnSource field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSsnSource
 
-`func (o *CustomerInPath) SetSsnSource(v SsnSource)`
+`func (o *CustomerInBody) SetSsnSource(v SsnSource)`
 
 SetSsnSource sets SsnSource field to given value.
 
 ### HasSsnSource
 
-`func (o *CustomerInPath) HasSsnSource() bool`
+`func (o *CustomerInBody) HasSsnSource() bool`
 
 HasSsnSource returns a boolean if a field has been set.
 

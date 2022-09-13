@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Transactions** | [**[]OutgoingAch**](OutgoingAch.md) | Array of outgoing ACH transactions. | 
+**Transactions** | [**[]OutgoingAch**](OutgoingAch.md) | Array of sent ACH transactions. | 
 
 ## Methods
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BusinessId** | Pointer to **string** | Unique ID for the business. Exactly one of &#x60;business_id&#x60; or &#x60;person_id&#x60; must be set.  | [optional] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
-**Details** | Pointer to [**[]Detail**](Detail.md) | A list of individual checks done as part of the due diligence process  for the verification type.  | [optional] [readonly] 
+**Details** | Pointer to [**[]Detail**](Detail.md) | A list of individual checks done as part of the due diligence process for the verification type.  | [optional] [readonly] 
 **Id** | Pointer to **string** | Unique ID for this verification result. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 

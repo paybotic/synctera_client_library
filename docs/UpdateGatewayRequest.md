@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Active** | Pointer to **bool** | Current status of the Authorization gateway | [optional] 
+**CardProducts** | Pointer to **[]string** | List of Card Product unique identifiers that will utilize the Gateway | [optional] 
 **CustomHeaders** | Pointer to **map[string]string** | Custom Headers of the Authorization gateway | [optional] 
 **Url** | Pointer to **string** | URL of the Authorization gateway | [optional] 
 
@@ -51,6 +52,31 @@ SetActive sets Active field to given value.
 `func (o *UpdateGatewayRequest) HasActive() bool`
 
 HasActive returns a boolean if a field has been set.
+
+### GetCardProducts
+
+`func (o *UpdateGatewayRequest) GetCardProducts() []string`
+
+GetCardProducts returns the CardProducts field if non-nil, zero value otherwise.
+
+### GetCardProductsOk
+
+`func (o *UpdateGatewayRequest) GetCardProductsOk() (*[]string, bool)`
+
+GetCardProductsOk returns a tuple with the CardProducts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCardProducts
+
+`func (o *UpdateGatewayRequest) SetCardProducts(v []string)`
+
+SetCardProducts sets CardProducts field to given value.
+
+### HasCardProducts
+
+`func (o *UpdateGatewayRequest) HasCardProducts() bool`
+
+HasCardProducts returns a boolean if a field has been set.
 
 ### GetCustomHeaders
 

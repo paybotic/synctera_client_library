@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **EndDate** | Pointer to **string** | The date indicating the ending of the time interval covered by the statement | [optional] [readonly] 
 **Id** | Pointer to **string** | statement ID | [optional] [readonly] 
 **IssueDate** | Pointer to **string** | The date when the statement has been issued | [optional] [readonly] 
-**StartDate** | Pointer to **string** | The date indicating the begining of the time interval covered by the statement | [optional] [readonly] 
+**StartDate** | Pointer to **string** | The date indicating the beginning of the time interval covered by the statement | [optional] [readonly] 
 
 ## Methods
 

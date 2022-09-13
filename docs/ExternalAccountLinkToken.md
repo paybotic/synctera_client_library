@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **RedirectUri** | Pointer to **string** | A URI indicating the destination where a user should be forwarded after completing the Link flow; used to support OAuth authentication flows when launching Link in the browser or via a webview.  | [optional] 
 **RequestId** | Pointer to **string** | A unique identifier for the request, which can be used for troubleshooting. | [optional] [readonly] 
 **SdkType** | Pointer to **string** | Describes the environment of the client code running a vendor-supplied SDK | [optional] [default to "WEB"]
-**Type** | **string** | The type of the link token. DEPOSITORY for checking and savings accounts, CREDIT for credit card type accounts. | 
+**Type** | **string** | The type of the link token. DEPOSITORY for checking and savings accounts, CREDIT for credit card type accounts, INVESTMENT for investment accounts, and MICRO_DEPOSIT for depository accounts with support for micro-deposits verification. | 
 **VendorAccessToken** | Pointer to **string** | The access token associated with the Item data is being requested for. | [optional] 
 **VendorInstitutionId** | Pointer to **string** | The ID of the institution the access token is requested for. If present the link token will be created in an update mode.  | [optional] 
 **VerifyOwner** | Pointer to **bool** | If true, Synctera will attempt to verify that the external account owner is the same as the customer by comparing external account data to customer data. At least 2 of the following fields must match: name, phone number, email, address. Verification is disabled by default.  | [optional] [default to false]

@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BanStatus** | Pointer to [**BanStatus**](BanStatus.md) |  | [optional] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
 **Dob** | Pointer to **string** | Person&#39;s date of birth in RFC 3339 full-date format (YYYY-MM-DD). | [optional] 
 **Email** | Pointer to **string** | Person&#39;s email. | [optional] 
@@ -41,6 +42,31 @@ will change when the set of required properties is changed
 NewPatchPersonWithDefaults instantiates a new PatchPerson object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBanStatus
+
+`func (o *PatchPerson) GetBanStatus() BanStatus`
+
+GetBanStatus returns the BanStatus field if non-nil, zero value otherwise.
+
+### GetBanStatusOk
+
+`func (o *PatchPerson) GetBanStatusOk() (*BanStatus, bool)`
+
+GetBanStatusOk returns a tuple with the BanStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBanStatus
+
+`func (o *PatchPerson) SetBanStatus(v BanStatus)`
+
+SetBanStatus sets BanStatus field to given value.
+
+### HasBanStatus
+
+`func (o *PatchPerson) HasBanStatus() bool`
+
+HasBanStatus returns a boolean if a field has been set.
 
 ### GetCreationTime
 

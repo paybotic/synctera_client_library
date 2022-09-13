@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **ExpirationTime** | Pointer to **time.Time** | The timestamp representing when the card would expire at | [optional] [readonly] 
 **ExpirationYear** | Pointer to **string** |  | [optional] [readonly] 
 **Id** | Pointer to **string** | Card ID | [optional] [readonly] 
+**IsPinSet** | Pointer to **bool** | indicates whether a pin has been set on the card | [optional] [readonly] [default to false]
 **LastFour** | Pointer to **string** | The last 4 digits of the card PAN | [optional] [readonly] 
 **LastModifiedTime** | Pointer to **time.Time** | The timestamp representing when the card was last modified at | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]string** | Additional data to include in the request structured as key-value pairs | [optional] 
@@ -337,6 +338,31 @@ SetId sets Id field to given value.
 `func (o *BaseCard) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetIsPinSet
+
+`func (o *BaseCard) GetIsPinSet() bool`
+
+GetIsPinSet returns the IsPinSet field if non-nil, zero value otherwise.
+
+### GetIsPinSetOk
+
+`func (o *BaseCard) GetIsPinSetOk() (*bool, bool)`
+
+GetIsPinSetOk returns a tuple with the IsPinSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPinSet
+
+`func (o *BaseCard) SetIsPinSet(v bool)`
+
+SetIsPinSet sets IsPinSet field to given value.
+
+### HasIsPinSet
+
+`func (o *BaseCard) HasIsPinSet() bool`
+
+HasIsPinSet returns a boolean if a field has been set.
 
 ### GetLastFour
 

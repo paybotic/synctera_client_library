@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ActivateCard**](CardsApi.md#ActivateCard) | **Post** /cards/activate | Activate a card
 [**CreateCardImage**](CardsApi.md#CreateCardImage) | **Post** /cards/images | Create Card Image
+[**CreateGateway**](CardsApi.md#CreateGateway) | **Post** /cards/gateways | Create Gateway
 [**GetCard**](CardsApi.md#GetCard) | **Get** /cards/{card_id} | Get Card
 [**GetCardBarcode**](CardsApi.md#GetCardBarcode) | **Get** /cards/{card_id}/barcodes | Get Card Barcode
 [**GetCardImageData**](CardsApi.md#GetCardImageData) | **Get** /cards/images/{card_image_id}/data | Get Card Image Data
@@ -13,13 +14,16 @@ Method | HTTP request | Description
 [**GetCardWidgetURL**](CardsApi.md#GetCardWidgetURL) | **Get** /cards/card_widget_url | Get card widget URL
 [**GetClientAccessToken**](CardsApi.md#GetClientAccessToken) | **Post** /cards/{card_id}/client_token | Get a client token
 [**GetClientSingleUseToken**](CardsApi.md#GetClientSingleUseToken) | **Post** /cards/single_use_token | Get single-use token
+[**GetGateway**](CardsApi.md#GetGateway) | **Get** /cards/gateways/{gateway_id} | Get Gateway
 [**IssueCard**](CardsApi.md#IssueCard) | **Post** /cards | Issue a Card
 [**ListCardImageDetails**](CardsApi.md#ListCardImageDetails) | **Get** /cards/images | List Card Image Details
 [**ListCardProducts**](CardsApi.md#ListCardProducts) | **Get** /cards/products | List Card Products
 [**ListCards**](CardsApi.md#ListCards) | **Get** /cards | List Cards
 [**ListChanges**](CardsApi.md#ListChanges) | **Get** /cards/{card_id}/changes | List Card Changes
+[**ListGateways**](CardsApi.md#ListGateways) | **Get** /cards/gateways | List Gateways
 [**UpdateCard**](CardsApi.md#UpdateCard) | **Patch** /cards/{card_id} | Update Card
 [**UpdateCardImageDetails**](CardsApi.md#UpdateCardImageDetails) | **Patch** /cards/images/{card_image_id} | Update Card Image Details
+[**UpdateGateway**](CardsApi.md#UpdateGateway) | **Patch** /cards/gateways/{gateway_id} | Update Gateway
 [**UploadCardImageData**](CardsApi.md#UploadCardImageData) | **Post** /cards/images/{card_image_id}/data | Upload Card Image
 
 
@@ -45,7 +49,7 @@ import (
 )
 
 func main() {
-    cardActivationRequest := *openapiclient.NewCardActivationRequest("ActivationCode_example", "29b106d0-8201-48a9-a517-40c9c01a01e2") // CardActivationRequest | Card activation code
+    cardActivationRequest := *openapiclient.NewCardActivationRequest("ActivationCode_example", "1acf447c-544b-41b4-94f9-bd96b03cc48e") // CardActivationRequest | Card activation code
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -111,7 +115,7 @@ import (
 )
 
 func main() {
-    createCardImageRequest := *openapiclient.NewCreateCardImageRequest("c88a1c5f-67b5-4ebd-a833-202c7ae80c87", "37a054b8-fbdb-44c6-ae20-091f94ada475") // CreateCardImageRequest | Details of the image to create
+    createCardImageRequest := *openapiclient.NewCreateCardImageRequest("d6180286-ae04-4bdb-ac62-bce0b4b06f91", "8da2b02b-81f2-41f3-a32e-041eb8ccd825") // CreateCardImageRequest | Details of the image to create
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -141,6 +145,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CardImageDetails**](CardImageDetails.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateGateway
+
+> GatewayResponse CreateGateway(ctx).CreateGatewayRequest(createGatewayRequest).Execute()
+
+Create Gateway
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    createGatewayRequest := *openapiclient.NewCreateGatewayRequest([]string{"9faacdc6-bd75-4c79-b39f-898a95a21cac"}, "Url_example") // CreateGatewayRequest | Create a new Authorization Gateway Configuration
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CardsApi.CreateGateway(context.Background()).CreateGatewayRequest(createGatewayRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.CreateGateway``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateGateway`: GatewayResponse
+    fmt.Fprintf(os.Stdout, "Response from `CardsApi.CreateGateway`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateGatewayRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createGatewayRequest** | [**CreateGatewayRequest**](CreateGatewayRequest.md) | Create a new Authorization Gateway Configuration | 
+
+### Return type
+
+[**GatewayResponse**](GatewayResponse.md)
 
 ### Authorization
 
@@ -599,7 +669,7 @@ import (
 )
 
 func main() {
-    singleUseTokenRequest := *openapiclient.NewSingleUseTokenRequest("dd227f31-7fdf-4eb4-ab0a-0fa7eca1a56b", "7f32f8c4-691a-4586-b0c4-9fc172f019ab") // SingleUseTokenRequest | User token details
+    singleUseTokenRequest := *openapiclient.NewSingleUseTokenRequest("9aea04bb-b7c7-46b5-817d-1af05e6b22f2", "e167fa0d-ee40-4a6e-b1ba-f61593fd254e") // SingleUseTokenRequest | User token details
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -644,6 +714,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetGateway
+
+> GatewayResponse GetGateway(ctx, gatewayId).Execute()
+
+Get Gateway
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    gatewayId := "gatewayId_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CardsApi.GetGateway(context.Background(), gatewayId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetGateway``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetGateway`: GatewayResponse
+    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetGateway`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetGatewayRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GatewayResponse**](GatewayResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## IssueCard
 
 > CardResponse IssueCard(ctx).CardIssuanceRequest(cardIssuanceRequest).Execute()
@@ -665,7 +805,7 @@ import (
 )
 
 func main() {
-    cardIssuanceRequest := openapiclient.card_issuance_request{PhysicalCardIssuanceRequest: openapiclient.NewPhysicalCardIssuanceRequest("Form_example", "7bbd3567-dfc3-4b9b-9311-5a6e667ff3ab", "31dbb03f-7960-4b36-a670-046b6c23e1f9", "15047152-4b0f-48ce-8318-862807352003", "Type_example")} // CardIssuanceRequest | Card to issue
+    cardIssuanceRequest := openapiclient.card_issuance_request{PhysicalCardIssuanceRequest: openapiclient.NewPhysicalCardIssuanceRequest("Form_example", "98d3a7dd-8b7e-4b93-94b0-f5c9bcf88b39", "f453e97a-83f8-4810-bdbc-8df324fc4241", "a33e874c-4fa5-4c6f-850f-0778ffa097e9", "Type_example")} // CardIssuanceRequest | Card to issue
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -796,7 +936,7 @@ import (
 
 func main() {
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "xwsfu1mkaq" // string |  (optional)
+    pageToken := "h50ffqz9q5" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -865,7 +1005,7 @@ import (
 
 func main() {
     customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
-    accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+    accountId := []string{"4403f645-c2e3-4f8d-9027-127dca09f353"} // []string | Account ID(s). Multiple IDs can be provided as a comma-separated list. (optional)
     embossName := "embossName_example" // string | emboss name (optional)
     lastFour := "1234" // string | The last 4 digits of the card PAN (optional)
     expirationDate := time.Now() // string | The date representing when the card would expire at (optional)
@@ -876,7 +1016,7 @@ func main() {
     cardStatus := openapiclient.card_status("ACTIVE") // CardStatus | The status of a card (optional)
     postalCode := "49633" // string | The postal code of a card user (optional)
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "xwsfu1mkaq" // string |  (optional)
+    pageToken := "h50ffqz9q5" // string |  (optional)
     sortBy := []string{"SortBy_example"} // []string | Specifies the sort order for the returned cards.  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -903,7 +1043,7 @@ Other parameters are passed through a pointer to a apiListCardsRequest struct vi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **customerId** | **string** |  | 
- **accountId** | **string** |  | 
+ **accountId** | **[]string** | Account ID(s). Multiple IDs can be provided as a comma-separated list. | 
  **embossName** | **string** | emboss name | 
  **lastFour** | **string** | The last 4 digits of the card PAN | 
  **expirationDate** | **string** | The date representing when the card would expire at | 
@@ -990,6 +1130,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CardChangesList**](CardChangesList.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListGateways
+
+> GatewayListResponse ListGateways(ctx).Limit(limit).PageToken(pageToken).Execute()
+
+List Gateways
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    limit := int32(100) // int32 |  (optional) (default to 100)
+    pageToken := "h50ffqz9q5" // string |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CardsApi.ListGateways(context.Background()).Limit(limit).PageToken(pageToken).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.ListGateways``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListGateways`: GatewayListResponse
+    fmt.Fprintf(os.Stdout, "Response from `CardsApi.ListGateways`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListGatewaysRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int32** |  | [default to 100]
+ **pageToken** | **string** |  | 
+
+### Return type
+
+[**GatewayListResponse**](GatewayListResponse.md)
 
 ### Authorization
 
@@ -1134,6 +1342,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CardImageDetails**](CardImageDetails.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateGateway
+
+> GatewayResponse UpdateGateway(ctx, gatewayId).UpdateGatewayRequest(updateGatewayRequest).Execute()
+
+Update Gateway
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    gatewayId := "gatewayId_example" // string | 
+    updateGatewayRequest := *openapiclient.NewUpdateGatewayRequest() // UpdateGatewayRequest | Gateway edits
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CardsApi.UpdateGateway(context.Background(), gatewayId).UpdateGatewayRequest(updateGatewayRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.UpdateGateway``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateGateway`: GatewayResponse
+    fmt.Fprintf(os.Stdout, "Response from `CardsApi.UpdateGateway`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateGatewayRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updateGatewayRequest** | [**UpdateGatewayRequest**](UpdateGatewayRequest.md) | Gateway edits | 
+
+### Return type
+
+[**GatewayResponse**](GatewayResponse.md)
 
 ### Authorization
 

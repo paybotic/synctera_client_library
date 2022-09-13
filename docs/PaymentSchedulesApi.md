@@ -33,7 +33,7 @@ import (
 )
 
 func main() {
-    paymentSchedule := *openapiclient.NewPaymentSchedule("Description_example", openapiclient.payment_instruction{AchInstruction: openapiclient.NewAchInstruction(*openapiclient.NewOutgoingAchRequest(int32(607), "USD", "bd6fb05d-a0ba-4105-b280-51afdbc09e02", "debit", "ced6ad36-d1cd-4e73-90f5-11a07331406b", "f48a96a4-3921-4e11-a062-270697d24bec"), "Type_example")}, *openapiclient.NewScheduleConfig("Frequency_example", int32(123), time.Now())) // PaymentSchedule | payment schedule to create
+    paymentSchedule := *openapiclient.NewPaymentSchedule("Description_example", openapiclient.payment_instruction{AchInstruction: openapiclient.NewAchInstruction(*openapiclient.NewOutgoingAchRequest(int32(607), "USD", "2071f55a-0aeb-4f62-85a9-68f72856d463", "debit", "4394f57f-3396-4661-bd03-27684791611f", "18b1f30b-227f-4720-9956-4c6805e5cdfa"), "Type_example")}, *openapiclient.NewScheduleConfig("Frequency_example", int32(123), time.Now())) // PaymentSchedule | payment schedule to create
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -100,7 +100,7 @@ import (
 
 func main() {
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "xwsfu1mkaq" // string |  (optional)
+    pageToken := "h50ffqz9q5" // string |  (optional)
     id := []string{"Inner_example"} // []string | IDs. Multiple IDs can be provided as a comma-separated list. (optional)
     accountId := []string{"Inner_example"} // []string | Originating account IDs. Multiple IDs can be provided as a comma-separated list. (optional)
     customerId := []string{"Inner_example"} // []string | The IDs of customers who created the payment schedules. Multiple IDs can be provided as a comma-separated list. (optional)
@@ -174,7 +174,7 @@ import (
 
 func main() {
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "xwsfu1mkaq" // string |  (optional)
+    pageToken := "h50ffqz9q5" // string |  (optional)
     id := []string{"Inner_example"} // []string | IDs. Multiple IDs can be provided as a comma-separated list. (optional)
     scheduleId := []string{"Inner_example"} // []string | Payment schedule IDs. Multiple IDs can be provided as a comma-separated list. (optional)
     accountId := []string{"Inner_example"} // []string | Originating account IDs. Multiple IDs can be provided as a comma-separated list. (optional)

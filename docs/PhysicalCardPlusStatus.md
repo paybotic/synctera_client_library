@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **ExpirationTime** | Pointer to **time.Time** | The timestamp representing when the card would expire at | [optional] [readonly] 
 **ExpirationYear** | Pointer to **string** |  | [optional] [readonly] 
 **Id** | Pointer to **string** | Card ID | [optional] [readonly] 
+**IsPinSet** | Pointer to **bool** | indicates whether a pin has been set on the card | [optional] [readonly] [default to false]
 **LastFour** | Pointer to **string** | The last 4 digits of the card PAN | [optional] [readonly] 
 **LastModifiedTime** | Pointer to **time.Time** | The timestamp representing when the card was last modified at | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]string** | Additional data to include in the request structured as key-value pairs | [optional] 
@@ -24,13 +25,13 @@ Name | Type | Description | Notes
 **ReissuedToId** | Pointer to **string** | If this card was reissued, this ID refers to the card that replaced it. | [optional] [readonly] 
 **Type** | Pointer to **string** | Indicates the type of card to be issued | [optional] 
 **CardImageId** | Pointer to **string** | The ID of the custom card image used for this card | [optional] 
-**IsPinSet** | Pointer to **bool** | indicates whether a pin has been set on the card | [optional] [readonly] [default to false]
 **Shipping** | Pointer to [**Shipping**](Shipping.md) |  | [optional] 
 **CardStatus** | [**CardStatus**](CardStatus.md) |  | 
 **Memo** | Pointer to **string** | Additional details about the reason for the status change | [optional] 
 **StatusReason** | [**CardStatusReasonCode**](CardStatusReasonCode.md) |  | 
 **CardFulfillmentStatus** | [**CardFulfillmentStatus**](CardFulfillmentStatus.md) |  | 
-**TrackingNumber** | Pointer to **string** | The tracking number | [optional] [readonly] 
+**FulfillmentDetails** | Pointer to [**FulfillmentDetails**](FulfillmentDetails.md) |  | [optional] 
+**TrackingNumber** | Pointer to **string** | This contains all shipping details as provided by the card fulfillment provider, including the tracking number. This field is deprecated. Instead, please use the fulfillment_details object, which includes a field for just the tracking number.  | [optional] [readonly] 
 
 ## Methods
 
@@ -346,6 +347,31 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
+### GetIsPinSet
+
+`func (o *PhysicalCardPlusStatus) GetIsPinSet() bool`
+
+GetIsPinSet returns the IsPinSet field if non-nil, zero value otherwise.
+
+### GetIsPinSetOk
+
+`func (o *PhysicalCardPlusStatus) GetIsPinSetOk() (*bool, bool)`
+
+GetIsPinSetOk returns a tuple with the IsPinSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPinSet
+
+`func (o *PhysicalCardPlusStatus) SetIsPinSet(v bool)`
+
+SetIsPinSet sets IsPinSet field to given value.
+
+### HasIsPinSet
+
+`func (o *PhysicalCardPlusStatus) HasIsPinSet() bool`
+
+HasIsPinSet returns a boolean if a field has been set.
+
 ### GetLastFour
 
 `func (o *PhysicalCardPlusStatus) GetLastFour() string`
@@ -546,31 +572,6 @@ SetCardImageId sets CardImageId field to given value.
 
 HasCardImageId returns a boolean if a field has been set.
 
-### GetIsPinSet
-
-`func (o *PhysicalCardPlusStatus) GetIsPinSet() bool`
-
-GetIsPinSet returns the IsPinSet field if non-nil, zero value otherwise.
-
-### GetIsPinSetOk
-
-`func (o *PhysicalCardPlusStatus) GetIsPinSetOk() (*bool, bool)`
-
-GetIsPinSetOk returns a tuple with the IsPinSet field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsPinSet
-
-`func (o *PhysicalCardPlusStatus) SetIsPinSet(v bool)`
-
-SetIsPinSet sets IsPinSet field to given value.
-
-### HasIsPinSet
-
-`func (o *PhysicalCardPlusStatus) HasIsPinSet() bool`
-
-HasIsPinSet returns a boolean if a field has been set.
-
 ### GetShipping
 
 `func (o *PhysicalCardPlusStatus) GetShipping() Shipping`
@@ -680,6 +681,31 @@ and a boolean to check if the value has been set.
 
 SetCardFulfillmentStatus sets CardFulfillmentStatus field to given value.
 
+
+### GetFulfillmentDetails
+
+`func (o *PhysicalCardPlusStatus) GetFulfillmentDetails() FulfillmentDetails`
+
+GetFulfillmentDetails returns the FulfillmentDetails field if non-nil, zero value otherwise.
+
+### GetFulfillmentDetailsOk
+
+`func (o *PhysicalCardPlusStatus) GetFulfillmentDetailsOk() (*FulfillmentDetails, bool)`
+
+GetFulfillmentDetailsOk returns a tuple with the FulfillmentDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFulfillmentDetails
+
+`func (o *PhysicalCardPlusStatus) SetFulfillmentDetails(v FulfillmentDetails)`
+
+SetFulfillmentDetails sets FulfillmentDetails field to given value.
+
+### HasFulfillmentDetails
+
+`func (o *PhysicalCardPlusStatus) HasFulfillmentDetails() bool`
+
+HasFulfillmentDetails returns a boolean if a field has been set.
 
 ### GetTrackingNumber
 

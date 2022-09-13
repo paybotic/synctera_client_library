@@ -34,7 +34,7 @@ import (
 )
 
 func main() {
-    externalCardRequest := *openapiclient.NewExternalCardRequest("37a054b8-fbdb-44c6-ae20-091f94ada475", "Token_example") // ExternalCardRequest | Details of the card to create
+    externalCardRequest := *openapiclient.NewExternalCardRequest("8da2b02b-81f2-41f3-a32e-041eb8ccd825", "Token_example") // ExternalCardRequest | Details of the card to create
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -100,7 +100,7 @@ import (
 )
 
 func main() {
-    transferRequest := *openapiclient.NewTransferRequest(int32(123), "USD", "b542b637-ce49-4be6-a26d-973f050985b9", "d3b3de70-661d-4c72-be44-3ca8d696d969", openapiclient.transfer_type("PULL")) // TransferRequest | Details of the transfer to create
+    transferRequest := *openapiclient.NewTransferRequest(int32(123), "USD", "b2710751-b575-47d0-a09b-da0994553d93", "3e2a2f28-4910-4934-be22-ded51f926b76", openapiclient.transfer_type("PULL")) // TransferRequest | Details of the transfer to create
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -166,7 +166,7 @@ import (
 )
 
 func main() {
-    externalCardId := "4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5" // string | The unique identifier of an external card
+    externalCardId := "411e5190-c495-4344-9fb5-0a3c7bab0345" // string | The unique identifier of an external card
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -236,7 +236,7 @@ import (
 )
 
 func main() {
-    transferId := "ddcacaa4-e0e4-4652-ae9f-5ef7f1b7d7e1" // string | The unique identifier of a transfer
+    transferId := "1b7767fe-7dcd-43d5-85cf-c4392bb3e830" // string | The unique identifier of a transfer
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -307,10 +307,10 @@ import (
 
 func main() {
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "xwsfu1mkaq" // string |  (optional)
-    customerId := []string{"37a054b8-fbdb-44c6-ae20-091f94ada475"} // []string |  (optional)
+    pageToken := "h50ffqz9q5" // string |  (optional)
+    customerId := []string{"8da2b02b-81f2-41f3-a32e-041eb8ccd825"} // []string |  (optional)
     externalCardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
-    originatingAccountId := []string{"e85e7aeb-712d-4e9c-b2eb-d65fce19507b"} // []string |  (optional)
+    originatingAccountId := []string{"a6f8870c-1e7e-45ba-833d-cbc1eead9d2d"} // []string |  (optional)
     type_ := openapiclient.transfer_type("PULL") // TransferType | The type of an external transfer (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -363,7 +363,7 @@ Name | Type | Description  | Notes
 
 ## ListExternalCards
 
-> ExternalCardListResponse ListExternalCards(ctx).Limit(limit).PageToken(pageToken).CustomerId(customerId).Execute()
+> ExternalCardListResponse ListExternalCards(ctx).Limit(limit).PageToken(pageToken).CustomerId(customerId).BusinessId(businessId).Execute()
 
 List external cards
 
@@ -383,12 +383,13 @@ import (
 
 func main() {
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "xwsfu1mkaq" // string |  (optional)
+    pageToken := "h50ffqz9q5" // string |  (optional)
     customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+    businessId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ExternalCardsAlphaApi.ListExternalCards(context.Background()).Limit(limit).PageToken(pageToken).CustomerId(customerId).Execute()
+    resp, r, err := apiClient.ExternalCardsAlphaApi.ListExternalCards(context.Background()).Limit(limit).PageToken(pageToken).CustomerId(customerId).BusinessId(businessId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ExternalCardsAlphaApi.ListExternalCards``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -412,6 +413,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
  **customerId** | **string** |  | 
+ **businessId** | **string** |  | 
 
 ### Return type
 

@@ -32,7 +32,7 @@ import (
 )
 
 func main() {
-    wireId := "50653b5a-fba5-4e95-aef3-819414206d61" // string | The unique identifier of a wire
+    wireId := "e7c5e3cb-0294-4243-b418-47025997de7f" // string | The unique identifier of a wire
     updateTransfer := *openapiclient.NewUpdateTransfer() // UpdateTransfer | wire to update
 
     configuration := openapiclient.NewConfiguration()
@@ -104,7 +104,7 @@ import (
 )
 
 func main() {
-    wireRequest := *openapiclient.NewWireRequest(int32(10000), "USD", "6a403707-795c-4c74-a406-ee19f32a2a5a", "ba2d8305-b38b-4cf9-ae86-066b4ccbc52b", "c0698ffe-c383-49ea-a8dc-44bf4b514e4e") // WireRequest | Wire transfer request
+    wireRequest := *openapiclient.NewWireRequest(int32(10000), "USD", "98f0e4c8-220b-463c-8981-7413c65ee6c9", "ed92890d-7111-465a-a972-1b6839e88eb2", "72b70665-ba18-412e-a91f-cd59f72c6cd0") // WireRequest | Wire transfer request
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -170,7 +170,7 @@ import (
 )
 
 func main() {
-    wireId := "50653b5a-fba5-4e95-aef3-819414206d61" // string | The unique identifier of a wire
+    wireId := "e7c5e3cb-0294-4243-b418-47025997de7f" // string | The unique identifier of a wire
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -241,11 +241,11 @@ import (
 
 func main() {
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "xwsfu1mkaq" // string |  (optional)
+    pageToken := "h50ffqz9q5" // string |  (optional)
     status := "PENDING" // string |  (optional)
-    customerId := "21b74a02-b7c7-49f4-a497-98ba5cbedb27" // string |  (optional)
-    originatingAccountId := "f122e6f2-ba88-4a5d-9084-350bba5f27e1" // string |  (optional)
-    receivingAccountId := "251ee435-8230-48cb-8a71-b11a43dcf497" // string |  (optional)
+    customerId := "3b601be1-1c91-4136-bca8-6754cc78f713" // string |  (optional)
+    originatingAccountId := "1a43dcf4-97b8-4522-850d-4de9061cf1b4" // string |  (optional)
+    receivingAccountId := "2c0b200c-7b43-4110-83f4-79370103ded8" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

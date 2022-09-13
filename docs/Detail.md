@@ -4,9 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Description** | Pointer to **string** | Human-readable description explaining the result. | [optional] 
-**Label** | Pointer to **string** | Human-readable version of the category. | [optional] 
+**Description** | Pointer to **string** | Human-readable description explaining the individual check. | [optional] 
+**Label** | Pointer to **string** | Human-readable grouping describing the aspect of the customer&#39;s identity examined by this check. | [optional] 
 **Result** | Pointer to **string** | The result of the individual check. One of the following: * &#x60;PASS&#x60; – the check passed contributing to a positive outcome (or accepted verification result). * &#x60;WARN&#x60; – the results of the check were inconclusive and might require review. * &#x60;FAIL&#x60; – the check failed and might result in a failing outcome (or rejected verification_result).  | [optional] 
+**VendorCode** | Pointer to **string** | Machine-readable description of the individual check. This field contains vendor-specific terms and may not be populated in all cases. | [optional] 
 
 ## Methods
 
@@ -101,6 +102,31 @@ SetResult sets Result field to given value.
 `func (o *Detail) HasResult() bool`
 
 HasResult returns a boolean if a field has been set.
+
+### GetVendorCode
+
+`func (o *Detail) GetVendorCode() string`
+
+GetVendorCode returns the VendorCode field if non-nil, zero value otherwise.
+
+### GetVendorCodeOk
+
+`func (o *Detail) GetVendorCodeOk() (*string, bool)`
+
+GetVendorCodeOk returns a tuple with the VendorCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVendorCode
+
+`func (o *Detail) SetVendorCode(v string)`
+
+SetVendorCode sets VendorCode field to given value.
+
+### HasVendorCode
+
+`func (o *Detail) HasVendorCode() bool`
+
+HasVendorCode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

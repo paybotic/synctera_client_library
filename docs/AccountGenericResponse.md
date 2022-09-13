@@ -5,7 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccessStatus** | Pointer to [**AccountAccessStatus**](AccountAccessStatus.md) |  | [optional] 
+**AccessStatusLastUpdatedTime** | Pointer to **time.Time** | Timestamp of the last modification of the access_status. RFC3339 format. | [optional] [readonly] 
 **AccountNumber** | Pointer to **string** | Account number | [optional] [readonly] 
+**AccountNumberMasked** | Pointer to **string** | The response will contain the bank fintech ID (3 or 6 digits) plus the last 4 digits, with the digits in between replaced with * characters. Shadow mode account numbers will not be masked. | [optional] [readonly] 
 **AccountPurpose** | Pointer to **string** | Purpose of the account | [optional] 
 **AccountType** | Pointer to [**AccountType**](AccountType.md) |  | [optional] 
 **ApplicationId** | Pointer to **string** | The application ID for this account.  | [optional] 
@@ -23,11 +25,11 @@ Name | Type | Description | Notes
 **CustomerType** | Pointer to [**CustomerType**](CustomerType.md) |  | [optional] 
 **DelinquencyPeriod** | Pointer to **int32** | The number of days past the due date to wait for a minimum payment before marking an account as delinquent.  | [optional] [default to 30]
 **ExchangeRateType** | Pointer to **string** | Exchange rate type | [optional] 
-**FeeProductIds** | Pointer to **[]string** | A list of fee resources from account product that the current account associate with | [optional] 
+**FeeProductIds** | Pointer to **[]string** | A list of fee account products that the current account associates with. | [optional] 
 **GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] 
 **Iban** | Pointer to **string** | International bank account number | [optional] 
 **Id** | Pointer to **string** | Account ID | [optional] [readonly] 
-**InterestProductId** | Pointer to **string** | An interest from account product that the current account associate with | [optional] 
+**InterestProductId** | Pointer to **string** | An interest account product that the current account associates with. | [optional] 
 **IsAccountPool** | Pointer to **bool** | Account is investment (variable balance) account or a multi-balance account pool. Default false | [optional] 
 **IsAchEnabled** | Pointer to **bool** | A flag to indicate whether ACH transactions are enabled. | [optional] [readonly] 
 **IsCardEnabled** | Pointer to **bool** | A flag to indicate whether card transactions are enabled. | [optional] [readonly] 
@@ -86,6 +88,31 @@ SetAccessStatus sets AccessStatus field to given value.
 
 HasAccessStatus returns a boolean if a field has been set.
 
+### GetAccessStatusLastUpdatedTime
+
+`func (o *AccountGenericResponse) GetAccessStatusLastUpdatedTime() time.Time`
+
+GetAccessStatusLastUpdatedTime returns the AccessStatusLastUpdatedTime field if non-nil, zero value otherwise.
+
+### GetAccessStatusLastUpdatedTimeOk
+
+`func (o *AccountGenericResponse) GetAccessStatusLastUpdatedTimeOk() (*time.Time, bool)`
+
+GetAccessStatusLastUpdatedTimeOk returns a tuple with the AccessStatusLastUpdatedTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccessStatusLastUpdatedTime
+
+`func (o *AccountGenericResponse) SetAccessStatusLastUpdatedTime(v time.Time)`
+
+SetAccessStatusLastUpdatedTime sets AccessStatusLastUpdatedTime field to given value.
+
+### HasAccessStatusLastUpdatedTime
+
+`func (o *AccountGenericResponse) HasAccessStatusLastUpdatedTime() bool`
+
+HasAccessStatusLastUpdatedTime returns a boolean if a field has been set.
+
 ### GetAccountNumber
 
 `func (o *AccountGenericResponse) GetAccountNumber() string`
@@ -110,6 +137,31 @@ SetAccountNumber sets AccountNumber field to given value.
 `func (o *AccountGenericResponse) HasAccountNumber() bool`
 
 HasAccountNumber returns a boolean if a field has been set.
+
+### GetAccountNumberMasked
+
+`func (o *AccountGenericResponse) GetAccountNumberMasked() string`
+
+GetAccountNumberMasked returns the AccountNumberMasked field if non-nil, zero value otherwise.
+
+### GetAccountNumberMaskedOk
+
+`func (o *AccountGenericResponse) GetAccountNumberMaskedOk() (*string, bool)`
+
+GetAccountNumberMaskedOk returns a tuple with the AccountNumberMasked field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountNumberMasked
+
+`func (o *AccountGenericResponse) SetAccountNumberMasked(v string)`
+
+SetAccountNumberMasked sets AccountNumberMasked field to given value.
+
+### HasAccountNumberMasked
+
+`func (o *AccountGenericResponse) HasAccountNumberMasked() bool`
+
+HasAccountNumberMasked returns a boolean if a field has been set.
 
 ### GetAccountPurpose
 

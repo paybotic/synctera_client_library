@@ -9,15 +9,15 @@ Name | Type | Description | Notes
 **EndDate** | Pointer to **string** | The date indicating the ending of the time interval covered by the statement | [optional] [readonly] 
 **Id** | Pointer to **string** | statement ID | [optional] [readonly] 
 **IssueDate** | Pointer to **string** | The date when the statement has been issued | [optional] [readonly] 
-**StartDate** | Pointer to **string** | The date indicating the begining of the time interval covered by the statement | [optional] [readonly] 
+**StartDate** | Pointer to **string** | The date indicating the beginning of the time interval covered by the statement | [optional] [readonly] 
 **AccountSummary** | Pointer to [**AccountSummary**](AccountSummary.md) |  | [optional] 
 **AuthorizedSigner** | Pointer to [**[]Person1**](Person1.md) |  | [optional] [readonly] 
 **Disclosure** | Pointer to **string** |  | [optional] 
 **JointAccountHolders** | Pointer to [**[]Person1**](Person1.md) |  | [optional] [readonly] 
 **PrimaryAccountHolderBusiness** | Pointer to [**Business1**](Business1.md) |  | [optional] 
 **PrimaryAccountHolderPersonal** | Pointer to [**Person1**](Person1.md) |  | [optional] 
-**SavingsSummary** | Pointer to [**SavingsSummary**](SavingsSummary.md) |  | [optional] 
 **Transactions** | Pointer to [**[]Transaction**](Transaction.md) |  | [optional] 
+**SavingsSummary** | Pointer to [**SavingsSummary**](SavingsSummary.md) |  | [optional] 
 
 ## Methods
 
@@ -338,31 +338,6 @@ SetPrimaryAccountHolderPersonal sets PrimaryAccountHolderPersonal field to given
 
 HasPrimaryAccountHolderPersonal returns a boolean if a field has been set.
 
-### GetSavingsSummary
-
-`func (o *Statement) GetSavingsSummary() SavingsSummary`
-
-GetSavingsSummary returns the SavingsSummary field if non-nil, zero value otherwise.
-
-### GetSavingsSummaryOk
-
-`func (o *Statement) GetSavingsSummaryOk() (*SavingsSummary, bool)`
-
-GetSavingsSummaryOk returns a tuple with the SavingsSummary field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSavingsSummary
-
-`func (o *Statement) SetSavingsSummary(v SavingsSummary)`
-
-SetSavingsSummary sets SavingsSummary field to given value.
-
-### HasSavingsSummary
-
-`func (o *Statement) HasSavingsSummary() bool`
-
-HasSavingsSummary returns a boolean if a field has been set.
-
 ### GetTransactions
 
 `func (o *Statement) GetTransactions() []Transaction`
@@ -387,6 +362,31 @@ SetTransactions sets Transactions field to given value.
 `func (o *Statement) HasTransactions() bool`
 
 HasTransactions returns a boolean if a field has been set.
+
+### GetSavingsSummary
+
+`func (o *Statement) GetSavingsSummary() SavingsSummary`
+
+GetSavingsSummary returns the SavingsSummary field if non-nil, zero value otherwise.
+
+### GetSavingsSummaryOk
+
+`func (o *Statement) GetSavingsSummaryOk() (*SavingsSummary, bool)`
+
+GetSavingsSummaryOk returns a tuple with the SavingsSummary field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSavingsSummary
+
+`func (o *Statement) SetSavingsSummary(v SavingsSummary)`
+
+SetSavingsSummary sets SavingsSummary field to given value.
+
+### HasSavingsSummary
+
+`func (o *Statement) HasSavingsSummary() bool`
+
+HasSavingsSummary returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

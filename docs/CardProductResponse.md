@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **CreationTime** | **time.Time** | The timestamp representing when the Card Product was created | [readonly] 
 **DigitalWalletTokenization** | [**DigitalWalletTokenization**](DigitalWalletTokenization.md) |  | 
 **EndDate** | **time.Time** | The time when the Card Product is decommissioned | 
-**GatewayId** | Pointer to **string** | Gateway ID, used if the Card Product is utilizing FinTech authorization flow | [optional] 
 **Id** | **string** | Card Product ID | [readonly] 
 **Image** | Pointer to **bool** | Indicates whether or not there is an overlay image of the card product available | [optional] 
 **ImageMode** | Pointer to [**CardImageMode**](CardImageMode.md) |  | [optional] 
@@ -187,31 +186,6 @@ and a boolean to check if the value has been set.
 
 SetEndDate sets EndDate field to given value.
 
-
-### GetGatewayId
-
-`func (o *CardProductResponse) GetGatewayId() string`
-
-GetGatewayId returns the GatewayId field if non-nil, zero value otherwise.
-
-### GetGatewayIdOk
-
-`func (o *CardProductResponse) GetGatewayIdOk() (*string, bool)`
-
-GetGatewayIdOk returns a tuple with the GatewayId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetGatewayId
-
-`func (o *CardProductResponse) SetGatewayId(v string)`
-
-SetGatewayId sets GatewayId field to given value.
-
-### HasGatewayId
-
-`func (o *CardProductResponse) HasGatewayId() bool`
-
-HasGatewayId returns a boolean if a field has been set.
 
 ### GetId
 
