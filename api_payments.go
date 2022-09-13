@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.17.0
 */
@@ -23,22 +23,6 @@ import (
 // PaymentsApiService PaymentsApi service
 type PaymentsApiService service
 
-type ApiAddTransactionOutRequest struct {
-	ctx context.Context
-	ApiService *PaymentsApiService
-	outgoingAchRequest *OutgoingAchRequest
-}
-
-// Outgoing ACH
-func (r ApiAddTransactionOutRequest) OutgoingAchRequest(outgoingAchRequest OutgoingAchRequest) ApiAddTransactionOutRequest {
-	r.outgoingAchRequest = &outgoingAchRequest
-	return r
-}
-
-func (r ApiAddTransactionOutRequest) Execute() (*OutgoingAch, *http.Response, error) {
-	return r.ApiService.AddTransactionOutExecute(r)
-}
-
 /*
 AddTransactionOut Create an outgoing ACH
 
@@ -50,8 +34,8 @@ Create an outgoing ACH
 */
 func (a *PaymentsApiService) AddTransactionOut(ctx context.Context) ApiAddTransactionOutRequest {
 	return ApiAddTransactionOutRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService: (*ACHApiService)(a),
+		ctx:        ctx,
 	}
 }
 
@@ -184,16 +168,6 @@ func (a *PaymentsApiService) AddTransactionOutExecute(r ApiAddTransactionOutRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetTransactionOutRequest struct {
-	ctx context.Context
-	ApiService *PaymentsApiService
-	transactionId string
-}
-
-func (r ApiGetTransactionOutRequest) Execute() (*OutgoingAch, *http.Response, error) {
-	return r.ApiService.GetTransactionOutExecute(r)
-}
-
 /*
 GetTransactionOut Get an outgoing ACH transaction
 
@@ -205,8 +179,8 @@ Get a single outgoing ACH transaction
 */
 func (a *PaymentsApiService) GetTransactionOut(ctx context.Context, transactionId string) ApiGetTransactionOutRequest {
 	return ApiGetTransactionOutRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService: (*ACHApiService)(a),
+		ctx:           ctx,
 		transactionId: transactionId,
 	}
 }
@@ -336,27 +310,6 @@ func (a *PaymentsApiService) GetTransactionOutExecute(r ApiGetTransactionOutRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListTransactionsOutRequest struct {
-	ctx context.Context
-	ApiService *PaymentsApiService
-	limit *int32
-	pageToken *string
-}
-
-func (r ApiListTransactionsOutRequest) Limit(limit int32) ApiListTransactionsOutRequest {
-	r.limit = &limit
-	return r
-}
-
-func (r ApiListTransactionsOutRequest) PageToken(pageToken string) ApiListTransactionsOutRequest {
-	r.pageToken = &pageToken
-	return r
-}
-
-func (r ApiListTransactionsOutRequest) Execute() (*OutgoingAchList, *http.Response, error) {
-	return r.ApiService.ListTransactionsOutExecute(r)
-}
-
 /*
 ListTransactionsOut List outgoing ACH transactions
 
@@ -367,8 +320,8 @@ List outgoing ACH transactions
 */
 func (a *PaymentsApiService) ListTransactionsOut(ctx context.Context) ApiListTransactionsOutRequest {
 	return ApiListTransactionsOutRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService: (*ACHApiService)(a),
+		ctx:        ctx,
 	}
 }
 
@@ -482,23 +435,6 @@ func (a *PaymentsApiService) ListTransactionsOutExecute(r ApiListTransactionsOut
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPatchTransactionOutRequest struct {
-	ctx context.Context
-	ApiService *PaymentsApiService
-	transactionId string
-	outgoingAchPatch *OutgoingAchPatch
-}
-
-// Outgoing ACH update request
-func (r ApiPatchTransactionOutRequest) OutgoingAchPatch(outgoingAchPatch OutgoingAchPatch) ApiPatchTransactionOutRequest {
-	r.outgoingAchPatch = &outgoingAchPatch
-	return r
-}
-
-func (r ApiPatchTransactionOutRequest) Execute() (*http.Response, error) {
-	return r.ApiService.PatchTransactionOutExecute(r)
-}
-
 /*
 PatchTransactionOut Update outgoing ACH transaction
 
@@ -510,8 +446,8 @@ Update outgoing ACH transaction (either status or funds availability)
 */
 func (a *PaymentsApiService) PatchTransactionOut(ctx context.Context, transactionId string) ApiPatchTransactionOutRequest {
 	return ApiPatchTransactionOutRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService: (*ACHApiService)(a),
+		ctx:           ctx,
 		transactionId: transactionId,
 	}
 }
