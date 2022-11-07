@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Documents** | [**[]Document**](Document.md) | Array of documents. | 
+**Documents** | [**[]Document**](Document.md) | Array of documents | 
 
 ## Methods
 

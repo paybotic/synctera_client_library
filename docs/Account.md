@@ -34,12 +34,14 @@ Name | Type | Description | Notes
 **FeeProductIds** | Pointer to **[]string** | A list of fee account products that the current account associates with. | [optional] 
 **InterestProductId** | Pointer to **string** | An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_DAILY.  | [optional] 
 **OverdraftLimit** | Pointer to **int64** | Account&#39;s overdraft limit | [optional] 
+**SpendControlIds** | Pointer to **[]string** | List of spend control IDs to control spending for the account | [optional] 
 **SpendingLimits** | Pointer to [**SpendingLimits**](SpendingLimits.md) |  | [optional] 
 **ChargeoffPeriod** | Pointer to **int32** | The number of days an account can stay delinquent before marking an account as charged-off.  | [optional] [default to 90]
 **CreditLimit** | Pointer to **int64** | The credit limit for this line of credit account in cents. Minimum is 0.  | [optional] 
 **DelinquencyPeriod** | Pointer to **int32** | The number of days past the due date to wait for a minimum payment before marking an account as delinquent.  | [optional] [default to 30]
 **GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] 
-**MinimumPayment** | Pointer to [**MinimumPayment**](MinimumPayment.md) |  | [optional] 
+**MinimumPayment** | Pointer to [**MinimumPaymentPartial**](MinimumPaymentPartial.md) |  | [optional] 
+**Security** | Pointer to [**Security**](Security.md) |  | [optional] 
 
 ## Methods
 
@@ -810,6 +812,31 @@ SetOverdraftLimit sets OverdraftLimit field to given value.
 
 HasOverdraftLimit returns a boolean if a field has been set.
 
+### GetSpendControlIds
+
+`func (o *Account) GetSpendControlIds() []string`
+
+GetSpendControlIds returns the SpendControlIds field if non-nil, zero value otherwise.
+
+### GetSpendControlIdsOk
+
+`func (o *Account) GetSpendControlIdsOk() (*[]string, bool)`
+
+GetSpendControlIdsOk returns a tuple with the SpendControlIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpendControlIds
+
+`func (o *Account) SetSpendControlIds(v []string)`
+
+SetSpendControlIds sets SpendControlIds field to given value.
+
+### HasSpendControlIds
+
+`func (o *Account) HasSpendControlIds() bool`
+
+HasSpendControlIds returns a boolean if a field has been set.
+
 ### GetSpendingLimits
 
 `func (o *Account) GetSpendingLimits() SpendingLimits`
@@ -937,20 +964,20 @@ HasGracePeriod returns a boolean if a field has been set.
 
 ### GetMinimumPayment
 
-`func (o *Account) GetMinimumPayment() MinimumPayment`
+`func (o *Account) GetMinimumPayment() MinimumPaymentPartial`
 
 GetMinimumPayment returns the MinimumPayment field if non-nil, zero value otherwise.
 
 ### GetMinimumPaymentOk
 
-`func (o *Account) GetMinimumPaymentOk() (*MinimumPayment, bool)`
+`func (o *Account) GetMinimumPaymentOk() (*MinimumPaymentPartial, bool)`
 
 GetMinimumPaymentOk returns a tuple with the MinimumPayment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMinimumPayment
 
-`func (o *Account) SetMinimumPayment(v MinimumPayment)`
+`func (o *Account) SetMinimumPayment(v MinimumPaymentPartial)`
 
 SetMinimumPayment sets MinimumPayment field to given value.
 
@@ -959,6 +986,31 @@ SetMinimumPayment sets MinimumPayment field to given value.
 `func (o *Account) HasMinimumPayment() bool`
 
 HasMinimumPayment returns a boolean if a field has been set.
+
+### GetSecurity
+
+`func (o *Account) GetSecurity() Security`
+
+GetSecurity returns the Security field if non-nil, zero value otherwise.
+
+### GetSecurityOk
+
+`func (o *Account) GetSecurityOk() (*Security, bool)`
+
+GetSecurityOk returns a tuple with the Security field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecurity
+
+`func (o *Account) SetSecurity(v Security)`
+
+SetSecurity sets Security field to given value.
+
+### HasSecurity
+
+`func (o *Account) HasSecurity() bool`
+
+HasSecurity returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

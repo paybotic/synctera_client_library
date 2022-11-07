@@ -6,8 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Form** | **string** | PHYSICAL or VIRTUAL. | 
 **AccountId** | **string** | The ID of the account to which the card will be linked | 
-**Bin** | Pointer to **string** | The bin number | [optional] 
-**CardBrand** | Pointer to [**CardBrand**](CardBrand.md) |  | [optional] 
 **CardProductId** | **string** | The card product to which the card is attached | 
 **CreationTime** | Pointer to **time.Time** | The timestamp representing when the card issuance request was made | [optional] [readonly] 
 **CustomerId** | **string** | The ID of the customer to whom the card will be issued | 
@@ -85,56 +83,6 @@ and a boolean to check if the value has been set.
 
 SetAccountId sets AccountId field to given value.
 
-
-### GetBin
-
-`func (o *PhysicalCardIssuanceRequest) GetBin() string`
-
-GetBin returns the Bin field if non-nil, zero value otherwise.
-
-### GetBinOk
-
-`func (o *PhysicalCardIssuanceRequest) GetBinOk() (*string, bool)`
-
-GetBinOk returns a tuple with the Bin field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBin
-
-`func (o *PhysicalCardIssuanceRequest) SetBin(v string)`
-
-SetBin sets Bin field to given value.
-
-### HasBin
-
-`func (o *PhysicalCardIssuanceRequest) HasBin() bool`
-
-HasBin returns a boolean if a field has been set.
-
-### GetCardBrand
-
-`func (o *PhysicalCardIssuanceRequest) GetCardBrand() CardBrand`
-
-GetCardBrand returns the CardBrand field if non-nil, zero value otherwise.
-
-### GetCardBrandOk
-
-`func (o *PhysicalCardIssuanceRequest) GetCardBrandOk() (*CardBrand, bool)`
-
-GetCardBrandOk returns a tuple with the CardBrand field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCardBrand
-
-`func (o *PhysicalCardIssuanceRequest) SetCardBrand(v CardBrand)`
-
-SetCardBrand sets CardBrand field to given value.
-
-### HasCardBrand
-
-`func (o *PhysicalCardIssuanceRequest) HasCardBrand() bool`
-
-HasCardBrand returns a boolean if a field has been set.
 
 ### GetCardProductId
 

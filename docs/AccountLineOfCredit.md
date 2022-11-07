@@ -34,7 +34,7 @@ Name | Type | Description | Notes
 **DelinquencyPeriod** | Pointer to **int32** | The number of days past the due date to wait for a minimum payment before marking an account as delinquent.  | [optional] [default to 30]
 **GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] 
 **InterestProductId** | Pointer to **string** | An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_DAILY.  | [optional] 
-**MinimumPayment** | Pointer to [**MinimumPayment**](MinimumPayment.md) |  | [optional] 
+**MinimumPayment** | Pointer to [**MinimumPaymentPartial**](MinimumPaymentPartial.md) |  | [optional] 
 
 ## Methods
 
@@ -807,20 +807,20 @@ HasInterestProductId returns a boolean if a field has been set.
 
 ### GetMinimumPayment
 
-`func (o *AccountLineOfCredit) GetMinimumPayment() MinimumPayment`
+`func (o *AccountLineOfCredit) GetMinimumPayment() MinimumPaymentPartial`
 
 GetMinimumPayment returns the MinimumPayment field if non-nil, zero value otherwise.
 
 ### GetMinimumPaymentOk
 
-`func (o *AccountLineOfCredit) GetMinimumPaymentOk() (*MinimumPayment, bool)`
+`func (o *AccountLineOfCredit) GetMinimumPaymentOk() (*MinimumPaymentPartial, bool)`
 
 GetMinimumPaymentOk returns a tuple with the MinimumPayment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMinimumPayment
 
-`func (o *AccountLineOfCredit) SetMinimumPayment(v MinimumPayment)`
+`func (o *AccountLineOfCredit) SetMinimumPayment(v MinimumPaymentPartial)`
 
 SetMinimumPayment sets MinimumPayment field to given value.
 

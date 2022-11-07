@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **ShippingAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
 **Ssn** | Pointer to **string** | Customer&#39;s full tax ID eg SSN formatted with hyphens. This optional parameter is required when running KYC on a customer. Input must match the pattern ^\\d{3}-\\d{2}-\\d{4}$. The response contains the last 4 digits only (e.g. 6789). | [optional] 
 **SsnSource** | Pointer to [**SsnSource**](SsnSource.md) |  | [optional] 
+**Tenant** | Pointer to **string** | The tenant containing the resource. Tenancy is represented as bank_id_partner_id. This attribute is included on all responses.  | [optional] [readonly] 
 
 ## Methods
 
@@ -538,6 +539,31 @@ SetSsnSource sets SsnSource field to given value.
 `func (o *CustomerInBody) HasSsnSource() bool`
 
 HasSsnSource returns a boolean if a field has been set.
+
+### GetTenant
+
+`func (o *CustomerInBody) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *CustomerInBody) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *CustomerInBody) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *CustomerInBody) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

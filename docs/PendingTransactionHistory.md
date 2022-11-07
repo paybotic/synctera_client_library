@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 **AccountId** | **string** | The account id associated with the hold | 
 **AccountNo** | **string** | The account number associated with the hold | 
 **Created** | **time.Time** | The creation date of the hold | 
-**Data** | [**PendingTransactionHistoryData**](PendingTransactionHistoryData.md) |  | 
+**Data** | Pointer to [**PendingTransactionHistoryData**](PendingTransactionHistoryData.md) |  | [optional] 
 **Id** | **int64** |  | 
 **Idemkey** | **string** | The idempotency key used when initially creating this transaction. | 
-**OffsetAccountId** | **string** | The offset account id associated with the hold | 
-**OffsetAccountNo** | **string** | The offset account number associated with the hold | 
+**OffsetAccountId** | Pointer to **string** | The offset account id associated with the hold | [optional] 
+**OffsetAccountNo** | Pointer to **string** | The offset account number associated with the hold | [optional] 
 **ReferenceId** | **NullableString** | An external ID provided by the payment network to represent this transaction. | 
 **Tenant** | **string** | The tenant associated with this transaction, in the form \&quot;&lt;bankid&gt;_&lt;partnerid&gt;\&quot; | 
 **Updated** | **time.Time** | The date the hold was last update | 
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewPendingTransactionHistory
 
-`func NewPendingTransactionHistory(accountId string, accountNo string, created time.Time, data PendingTransactionHistoryData, id int64, idemkey string, offsetAccountId string, offsetAccountNo string, referenceId NullableString, tenant string, updated time.Time, uuid string, ) *PendingTransactionHistory`
+`func NewPendingTransactionHistory(accountId string, accountNo string, created time.Time, id int64, idemkey string, referenceId NullableString, tenant string, updated time.Time, uuid string, ) *PendingTransactionHistory`
 
 NewPendingTransactionHistory instantiates a new PendingTransactionHistory object
 This constructor will assign default values to properties that have it defined,
@@ -115,6 +115,11 @@ and a boolean to check if the value has been set.
 
 SetData sets Data field to given value.
 
+### HasData
+
+`func (o *PendingTransactionHistory) HasData() bool`
+
+HasData returns a boolean if a field has been set.
 
 ### GetId
 
@@ -175,6 +180,11 @@ and a boolean to check if the value has been set.
 
 SetOffsetAccountId sets OffsetAccountId field to given value.
 
+### HasOffsetAccountId
+
+`func (o *PendingTransactionHistory) HasOffsetAccountId() bool`
+
+HasOffsetAccountId returns a boolean if a field has been set.
 
 ### GetOffsetAccountNo
 
@@ -195,6 +205,11 @@ and a boolean to check if the value has been set.
 
 SetOffsetAccountNo sets OffsetAccountNo field to given value.
 
+### HasOffsetAccountNo
+
+`func (o *PendingTransactionHistory) HasOffsetAccountNo() bool`
+
+HasOffsetAccountNo returns a boolean if a field has been set.
 
 ### GetReferenceId
 

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExternalData** | **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | 
-**UserData** | **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | 
+**ExternalData** | Pointer to **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | [optional] 
+**UserData** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
 
 ## Methods
 
 ### NewTransactionUpdateMetaRequest
 
-`func NewTransactionUpdateMetaRequest(externalData map[string]interface{}, userData map[string]interface{}, ) *TransactionUpdateMetaRequest`
+`func NewTransactionUpdateMetaRequest() *TransactionUpdateMetaRequest`
 
 NewTransactionUpdateMetaRequest instantiates a new TransactionUpdateMetaRequest object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,11 @@ and a boolean to check if the value has been set.
 
 SetExternalData sets ExternalData field to given value.
 
+### HasExternalData
+
+`func (o *TransactionUpdateMetaRequest) HasExternalData() bool`
+
+HasExternalData returns a boolean if a field has been set.
 
 ### SetExternalDataNil
 
@@ -75,6 +80,11 @@ and a boolean to check if the value has been set.
 
 SetUserData sets UserData field to given value.
 
+### HasUserData
+
+`func (o *TransactionUpdateMetaRequest) HasUserData() bool`
+
+HasUserData returns a boolean if a field has been set.
 
 ### SetUserDataNil
 

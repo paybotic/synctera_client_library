@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
 **Currency** | **string** | Account currency or account settlement currency. ISO 4217 alphabetic currency code. | 
 **Description** | Pointer to **string** | A user provided description for the current account | [optional] 
-**GlType** | Pointer to **string** | Whether the account will represent assets or liabilities | [optional] 
+**GlType** | Pointer to **string** | What type of general ledger account this internal account represents.  | [optional] 
 **Id** | Pointer to **string** | Generated ID for internal account | [optional] [readonly] 
 **IsSystemAcc** | Pointer to **bool** | Is a system-controlled internal account | [optional] [default to false]
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 

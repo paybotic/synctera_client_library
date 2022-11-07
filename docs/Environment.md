@@ -5,8 +5,6 @@
 
 * `SANDBOX` (value: `"SANDBOX"`)
 
-* `LIVE_TESTING` (value: `"LIVE_TESTING"`)
-
 * `PROD_LITE` (value: `"PROD_LITE"`)
 
 * `PROD` (value: `"PROD"`)

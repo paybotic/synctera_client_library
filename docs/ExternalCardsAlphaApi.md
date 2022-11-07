@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateExternalCardFromToken**](ExternalCardsAlphaApi.md#CreateExternalCardFromToken) | **Post** /external_cards/tokens | Create external card from token
 [**CreateExternalCardTransfer**](ExternalCardsAlphaApi.md#CreateExternalCardTransfer) | **Post** /external_cards/transfers | Create external card transfer
+[**CreateExternalCardTransferReversal**](ExternalCardsAlphaApi.md#CreateExternalCardTransferReversal) | **Post** /external_cards/transfers/{transfer_id}/reversals | Reverse an external card transfer
 [**GetExternalCard**](ExternalCardsAlphaApi.md#GetExternalCard) | **Get** /external_cards/{external_card_id} | Get a external card
 [**GetExternalCardTransfer**](ExternalCardsAlphaApi.md#GetExternalCardTransfer) | **Get** /external_cards/transfers/{transfer_id} | Get an external card transfer
 [**ListExternalCardTransfers**](ExternalCardsAlphaApi.md#ListExternalCardTransfers) | **Get** /external_cards/transfers | List external transfers
@@ -34,7 +35,7 @@ import (
 )
 
 func main() {
-    externalCardRequest := *openapiclient.NewExternalCardRequest("8da2b02b-81f2-41f3-a32e-041eb8ccd825", "Token_example") // ExternalCardRequest | Details of the card to create
+    externalCardRequest := *openapiclient.NewExternalCardRequest("7d943c51-e4ff-4e57-9558-08cab6b963c7", "Token_example") // ExternalCardRequest | Details of the card to create
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -100,7 +101,7 @@ import (
 )
 
 func main() {
-    transferRequest := *openapiclient.NewTransferRequest(int32(123), "USD", "b2710751-b575-47d0-a09b-da0994553d93", "3e2a2f28-4910-4934-be22-ded51f926b76", openapiclient.transfer_type("PULL")) // TransferRequest | Details of the transfer to create
+    transferRequest := *openapiclient.NewTransferRequest(int32(123), "USD", "7d943c51-e4ff-4e57-9558-08cab6b963c7", "7d943c51-e4ff-4e57-9558-08cab6b963c7", openapiclient.transfer_type("PULL")) // TransferRequest | Details of the transfer to create
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -145,6 +146,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateExternalCardTransferReversal
+
+> TransferResponse CreateExternalCardTransferReversal(ctx, transferId).TransferReversalRequest(transferReversalRequest).Execute()
+
+Reverse an external card transfer
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    transferId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | The unique identifier of a transfer
+    transferReversalRequest := *openapiclient.NewTransferReversalRequest(int32(123), "USD") // TransferReversalRequest | Details of the transfer to reverse
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ExternalCardsAlphaApi.CreateExternalCardTransferReversal(context.Background(), transferId).TransferReversalRequest(transferReversalRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ExternalCardsAlphaApi.CreateExternalCardTransferReversal``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateExternalCardTransferReversal`: TransferResponse
+    fmt.Fprintf(os.Stdout, "Response from `ExternalCardsAlphaApi.CreateExternalCardTransferReversal`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**transferId** | **string** | The unique identifier of a transfer | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateExternalCardTransferReversalRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **transferReversalRequest** | [**TransferReversalRequest**](TransferReversalRequest.md) | Details of the transfer to reverse | 
+
+### Return type
+
+[**TransferResponse**](TransferResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetExternalCard
 
 > ExternalCardResponse GetExternalCard(ctx, externalCardId).Execute()
@@ -166,7 +239,7 @@ import (
 )
 
 func main() {
-    externalCardId := "411e5190-c495-4344-9fb5-0a3c7bab0345" // string | The unique identifier of an external card
+    externalCardId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | The unique identifier of an external card
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -236,7 +309,7 @@ import (
 )
 
 func main() {
-    transferId := "1b7767fe-7dcd-43d5-85cf-c4392bb3e830" // string | The unique identifier of a transfer
+    transferId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | The unique identifier of a transfer
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -307,10 +380,10 @@ import (
 
 func main() {
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "h50ffqz9q5" // string |  (optional)
-    customerId := []string{"8da2b02b-81f2-41f3-a32e-041eb8ccd825"} // []string |  (optional)
+    pageToken := "a8937a0d" // string |  (optional)
+    customerId := []string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"} // []string |  (optional)
     externalCardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
-    originatingAccountId := []string{"a6f8870c-1e7e-45ba-833d-cbc1eead9d2d"} // []string |  (optional)
+    originatingAccountId := []string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"} // []string |  (optional)
     type_ := openapiclient.transfer_type("PULL") // TransferType | The type of an external transfer (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -383,7 +456,7 @@ import (
 
 func main() {
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "h50ffqz9q5" // string |  (optional)
+    pageToken := "a8937a0d" // string |  (optional)
     customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
     businessId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
 

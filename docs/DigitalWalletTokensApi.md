@@ -246,7 +246,7 @@ func main() {
     cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
     tokenState := openapiclient.digital_wallet_token_state("REQUESTED") // DigitalWalletTokenState | The status of the Digital Wallet Token (optional)
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "h50ffqz9q5" // string |  (optional)
+    pageToken := "a8937a0d" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

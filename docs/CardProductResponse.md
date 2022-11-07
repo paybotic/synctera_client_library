@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **Id** | **string** | Card Product ID | [readonly] 
 **Image** | Pointer to **bool** | Indicates whether or not there is an overlay image of the card product available | [optional] 
 **ImageMode** | Pointer to [**CardImageMode**](CardImageMode.md) |  | [optional] 
+**IssueWithoutKyc** | Pointer to **bool** | Allow issuing cards on this product without requiring KYC | [optional] 
 **LastModifiedTime** | **time.Time** | The timestamp representing when the Card Product was last modified | [readonly] 
 **Name** | **string** | The name of the Card Product | 
 **Orientation** | Pointer to **string** | Card orientation | [optional] 
@@ -256,6 +257,31 @@ SetImageMode sets ImageMode field to given value.
 `func (o *CardProductResponse) HasImageMode() bool`
 
 HasImageMode returns a boolean if a field has been set.
+
+### GetIssueWithoutKyc
+
+`func (o *CardProductResponse) GetIssueWithoutKyc() bool`
+
+GetIssueWithoutKyc returns the IssueWithoutKyc field if non-nil, zero value otherwise.
+
+### GetIssueWithoutKycOk
+
+`func (o *CardProductResponse) GetIssueWithoutKycOk() (*bool, bool)`
+
+GetIssueWithoutKycOk returns a tuple with the IssueWithoutKyc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIssueWithoutKyc
+
+`func (o *CardProductResponse) SetIssueWithoutKyc(v bool)`
+
+SetIssueWithoutKyc sets IssueWithoutKyc field to given value.
+
+### HasIssueWithoutKyc
+
+`func (o *CardProductResponse) HasIssueWithoutKyc() bool`
+
+HasIssueWithoutKyc returns a boolean if a field has been set.
 
 ### GetLastModifiedTime
 

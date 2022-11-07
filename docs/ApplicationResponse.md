@@ -4,19 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ApplicationDetails** | **map[string]interface{}** | Details about the applicant. The exact schema is to be determined with your bank. | 
-**CreationTime** | **time.Time** | Application creation timestamp in RFC3339 format | [readonly] 
-**CustomerId** | **string** | Customer ID for the application | 
-**Id** | **string** | Generated ID for the application | [readonly] 
-**LastUpdatedTime** | **time.Time** | Timestamp of the last application modification in RFC3339 format | [readonly] 
-**Status** | [**ApplicationStatus**](ApplicationStatus.md) |  | 
-**Type** | [**ApplicationType1**](ApplicationType1.md) |  | 
+**CreatedTime** | **time.Time** |  | 
+**Enabled** | **bool** | To enable or disable aft/oct feature | 
+**ExternalId** | Pointer to **string** | The id of the application from processor | [optional] 
+**Id** | **string** | The id of the application | 
+**LastModifiedTime** | **time.Time** |  | 
+**Processor** | [**Processor**](Processor.md) |  | 
 
 ## Methods
 
 ### NewApplicationResponse
 
-`func NewApplicationResponse(applicationDetails map[string]interface{}, creationTime time.Time, customerId string, id string, lastUpdatedTime time.Time, status ApplicationStatus, type_ ApplicationType1, ) *ApplicationResponse`
+`func NewApplicationResponse(createdTime time.Time, enabled bool, id string, lastModifiedTime time.Time, processor Processor, ) *ApplicationResponse`
 
 NewApplicationResponse instantiates a new ApplicationResponse object
 This constructor will assign default values to properties that have it defined,
@@ -31,65 +30,70 @@ NewApplicationResponseWithDefaults instantiates a new ApplicationResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetApplicationDetails
+### GetCreatedTime
 
-`func (o *ApplicationResponse) GetApplicationDetails() map[string]interface{}`
+`func (o *ApplicationResponse) GetCreatedTime() time.Time`
 
-GetApplicationDetails returns the ApplicationDetails field if non-nil, zero value otherwise.
+GetCreatedTime returns the CreatedTime field if non-nil, zero value otherwise.
 
-### GetApplicationDetailsOk
+### GetCreatedTimeOk
 
-`func (o *ApplicationResponse) GetApplicationDetailsOk() (*map[string]interface{}, bool)`
+`func (o *ApplicationResponse) GetCreatedTimeOk() (*time.Time, bool)`
 
-GetApplicationDetailsOk returns a tuple with the ApplicationDetails field if it's non-nil, zero value otherwise
+GetCreatedTimeOk returns a tuple with the CreatedTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetApplicationDetails
+### SetCreatedTime
 
-`func (o *ApplicationResponse) SetApplicationDetails(v map[string]interface{})`
+`func (o *ApplicationResponse) SetCreatedTime(v time.Time)`
 
-SetApplicationDetails sets ApplicationDetails field to given value.
+SetCreatedTime sets CreatedTime field to given value.
 
 
-### GetCreationTime
+### GetEnabled
 
-`func (o *ApplicationResponse) GetCreationTime() time.Time`
+`func (o *ApplicationResponse) GetEnabled() bool`
 
-GetCreationTime returns the CreationTime field if non-nil, zero value otherwise.
+GetEnabled returns the Enabled field if non-nil, zero value otherwise.
 
-### GetCreationTimeOk
+### GetEnabledOk
 
-`func (o *ApplicationResponse) GetCreationTimeOk() (*time.Time, bool)`
+`func (o *ApplicationResponse) GetEnabledOk() (*bool, bool)`
 
-GetCreationTimeOk returns a tuple with the CreationTime field if it's non-nil, zero value otherwise
+GetEnabledOk returns a tuple with the Enabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCreationTime
+### SetEnabled
 
-`func (o *ApplicationResponse) SetCreationTime(v time.Time)`
+`func (o *ApplicationResponse) SetEnabled(v bool)`
 
-SetCreationTime sets CreationTime field to given value.
+SetEnabled sets Enabled field to given value.
 
 
-### GetCustomerId
+### GetExternalId
 
-`func (o *ApplicationResponse) GetCustomerId() string`
+`func (o *ApplicationResponse) GetExternalId() string`
 
-GetCustomerId returns the CustomerId field if non-nil, zero value otherwise.
+GetExternalId returns the ExternalId field if non-nil, zero value otherwise.
 
-### GetCustomerIdOk
+### GetExternalIdOk
 
-`func (o *ApplicationResponse) GetCustomerIdOk() (*string, bool)`
+`func (o *ApplicationResponse) GetExternalIdOk() (*string, bool)`
 
-GetCustomerIdOk returns a tuple with the CustomerId field if it's non-nil, zero value otherwise
+GetExternalIdOk returns a tuple with the ExternalId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCustomerId
+### SetExternalId
 
-`func (o *ApplicationResponse) SetCustomerId(v string)`
+`func (o *ApplicationResponse) SetExternalId(v string)`
 
-SetCustomerId sets CustomerId field to given value.
+SetExternalId sets ExternalId field to given value.
 
+### HasExternalId
+
+`func (o *ApplicationResponse) HasExternalId() bool`
+
+HasExternalId returns a boolean if a field has been set.
 
 ### GetId
 
@@ -111,64 +115,44 @@ and a boolean to check if the value has been set.
 SetId sets Id field to given value.
 
 
-### GetLastUpdatedTime
+### GetLastModifiedTime
 
-`func (o *ApplicationResponse) GetLastUpdatedTime() time.Time`
+`func (o *ApplicationResponse) GetLastModifiedTime() time.Time`
 
-GetLastUpdatedTime returns the LastUpdatedTime field if non-nil, zero value otherwise.
+GetLastModifiedTime returns the LastModifiedTime field if non-nil, zero value otherwise.
 
-### GetLastUpdatedTimeOk
+### GetLastModifiedTimeOk
 
-`func (o *ApplicationResponse) GetLastUpdatedTimeOk() (*time.Time, bool)`
+`func (o *ApplicationResponse) GetLastModifiedTimeOk() (*time.Time, bool)`
 
-GetLastUpdatedTimeOk returns a tuple with the LastUpdatedTime field if it's non-nil, zero value otherwise
+GetLastModifiedTimeOk returns a tuple with the LastModifiedTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLastUpdatedTime
+### SetLastModifiedTime
 
-`func (o *ApplicationResponse) SetLastUpdatedTime(v time.Time)`
+`func (o *ApplicationResponse) SetLastModifiedTime(v time.Time)`
 
-SetLastUpdatedTime sets LastUpdatedTime field to given value.
+SetLastModifiedTime sets LastModifiedTime field to given value.
 
 
-### GetStatus
+### GetProcessor
 
-`func (o *ApplicationResponse) GetStatus() ApplicationStatus`
+`func (o *ApplicationResponse) GetProcessor() Processor`
 
-GetStatus returns the Status field if non-nil, zero value otherwise.
+GetProcessor returns the Processor field if non-nil, zero value otherwise.
 
-### GetStatusOk
+### GetProcessorOk
 
-`func (o *ApplicationResponse) GetStatusOk() (*ApplicationStatus, bool)`
+`func (o *ApplicationResponse) GetProcessorOk() (*Processor, bool)`
 
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+GetProcessorOk returns a tuple with the Processor field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStatus
+### SetProcessor
 
-`func (o *ApplicationResponse) SetStatus(v ApplicationStatus)`
+`func (o *ApplicationResponse) SetProcessor(v Processor)`
 
-SetStatus sets Status field to given value.
-
-
-### GetType
-
-`func (o *ApplicationResponse) GetType() ApplicationType1`
-
-GetType returns the Type field if non-nil, zero value otherwise.
-
-### GetTypeOk
-
-`func (o *ApplicationResponse) GetTypeOk() (*ApplicationType1, bool)`
-
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetType
-
-`func (o *ApplicationResponse) SetType(v ApplicationType1)`
-
-SetType sets Type field to given value.
+SetProcessor sets Processor field to given value.
 
 
 

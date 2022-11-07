@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **Data** | [**PendingTransactionData**](PendingTransactionData.md) |  | 
 **Id** | **int64** |  | 
 **Idemkey** | **string** | The idempotency key used when initially creating this hold. | 
-**OffsetAccountId** | **string** | The offset account id associated with the hold | 
-**OffsetAccountNo** | **string** | The offset account number associated with the hold | 
+**OffsetAccountId** | Pointer to **string** | The offset account id associated with the hold | [optional] 
+**OffsetAccountNo** | Pointer to **string** | The offset account number associated with the hold | [optional] 
 **ReferenceId** | **NullableString** | An external ID provided by the payment network to represent this transaction. | 
 **Tenant** | **string** | The tenant associated with this hold, in the form \&quot;&lt;bankid&gt;_&lt;partnerid&gt;\&quot; | 
 **Updated** | **time.Time** | The date the hold was last update | 
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewPendingTransaction
 
-`func NewPendingTransaction(accountId string, accountNo string, created time.Time, data PendingTransactionData, id int64, idemkey string, offsetAccountId string, offsetAccountNo string, referenceId NullableString, tenant string, updated time.Time, uuid string, ) *PendingTransaction`
+`func NewPendingTransaction(accountId string, accountNo string, created time.Time, data PendingTransactionData, id int64, idemkey string, referenceId NullableString, tenant string, updated time.Time, uuid string, ) *PendingTransaction`
 
 NewPendingTransaction instantiates a new PendingTransaction object
 This constructor will assign default values to properties that have it defined,
@@ -175,6 +175,11 @@ and a boolean to check if the value has been set.
 
 SetOffsetAccountId sets OffsetAccountId field to given value.
 
+### HasOffsetAccountId
+
+`func (o *PendingTransaction) HasOffsetAccountId() bool`
+
+HasOffsetAccountId returns a boolean if a field has been set.
 
 ### GetOffsetAccountNo
 
@@ -195,6 +200,11 @@ and a boolean to check if the value has been set.
 
 SetOffsetAccountNo sets OffsetAccountNo field to given value.
 
+### HasOffsetAccountNo
+
+`func (o *PendingTransaction) HasOffsetAccountNo() bool`
+
+HasOffsetAccountNo returns a boolean if a field has been set.
 
 ### GetReferenceId
 

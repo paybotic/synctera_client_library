@@ -4,8 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Description** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
+**Description** | Pointer to **string** | A description of the document | [optional] 
+**Name** | Pointer to **string** | A user-friendly name for the document | [optional] 
+**Type** | Pointer to [**DocumentType**](DocumentType.md) |  | [optional] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetName sets Name field to given value.
 `func (o *PatchDocument) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *PatchDocument) GetType() DocumentType`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *PatchDocument) GetTypeOk() (*DocumentType, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *PatchDocument) SetType(v DocumentType)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *PatchDocument) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

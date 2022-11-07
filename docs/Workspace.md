@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **PartnerId** | **int32** | Partner ID | 
 **PartnerName** | **string** | Last Name | 
 **Rank** | **int32** | Each workspace has a rank. The highest-ranked (lowest numerical value) workspace is intended to be presented first within its environment.  | 
+**Tenant** | Pointer to **string** | The id tenant containing the resource. Tenancy is represented as &lt;bank_id&gt;_&lt;partner_id&gt;. This attribute is included on all responses. In requests, it is optional for clients with access to only a single tenant.  | [optional] 
 **VerificationStatus** | **string** |  | 
 
 ## Methods
@@ -150,6 +151,31 @@ and a boolean to check if the value has been set.
 
 SetRank sets Rank field to given value.
 
+
+### GetTenant
+
+`func (o *Workspace) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *Workspace) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *Workspace) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *Workspace) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetVerificationStatus
 

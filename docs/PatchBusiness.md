@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **PhoneNumber** | Pointer to **string** | Business&#39;s phone number with country code in E.164 format. Must have a valid country code. Area code and local phone number are not validated. | [optional] 
 **Status** | Pointer to **string** | Status of the business. One of the following: * &#x60;PROSPECT&#x60; – a potential customer, used for information-gathering and disclosures. * &#x60;ACTIVE&#x60; –  is an integrator defined status.  Integrators should set a business to active if they believe the person to be qualified for conducting business.  Synctera will combine this status with other statuses such a verification to determine if the business is eligible for specific actions such as initiating transactions or issuing a card. * &#x60;FROZEN&#x60; – business&#39;s actions are blocked for security, legal, or other reasons. * &#x60;SANCTION&#x60; – business is on a sanctions list and should be carefully monitored. * &#x60;DISSOLVED&#x60; – an inactive status indicating a business entity has filed articles of dissolution or a certificate of termination to terminate its existence. * &#x60;CANCELLED&#x60; – an inactive status indicating that a business entity has filed a cancellation or has failed to file its periodic report after notice of forfeiture of its rights to do business. * &#x60;SUSPENDED&#x60; – an inactive status indicating that the business entity has lost the right to operate in it&#39;s registered jurisdiction. * &#x60;MERGED&#x60; – an inactive status indicating that the business entity has terminated existence by merging into another entity. * &#x60;INACTIVE&#x60; – an inactive status indicating that the business entity is no longer active. * &#x60;CONVERTED&#x60; – An inactive status indicating that the business entity has been converted to another type of business entity in the same jurisdiction.  | [optional] 
 **Structure** | Pointer to **string** | Business&#39;s legal structure. | [optional] 
+**Tenant** | Pointer to **string** | The tenant containing the resource. Tenancy is represented as bank_id_partner_id. This attribute is included on all responses.  | [optional] [readonly] 
 **TradeNames** | Pointer to **[]string** | Other names by which this business is known. | [optional] 
 **VerificationLastRun** | Pointer to **time.Time** | Date and time KYB verification was last run on the business. | [optional] [readonly] 
 **VerificationStatus** | Pointer to [**VerificationStatus**](VerificationStatus.md) |  | [optional] 
@@ -391,6 +392,31 @@ SetStructure sets Structure field to given value.
 `func (o *PatchBusiness) HasStructure() bool`
 
 HasStructure returns a boolean if a field has been set.
+
+### GetTenant
+
+`func (o *PatchBusiness) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *PatchBusiness) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *PatchBusiness) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *PatchBusiness) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetTradeNames
 

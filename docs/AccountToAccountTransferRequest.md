@@ -10,22 +10,22 @@ Name | Type | Description | Notes
 **DestAccountAlias** | **string** | An alias representing a GL account to credit. This is an alternative to specifying by account id | 
 **DestAccountNo** | **string** | The account number of the account being credited | 
 **EffectiveDate** | **time.Time** | The date the transaction should be effective | 
-**ExternalData** | **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | 
+**ExternalData** | Pointer to **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | [optional] 
 **Memo** | **string** | A short note to the recipient | 
 **OffsetDescription** | Pointer to **string** | A description of the offsetting transaction | [optional] 
-**PostedDate** | Pointer to **time.Time** | The date the transaction was posted | [optional] 
+**PostedDate** | Pointer to **string** | The date the transaction was posted | [optional] 
 **SourceAccountAlias** | **string** | An alias representing a GL account to debit. This is alternative to specifying by account id | 
 **SourceAccountNo** | **string** | The account number of the account being debited | 
 **Subtype** | **string** | The desired transaction subtype to use for this transfer | 
 **Type** | **string** | The desired transaction type to use for this transfer | 
-**UserData** | **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | 
+**UserData** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
 **Uuid** | **string** | The UUID of the transaction | 
 
 ## Methods
 
 ### NewAccountToAccountTransferRequest
 
-`func NewAccountToAccountTransferRequest(amount int64, currency string, destAccountAlias string, destAccountNo string, effectiveDate time.Time, externalData map[string]interface{}, memo string, sourceAccountAlias string, sourceAccountNo string, subtype string, type_ string, userData map[string]interface{}, uuid string, ) *AccountToAccountTransferRequest`
+`func NewAccountToAccountTransferRequest(amount int64, currency string, destAccountAlias string, destAccountNo string, effectiveDate time.Time, memo string, sourceAccountAlias string, sourceAccountNo string, subtype string, type_ string, uuid string, ) *AccountToAccountTransferRequest`
 
 NewAccountToAccountTransferRequest instantiates a new AccountToAccountTransferRequest object
 This constructor will assign default values to properties that have it defined,
@@ -184,6 +184,11 @@ and a boolean to check if the value has been set.
 
 SetExternalData sets ExternalData field to given value.
 
+### HasExternalData
+
+`func (o *AccountToAccountTransferRequest) HasExternalData() bool`
+
+HasExternalData returns a boolean if a field has been set.
 
 ### SetExternalDataNil
 
@@ -242,20 +247,20 @@ HasOffsetDescription returns a boolean if a field has been set.
 
 ### GetPostedDate
 
-`func (o *AccountToAccountTransferRequest) GetPostedDate() time.Time`
+`func (o *AccountToAccountTransferRequest) GetPostedDate() string`
 
 GetPostedDate returns the PostedDate field if non-nil, zero value otherwise.
 
 ### GetPostedDateOk
 
-`func (o *AccountToAccountTransferRequest) GetPostedDateOk() (*time.Time, bool)`
+`func (o *AccountToAccountTransferRequest) GetPostedDateOk() (*string, bool)`
 
 GetPostedDateOk returns a tuple with the PostedDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPostedDate
 
-`func (o *AccountToAccountTransferRequest) SetPostedDate(v time.Time)`
+`func (o *AccountToAccountTransferRequest) SetPostedDate(v string)`
 
 SetPostedDate sets PostedDate field to given value.
 
@@ -364,6 +369,11 @@ and a boolean to check if the value has been set.
 
 SetUserData sets UserData field to given value.
 
+### HasUserData
+
+`func (o *AccountToAccountTransferRequest) HasUserData() bool`
+
+HasUserData returns a boolean if a field has been set.
 
 ### SetUserDataNil
 

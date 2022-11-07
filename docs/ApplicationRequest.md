@@ -6,26 +6,26 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BankId** | **int32** | Bank ID | 
 **BusinessAddress** | [**Address1**](Address1.md) |  | 
-**BusinessName** | **string** | todo | 
-**BusinessPhone** | **string** | todo | 
-**BusinessTaxId** | **string** | todo | 
-**BusinessType** | **string** | todo | 
+**BusinessName** | **string** |  | 
+**BusinessPhone** | **string** |  | 
+**BusinessTaxId** | **string** |  | 
+**BusinessType** | **string** |  | 
 **Dob** | Pointer to [**ExternalPaymentDate**](ExternalPaymentDate.md) |  | [optional] 
-**DoingBusinessAs** | **string** | todo | 
-**Email** | Pointer to **string** | todo | [optional] 
+**DoingBusinessAs** | **string** |  | 
+**Email** | Pointer to **string** |  | [optional] 
 **Enabled** | **bool** | To enable or disable aft/oct feature | 
-**FirstName** | Pointer to **string** | todo | [optional] 
+**FirstName** | Pointer to **string** |  | [optional] 
 **IncorporationDate** | Pointer to [**ExternalPaymentDate**](ExternalPaymentDate.md) |  | [optional] 
-**LastName** | Pointer to **string** | todo | [optional] 
+**LastName** | Pointer to **string** |  | [optional] 
 **MaxTransactionAmount** | **int32** | Maximum amount that can be transacted for a single transaction in cents | 
 **PartnerId** | **int32** | Partner ID | 
 **PersonalAddress** | Pointer to [**Address1**](Address1.md) |  | [optional] 
-**Phone** | Pointer to **string** | todo | [optional] 
-**PrincipalPercentageOwnership** | Pointer to **string** | todo | [optional] 
+**Phone** | Pointer to **string** |  | [optional] 
+**PrincipalPercentageOwnership** | Pointer to **string** |  | [optional] 
 **Processor** | [**Processor**](Processor.md) |  | 
-**TaxId** | Pointer to **string** | todo | [optional] 
-**Title** | Pointer to **string** | todo | [optional] 
-**Url** | Pointer to **string** | todo | [optional] 
+**TaxId** | Pointer to **string** |  | [optional] 
+**Title** | Pointer to **string** |  | [optional] 
+**Url** | Pointer to **string** |  | [optional] 
 
 ## Methods
 

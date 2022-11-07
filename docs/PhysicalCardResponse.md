@@ -6,8 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Form** | **string** | PHYSICAL or VIRTUAL. | 
 **AccountId** | **string** | The ID of the account to which the card will be linked | 
-**Bin** | Pointer to **string** | The bin number | [optional] 
-**CardBrand** | [**CardBrand**](CardBrand.md) |  | 
 **CardProductId** | **string** | The card product to which the card is attached | 
 **CreationTime** | **time.Time** | The timestamp representing when the card issuance request was made | [readonly] 
 **CustomerId** | **string** | The ID of the customer to whom the card will be issued | 
@@ -32,13 +30,15 @@ Name | Type | Description | Notes
 **CardFulfillmentStatus** | [**CardFulfillmentStatus**](CardFulfillmentStatus.md) |  | 
 **FulfillmentDetails** | Pointer to [**FulfillmentDetails**](FulfillmentDetails.md) |  | [optional] 
 **TrackingNumber** | Pointer to **string** | This contains all shipping details as provided by the card fulfillment provider, including the tracking number. This field is deprecated. Instead, please use the fulfillment_details object, which includes a field for just the tracking number.  | [optional] [readonly] 
+**Bin** | Pointer to **string** | The bin number | [optional] 
+**CardBrand** | [**CardBrand**](CardBrand.md) |  | 
 **PhysicalCardFormat** | [**PhysicalCardFormat**](PhysicalCardFormat.md) |  | 
 
 ## Methods
 
 ### NewPhysicalCardResponse
 
-`func NewPhysicalCardResponse(form string, accountId string, cardBrand CardBrand, cardProductId string, creationTime time.Time, customerId string, embossName EmbossName, id string, type_ string, shipping Shipping, cardStatus CardStatus, statusReason CardStatusReasonCode, cardFulfillmentStatus CardFulfillmentStatus, physicalCardFormat PhysicalCardFormat, ) *PhysicalCardResponse`
+`func NewPhysicalCardResponse(form string, accountId string, cardProductId string, creationTime time.Time, customerId string, embossName EmbossName, id string, type_ string, shipping Shipping, cardStatus CardStatus, statusReason CardStatusReasonCode, cardFulfillmentStatus CardFulfillmentStatus, cardBrand CardBrand, physicalCardFormat PhysicalCardFormat, ) *PhysicalCardResponse`
 
 NewPhysicalCardResponse instantiates a new PhysicalCardResponse object
 This constructor will assign default values to properties that have it defined,
@@ -91,51 +91,6 @@ and a boolean to check if the value has been set.
 `func (o *PhysicalCardResponse) SetAccountId(v string)`
 
 SetAccountId sets AccountId field to given value.
-
-
-### GetBin
-
-`func (o *PhysicalCardResponse) GetBin() string`
-
-GetBin returns the Bin field if non-nil, zero value otherwise.
-
-### GetBinOk
-
-`func (o *PhysicalCardResponse) GetBinOk() (*string, bool)`
-
-GetBinOk returns a tuple with the Bin field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBin
-
-`func (o *PhysicalCardResponse) SetBin(v string)`
-
-SetBin sets Bin field to given value.
-
-### HasBin
-
-`func (o *PhysicalCardResponse) HasBin() bool`
-
-HasBin returns a boolean if a field has been set.
-
-### GetCardBrand
-
-`func (o *PhysicalCardResponse) GetCardBrand() CardBrand`
-
-GetCardBrand returns the CardBrand field if non-nil, zero value otherwise.
-
-### GetCardBrandOk
-
-`func (o *PhysicalCardResponse) GetCardBrandOk() (*CardBrand, bool)`
-
-GetCardBrandOk returns a tuple with the CardBrand field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCardBrand
-
-`func (o *PhysicalCardResponse) SetCardBrand(v CardBrand)`
-
-SetCardBrand sets CardBrand field to given value.
 
 
 ### GetCardProductId
@@ -687,6 +642,51 @@ SetTrackingNumber sets TrackingNumber field to given value.
 `func (o *PhysicalCardResponse) HasTrackingNumber() bool`
 
 HasTrackingNumber returns a boolean if a field has been set.
+
+### GetBin
+
+`func (o *PhysicalCardResponse) GetBin() string`
+
+GetBin returns the Bin field if non-nil, zero value otherwise.
+
+### GetBinOk
+
+`func (o *PhysicalCardResponse) GetBinOk() (*string, bool)`
+
+GetBinOk returns a tuple with the Bin field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBin
+
+`func (o *PhysicalCardResponse) SetBin(v string)`
+
+SetBin sets Bin field to given value.
+
+### HasBin
+
+`func (o *PhysicalCardResponse) HasBin() bool`
+
+HasBin returns a boolean if a field has been set.
+
+### GetCardBrand
+
+`func (o *PhysicalCardResponse) GetCardBrand() CardBrand`
+
+GetCardBrand returns the CardBrand field if non-nil, zero value otherwise.
+
+### GetCardBrandOk
+
+`func (o *PhysicalCardResponse) GetCardBrandOk() (*CardBrand, bool)`
+
+GetCardBrandOk returns a tuple with the CardBrand field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCardBrand
+
+`func (o *PhysicalCardResponse) SetCardBrand(v CardBrand)`
+
+SetCardBrand sets CardBrand field to given value.
+
 
 ### GetPhysicalCardFormat
 

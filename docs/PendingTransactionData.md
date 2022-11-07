@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **DcSign** | [**DcSign**](DcSign.md) |  | 
 **EffectiveDate** | **time.Time** | The effective date of the transaction once it gets posted | 
 **ExpiresAt** | **time.Time** | The date that at which this hold is no longer valid. | 
-**ExternalData** | **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | 
+**ExternalData** | Pointer to **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | [optional] 
 **ForcePost** | **bool** | Whether or not the hold was forced (spending controls ignored) | 
 **History** | [**[]PendingTransactionHistory**](PendingTransactionHistory.md) | An array representing any previous states of the hold, if it has been modified (For example, increasing or decreasing the hold amount). | 
 **Idemkey** | **string** | The idempotency key used when initially creating this hold. | 
@@ -22,21 +22,21 @@ Name | Type | Description | Notes
 **Operation** | **string** |  | 
 **Reason** | **string** | If a hold has been declined or modified, this will include the reason. | 
 **ReqAmount** | **int64** | The requested amount, in the case of hold modifications. | 
-**RiskInfo** | **map[string]interface{}** | Information received by the transaction risk/fraud service related to this transaction | 
+**RiskInfo** | Pointer to **map[string]interface{}** | Information received by the transaction risk/fraud service related to this transaction | [optional] 
 **Status** | **string** | The status of the hold. | 
 **Subtype** | **string** | The specific transaction type. For example, for &#x60;ach&#x60;, this may be \&quot;outgoing_debit\&quot;. | 
 **TotalAmount** | **int64** | The total amount of the hold. This may be different than &#x60;amount&#x60; in the case where a hold increase or decrease was requested. | 
 **TransactionId** | Pointer to **string** | The uuid of the transaction that this pending transaction originated from, if any. This is primary used when a transaction \&quot;posts\&quot;, but a subset of the amount reserved until a future settlement date. | [optional] 
 **TransactionTime** | **time.Time** | The time that the transaction was created | 
 **Type** | **string** | The general type of transaction. For example, \&quot;card\&quot; or \&quot;ach\&quot;. | 
-**UserData** | **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | 
+**UserData** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
 **WasPartial** | **bool** | Does this hold represent a partial debit (or credit)? | 
 
 ## Methods
 
 ### NewPendingTransactionData
 
-`func NewPendingTransactionData(amount int64, autoPostAt time.Time, availBalance int64, availableBalance int64, balance int64, currency string, dcSign DcSign, effectiveDate time.Time, expiresAt time.Time, externalData map[string]interface{}, forcePost bool, history []PendingTransactionHistory, idemkey string, memo string, network string, operation string, reason string, reqAmount int64, riskInfo map[string]interface{}, status string, subtype string, totalAmount int64, transactionTime time.Time, type_ string, userData map[string]interface{}, wasPartial bool, ) *PendingTransactionData`
+`func NewPendingTransactionData(amount int64, autoPostAt time.Time, availBalance int64, availableBalance int64, balance int64, currency string, dcSign DcSign, effectiveDate time.Time, expiresAt time.Time, forcePost bool, history []PendingTransactionHistory, idemkey string, memo string, network string, operation string, reason string, reqAmount int64, status string, subtype string, totalAmount int64, transactionTime time.Time, type_ string, wasPartial bool, ) *PendingTransactionData`
 
 NewPendingTransactionData instantiates a new PendingTransactionData object
 This constructor will assign default values to properties that have it defined,
@@ -250,6 +250,11 @@ and a boolean to check if the value has been set.
 
 SetExternalData sets ExternalData field to given value.
 
+### HasExternalData
+
+`func (o *PendingTransactionData) HasExternalData() bool`
+
+HasExternalData returns a boolean if a field has been set.
 
 ### SetExternalDataNil
 
@@ -440,6 +445,11 @@ and a boolean to check if the value has been set.
 
 SetRiskInfo sets RiskInfo field to given value.
 
+### HasRiskInfo
+
+`func (o *PendingTransactionData) HasRiskInfo() bool`
+
+HasRiskInfo returns a boolean if a field has been set.
 
 ### SetRiskInfoNil
 
@@ -595,6 +605,11 @@ and a boolean to check if the value has been set.
 
 SetUserData sets UserData field to given value.
 
+### HasUserData
+
+`func (o *PendingTransactionData) HasUserData() bool`
+
+HasUserData returns a boolean if a field has been set.
 
 ### SetUserDataNil
 

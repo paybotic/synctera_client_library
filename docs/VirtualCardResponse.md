@@ -6,8 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Form** | **string** | PHYSICAL or VIRTUAL. | 
 **AccountId** | **string** | The ID of the account to which the card will be linked | 
-**Bin** | Pointer to **string** | The bin number | [optional] 
-**CardBrand** | [**CardBrand**](CardBrand.md) |  | 
 **CardProductId** | **string** | The card product to which the card is attached | 
 **CreationTime** | **time.Time** | The timestamp representing when the card issuance request was made | [readonly] 
 **CustomerId** | **string** | The ID of the customer to whom the card will be issued | 
@@ -27,12 +25,14 @@ Name | Type | Description | Notes
 **CardStatus** | [**CardStatus**](CardStatus.md) |  | 
 **Memo** | Pointer to **string** | Additional details about the reason for the status change | [optional] 
 **StatusReason** | [**CardStatusReasonCode**](CardStatusReasonCode.md) |  | 
+**Bin** | Pointer to **string** | The bin number | [optional] 
+**CardBrand** | [**CardBrand**](CardBrand.md) |  | 
 
 ## Methods
 
 ### NewVirtualCardResponse
 
-`func NewVirtualCardResponse(form string, accountId string, cardBrand CardBrand, cardProductId string, creationTime time.Time, customerId string, embossName EmbossName, expirationMonth string, expirationYear string, id string, lastFour string, type_ string, cardStatus CardStatus, statusReason CardStatusReasonCode, ) *VirtualCardResponse`
+`func NewVirtualCardResponse(form string, accountId string, cardProductId string, creationTime time.Time, customerId string, embossName EmbossName, expirationMonth string, expirationYear string, id string, lastFour string, type_ string, cardStatus CardStatus, statusReason CardStatusReasonCode, cardBrand CardBrand, ) *VirtualCardResponse`
 
 NewVirtualCardResponse instantiates a new VirtualCardResponse object
 This constructor will assign default values to properties that have it defined,
@@ -85,51 +85,6 @@ and a boolean to check if the value has been set.
 `func (o *VirtualCardResponse) SetAccountId(v string)`
 
 SetAccountId sets AccountId field to given value.
-
-
-### GetBin
-
-`func (o *VirtualCardResponse) GetBin() string`
-
-GetBin returns the Bin field if non-nil, zero value otherwise.
-
-### GetBinOk
-
-`func (o *VirtualCardResponse) GetBinOk() (*string, bool)`
-
-GetBinOk returns a tuple with the Bin field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBin
-
-`func (o *VirtualCardResponse) SetBin(v string)`
-
-SetBin sets Bin field to given value.
-
-### HasBin
-
-`func (o *VirtualCardResponse) HasBin() bool`
-
-HasBin returns a boolean if a field has been set.
-
-### GetCardBrand
-
-`func (o *VirtualCardResponse) GetCardBrand() CardBrand`
-
-GetCardBrand returns the CardBrand field if non-nil, zero value otherwise.
-
-### GetCardBrandOk
-
-`func (o *VirtualCardResponse) GetCardBrandOk() (*CardBrand, bool)`
-
-GetCardBrandOk returns a tuple with the CardBrand field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCardBrand
-
-`func (o *VirtualCardResponse) SetCardBrand(v CardBrand)`
-
-SetCardBrand sets CardBrand field to given value.
 
 
 ### GetCardProductId
@@ -550,6 +505,51 @@ and a boolean to check if the value has been set.
 `func (o *VirtualCardResponse) SetStatusReason(v CardStatusReasonCode)`
 
 SetStatusReason sets StatusReason field to given value.
+
+
+### GetBin
+
+`func (o *VirtualCardResponse) GetBin() string`
+
+GetBin returns the Bin field if non-nil, zero value otherwise.
+
+### GetBinOk
+
+`func (o *VirtualCardResponse) GetBinOk() (*string, bool)`
+
+GetBinOk returns a tuple with the Bin field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBin
+
+`func (o *VirtualCardResponse) SetBin(v string)`
+
+SetBin sets Bin field to given value.
+
+### HasBin
+
+`func (o *VirtualCardResponse) HasBin() bool`
+
+HasBin returns a boolean if a field has been set.
+
+### GetCardBrand
+
+`func (o *VirtualCardResponse) GetCardBrand() CardBrand`
+
+GetCardBrand returns the CardBrand field if non-nil, zero value otherwise.
+
+### GetCardBrandOk
+
+`func (o *VirtualCardResponse) GetCardBrandOk() (*CardBrand, bool)`
+
+GetCardBrandOk returns a tuple with the CardBrand field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCardBrand
+
+`func (o *VirtualCardResponse) SetCardBrand(v CardBrand)`
+
+SetCardBrand sets CardBrand field to given value.
 
 
 

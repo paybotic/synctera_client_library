@@ -9,15 +9,15 @@ Name | Type | Description | Notes
 **Currency** | **string** | Account currency. ISO 4217 alphabetic currency code | 
 **ChargeoffPeriod** | Pointer to **int32** | The number of days an account can stay delinquent before marking an account as charged-off.  | [optional] [default to 90]
 **DelinquencyPeriod** | Pointer to **int32** | The number of days past the due date to wait for a minimum payment before marking an account as delinquent.  | [optional] [default to 30]
-**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] [default to 30]
+**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] 
 **InterestProductId** | Pointer to **string** | An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_DAILY.  | [optional] 
-**MinimumPayment** | [**MinimumPayment**](MinimumPayment.md) |  | 
+**MinimumPayment** | [**MinimumPaymentPartial**](MinimumPaymentPartial.md) |  | 
 
 ## Methods
 
 ### NewTemplateFieldsLineOfCredit
 
-`func NewTemplateFieldsLineOfCredit(accountType AccountType, bankCountry string, currency string, minimumPayment MinimumPayment, ) *TemplateFieldsLineOfCredit`
+`func NewTemplateFieldsLineOfCredit(accountType AccountType, bankCountry string, currency string, minimumPayment MinimumPaymentPartial, ) *TemplateFieldsLineOfCredit`
 
 NewTemplateFieldsLineOfCredit instantiates a new TemplateFieldsLineOfCredit object
 This constructor will assign default values to properties that have it defined,
@@ -194,20 +194,20 @@ HasInterestProductId returns a boolean if a field has been set.
 
 ### GetMinimumPayment
 
-`func (o *TemplateFieldsLineOfCredit) GetMinimumPayment() MinimumPayment`
+`func (o *TemplateFieldsLineOfCredit) GetMinimumPayment() MinimumPaymentPartial`
 
 GetMinimumPayment returns the MinimumPayment field if non-nil, zero value otherwise.
 
 ### GetMinimumPaymentOk
 
-`func (o *TemplateFieldsLineOfCredit) GetMinimumPaymentOk() (*MinimumPayment, bool)`
+`func (o *TemplateFieldsLineOfCredit) GetMinimumPaymentOk() (*MinimumPaymentPartial, bool)`
 
 GetMinimumPaymentOk returns a tuple with the MinimumPayment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMinimumPayment
 
-`func (o *TemplateFieldsLineOfCredit) SetMinimumPayment(v MinimumPayment)`
+`func (o *TemplateFieldsLineOfCredit) SetMinimumPayment(v MinimumPaymentPartial)`
 
 SetMinimumPayment sets MinimumPayment field to given value.
 

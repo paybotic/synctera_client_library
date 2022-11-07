@@ -5,18 +5,18 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AutoPostAt** | **time.Time** | The time the transaction will be automatically posted. | 
-**EnhancedTransaction** | **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | 
+**EnhancedTransaction** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
 **ExpiresAt** | **time.Time** | The date that at which this hold is no longer valid. | 
-**ExternalData** | **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | 
-**ReferenceId** | **NullableString** | An external ID provided by the payment network to represent this transaction. This will always be null for internal transfers. | 
-**RiskInfo** | **map[string]interface{}** | Information received by the transaction risk/fraud service related to this transaction | 
-**UserData** | **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | 
+**ExternalData** | Pointer to **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | [optional] 
+**ReferenceId** | **string** | An external ID provided by the payment network to represent this transaction. This will always be null for internal transfers. | 
+**RiskInfo** | Pointer to **map[string]interface{}** | Information received by the transaction risk/fraud service related to this transaction | [optional] 
+**UserData** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
 
 ## Methods
 
 ### NewHoldPatchRequest
 
-`func NewHoldPatchRequest(autoPostAt time.Time, enhancedTransaction map[string]interface{}, expiresAt time.Time, externalData map[string]interface{}, referenceId NullableString, riskInfo map[string]interface{}, userData map[string]interface{}, ) *HoldPatchRequest`
+`func NewHoldPatchRequest(autoPostAt time.Time, expiresAt time.Time, referenceId string, ) *HoldPatchRequest`
 
 NewHoldPatchRequest instantiates a new HoldPatchRequest object
 This constructor will assign default values to properties that have it defined,
@@ -70,6 +70,11 @@ and a boolean to check if the value has been set.
 
 SetEnhancedTransaction sets EnhancedTransaction field to given value.
 
+### HasEnhancedTransaction
+
+`func (o *HoldPatchRequest) HasEnhancedTransaction() bool`
+
+HasEnhancedTransaction returns a boolean if a field has been set.
 
 ### SetEnhancedTransactionNil
 
@@ -120,6 +125,11 @@ and a boolean to check if the value has been set.
 
 SetExternalData sets ExternalData field to given value.
 
+### HasExternalData
+
+`func (o *HoldPatchRequest) HasExternalData() bool`
+
+HasExternalData returns a boolean if a field has been set.
 
 ### SetExternalDataNil
 
@@ -151,16 +161,6 @@ and a boolean to check if the value has been set.
 SetReferenceId sets ReferenceId field to given value.
 
 
-### SetReferenceIdNil
-
-`func (o *HoldPatchRequest) SetReferenceIdNil(b bool)`
-
- SetReferenceIdNil sets the value for ReferenceId to be an explicit nil
-
-### UnsetReferenceId
-`func (o *HoldPatchRequest) UnsetReferenceId()`
-
-UnsetReferenceId ensures that no value is present for ReferenceId, not even an explicit nil
 ### GetRiskInfo
 
 `func (o *HoldPatchRequest) GetRiskInfo() map[string]interface{}`
@@ -180,6 +180,11 @@ and a boolean to check if the value has been set.
 
 SetRiskInfo sets RiskInfo field to given value.
 
+### HasRiskInfo
+
+`func (o *HoldPatchRequest) HasRiskInfo() bool`
+
+HasRiskInfo returns a boolean if a field has been set.
 
 ### SetRiskInfoNil
 
@@ -210,6 +215,11 @@ and a boolean to check if the value has been set.
 
 SetUserData sets UserData field to given value.
 
+### HasUserData
+
+`func (o *HoldPatchRequest) HasUserData() bool`
+
+HasUserData returns a boolean if a field has been set.
 
 ### SetUserDataNil
 

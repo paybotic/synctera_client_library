@@ -8,14 +8,14 @@ Name | Type | Description | Notes
 **ForcePost** | **bool** | Whether or not the hold was forced (spending controls ignored) | 
 **OffsetDescription** | Pointer to **string** | The description of the offset transaction | [optional] 
 **Reason** | **string** | The reason for the reversal | 
-**ReferenceId** | **NullableString** | An external ID provided by the payment network to represent this transaction. This will always be null for internal transfers. | 
-**UserData** | **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | 
+**ReferenceId** | **string** | An external ID provided by the payment network to represent this transaction. This will always be null for internal transfers. | 
+**UserData** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
 
 ## Methods
 
 ### NewTransactionReverseRequest
 
-`func NewTransactionReverseRequest(forcePost bool, reason string, referenceId NullableString, userData map[string]interface{}, ) *TransactionReverseRequest`
+`func NewTransactionReverseRequest(forcePost bool, reason string, referenceId string, ) *TransactionReverseRequest`
 
 NewTransactionReverseRequest instantiates a new TransactionReverseRequest object
 This constructor will assign default values to properties that have it defined,
@@ -140,16 +140,6 @@ and a boolean to check if the value has been set.
 SetReferenceId sets ReferenceId field to given value.
 
 
-### SetReferenceIdNil
-
-`func (o *TransactionReverseRequest) SetReferenceIdNil(b bool)`
-
- SetReferenceIdNil sets the value for ReferenceId to be an explicit nil
-
-### UnsetReferenceId
-`func (o *TransactionReverseRequest) UnsetReferenceId()`
-
-UnsetReferenceId ensures that no value is present for ReferenceId, not even an explicit nil
 ### GetUserData
 
 `func (o *TransactionReverseRequest) GetUserData() map[string]interface{}`
@@ -169,6 +159,11 @@ and a boolean to check if the value has been set.
 
 SetUserData sets UserData field to given value.
 
+### HasUserData
+
+`func (o *TransactionReverseRequest) HasUserData() bool`
+
+HasUserData returns a boolean if a field has been set.
 
 ### SetUserDataNil
 

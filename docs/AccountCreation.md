@@ -34,13 +34,15 @@ Name | Type | Description | Notes
 **FeeProductIds** | Pointer to **[]string** | A list of fee account products that the current account associates with. | [optional] 
 **InterestProductId** | Pointer to **string** | An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_DAILY.  | [optional] 
 **OverdraftLimit** | Pointer to **int64** | Account&#39;s overdraft limit | [optional] 
+**SpendControlIds** | Pointer to **[]string** | List of spend control IDs to control spending for the account | [optional] 
 **SpendingLimits** | Pointer to [**SpendingLimits**](SpendingLimits.md) |  | [optional] 
 **ChargeoffPeriod** | Pointer to **int32** | The number of days an account can stay delinquent before marking an account as charged-off.  | [optional] [default to 90]
 **CreditLimit** | Pointer to **int64** | The credit limit for this line of credit account in cents. Minimum is 0.  | [optional] 
 **DelinquencyPeriod** | Pointer to **int32** | The number of days past the due date to wait for a minimum payment before marking an account as delinquent.  | [optional] [default to 30]
 **GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] 
-**MinimumPayment** | Pointer to [**MinimumPayment**](MinimumPayment.md) |  | [optional] 
-**AccountTemplateId** | Pointer to **string** | Account template ID | [optional] 
+**MinimumPayment** | Pointer to [**MinimumPaymentPartial**](MinimumPaymentPartial.md) |  | [optional] 
+**Security** | Pointer to [**Security**](Security.md) |  | [optional] 
+**AccountTemplateId** | Pointer to **string** | Account template ID. If not specified: * &#x60;account_type&#x60; is *required*. * If there is a single account template of the correct type, that account template   is automatically used. * Otherwise, the request is an error.  | [optional] 
 **Relationships** | Pointer to [**[]Relationship**](Relationship.md) | List of the relationship for this account to the parties | [optional] 
 
 ## Methods
@@ -812,6 +814,31 @@ SetOverdraftLimit sets OverdraftLimit field to given value.
 
 HasOverdraftLimit returns a boolean if a field has been set.
 
+### GetSpendControlIds
+
+`func (o *AccountCreation) GetSpendControlIds() []string`
+
+GetSpendControlIds returns the SpendControlIds field if non-nil, zero value otherwise.
+
+### GetSpendControlIdsOk
+
+`func (o *AccountCreation) GetSpendControlIdsOk() (*[]string, bool)`
+
+GetSpendControlIdsOk returns a tuple with the SpendControlIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpendControlIds
+
+`func (o *AccountCreation) SetSpendControlIds(v []string)`
+
+SetSpendControlIds sets SpendControlIds field to given value.
+
+### HasSpendControlIds
+
+`func (o *AccountCreation) HasSpendControlIds() bool`
+
+HasSpendControlIds returns a boolean if a field has been set.
+
 ### GetSpendingLimits
 
 `func (o *AccountCreation) GetSpendingLimits() SpendingLimits`
@@ -939,20 +966,20 @@ HasGracePeriod returns a boolean if a field has been set.
 
 ### GetMinimumPayment
 
-`func (o *AccountCreation) GetMinimumPayment() MinimumPayment`
+`func (o *AccountCreation) GetMinimumPayment() MinimumPaymentPartial`
 
 GetMinimumPayment returns the MinimumPayment field if non-nil, zero value otherwise.
 
 ### GetMinimumPaymentOk
 
-`func (o *AccountCreation) GetMinimumPaymentOk() (*MinimumPayment, bool)`
+`func (o *AccountCreation) GetMinimumPaymentOk() (*MinimumPaymentPartial, bool)`
 
 GetMinimumPaymentOk returns a tuple with the MinimumPayment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMinimumPayment
 
-`func (o *AccountCreation) SetMinimumPayment(v MinimumPayment)`
+`func (o *AccountCreation) SetMinimumPayment(v MinimumPaymentPartial)`
 
 SetMinimumPayment sets MinimumPayment field to given value.
 
@@ -961,6 +988,31 @@ SetMinimumPayment sets MinimumPayment field to given value.
 `func (o *AccountCreation) HasMinimumPayment() bool`
 
 HasMinimumPayment returns a boolean if a field has been set.
+
+### GetSecurity
+
+`func (o *AccountCreation) GetSecurity() Security`
+
+GetSecurity returns the Security field if non-nil, zero value otherwise.
+
+### GetSecurityOk
+
+`func (o *AccountCreation) GetSecurityOk() (*Security, bool)`
+
+GetSecurityOk returns a tuple with the Security field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecurity
+
+`func (o *AccountCreation) SetSecurity(v Security)`
+
+SetSecurity sets Security field to given value.
+
+### HasSecurity
+
+`func (o *AccountCreation) HasSecurity() bool`
+
+HasSecurity returns a boolean if a field has been set.
 
 ### GetAccountTemplateId
 

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **BusinessId** | Pointer to **string** | The identifier for the business customer associated with this external account. Exactly one of &#x60;business_id&#x60; or &#x60;customer_id&#x60; will be returned.  | [optional] 
 **CreationTime** | **time.Time** |  | 
 **CustomerId** | Pointer to **string** | The identifier for the personal customer associated with this external account. Exactly one of &#x60;customer_id&#x60; or &#x60;business_id&#x60; will be returned.  | [optional] 
+**DeletionTime** | Pointer to **time.Time** |  | [optional] 
 **Id** | **string** | External account unique identifier | [readonly] 
 **LastUpdatedTime** | **time.Time** |  | 
 **Metadata** | Pointer to **map[string]interface{}** | User-supplied JSON format metadata. | [optional] 
@@ -149,6 +150,31 @@ SetCustomerId sets CustomerId field to given value.
 `func (o *ExternalAccount) HasCustomerId() bool`
 
 HasCustomerId returns a boolean if a field has been set.
+
+### GetDeletionTime
+
+`func (o *ExternalAccount) GetDeletionTime() time.Time`
+
+GetDeletionTime returns the DeletionTime field if non-nil, zero value otherwise.
+
+### GetDeletionTimeOk
+
+`func (o *ExternalAccount) GetDeletionTimeOk() (*time.Time, bool)`
+
+GetDeletionTimeOk returns a tuple with the DeletionTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeletionTime
+
+`func (o *ExternalAccount) SetDeletionTime(v time.Time)`
+
+SetDeletionTime sets DeletionTime field to given value.
+
+### HasDeletionTime
+
+`func (o *ExternalAccount) HasDeletionTime() bool`
+
+HasDeletionTime returns a boolean if a field has been set.
 
 ### GetId
 

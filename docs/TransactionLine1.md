@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AccountId** | **string** | The account uuid associated with this transaction line | 
 **AccountNo** | **string** | The account number associated with this transaction line | 
 **Amount** | **int64** | The amount (in cents) of the transaction | 
+**AvailBalance** | **int64** | The account \&quot;available balance\&quot; at the point in time this (to be deprecated) transaction was posted | 
 **AvailableBalance** | **int64** | The account \&quot;available balance\&quot; at the point in time this transaction was posted | 
 **Balance** | **int64** | The account balance at the point in time this transaction was posted | 
 **Created** | **time.Time** | The creation date of the transaction | 
@@ -18,8 +19,8 @@ Name | Type | Description | Notes
 **IsPrimary** | **bool** | Whether or not this line is considered the \&quot;primary\&quot; line | 
 **Meta** | **map[string]interface{}** |  | 
 **Network** | **string** | The network this transaction is associated with | 
-**RelatedLine** | **int64** |  | 
-**Seq** | **int64** |  | 
+**RelatedLine** | **int32** |  | 
+**Seq** | **int32** |  | 
 **Tenant** | **string** | The tenant associated with this transaction, in the form \&quot;&lt;bankid&gt;_&lt;partnerid&gt;\&quot; | 
 **Updated** | **time.Time** | The date the transaction was last updated | 
 **Uuid** | **string** |  | 
@@ -28,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewTransactionLine1
 
-`func NewTransactionLine1(accountId string, accountNo string, amount int64, availableBalance int64, balance int64, created time.Time, currency string, dcSign DcSign, isFee bool, isGlAcc bool, isOffset bool, isPrimary bool, meta map[string]interface{}, network string, relatedLine int64, seq int64, tenant string, updated time.Time, uuid string, ) *TransactionLine1`
+`func NewTransactionLine1(accountId string, accountNo string, amount int64, availBalance int64, availableBalance int64, balance int64, created time.Time, currency string, dcSign DcSign, isFee bool, isGlAcc bool, isOffset bool, isPrimary bool, meta map[string]interface{}, network string, relatedLine int32, seq int32, tenant string, updated time.Time, uuid string, ) *TransactionLine1`
 
 NewTransactionLine1 instantiates a new TransactionLine1 object
 This constructor will assign default values to properties that have it defined,
@@ -101,6 +102,26 @@ and a boolean to check if the value has been set.
 `func (o *TransactionLine1) SetAmount(v int64)`
 
 SetAmount sets Amount field to given value.
+
+
+### GetAvailBalance
+
+`func (o *TransactionLine1) GetAvailBalance() int64`
+
+GetAvailBalance returns the AvailBalance field if non-nil, zero value otherwise.
+
+### GetAvailBalanceOk
+
+`func (o *TransactionLine1) GetAvailBalanceOk() (*int64, bool)`
+
+GetAvailBalanceOk returns a tuple with the AvailBalance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailBalance
+
+`func (o *TransactionLine1) SetAvailBalance(v int64)`
+
+SetAvailBalance sets AvailBalance field to given value.
 
 
 ### GetAvailableBalance
@@ -335,40 +356,40 @@ SetNetwork sets Network field to given value.
 
 ### GetRelatedLine
 
-`func (o *TransactionLine1) GetRelatedLine() int64`
+`func (o *TransactionLine1) GetRelatedLine() int32`
 
 GetRelatedLine returns the RelatedLine field if non-nil, zero value otherwise.
 
 ### GetRelatedLineOk
 
-`func (o *TransactionLine1) GetRelatedLineOk() (*int64, bool)`
+`func (o *TransactionLine1) GetRelatedLineOk() (*int32, bool)`
 
 GetRelatedLineOk returns a tuple with the RelatedLine field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRelatedLine
 
-`func (o *TransactionLine1) SetRelatedLine(v int64)`
+`func (o *TransactionLine1) SetRelatedLine(v int32)`
 
 SetRelatedLine sets RelatedLine field to given value.
 
 
 ### GetSeq
 
-`func (o *TransactionLine1) GetSeq() int64`
+`func (o *TransactionLine1) GetSeq() int32`
 
 GetSeq returns the Seq field if non-nil, zero value otherwise.
 
 ### GetSeqOk
 
-`func (o *TransactionLine1) GetSeqOk() (*int64, bool)`
+`func (o *TransactionLine1) GetSeqOk() (*int32, bool)`
 
 GetSeqOk returns a tuple with the Seq field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSeq
 
-`func (o *TransactionLine1) SetSeq(v int64)`
+`func (o *TransactionLine1) SetSeq(v int32)`
 
 SetSeq sets Seq field to given value.
 

@@ -32,7 +32,7 @@ import (
 )
 
 func main() {
-    deposit := *openapiclient.NewDeposit("ab144f71-3708-4625-8df3-d9307804475e", "a745e775-9d35-46a5-812d-4a7663178a3b", int32(8032), time.Now(), time.Now(), int32(6207), "USD", "a6be36a2-1211-4c7f-b38e-14923e009262", "69170eba-daa5-4c06-9a6d-abc1d4733f67", "Status_example", "261343ed-2752-4e07-b14f-5cafcd38361c", openapiclient.vendor_info1{VendorJson: openapiclient.NewVendorJson("ContentType_example", map[string]interface{}(123), "SOCURE")}) // Deposit | Attributes of the Remote Check Deposit to create (optional)
+    deposit := *openapiclient.NewDeposit("a2b17b47-49a3-4f69-88bf-b7a0abb555f2", "b6d8065d-7122-40df-922e-6f2ba88a5d50", int32(5005), time.Now(), time.Now(), int32(2979), "USD", "350bba5f-27e1-4eec-ad0a-94b322d7fc59", "38ebff87-fb06-44a0-9a06-72f0175dfc62", "Status_example", "50f24553-6017-4d36-82b9-43a251ee4358", openapiclient.vendor_info1{VendorJson: openapiclient.NewVendorJson("ContentType_example", map[string]interface{}(123), "SOCURE")}) // Deposit | Attributes of the Remote Check Deposit to create (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -98,7 +98,7 @@ import (
 )
 
 func main() {
-    depositId := "1985f769-dd31-4128-95db-f765355e6631" // string | ID of a deposit for a remote deposit capture
+    depositId := "4d463562-87b0-40bf-ba3f-7b52833f4898" // string | ID of a deposit for a remote deposit capture
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 
 ## ListRdcDeposits
 
-> DepositList ListRdcDeposits(ctx).Limit(limit).PageToken(pageToken).Execute()
+> DepositList ListRdcDeposits(ctx).AccountId(accountId).Limit(limit).PageToken(pageToken).Execute()
 
 List Remote Check Deposits
 
@@ -168,12 +168,13 @@ import (
 )
 
 func main() {
+    accountId := "12dbc24c-3cfc-46dc-a164-0977434afabf" // string | Unique identifier for the account. (optional)
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "h50ffqz9q5" // string |  (optional)
+    pageToken := "a8937a0d" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RemoteCheckDepositBetaApi.ListRdcDeposits(context.Background()).Limit(limit).PageToken(pageToken).Execute()
+    resp, r, err := apiClient.RemoteCheckDepositBetaApi.ListRdcDeposits(context.Background()).AccountId(accountId).Limit(limit).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RemoteCheckDepositBetaApi.ListRdcDeposits``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -194,6 +195,7 @@ Other parameters are passed through a pointer to a apiListRdcDepositsRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **accountId** | **string** | Unique identifier for the account. | 
  **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
 

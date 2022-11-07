@@ -5,12 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | The transaction id associated with the transfer | 
+**Status** | **string** | The status of the internal transfer auth. A value of &#x60;PENDING&#x60; indicates that the funds have been reserved and the transaction is ready to be either completed or canceled. A value of &#x60;COMPLETE&#x60; indicates the funds have been successfully moved and no more action can be performed. A value of &#x60;CANCELED&#x60; or &#x60;EXPIRED&#x60; means that the transaction has rolled back and the funds have been returned to the originating account, either by explicitly canceling via the API, or due to the expiry time having passed. | 
 
 ## Methods
 
 ### NewInternalTransferResponseAllOf
 
-`func NewInternalTransferResponseAllOf(id string, ) *InternalTransferResponseAllOf`
+`func NewInternalTransferResponseAllOf(id string, status string, ) *InternalTransferResponseAllOf`
 
 NewInternalTransferResponseAllOf instantiates a new InternalTransferResponseAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -43,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *InternalTransferResponseAllOf) SetId(v string)`
 
 SetId sets Id field to given value.
+
+
+### GetStatus
+
+`func (o *InternalTransferResponseAllOf) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *InternalTransferResponseAllOf) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *InternalTransferResponseAllOf) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
 
 
 

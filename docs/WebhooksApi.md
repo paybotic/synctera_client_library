@@ -103,7 +103,7 @@ import (
 )
 
 func main() {
-    webhookId := "97e074c8-188e-4cfb-8e34-16099909c595" // string | Webhook ID
+    webhookId := "4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5" // string | Webhook ID
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -173,8 +173,8 @@ import (
 )
 
 func main() {
-    webhookId := "97e074c8-188e-4cfb-8e34-16099909c595" // string | Webhook ID
-    eventId := "30b341b8-8445-459a-8349-b3548b2aff53" // string | Webhook event ID
+    webhookId := "4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5" // string | Webhook ID
+    eventId := "9210da83-0834-4fc6-96aa-58c4925a6723" // string | Webhook event ID
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -246,7 +246,7 @@ import (
 )
 
 func main() {
-    webhookId := "97e074c8-188e-4cfb-8e34-16099909c595" // string | Webhook ID
+    webhookId := "4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5" // string | Webhook ID
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -317,13 +317,13 @@ import (
 )
 
 func main() {
-    webhookId := "97e074c8-188e-4cfb-8e34-16099909c595" // string | Webhook ID
+    webhookId := "4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5" // string | Webhook ID
     startDate := time.Now() // string | Start date of date range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.. start_date is alias of start_time and is deprecated. Please use start_time instead. (optional)
     endDate := time.Now() // string | End date of date range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.. end_date is alias of end_time and is deprecated. Please use end_time instead. (optional)
     startTime := time.Now() // time.Time | Start time of date-time range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00. (optional)
     endTime := time.Now() // time.Time | End time of date-time range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00. (optional)
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "h50ffqz9q5" // string |  (optional)
+    pageToken := "a8937a0d" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -400,7 +400,7 @@ import (
 
 func main() {
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "h50ffqz9q5" // string |  (optional)
+    pageToken := "a8937a0d" // string |  (optional)
     isEnabledOnly := true // bool |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -469,8 +469,8 @@ import (
 )
 
 func main() {
-    webhookId := "97e074c8-188e-4cfb-8e34-16099909c595" // string | Webhook ID
-    eventId := "9e57eb8e-1795-4496-b3c5-06fcfdc7329f" // string | Webhook event ID
+    webhookId := "4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5" // string | Webhook ID
+    eventId := "faa78c68-e36e-4323-a45e-897e074c8188" // string | Webhook event ID
     delay := int32(56) // int32 | Delay the event triggering in seconds (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -610,7 +610,7 @@ import (
 )
 
 func main() {
-    webhookId := "97e074c8-188e-4cfb-8e34-16099909c595" // string | Webhook ID
+    webhookId := "4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5" // string | Webhook ID
     webhook := *openapiclient.NewWebhook([]openapiclient.EventType1{openapiclient.event_type1{EventTypeExplicit: penapiclient.event_type_explicit("ACCOUNT.CREATED")}}, false, "Url_example") // Webhook | Webhook to update
 
     configuration := openapiclient.NewConfiguration()

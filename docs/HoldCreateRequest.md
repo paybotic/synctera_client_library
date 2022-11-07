@@ -15,23 +15,24 @@ Name | Type | Description | Notes
 **EffectiveDate** | **time.Time** | The effective date of the transaction once it gets posted | 
 **EnhancedTransaction** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
 **ExpiresAt** | **time.Time** | The date that at which this hold is no longer valid. | 
-**ExternalData** | **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | 
+**ExternalData** | Pointer to **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | [optional] 
 **ForcePost** | **bool** | Whether or not the hold was forced (spending controls ignored) | 
 **Memo** | **string** | A short note to the recipient | 
 **Network** | **string** | The network this transaction is associated with | 
+**OffsetAccountNo** | Pointer to **string** | The account number to offset the transaction | [optional] 
 **OffsetDescription** | Pointer to **string** | The description of the offset transaction | [optional] 
-**ReferenceId** | **NullableString** | An external ID provided by the payment network to represent this transaction. This will always be null for internal transfers. | 
-**Status** | **string** | The status of the hold. | 
+**ReferenceId** | **string** | An external ID provided by the payment network to represent this transaction. This will always be null for internal transfers. | 
+**Status** | [**HoldCreateRequestStatus**](HoldCreateRequestStatus.md) |  | 
 **Subtype** | **string** | The specific transaction type. For example, for &#x60;ach&#x60;, this may be \&quot;outgoing_debit\&quot;. | 
 **TransactionTime** | **time.Time** | The time the transaction occurred. | 
 **Type** | **string** | The general type of transaction. For example, \&quot;card\&quot; or \&quot;ach\&quot;. | 
-**UserData** | **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | 
+**UserData** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
 
 ## Methods
 
 ### NewHoldCreateRequest
 
-`func NewHoldCreateRequest(accountNo string, allowPartial bool, amount int64, autoPostAt time.Time, currency string, dcSign DcSign, declineReason string, effectiveDate time.Time, expiresAt time.Time, externalData map[string]interface{}, forcePost bool, memo string, network string, referenceId NullableString, status string, subtype string, transactionTime time.Time, type_ string, userData map[string]interface{}, ) *HoldCreateRequest`
+`func NewHoldCreateRequest(accountNo string, allowPartial bool, amount int64, autoPostAt time.Time, currency string, dcSign DcSign, declineReason string, effectiveDate time.Time, expiresAt time.Time, forcePost bool, memo string, network string, referenceId string, status HoldCreateRequestStatus, subtype string, transactionTime time.Time, type_ string, ) *HoldCreateRequest`
 
 NewHoldCreateRequest instantiates a new HoldCreateRequest object
 This constructor will assign default values to properties that have it defined,
@@ -305,6 +306,11 @@ and a boolean to check if the value has been set.
 
 SetExternalData sets ExternalData field to given value.
 
+### HasExternalData
+
+`func (o *HoldCreateRequest) HasExternalData() bool`
+
+HasExternalData returns a boolean if a field has been set.
 
 ### SetExternalDataNil
 
@@ -376,6 +382,31 @@ and a boolean to check if the value has been set.
 SetNetwork sets Network field to given value.
 
 
+### GetOffsetAccountNo
+
+`func (o *HoldCreateRequest) GetOffsetAccountNo() string`
+
+GetOffsetAccountNo returns the OffsetAccountNo field if non-nil, zero value otherwise.
+
+### GetOffsetAccountNoOk
+
+`func (o *HoldCreateRequest) GetOffsetAccountNoOk() (*string, bool)`
+
+GetOffsetAccountNoOk returns a tuple with the OffsetAccountNo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOffsetAccountNo
+
+`func (o *HoldCreateRequest) SetOffsetAccountNo(v string)`
+
+SetOffsetAccountNo sets OffsetAccountNo field to given value.
+
+### HasOffsetAccountNo
+
+`func (o *HoldCreateRequest) HasOffsetAccountNo() bool`
+
+HasOffsetAccountNo returns a boolean if a field has been set.
+
 ### GetOffsetDescription
 
 `func (o *HoldCreateRequest) GetOffsetDescription() string`
@@ -421,32 +452,22 @@ and a boolean to check if the value has been set.
 SetReferenceId sets ReferenceId field to given value.
 
 
-### SetReferenceIdNil
-
-`func (o *HoldCreateRequest) SetReferenceIdNil(b bool)`
-
- SetReferenceIdNil sets the value for ReferenceId to be an explicit nil
-
-### UnsetReferenceId
-`func (o *HoldCreateRequest) UnsetReferenceId()`
-
-UnsetReferenceId ensures that no value is present for ReferenceId, not even an explicit nil
 ### GetStatus
 
-`func (o *HoldCreateRequest) GetStatus() string`
+`func (o *HoldCreateRequest) GetStatus() HoldCreateRequestStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *HoldCreateRequest) GetStatusOk() (*string, bool)`
+`func (o *HoldCreateRequest) GetStatusOk() (*HoldCreateRequestStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *HoldCreateRequest) SetStatus(v string)`
+`func (o *HoldCreateRequest) SetStatus(v HoldCreateRequestStatus)`
 
 SetStatus sets Status field to given value.
 
@@ -530,6 +551,11 @@ and a boolean to check if the value has been set.
 
 SetUserData sets UserData field to given value.
 
+### HasUserData
+
+`func (o *HoldCreateRequest) HasUserData() bool`
+
+HasUserData returns a boolean if a field has been set.
 
 ### SetUserDataNil
 

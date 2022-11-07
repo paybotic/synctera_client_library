@@ -12,25 +12,25 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | The description of the transaction | [optional] 
 **EffectiveDate** | **time.Time** | The effective date of the transaction once it gets posted | 
 **EnhancedTransaction** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
-**ExternalData** | **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | 
+**ExternalData** | Pointer to **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | [optional] 
 **ForcePost** | **bool** | Whether or not the hold was forced (spending controls ignored) | 
 **InfoOnly** | **bool** | Whether or not this transaction represents a purely informational operation or an actual money movement | 
 **Memo** | **string** | A short note to the recipient | 
 **Network** | **string** | The network this transaction is associated with | 
 **OffsetDescription** | Pointer to **string** | The description of the offset transaction | [optional] 
-**ReferenceId** | **NullableString** | An external ID provided by the payment network to represent this transaction. This will always be null for internal transfers. | 
-**RiskInfo** | **map[string]interface{}** | Information received by the transaction risk/fraud service related to this transaction | 
+**ReferenceId** | **string** | An external ID provided by the payment network to represent this transaction. This will always be null for internal transfers. | 
+**RiskInfo** | Pointer to **map[string]interface{}** | Information received by the transaction risk/fraud service related to this transaction | [optional] 
 **Subtype** | **string** | The specific transaction type. For example, for &#x60;ach&#x60;, this may be \&quot;outgoing_debit\&quot;. | 
 **TransactionTime** | **time.Time** | The time the transaction occurred. | 
 **Type** | **string** | The general type of transaction. For example, \&quot;card\&quot; or \&quot;ach\&quot;. | 
-**UserData** | **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | 
-**Uuid** | **string** | The unique identifier of the transaction. | 
+**UserData** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
+**Uuid** | Pointer to **string** | The unique identifier of the transaction. | [optional] 
 
 ## Methods
 
 ### NewTransactionDirectPostRequest
 
-`func NewTransactionDirectPostRequest(accountAlias string, accountNo string, amount int64, currency string, dcSign DcSign, effectiveDate time.Time, externalData map[string]interface{}, forcePost bool, infoOnly bool, memo string, network string, referenceId NullableString, riskInfo map[string]interface{}, subtype string, transactionTime time.Time, type_ string, userData map[string]interface{}, uuid string, ) *TransactionDirectPostRequest`
+`func NewTransactionDirectPostRequest(accountAlias string, accountNo string, amount int64, currency string, dcSign DcSign, effectiveDate time.Time, forcePost bool, infoOnly bool, memo string, network string, referenceId string, subtype string, transactionTime time.Time, type_ string, ) *TransactionDirectPostRequest`
 
 NewTransactionDirectPostRequest instantiates a new TransactionDirectPostRequest object
 This constructor will assign default values to properties that have it defined,
@@ -244,6 +244,11 @@ and a boolean to check if the value has been set.
 
 SetExternalData sets ExternalData field to given value.
 
+### HasExternalData
+
+`func (o *TransactionDirectPostRequest) HasExternalData() bool`
+
+HasExternalData returns a boolean if a field has been set.
 
 ### SetExternalDataNil
 
@@ -380,16 +385,6 @@ and a boolean to check if the value has been set.
 SetReferenceId sets ReferenceId field to given value.
 
 
-### SetReferenceIdNil
-
-`func (o *TransactionDirectPostRequest) SetReferenceIdNil(b bool)`
-
- SetReferenceIdNil sets the value for ReferenceId to be an explicit nil
-
-### UnsetReferenceId
-`func (o *TransactionDirectPostRequest) UnsetReferenceId()`
-
-UnsetReferenceId ensures that no value is present for ReferenceId, not even an explicit nil
 ### GetRiskInfo
 
 `func (o *TransactionDirectPostRequest) GetRiskInfo() map[string]interface{}`
@@ -409,6 +404,11 @@ and a boolean to check if the value has been set.
 
 SetRiskInfo sets RiskInfo field to given value.
 
+### HasRiskInfo
+
+`func (o *TransactionDirectPostRequest) HasRiskInfo() bool`
+
+HasRiskInfo returns a boolean if a field has been set.
 
 ### SetRiskInfoNil
 
@@ -499,6 +499,11 @@ and a boolean to check if the value has been set.
 
 SetUserData sets UserData field to given value.
 
+### HasUserData
+
+`func (o *TransactionDirectPostRequest) HasUserData() bool`
+
+HasUserData returns a boolean if a field has been set.
 
 ### SetUserDataNil
 
@@ -529,6 +534,11 @@ and a boolean to check if the value has been set.
 
 SetUuid sets Uuid field to given value.
 
+### HasUuid
+
+`func (o *TransactionDirectPostRequest) HasUuid() bool`
+
+HasUuid returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

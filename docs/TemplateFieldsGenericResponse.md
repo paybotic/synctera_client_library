@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **IsWireEnabled** | Pointer to **bool** | Enable wire transaction on ledger. | [optional] [default to false]
 **MinimumPayment** | Pointer to [**MinimumPayment**](MinimumPayment.md) |  | [optional] 
 **OverdraftLimit** | Pointer to **int64** | Account&#39;s overdraft limit. Default is 0. Unit in cents. | [optional] 
+**SpendControlIds** | Pointer to **[]string** | List of spend control IDs to control spending for the account | [optional] 
 **SpendingLimits** | Pointer to [**SpendingLimits**](SpendingLimits.md) |  | [optional] 
 
 ## Methods
@@ -451,6 +452,31 @@ SetOverdraftLimit sets OverdraftLimit field to given value.
 `func (o *TemplateFieldsGenericResponse) HasOverdraftLimit() bool`
 
 HasOverdraftLimit returns a boolean if a field has been set.
+
+### GetSpendControlIds
+
+`func (o *TemplateFieldsGenericResponse) GetSpendControlIds() []string`
+
+GetSpendControlIds returns the SpendControlIds field if non-nil, zero value otherwise.
+
+### GetSpendControlIdsOk
+
+`func (o *TemplateFieldsGenericResponse) GetSpendControlIdsOk() (*[]string, bool)`
+
+GetSpendControlIdsOk returns a tuple with the SpendControlIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpendControlIds
+
+`func (o *TemplateFieldsGenericResponse) SetSpendControlIds(v []string)`
+
+SetSpendControlIds sets SpendControlIds field to given value.
+
+### HasSpendControlIds
+
+`func (o *TemplateFieldsGenericResponse) HasSpendControlIds() bool`
+
+HasSpendControlIds returns a boolean if a field has been set.
 
 ### GetSpendingLimits
 

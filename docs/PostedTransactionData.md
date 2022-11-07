@@ -4,21 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExternalData** | **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | 
+**ExternalData** | Pointer to **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | [optional] 
 **ForcePost** | **bool** | Whether or not the hold was forced (spending controls ignored) | 
 **HoldId** | Pointer to **string** | The uuid of the hold (pending transaction) that this transaction originated from, if any. | [optional] 
 **Lines** | [**[]TransactionLine1**](TransactionLine1.md) | The set of accounting entries associated with this transaction. For example, a debit to a customer account will have a corresponding credit in a general ledger account. | 
 **Memo** | **string** | A short note to the recipient | 
 **Metadata** | **map[string]interface{}** |  | 
 **OriginalTrx** | Pointer to **string** | The \&quot;original\&quot; transaction that this transaction is related to. This is only populated in the case of reversed transactions. | [optional] 
-**RiskInfo** | **map[string]interface{}** | Information received by the transaction risk/fraud service related to this transaction | 
-**UserData** | **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | 
+**ParentTrx** | Pointer to **string** | The \&quot;parent\&quot; transaction that this transaction is related to. This is only populated in the case of scheduled transactions. | [optional] 
+**RiskInfo** | Pointer to **map[string]interface{}** | Information received by the transaction risk/fraud service related to this transaction | [optional] 
+**UserData** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
 
 ## Methods
 
 ### NewPostedTransactionData
 
-`func NewPostedTransactionData(externalData map[string]interface{}, forcePost bool, lines []TransactionLine1, memo string, metadata map[string]interface{}, riskInfo map[string]interface{}, userData map[string]interface{}, ) *PostedTransactionData`
+`func NewPostedTransactionData(forcePost bool, lines []TransactionLine1, memo string, metadata map[string]interface{}, ) *PostedTransactionData`
 
 NewPostedTransactionData instantiates a new PostedTransactionData object
 This constructor will assign default values to properties that have it defined,
@@ -52,6 +53,11 @@ and a boolean to check if the value has been set.
 
 SetExternalData sets ExternalData field to given value.
 
+### HasExternalData
+
+`func (o *PostedTransactionData) HasExternalData() bool`
+
+HasExternalData returns a boolean if a field has been set.
 
 ### SetExternalDataNil
 
@@ -203,6 +209,31 @@ SetOriginalTrx sets OriginalTrx field to given value.
 
 HasOriginalTrx returns a boolean if a field has been set.
 
+### GetParentTrx
+
+`func (o *PostedTransactionData) GetParentTrx() string`
+
+GetParentTrx returns the ParentTrx field if non-nil, zero value otherwise.
+
+### GetParentTrxOk
+
+`func (o *PostedTransactionData) GetParentTrxOk() (*string, bool)`
+
+GetParentTrxOk returns a tuple with the ParentTrx field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentTrx
+
+`func (o *PostedTransactionData) SetParentTrx(v string)`
+
+SetParentTrx sets ParentTrx field to given value.
+
+### HasParentTrx
+
+`func (o *PostedTransactionData) HasParentTrx() bool`
+
+HasParentTrx returns a boolean if a field has been set.
+
 ### GetRiskInfo
 
 `func (o *PostedTransactionData) GetRiskInfo() map[string]interface{}`
@@ -222,6 +253,11 @@ and a boolean to check if the value has been set.
 
 SetRiskInfo sets RiskInfo field to given value.
 
+### HasRiskInfo
+
+`func (o *PostedTransactionData) HasRiskInfo() bool`
+
+HasRiskInfo returns a boolean if a field has been set.
 
 ### SetRiskInfoNil
 
@@ -252,6 +288,11 @@ and a boolean to check if the value has been set.
 
 SetUserData sets UserData field to given value.
 
+### HasUserData
+
+`func (o *PostedTransactionData) HasUserData() bool`
+
+HasUserData returns a boolean if a field has been set.
 
 ### SetUserDataNil
 

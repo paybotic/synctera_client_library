@@ -7,17 +7,17 @@ Name | Type | Description | Notes
 **AccountNo** | **string** | The account number associated with the hold | 
 **Amount** | **int64** | The amount of the hold. | 
 **EffectiveDate** | **time.Time** | The effective date of the transaction once it gets posted | 
-**ExternalData** | **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | 
+**ExternalData** | Pointer to **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | [optional] 
 **HoldAmount** | **int64** | The amount of the hold. | 
-**RiskInfo** | **map[string]interface{}** | Information received by the transaction risk/fraud service related to this transaction | 
+**RiskInfo** | Pointer to **map[string]interface{}** | Information received by the transaction risk/fraud service related to this transaction | [optional] 
 **Subtype** | **string** | The specific transaction type. For example, for &#x60;ach&#x60;, this may be \&quot;outgoing_debit\&quot;. | 
-**UserData** | **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | 
+**UserData** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
 
 ## Methods
 
 ### NewHoldPostingRequest
 
-`func NewHoldPostingRequest(accountNo string, amount int64, effectiveDate time.Time, externalData map[string]interface{}, holdAmount int64, riskInfo map[string]interface{}, subtype string, userData map[string]interface{}, ) *HoldPostingRequest`
+`func NewHoldPostingRequest(accountNo string, amount int64, effectiveDate time.Time, holdAmount int64, subtype string, ) *HoldPostingRequest`
 
 NewHoldPostingRequest instantiates a new HoldPostingRequest object
 This constructor will assign default values to properties that have it defined,
@@ -111,6 +111,11 @@ and a boolean to check if the value has been set.
 
 SetExternalData sets ExternalData field to given value.
 
+### HasExternalData
+
+`func (o *HoldPostingRequest) HasExternalData() bool`
+
+HasExternalData returns a boolean if a field has been set.
 
 ### SetExternalDataNil
 
@@ -161,6 +166,11 @@ and a boolean to check if the value has been set.
 
 SetRiskInfo sets RiskInfo field to given value.
 
+### HasRiskInfo
+
+`func (o *HoldPostingRequest) HasRiskInfo() bool`
+
+HasRiskInfo returns a boolean if a field has been set.
 
 ### SetRiskInfoNil
 
@@ -211,6 +221,11 @@ and a boolean to check if the value has been set.
 
 SetUserData sets UserData field to given value.
 
+### HasUserData
+
+`func (o *HoldPostingRequest) HasUserData() bool`
+
+HasUserData returns a boolean if a field has been set.
 
 ### SetUserDataNil
 

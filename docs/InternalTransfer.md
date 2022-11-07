@@ -5,14 +5,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amount** | **int64** | The amount (in cents) to transfer from originating account to receiving account. | 
+**CaptureMode** | Pointer to **string** | Controls when the transfer will take effect. A value of &#x60;IMMEDIATE&#x60; (the default) means that the transfer will be completed immediately. A value of &#x60;MANUAL&#x60; means that the transaction will remain in a \&quot;pending\&quot; state until explicitly completed or cancelled (or the auth expires). | [optional] [default to "IMMEDIATE"]
 **Currency** | **string** | ISO 4217 alphabetic currency code of the transfer amount | 
+**ExpiresAt** | Pointer to **time.Time** | When &#x60;capture_mode&#x60; is &#x60;MANUAL&#x60;, this field describes when the pending transaction should expire. | [optional] 
+**FinalCustomerId** | Pointer to **string** | The customer id of the international customer that receives the final remittance transfer (required for remittance payments). | [optional] 
 **Memo** | Pointer to **string** | A short note to the recipient | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** | Arbitrary key-value metadata to associate with the transaction | [optional] 
 **OriginatingAccountAlias** | Pointer to **string** | An alias representing a GL account to debit. This is alternative to specifying by account id | [optional] 
 **OriginatingAccountCustomerId** | Pointer to **string** | The customer id of the owner of the originating account. | [optional] 
 **OriginatingAccountId** | Pointer to **string** | The UUID of the account being debited | [optional] 
 **ReceivingAccountAlias** | Pointer to **string** | An alias representing a GL account to credit. This is an alternative to specifying by account id | [optional] 
-**ReceivingAccountCustomerId** | Pointer to **string** | The customer id of the owner of the receiving account. Only required when type is \&quot;outgoing_remittance\&quot; | [optional] 
+**ReceivingAccountCustomerId** | Pointer to **string** | The customer id of the owner of the receiving account. | [optional] 
 **ReceivingAccountId** | Pointer to **string** | The UUID of the account being credited | [optional] 
 **Type** | **string** | The desired transaction type to use for this transfer | 
 
@@ -55,6 +58,31 @@ and a boolean to check if the value has been set.
 SetAmount sets Amount field to given value.
 
 
+### GetCaptureMode
+
+`func (o *InternalTransfer) GetCaptureMode() string`
+
+GetCaptureMode returns the CaptureMode field if non-nil, zero value otherwise.
+
+### GetCaptureModeOk
+
+`func (o *InternalTransfer) GetCaptureModeOk() (*string, bool)`
+
+GetCaptureModeOk returns a tuple with the CaptureMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCaptureMode
+
+`func (o *InternalTransfer) SetCaptureMode(v string)`
+
+SetCaptureMode sets CaptureMode field to given value.
+
+### HasCaptureMode
+
+`func (o *InternalTransfer) HasCaptureMode() bool`
+
+HasCaptureMode returns a boolean if a field has been set.
+
 ### GetCurrency
 
 `func (o *InternalTransfer) GetCurrency() string`
@@ -74,6 +102,56 @@ and a boolean to check if the value has been set.
 
 SetCurrency sets Currency field to given value.
 
+
+### GetExpiresAt
+
+`func (o *InternalTransfer) GetExpiresAt() time.Time`
+
+GetExpiresAt returns the ExpiresAt field if non-nil, zero value otherwise.
+
+### GetExpiresAtOk
+
+`func (o *InternalTransfer) GetExpiresAtOk() (*time.Time, bool)`
+
+GetExpiresAtOk returns a tuple with the ExpiresAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiresAt
+
+`func (o *InternalTransfer) SetExpiresAt(v time.Time)`
+
+SetExpiresAt sets ExpiresAt field to given value.
+
+### HasExpiresAt
+
+`func (o *InternalTransfer) HasExpiresAt() bool`
+
+HasExpiresAt returns a boolean if a field has been set.
+
+### GetFinalCustomerId
+
+`func (o *InternalTransfer) GetFinalCustomerId() string`
+
+GetFinalCustomerId returns the FinalCustomerId field if non-nil, zero value otherwise.
+
+### GetFinalCustomerIdOk
+
+`func (o *InternalTransfer) GetFinalCustomerIdOk() (*string, bool)`
+
+GetFinalCustomerIdOk returns a tuple with the FinalCustomerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFinalCustomerId
+
+`func (o *InternalTransfer) SetFinalCustomerId(v string)`
+
+SetFinalCustomerId sets FinalCustomerId field to given value.
+
+### HasFinalCustomerId
+
+`func (o *InternalTransfer) HasFinalCustomerId() bool`
+
+HasFinalCustomerId returns a boolean if a field has been set.
 
 ### GetMemo
 

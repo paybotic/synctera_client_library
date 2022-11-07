@@ -30,7 +30,7 @@ import (
 )
 
 func main() {
-    statementId := "1dac8580-6815-4c9f-be84-ac5518a46832" // string | The unique identifier of a statement
+    statementId := "3fa12d3f-6436-482c-a8a1-d65e9761dc2d" // string | The unique identifier of a statement
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

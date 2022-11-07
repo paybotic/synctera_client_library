@@ -9,17 +9,17 @@ Name | Type | Description | Notes
 **Amount** | **int64** | The amount of the hold. | 
 **EffectiveDate** | **time.Time** | The effective date of the transaction once it gets posted | 
 **ExpiresAt** | **time.Time** | The date that at which this hold is no longer valid. | 
-**ExternalData** | **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | 
+**ExternalData** | Pointer to **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | [optional] 
 **ForcePost** | **bool** | Whether or not the hold was forced (spending controls ignored) | 
-**RiskInfo** | **map[string]interface{}** | Information received by the transaction risk/fraud service related to this transaction | 
+**RiskInfo** | Pointer to **map[string]interface{}** | Information received by the transaction risk/fraud service related to this transaction | [optional] 
 **Subtype** | **string** | The specific transaction type. For example, for &#x60;ach&#x60;, this may be \&quot;outgoing_debit\&quot;. | 
-**UserData** | **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | 
+**UserData** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
 
 ## Methods
 
 ### NewHoldModifyRequest
 
-`func NewHoldModifyRequest(accountNo string, allowPartial bool, amount int64, effectiveDate time.Time, expiresAt time.Time, externalData map[string]interface{}, forcePost bool, riskInfo map[string]interface{}, subtype string, userData map[string]interface{}, ) *HoldModifyRequest`
+`func NewHoldModifyRequest(accountNo string, allowPartial bool, amount int64, effectiveDate time.Time, expiresAt time.Time, forcePost bool, subtype string, ) *HoldModifyRequest`
 
 NewHoldModifyRequest instantiates a new HoldModifyRequest object
 This constructor will assign default values to properties that have it defined,
@@ -153,6 +153,11 @@ and a boolean to check if the value has been set.
 
 SetExternalData sets ExternalData field to given value.
 
+### HasExternalData
+
+`func (o *HoldModifyRequest) HasExternalData() bool`
+
+HasExternalData returns a boolean if a field has been set.
 
 ### SetExternalDataNil
 
@@ -203,6 +208,11 @@ and a boolean to check if the value has been set.
 
 SetRiskInfo sets RiskInfo field to given value.
 
+### HasRiskInfo
+
+`func (o *HoldModifyRequest) HasRiskInfo() bool`
+
+HasRiskInfo returns a boolean if a field has been set.
 
 ### SetRiskInfoNil
 
@@ -253,6 +263,11 @@ and a boolean to check if the value has been set.
 
 SetUserData sets UserData field to given value.
 
+### HasUserData
+
+`func (o *HoldModifyRequest) HasUserData() bool`
+
+HasUserData returns a boolean if a field has been set.
 
 ### SetUserDataNil
 

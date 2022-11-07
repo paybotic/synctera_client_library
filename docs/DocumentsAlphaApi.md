@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateDocument**](DocumentsAlphaApi.md#CreateDocument) | **Post** /documents | Create a document
 [**GetDocument**](DocumentsAlphaApi.md#GetDocument) | **Get** /documents/{document_id} | Get a document
-[**GetDocumentContents**](DocumentsAlphaApi.md#GetDocumentContents) | **Get** /documents/{document_id}/contents | Get a document
+[**GetDocumentContents**](DocumentsAlphaApi.md#GetDocumentContents) | **Get** /documents/{document_id}/contents | Get document contents
 [**ListDocuments**](DocumentsAlphaApi.md#ListDocuments) | **Get** /documents | List documents
 [**UpdateDocument**](DocumentsAlphaApi.md#UpdateDocument) | **Patch** /documents/{document_id} | Update a document
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateDocument
 
-> Document CreateDocument(ctx).File(file).Description(description).Encryption(encryption).Metadata(metadata).Name(name).RelatedResourceId(relatedResourceId).RelatedResourceType(relatedResourceType).Execute()
+> Document CreateDocument(ctx).File(file).Description(description).Encryption(encryption).Metadata(metadata).Name(name).RelatedResourceId(relatedResourceId).RelatedResourceType(relatedResourceType).Type_(type_).Execute()
 
 Create a document
 
@@ -33,17 +33,18 @@ import (
 )
 
 func main() {
-    file := os.NewFile(1234, "some_file") // *os.File | 
-    description := "description_example" // string |  (optional)
+    file := os.NewFile(1234, "some_file") // *os.File | The file contents
+    description := "description_example" // string | A description of the attached document (optional)
     encryption := openapiclient.encryption("REQUIRED") // Encryption |  (optional) (default to "NOT_REQUIRED")
-    metadata := map[string]interface{}{ ... } // map[string]interface{} | Optional field to store additional informaton about the resource.  Intended to be used by the integrator to store non-sensitive data.  (optional)
-    name := "name_example" // string |  (optional)
-    relatedResourceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Related resource ID (optional)
+    metadata := map[string]interface{}{ ... } // map[string]interface{} | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  (optional)
+    name := "name_example" // string | A user-friendly name for the document (optional)
+    relatedResourceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the resource related to the document (optional)
     relatedResourceType := openapiclient.related_resource_type("CUSTOMER") // RelatedResourceType |  (optional)
+    type_ := openapiclient.document_type("APPLICATION_DOCUMENTATION") // DocumentType |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DocumentsAlphaApi.CreateDocument(context.Background()).File(file).Description(description).Encryption(encryption).Metadata(metadata).Name(name).RelatedResourceId(relatedResourceId).RelatedResourceType(relatedResourceType).Execute()
+    resp, r, err := apiClient.DocumentsAlphaApi.CreateDocument(context.Background()).File(file).Description(description).Encryption(encryption).Metadata(metadata).Name(name).RelatedResourceId(relatedResourceId).RelatedResourceType(relatedResourceType).Type_(type_).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DocumentsAlphaApi.CreateDocument``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,13 +65,14 @@ Other parameters are passed through a pointer to a apiCreateDocumentRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file** | ***os.File** |  | 
- **description** | **string** |  | 
+ **file** | ***os.File** | The file contents | 
+ **description** | **string** | A description of the attached document | 
  **encryption** | [**Encryption**](Encryption.md) |  | [default to &quot;NOT_REQUIRED&quot;]
- **metadata** | [**map[string]interface{}**](map[string]interface{}.md) | Optional field to store additional informaton about the resource.  Intended to be used by the integrator to store non-sensitive data.  | 
- **name** | **string** |  | 
- **relatedResourceId** | **string** | Related resource ID | 
+ **metadata** | [**map[string]interface{}**](map[string]interface{}.md) | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | 
+ **name** | **string** | A user-friendly name for the document | 
+ **relatedResourceId** | **string** | The ID of the resource related to the document | 
  **relatedResourceType** | [**RelatedResourceType**](RelatedResourceType.md) |  | 
+ **type_** | [**DocumentType**](DocumentType.md) |  | 
 
 ### Return type
 
@@ -111,7 +113,7 @@ import (
 )
 
 func main() {
-    documentId := "dd8cd509-ce52-4990-8f84-316558e68e9a" // string | The unique identifier of a document.
+    documentId := "2e3304dc-a1c2-427e-ac5a-a2586a95ce1f" // string | The unique identifier of the document.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -131,7 +133,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**documentId** | **string** | The unique identifier of a document. | 
+**documentId** | **string** | The unique identifier of the document. | 
 
 ### Other Parameters
 
@@ -164,7 +166,7 @@ Name | Type | Description  | Notes
 
 > *os.File GetDocumentContents(ctx, documentId).Execute()
 
-Get a document
+Get document contents
 
 
 
@@ -181,7 +183,7 @@ import (
 )
 
 func main() {
-    documentId := "dd8cd509-ce52-4990-8f84-316558e68e9a" // string | The unique identifier of a document.
+    documentId := "2e3304dc-a1c2-427e-ac5a-a2586a95ce1f" // string | The unique identifier of the document.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -201,7 +203,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**documentId** | **string** | The unique identifier of a document. | 
+**documentId** | **string** | The unique identifier of the document. | 
 
 ### Other Parameters
 
@@ -232,7 +234,7 @@ Name | Type | Description  | Notes
 
 ## ListDocuments
 
-> DocumentList ListDocuments(ctx).Id(id).Limit(limit).PageToken(pageToken).Execute()
+> DocumentList ListDocuments(ctx).Id(id).Limit(limit).PageToken(pageToken).RelatedResourceType(relatedResourceType).RelatedResourceId(relatedResourceId).Encryption(encryption).Type_(type_).Execute()
 
 List documents
 
@@ -251,13 +253,17 @@ import (
 )
 
 func main() {
-    id := []string{"81026fb3-d06c-4b37-80da-2b17b4749a3f"} // []string | Unique resource identifier (optional)
+    id := []string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"} // []string | Unique resource identifier (optional)
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "h50ffqz9q5" // string |  (optional)
+    pageToken := "a8937a0d" // string |  (optional)
+    relatedResourceType := openapiclient.related_resource_type("CUSTOMER") // RelatedResourceType | Return documents that are related to resources of the specified type (optional)
+    relatedResourceId := "1985f769-dd31-4128-95db-f765355e6631" // string | Return documents that are related to resources with the specified ID (optional)
+    encryption := "encryption_example" // string | Whether the file should be encrypted and access restricted, e.g. if the file contains PII (optional)
+    type_ := openapiclient.document_type("APPLICATION_DOCUMENTATION") // DocumentType | The type of documents (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DocumentsAlphaApi.ListDocuments(context.Background()).Id(id).Limit(limit).PageToken(pageToken).Execute()
+    resp, r, err := apiClient.DocumentsAlphaApi.ListDocuments(context.Background()).Id(id).Limit(limit).PageToken(pageToken).RelatedResourceType(relatedResourceType).RelatedResourceId(relatedResourceId).Encryption(encryption).Type_(type_).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DocumentsAlphaApi.ListDocuments``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -281,6 +287,10 @@ Name | Type | Description  | Notes
  **id** | **[]string** | Unique resource identifier | 
  **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
+ **relatedResourceType** | [**RelatedResourceType**](RelatedResourceType.md) | Return documents that are related to resources of the specified type | 
+ **relatedResourceId** | **string** | Return documents that are related to resources with the specified ID | 
+ **encryption** | **string** | Whether the file should be encrypted and access restricted, e.g. if the file contains PII | 
+ **type_** | [**DocumentType**](DocumentType.md) | The type of documents | 
 
 ### Return type
 
@@ -321,7 +331,7 @@ import (
 )
 
 func main() {
-    documentId := "dd8cd509-ce52-4990-8f84-316558e68e9a" // string | The unique identifier of a document.
+    documentId := "2e3304dc-a1c2-427e-ac5a-a2586a95ce1f" // string | The unique identifier of the document.
     patchDocument := *openapiclient.NewPatchDocument() // PatchDocument | 
 
     configuration := openapiclient.NewConfiguration()
@@ -342,7 +352,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**documentId** | **string** | The unique identifier of a document. | 
+**documentId** | **string** | The unique identifier of the document. | 
 
 ### Other Parameters
 

@@ -5,9 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
+**DocumentId** | Pointer to **string** | ID of disclosure document. | [optional] 
 **Id** | Pointer to **string** | The unique identifier for this resource. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 
+**Tenant** | Pointer to **string** | The id tenant containing the resource. Tenancy is represented as &lt;bank_id&gt;_&lt;partner_id&gt;. This attribute is included on all responses. In requests, it is optional for clients with access to only a single tenant.  | [optional] 
 **Type** | Pointer to [**DisclosureType**](DisclosureType.md) |  | [optional] 
 **Version** | Pointer to **string** | Version of the disclosure document. | [optional] 
 
@@ -54,6 +56,31 @@ SetCreationTime sets CreationTime field to given value.
 `func (o *BaseMasterDisclosure) HasCreationTime() bool`
 
 HasCreationTime returns a boolean if a field has been set.
+
+### GetDocumentId
+
+`func (o *BaseMasterDisclosure) GetDocumentId() string`
+
+GetDocumentId returns the DocumentId field if non-nil, zero value otherwise.
+
+### GetDocumentIdOk
+
+`func (o *BaseMasterDisclosure) GetDocumentIdOk() (*string, bool)`
+
+GetDocumentIdOk returns a tuple with the DocumentId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocumentId
+
+`func (o *BaseMasterDisclosure) SetDocumentId(v string)`
+
+SetDocumentId sets DocumentId field to given value.
+
+### HasDocumentId
+
+`func (o *BaseMasterDisclosure) HasDocumentId() bool`
+
+HasDocumentId returns a boolean if a field has been set.
 
 ### GetId
 
@@ -129,6 +156,31 @@ SetMetadata sets Metadata field to given value.
 `func (o *BaseMasterDisclosure) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetTenant
+
+`func (o *BaseMasterDisclosure) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *BaseMasterDisclosure) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *BaseMasterDisclosure) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *BaseMasterDisclosure) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetType
 

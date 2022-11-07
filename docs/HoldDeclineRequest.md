@@ -5,17 +5,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountNo** | **string** | The account number associated with the hold | 
-**ExternalData** | **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | 
+**ExternalData** | Pointer to **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | [optional] 
 **Reason** | **string** | The reason for the cancellation | 
-**ReferenceId** | **NullableString** | An external ID provided by the payment network to represent this transaction. This will always be null for internal transfers. | 
-**RiskInfo** | **map[string]interface{}** | Information received by the transaction risk/fraud service related to this transaction | 
-**UserData** | **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | 
+**ReferenceId** | **string** | An external ID provided by the payment network to represent this transaction. This will always be null for internal transfers. | 
+**RiskInfo** | Pointer to **map[string]interface{}** | Information received by the transaction risk/fraud service related to this transaction | [optional] 
+**UserData** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
 
 ## Methods
 
 ### NewHoldDeclineRequest
 
-`func NewHoldDeclineRequest(accountNo string, externalData map[string]interface{}, reason string, referenceId NullableString, riskInfo map[string]interface{}, userData map[string]interface{}, ) *HoldDeclineRequest`
+`func NewHoldDeclineRequest(accountNo string, reason string, referenceId string, ) *HoldDeclineRequest`
 
 NewHoldDeclineRequest instantiates a new HoldDeclineRequest object
 This constructor will assign default values to properties that have it defined,
@@ -69,6 +69,11 @@ and a boolean to check if the value has been set.
 
 SetExternalData sets ExternalData field to given value.
 
+### HasExternalData
+
+`func (o *HoldDeclineRequest) HasExternalData() bool`
+
+HasExternalData returns a boolean if a field has been set.
 
 ### SetExternalDataNil
 
@@ -120,16 +125,6 @@ and a boolean to check if the value has been set.
 SetReferenceId sets ReferenceId field to given value.
 
 
-### SetReferenceIdNil
-
-`func (o *HoldDeclineRequest) SetReferenceIdNil(b bool)`
-
- SetReferenceIdNil sets the value for ReferenceId to be an explicit nil
-
-### UnsetReferenceId
-`func (o *HoldDeclineRequest) UnsetReferenceId()`
-
-UnsetReferenceId ensures that no value is present for ReferenceId, not even an explicit nil
 ### GetRiskInfo
 
 `func (o *HoldDeclineRequest) GetRiskInfo() map[string]interface{}`
@@ -149,6 +144,11 @@ and a boolean to check if the value has been set.
 
 SetRiskInfo sets RiskInfo field to given value.
 
+### HasRiskInfo
+
+`func (o *HoldDeclineRequest) HasRiskInfo() bool`
+
+HasRiskInfo returns a boolean if a field has been set.
 
 ### SetRiskInfoNil
 
@@ -179,6 +179,11 @@ and a boolean to check if the value has been set.
 
 SetUserData sets UserData field to given value.
 
+### HasUserData
+
+`func (o *HoldDeclineRequest) HasUserData() bool`
+
+HasUserData returns a boolean if a field has been set.
 
 ### SetUserDataNil
 

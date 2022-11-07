@@ -18,9 +18,10 @@ Name | Type | Description | Notes
 **MiddleName** | Pointer to **string** | Person&#39;s middle name. | [optional] 
 **PhoneNumber** | Pointer to **string** | Person&#39;s mobile phone number with country code in E.164 format. Must have a valid country code. Area code and local phone number are not validated | [optional] 
 **ShippingAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
-**Ssn** | Pointer to **string** | Person&#39;s full tax ID eg SSN formatted with hyphens. This optional parameter is required when running KYC. The response contains the last 4 digits only (e.g. 6789). | [optional] 
+**Ssn** | Pointer to **string** | Person&#39;s full tax ID eg SSN formatted with hyphens. The response contains the last 4 digits only (e.g. 6789). | [optional] 
 **SsnSource** | Pointer to [**SsnSource**](SsnSource.md) |  | [optional] 
 **Status** | Pointer to [**Status1**](Status1.md) |  | [optional] 
+**Tenant** | Pointer to **string** | The id tenant containing the resource. Tenancy is represented as &lt;bank_id&gt;_&lt;partner_id&gt;. This attribute is included on all responses. In requests, it is optional for clients with access to only a single tenant.  | [optional] 
 **VerificationLastRun** | Pointer to **time.Time** | Date and time KYC verification was last run on the person. | [optional] [readonly] 
 **VerificationStatus** | Pointer to [**VerificationStatus**](VerificationStatus.md) |  | [optional] 
 
@@ -467,6 +468,31 @@ SetStatus sets Status field to given value.
 `func (o *BasePerson1) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetTenant
+
+`func (o *BasePerson1) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *BasePerson1) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *BasePerson1) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *BasePerson1) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetVerificationLastRun
 

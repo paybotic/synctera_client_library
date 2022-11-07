@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExternalApplications** | [**[]ApplicationResponse1**](ApplicationResponse1.md) | Array of External Applications | 
+**ExternalApplications** | [**[]ApplicationResponse**](ApplicationResponse.md) | Array of External Applications | 
 **NextPageToken** | Pointer to **string** | If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows. | [optional] 
 
 ## Methods
 
 ### NewApplicationListResponse
 
-`func NewApplicationListResponse(externalApplications []ApplicationResponse1, ) *ApplicationListResponse`
+`func NewApplicationListResponse(externalApplications []ApplicationResponse, ) *ApplicationListResponse`
 
 NewApplicationListResponse instantiates a new ApplicationListResponse object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetExternalApplications
 
-`func (o *ApplicationListResponse) GetExternalApplications() []ApplicationResponse1`
+`func (o *ApplicationListResponse) GetExternalApplications() []ApplicationResponse`
 
 GetExternalApplications returns the ExternalApplications field if non-nil, zero value otherwise.
 
 ### GetExternalApplicationsOk
 
-`func (o *ApplicationListResponse) GetExternalApplicationsOk() (*[]ApplicationResponse1, bool)`
+`func (o *ApplicationListResponse) GetExternalApplicationsOk() (*[]ApplicationResponse, bool)`
 
 GetExternalApplicationsOk returns a tuple with the ExternalApplications field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExternalApplications
 
-`func (o *ApplicationListResponse) SetExternalApplications(v []ApplicationResponse1)`
+`func (o *ApplicationListResponse) SetExternalApplications(v []ApplicationResponse)`
 
 SetExternalApplications sets ExternalApplications field to given value.
 

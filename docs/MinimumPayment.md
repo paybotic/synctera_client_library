@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MinAmount** | **int64** | The maximum amount to charge as a minimum payment, in cents. For example, to set the maximum to $30, set this value to 3000.  | 
+**MinAmount** | **int64** | The minimum amount to charge as a minimum payment, in cents. For example, to set the minimum to $30, set this value to 3000. Note: despite setting this value, the minimum payment will never be greater than the statement balance.  | 
 **Rate** | **int32** | The percentage of the balance to use, in basis points. For example, to set 12.5% of the balance, set this value to 1250.  | 
 **Type** | [**MinimumPaymentType**](MinimumPaymentType.md) |  | 
 

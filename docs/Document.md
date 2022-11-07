@@ -4,16 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
-**Description** | Pointer to **string** | A description of the attached document. | [optional] 
+**CreationTime** | Pointer to **time.Time** | The date and time the resource was created | [optional] [readonly] 
+**Description** | Pointer to **string** | A description of the document | [optional] 
 **Encryption** | Pointer to [**Encryption**](Encryption.md) |  | [optional] [default to ENCRYPTION_NOT_REQUIRED]
-**FileName** | Pointer to **string** | The name of the document. | [optional] [readonly] 
-**Id** | Pointer to **string** | The unique identifier for this resource. | [optional] [readonly] 
-**LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last update. | [optional] [readonly] 
-**Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional informaton about the resource.  Intended to be used by the integrator to store non-sensitive data.  | [optional] 
-**Name** | Pointer to **string** | A user-friendly name for the document. | [optional] 
-**RelatedResourceId** | Pointer to **string** | Related resource ID | [optional] 
+**FileName** | Pointer to **string** | The name of the document | [optional] [readonly] 
+**Id** | Pointer to **string** | The unique identifier for this resource | [optional] [readonly] 
+**LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated | [optional] [readonly] 
+**Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 
+**Name** | Pointer to **string** | A user-friendly name for the document | [optional] 
+**RelatedResourceId** | Pointer to **string** | The ID of the resource related to the document | [optional] 
 **RelatedResourceType** | Pointer to [**RelatedResourceType**](RelatedResourceType.md) |  | [optional] 
+**Type** | Pointer to [**DocumentType**](DocumentType.md) |  | [optional] 
 
 ## Methods
 
@@ -283,6 +284,31 @@ SetRelatedResourceType sets RelatedResourceType field to given value.
 `func (o *Document) HasRelatedResourceType() bool`
 
 HasRelatedResourceType returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *Document) GetType() DocumentType`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *Document) GetTypeOk() (*DocumentType, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *Document) SetType(v DocumentType)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *Document) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

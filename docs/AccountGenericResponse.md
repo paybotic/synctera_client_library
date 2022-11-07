@@ -40,9 +40,12 @@ Name | Type | Description | Notes
 **MinimumPayment** | Pointer to [**MinimumPayment**](MinimumPayment.md) |  | [optional] 
 **Nickname** | Pointer to **string** | User provided account nickname | [optional] 
 **OverdraftLimit** | Pointer to **int64** | Account&#39;s overdraft limit | [optional] 
+**Security** | Pointer to [**Security**](Security.md) |  | [optional] 
+**SpendControlIds** | Pointer to **[]string** | List of spend control IDs to control spending for the account | [optional] 
 **SpendingLimits** | Pointer to [**SpendingLimits**](SpendingLimits.md) |  | [optional] 
 **Status** | Pointer to [**Status**](Status.md) |  | [optional] 
 **SwiftCode** | Pointer to **string** | SWIFT code | [optional] 
+**Tenant** | Pointer to **string** | The id tenant containing the resource. Tenancy is represented as &lt;bank_id&gt;_&lt;partner_id&gt;. This attribute is included on all responses. In requests, it is optional for clients with access to only a single tenant.  | [optional] 
 
 ## Methods
 
@@ -963,6 +966,56 @@ SetOverdraftLimit sets OverdraftLimit field to given value.
 
 HasOverdraftLimit returns a boolean if a field has been set.
 
+### GetSecurity
+
+`func (o *AccountGenericResponse) GetSecurity() Security`
+
+GetSecurity returns the Security field if non-nil, zero value otherwise.
+
+### GetSecurityOk
+
+`func (o *AccountGenericResponse) GetSecurityOk() (*Security, bool)`
+
+GetSecurityOk returns a tuple with the Security field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecurity
+
+`func (o *AccountGenericResponse) SetSecurity(v Security)`
+
+SetSecurity sets Security field to given value.
+
+### HasSecurity
+
+`func (o *AccountGenericResponse) HasSecurity() bool`
+
+HasSecurity returns a boolean if a field has been set.
+
+### GetSpendControlIds
+
+`func (o *AccountGenericResponse) GetSpendControlIds() []string`
+
+GetSpendControlIds returns the SpendControlIds field if non-nil, zero value otherwise.
+
+### GetSpendControlIdsOk
+
+`func (o *AccountGenericResponse) GetSpendControlIdsOk() (*[]string, bool)`
+
+GetSpendControlIdsOk returns a tuple with the SpendControlIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpendControlIds
+
+`func (o *AccountGenericResponse) SetSpendControlIds(v []string)`
+
+SetSpendControlIds sets SpendControlIds field to given value.
+
+### HasSpendControlIds
+
+`func (o *AccountGenericResponse) HasSpendControlIds() bool`
+
+HasSpendControlIds returns a boolean if a field has been set.
+
 ### GetSpendingLimits
 
 `func (o *AccountGenericResponse) GetSpendingLimits() SpendingLimits`
@@ -1037,6 +1090,31 @@ SetSwiftCode sets SwiftCode field to given value.
 `func (o *AccountGenericResponse) HasSwiftCode() bool`
 
 HasSwiftCode returns a boolean if a field has been set.
+
+### GetTenant
+
+`func (o *AccountGenericResponse) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *AccountGenericResponse) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *AccountGenericResponse) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *AccountGenericResponse) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

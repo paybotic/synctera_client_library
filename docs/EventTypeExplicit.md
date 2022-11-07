@@ -11,6 +11,8 @@
 
 * `CARD_IMAGE_UPDATED` (value: `"CARD.IMAGE.UPDATED"`)
 
+* `CASE_UPDATED` (value: `"CASE.UPDATED"`)
+
 * `CUSTOMER_UPDATED` (value: `"CUSTOMER.UPDATED"`)
 
 * `CUSTOMER_KYC_OUTCOME_UPDATED` (value: `"CUSTOMER.KYC_OUTCOME.UPDATED"`)
@@ -44,6 +46,14 @@
 * `STATEMENT_CREATED` (value: `"STATEMENT.CREATED"`)
 
 * `EXTERNAL_CARD_CREATED` (value: `"EXTERNAL_CARD.CREATED"`)
+
+* `APPLICATION_CREATED` (value: `"APPLICATION.CREATED"`)
+
+* `APPLICATION_UPDATED` (value: `"APPLICATION.UPDATED"`)
+
+* `CASH_PICKUP_CREATED` (value: `"CASH_PICKUP.CREATED"`)
+
+* `CASH_PICKUP_UPDATED` (value: `"CASH_PICKUP.UPDATED"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

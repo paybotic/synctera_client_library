@@ -10,23 +10,24 @@ Name | Type | Description | Notes
 **BalanceCeiling** | Pointer to [**BalanceCeiling**](BalanceCeiling.md) |  | [optional] 
 **BalanceFloor** | Pointer to [**BalanceFloor**](BalanceFloor.md) |  | [optional] 
 **FeeProductIds** | Pointer to **[]string** | A list of fee account products that the current account associates with. | [optional] 
-**InterestProductId** | Pointer to **string** | An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_DAILY.  | [optional] 
+**InterestProductId** | **string** | An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_DAILY, and its rates set to 0%.  | 
 **IsAchEnabled** | Pointer to **bool** | Enable ACH transaction. | [optional] [default to false]
 **IsCardEnabled** | Pointer to **bool** | Enable card transaction. | [optional] [default to false]
 **IsP2pEnabled** | Pointer to **bool** | Enable P2P transaction. | [optional] [default to false]
 **IsWireEnabled** | Pointer to **bool** | Enable wire transaction. | [optional] [default to false]
 **OverdraftLimit** | Pointer to **int64** | Account&#39;s overdraft limit. Default is 0. Unit in cents. | [optional] 
+**SpendControlIds** | Pointer to **[]string** | List of spend control IDs to control spending for the account | [optional] 
 **SpendingLimits** | Pointer to [**SpendingLimits**](SpendingLimits.md) |  | [optional] 
 **ChargeoffPeriod** | Pointer to **int32** | The number of days an account can stay delinquent before marking an account as charged-off.  | [optional] [default to 90]
 **DelinquencyPeriod** | Pointer to **int32** | The number of days past the due date to wait for a minimum payment before marking an account as delinquent.  | [optional] [default to 30]
-**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] [default to 30]
-**MinimumPayment** | [**MinimumPayment**](MinimumPayment.md) |  | 
+**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] 
+**MinimumPayment** | [**MinimumPaymentFull**](MinimumPaymentFull.md) |  | 
 
 ## Methods
 
 ### NewTemplateFields
 
-`func NewTemplateFields(accountType AccountType, bankCountry string, currency string, minimumPayment MinimumPayment, ) *TemplateFields`
+`func NewTemplateFields(accountType AccountType, bankCountry string, currency string, interestProductId string, minimumPayment MinimumPaymentFull, ) *TemplateFields`
 
 NewTemplateFields instantiates a new TemplateFields object
 This constructor will assign default values to properties that have it defined,
@@ -195,11 +196,6 @@ and a boolean to check if the value has been set.
 
 SetInterestProductId sets InterestProductId field to given value.
 
-### HasInterestProductId
-
-`func (o *TemplateFields) HasInterestProductId() bool`
-
-HasInterestProductId returns a boolean if a field has been set.
 
 ### GetIsAchEnabled
 
@@ -326,6 +322,31 @@ SetOverdraftLimit sets OverdraftLimit field to given value.
 
 HasOverdraftLimit returns a boolean if a field has been set.
 
+### GetSpendControlIds
+
+`func (o *TemplateFields) GetSpendControlIds() []string`
+
+GetSpendControlIds returns the SpendControlIds field if non-nil, zero value otherwise.
+
+### GetSpendControlIdsOk
+
+`func (o *TemplateFields) GetSpendControlIdsOk() (*[]string, bool)`
+
+GetSpendControlIdsOk returns a tuple with the SpendControlIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpendControlIds
+
+`func (o *TemplateFields) SetSpendControlIds(v []string)`
+
+SetSpendControlIds sets SpendControlIds field to given value.
+
+### HasSpendControlIds
+
+`func (o *TemplateFields) HasSpendControlIds() bool`
+
+HasSpendControlIds returns a boolean if a field has been set.
+
 ### GetSpendingLimits
 
 `func (o *TemplateFields) GetSpendingLimits() SpendingLimits`
@@ -428,20 +449,20 @@ HasGracePeriod returns a boolean if a field has been set.
 
 ### GetMinimumPayment
 
-`func (o *TemplateFields) GetMinimumPayment() MinimumPayment`
+`func (o *TemplateFields) GetMinimumPayment() MinimumPaymentFull`
 
 GetMinimumPayment returns the MinimumPayment field if non-nil, zero value otherwise.
 
 ### GetMinimumPaymentOk
 
-`func (o *TemplateFields) GetMinimumPaymentOk() (*MinimumPayment, bool)`
+`func (o *TemplateFields) GetMinimumPaymentOk() (*MinimumPaymentFull, bool)`
 
 GetMinimumPaymentOk returns a tuple with the MinimumPayment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMinimumPayment
 
-`func (o *TemplateFields) SetMinimumPayment(v MinimumPayment)`
+`func (o *TemplateFields) SetMinimumPayment(v MinimumPaymentFull)`
 
 SetMinimumPayment sets MinimumPayment field to given value.
 

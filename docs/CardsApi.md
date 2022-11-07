@@ -49,7 +49,7 @@ import (
 )
 
 func main() {
-    cardActivationRequest := *openapiclient.NewCardActivationRequest("ActivationCode_example", "1acf447c-544b-41b4-94f9-bd96b03cc48e") // CardActivationRequest | Card activation code
+    cardActivationRequest := *openapiclient.NewCardActivationRequest("ActivationCode_example", "7d943c51-e4ff-4e57-9558-08cab6b963c7") // CardActivationRequest | Card activation code
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -115,7 +115,7 @@ import (
 )
 
 func main() {
-    createCardImageRequest := *openapiclient.NewCreateCardImageRequest("d6180286-ae04-4bdb-ac62-bce0b4b06f91", "8da2b02b-81f2-41f3-a32e-041eb8ccd825") // CreateCardImageRequest | Details of the image to create
+    createCardImageRequest := *openapiclient.NewCreateCardImageRequest("7d943c51-e4ff-4e57-9558-08cab6b963c7", "7d943c51-e4ff-4e57-9558-08cab6b963c7") // CreateCardImageRequest | Details of the image to create
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -181,7 +181,7 @@ import (
 )
 
 func main() {
-    createGatewayRequest := *openapiclient.NewCreateGatewayRequest([]string{"9faacdc6-bd75-4c79-b39f-898a95a21cac"}, "Url_example") // CreateGatewayRequest | Create a new Authorization Gateway Configuration
+    createGatewayRequest := *openapiclient.NewCreateGatewayRequest([]string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"}, "Url_example") // CreateGatewayRequest | Create a new Authorization Gateway Configuration
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -669,7 +669,7 @@ import (
 )
 
 func main() {
-    singleUseTokenRequest := *openapiclient.NewSingleUseTokenRequest("9aea04bb-b7c7-46b5-817d-1af05e6b22f2", "e167fa0d-ee40-4a6e-b1ba-f61593fd254e") // SingleUseTokenRequest | User token details
+    singleUseTokenRequest := *openapiclient.NewSingleUseTokenRequest("7d943c51-e4ff-4e57-9558-08cab6b963c7", "7d943c51-e4ff-4e57-9558-08cab6b963c7") // SingleUseTokenRequest | User token details
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -805,7 +805,7 @@ import (
 )
 
 func main() {
-    cardIssuanceRequest := openapiclient.card_issuance_request{PhysicalCardIssuanceRequest: openapiclient.NewPhysicalCardIssuanceRequest("Form_example", "98d3a7dd-8b7e-4b93-94b0-f5c9bcf88b39", "f453e97a-83f8-4810-bdbc-8df324fc4241", "a33e874c-4fa5-4c6f-850f-0778ffa097e9", "Type_example")} // CardIssuanceRequest | Card to issue
+    cardIssuanceRequest := openapiclient.card_issuance_request{PhysicalCardIssuanceRequest: openapiclient.NewPhysicalCardIssuanceRequest("Form_example", "7d943c51-e4ff-4e57-9558-08cab6b963c7", "7d943c51-e4ff-4e57-9558-08cab6b963c7", "7d943c51-e4ff-4e57-9558-08cab6b963c7", "Type_example")} // CardIssuanceRequest | Card to issue
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -918,7 +918,7 @@ Name | Type | Description  | Notes
 
 ## ListCardProducts
 
-> CardProductListResponse ListCardProducts(ctx).Limit(limit).PageToken(pageToken).Execute()
+> CardProductListResponse ListCardProducts(ctx).Limit(limit).PageToken(pageToken).Form(form).Execute()
 
 List Card Products
 
@@ -936,11 +936,12 @@ import (
 
 func main() {
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "h50ffqz9q5" // string |  (optional)
+    pageToken := "a8937a0d" // string |  (optional)
+    form := openapiclient.form("PHYSICAL") // Form | The format of the card (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.ListCardProducts(context.Background()).Limit(limit).PageToken(pageToken).Execute()
+    resp, r, err := apiClient.CardsApi.ListCardProducts(context.Background()).Limit(limit).PageToken(pageToken).Form(form).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.ListCardProducts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -963,6 +964,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
+ **form** | [**Form**](Form.md) | The format of the card | 
 
 ### Return type
 
@@ -1005,7 +1007,7 @@ import (
 
 func main() {
     customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
-    accountId := []string{"4403f645-c2e3-4f8d-9027-127dca09f353"} // []string | Account ID(s). Multiple IDs can be provided as a comma-separated list. (optional)
+    accountId := []string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"} // []string | Account ID(s). Multiple IDs can be provided as a comma-separated list. (optional)
     embossName := "embossName_example" // string | emboss name (optional)
     lastFour := "1234" // string | The last 4 digits of the card PAN (optional)
     expirationDate := time.Now() // string | The date representing when the card would expire at (optional)
@@ -1016,7 +1018,7 @@ func main() {
     cardStatus := openapiclient.card_status("ACTIVE") // CardStatus | The status of a card (optional)
     postalCode := "49633" // string | The postal code of a card user (optional)
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "h50ffqz9q5" // string |  (optional)
+    pageToken := "a8937a0d" // string |  (optional)
     sortBy := []string{"SortBy_example"} // []string | Specifies the sort order for the returned cards.  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -1167,7 +1169,7 @@ import (
 
 func main() {
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "h50ffqz9q5" // string |  (optional)
+    pageToken := "a8937a0d" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

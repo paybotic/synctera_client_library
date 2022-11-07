@@ -53,6 +53,16 @@ SetExternalData sets ExternalData field to given value.
 
 HasExternalData returns a boolean if a field has been set.
 
+### SetExternalDataNil
+
+`func (o *TransactionData) SetExternalDataNil(b bool)`
+
+ SetExternalDataNil sets the value for ExternalData to be an explicit nil
+
+### UnsetExternalData
+`func (o *TransactionData) UnsetExternalData()`
+
+UnsetExternalData ensures that no value is present for ExternalData, not even an explicit nil
 ### GetLines
 
 `func (o *TransactionData) GetLines() []TransactionLine`
@@ -118,6 +128,16 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
+### SetMetadataNil
+
+`func (o *TransactionData) SetMetadataNil(b bool)`
+
+ SetMetadataNil sets the value for Metadata to be an explicit nil
+
+### UnsetMetadata
+`func (o *TransactionData) UnsetMetadata()`
+
+UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
