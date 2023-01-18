@@ -4,8 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccountAlias** | **string** |  | 
-**AccountNo** | **string** | The account number associated with the transaction | 
+**AccountAlias** | Pointer to **string** |  | [optional] 
+**AccountId** | Pointer to **string** | The uuid of the account to post against Note: &#x60;account_no&#x60;, &#x60;account_id&#x60;, and &#x60;account_alias&#x60; are mutually exclusive. | [optional] 
+**AccountNo** | Pointer to **string** | The account number associated with the transaction | [optional] 
 **Amount** | **int64** | The amount of the hold. | 
 **Currency** | **string** | ISO 4217 alphabetic currency code of the transfer amount | 
 **DcSign** | [**DcSign**](DcSign.md) |  | 
@@ -30,7 +31,7 @@ Name | Type | Description | Notes
 
 ### NewTransactionDirectPostRequest
 
-`func NewTransactionDirectPostRequest(accountAlias string, accountNo string, amount int64, currency string, dcSign DcSign, effectiveDate time.Time, forcePost bool, infoOnly bool, memo string, network string, referenceId string, subtype string, transactionTime time.Time, type_ string, ) *TransactionDirectPostRequest`
+`func NewTransactionDirectPostRequest(amount int64, currency string, dcSign DcSign, effectiveDate time.Time, forcePost bool, infoOnly bool, memo string, network string, referenceId string, subtype string, transactionTime time.Time, type_ string, ) *TransactionDirectPostRequest`
 
 NewTransactionDirectPostRequest instantiates a new TransactionDirectPostRequest object
 This constructor will assign default values to properties that have it defined,
@@ -64,6 +65,36 @@ and a boolean to check if the value has been set.
 
 SetAccountAlias sets AccountAlias field to given value.
 
+### HasAccountAlias
+
+`func (o *TransactionDirectPostRequest) HasAccountAlias() bool`
+
+HasAccountAlias returns a boolean if a field has been set.
+
+### GetAccountId
+
+`func (o *TransactionDirectPostRequest) GetAccountId() string`
+
+GetAccountId returns the AccountId field if non-nil, zero value otherwise.
+
+### GetAccountIdOk
+
+`func (o *TransactionDirectPostRequest) GetAccountIdOk() (*string, bool)`
+
+GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountId
+
+`func (o *TransactionDirectPostRequest) SetAccountId(v string)`
+
+SetAccountId sets AccountId field to given value.
+
+### HasAccountId
+
+`func (o *TransactionDirectPostRequest) HasAccountId() bool`
+
+HasAccountId returns a boolean if a field has been set.
 
 ### GetAccountNo
 
@@ -84,6 +115,11 @@ and a boolean to check if the value has been set.
 
 SetAccountNo sets AccountNo field to given value.
 
+### HasAccountNo
+
+`func (o *TransactionDirectPostRequest) HasAccountNo() bool`
+
+HasAccountNo returns a boolean if a field has been set.
 
 ### GetAmount
 

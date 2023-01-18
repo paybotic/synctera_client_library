@@ -4,13 +4,13 @@ All URIs are relative to *https://api.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateExternalCardFromToken**](ExternalCardsAlphaApi.md#CreateExternalCardFromToken) | **Post** /external_cards/tokens | Create external card from token
-[**CreateExternalCardTransfer**](ExternalCardsAlphaApi.md#CreateExternalCardTransfer) | **Post** /external_cards/transfers | Create external card transfer
-[**CreateExternalCardTransferReversal**](ExternalCardsAlphaApi.md#CreateExternalCardTransferReversal) | **Post** /external_cards/transfers/{transfer_id}/reversals | Reverse an external card transfer
-[**GetExternalCard**](ExternalCardsAlphaApi.md#GetExternalCard) | **Get** /external_cards/{external_card_id} | Get a external card
-[**GetExternalCardTransfer**](ExternalCardsAlphaApi.md#GetExternalCardTransfer) | **Get** /external_cards/transfers/{transfer_id} | Get an external card transfer
-[**ListExternalCardTransfers**](ExternalCardsAlphaApi.md#ListExternalCardTransfers) | **Get** /external_cards/transfers | List external transfers
-[**ListExternalCards**](ExternalCardsAlphaApi.md#ListExternalCards) | **Get** /external_cards | List external cards
+[**CreateExternalCardFromToken**](ExternalCardsAlphaApi.md#CreateExternalCardFromToken) | **Post** /external_cards/tokens | Create External Card from token
+[**CreateExternalCardTransfer**](ExternalCardsAlphaApi.md#CreateExternalCardTransfer) | **Post** /external_cards/transfers | Create External Card Transfer
+[**CreateExternalCardTransferReversal**](ExternalCardsAlphaApi.md#CreateExternalCardTransferReversal) | **Post** /external_cards/transfers/{transfer_id}/reversals | Create External Card Transfer Reversal
+[**GetExternalCard**](ExternalCardsAlphaApi.md#GetExternalCard) | **Get** /external_cards/{external_card_id} | Get External Card
+[**GetExternalCardTransfer**](ExternalCardsAlphaApi.md#GetExternalCardTransfer) | **Get** /external_cards/transfers/{transfer_id} | Get External Card Transfer
+[**ListExternalCardTransfers**](ExternalCardsAlphaApi.md#ListExternalCardTransfers) | **Get** /external_cards/transfers | List External Card Transfers
+[**ListExternalCards**](ExternalCardsAlphaApi.md#ListExternalCards) | **Get** /external_cards | List External Cards
 
 
 
@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 > ExternalCardResponse CreateExternalCardFromToken(ctx).ExternalCardRequest(externalCardRequest).Execute()
 
-Create external card from token
+Create External Card from token
 
 
 
@@ -35,7 +35,7 @@ import (
 )
 
 func main() {
-    externalCardRequest := *openapiclient.NewExternalCardRequest("7d943c51-e4ff-4e57-9558-08cab6b963c7", "Token_example") // ExternalCardRequest | Details of the card to create
+    externalCardRequest := *openapiclient.NewExternalCardRequest("7d943c51-e4ff-4e57-9558-08cab6b963c7", "Jean Valjean", "Token_example") // ExternalCardRequest | Details of the External Card to create
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -60,7 +60,7 @@ Other parameters are passed through a pointer to a apiCreateExternalCardFromToke
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **externalCardRequest** | [**ExternalCardRequest**](ExternalCardRequest.md) | Details of the card to create | 
+ **externalCardRequest** | [**ExternalCardRequest**](ExternalCardRequest.md) | Details of the External Card to create | 
 
 ### Return type
 
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 > TransferResponse CreateExternalCardTransfer(ctx).TransferRequest(transferRequest).Execute()
 
-Create external card transfer
+Create External Card Transfer
 
 
 
@@ -101,7 +101,7 @@ import (
 )
 
 func main() {
-    transferRequest := *openapiclient.NewTransferRequest(int32(123), "USD", "7d943c51-e4ff-4e57-9558-08cab6b963c7", "7d943c51-e4ff-4e57-9558-08cab6b963c7", openapiclient.transfer_type("PULL")) // TransferRequest | Details of the transfer to create
+    transferRequest := *openapiclient.NewTransferRequest(int32(123), "USD", "7d943c51-e4ff-4e57-9558-08cab6b963c7", "7d943c51-e4ff-4e57-9558-08cab6b963c7", openapiclient.transfer_type_request("PULL")) // TransferRequest | Details of the External Card Transfer to create
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -126,7 +126,7 @@ Other parameters are passed through a pointer to a apiCreateExternalCardTransfer
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **transferRequest** | [**TransferRequest**](TransferRequest.md) | Details of the transfer to create | 
+ **transferRequest** | [**TransferRequest**](TransferRequest.md) | Details of the External Card Transfer to create | 
 
 ### Return type
 
@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 
 > TransferResponse CreateExternalCardTransferReversal(ctx, transferId).TransferReversalRequest(transferReversalRequest).Execute()
 
-Reverse an external card transfer
+Create External Card Transfer Reversal
 
 
 
@@ -168,7 +168,7 @@ import (
 
 func main() {
     transferId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | The unique identifier of a transfer
-    transferReversalRequest := *openapiclient.NewTransferReversalRequest(int32(123), "USD") // TransferReversalRequest | Details of the transfer to reverse
+    transferReversalRequest := *openapiclient.NewTransferReversalRequest(int32(123), "USD") // TransferReversalRequest | Details of the External Card Transfer Reversal to create
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -198,7 +198,7 @@ Other parameters are passed through a pointer to a apiCreateExternalCardTransfer
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **transferReversalRequest** | [**TransferReversalRequest**](TransferReversalRequest.md) | Details of the transfer to reverse | 
+ **transferReversalRequest** | [**TransferReversalRequest**](TransferReversalRequest.md) | Details of the External Card Transfer Reversal to create | 
 
 ### Return type
 
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 > ExternalCardResponse GetExternalCard(ctx, externalCardId).Execute()
 
-Get a external card
+Get External Card
 
 
 
@@ -292,7 +292,7 @@ Name | Type | Description  | Notes
 
 > TransferResponse GetExternalCardTransfer(ctx, transferId).Execute()
 
-Get an external card transfer
+Get External Card Transfer
 
 
 
@@ -362,7 +362,7 @@ Name | Type | Description  | Notes
 
 > TransferListResponse ListExternalCardTransfers(ctx).Limit(limit).PageToken(pageToken).CustomerId(customerId).ExternalCardId(externalCardId).OriginatingAccountId(originatingAccountId).Type_(type_).Execute()
 
-List external transfers
+List External Card Transfers
 
 
 
@@ -438,7 +438,7 @@ Name | Type | Description  | Notes
 
 > ExternalCardListResponse ListExternalCards(ctx).Limit(limit).PageToken(pageToken).CustomerId(customerId).BusinessId(businessId).Execute()
 
-List external cards
+List External Cards
 
 
 

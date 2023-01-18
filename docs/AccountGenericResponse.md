@@ -45,7 +45,7 @@ Name | Type | Description | Notes
 **SpendingLimits** | Pointer to [**SpendingLimits**](SpendingLimits.md) |  | [optional] 
 **Status** | Pointer to [**Status**](Status.md) |  | [optional] 
 **SwiftCode** | Pointer to **string** | SWIFT code | [optional] 
-**Tenant** | Pointer to **string** | The id tenant containing the resource. Tenancy is represented as &lt;bank_id&gt;_&lt;partner_id&gt;. This attribute is included on all responses. In requests, it is optional for clients with access to only a single tenant.  | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
 
 ## Methods
 

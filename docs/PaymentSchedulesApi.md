@@ -33,7 +33,7 @@ import (
 )
 
 func main() {
-    paymentSchedule := *openapiclient.NewPaymentSchedule("Description_example", openapiclient.payment_instruction{AchInstruction: openapiclient.NewAchInstruction(*openapiclient.NewOutgoingAchRequest(int32(607), "USD", "58b33b89-6294-4141-9ee6-2c0b200c7b43", "debit", "75ed1c0e-d7d1-4efc-8e13-1558a4136b1c", "5e00da03-86ae-45b4-ab75-858f5a312723"), "Type_example")}, *openapiclient.NewScheduleConfig("Frequency_example", int32(123), time.Now())) // PaymentSchedule | payment schedule to create
+    paymentSchedule := *openapiclient.NewPaymentSchedule("Description_example", openapiclient.payment_instruction{AchInstruction: openapiclient.NewAchInstruction(*openapiclient.NewOutgoingAchRequest(int32(607), "USD", "e9061cf1-b472-4066-bf4b-2491b33fd182", "debit", "b58b33b8-9629-4414-91ee-62c0b200c7b4", "3110c3f4-7937-4010-bded-86917767f50b"), "Type_example")}, *openapiclient.NewScheduleConfig("Frequency_example", int32(123), time.Now())) // PaymentSchedule | payment schedule to create
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

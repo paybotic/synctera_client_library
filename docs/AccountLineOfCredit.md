@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **Nickname** | Pointer to **string** | User provided account nickname | [optional] 
 **Status** | Pointer to [**Status**](Status.md) |  | [optional] 
 **SwiftCode** | Pointer to **string** | SWIFT code | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
 **ChargeoffPeriod** | Pointer to **int32** | The number of days an account can stay delinquent before marking an account as charged-off.  | [optional] [default to 90]
 **CreditLimit** | Pointer to **int64** | The credit limit for this line of credit account in cents. Minimum is 0.  | [optional] 
 **DelinquencyPeriod** | Pointer to **int32** | The number of days past the due date to wait for a minimum payment before marking an account as delinquent.  | [optional] [default to 30]
@@ -679,6 +680,31 @@ SetSwiftCode sets SwiftCode field to given value.
 `func (o *AccountLineOfCredit) HasSwiftCode() bool`
 
 HasSwiftCode returns a boolean if a field has been set.
+
+### GetTenant
+
+`func (o *AccountLineOfCredit) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *AccountLineOfCredit) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *AccountLineOfCredit) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *AccountLineOfCredit) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetChargeoffPeriod
 

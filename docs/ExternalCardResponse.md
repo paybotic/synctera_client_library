@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Id** | **string** | External card ID | 
 **LastFour** | **string** | The last 4 digits of the card PAN | [readonly] 
 **LastModifiedTime** | Pointer to **time.Time** |  | [optional] 
-**Name** | **string** | The external card holder name | 
+**Name** | **string** | The cardholder name | 
 **Verifications** | Pointer to [**ExternalCardVerifications**](ExternalCardVerifications.md) |  | [optional] 
 
 ## Methods

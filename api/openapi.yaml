@@ -11,7 +11,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   title: Synctera API
-  version: 0.5.0
+  version: 0.32.0
 servers:
 - description: Production
   url: https://api.synctera.com/v0
@@ -28,6 +28,8 @@ tags:
   name: Account Templates
 - description: Create and manage payments
   name: ACH
+- description: Simulate receiving ACH transactions and returns
+  name: ACH Transaction Simulations
 - description: Requests to create and manage ban rules
   name: Ban Rules
 - description: "A legal entity (corporation, partnership, etc.) that is relevant to\
@@ -53,7 +55,7 @@ tags:
     regulatory obligations.
   name: Disclosures (deprecated)
 - description: Create and manage documents.
-  name: Documents (alpha)
+  name: Documents
 - description: |
     The External Account resource is used for managing links to accounts
     that operate outside of the Synctera ecosystem.
@@ -81,6 +83,8 @@ tags:
 - description: "Represents the relationships between parties. A relationship can exist\
     \ between personal customers, business customers, or non-customer persons/organizations.\n"
   name: Relationships
+- description: Create and manage spending controls
+  name: Spend Controls (beta)
 - description: Request to create and manage statements
   name: Stately
 - description: Requests to generate simulated transactions
@@ -112,7 +116,11 @@ paths:
         name: id
         required: false
         schema:
-          $ref: '#/components/schemas/account_id_query_schema'
+          example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+          items:
+            format: uuid
+            type: string
+          type: array
         style: form
         x-external: true
       - description: |
@@ -132,7 +140,11 @@ paths:
         name: linked_account_id
         required: false
         schema:
-          $ref: '#/components/schemas/account_id_query_schema'
+          example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+          items:
+            format: uuid
+            type: string
+          type: array
         style: form
         x-external: true
       - deprecated: true
@@ -144,7 +156,11 @@ paths:
         name: overdraft_account_id
         required: false
         schema:
-          $ref: '#/components/schemas/account_id_query_schema'
+          example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+          items:
+            format: uuid
+            type: string
+          type: array
         style: form
         x-external: true
       - deprecated: true
@@ -156,7 +172,11 @@ paths:
         name: overflow_account_id
         required: false
         schema:
-          $ref: '#/components/schemas/account_id_query_schema'
+          example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+          items:
+            format: uuid
+            type: string
+          type: array
         style: form
         x-external: true
       - description: "Account number(s). Multiple account numbers can be provided\
@@ -254,9 +274,9 @@ paths:
         name: first_name
         required: false
         schema:
-          description: "Only return resources where the first_name field matches the\
-            \ specified string. Any * characters in the string are wildcards, and\
-            \ match any characters."
+          description: "Only return resources where the first_name or chosen_name\
+            \ field matches the specified string. Any * characters in the string are\
+            \ wildcards, and match any characters."
           example: Alice
           type: string
         style: form
@@ -1381,7 +1401,7 @@ paths:
         name: transaction_id
         required: true
         schema:
-          example: dd8cd509-ce52-4990-8f84-316558e68e9a
+          example: 1985f769-dd31-4128-95db-f765355e6631
           format: uuid
           type: string
         style: simple
@@ -1436,7 +1456,7 @@ paths:
         name: transaction_id
         required: true
         schema:
-          example: dd8cd509-ce52-4990-8f84-316558e68e9a
+          example: 1985f769-dd31-4128-95db-f765355e6631
           format: uuid
           type: string
         style: simple
@@ -1489,6 +1509,104 @@ paths:
       - ACH
       x-external: true
     summary: Sent ACH detail
+  /ach/transaction_simulations/receiving_return:
+    post:
+      description: Use to simulate receiving ACH return in test environments. Creates
+        an incoming ACH file with a single return entry based on a previously created
+        outgoing transaction. The file gets automatically processed.
+      operationId: achReturnSimulation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ach_return_simulation_request'
+        description: Incoming ACH return simulation
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ach_simulation_response'
+          description: Simulated receiving ACH return
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: BadRequest
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Forbidden error
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Internal server error
+      summary: Simulate receiving ACH return
+      tags:
+      - ACH Transaction Simulations
+      x-external: true
+    summary: Receiving ACH return simulation
+  /ach/transaction_simulations/receiving_transaction:
+    post:
+      description: "Use to simulate receiving ACH transaction in test environments.\
+        \ Creates an incoming ACH file with a single transaction, which gets automatically\
+        \ processed."
+      operationId: achTransactionSimulation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ach_transaction_simulation_request'
+        description: Sent ACH request
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ach_simulation_response'
+          description: Simulated receiving ACH transaction
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: BadRequest
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Forbidden error
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Internal server error
+      summary: Simulate receiving ACH transaction
+      tags:
+      - ACH Transaction Simulations
+      x-external: true
+    summary: Receiving ACH simulation
   /businesses:
     get:
       description: Retrieves paginated list of businesses associated with the authorized
@@ -1593,6 +1711,10 @@ paths:
             enum:
             - entity_name:asc
             - entity_name:desc
+            - creation_time:asc
+            - creation_time:desc
+            - last_updated_time:asc
+            - last_updated_time:desc
             type: string
           type: array
         style: form
@@ -4241,9 +4363,9 @@ paths:
         name: first_name
         required: false
         schema:
-          description: "Only return resources where the first_name field matches the\
-            \ specified string. Any * characters in the string are wildcards, and\
-            \ match any characters."
+          description: "Only return resources where the first_name or chosen_name\
+            \ field matches the specified string. Any * characters in the string are\
+            \ wildcards, and match any characters."
           example: Alice
           type: string
         style: form
@@ -6367,7 +6489,7 @@ paths:
       x-status: alpha
   /documents:
     get:
-      description: Returns a paginated list of documents.
+      description: "Returns a paginated list of documents (metadata only, not contents)."
       operationId: listDocuments
       parameters:
       - description: Unique resource identifier
@@ -6424,7 +6546,7 @@ paths:
         name: related_resource_id
         required: false
         schema:
-          example: 1985f769-dd31-4128-95db-f765355e6631
+          example: 3b601be1-1c91-4136-bca8-6754cc78f713
           format: uuid
           type: string
         style: form
@@ -6490,9 +6612,8 @@ paths:
           description: Internal server error
       summary: List documents
       tags:
-      - Documents (alpha)
+      - Documents
       x-external: true
-      x-status: alpha
     post:
       description: |
         Docs
@@ -6542,15 +6663,13 @@ paths:
           description: Internal server error
       summary: Create a document
       tags:
-      - Documents (alpha)
+      - Documents
       x-external: true
-      x-status: alpha
     summary: Documents
   /documents/{document_id}:
     get:
-      deprecated: true
-      description: "Returns the bytes of the requested document. This endpoint is\
-        \ deprecated. Use /documents/{document_id}/contents instead."
+      description: "Returns the document attributes. Use /documents/{document_id}/contents\
+        \ to get the contents.\n"
       operationId: getDocument
       parameters:
       - description: The unique identifier of the document.
@@ -6559,17 +6678,16 @@ paths:
         name: document_id
         required: true
         schema:
-          example: 2e3304dc-a1c2-427e-ac5a-a2586a95ce1f
+          example: 4d463562-87b0-40bf-ba3f-7b52833f4898
           format: uuid
           type: string
         style: simple
       responses:
         "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                format: binary
-                type: string
+                $ref: '#/components/schemas/document'
           description: The requested document.
         "401":
           content:
@@ -6597,11 +6715,10 @@ paths:
           description: Internal server error
       summary: Get a document
       tags:
-      - Documents (alpha)
+      - Documents
       x-external: true
-      x-status: alpha
     patch:
-      description: Update document attributes by document ID
+      description: Update attributes of the latest document version.
       operationId: updateDocument
       parameters:
       - description: The unique identifier of the document.
@@ -6610,7 +6727,7 @@ paths:
         name: document_id
         required: true
         schema:
-          example: 2e3304dc-a1c2-427e-ac5a-a2586a95ce1f
+          example: 4d463562-87b0-40bf-ba3f-7b52833f4898
           format: uuid
           type: string
         style: simple
@@ -6659,9 +6776,8 @@ paths:
           description: Internal server error
       summary: Update a document
       tags:
-      - Documents (alpha)
+      - Documents
       x-external: true
-      x-status: alpha
     summary: Document
   /documents/{document_id}/contents:
     get:
@@ -6674,7 +6790,7 @@ paths:
         name: document_id
         required: true
         schema:
-          example: 2e3304dc-a1c2-427e-ac5a-a2586a95ce1f
+          example: 4d463562-87b0-40bf-ba3f-7b52833f4898
           format: uuid
           type: string
         style: simple
@@ -6710,11 +6826,196 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: Internal server error
-      summary: Get document contents
+      summary: Get contents of latest document version
       tags:
-      - Documents (alpha)
+      - Documents
       x-external: true
-      x-status: alpha
+    summary: Document
+  /documents/{document_id}/versions:
+    post:
+      description: |
+        Docs
+      operationId: createDocumentVersion
+      parameters:
+      - description: The unique identifier of the document.
+        explode: false
+        in: path
+        name: document_id
+        required: true
+        schema:
+          example: 4d463562-87b0-40bf-ba3f-7b52833f4898
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/uprev_document'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document'
+          description: Created document representation.
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: BadRequest
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Forbidden error
+        "409":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Resource already exists error
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Internal server error
+      summary: Create a new document version
+      tags:
+      - Documents
+      x-external: true
+    summary: Documents
+  /documents/{document_id}/versions/{document_version}:
+    get:
+      description: "Returns the document (attributes). Use /documents/{document_id}/versions/{version}/contents\
+        \ to get the contents.\n"
+      operationId: getDocumentVersion
+      parameters:
+      - description: The unique identifier of the document.
+        explode: false
+        in: path
+        name: document_id
+        required: true
+        schema:
+          example: 4d463562-87b0-40bf-ba3f-7b52833f4898
+          format: uuid
+          type: string
+        style: simple
+      - description: The document version.
+        explode: false
+        in: path
+        name: document_version
+        required: true
+        schema:
+          example: 1
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document'
+          description: The requested document.
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Forbidden error
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Resource not found
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Internal server error
+      summary: Get a document by version
+      tags:
+      - Documents
+      x-external: true
+    summary: Document
+  /documents/{document_id}/versions/{document_version}/contents:
+    get:
+      description: Returns the bytes of the requested document.
+      operationId: getDocumentVersionContents
+      parameters:
+      - description: The unique identifier of the document.
+        explode: false
+        in: path
+        name: document_id
+        required: true
+        schema:
+          example: 4d463562-87b0-40bf-ba3f-7b52833f4898
+          format: uuid
+          type: string
+        style: simple
+      - description: The document version.
+        explode: false
+        in: path
+        name: document_version
+        required: true
+        schema:
+          example: 1
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                format: binary
+                type: string
+          description: The requested document.
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Forbidden error
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Resource not found
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Internal server error
+      summary: Get document contents by version
+      tags:
+      - Documents
+      x-external: true
     summary: Document
   /external_accounts:
     description: |
@@ -6770,6 +7071,16 @@ paths:
             \ pages, returned from previous get"
           example: a8937a0d
           type: string
+        style: form
+        x-external: true
+      - description: "If true, include old (inactive) records as well."
+        explode: true
+        in: query
+        name: include_history
+        required: false
+        schema:
+          default: false
+          type: boolean
         style: form
         x-external: true
       responses:
@@ -7476,7 +7787,7 @@ paths:
   /external_cards:
     get:
       description: |
-        List external cards
+        List External Cards
       operationId: listExternalCards
       parameters:
       - explode: true
@@ -7525,7 +7836,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/external_card_list_response'
-          description: External cards list
+          description: External Card list
         "400":
           content:
             application/problem+json:
@@ -7556,7 +7867,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: Internal server error
-      summary: List external cards
+      summary: List External Cards
       tags:
       - External Cards (alpha)
       x-external: true
@@ -7565,7 +7876,7 @@ paths:
       External Card
     get:
       description: |
-        Get an external card
+        Get External Card
       operationId: getExternalCard
       parameters:
       - description: The unique identifier of an external card
@@ -7584,7 +7895,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/external_card_response'
-          description: External card details
+          description: External Card details
         "400":
           content:
             application/problem+json:
@@ -7615,7 +7926,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: Internal server error
-      summary: Get a external card
+      summary: Get External Card
       tags:
       - External Cards (alpha)
       x-external: true
@@ -7639,7 +7950,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/external_card_request'
-        description: Details of the card to create
+        description: Details of the External Card to create
         required: true
       responses:
         "201":
@@ -7647,7 +7958,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/external_card_response'
-          description: External card created
+          description: External Card created
         "400":
           content:
             application/problem+json:
@@ -7678,14 +7989,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: Internal server error
-      summary: Create external card from token
+      summary: Create External Card from token
       tags:
       - External Cards (alpha)
       x-external: true
   /external_cards/transfers:
     get:
       description: |
-        List external card transfer
+        List External Card Transfers
       operationId: listExternalCardTransfers
       parameters:
       - explode: true
@@ -7755,7 +8066,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/transfer_list_response'
-          description: External transfer list
+          description: External Card Transfer list
         "400":
           content:
             application/problem+json:
@@ -7786,20 +8097,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: Internal server error
-      summary: List external transfers
+      summary: List External Card Transfers
       tags:
       - External Cards (alpha)
       x-external: true
     post:
       description: |
-        Create a external card transfer
+        Create External Card Transfer
       operationId: createExternalCardTransfer
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/transfer_request'
-        description: Details of the transfer to create
+        description: Details of the External Card Transfer to create
         required: true
       responses:
         "201":
@@ -7807,7 +8118,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/transfer_response'
-          description: External card transfer created
+          description: External Card Transfer created
         "400":
           content:
             application/problem+json:
@@ -7838,16 +8149,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: Internal server error
-      summary: Create external card transfer
+      summary: Create External Card Transfer
       tags:
       - External Cards (alpha)
       x-external: true
   /external_cards/transfers/{transfer_id}:
     description: |
-      External card transfer
+      External Card Transfer
     get:
       description: |
-        Get an external transfer
+        Get External Card Transfer
       operationId: getExternalCardTransfer
       parameters:
       - description: The unique identifier of a transfer
@@ -7866,7 +8177,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/transfer_response'
-          description: External card transfer details
+          description: External Card Transfer details
         "400":
           content:
             application/problem+json:
@@ -7897,7 +8208,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: Internal server error
-      summary: Get an external card transfer
+      summary: Get External Card Transfer
       tags:
       - External Cards (alpha)
       x-external: true
@@ -7905,7 +8216,7 @@ paths:
   /external_cards/transfers/{transfer_id}/reversals:
     post:
       description: |
-        Create an external card transfer reversal
+        Create External Card Transfer Reversal
       operationId: createExternalCardTransferReversal
       parameters:
       - description: The unique identifier of a transfer
@@ -7923,7 +8234,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/transfer_reversal_request'
-        description: Details of the transfer to reverse
+        description: Details of the External Card Transfer Reversal to create
         required: true
       responses:
         "201":
@@ -7931,7 +8242,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/transfer_response'
-          description: External card transfer reversal created
+          description: External Card Transfer Reversal created
         "400":
           content:
             application/problem+json:
@@ -7962,7 +8273,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: Internal server error
-      summary: Reverse an external card transfer
+      summary: Create External Card Transfer Reversal
       tags:
       - External Cards (alpha)
       x-external: true
@@ -8005,7 +8316,11 @@ paths:
         name: id
         required: false
         schema:
-          $ref: '#/components/schemas/account_id_query_schema'
+          example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+          items:
+            format: uuid
+            type: string
+          type: array
         style: form
         x-external: true
       responses:
@@ -8104,6 +8419,50 @@ paths:
       x-external: true
     summary: Internal Accounts
   /internal_accounts/{internal_account_id}:
+    get:
+      description: |
+        Returns an internal account by id
+      operationId: getInternalAccounts
+      parameters:
+      - description: Unique identifier for the internal account.
+        explode: false
+        in: path
+        name: internal_account_id
+        required: true
+        schema:
+          example: 7d943c51-e4ff-4e57-9558-08cab6b963c7
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internal_account'
+          description: Internal Account
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Forbidden error
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Internal server error
+      summary: Get internal account by id
+      tags:
+      - Internal Accounts
+      x-external: true
     patch:
       description: |
         Patch internal account.
@@ -8688,7 +9047,11 @@ paths:
         name: id
         required: false
         schema:
-          $ref: '#/components/schemas/id_list_query_schema'
+          example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+          items:
+            format: uuid
+            type: string
+          type: array
         style: form
         x-external: true
       - description: Originating account IDs. Multiple IDs can be provided as a comma-separated
@@ -8698,7 +9061,11 @@ paths:
         name: account_id
         required: false
         schema:
-          $ref: '#/components/schemas/id_list_query_schema'
+          example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+          items:
+            format: uuid
+            type: string
+          type: array
         style: form
         x-external: true
       - description: The IDs of customers who created the payment schedules. Multiple
@@ -8708,7 +9075,11 @@ paths:
         name: customer_id
         required: false
         schema:
-          $ref: '#/components/schemas/id_list_query_schema'
+          example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+          items:
+            format: uuid
+            type: string
+          type: array
         style: form
         x-external: true
       responses:
@@ -8895,7 +9266,11 @@ paths:
         name: id
         required: false
         schema:
-          $ref: '#/components/schemas/id_list_query_schema'
+          example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+          items:
+            format: uuid
+            type: string
+          type: array
         style: form
         x-external: true
       - description: Payment schedule IDs. Multiple IDs can be provided as a comma-separated
@@ -8905,7 +9280,11 @@ paths:
         name: schedule_id
         required: false
         schema:
-          $ref: '#/components/schemas/id_list_query_schema'
+          example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+          items:
+            format: uuid
+            type: string
+          type: array
         style: form
         x-external: true
       - description: Originating account IDs. Multiple IDs can be provided as a comma-separated
@@ -8915,7 +9294,11 @@ paths:
         name: account_id
         required: false
         schema:
-          $ref: '#/components/schemas/id_list_query_schema'
+          example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+          items:
+            format: uuid
+            type: string
+          type: array
         style: form
         x-external: true
       - description: The IDs of customers who created the payment schedules. Multiple
@@ -8925,7 +9308,11 @@ paths:
         name: customer_id
         required: false
         schema:
-          $ref: '#/components/schemas/id_list_query_schema'
+          example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+          items:
+            format: uuid
+            type: string
+          type: array
         style: form
         x-external: true
       responses:
@@ -8983,9 +9370,9 @@ paths:
         name: first_name
         required: false
         schema:
-          description: "Only return resources where the first_name field matches the\
-            \ specified string. Any * characters in the string are wildcards, and\
-            \ match any characters."
+          description: "Only return resources where the first_name or chosen_name\
+            \ field matches the specified string. Any * characters in the string are\
+            \ wildcards, and match any characters."
           example: Alice
           type: string
         style: form
@@ -9517,7 +9904,7 @@ paths:
         name: deposit_id
         required: true
         schema:
-          example: 4d463562-87b0-40bf-ba3f-7b52833f4898
+          example: ff23b9d0-4e64-4b98-9f4a-3591ed08121a
           format: uuid
           type: string
         style: simple
@@ -9768,11 +10155,12 @@ paths:
           type: array
         style: form
         x-external: true
-      - description: "The relationship type. Any of the following:\n* `BENEFICIAL_OWNER_OF`\
-          \ – a person who directly or indirectly owns a portion of the business.\n\
-          * `MANAGING_PERSON_OF` – a person who is an officer, director, or other\
-          \ notable person of an organization.\n* `OWNER_OF` – a business with ownership\
-          \ of another business.\n"
+      - description: "The relationship type, any of the following.  All direct businesses\
+          \ customers need at least one beneficial owner or controlling person.\n\
+          * `BENEFICIAL_OWNER_OF` – a person who directly or indirectly owns a portion\
+          \ of the business.\n* `MANAGING_PERSON_OF` – a person who is an officer,\
+          \ director, or controlling person of an organization.\n* `OWNER_OF` – a\
+          \ business with ownership of another business.\n"
         explode: false
         in: query
         name: relationship_type
@@ -10117,6 +10505,365 @@ paths:
       x-external: true
       x-status: alpha
     summary: Relationship
+  /spend_controls:
+    get:
+      description: |
+        List spend controls
+      operationId: listSpendControls
+      parameters:
+      - description: return results matching this account ID
+        explode: true
+        in: query
+        name: account_id
+        required: false
+        schema:
+          example: 7d943c51-e4ff-4e57-9558-08cab6b963c7
+          format: uuid
+          type: string
+        style: form
+        x-external: true
+      - explode: true
+        in: query
+        name: payment_type
+        required: false
+        schema:
+          $ref: '#/components/schemas/payment_type'
+        style: form
+        x-external: true
+      - description: return results matching this amount limit
+        explode: true
+        in: query
+        name: amount_limit
+        required: false
+        schema:
+          exclusiveMinimum: true
+          format: int64
+          minimum: 0
+          type: integer
+        style: form
+        x-external: true
+      - description: return results with an amount limit greater than or equal to
+          this
+        explode: true
+        in: query
+        name: amount_limit_gte
+        required: false
+        schema:
+          exclusiveMinimum: true
+          minimum: 0
+          type: integer
+        style: form
+        x-external: true
+      - description: return results with an amount limit less than or equal to this
+        explode: true
+        in: query
+        name: amount_limit_lte
+        required: false
+        schema:
+          exclusiveMinimum: true
+          minimum: 0
+          type: integer
+        style: form
+        x-external: true
+      - description: return results that are associated with this many accounts
+        explode: true
+        in: query
+        name: num_related_accounts
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+        style: form
+        x-external: true
+      - description: return results that are associated with at least this many accounts
+        explode: true
+        in: query
+        name: num_related_accounts_gte
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+        style: form
+        x-external: true
+      - description: return results that are associated with at most this many accounts
+        explode: true
+        in: query
+        name: num_related_accounts_lte
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+        style: form
+        x-external: true
+      - description: return results that match this active status
+        explode: true
+        in: query
+        name: is_active
+        required: false
+        schema:
+          type: boolean
+        style: form
+        x-external: true
+      - description: return results that match this name
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+        x-external: true
+      - explode: true
+        in: query
+        name: direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/spend_control_direction'
+        style: form
+        x-external: true
+      - description: return results with these comma-separated IDs
+        explode: false
+        in: query
+        name: id
+        required: false
+        schema:
+          example: "c833e6c6-5c15-4719-90e9-7a6682c483d3,ef17356c-69b0-446e-ae2f-72ab59eeb544"
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+        x-external: true
+      - description: |
+          Specifies the sort order for returned Spend Controls.
+        explode: false
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          items:
+            enum:
+            - name:asc
+            - name:desc
+            - num_related_accounts:asc
+            - num_related_accounts:desc
+            - amount_limit:asc
+            - amount_limit:desc
+            - last_modified_time:asc
+            - last_modified_time:desc
+            - is_active:asc
+            - is_active:desc
+            type: string
+          type: array
+        style: form
+        x-external: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/spend_control_response_list'
+          description: Spend control details
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: BadRequest
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Forbidden error
+        "422":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unprocessable entity request response
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Internal server error
+      summary: List Spend Controls
+      tags:
+      - Spend Controls (beta)
+      x-external: true
+    post:
+      description: |
+        Create a spend control
+      operationId: createSpendControl
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/spend_control'
+        description: Details of the spend control to create
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/spend_control_response'
+          description: Spend control details
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: BadRequest
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Forbidden error
+        "422":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unprocessable entity request response
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Internal server error
+      summary: Create Spend Control
+      tags:
+      - Spend Controls (beta)
+      x-external: true
+  /spend_controls/{spend_control_id}:
+    get:
+      description: |
+        Get spend control
+      operationId: getSpendControl
+      parameters:
+      - explode: false
+        in: path
+        name: spend_control_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/spend_control_id'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/spend_control_response'
+          description: Spend control details
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: BadRequest
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Forbidden error
+        "422":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unprocessable entity request response
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Internal server error
+      summary: Get Spend Control
+      tags:
+      - Spend Controls (beta)
+      x-external: true
+    patch:
+      description: |
+        Update spend control
+      operationId: updateSpendControl
+      parameters:
+      - explode: false
+        in: path
+        name: spend_control_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/spend_control_id'
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/spend_control_update_request'
+        description: Fields to update
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/spend_control_response'
+          description: Spend control details
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: BadRequest
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Forbidden error
+        "422":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unprocessable entity request response
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Internal server error
+      summary: Update Spend Control
+      tags:
+      - Spend Controls (beta)
+      x-external: true
   /statements:
     get:
       description: Get list of statements
@@ -10128,7 +10875,7 @@ paths:
         name: account_id
         required: true
         schema:
-          example: e4b92656-ef1e-41f5-a85f-af09346611c0
+          example: 7d943c51-e4ff-4e57-9558-08cab6b963c7
           format: uuid
           type: string
         style: form
@@ -10174,7 +10921,7 @@ paths:
         name: statement_id
         required: true
         schema:
-          example: 3fa12d3f-6436-482c-a8a1-d65e9761dc2d
+          example: 7d943c51-e4ff-4e57-9558-08cab6b963c7
           format: uuid
           type: string
         style: simple
@@ -10216,12 +10963,12 @@ paths:
       x-external: true
     summary: Statements
   /transactions/internal_transfer:
-    description: "An internal transfer is an payment between two accounts within the\
-      \ same Fintech.\nBy default, this the payment is posted immediately. To indicate\
-      \ that you want to separate the authorization and the completion of the payment,\
-      \ use `capture_mode` = 'MANUAL'."
     post:
-      description: Create an internal transfer
+      description: "An internal transfer is an payment between two accounts within\
+        \ the same Fintech.\n\nBy default, the payment is posted immediately. To indicate\
+        \ that you want to separate the authorization from the completion of the payment,\
+        \ use `capture_mode` = `MANUAL`. In that case, a separate call to update the\
+        \ status of the transfer will be required to complete the payment."
       operationId: createInternalTransfer
       parameters:
       - description: "An idempotency key is an arbitrary unique value generated by\
@@ -10344,7 +11091,10 @@ paths:
       - Internal Transfer
       x-external: true
     patch:
-      description: Update an internal transfer
+      description: |-
+        Update an internal transfer.
+
+        This is only relevant when committing or cancelling an internal transfer authorization (created with `capture_mode` = `MANUAL`) that hasn't already been completed.
       operationId: updateInternalTransferByID
       parameters:
       - description: Transaction ID
@@ -11345,7 +12095,7 @@ paths:
         name: webhook_id
         required: true
         schema:
-          example: 4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5
+          example: 3fa12d3f-6436-482c-a8a1-d65e9761dc2d
           format: uuid
           type: string
         style: simple
@@ -11388,7 +12138,7 @@ paths:
         name: webhook_id
         required: true
         schema:
-          example: 4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5
+          example: 3fa12d3f-6436-482c-a8a1-d65e9761dc2d
           format: uuid
           type: string
         style: simple
@@ -11431,7 +12181,7 @@ paths:
         name: webhook_id
         required: true
         schema:
-          example: 4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5
+          example: 3fa12d3f-6436-482c-a8a1-d65e9761dc2d
           format: uuid
           type: string
         style: simple
@@ -11483,7 +12233,7 @@ paths:
         name: webhook_id
         required: true
         schema:
-          example: 4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5
+          example: 3fa12d3f-6436-482c-a8a1-d65e9761dc2d
           format: uuid
           type: string
         style: simple
@@ -11593,7 +12343,7 @@ paths:
         name: webhook_id
         required: true
         schema:
-          example: 4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5
+          example: 3fa12d3f-6436-482c-a8a1-d65e9761dc2d
           format: uuid
           type: string
         style: simple
@@ -11603,7 +12353,7 @@ paths:
         name: event_id
         required: true
         schema:
-          example: 9210da83-0834-4fc6-96aa-58c4925a6723
+          example: 68281b01-5d95-4830-a312-eb1b7767fe7d
           format: uuid
           type: string
         style: simple
@@ -11647,7 +12397,7 @@ paths:
         name: webhook_id
         required: true
         schema:
-          example: 4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5
+          example: 3fa12d3f-6436-482c-a8a1-d65e9761dc2d
           format: uuid
           type: string
         style: simple
@@ -11657,7 +12407,7 @@ paths:
         name: event_id
         required: true
         schema:
-          example: faa78c68-e36e-4323-a45e-897e074c8188
+          example: cd3d505c-fc43-492b-b3e8-3050653b5afb
           format: uuid
           type: string
         style: simple
@@ -11819,7 +12569,7 @@ paths:
         name: customer_id
         required: false
         schema:
-          example: ff23b9d0-4e64-4b98-9f4a-3591ed08121a
+          example: d6201244-02d1-493e-87f6-a3391527abfc
           format: uuid
           type: string
         style: form
@@ -11829,7 +12579,7 @@ paths:
         name: originating_account_id
         required: false
         schema:
-          example: 21b74a02-b7c7-49f4-a497-98ba5cbedb27
+          example: 2e3304dc-a1c2-427e-ac5a-a2586a95ce1f
           format: uuid
           type: string
         style: form
@@ -11839,7 +12589,7 @@ paths:
         name: receiving_account_id
         required: false
         schema:
-          example: 3b601be1-1c91-4136-bca8-6754cc78f713
+          example: 21b74a02-b7c7-49f4-a497-98ba5cbedb27
           format: uuid
           type: string
         style: form
@@ -11938,7 +12688,7 @@ paths:
         name: wire_id
         required: true
         schema:
-          example: 63ea71cb-7f86-44c1-956b-77f6cbd6ecf7
+          example: dd8cd509-ce52-4990-8f84-316558e68e9a
           format: uuid
           type: string
         style: simple
@@ -11988,7 +12738,7 @@ paths:
         name: wire_id
         required: true
         schema:
-          example: 63ea71cb-7f86-44c1-956b-77f6cbd6ecf7
+          example: dd8cd509-ce52-4990-8f84-316558e68e9a
           format: uuid
           type: string
         style: simple
@@ -12063,7 +12813,11 @@ components:
       name: id
       required: false
       schema:
-        $ref: '#/components/schemas/account_id_query_schema'
+        example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+        items:
+          format: uuid
+          type: string
+        type: array
       style: form
       x-external: true
     account_id_query_array:
@@ -12087,7 +12841,23 @@ components:
       name: account_id
       required: false
       schema:
-        $ref: '#/components/schemas/id_list_query_schema'
+        example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+        items:
+          format: uuid
+          type: string
+        type: array
+      style: form
+      x-external: true
+    account_id_query2:
+      description: return results matching this account ID
+      explode: true
+      in: query
+      name: account_id
+      required: false
+      schema:
+        example: 7d943c51-e4ff-4e57-9558-08cab6b963c7
+        format: uuid
+        type: string
       style: form
       x-external: true
     account_id1:
@@ -12109,7 +12879,7 @@ components:
       name: account_id
       required: true
       schema:
-        example: e4b92656-ef1e-41f5-a85f-af09346611c0
+        example: 7d943c51-e4ff-4e57-9558-08cab6b963c7
         format: uuid
         type: string
       style: form
@@ -12249,6 +13019,43 @@ components:
         type: integer
       style: form
       x-external: true
+    amount_limit_gte_query:
+      description: return results with an amount limit greater than or equal to this
+      explode: true
+      in: query
+      name: amount_limit_gte
+      required: false
+      schema:
+        exclusiveMinimum: true
+        minimum: 0
+        type: integer
+      style: form
+      x-external: true
+    amount_limit_lte_query:
+      description: return results with an amount limit less than or equal to this
+      explode: true
+      in: query
+      name: amount_limit_lte
+      required: false
+      schema:
+        exclusiveMinimum: true
+        minimum: 0
+        type: integer
+      style: form
+      x-external: true
+    amount_limit_query:
+      description: return results matching this amount limit
+      explode: true
+      in: query
+      name: amount_limit
+      required: false
+      schema:
+        exclusiveMinimum: true
+        format: int64
+        minimum: 0
+        type: integer
+      style: form
+      x-external: true
     amount_lt:
       description: Only return transactions with `amount` less than `amount_lt`
       explode: true
@@ -12287,7 +13094,7 @@ components:
       name: ban_rule_id
       required: true
       schema:
-        example: d6201244-02d1-493e-87f6-a3391527abfc
+        example: e4b92656-ef1e-41f5-a85f-af09346611c0
         format: uuid
         type: string
       style: simple
@@ -12380,6 +13187,10 @@ components:
           enum:
           - entity_name:asc
           - entity_name:desc
+          - creation_time:asc
+          - creation_time:desc
+          - last_updated_time:asc
+          - last_updated_time:desc
           type: string
         type: array
       style: form
@@ -12515,7 +13326,7 @@ components:
       name: customer_id
       required: false
       schema:
-        example: ff23b9d0-4e64-4b98-9f4a-3591ed08121a
+        example: d6201244-02d1-493e-87f6-a3391527abfc
         format: uuid
         type: string
       style: form
@@ -12590,7 +13401,11 @@ components:
       name: customer_id
       required: false
       schema:
-        $ref: '#/components/schemas/id_list_query_schema'
+        example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+        items:
+          format: uuid
+          type: string
+        type: array
       style: form
       x-external: true
     customer_sort_by_query:
@@ -12640,7 +13455,7 @@ components:
       name: deposit_id
       required: true
       schema:
-        example: 4d463562-87b0-40bf-ba3f-7b52833f4898
+        example: ff23b9d0-4e64-4b98-9f4a-3591ed08121a
         format: uuid
         type: string
       style: simple
@@ -12680,9 +13495,19 @@ components:
       name: document_id
       required: true
       schema:
-        example: 2e3304dc-a1c2-427e-ac5a-a2586a95ce1f
+        example: 4d463562-87b0-40bf-ba3f-7b52833f4898
         format: uuid
         type: string
+      style: simple
+    document_version:
+      description: The document version.
+      explode: false
+      in: path
+      name: document_version
+      required: true
+      schema:
+        example: 1
+        type: integer
       style: simple
     email1:
       explode: true
@@ -12809,15 +13634,15 @@ components:
         $ref: '#/components/schemas/transfer_type'
       style: form
       x-external: true
-    first_name:
+    first_chosen_name:
       explode: true
       in: query
       name: first_name
       required: false
       schema:
-        description: "Only return resources where the first_name field matches the\
-          \ specified string. Any * characters in the string are wildcards, and match\
-          \ any characters."
+        description: "Only return resources where the first_name or chosen_name field\
+          \ matches the specified string. Any * characters in the string are wildcards,\
+          \ and match any characters."
         example: Alice
         type: string
       style: form
@@ -12943,7 +13768,11 @@ components:
       name: id
       required: false
       schema:
-        $ref: '#/components/schemas/id_list_query_schema'
+        example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+        items:
+          format: uuid
+          type: string
+        type: array
       style: form
       x-external: true
     id_query3:
@@ -12962,6 +13791,20 @@ components:
       style: form
       x-external: true
     id_query4:
+      description: return results with these comma-separated IDs
+      explode: false
+      in: query
+      name: id
+      required: false
+      schema:
+        example: "c833e6c6-5c15-4719-90e9-7a6682c483d3,ef17356c-69b0-446e-ae2f-72ab59eeb544"
+        items:
+          format: uuid
+          type: string
+        type: array
+      style: form
+      x-external: true
+    id_query5:
       description: |
         Unique identifier for the resource. Multiple IDs can be provided as a comma-separated list.
       explode: false
@@ -13053,7 +13896,21 @@ components:
       name: id
       required: false
       schema:
-        $ref: '#/components/schemas/account_id_query_schema'
+        example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+        items:
+          format: uuid
+          type: string
+        type: array
+      style: form
+      x-external: true
+    is_active_query:
+      description: return results that match this active status
+      explode: true
+      in: query
+      name: is_active
+      required: false
+      schema:
+        type: boolean
       style: form
       x-external: true
     is_customer:
@@ -13113,7 +13970,11 @@ components:
       name: linked_account_id
       required: false
       schema:
-        $ref: '#/components/schemas/account_id_query_schema'
+        example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+        items:
+          format: uuid
+          type: string
+        type: array
       style: form
       x-external: true
     max_age:
@@ -13154,13 +14015,56 @@ components:
         format: uuid
         type: string
       style: simple
+    name_query:
+      description: return results that match this name
+      explode: true
+      in: query
+      name: name
+      required: false
+      schema:
+        type: string
+      style: form
+      x-external: true
+    num_related_accounts_gte_query:
+      description: return results that are associated with at least this many accounts
+      explode: true
+      in: query
+      name: num_related_accounts_gte
+      required: false
+      schema:
+        minimum: 0
+        type: integer
+      style: form
+      x-external: true
+    num_related_accounts_lte_query:
+      description: return results that are associated with at most this many accounts
+      explode: true
+      in: query
+      name: num_related_accounts_lte
+      required: false
+      schema:
+        minimum: 0
+        type: integer
+      style: form
+      x-external: true
+    num_related_accounts_query:
+      description: return results that are associated with this many accounts
+      explode: true
+      in: query
+      name: num_related_accounts
+      required: false
+      schema:
+        minimum: 0
+        type: integer
+      style: form
+      x-external: true
     originating_account_id:
       explode: true
       in: query
       name: originating_account_id
       required: false
       schema:
-        example: 21b74a02-b7c7-49f4-a497-98ba5cbedb27
+        example: 2e3304dc-a1c2-427e-ac5a-a2586a95ce1f
         format: uuid
         type: string
       style: form
@@ -13186,7 +14090,11 @@ components:
       name: overdraft_account_id
       required: false
       schema:
-        $ref: '#/components/schemas/account_id_query_schema'
+        example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+        items:
+          format: uuid
+          type: string
+        type: array
       style: form
       x-external: true
     overflow_account_id_query:
@@ -13199,7 +14107,11 @@ components:
       name: overflow_account_id
       required: false
       schema:
-        $ref: '#/components/schemas/account_id_query_schema'
+        example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+        items:
+          format: uuid
+          type: string
+        type: array
       style: form
       x-external: true
     page_token:
@@ -13222,7 +14134,20 @@ components:
       name: schedule_id
       required: false
       schema:
-        $ref: '#/components/schemas/id_list_query_schema'
+        example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
+        items:
+          format: uuid
+          type: string
+        type: array
+      style: form
+      x-external: true
+    payment_type_query1:
+      explode: true
+      in: query
+      name: payment_type
+      required: false
+      schema:
+        $ref: '#/components/schemas/payment_type'
       style: form
       x-external: true
     pending_amount:
@@ -13487,7 +14412,7 @@ components:
       name: receiving_account_id
       required: false
       schema:
-        example: 3b601be1-1c91-4136-bca8-6754cc78f713
+        example: 21b74a02-b7c7-49f4-a497-98ba5cbedb27
         format: uuid
         type: string
       style: form
@@ -13511,7 +14436,7 @@ components:
       name: related_resource_id
       required: false
       schema:
-        example: 1985f769-dd31-4128-95db-f765355e6631
+        example: 3b601be1-1c91-4136-bca8-6754cc78f713
         format: uuid
         type: string
       style: form
@@ -13550,9 +14475,10 @@ components:
         type: string
       style: simple
     relationship_type:
-      description: "The relationship type. Any of the following:\n* `BENEFICIAL_OWNER_OF`\
+      description: "The relationship type, any of the following.  All direct businesses\
+        \ customers need at least one beneficial owner or controlling person.\n* `BENEFICIAL_OWNER_OF`\
         \ – a person who directly or indirectly owns a portion of the business.\n\
-        * `MANAGING_PERSON_OF` – a person who is an officer, director, or other notable\
+        * `MANAGING_PERSON_OF` – a person who is an officer, director, or controlling\
         \ person of an organization.\n* `OWNER_OF` – a business with ownership of\
         \ another business.\n"
       explode: false
@@ -13605,6 +14531,23 @@ components:
         format: uuid
         type: string
       style: simple
+    spend_control_direction_query:
+      explode: true
+      in: query
+      name: direction
+      required: false
+      schema:
+        $ref: '#/components/schemas/spend_control_direction'
+      style: form
+      x-external: true
+    spend_control_id:
+      explode: false
+      in: path
+      name: spend_control_id
+      required: true
+      schema:
+        $ref: '#/components/schemas/spend_control_id'
+      style: simple
     spend_control_ids_query:
       description: |
         Spend Control ID(s). Multiple IDs can be provided as a comma-separated list.
@@ -13615,6 +14558,30 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/spend_control_ids'
+      style: form
+      x-external: true
+    spend_control_sort_by_query:
+      description: |
+        Specifies the sort order for returned Spend Controls.
+      explode: false
+      in: query
+      name: sort_by
+      required: false
+      schema:
+        items:
+          enum:
+          - name:asc
+          - name:desc
+          - num_related_accounts:asc
+          - num_related_accounts:desc
+          - amount_limit:asc
+          - amount_limit:desc
+          - last_modified_time:asc
+          - last_modified_time:desc
+          - is_active:asc
+          - is_active:desc
+          type: string
+        type: array
       style: form
       x-external: true
     ssn_last_4:
@@ -13638,7 +14605,7 @@ components:
       name: statement_id
       required: true
       schema:
-        example: 3fa12d3f-6436-482c-a8a1-d65e9761dc2d
+        example: 7d943c51-e4ff-4e57-9558-08cab6b963c7
         format: uuid
         type: string
       style: simple
@@ -13815,7 +14782,7 @@ components:
       name: transaction_id
       required: true
       schema:
-        example: dd8cd509-ce52-4990-8f84-316558e68e9a
+        example: 1985f769-dd31-4128-95db-f765355e6631
         format: uuid
         type: string
       style: simple
@@ -13935,7 +14902,7 @@ components:
       name: webhook_id
       required: true
       schema:
-        example: 4675ebf0-0691-4a2b-b1db-7ca6f4ff9ec5
+        example: 3fa12d3f-6436-482c-a8a1-d65e9761dc2d
         format: uuid
         type: string
       style: simple
@@ -13946,7 +14913,7 @@ components:
       name: wire_id
       required: true
       schema:
-        example: 63ea71cb-7f86-44c1-956b-77f6cbd6ecf7
+        example: dd8cd509-ce52-4990-8f84-316558e68e9a
         format: uuid
         type: string
       style: simple
@@ -14129,6 +15096,11 @@ components:
           description: SWIFT code
           maxLength: 11
           minLength: 8
+          type: string
+        tenant:
+          description: |
+            The id of the tenant containing the resource.
+          example: abcdef_ghijkl
           type: string
       type: object
     account_charge_secured:
@@ -14417,9 +15389,8 @@ components:
           minLength: 8
           type: string
         tenant:
-          description: "The id tenant containing the resource.\nTenancy is represented\
-            \ as <bank_id>_<partner_id>.\nThis attribute is included on all responses.\n\
-            In requests, it is optional for clients with access to only a single tenant.\n"
+          description: |
+            The id of the tenant containing the resource.
           example: abcdef_ghijkl
           type: string
       type: object
@@ -14428,12 +15399,6 @@ components:
       example: 7d943c51-e4ff-4e57-9558-08cab6b963c7
       format: uuid
       type: string
-    account_id_query_schema:
-      example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
-      items:
-        format: uuid
-        type: string
-      type: array
     account_identifiers:
       example:
         number: "78277121"
@@ -14568,7 +15533,7 @@ components:
           type: string
         is_tokenization_enabled:
           description: Controls whether account range allows tokenization
-          example: true
+          example: false
           type: boolean
         physical_card_format:
           $ref: '#/components/schemas/physical_card_format'
@@ -14663,7 +15628,7 @@ components:
         currency:
           description: Account currency or account settlement currency. ISO 4217 alphabetic
             currency code. Default USD
-          example: BTN
+          example: USD
           pattern: "^[A-Z]{3}$"
           type: string
         customer_type:
@@ -14705,6 +15670,11 @@ components:
           type: string
         template:
           $ref: '#/components/schemas/template_fields'
+        tenant:
+          description: |
+            The id of the tenant containing the resource.
+          example: abcdef_ghijkl
+          type: string
       required:
       - is_enabled
       - name
@@ -14767,6 +15737,7 @@ components:
         name: name
         description: description
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tenant: abcdef_ghijkl
       properties:
         application_type:
           $ref: '#/components/schemas/application_type'
@@ -14785,6 +15756,11 @@ components:
           type: string
         template:
           $ref: '#/components/schemas/template_fields_generic_response'
+        tenant:
+          description: |
+            The id of the tenant containing the resource.
+          example: abcdef_ghijkl
+          type: string
       required:
       - is_enabled
       - name
@@ -14810,6 +15786,9 @@ components:
           description: An alias representing a GL account to credit. This is an alternative
             to specifying by account id
           example: ach_suspense
+          type: string
+        dest_account_id:
+          description: The account id of the account being credited
           type: string
         dest_account_no:
           description: The account number of the account being credited
@@ -14840,6 +15819,9 @@ components:
             to specifying by account id
           example: ach_suspense
           type: string
+        source_account_id:
+          description: The uuid of the the account being debited
+          type: string
         source_account_no:
           description: The account number of the account being debited
           type: string
@@ -14861,15 +15843,6 @@ components:
       required:
       - amount
       - currency
-      - dest_account_alias
-      - dest_account_no
-      - effective_date
-      - memo
-      - source_account_alias
-      - source_account_no
-      - subtype
-      - type
-      - uuid
       title: Account to Account Transfer Request
       type: object
     account_type:
@@ -14930,6 +15903,20 @@ components:
       - amount
       - duration
       type: object
+    ach_return_simulation_request:
+      description: Simulate receiving an ACH return
+      properties:
+        ach_id:
+          description: ID of an outgoing ACH transfer to be returned.
+          example: 23a37f14-16eb-461d-9331-b78182adbad4
+          format: uuid
+          type: string
+      required:
+      - ach_id
+      title: Incoming ACH return simulation request
+      type: object
+    ach_simulation_response:
+      type: object
     ach_transaction:
       allOf:
       - $ref: '#/components/schemas/base_transaction'
@@ -14977,6 +15964,40 @@ components:
           type: string
       required:
       - id
+      type: object
+    ach_transaction_simulation_request:
+      description: Simulate receiving an ACH transaction
+      properties:
+        account_number:
+          description: Number of the receiving account
+          example: "123638791329"
+          type: string
+        amount:
+          description: Amount to transfer in cents (e.g. 100 = $1).
+          example: 607
+          type: integer
+        dc_sign:
+          description: The type of transaction (debit or credit) in relation to the
+            receiving account. A credit is a transfer in and a debit is a transfer
+            pulling money out of the receiving account.
+          enum:
+          - debit
+          - credit
+          example: debit
+          type: string
+        effective_date:
+          description: Effective date of the transaction. Transactions with the current
+            date or date in the past are posted immediately. Future-dated transactions
+            are scheduled to be posted on the chosen date.
+          example: 2022-03-18
+          format: date
+          type: string
+      required:
+      - account_number
+      - amount
+      - dc_sign
+      - effective_date
+      title: Incoming ACH transaction simulation request
       type: object
     ach_transaction_subtypes:
       description: The set of valid ACH transaction subtypes
@@ -15388,7 +16409,7 @@ components:
           example: 100 Main St.
           type: string
         address_line_2:
-          description: String address line 2
+          description: Street address line 2
           example: Suite 99
           type: string
         city:
@@ -15414,7 +16435,7 @@ components:
       type: object
     address1:
       example:
-        country_code: BO
+        country_code: UM
         city: New York
         address_line_1: 100 Main St.
         address_line_2: Suite 99
@@ -15426,7 +16447,7 @@ components:
           example: 100 Main St.
           type: string
         address_line_2:
-          description: String address line 2
+          description: Street address line 2
           example: Suite 99
           type: string
         city:
@@ -15435,7 +16456,7 @@ components:
           type: string
         country_code:
           description: ISO-3166-1 Alpha-2 country code
-          example: BO
+          example: UM
           type: string
         postal_code:
           description: Postal code
@@ -15669,8 +16690,6 @@ components:
           type: string
         principal_percentage_ownership:
           type: string
-        processor:
-          $ref: '#/components/schemas/processor'
         tax_id:
           maxLength: 9
           minLength: 9
@@ -15690,7 +16709,6 @@ components:
       - enabled
       - max_transaction_amount
       - partner_id
-      - processor
       type: object
     application_response:
       properties:
@@ -15711,14 +16729,11 @@ components:
           example: 2020-01-01T00:00:00Z
           format: date-time
           type: string
-        processor:
-          $ref: '#/components/schemas/processor'
       required:
       - created_time
       - enabled
       - id
       - last_modified_time
-      - processor
       type: object
     application_type:
       description: "The type of the application.\n* LINE_OF_CREDIT: line of credit\
@@ -15733,8 +16748,6 @@ components:
         enabled:
           description: To enable or disable aft/oct feature
           type: boolean
-        processor:
-          $ref: '#/components/schemas/processor'
       type: object
     auth_request_model:
       properties:
@@ -16035,8 +17048,8 @@ components:
           readOnly: true
           type: string
         is_customer:
-          description: True for personal and business customers with a direct relationship
-            with the fintech or bank.
+          description: |
+            True for personal and business customers with a direct relationship with the fintech or bank. Set this to true for any customer related to an account.
           example: true
           type: boolean
         last_updated_time:
@@ -16106,11 +17119,8 @@ components:
           type: string
         tenant:
           description: |
-            The tenant containing the resource.
-            Tenancy is represented as bank_id_partner_id.
-            This attribute is included on all responses.
+            The id of the tenant containing the resource.
           example: abcdef_ghijkl
-          readOnly: true
           type: string
         trade_names:
           description: Other names by which this business is known.
@@ -16340,9 +17350,8 @@ components:
             Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.
           type: object
         tenant:
-          description: "The id tenant containing the resource.\nTenancy is represented\
-            \ as <bank_id>_<partner_id>.\nThis attribute is included on all responses.\n\
-            In requests, it is optional for clients with access to only a single tenant.\n"
+          description: |
+            The id of the tenant containing the resource.
           example: abcdef_ghijkl
           type: string
         type:
@@ -16425,17 +17434,18 @@ components:
           $ref: '#/components/schemas/ssn_source'
         tenant:
           description: |
-            The tenant containing the resource.
-            Tenancy is represented as bank_id_partner_id.
-            This attribute is included on all responses.
+            The id of the tenant containing the resource.
           example: abcdef_ghijkl
-          readOnly: true
           type: string
       type: object
     base_person1:
       properties:
         ban_status:
           $ref: '#/components/schemas/ban_status'
+        chosen_name:
+          description: Person's chosen name.
+          example: Annie
+          type: string
         creation_time:
           description: The date and time the resource was created.
           example: 2021-06-14T11:23:41Z
@@ -16462,8 +17472,8 @@ components:
           readOnly: true
           type: string
         is_customer:
-          description: True for personal and business customers with a direct relationship
-            with the fintech or bank.
+          description: |
+            True for personal and business customers with a direct relationship with the fintech or bank. Set this to true for any customer related to an account.
           example: true
           type: boolean
         last_name:
@@ -16505,9 +17515,8 @@ components:
         status:
           $ref: '#/components/schemas/status1'
         tenant:
-          description: "The id tenant containing the resource.\nTenancy is represented\
-            \ as <bank_id>_<partner_id>.\nThis attribute is included on all responses.\n\
-            In requests, it is optional for clients with access to only a single tenant.\n"
+          description: |
+            The id of the tenant containing the resource.
           example: abcdef_ghijkl
           type: string
         verification_last_run:
@@ -16762,7 +17771,7 @@ components:
           $ref: '#/components/schemas/card_product_type'
         country:
           description: ISO-3166-1 Alpha-2 country code
-          example: AG
+          example: MK
           maxLength: 2
           minLength: 2
           type: string
@@ -16799,7 +17808,7 @@ components:
         is_tokenization_enabled:
           default: false
           description: Controls whether bin allows tokenization
-          example: true
+          example: false
           type: boolean
         last_modified_time:
           description: The timestamp representing when the bin was last modified
@@ -17027,7 +18036,7 @@ components:
     business_id4:
       description: |
         Unique ID for the business. Exactly one of `business_id` or `person_id` must be set.
-      example: 44dfb50a-3c7b-4ab0-b458-1026fb3d06cb
+      example: a2bb1db7-ca6f-44ff-9ec5-63ea71cb7f86
       format: uuid
       type: string
     business_id5:
@@ -17782,6 +18791,8 @@ components:
       enum:
       - MOBILE_DEPOSIT
       - MOBILE_DEPOSIT_REVERSAL
+      - MOBILE_DEPOSIT_RETURN
+      - MOBILE_DEPOSIT_RETURN_REVERSAL
       type: string
     clearing_model:
       example:
@@ -17829,6 +18840,8 @@ components:
             $ref: '#/components/schemas/network_fee_model'
           type: array
         original_transaction_id:
+          description: When you simulated a clearing the synchronous response would
+            have included a `transaction.token`. That value should be used here.
           format: uuid
           type: string
       required:
@@ -17867,7 +18880,7 @@ components:
       type: object
     country_code:
       description: ISO-3166-1 Alpha-2 country code
-      example: AG
+      example: MK
       maxLength: 2
       minLength: 2
       type: string
@@ -18193,42 +19206,45 @@ components:
       description: Deposit using remote deposit capture
       example:
         creation_time: 2022-01-18T17:54:12Z
-        transaction_id: 50f24553-6017-4d36-82b9-43a251ee4358
-        deposit_amount: 2979
+        transaction_id: 4350bba5-f27e-41ee-86d0-a94b322d7fc5
+        deposit_amount: 6478
         metadata: "{}"
+        ocr_routing_number: "26009593"
         deposit_currency: USD
-        front_image_id: 350bba5f-27e1-4eec-ad0a-94b322d7fc59
+        front_image_id: 2b17b474-9a3f-469c-8bfb-7a0abb555f2b
         date_captured: 2022-01-02T03:04:05.678Z
         vendor_info: null
-        account_id: a2b17b47-49a3-4f69-88bf-b7a0abb555f2
-        back_image_id: b6d8065d-7122-40df-922e-6f2ba88a5d50
+        ocr_check_number: "001"
+        ocr_account_number: "123456789"
+        account_id: 6b77f6cb-d6ec-4f74-91e5-190c495344df
+        back_image_id: b50a3c7b-ab03-4458-9026-fb3d06cb3780
         last_updated_time: 2022-01-18T17:54:12Z
-        check_amount: 5005
-        id: 38ebff87-fb06-44a0-9a06-72f0175dfc62
+        check_amount: 8302
+        id: 6d8065d7-1220-4df1-a2e6-f2ba88a5d508
         date_processed: 2022-01-02T03:04:05.678Z
-        business_id: 44dfb50a-3c7b-4ab0-b458-1026fb3d06cb
-        person_id: 01d40d9d-d25a-4e35-9b92-b9b7442d9140
+        business_id: a2bb1db7-ca6f-44ff-9ec5-63ea71cb7f86
+        person_id: 7d1efc8e-1315-458a-8136-b1c5e00da038
         status: SUBMITTED
       properties:
         account_id:
           description: The ID of the account
-          example: a2b17b47-49a3-4f69-88bf-b7a0abb555f2
+          example: 6b77f6cb-d6ec-4f74-91e5-190c495344df
           format: uuid
           type: string
         back_image_id:
           description: ID of the uploaded image of the back of the check
-          example: b6d8065d-7122-40df-922e-6f2ba88a5d50
+          example: b50a3c7b-ab03-4458-9026-fb3d06cb3780
           format: uuid
           type: string
         business_id:
           description: |
             Unique ID for the business. Exactly one of `business_id` or `person_id` must be set.
-          example: 44dfb50a-3c7b-4ab0-b458-1026fb3d06cb
+          example: a2bb1db7-ca6f-44ff-9ec5-63ea71cb7f86
           format: uuid
           type: string
         check_amount:
           description: Amount on check in ISO 4217 minor currency units
-          example: 5005
+          example: 8302
           minimum: 1
           type: integer
         creation_time:
@@ -18250,7 +19266,7 @@ components:
           type: string
         deposit_amount:
           description: Amount deposited in ISO 4217 minor currency units
-          example: 2979
+          example: 6478
           readOnly: true
           type: integer
         deposit_currency:
@@ -18259,12 +19275,12 @@ components:
           type: string
         front_image_id:
           description: ID of the uploaded image of the front of the check
-          example: 350bba5f-27e1-4eec-ad0a-94b322d7fc59
+          example: 2b17b474-9a3f-469c-8bfb-7a0abb555f2b
           format: uuid
           type: string
         id:
           description: Remote Check Deposit ID
-          example: 38ebff87-fb06-44a0-9a06-72f0175dfc62
+          example: 6d8065d7-1220-4df1-a2e6-f2ba88a5d508
           format: uuid
           readOnly: true
           type: string
@@ -18277,10 +19293,27 @@ components:
           description: |
             Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.
           type: object
+        ocr_account_number:
+          description: "Account number of the issuer of the check, included if OCR\
+            \ is successful"
+          example: "123456789"
+          readOnly: true
+          type: string
+        ocr_check_number:
+          description: "The unique check number for this check in the checkbook, included\
+            \ if OCR is successful and there is a check number on the check"
+          example: "001"
+          readOnly: true
+          type: string
+        ocr_routing_number:
+          description: "Routing number of the issuing bank, included if OCR is successful"
+          example: "26009593"
+          readOnly: true
+          type: string
         person_id:
           description: |
             Unique ID for the person. Exactly one of `person_id` or `business_id` must be set.
-          example: 01d40d9d-d25a-4e35-9b92-b9b7442d9140
+          example: 7d1efc8e-1315-458a-8136-b1c5e00da038
           format: uuid
           type: string
         status:
@@ -18294,7 +19327,7 @@ components:
           type: string
         transaction_id:
           description: The ID of the transaction associated with this deposit
-          example: 50f24553-6017-4d36-82b9-43a251ee4358
+          example: 4350bba5-f27e-41ee-86d0-a94b322d7fc5
           format: uuid
           readOnly: true
           type: string
@@ -18315,21 +19348,21 @@ components:
       - vendor_info
       title: Remote Check Deposit
       type: object
-    deposit_feedback:
-      description: Approve or reject deposit transactions
-      properties:
-        feedback:
-          description: The value of the feedback for the deposit transaction
-          enum:
-          - APPROVE
-          - REJECT
-          type: string
-      title: Remote Check Deposit feedback
-      type: object
     deposit_list:
       allOf:
       - $ref: '#/components/schemas/deposit_list_allOf'
       - $ref: '#/components/schemas/paginated_response1'
+    deposit_patch_request:
+      description: Approve or reject deposits
+      properties:
+        status:
+          description: The status of the deposit
+          enum:
+          - SUBMITTED
+          - REJECTED
+          type: string
+      title: Patch Remote Check Deposit
+      type: object
     detail:
       description: An object containing information about an individual check performed.
       properties:
@@ -18651,15 +19684,26 @@ components:
         creation_time: 2021-06-14T11:23:04Z
         related_resource_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         metadata: "{}"
+        available_versions:
+        - 0
+        - 0
+        file_name: file_name
+        is_restricted: true
+        description: description
+        type: null
+        version: 6
         encryption: null
         last_updated_time: 2021-06-14T11:23:04Z
-        file_name: file_name
         name: name
-        description: description
-        id: 2308cb4a-71b1-41a4-bdcf-497b8522850d
+        id: 938ebff8-7fb0-464a-89a0-672f0175dfc6
         related_resource_type: null
-        type: null
+        tenant: abcdef_ghijkl
       properties:
+        available_versions:
+          description: All document versions
+          items:
+            type: integer
+          type: array
         creation_time:
           description: The date and time the resource was created
           example: 2021-06-14T11:23:04Z
@@ -18677,10 +19721,15 @@ components:
           type: string
         id:
           description: The unique identifier for this resource
-          example: 2308cb4a-71b1-41a4-bdcf-497b8522850d
+          example: 938ebff8-7fb0-464a-89a0-672f0175dfc6
           format: uuid
           readOnly: true
           type: string
+        is_restricted:
+          description: whether this document should be restricted (special permissions
+            will be used to access restricted documents)
+          type: boolean
+          x-external: false
         last_updated_time:
           description: The date and time the resource was last updated
           example: 2021-06-14T11:23:04Z
@@ -18700,8 +19749,16 @@ components:
           type: string
         related_resource_type:
           $ref: '#/components/schemas/related_resource_type'
+        tenant:
+          description: |
+            The id of the tenant containing the resource.
+          example: abcdef_ghijkl
+          type: string
         type:
           $ref: '#/components/schemas/document_type'
+        version:
+          description: The document version
+          type: integer
       type: object
     document_creation:
       properties:
@@ -18714,6 +19771,11 @@ components:
           description: The file contents
           format: binary
           type: string
+        is_restricted:
+          description: whether this document should be restricted (special permissions
+            will be used to access restricted documents)
+          type: boolean
+          x-external: false
         metadata:
           $ref: '#/components/schemas/metadata'
         name:
@@ -18725,6 +19787,8 @@ components:
           type: string
         related_resource_type:
           $ref: '#/components/schemas/related_resource_type'
+        tenant:
+          $ref: '#/components/schemas/tenant_id'
         type:
           $ref: '#/components/schemas/document_type'
       required:
@@ -18742,7 +19806,18 @@ components:
       - IDENTITY_DOCUMENTATION
       - STATEMENT_DISCLOSURE
       - TERMS_OF_SERVICE
+      - COMPLIANCE_REPORT
+      - STATEMENT
+      - COMPANY_PROFILE_DOCUMENT
       type: string
+    document_version:
+      description: The document version
+      type: integer
+    document_versions:
+      description: All document versions
+      items:
+        type: integer
+      type: array
     emboss_name:
       description: "The customer details to emboss on the card - Defaults to customer\
         \ first and last name. Is limited to 21 characters. Valid characters are A-Z,\
@@ -18755,7 +19830,7 @@ components:
           type: string
         line_2:
           description: line 2
-          example: Stiedemann Group
+          example: Halvorson Inc
           type: string
       required:
       - line_1
@@ -18854,6 +19929,7 @@ components:
       description: Indicates which environment the workspace belongs to
       enum:
       - SANDBOX
+      - TMINUS10
       - PROD_LITE
       - PROD
       type: string
@@ -19010,6 +20086,7 @@ components:
           - RUNNING
           - SUCCESS
           - RETRYING
+          - FAILED
           type: string
         type:
           $ref: '#/components/schemas/event_type_explicit'
@@ -19105,6 +20182,7 @@ components:
           - RUNNING
           - SUCCESS
           - RETRYING
+          - FAILED
           type: string
         type:
           $ref: '#/components/schemas/event_type_explicit'
@@ -19159,6 +20237,7 @@ components:
       - PAYMENT_SCHEDULE.PAYMENT.CREATED
       - STATEMENT.CREATED
       - EXTERNAL_CARD.CREATED
+      - EXTERNAL_CARD_TRANSFER.CREATED
       - APPLICATION.CREATED
       - APPLICATION.UPDATED
       - CASH_PICKUP.CREATED
@@ -19178,6 +20257,7 @@ components:
       - PAYMENT_SCHEDULE.*
       - STATEMENT.*
       - EXTERNAL_CARD.*
+      - EXTERNAL_CARD_TRANSFER.*
       - APPLICATION.*
       - CASH_PICKUP.*
       type: string
@@ -19674,11 +20754,16 @@ components:
           example: 7d943c51-e4ff-4e57-9558-08cab6b963c7
           format: uuid
           type: string
+        name:
+          description: The cardholder name
+          example: Jean Valjean
+          type: string
         token:
           description: The token that was returned via tokenization iframe
           type: string
       required:
       - customer_id
+      - name
       - token
       type: object
     external_card_response:
@@ -19693,14 +20778,11 @@ components:
         id: id
         customer_id: 7d943c51-e4ff-4e57-9558-08cab6b963c7
         verifications:
-          push_funds_block_indicator: true
+          pull_enabled: true
           cvv2_result: VERIFIED
-          online_gambling_block_indicator: true
+          push_enabled: true
+          address_verification_result: VERIFIED
           state: SUCCEEDED
-          card_type: CREDIT
-          processor: MASTERCARD_V1
-          address_verification_results: VERIFIED
-          fast_funds_indicator: true
       properties:
         created_time:
           example: 2020-01-01T00:00:00Z
@@ -19738,7 +20820,7 @@ components:
           format: date-time
           type: string
         name:
-          description: The external card holder name
+          description: The cardholder name
           example: Jean Valjean
           type: string
         verifications:
@@ -19765,69 +20847,60 @@ components:
       - CARD_SEND_REVERSAL
       type: string
     external_card_verifications:
-      description: "Verify card passed AVS and CVV checks in order to use PULL transfer.\
-        \ Verify card is eligible to receive push-to-card disbursements. For example,\
-        \ the inquiry_details object will contain a push_funds_block_indicator attribute\
-        \ that indicates if it is eligible for push-to-card disbursements."
+      description: Verify card passed AVS and CVV checks and if it able to perform
+        PUSH/PULL transfers.
       example:
-        push_funds_block_indicator: true
+        pull_enabled: true
         cvv2_result: VERIFIED
-        online_gambling_block_indicator: true
+        push_enabled: true
+        address_verification_result: VERIFIED
         state: SUCCEEDED
-        card_type: CREDIT
-        processor: MASTERCARD_V1
-        address_verification_results: VERIFIED
-        fast_funds_indicator: true
       properties:
-        address_verification_results:
+        address_verification_result:
           description: "Address verification results\n\nStatus | Description\n---\
-            \ | ---\nVERIFIED | Address verified\nNOT_VERIFIED | Address not verified\n\
-            ADDRESS_NO_MATCH | Postal/ZIP match, street addresses do not match or\
-            \ street address not included in request\n"
+            \ | ---\nVERIFIED | AVS verified\nNOT_VERIFIED | AVS not verified\nADDRESS_MISMATCH\
+            \ | ZIP code match, address no match\nZIP_MISMATCH | Address match, ZIP\
+            \ code no match\nADDRESS_AND_ZIP_MISMATCH | Address and ZIP code no match\n"
           enum:
           - VERIFIED
           - NOT_VERIFIED
-          - ADDRESS_NO_MATCH
-          type: string
-        card_type:
-          description: "Indicates whether the external card is credit, debit, prepaid,\
-            \ deferred debit, or charge."
-          enum:
-          - CREDIT
-          - DEBIT
-          - CHARGE_PAID
-          - PREPAID
-          - DEFERRED_DEBIT
+          - ADDRESS_MISMATCH
+          - ZIP_MISMATCH
+          - ADDRESS_AND_ZIP_MISMATCH
           type: string
         cvv2_result:
-          description: "Card Verification Value results\n\nStatus | Description\n\
-            --- | ---\nVERIFIED | CVV and expiration dates verified\nINCORRECT | Either\
-            \ CVV or expiration date is incorrect\nNOT_SUPPORTED | \tIssuer does not\
-            \ participate in CVV2 service\n"
+          description: |
+            Card Verification Value results
+
+            Status | Description
+            --- | ---
+            VERIFIED | CVV and expiration date verified
+            NOT_VERIFIED | CVV and expiration date not verified
+            CVV_MISMATCH | Either CVV or expiration date does not match
+            NOT_SUPPORTED | Issuer does not participate in CVV2 service
           enum:
           - VERIFIED
-          - INCORRECT
+          - NOT_VERIFIED
+          - CVV_MISMATCH
           - NOT_SUPPORTED
           type: string
-        fast_funds_indicator:
-          description: "Indicates if card is Fast Funds eligible (i.e. if the funds\
-            \ will settle in 30 mins or less). If not eligible, typically funds will\
-            \ settle within 2 business days."
+        pull_enabled:
+          description: Indicates if the card is able to perform PULL transfers.
           type: boolean
-        online_gambling_block_indicator:
-          description: Indicates if the card can receive push-payments for online
-            gambling payouts.
-          type: boolean
-        processor:
-          $ref: '#/components/schemas/processor'
-        push_funds_block_indicator:
-          description: Indicates if the associated card can receive push-to-card disbursements.
+        push_enabled:
+          description: Indicates if the card is able to perform PUSH transfers.
           type: boolean
         state:
           enum:
           - SUCCEEDED
           - FAILED
           type: string
+      required:
+      - address_verification_result
+      - cvv2_result
+      - pull_enabled
+      - push_enabled
+      - state
       type: object
     external_data:
       description: an unstructured json blob representing additional transaction information
@@ -20109,7 +21182,7 @@ components:
           token_service_provider: token_service_provider
           opaque_payment_card: opaque_payment_card
           user_address:
-            country_code: BO
+            country_code: UM
             city: New York
             address_line_1: 100 Main St.
             address_line_2: Suite 99
@@ -20171,6 +21244,10 @@ components:
       type: object
     hold_create_request:
       properties:
+        account_id:
+          description: "The uuid of the account associated with the hold.\nNote: account_no\
+            \ and account_id are mutually exclusive"
+          type: string
         account_no:
           description: The account number associated with the hold
           type: string
@@ -20223,6 +21300,10 @@ components:
         network:
           description: The network this transaction is associated with
           type: string
+        offset_account_id:
+          description: "The uuid of the account to offset the transaction\nNote: `offset_account_id`\
+            \ and `account_id` are mutually exclusive."
+          type: string
         offset_account_no:
           description: The account number to offset the transaction
           type: string
@@ -20253,7 +21334,6 @@ components:
           nullable: true
           type: object
       required:
-      - account_no
       - allow_partial
       - amount
       - auto_post_at
@@ -20467,12 +21547,6 @@ components:
       format: uuid
       readOnly: true
       type: string
-    id_list_query_schema:
-      example: "64438afd-fa20-4010-a573-2bbdca77cdb6,84ef251c-ab8f-47a5-bbfd-a16648f95157"
-      items:
-        format: uuid
-        type: string
-      type: array
     in_app_provisioning:
       properties:
         address_verification:
@@ -20526,17 +21600,19 @@ components:
       example:
         creation_time: 2021-06-14T11:23:41Z
         account_number: account_number
+        account_type: null
+        purpose: null
+        description: description
+        gl_type: ASSET
         balances:
         - balance: 2399
           type: null
         - balance: 2399
           type: null
         last_updated_time: 2022-01-18T17:54:12Z
-        description: description
         is_system_acc: false
         bank_routing: bank_routing
         currency: USD
-        gl_type: ASSET
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         status: ACTIVE
       properties:
@@ -20546,6 +21622,8 @@ components:
           minLength: 14
           readOnly: true
           type: string
+        account_type:
+          $ref: '#/components/schemas/internal_account_type'
         balances:
           description: A list of balances for internal account based on different
             type
@@ -20589,7 +21667,10 @@ components:
           type: string
         is_system_acc:
           default: false
-          description: Is a system-controlled internal account
+          description: "Is a system-controlled internal account. When this field is\
+            \ true, this internal account will be reserved exclusively for internal\
+            \ use by the Synctera platform and any internal transfers to or from this\
+            \ internal account will be declined."
           type: boolean
         last_updated_time:
           description: The date and time the resource was last updated.
@@ -20597,6 +21678,8 @@ components:
           format: date-time
           readOnly: true
           type: string
+        purpose:
+          $ref: '#/components/schemas/internal_account_purpose'
         status:
           enum:
           - ACTIVE
@@ -20607,10 +21690,41 @@ components:
       type: object
     internal_account_patch:
       properties:
+        account_type:
+          $ref: '#/components/schemas/internal_account_type'
         description:
           description: A user provided description for the current account
           type: string
+        purpose:
+          $ref: '#/components/schemas/internal_account_purpose'
       type: object
+    internal_account_purpose:
+      default: PROFIT_AND_LOSS
+      description: the purpose of the internal account
+      enum:
+      - PROFIT_AND_LOSS
+      - CORE
+      - RESERVE
+      - SETTLEMENT
+      - TREASURY
+      - SUSPENSE
+      type: string
+    internal_account_type:
+      description: type associated with the internal account.
+      enum:
+      - ACH_SETTLEMENT
+      - ACH_SUSPENSE
+      - CARD_SETTLEMENT
+      - INTEREST_PAYOUT
+      - WIRE_SETTLEMENT
+      - WIRE_SUSPENSE
+      - CHECK_SETTLEMENT
+      - CASH_SETTLEMENT
+      - CASH_SUSPENSE
+      - NETWORK_ADJUSTMENT
+      - FEES
+      - REWARDS
+      type: string
     internal_accounts_list:
       allOf:
       - $ref: '#/components/schemas/internal_accounts_list_allOf'
@@ -20692,12 +21806,16 @@ components:
           - ACH_CREDIT_SWEEP
           - ACH_DEBIT_SWEEP
           - ACH_FLOAT_TRANSFER
+          - ACH_SWEEP
           - CASHBACK
           - FEE
           - INCOMING_WIRE
           - INTEREST_PAYOUT
+          - LOAN_DISBURSEMENT
+          - LOAN_FUNDING
           - MANUAL_ADJUSTMENT
           - MANUAL_ADJUSTMENT_REVERSAL
+          - MANUAL_CARD_SWEEP
           - OUTGOING_INTERNATIONAL_REMITTANCE
           - OUTGOING_INTERNATIONAL_REMITTANCE_REVERSAL
           - PROMOTIONAL_CREDIT
@@ -20766,8 +21884,14 @@ components:
       - ACH_DEBIT_SWEEP_REVERSAL
       - ACH_FLOAT_TRANSFER
       - ACH_FLOAT_TRANSFER_REVERSAL
+      - ACH_SWEEP
+      - ACH_SWEEP_REVERSAL
       - CASHBACK
       - CASHBACK_REVERSAL
+      - EXCHANGE_RATE_DIFFERENCE_GAIN
+      - EXCHANGE_RATE_DIFFERENCE_GAIN_REVERSAL
+      - EXCHANGE_RATE_DIFFERENCE_LOSS
+      - EXCHANGE_RATE_DIFFERENCE_LOSS_REVERSAL
       - FEE
       - FEE_REVERSAL
       - INCOMING_WIRE
@@ -20778,10 +21902,16 @@ components:
       - INTEREST_PAYOUT_REVERSAL
       - JIT_FUND
       - JIT_FUND_REVERSAL
+      - LOAN_DISBURSEMENT
+      - LOAN_DISBURSEMENT_REVERSAL
+      - LOAN_FUNDING
+      - LOAN_FUNDING_REVERSAL
       - LOC_USAGE
       - LOC_USAGE_REVERSAL
       - MANUAL_ADJUSTMENT
       - MANUAL_ADJUSTMENT_REVERSAL
+      - MANUAL_CARD_SWEEP
+      - MANUAL_CARD_SWEEP_REVERSAL
       - OUTGOING_INTERNATIONAL_REMITTANCE
       - OUTGOING_INTERNATIONAL_REMITTANCE_REVERSAL
       - PROGRAM_DECREASE
@@ -20801,8 +21931,8 @@ components:
       - TRANSFER_FEE_REVERSAL_REVERSAL
       type: string
     is_customer:
-      description: True for personal and business customers with a direct relationship
-        with the fintech or bank.
+      description: |
+        True for personal and business customers with a direct relationship with the fintech or bank. Set this to true for any customer related to an account.
       example: true
       type: boolean
     manual_account_verification:
@@ -20831,6 +21961,41 @@ components:
       allOf:
       - $ref: '#/components/schemas/master_disclosure_list_allOf'
       - $ref: '#/components/schemas/paginated_response'
+    merchant:
+      description: "Merchant descriptor information that will be shown on statement\
+        \ and transaction details. If not provided, FinTech information will be used."
+      example:
+        address:
+          country_code: UM
+          city: New York
+          address_line_1: 100 Main St.
+          address_line_2: Suite 99
+          state: NY
+          postal_code: "49633"
+        name: name
+        phone_number: +14374570680
+        email: alice@example.com
+      properties:
+        address:
+          $ref: '#/components/schemas/address1'
+        email:
+          description: Merchant's email
+          example: alice@example.com
+          type: string
+        name:
+          description: Merchant's name
+          type: string
+        phone_number:
+          description: Merchant's phone number with country code in E.164 format.
+            Must have a valid country code. Area code and local phone number are not
+            validated.
+          example: +14374570680
+          pattern: "^\\+[1-9]\\d{1,14}$"
+          type: string
+      required:
+      - address
+      - name
+      type: object
     metadata:
       description: |
         Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.
@@ -21290,7 +22455,7 @@ components:
         source_account_name: Thomas Anderson
         is_same_day: true
         memo: memo
-        external_id: 9061cf1b-4720-466b-b4b2-491b33fd182c
+        external_id: f2455360-17d3-4682-b943-a251ee435823
         trace_no: "123456780000069"
         account_no: "122455799"
         hold:
@@ -21301,7 +22466,7 @@ components:
         account_name: Bruce Wayne
         effective_date: 2022-03-25T00:00:00.000+00:00
         reference_info: reference_info
-        id: f0b50d4f-2f92-49bb-b6d9-95a2e06d83ab
+        id: 08cb4a71-b11a-443d-8f49-7b8522850d4d
         status: INIT
       properties:
         account_name:
@@ -21326,13 +22491,13 @@ components:
           type: string
         external_id:
           description: Transaction ID in the ledger
-          example: 9061cf1b-4720-466b-b4b2-491b33fd182c
+          example: f2455360-17d3-4682-b943-a251ee435823
           format: uuid
           type: string
         hold:
           $ref: '#/components/schemas/hold_data'
         id:
-          example: f0b50d4f-2f92-49bb-b6d9-95a2e06d83ab
+          example: 08cb4a71-b11a-443d-8f49-7b8522850d4d
           format: uuid
           type: string
         is_same_day:
@@ -21415,7 +22580,7 @@ components:
           type: string
         customer_id:
           description: The customer's unique identifier
-          example: 58b33b89-6294-4141-9ee6-2c0b200c7b43
+          example: e9061cf1-b472-4066-bf4b-2491b33fd182
           format: uuid
           type: string
         dc_sign:
@@ -21443,7 +22608,7 @@ components:
         hold:
           $ref: '#/components/schemas/ach_request_hold_data'
         id:
-          example: 110c3f47-9370-4103-9ed8-6917767f50b9
+          example: cf0b50d4-f2f9-429b-bb6d-995a2e06d83a
           format: uuid
           readOnly: true
           type: string
@@ -21456,12 +22621,12 @@ components:
           type: string
         originating_account_id:
           description: The unique identifier for an originating account
-          example: 75ed1c0e-d7d1-4efc-8e13-1558a4136b1c
+          example: b58b33b8-9629-4414-91ee-62c0b200c7b4
           format: uuid
           type: string
         receiving_account_id:
           description: The unique identifier for an receiving account
-          example: 5e00da03-86ae-45b4-ab75-858f5a312723
+          example: 3110c3f4-7937-4010-bded-86917767f50b
           format: uuid
           type: string
         reference_info:
@@ -21494,7 +22659,7 @@ components:
         next_page_token:
           description: "If returned, use the next_page_token to query for the next\
             \ page of results. Not returned if there are no more rows."
-          example: d4tcstrp6s
+          example: kgbvt4s0vu
           type: string
       title: Paginated List response
       type: object
@@ -21864,6 +23029,26 @@ components:
       - COMPLETED
       - ERROR
       type: string
+    payment_type:
+      description: "The type of payment to which a spend control applies.\nIf this\
+        \ is not set, the spend control applies to all spending, regardless of payment\
+        \ type.\n"
+      enum:
+      - CARD
+      - ACH
+      - CHECK
+      - INTERNAL_TRANSFER
+      - WIRE
+      - CASH
+      - EXTERNAL_CARD
+      type: string
+    payment_type_list:
+      description: "A list of payment types to which a spend control will apply, if\
+        \ set. If not set or the array is empty, then the spend control will apply\
+        \ to all types of payments."
+      items:
+        $ref: '#/components/schemas/payment_type'
+      type: array
     pending_transaction:
       example:
         account_id: 7d943c51-e4ff-4e57-9558-08cab6b963c7
@@ -22855,7 +24040,7 @@ components:
     person_id1:
       description: |
         Unique ID for the person. Exactly one of `person_id` or `business_id` must be set.
-      example: 01d40d9d-d25a-4e35-9b92-b9b7442d9140
+      example: 7d1efc8e-1315-458a-8136-b1c5e00da038
       format: uuid
       type: string
     person_list:
@@ -23196,6 +24381,13 @@ components:
       - memo
       - metadata
       type: object
+    posted_transaction_reverse_request:
+      properties:
+        reason:
+          description: The reason for the reversal
+          type: string
+      title: Posted Transaction Reverse Request
+      type: object
     posted_transactions:
       example:
         result:
@@ -23362,13 +24554,6 @@ components:
           description: Last four digits of person's Social Security number (SSN).
           example: "4271"
           type: string
-    processor:
-      description: The transaction processor
-      enum:
-      - VISA_V1
-      - MASTERCARD_V1
-      example: MASTERCARD_V1
-      type: string
     prospect:
       allOf:
       - $ref: '#/components/schemas/customer_allOf'
@@ -23449,7 +24634,7 @@ components:
         token_service_provider: token_service_provider
         opaque_payment_card: opaque_payment_card
         user_address:
-          country_code: BO
+          country_code: UM
           city: New York
           address_line_1: 100 Main St.
           address_line_2: Suite 99
@@ -23619,6 +24804,7 @@ components:
       enum:
       - CUSTOMER
       - BUSINESS
+      - ACCOUNT
       type: string
     related_resource_type1:
       description: "Type of the resource associated with the note. \n"
@@ -23629,6 +24815,7 @@ components:
       - TENANT
       - TRANSACTION
       - USER
+      - SNAPSHOT
       example: CUSTOMER
       type: string
     relationship:
@@ -23966,7 +25153,7 @@ components:
           type: string
         phone_number:
           description: The phone number of the recipient
-          example: "8685350351"
+          example: "35359362014"
           pattern: "^\\+[1-9]\\d{1,14}$"
           type: string
         recipient_name:
@@ -24094,6 +25281,83 @@ components:
       required:
       - referenceId
       type: object
+    spend_control:
+      properties:
+        action_case:
+          description: "If set, create a case for transactions that do not conform\
+            \ to the spend control"
+          type: boolean
+        action_decline:
+          description: "If set, decline transactions that do not conform to the spend\
+            \ control"
+          type: boolean
+        amount_limit:
+          description: Monetary limit for the spend control in the smallest currency
+            unit (eg cents)
+          exclusiveMinimum: true
+          format: int64
+          minimum: 0
+          type: integer
+        creation_time:
+          description: The timestamp representing when the spend control was created
+          example: 2022-03-24T12:59:06.756Z
+          format: date-time
+          readOnly: true
+          type: string
+        direction:
+          $ref: '#/components/schemas/spend_control_direction'
+        id:
+          description: Spend Control ID
+          example: 7d943c51-e4ff-4e57-9558-08cab6b963c7
+          format: uuid
+          readOnly: true
+          type: string
+        is_active:
+          description: Indicates if spend control is active
+          example: true
+          type: boolean
+        last_modified_time:
+          description: The timestamp representing when the spend control was last
+            modified
+          example: 2022-03-24T12:59:06.756Z
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: Name assigned to spend control
+          type: string
+        payment_types:
+          description: "A list of payment types to which a spend control will apply,\
+            \ if set. If not set or the array is empty, then the spend control will\
+            \ apply to all types of payments."
+          items:
+            $ref: '#/components/schemas/payment_type'
+          type: array
+        time_range:
+          $ref: '#/components/schemas/spend_control_time_range'
+      required:
+      - action_case
+      - action_decline
+      - amount_limit
+      - is_active
+      - name
+      - time_range
+      title: Spend Control
+      type: object
+    spend_control_direction:
+      description: "The direction of funds flow to which a spend control applies.\
+        \ To limit the rate of funds flowing out of an\naccount, use DEBIT. To limit\
+        \ the rate of funds flowing in to an account, use CREDIT.\nIf this is not\
+        \ set, the spend control applies to debits (ie spending) only.\n"
+      enum:
+      - DEBITS
+      - CREDITS
+      type: string
+    spend_control_id:
+      description: The unique identifier of a spending control
+      example: 7d943c51-e4ff-4e57-9558-08cab6b963c7
+      format: uuid
+      type: string
     spend_control_ids:
       description: List of spend control IDs to control spending for the account
       items:
@@ -24102,6 +25366,84 @@ components:
         type: string
       maxItems: 10
       type: array
+    spend_control_response:
+      allOf:
+      - $ref: '#/components/schemas/spend_control'
+      - $ref: '#/components/schemas/spend_control_response_allOf'
+      required:
+      - action_case
+      - action_decline
+      - amount_limit
+      - creation_time
+      - id
+      - is_active
+      - last_modified_time
+      - name
+      - number_of_related_accounts
+      - time_range
+    spend_control_response_list:
+      allOf:
+      - $ref: '#/components/schemas/spend_control_response_list_allOf'
+      - $ref: '#/components/schemas/paginated_response'
+    spend_control_rolling_window_days:
+      allOf:
+      - $ref: '#/components/schemas/spend_control_time_range_type'
+      - $ref: '#/components/schemas/spend_control_rolling_window_days_allOf'
+    spend_control_time_range:
+      description: The time range to which the spend control applies
+      discriminator:
+        mapping:
+          ROLLING_WINDOW_DAYS: '#/components/schemas/spend_control_rolling_window_days'
+        propertyName: time_range_type
+      oneOf:
+      - $ref: '#/components/schemas/spend_control_rolling_window_days'
+      type: object
+    spend_control_time_range_type:
+      properties:
+        time_range_type:
+          enum:
+          - ROLLING_WINDOW_DAYS
+          type: string
+      required:
+      - time_range_type
+      type: object
+    spend_control_update_request:
+      additionalProperties: false
+      properties:
+        action_case:
+          description: "If set, create a case for transactions that do not conform\
+            \ to the spend control"
+          type: boolean
+        action_decline:
+          description: "If set, decline transactions that do not conform to the spend\
+            \ control"
+          type: boolean
+        amount_limit:
+          description: Monetary limit for the spend control in the smallest currency
+            unit (eg cents)
+          exclusiveMinimum: true
+          format: int64
+          minimum: 0
+          type: integer
+        direction:
+          $ref: '#/components/schemas/spend_control_direction'
+        is_active:
+          description: Indicates if spend control is active
+          example: true
+          type: boolean
+        name:
+          description: Name assigned to spend control
+          type: string
+        payment_types:
+          description: "A list of payment types to which a spend control will apply,\
+            \ if set. If not set or the array is empty, then the spend control will\
+            \ apply to all types of payments."
+          items:
+            $ref: '#/components/schemas/payment_type'
+          type: array
+        time_range:
+          $ref: '#/components/schemas/spend_control_time_range'
+      type: object
     spending_limit_with_time:
       description: Limit over a specific time period.
       example:
@@ -24429,9 +25771,8 @@ components:
       - $ref: '#/components/schemas/template_list_allOf'
       - $ref: '#/components/schemas/paginated_response'
     tenant_id:
-      description: "The id tenant containing the resource.\nTenancy is represented\
-        \ as <bank_id>_<partner_id>.\nThis attribute is included on all responses.\n\
-        In requests, it is optional for clients with access to only a single tenant.\n"
+      description: |
+        The id of the tenant containing the resource.
       example: abcdef_ghijkl
       type: string
     tenant_id1:
@@ -24439,14 +25780,6 @@ components:
         \ bank_id_partner_id.\nThis attribute is included on all responses.\nFor requests,\
         \ it is optional for clients with access to a single tenant.\n"
       example: abcdef_ghijkl
-      type: string
-    tenant_read_only:
-      description: |
-        The tenant containing the resource.
-        Tenancy is represented as bank_id_partner_id.
-        This attribute is included on all responses.
-      example: abcdef_ghijkl
-      readOnly: true
       type: string
     token_list:
       properties:
@@ -24532,6 +25865,10 @@ components:
       properties:
         account_alias:
           type: string
+        account_id:
+          description: "The uuid of the account to post against\nNote: `account_no`,\
+            \ `account_id`, and `account_alias` are mutually exclusive."
+          type: string
         account_no:
           description: The account number associated with the transaction
           type: string
@@ -24609,8 +25946,6 @@ components:
           format: uuid
           type: string
       required:
-      - account_alias
-      - account_no
       - amount
       - currency
       - dc_sign
@@ -24629,7 +25964,7 @@ components:
       properties:
         account_id:
           description: The account uuid associated with this transaction line
-          example: 5c9ffe84-ac55-418a-8683-2ddcacaa4e0e
+          example: 7d943c51-e4ff-4e57-9558-08cab6b963c7
           type: string
         account_no:
           description: The account number associated with this transaction line
@@ -24794,35 +26129,6 @@ components:
           format: int64
           type: integer
       type: object
-    transaction_reverse_request:
-      properties:
-        description:
-          description: The description of the transaction
-          type: string
-        force_post:
-          description: Whether or not the hold was forced (spending controls ignored)
-          type: boolean
-        offset_description:
-          description: The description of the offset transaction
-          type: string
-        reason:
-          description: The reason for the reversal
-          type: string
-        reference_id:
-          description: An external ID provided by the payment network to represent
-            this transaction. This will always be null for internal transfers.
-          type: string
-        user_data:
-          description: An unstructured JSON blob representing additional transaction
-            information specific to each payment rail.
-          nullable: true
-          type: object
-      required:
-      - force_post
-      - reason
-      - reference_id
-      title: Transaction Reverse Request
-      type: object
     transaction_update_meta_request:
       properties:
         external_data:
@@ -24877,13 +26183,15 @@ components:
           example: 7d943c51-e4ff-4e57-9558-08cab6b963c7
           format: uuid
           type: string
+        merchant:
+          $ref: '#/components/schemas/merchant'
         originating_account_id:
           description: The ID of the account to which the transfer will be initiated/received
           example: 7d943c51-e4ff-4e57-9558-08cab6b963c7
           format: uuid
           type: string
         type:
-          $ref: '#/components/schemas/transfer_type'
+          $ref: '#/components/schemas/transfer_type_request'
       required:
       - amount
       - currency
@@ -24899,6 +26207,17 @@ components:
         amount: 0
         account_id: 7d943c51-e4ff-4e57-9558-08cab6b963c7
         last_modified_time: 2020-01-01T00:00:00Z
+        merchant:
+          address:
+            country_code: UM
+            city: New York
+            address_line_1: 100 Main St.
+            address_line_2: Suite 99
+            state: NY
+            postal_code: "49633"
+          name: name
+          phone_number: +14374570680
+          email: alice@example.com
         currency: USD
         id: id
         customer_id: 7d943c51-e4ff-4e57-9558-08cab6b963c7
@@ -24939,12 +26258,16 @@ components:
           example: 2020-01-01T00:00:00Z
           format: date-time
           type: string
+        merchant:
+          $ref: '#/components/schemas/merchant'
         status:
           description: The status of the transfer
           enum:
           - SUCCEEDED
           - PENDING
-          - FAILED
+          - DECLINED
+          - CANCELED
+          - UNKNOWN
           type: string
         transaction_id:
           description: The transaction ID
@@ -24961,6 +26284,7 @@ components:
       - customer_id
       - id
       - last_modified_time
+      - merchant
       - status
       - type
       type: object
@@ -24994,6 +26318,19 @@ components:
       - PULL
       - PUSH
       - PULL_REVERSAL
+      example: PULL
+      type: string
+    transfer_type_request:
+      description: |
+        Type of operation for transfer.
+
+        Type | Description
+        --- | ---
+        PUSH | Push fund to the external card from the account_id
+        PULL | Pull funds from the external card to the account_id.
+      enum:
+      - PULL
+      - PUSH
       example: PULL
       type: string
     txn_enhancer:
@@ -25048,6 +26385,25 @@ components:
           example: CANCELED
           type: string
       title: Change Status
+      type: object
+    uprev_document:
+      properties:
+        description:
+          description: A description of the attached document
+          type: string
+        encryption:
+          $ref: '#/components/schemas/encryption'
+        file:
+          description: The file contents
+          format: binary
+          type: string
+        name:
+          description: A user-friendly name for the document
+          type: string
+        type:
+          $ref: '#/components/schemas/document_type'
+      required:
+      - file
       type: object
     user_data:
       description: An unstructured JSON blob representing additional transaction information
@@ -25140,14 +26496,16 @@ components:
       type: object
     verification_result:
       description: "The determination of this verification. One of the following:\n\
-        * `PENDING` – verification is in progress for this customer.\n* `PROVISIONAL`\
-        \ – partially verified or verified with restrictions.\n* `ACCEPTED` – the\
-        \ customer has been verified.\n* `REVIEW` – verification has run and issues\
-        \ have been identified and require review.\n* `VENDOR_ERROR` – verification\
-        \ did not successfully run due to an unexpected error or failure.\n* `REJECTED`\
-        \ – the customer was rejected and should not be allowed to take certain actions\
-        \ e.g., open an account.\n"
+        * `UNVERIFIED` – record representing the absence of a verification.\n* `PENDING`\
+        \ – verification is in progress for this customer.\n* `PROVISIONAL` – partially\
+        \ verified or verified with restrictions.\n* `ACCEPTED` – the customer has\
+        \ been verified.\n* `REVIEW` – verification has run and issues have been identified\
+        \ and require review.\n* `VENDOR_ERROR` – verification did not successfully\
+        \ run due to an unexpected error or failure.\n* `REJECTED` – the customer\
+        \ was rejected and should not be allowed to take certain actions e.g., open\
+        \ an account.\n"
       enum:
+      - UNVERIFIED
       - PENDING
       - PROVISIONAL
       - ACCEPTED
@@ -25718,6 +27076,7 @@ components:
           - RUNNING
           - SUCCESS
           - RETRYING
+          - FAILED
           type: string
         type:
           $ref: '#/components/schemas/event_type_explicit'
@@ -25755,15 +27114,15 @@ components:
         creation_time: 2000-01-23T04:56:07.000+00:00
         transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         amount: 10000
-        originating_account_id: a6834d33-2510-4afa-a6ea-b0cf8872942f
-        receiving_account_id: e82d504f-2f05-4082-9285-8cc89a467e86
+        originating_account_id: b9b7442d-9140-4a07-aece-711dac858068
+        receiving_account_id: 15c9ffe8-4ac5-4518-a468-32ddcacaa4e0
         bank_message: bank_message
         sender_reference_id: 9F564A6124E65
         last_updated_time: 2000-01-23T04:56:07.000+00:00
         recipient_message: recipient_message
         currency: USD
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        customer_id: 4652ee9f-5ef7-4f1b-bd7e-172aad5e2302
+        customer_id: 2352d5cd-cb2c-401d-80d9-dd25ae35db92
         status: PENDING
       properties:
         amount:
@@ -25785,7 +27144,7 @@ components:
         customer_id:
           description: The customer UUID representing the person initiating the Wire
             transfer
-          example: 4652ee9f-5ef7-4f1b-bd7e-172aad5e2302
+          example: 2352d5cd-cb2c-401d-80d9-dd25ae35db92
           format: uuid
           type: string
         id:
@@ -25799,13 +27158,13 @@ components:
           type: string
         originating_account_id:
           description: Sender account ID
-          example: a6834d33-2510-4afa-a6ea-b0cf8872942f
+          example: b9b7442d-9140-4a07-aece-711dac858068
           format: uuid
           type: string
         receiving_account_id:
           description: The external account uuid representing the recipient of the
             wire.
-          example: e82d504f-2f05-4082-9285-8cc89a467e86
+          example: 15c9ffe8-4ac5-4518-a468-32ddcacaa4e0
           format: uuid
           type: string
         recipient_message:
@@ -25870,7 +27229,7 @@ components:
         customer_id:
           description: The customer UUID representing the person initiating the Wire
             transfer
-          example: 8281b015-d958-430a-b12e-b1b7767fe7dc
+          example: e4652ee9-f5ef-47f1-b7d7-e172aad5e230
           format: uuid
           type: string
         metadata:
@@ -25878,13 +27237,13 @@ components:
           type: object
         originating_account_id:
           description: Sender account ID
-          example: d3d505cf-c439-42bb-be83-050653b5afba
+          example: 2a6834d3-3251-40af-ae6e-ab0cf8872942
           format: uuid
           type: string
         receiving_account_id:
           description: The external account uuid representing the recipient of the
             wire.
-          example: 5e95eef3-8194-4142-86d6-11b0cb707c39
+          example: fe82d504-f2f0-4508-a528-58cc89a467e8
           format: uuid
           type: string
         recipient_message:
@@ -25992,9 +27351,8 @@ components:
             intended to be presented first within its environment.
           type: integer
         tenant:
-          description: "The id tenant containing the resource.\nTenancy is represented\
-            \ as <bank_id>_<partner_id>.\nThis attribute is included on all responses.\n\
-            In requests, it is optional for clients with access to only a single tenant.\n"
+          description: |
+            The id of the tenant containing the resource.
           example: abcdef_ghijkl
           type: string
         verification_status:
@@ -26253,7 +27611,7 @@ components:
         is_pin_set:
           default: false
           description: indicates whether a pin has been set on the card
-          example: true
+          example: false
           readOnly: true
           type: boolean
         last_four:
@@ -27353,7 +28711,7 @@ components:
           type: string
         referred_by_code:
           description: Referral code of the referrer
-          example: o1hwxtvh
+          example: fowdp9fp
           type: string
         referred_prospects:
           description: Number of people this prospect referred
@@ -27437,6 +28795,35 @@ components:
             type: string
           type: array
       type: object
+    spend_control_response_allOf:
+      properties:
+        number_of_related_accounts:
+          description: A count of how many accounts are using this spend control
+          minimum: 0
+          type: integer
+      required:
+      - number_of_related_accounts
+      type: object
+    spend_control_response_list_allOf:
+      properties:
+        spend_controls:
+          description: Array of Spend Controls
+          items:
+            $ref: '#/components/schemas/spend_control_response'
+          type: array
+      required:
+      - spend_controls
+      type: object
+    spend_control_rolling_window_days_allOf:
+      properties:
+        days:
+          description: The number of days to define a rolling window for a spend control
+          maximum: 31
+          type: integer
+      required:
+      - days
+      - time_range_type
+      type: object
     spending_limits_transaction:
       description: Individual transaction limit
       example:
@@ -27478,9 +28865,9 @@ components:
           minimum: 0
           type: integer
         grace_period:
+          default: 30
           description: |
             The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.
-          example: 25
           minimum: 0
           type: integer
         interest_product_id:
@@ -27558,9 +28945,9 @@ components:
           minimum: 0
           type: integer
         grace_period:
+          default: 30
           description: |
             The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.
-          example: 25
           minimum: 0
           type: integer
         interest_product_id:

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **PartnerId** | **int32** | Partner ID | 
 **PartnerName** | **string** | Last Name | 
 **Rank** | **int32** | Each workspace has a rank. The highest-ranked (lowest numerical value) workspace is intended to be presented first within its environment.  | 
-**Tenant** | Pointer to **string** | The id tenant containing the resource. Tenancy is represented as &lt;bank_id&gt;_&lt;partner_id&gt;. This attribute is included on all responses. In requests, it is optional for clients with access to only a single tenant.  | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
 **VerificationStatus** | **string** |  | 
 
 ## Methods

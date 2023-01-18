@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountNumber** | Pointer to **string** | Generated internal account number | [optional] [readonly] 
+**AccountType** | Pointer to [**InternalAccountType**](InternalAccountType.md) |  | [optional] 
 **Balances** | Pointer to [**[]Balance**](Balance.md) | A list of balances for internal account based on different type | [optional] [readonly] 
 **BankRouting** | Pointer to **string** | Bank routing number | [optional] [readonly] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
@@ -12,8 +13,9 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | A user provided description for the current account | [optional] 
 **GlType** | Pointer to **string** | What type of general ledger account this internal account represents.  | [optional] 
 **Id** | Pointer to **string** | Generated ID for internal account | [optional] [readonly] 
-**IsSystemAcc** | Pointer to **bool** | Is a system-controlled internal account | [optional] [default to false]
+**IsSystemAcc** | Pointer to **bool** | Is a system-controlled internal account. When this field is true, this internal account will be reserved exclusively for internal use by the Synctera platform and any internal transfers to or from this internal account will be declined. | [optional] [default to false]
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
+**Purpose** | Pointer to [**InternalAccountPurpose**](InternalAccountPurpose.md) |  | [optional] [default to INTERNALACCOUNTPURPOSE_PROFIT_AND_LOSS]
 **Status** | **string** |  | 
 
 ## Methods
@@ -59,6 +61,31 @@ SetAccountNumber sets AccountNumber field to given value.
 `func (o *InternalAccount) HasAccountNumber() bool`
 
 HasAccountNumber returns a boolean if a field has been set.
+
+### GetAccountType
+
+`func (o *InternalAccount) GetAccountType() InternalAccountType`
+
+GetAccountType returns the AccountType field if non-nil, zero value otherwise.
+
+### GetAccountTypeOk
+
+`func (o *InternalAccount) GetAccountTypeOk() (*InternalAccountType, bool)`
+
+GetAccountTypeOk returns a tuple with the AccountType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountType
+
+`func (o *InternalAccount) SetAccountType(v InternalAccountType)`
+
+SetAccountType sets AccountType field to given value.
+
+### HasAccountType
+
+`func (o *InternalAccount) HasAccountType() bool`
+
+HasAccountType returns a boolean if a field has been set.
 
 ### GetBalances
 
@@ -279,6 +306,31 @@ SetLastUpdatedTime sets LastUpdatedTime field to given value.
 `func (o *InternalAccount) HasLastUpdatedTime() bool`
 
 HasLastUpdatedTime returns a boolean if a field has been set.
+
+### GetPurpose
+
+`func (o *InternalAccount) GetPurpose() InternalAccountPurpose`
+
+GetPurpose returns the Purpose field if non-nil, zero value otherwise.
+
+### GetPurposeOk
+
+`func (o *InternalAccount) GetPurposeOk() (*InternalAccountPurpose, bool)`
+
+GetPurposeOk returns a tuple with the Purpose field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPurpose
+
+`func (o *InternalAccount) SetPurpose(v InternalAccountPurpose)`
+
+SetPurpose sets Purpose field to given value.
+
+### HasPurpose
+
+`func (o *InternalAccount) HasPurpose() bool`
+
+HasPurpose returns a boolean if a field has been set.
 
 ### GetStatus
 

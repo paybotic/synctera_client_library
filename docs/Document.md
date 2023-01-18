@@ -4,17 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AvailableVersions** | Pointer to **[]int32** | All document versions | [optional] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created | [optional] [readonly] 
 **Description** | Pointer to **string** | A description of the document | [optional] 
 **Encryption** | Pointer to [**Encryption**](Encryption.md) |  | [optional] [default to ENCRYPTION_NOT_REQUIRED]
 **FileName** | Pointer to **string** | The name of the document | [optional] [readonly] 
 **Id** | Pointer to **string** | The unique identifier for this resource | [optional] [readonly] 
+**IsRestricted** | Pointer to **bool** | whether this document should be restricted (special permissions will be used to access restricted documents) | [optional] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 
 **Name** | Pointer to **string** | A user-friendly name for the document | [optional] 
 **RelatedResourceId** | Pointer to **string** | The ID of the resource related to the document | [optional] 
 **RelatedResourceType** | Pointer to [**RelatedResourceType**](RelatedResourceType.md) |  | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
 **Type** | Pointer to [**DocumentType**](DocumentType.md) |  | [optional] 
+**Version** | Pointer to **int32** | The document version | [optional] 
 
 ## Methods
 
@@ -34,6 +38,31 @@ will change when the set of required properties is changed
 NewDocumentWithDefaults instantiates a new Document object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAvailableVersions
+
+`func (o *Document) GetAvailableVersions() []int32`
+
+GetAvailableVersions returns the AvailableVersions field if non-nil, zero value otherwise.
+
+### GetAvailableVersionsOk
+
+`func (o *Document) GetAvailableVersionsOk() (*[]int32, bool)`
+
+GetAvailableVersionsOk returns a tuple with the AvailableVersions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailableVersions
+
+`func (o *Document) SetAvailableVersions(v []int32)`
+
+SetAvailableVersions sets AvailableVersions field to given value.
+
+### HasAvailableVersions
+
+`func (o *Document) HasAvailableVersions() bool`
+
+HasAvailableVersions returns a boolean if a field has been set.
 
 ### GetCreationTime
 
@@ -160,6 +189,31 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
+### GetIsRestricted
+
+`func (o *Document) GetIsRestricted() bool`
+
+GetIsRestricted returns the IsRestricted field if non-nil, zero value otherwise.
+
+### GetIsRestrictedOk
+
+`func (o *Document) GetIsRestrictedOk() (*bool, bool)`
+
+GetIsRestrictedOk returns a tuple with the IsRestricted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsRestricted
+
+`func (o *Document) SetIsRestricted(v bool)`
+
+SetIsRestricted sets IsRestricted field to given value.
+
+### HasIsRestricted
+
+`func (o *Document) HasIsRestricted() bool`
+
+HasIsRestricted returns a boolean if a field has been set.
+
 ### GetLastUpdatedTime
 
 `func (o *Document) GetLastUpdatedTime() time.Time`
@@ -285,6 +339,31 @@ SetRelatedResourceType sets RelatedResourceType field to given value.
 
 HasRelatedResourceType returns a boolean if a field has been set.
 
+### GetTenant
+
+`func (o *Document) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *Document) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *Document) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *Document) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
+
 ### GetType
 
 `func (o *Document) GetType() DocumentType`
@@ -309,6 +388,31 @@ SetType sets Type field to given value.
 `func (o *Document) HasType() bool`
 
 HasType returns a boolean if a field has been set.
+
+### GetVersion
+
+`func (o *Document) GetVersion() int32`
+
+GetVersion returns the Version field if non-nil, zero value otherwise.
+
+### GetVersionOk
+
+`func (o *Document) GetVersionOk() (*int32, bool)`
+
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersion
+
+`func (o *Document) SetVersion(v int32)`
+
+SetVersion sets Version field to given value.
+
+### HasVersion
+
+`func (o *Document) HasVersion() bool`
+
+HasVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

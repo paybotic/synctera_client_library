@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **IsRefund** | Pointer to **bool** |  | [optional] [default to false]
 **Mid** | Pointer to **string** |  | [optional] 
 **NetworkFees** | Pointer to [**[]NetworkFeeModel**](NetworkFeeModel.md) |  | [optional] 
-**OriginalTransactionId** | **string** |  | 
+**OriginalTransactionId** | **string** | When you simulated a clearing the synchronous response would have included a &#x60;transaction.token&#x60;. That value should be used here. | 
 
 ## Methods
 

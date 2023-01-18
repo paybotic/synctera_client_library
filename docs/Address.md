@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AddressLine1** | **string** | Street address line 1 | 
-**AddressLine2** | Pointer to **string** | String address line 2 | [optional] 
+**AddressLine2** | Pointer to **string** | Street address line 2 | [optional] 
 **City** | Pointer to **string** | City | [optional] 
 **CountryCode** | **string** | ISO-3166-1 Alpha-2 country code | 
 **PostalCode** | Pointer to **string** | Postal code | [optional] 

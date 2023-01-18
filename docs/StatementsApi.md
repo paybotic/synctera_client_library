@@ -30,7 +30,7 @@ import (
 )
 
 func main() {
-    statementId := "3fa12d3f-6436-482c-a8a1-d65e9761dc2d" // string | The unique identifier of a statement
+    statementId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | The unique identifier of a statement
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -100,7 +100,7 @@ import (
 )
 
 func main() {
-    accountId := "e4b92656-ef1e-41f5-a85f-af09346611c0" // string | The account's unique identifier provided by Synctera
+    accountId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | The account's unique identifier provided by Synctera
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

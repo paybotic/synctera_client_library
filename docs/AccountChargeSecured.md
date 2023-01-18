@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **Nickname** | Pointer to **string** | User provided account nickname | [optional] 
 **Status** | Pointer to [**Status**](Status.md) |  | [optional] 
 **SwiftCode** | Pointer to **string** | SWIFT code | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
 **Security** | Pointer to [**Security**](Security.md) |  | [optional] 
 
 ## Methods
@@ -674,6 +675,31 @@ SetSwiftCode sets SwiftCode field to given value.
 `func (o *AccountChargeSecured) HasSwiftCode() bool`
 
 HasSwiftCode returns a boolean if a field has been set.
+
+### GetTenant
+
+`func (o *AccountChargeSecured) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *AccountChargeSecured) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *AccountChargeSecured) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *AccountChargeSecured) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetSecurity
 

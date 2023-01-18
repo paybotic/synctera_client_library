@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **SpendingLimits** | Pointer to [**SpendingLimits**](SpendingLimits.md) |  | [optional] 
 **ChargeoffPeriod** | Pointer to **int32** | The number of days an account can stay delinquent before marking an account as charged-off.  | [optional] [default to 90]
 **DelinquencyPeriod** | Pointer to **int32** | The number of days past the due date to wait for a minimum payment before marking an account as delinquent.  | [optional] [default to 30]
-**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] 
+**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] [default to 30]
 **MinimumPayment** | [**MinimumPaymentFull**](MinimumPaymentFull.md) |  | 
 
 ## Methods

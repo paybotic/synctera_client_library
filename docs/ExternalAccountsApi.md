@@ -575,7 +575,7 @@ Name | Type | Description  | Notes
 
 ## ListExternalAccounts
 
-> ExternalAccountsList ListExternalAccounts(ctx).CustomerId(customerId).BusinessId(businessId).Limit(limit).PageToken(pageToken).Execute()
+> ExternalAccountsList ListExternalAccounts(ctx).CustomerId(customerId).BusinessId(businessId).Limit(limit).PageToken(pageToken).IncludeHistory(includeHistory).Execute()
 
 List external accounts
 
@@ -598,10 +598,11 @@ func main() {
     businessId := []string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"} // []string | A list of business unique identifiers, with a comma separating any values. (optional)
     limit := int32(100) // int32 |  (optional) (default to 100)
     pageToken := "a8937a0d" // string |  (optional)
+    includeHistory := true // bool | If true, include old (inactive) records as well. (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ExternalAccountsApi.ListExternalAccounts(context.Background()).CustomerId(customerId).BusinessId(businessId).Limit(limit).PageToken(pageToken).Execute()
+    resp, r, err := apiClient.ExternalAccountsApi.ListExternalAccounts(context.Background()).CustomerId(customerId).BusinessId(businessId).Limit(limit).PageToken(pageToken).IncludeHistory(includeHistory).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ExternalAccountsApi.ListExternalAccounts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -626,6 +627,7 @@ Name | Type | Description  | Notes
  **businessId** | **[]string** | A list of business unique identifiers, with a comma separating any values. | 
  **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
+ **includeHistory** | **bool** | If true, include old (inactive) records as well. | [default to false]
 
 ### Return type
 

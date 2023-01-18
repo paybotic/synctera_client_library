@@ -245,7 +245,7 @@ func main() {
     fromPersonId := []string{"Inner_example"} // []string | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  (optional)
     fromBusinessId := []string{"Inner_example"} // []string | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  (optional)
     toBusinessId := []string{"Inner_example"} // []string | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  (optional)
-    relationshipType := []string{"BENEFICIAL_OWNER_OF"} // []string | The relationship type. Any of the following: * `BENEFICIAL_OWNER_OF` – a person who directly or indirectly owns a portion of the business. * `MANAGING_PERSON_OF` – a person who is an officer, director, or other notable person of an organization. * `OWNER_OF` – a business with ownership of another business.  (optional)
+    relationshipType := []string{"BENEFICIAL_OWNER_OF"} // []string | The relationship type, any of the following.  All direct businesses customers need at least one beneficial owner or controlling person. * `BENEFICIAL_OWNER_OF` – a person who directly or indirectly owns a portion of the business. * `MANAGING_PERSON_OF` – a person who is an officer, director, or controlling person of an organization. * `OWNER_OF` – a business with ownership of another business.  (optional)
     limit := int32(100) // int32 |  (optional) (default to 100)
     pageToken := "a8937a0d" // string |  (optional)
 
@@ -276,7 +276,7 @@ Name | Type | Description  | Notes
  **fromPersonId** | **[]string** | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  | 
  **fromBusinessId** | **[]string** | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  | 
  **toBusinessId** | **[]string** | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  | 
- **relationshipType** | **[]string** | The relationship type. Any of the following: * &#x60;BENEFICIAL_OWNER_OF&#x60; – a person who directly or indirectly owns a portion of the business. * &#x60;MANAGING_PERSON_OF&#x60; – a person who is an officer, director, or other notable person of an organization. * &#x60;OWNER_OF&#x60; – a business with ownership of another business.  | 
+ **relationshipType** | **[]string** | The relationship type, any of the following.  All direct businesses customers need at least one beneficial owner or controlling person. * &#x60;BENEFICIAL_OWNER_OF&#x60; – a person who directly or indirectly owns a portion of the business. * &#x60;MANAGING_PERSON_OF&#x60; – a person who is an officer, director, or controlling person of an organization. * &#x60;OWNER_OF&#x60; – a business with ownership of another business.  | 
  **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
 

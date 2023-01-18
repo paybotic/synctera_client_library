@@ -5,12 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BanStatus** | Pointer to [**BanStatus**](BanStatus.md) |  | [optional] 
+**ChosenName** | Pointer to **string** | Person&#39;s chosen name. | [optional] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
 **Dob** | Pointer to **string** | Person&#39;s date of birth in RFC 3339 full-date format (YYYY-MM-DD). | [optional] 
 **Email** | Pointer to **string** | Person&#39;s email. | [optional] 
 **FirstName** | Pointer to **string** | Person&#39;s first name. | [optional] 
 **Id** | Pointer to **string** | Person&#39;s unique identifier. | [optional] [readonly] 
-**IsCustomer** | Pointer to **bool** | True for personal and business customers with a direct relationship with the fintech or bank. | [optional] 
+**IsCustomer** | Pointer to **bool** | True for personal and business customers with a direct relationship with the fintech or bank. Set this to true for any customer related to an account.  | [optional] 
 **LastName** | Pointer to **string** | Person&#39;s last name. | [optional] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
 **LegalAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
@@ -21,7 +22,7 @@ Name | Type | Description | Notes
 **Ssn** | Pointer to **string** | Person&#39;s full tax ID eg SSN formatted with hyphens. The response contains the last 4 digits only (e.g. 6789). | [optional] 
 **SsnSource** | Pointer to [**SsnSource**](SsnSource.md) |  | [optional] 
 **Status** | Pointer to [**Status1**](Status1.md) |  | [optional] 
-**Tenant** | Pointer to **string** | The id tenant containing the resource. Tenancy is represented as &lt;bank_id&gt;_&lt;partner_id&gt;. This attribute is included on all responses. In requests, it is optional for clients with access to only a single tenant.  | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
 **VerificationLastRun** | Pointer to **time.Time** | Date and time KYC verification was last run on the person. | [optional] [readonly] 
 **VerificationStatus** | Pointer to [**VerificationStatus**](VerificationStatus.md) |  | [optional] 
 
@@ -68,6 +69,31 @@ SetBanStatus sets BanStatus field to given value.
 `func (o *BasePerson1) HasBanStatus() bool`
 
 HasBanStatus returns a boolean if a field has been set.
+
+### GetChosenName
+
+`func (o *BasePerson1) GetChosenName() string`
+
+GetChosenName returns the ChosenName field if non-nil, zero value otherwise.
+
+### GetChosenNameOk
+
+`func (o *BasePerson1) GetChosenNameOk() (*string, bool)`
+
+GetChosenNameOk returns a tuple with the ChosenName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChosenName
+
+`func (o *BasePerson1) SetChosenName(v string)`
+
+SetChosenName sets ChosenName field to given value.
+
+### HasChosenName
+
+`func (o *BasePerson1) HasChosenName() bool`
+
+HasChosenName returns a boolean if a field has been set.
 
 ### GetCreationTime
 

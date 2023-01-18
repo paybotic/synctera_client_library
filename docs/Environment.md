@@ -5,6 +5,8 @@
 
 * `SANDBOX` (value: `"SANDBOX"`)
 
+* `TMINUS10` (value: `"TMINUS10"`)
+
 * `PROD_LITE` (value: `"PROD_LITE"`)
 
 * `PROD` (value: `"PROD"`)

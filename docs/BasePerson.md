@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **ShippingAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
 **Ssn** | Pointer to **string** | Customer&#39;s full tax ID eg SSN formatted with hyphens. This optional parameter is required when running KYC on a customer. Input must match the pattern ^\\d{3}-\\d{2}-\\d{4}$. The response contains the last 4 digits only (e.g. 6789). | [optional] 
 **SsnSource** | Pointer to [**SsnSource**](SsnSource.md) |  | [optional] 
-**Tenant** | Pointer to **string** | The tenant containing the resource. Tenancy is represented as bank_id_partner_id. This attribute is included on all responses.  | [optional] [readonly] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
 
 ## Methods
 

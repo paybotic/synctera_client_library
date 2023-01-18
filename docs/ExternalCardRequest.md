@@ -6,13 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BusinessId** | Pointer to **string** | The unique identifier of a business | [optional] 
 **CustomerId** | **string** | The unique identifier of a customer | 
+**Name** | **string** | The cardholder name | 
 **Token** | **string** | The token that was returned via tokenization iframe | 
 
 ## Methods
 
 ### NewExternalCardRequest
 
-`func NewExternalCardRequest(customerId string, token string, ) *ExternalCardRequest`
+`func NewExternalCardRequest(customerId string, name string, token string, ) *ExternalCardRequest`
 
 NewExternalCardRequest instantiates a new ExternalCardRequest object
 This constructor will assign default values to properties that have it defined,
@@ -70,6 +71,26 @@ and a boolean to check if the value has been set.
 `func (o *ExternalCardRequest) SetCustomerId(v string)`
 
 SetCustomerId sets CustomerId field to given value.
+
+
+### GetName
+
+`func (o *ExternalCardRequest) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *ExternalCardRequest) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *ExternalCardRequest) SetName(v string)`
+
+SetName sets Name field to given value.
 
 
 ### GetToken

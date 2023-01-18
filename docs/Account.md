@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **Nickname** | Pointer to **string** | User provided account nickname | [optional] 
 **Status** | Pointer to [**Status**](Status.md) |  | [optional] 
 **SwiftCode** | Pointer to **string** | SWIFT code | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
 **BalanceCeiling** | Pointer to [**BalanceCeiling**](BalanceCeiling.md) |  | [optional] 
 **BalanceFloor** | Pointer to [**BalanceFloor**](BalanceFloor.md) |  | [optional] 
 **FeeProductIds** | Pointer to **[]string** | A list of fee account products that the current account associates with. | [optional] 
@@ -686,6 +687,31 @@ SetSwiftCode sets SwiftCode field to given value.
 `func (o *Account) HasSwiftCode() bool`
 
 HasSwiftCode returns a boolean if a field has been set.
+
+### GetTenant
+
+`func (o *Account) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *Account) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *Account) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *Account) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetBalanceCeiling
 

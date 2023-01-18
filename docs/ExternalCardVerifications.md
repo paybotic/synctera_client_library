@@ -4,20 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AddressVerificationResults** | Pointer to **string** | Address verification results  Status | Description --- | --- VERIFIED | Address verified NOT_VERIFIED | Address not verified ADDRESS_NO_MATCH | Postal/ZIP match, street addresses do not match or street address not included in request  | [optional] 
-**CardType** | Pointer to **string** | Indicates whether the external card is credit, debit, prepaid, deferred debit, or charge. | [optional] 
-**Cvv2Result** | Pointer to **string** | Card Verification Value results  Status | Description --- | --- VERIFIED | CVV and expiration dates verified INCORRECT | Either CVV or expiration date is incorrect NOT_SUPPORTED |  Issuer does not participate in CVV2 service  | [optional] 
-**FastFundsIndicator** | Pointer to **bool** | Indicates if card is Fast Funds eligible (i.e. if the funds will settle in 30 mins or less). If not eligible, typically funds will settle within 2 business days. | [optional] 
-**OnlineGamblingBlockIndicator** | Pointer to **bool** | Indicates if the card can receive push-payments for online gambling payouts. | [optional] 
-**Processor** | Pointer to [**Processor**](Processor.md) |  | [optional] 
-**PushFundsBlockIndicator** | Pointer to **bool** | Indicates if the associated card can receive push-to-card disbursements. | [optional] 
-**State** | Pointer to **string** |  | [optional] 
+**AddressVerificationResult** | **string** | Address verification results  Status | Description --- | --- VERIFIED | AVS verified NOT_VERIFIED | AVS not verified ADDRESS_MISMATCH | ZIP code match, address no match ZIP_MISMATCH | Address match, ZIP code no match ADDRESS_AND_ZIP_MISMATCH | Address and ZIP code no match  | 
+**Cvv2Result** | **string** | Card Verification Value results  Status | Description --- | --- VERIFIED | CVV and expiration date verified NOT_VERIFIED | CVV and expiration date not verified CVV_MISMATCH | Either CVV or expiration date does not match NOT_SUPPORTED | Issuer does not participate in CVV2 service  | 
+**PullEnabled** | **bool** | Indicates if the card is able to perform PULL transfers. | 
+**PushEnabled** | **bool** | Indicates if the card is able to perform PUSH transfers. | 
+**State** | **string** |  | 
 
 ## Methods
 
 ### NewExternalCardVerifications
 
-`func NewExternalCardVerifications() *ExternalCardVerifications`
+`func NewExternalCardVerifications(addressVerificationResult string, cvv2Result string, pullEnabled bool, pushEnabled bool, state string, ) *ExternalCardVerifications`
 
 NewExternalCardVerifications instantiates a new ExternalCardVerifications object
 This constructor will assign default values to properties that have it defined,
@@ -32,55 +29,25 @@ NewExternalCardVerificationsWithDefaults instantiates a new ExternalCardVerifica
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetAddressVerificationResults
+### GetAddressVerificationResult
 
-`func (o *ExternalCardVerifications) GetAddressVerificationResults() string`
+`func (o *ExternalCardVerifications) GetAddressVerificationResult() string`
 
-GetAddressVerificationResults returns the AddressVerificationResults field if non-nil, zero value otherwise.
+GetAddressVerificationResult returns the AddressVerificationResult field if non-nil, zero value otherwise.
 
-### GetAddressVerificationResultsOk
+### GetAddressVerificationResultOk
 
-`func (o *ExternalCardVerifications) GetAddressVerificationResultsOk() (*string, bool)`
+`func (o *ExternalCardVerifications) GetAddressVerificationResultOk() (*string, bool)`
 
-GetAddressVerificationResultsOk returns a tuple with the AddressVerificationResults field if it's non-nil, zero value otherwise
+GetAddressVerificationResultOk returns a tuple with the AddressVerificationResult field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAddressVerificationResults
+### SetAddressVerificationResult
 
-`func (o *ExternalCardVerifications) SetAddressVerificationResults(v string)`
+`func (o *ExternalCardVerifications) SetAddressVerificationResult(v string)`
 
-SetAddressVerificationResults sets AddressVerificationResults field to given value.
+SetAddressVerificationResult sets AddressVerificationResult field to given value.
 
-### HasAddressVerificationResults
-
-`func (o *ExternalCardVerifications) HasAddressVerificationResults() bool`
-
-HasAddressVerificationResults returns a boolean if a field has been set.
-
-### GetCardType
-
-`func (o *ExternalCardVerifications) GetCardType() string`
-
-GetCardType returns the CardType field if non-nil, zero value otherwise.
-
-### GetCardTypeOk
-
-`func (o *ExternalCardVerifications) GetCardTypeOk() (*string, bool)`
-
-GetCardTypeOk returns a tuple with the CardType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCardType
-
-`func (o *ExternalCardVerifications) SetCardType(v string)`
-
-SetCardType sets CardType field to given value.
-
-### HasCardType
-
-`func (o *ExternalCardVerifications) HasCardType() bool`
-
-HasCardType returns a boolean if a field has been set.
 
 ### GetCvv2Result
 
@@ -101,111 +68,46 @@ and a boolean to check if the value has been set.
 
 SetCvv2Result sets Cvv2Result field to given value.
 
-### HasCvv2Result
 
-`func (o *ExternalCardVerifications) HasCvv2Result() bool`
+### GetPullEnabled
 
-HasCvv2Result returns a boolean if a field has been set.
+`func (o *ExternalCardVerifications) GetPullEnabled() bool`
 
-### GetFastFundsIndicator
+GetPullEnabled returns the PullEnabled field if non-nil, zero value otherwise.
 
-`func (o *ExternalCardVerifications) GetFastFundsIndicator() bool`
+### GetPullEnabledOk
 
-GetFastFundsIndicator returns the FastFundsIndicator field if non-nil, zero value otherwise.
+`func (o *ExternalCardVerifications) GetPullEnabledOk() (*bool, bool)`
 
-### GetFastFundsIndicatorOk
-
-`func (o *ExternalCardVerifications) GetFastFundsIndicatorOk() (*bool, bool)`
-
-GetFastFundsIndicatorOk returns a tuple with the FastFundsIndicator field if it's non-nil, zero value otherwise
+GetPullEnabledOk returns a tuple with the PullEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFastFundsIndicator
+### SetPullEnabled
 
-`func (o *ExternalCardVerifications) SetFastFundsIndicator(v bool)`
+`func (o *ExternalCardVerifications) SetPullEnabled(v bool)`
 
-SetFastFundsIndicator sets FastFundsIndicator field to given value.
+SetPullEnabled sets PullEnabled field to given value.
 
-### HasFastFundsIndicator
 
-`func (o *ExternalCardVerifications) HasFastFundsIndicator() bool`
+### GetPushEnabled
 
-HasFastFundsIndicator returns a boolean if a field has been set.
+`func (o *ExternalCardVerifications) GetPushEnabled() bool`
 
-### GetOnlineGamblingBlockIndicator
+GetPushEnabled returns the PushEnabled field if non-nil, zero value otherwise.
 
-`func (o *ExternalCardVerifications) GetOnlineGamblingBlockIndicator() bool`
+### GetPushEnabledOk
 
-GetOnlineGamblingBlockIndicator returns the OnlineGamblingBlockIndicator field if non-nil, zero value otherwise.
+`func (o *ExternalCardVerifications) GetPushEnabledOk() (*bool, bool)`
 
-### GetOnlineGamblingBlockIndicatorOk
-
-`func (o *ExternalCardVerifications) GetOnlineGamblingBlockIndicatorOk() (*bool, bool)`
-
-GetOnlineGamblingBlockIndicatorOk returns a tuple with the OnlineGamblingBlockIndicator field if it's non-nil, zero value otherwise
+GetPushEnabledOk returns a tuple with the PushEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOnlineGamblingBlockIndicator
+### SetPushEnabled
 
-`func (o *ExternalCardVerifications) SetOnlineGamblingBlockIndicator(v bool)`
+`func (o *ExternalCardVerifications) SetPushEnabled(v bool)`
 
-SetOnlineGamblingBlockIndicator sets OnlineGamblingBlockIndicator field to given value.
+SetPushEnabled sets PushEnabled field to given value.
 
-### HasOnlineGamblingBlockIndicator
-
-`func (o *ExternalCardVerifications) HasOnlineGamblingBlockIndicator() bool`
-
-HasOnlineGamblingBlockIndicator returns a boolean if a field has been set.
-
-### GetProcessor
-
-`func (o *ExternalCardVerifications) GetProcessor() Processor`
-
-GetProcessor returns the Processor field if non-nil, zero value otherwise.
-
-### GetProcessorOk
-
-`func (o *ExternalCardVerifications) GetProcessorOk() (*Processor, bool)`
-
-GetProcessorOk returns a tuple with the Processor field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProcessor
-
-`func (o *ExternalCardVerifications) SetProcessor(v Processor)`
-
-SetProcessor sets Processor field to given value.
-
-### HasProcessor
-
-`func (o *ExternalCardVerifications) HasProcessor() bool`
-
-HasProcessor returns a boolean if a field has been set.
-
-### GetPushFundsBlockIndicator
-
-`func (o *ExternalCardVerifications) GetPushFundsBlockIndicator() bool`
-
-GetPushFundsBlockIndicator returns the PushFundsBlockIndicator field if non-nil, zero value otherwise.
-
-### GetPushFundsBlockIndicatorOk
-
-`func (o *ExternalCardVerifications) GetPushFundsBlockIndicatorOk() (*bool, bool)`
-
-GetPushFundsBlockIndicatorOk returns a tuple with the PushFundsBlockIndicator field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPushFundsBlockIndicator
-
-`func (o *ExternalCardVerifications) SetPushFundsBlockIndicator(v bool)`
-
-SetPushFundsBlockIndicator sets PushFundsBlockIndicator field to given value.
-
-### HasPushFundsBlockIndicator
-
-`func (o *ExternalCardVerifications) HasPushFundsBlockIndicator() bool`
-
-HasPushFundsBlockIndicator returns a boolean if a field has been set.
 
 ### GetState
 
@@ -226,11 +128,6 @@ and a boolean to check if the value has been set.
 
 SetState sets State field to given value.
 
-### HasState
-
-`func (o *ExternalCardVerifications) HasState() bool`
-
-HasState returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

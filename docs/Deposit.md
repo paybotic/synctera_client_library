@@ -17,6 +17,9 @@ Name | Type | Description | Notes
 **Id** | **string** | Remote Check Deposit ID | [readonly] 
 **LastUpdatedTime** | Pointer to **time.Time** |  | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 
+**OcrAccountNumber** | Pointer to **string** | Account number of the issuer of the check, included if OCR is successful | [optional] [readonly] 
+**OcrCheckNumber** | Pointer to **string** | The unique check number for this check in the checkbook, included if OCR is successful and there is a check number on the check | [optional] [readonly] 
+**OcrRoutingNumber** | Pointer to **string** | Routing number of the issuing bank, included if OCR is successful | [optional] [readonly] 
 **PersonId** | Pointer to **string** | Unique ID for the person. Exactly one of &#x60;person_id&#x60; or &#x60;business_id&#x60; must be set.  | [optional] 
 **Status** | **string** | The status of the deposit | [readonly] 
 **TransactionId** | **string** | The ID of the transaction associated with this deposit | [readonly] 
@@ -320,6 +323,81 @@ SetMetadata sets Metadata field to given value.
 `func (o *Deposit) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetOcrAccountNumber
+
+`func (o *Deposit) GetOcrAccountNumber() string`
+
+GetOcrAccountNumber returns the OcrAccountNumber field if non-nil, zero value otherwise.
+
+### GetOcrAccountNumberOk
+
+`func (o *Deposit) GetOcrAccountNumberOk() (*string, bool)`
+
+GetOcrAccountNumberOk returns a tuple with the OcrAccountNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOcrAccountNumber
+
+`func (o *Deposit) SetOcrAccountNumber(v string)`
+
+SetOcrAccountNumber sets OcrAccountNumber field to given value.
+
+### HasOcrAccountNumber
+
+`func (o *Deposit) HasOcrAccountNumber() bool`
+
+HasOcrAccountNumber returns a boolean if a field has been set.
+
+### GetOcrCheckNumber
+
+`func (o *Deposit) GetOcrCheckNumber() string`
+
+GetOcrCheckNumber returns the OcrCheckNumber field if non-nil, zero value otherwise.
+
+### GetOcrCheckNumberOk
+
+`func (o *Deposit) GetOcrCheckNumberOk() (*string, bool)`
+
+GetOcrCheckNumberOk returns a tuple with the OcrCheckNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOcrCheckNumber
+
+`func (o *Deposit) SetOcrCheckNumber(v string)`
+
+SetOcrCheckNumber sets OcrCheckNumber field to given value.
+
+### HasOcrCheckNumber
+
+`func (o *Deposit) HasOcrCheckNumber() bool`
+
+HasOcrCheckNumber returns a boolean if a field has been set.
+
+### GetOcrRoutingNumber
+
+`func (o *Deposit) GetOcrRoutingNumber() string`
+
+GetOcrRoutingNumber returns the OcrRoutingNumber field if non-nil, zero value otherwise.
+
+### GetOcrRoutingNumberOk
+
+`func (o *Deposit) GetOcrRoutingNumberOk() (*string, bool)`
+
+GetOcrRoutingNumberOk returns a tuple with the OcrRoutingNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOcrRoutingNumber
+
+`func (o *Deposit) SetOcrRoutingNumber(v string)`
+
+SetOcrRoutingNumber sets OcrRoutingNumber field to given value.
+
+### HasOcrRoutingNumber
+
+`func (o *Deposit) HasOcrRoutingNumber() bool`
+
+HasOcrRoutingNumber returns a boolean if a field has been set.
 
 ### GetPersonId
 

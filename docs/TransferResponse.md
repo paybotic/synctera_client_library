@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **CustomerId** | **string** | The ID of the customer for which card is being activated | 
 **Id** | **string** | The id of the transfer | 
 **LastModifiedTime** | **time.Time** |  | 
+**Merchant** | [**Merchant**](Merchant.md) |  | 
 **Status** | **string** | The status of the transfer | 
 **TransactionId** | Pointer to **string** | The transaction ID | [optional] 
 **Type** | [**TransferType**](TransferType.md) |  | 
@@ -20,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewTransferResponse
 
-`func NewTransferResponse(accountId string, amount int32, countryCode string, createdTime time.Time, currency string, customerId string, id string, lastModifiedTime time.Time, status string, type_ TransferType, ) *TransferResponse`
+`func NewTransferResponse(accountId string, amount int32, countryCode string, createdTime time.Time, currency string, customerId string, id string, lastModifiedTime time.Time, merchant Merchant, status string, type_ TransferType, ) *TransferResponse`
 
 NewTransferResponse instantiates a new TransferResponse object
 This constructor will assign default values to properties that have it defined,
@@ -193,6 +194,26 @@ and a boolean to check if the value has been set.
 `func (o *TransferResponse) SetLastModifiedTime(v time.Time)`
 
 SetLastModifiedTime sets LastModifiedTime field to given value.
+
+
+### GetMerchant
+
+`func (o *TransferResponse) GetMerchant() Merchant`
+
+GetMerchant returns the Merchant field if non-nil, zero value otherwise.
+
+### GetMerchantOk
+
+`func (o *TransferResponse) GetMerchantOk() (*Merchant, bool)`
+
+GetMerchantOk returns a tuple with the Merchant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchant
+
+`func (o *TransferResponse) SetMerchant(v Merchant)`
+
+SetMerchant sets Merchant field to given value.
 
 
 ### GetStatus

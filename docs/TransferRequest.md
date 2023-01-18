@@ -7,14 +7,15 @@ Name | Type | Description | Notes
 **Amount** | **int32** | Amount of the transfer in cents | 
 **Currency** | **string** | ISO 4217  Alpha-3 currency code | 
 **ExternalCardId** | **string** | The ID of the external card from/to which the transfer will be initiated/received | 
+**Merchant** | Pointer to [**Merchant**](Merchant.md) |  | [optional] 
 **OriginatingAccountId** | **string** | The ID of the account to which the transfer will be initiated/received | 
-**Type** | [**TransferType**](TransferType.md) |  | 
+**Type** | [**TransferTypeRequest**](TransferTypeRequest.md) |  | 
 
 ## Methods
 
 ### NewTransferRequest
 
-`func NewTransferRequest(amount int32, currency string, externalCardId string, originatingAccountId string, type_ TransferType, ) *TransferRequest`
+`func NewTransferRequest(amount int32, currency string, externalCardId string, originatingAccountId string, type_ TransferTypeRequest, ) *TransferRequest`
 
 NewTransferRequest instantiates a new TransferRequest object
 This constructor will assign default values to properties that have it defined,
@@ -89,6 +90,31 @@ and a boolean to check if the value has been set.
 SetExternalCardId sets ExternalCardId field to given value.
 
 
+### GetMerchant
+
+`func (o *TransferRequest) GetMerchant() Merchant`
+
+GetMerchant returns the Merchant field if non-nil, zero value otherwise.
+
+### GetMerchantOk
+
+`func (o *TransferRequest) GetMerchantOk() (*Merchant, bool)`
+
+GetMerchantOk returns a tuple with the Merchant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchant
+
+`func (o *TransferRequest) SetMerchant(v Merchant)`
+
+SetMerchant sets Merchant field to given value.
+
+### HasMerchant
+
+`func (o *TransferRequest) HasMerchant() bool`
+
+HasMerchant returns a boolean if a field has been set.
+
 ### GetOriginatingAccountId
 
 `func (o *TransferRequest) GetOriginatingAccountId() string`
@@ -111,20 +137,20 @@ SetOriginatingAccountId sets OriginatingAccountId field to given value.
 
 ### GetType
 
-`func (o *TransferRequest) GetType() TransferType`
+`func (o *TransferRequest) GetType() TransferTypeRequest`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *TransferRequest) GetTypeOk() (*TransferType, bool)`
+`func (o *TransferRequest) GetTypeOk() (*TransferTypeRequest, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *TransferRequest) SetType(v TransferType)`
+`func (o *TransferRequest) SetType(v TransferTypeRequest)`
 
 SetType sets Type field to given value.
 

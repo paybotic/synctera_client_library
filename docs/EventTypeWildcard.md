@@ -27,6 +27,8 @@
 
 * `EXTERNAL_CARD` (value: `"EXTERNAL_CARD.*"`)
 
+* `EXTERNAL_CARD_TRANSFER` (value: `"EXTERNAL_CARD_TRANSFER.*"`)
+
 * `APPLICATION` (value: `"APPLICATION.*"`)
 
 * `CASH_PICKUP` (value: `"CASH_PICKUP.*"`)

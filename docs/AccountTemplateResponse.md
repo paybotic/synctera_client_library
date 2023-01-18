@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **IsEnabled** | **bool** | Whether this template can be used for account creation | 
 **Name** | **string** | Unique account template name | 
 **Template** | [**TemplateFieldsGenericResponse**](TemplateFieldsGenericResponse.md) |  | 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
 
 ## Methods
 
@@ -164,6 +165,31 @@ and a boolean to check if the value has been set.
 
 SetTemplate sets Template field to given value.
 
+
+### GetTenant
+
+`func (o *AccountTemplateResponse) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *AccountTemplateResponse) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *AccountTemplateResponse) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *AccountTemplateResponse) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

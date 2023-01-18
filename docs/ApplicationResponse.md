@@ -9,13 +9,12 @@ Name | Type | Description | Notes
 **ExternalId** | Pointer to **string** | The id of the application from processor | [optional] 
 **Id** | **string** | The id of the application | 
 **LastModifiedTime** | **time.Time** |  | 
-**Processor** | [**Processor**](Processor.md) |  | 
 
 ## Methods
 
 ### NewApplicationResponse
 
-`func NewApplicationResponse(createdTime time.Time, enabled bool, id string, lastModifiedTime time.Time, processor Processor, ) *ApplicationResponse`
+`func NewApplicationResponse(createdTime time.Time, enabled bool, id string, lastModifiedTime time.Time, ) *ApplicationResponse`
 
 NewApplicationResponse instantiates a new ApplicationResponse object
 This constructor will assign default values to properties that have it defined,
@@ -133,26 +132,6 @@ and a boolean to check if the value has been set.
 `func (o *ApplicationResponse) SetLastModifiedTime(v time.Time)`
 
 SetLastModifiedTime sets LastModifiedTime field to given value.
-
-
-### GetProcessor
-
-`func (o *ApplicationResponse) GetProcessor() Processor`
-
-GetProcessor returns the Processor field if non-nil, zero value otherwise.
-
-### GetProcessorOk
-
-`func (o *ApplicationResponse) GetProcessorOk() (*Processor, bool)`
-
-GetProcessorOk returns a tuple with the Processor field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProcessor
-
-`func (o *ApplicationResponse) SetProcessor(v Processor)`
-
-SetProcessor sets Processor field to given value.
 
 
 

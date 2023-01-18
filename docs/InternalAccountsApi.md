@@ -5,6 +5,7 @@ All URIs are relative to *https://api.synctera.com/v0*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddInternalAccounts**](InternalAccountsApi.md#AddInternalAccounts) | **Post** /internal_accounts | Add internal accounts
+[**GetInternalAccounts**](InternalAccountsApi.md#GetInternalAccounts) | **Get** /internal_accounts/{internal_account_id} | Get internal account by id
 [**ListInternalAccounts**](InternalAccountsApi.md#ListInternalAccounts) | **Get** /internal_accounts | List internal accounts
 [**PatchInternalAccount**](InternalAccountsApi.md#PatchInternalAccount) | **Patch** /internal_accounts/{internal_account_id} | Patch internal account
 
@@ -71,6 +72,76 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetInternalAccounts
+
+> InternalAccount GetInternalAccounts(ctx, internalAccountId).Execute()
+
+Get internal account by id
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    internalAccountId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the internal account.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.InternalAccountsApi.GetInternalAccounts(context.Background(), internalAccountId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `InternalAccountsApi.GetInternalAccounts``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetInternalAccounts`: InternalAccount
+    fmt.Fprintf(os.Stdout, "Response from `InternalAccountsApi.GetInternalAccounts`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**internalAccountId** | **string** | Unique identifier for the internal account. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetInternalAccountsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**InternalAccount**](InternalAccount.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json, application/problem+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

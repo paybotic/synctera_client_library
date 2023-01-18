@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.17.0
 */
@@ -23,22 +23,6 @@ import (
 // RemoteCheckDepositApiService RemoteCheckDepositApi service
 type RemoteCheckDepositApiService service
 
-type ApiCreateRdcDepositRequest struct {
-	ctx context.Context
-	ApiService *RemoteCheckDepositApiService
-	deposit *Deposit
-}
-
-// Attributes of the Remote Check Deposit to create
-func (r ApiCreateRdcDepositRequest) Deposit(deposit Deposit) ApiCreateRdcDepositRequest {
-	r.deposit = &deposit
-	return r
-}
-
-func (r ApiCreateRdcDepositRequest) Execute() (*Deposit, *http.Response, error) {
-	return r.ApiService.CreateRdcDepositExecute(r)
-}
-
 /*
 CreateRdcDeposit Create a Remote Check Deposit
 
@@ -50,8 +34,8 @@ Create a new deposit using remote deposit capture to an account
 */
 func (a *RemoteCheckDepositApiService) CreateRdcDeposit(ctx context.Context) ApiCreateRdcDepositRequest {
 	return ApiCreateRdcDepositRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService: (*RemoteCheckDepositBetaApiService)(a),
+		ctx:        ctx,
 	}
 }
 
@@ -161,16 +145,6 @@ func (a *RemoteCheckDepositApiService) CreateRdcDepositExecute(r ApiCreateRdcDep
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetRdcDepositRequest struct {
-	ctx context.Context
-	ApiService *RemoteCheckDepositApiService
-	depositId string
-}
-
-func (r ApiGetRdcDepositRequest) Execute() (*Deposit, *http.Response, error) {
-	return r.ApiService.GetRdcDepositExecute(r)
-}
-
 /*
 GetRdcDeposit Get Remote Check Deposit
 
@@ -182,9 +156,9 @@ Retrieves one deposit made using remote deposit capture associated with an accou
 */
 func (a *RemoteCheckDepositApiService) GetRdcDeposit(ctx context.Context, depositId string) ApiGetRdcDepositRequest {
 	return ApiGetRdcDepositRequest{
-		ApiService: a,
-		ctx: ctx,
-		depositId: depositId,
+		ApiService: (*RemoteCheckDepositBetaApiService)(a),
+		ctx:        ctx,
+		depositId:  depositId,
 	}
 }
 
@@ -293,27 +267,6 @@ func (a *RemoteCheckDepositApiService) GetRdcDepositExecute(r ApiGetRdcDepositRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListRdcDepositsRequest struct {
-	ctx context.Context
-	ApiService *RemoteCheckDepositApiService
-	limit *int32
-	pageToken *string
-}
-
-func (r ApiListRdcDepositsRequest) Limit(limit int32) ApiListRdcDepositsRequest {
-	r.limit = &limit
-	return r
-}
-
-func (r ApiListRdcDepositsRequest) PageToken(pageToken string) ApiListRdcDepositsRequest {
-	r.pageToken = &pageToken
-	return r
-}
-
-func (r ApiListRdcDepositsRequest) Execute() (*DepositList, *http.Response, error) {
-	return r.ApiService.ListRdcDepositsExecute(r)
-}
-
 /*
 ListRdcDeposits List Remote Check Deposits
 
@@ -324,8 +277,8 @@ Retrieves a paginated list of the deposits made using remote deposit capture ass
 */
 func (a *RemoteCheckDepositApiService) ListRdcDeposits(ctx context.Context) ApiListRdcDepositsRequest {
 	return ApiListRdcDepositsRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService: (*RemoteCheckDepositBetaApiService)(a),
+		ctx:        ctx,
 	}
 }
 

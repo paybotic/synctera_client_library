@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccountNo** | **string** | The account number associated with the hold | 
+**AccountId** | Pointer to **string** | The uuid of the account associated with the hold. Note: account_no and account_id are mutually exclusive | [optional] 
+**AccountNo** | Pointer to **string** | The account number associated with the hold | [optional] 
 **AllowPartial** | **bool** |  | 
 **Amount** | **int64** | The amount of the hold. | 
 **AutoPostAt** | **time.Time** | The time the transaction will be automatically posted. | 
@@ -19,6 +20,7 @@ Name | Type | Description | Notes
 **ForcePost** | **bool** | Whether or not the hold was forced (spending controls ignored) | 
 **Memo** | **string** | A short note to the recipient | 
 **Network** | **string** | The network this transaction is associated with | 
+**OffsetAccountId** | Pointer to **string** | The uuid of the account to offset the transaction Note: &#x60;offset_account_id&#x60; and &#x60;account_id&#x60; are mutually exclusive. | [optional] 
 **OffsetAccountNo** | Pointer to **string** | The account number to offset the transaction | [optional] 
 **OffsetDescription** | Pointer to **string** | The description of the offset transaction | [optional] 
 **ReferenceId** | **string** | An external ID provided by the payment network to represent this transaction. This will always be null for internal transfers. | 
@@ -32,7 +34,7 @@ Name | Type | Description | Notes
 
 ### NewHoldCreateRequest
 
-`func NewHoldCreateRequest(accountNo string, allowPartial bool, amount int64, autoPostAt time.Time, currency string, dcSign DcSign, declineReason string, effectiveDate time.Time, expiresAt time.Time, forcePost bool, memo string, network string, referenceId string, status HoldCreateRequestStatus, subtype string, transactionTime time.Time, type_ string, ) *HoldCreateRequest`
+`func NewHoldCreateRequest(allowPartial bool, amount int64, autoPostAt time.Time, currency string, dcSign DcSign, declineReason string, effectiveDate time.Time, expiresAt time.Time, forcePost bool, memo string, network string, referenceId string, status HoldCreateRequestStatus, subtype string, transactionTime time.Time, type_ string, ) *HoldCreateRequest`
 
 NewHoldCreateRequest instantiates a new HoldCreateRequest object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +48,31 @@ will change when the set of required properties is changed
 NewHoldCreateRequestWithDefaults instantiates a new HoldCreateRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAccountId
+
+`func (o *HoldCreateRequest) GetAccountId() string`
+
+GetAccountId returns the AccountId field if non-nil, zero value otherwise.
+
+### GetAccountIdOk
+
+`func (o *HoldCreateRequest) GetAccountIdOk() (*string, bool)`
+
+GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountId
+
+`func (o *HoldCreateRequest) SetAccountId(v string)`
+
+SetAccountId sets AccountId field to given value.
+
+### HasAccountId
+
+`func (o *HoldCreateRequest) HasAccountId() bool`
+
+HasAccountId returns a boolean if a field has been set.
 
 ### GetAccountNo
 
@@ -66,6 +93,11 @@ and a boolean to check if the value has been set.
 
 SetAccountNo sets AccountNo field to given value.
 
+### HasAccountNo
+
+`func (o *HoldCreateRequest) HasAccountNo() bool`
+
+HasAccountNo returns a boolean if a field has been set.
 
 ### GetAllowPartial
 
@@ -381,6 +413,31 @@ and a boolean to check if the value has been set.
 
 SetNetwork sets Network field to given value.
 
+
+### GetOffsetAccountId
+
+`func (o *HoldCreateRequest) GetOffsetAccountId() string`
+
+GetOffsetAccountId returns the OffsetAccountId field if non-nil, zero value otherwise.
+
+### GetOffsetAccountIdOk
+
+`func (o *HoldCreateRequest) GetOffsetAccountIdOk() (*string, bool)`
+
+GetOffsetAccountIdOk returns a tuple with the OffsetAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOffsetAccountId
+
+`func (o *HoldCreateRequest) SetOffsetAccountId(v string)`
+
+SetOffsetAccountId sets OffsetAccountId field to given value.
+
+### HasOffsetAccountId
+
+`func (o *HoldCreateRequest) HasOffsetAccountId() bool`
+
+HasOffsetAccountId returns a boolean if a field has been set.
 
 ### GetOffsetAccountNo
 

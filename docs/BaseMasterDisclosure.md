@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | The unique identifier for this resource. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 
-**Tenant** | Pointer to **string** | The id tenant containing the resource. Tenancy is represented as &lt;bank_id&gt;_&lt;partner_id&gt;. This attribute is included on all responses. In requests, it is optional for clients with access to only a single tenant.  | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
 **Type** | Pointer to [**DisclosureType**](DisclosureType.md) |  | [optional] 
 **Version** | Pointer to **string** | Version of the disclosure document. | [optional] 
 

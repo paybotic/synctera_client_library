@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Enabled** | Pointer to **bool** | To enable or disable aft/oct feature | [optional] 
-**Processor** | Pointer to [**Processor**](Processor.md) |  | [optional] 
 
 ## Methods
 
@@ -50,31 +49,6 @@ SetEnabled sets Enabled field to given value.
 `func (o *ApplicationUpdateRequest) HasEnabled() bool`
 
 HasEnabled returns a boolean if a field has been set.
-
-### GetProcessor
-
-`func (o *ApplicationUpdateRequest) GetProcessor() Processor`
-
-GetProcessor returns the Processor field if non-nil, zero value otherwise.
-
-### GetProcessorOk
-
-`func (o *ApplicationUpdateRequest) GetProcessorOk() (*Processor, bool)`
-
-GetProcessorOk returns a tuple with the Processor field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProcessor
-
-`func (o *ApplicationUpdateRequest) SetProcessor(v Processor)`
-
-SetProcessor sets Processor field to given value.
-
-### HasProcessor
-
-`func (o *ApplicationUpdateRequest) HasProcessor() bool`
-
-HasProcessor returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

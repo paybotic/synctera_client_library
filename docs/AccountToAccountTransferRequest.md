@@ -7,25 +7,27 @@ Name | Type | Description | Notes
 **Amount** | **int64** | The amount (in cents) to transfer from originating account to receiving account. | 
 **Currency** | **string** | ISO 4217 alphabetic currency code of the transfer amount | 
 **Description** | Pointer to **string** | A description of the transaction | [optional] 
-**DestAccountAlias** | **string** | An alias representing a GL account to credit. This is an alternative to specifying by account id | 
-**DestAccountNo** | **string** | The account number of the account being credited | 
-**EffectiveDate** | **time.Time** | The date the transaction should be effective | 
+**DestAccountAlias** | Pointer to **string** | An alias representing a GL account to credit. This is an alternative to specifying by account id | [optional] 
+**DestAccountId** | Pointer to **string** | The account id of the account being credited | [optional] 
+**DestAccountNo** | Pointer to **string** | The account number of the account being credited | [optional] 
+**EffectiveDate** | Pointer to **time.Time** | The date the transaction should be effective | [optional] 
 **ExternalData** | Pointer to **map[string]interface{}** | an unstructured json blob representing additional transaction information supplied by the integrator. | [optional] 
-**Memo** | **string** | A short note to the recipient | 
+**Memo** | Pointer to **string** | A short note to the recipient | [optional] 
 **OffsetDescription** | Pointer to **string** | A description of the offsetting transaction | [optional] 
 **PostedDate** | Pointer to **string** | The date the transaction was posted | [optional] 
-**SourceAccountAlias** | **string** | An alias representing a GL account to debit. This is alternative to specifying by account id | 
-**SourceAccountNo** | **string** | The account number of the account being debited | 
-**Subtype** | **string** | The desired transaction subtype to use for this transfer | 
-**Type** | **string** | The desired transaction type to use for this transfer | 
+**SourceAccountAlias** | Pointer to **string** | An alias representing a GL account to debit. This is alternative to specifying by account id | [optional] 
+**SourceAccountId** | Pointer to **string** | The uuid of the the account being debited | [optional] 
+**SourceAccountNo** | Pointer to **string** | The account number of the account being debited | [optional] 
+**Subtype** | Pointer to **string** | The desired transaction subtype to use for this transfer | [optional] 
+**Type** | Pointer to **string** | The desired transaction type to use for this transfer | [optional] 
 **UserData** | Pointer to **map[string]interface{}** | An unstructured JSON blob representing additional transaction information specific to each payment rail. | [optional] 
-**Uuid** | **string** | The UUID of the transaction | 
+**Uuid** | Pointer to **string** | The UUID of the transaction | [optional] 
 
 ## Methods
 
 ### NewAccountToAccountTransferRequest
 
-`func NewAccountToAccountTransferRequest(amount int64, currency string, destAccountAlias string, destAccountNo string, effectiveDate time.Time, memo string, sourceAccountAlias string, sourceAccountNo string, subtype string, type_ string, uuid string, ) *AccountToAccountTransferRequest`
+`func NewAccountToAccountTransferRequest(amount int64, currency string, ) *AccountToAccountTransferRequest`
 
 NewAccountToAccountTransferRequest instantiates a new AccountToAccountTransferRequest object
 This constructor will assign default values to properties that have it defined,
@@ -124,6 +126,36 @@ and a boolean to check if the value has been set.
 
 SetDestAccountAlias sets DestAccountAlias field to given value.
 
+### HasDestAccountAlias
+
+`func (o *AccountToAccountTransferRequest) HasDestAccountAlias() bool`
+
+HasDestAccountAlias returns a boolean if a field has been set.
+
+### GetDestAccountId
+
+`func (o *AccountToAccountTransferRequest) GetDestAccountId() string`
+
+GetDestAccountId returns the DestAccountId field if non-nil, zero value otherwise.
+
+### GetDestAccountIdOk
+
+`func (o *AccountToAccountTransferRequest) GetDestAccountIdOk() (*string, bool)`
+
+GetDestAccountIdOk returns a tuple with the DestAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDestAccountId
+
+`func (o *AccountToAccountTransferRequest) SetDestAccountId(v string)`
+
+SetDestAccountId sets DestAccountId field to given value.
+
+### HasDestAccountId
+
+`func (o *AccountToAccountTransferRequest) HasDestAccountId() bool`
+
+HasDestAccountId returns a boolean if a field has been set.
 
 ### GetDestAccountNo
 
@@ -144,6 +176,11 @@ and a boolean to check if the value has been set.
 
 SetDestAccountNo sets DestAccountNo field to given value.
 
+### HasDestAccountNo
+
+`func (o *AccountToAccountTransferRequest) HasDestAccountNo() bool`
+
+HasDestAccountNo returns a boolean if a field has been set.
 
 ### GetEffectiveDate
 
@@ -164,6 +201,11 @@ and a boolean to check if the value has been set.
 
 SetEffectiveDate sets EffectiveDate field to given value.
 
+### HasEffectiveDate
+
+`func (o *AccountToAccountTransferRequest) HasEffectiveDate() bool`
+
+HasEffectiveDate returns a boolean if a field has been set.
 
 ### GetExternalData
 
@@ -219,6 +261,11 @@ and a boolean to check if the value has been set.
 
 SetMemo sets Memo field to given value.
 
+### HasMemo
+
+`func (o *AccountToAccountTransferRequest) HasMemo() bool`
+
+HasMemo returns a boolean if a field has been set.
 
 ### GetOffsetDescription
 
@@ -289,6 +336,36 @@ and a boolean to check if the value has been set.
 
 SetSourceAccountAlias sets SourceAccountAlias field to given value.
 
+### HasSourceAccountAlias
+
+`func (o *AccountToAccountTransferRequest) HasSourceAccountAlias() bool`
+
+HasSourceAccountAlias returns a boolean if a field has been set.
+
+### GetSourceAccountId
+
+`func (o *AccountToAccountTransferRequest) GetSourceAccountId() string`
+
+GetSourceAccountId returns the SourceAccountId field if non-nil, zero value otherwise.
+
+### GetSourceAccountIdOk
+
+`func (o *AccountToAccountTransferRequest) GetSourceAccountIdOk() (*string, bool)`
+
+GetSourceAccountIdOk returns a tuple with the SourceAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceAccountId
+
+`func (o *AccountToAccountTransferRequest) SetSourceAccountId(v string)`
+
+SetSourceAccountId sets SourceAccountId field to given value.
+
+### HasSourceAccountId
+
+`func (o *AccountToAccountTransferRequest) HasSourceAccountId() bool`
+
+HasSourceAccountId returns a boolean if a field has been set.
 
 ### GetSourceAccountNo
 
@@ -309,6 +386,11 @@ and a boolean to check if the value has been set.
 
 SetSourceAccountNo sets SourceAccountNo field to given value.
 
+### HasSourceAccountNo
+
+`func (o *AccountToAccountTransferRequest) HasSourceAccountNo() bool`
+
+HasSourceAccountNo returns a boolean if a field has been set.
 
 ### GetSubtype
 
@@ -329,6 +411,11 @@ and a boolean to check if the value has been set.
 
 SetSubtype sets Subtype field to given value.
 
+### HasSubtype
+
+`func (o *AccountToAccountTransferRequest) HasSubtype() bool`
+
+HasSubtype returns a boolean if a field has been set.
 
 ### GetType
 
@@ -349,6 +436,11 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
+### HasType
+
+`func (o *AccountToAccountTransferRequest) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 ### GetUserData
 
@@ -404,6 +496,11 @@ and a boolean to check if the value has been set.
 
 SetUuid sets Uuid field to given value.
 
+### HasUuid
+
+`func (o *AccountToAccountTransferRequest) HasUuid() bool`
+
+HasUuid returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

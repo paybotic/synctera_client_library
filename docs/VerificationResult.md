@@ -3,6 +3,8 @@
 ## Enum
 
 
+* `UNVERIFIED` (value: `"UNVERIFIED"`)
+
 * `PENDING` (value: `"PENDING"`)
 
 * `PROVISIONAL` (value: `"PROVISIONAL"`)

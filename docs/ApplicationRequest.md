@@ -22,7 +22,6 @@ Name | Type | Description | Notes
 **PersonalAddress** | Pointer to [**Address1**](Address1.md) |  | [optional] 
 **Phone** | Pointer to **string** |  | [optional] 
 **PrincipalPercentageOwnership** | Pointer to **string** |  | [optional] 
-**Processor** | [**Processor**](Processor.md) |  | 
 **TaxId** | Pointer to **string** |  | [optional] 
 **Title** | Pointer to **string** |  | [optional] 
 **Url** | Pointer to **string** |  | [optional] 
@@ -31,7 +30,7 @@ Name | Type | Description | Notes
 
 ### NewApplicationRequest
 
-`func NewApplicationRequest(bankId int32, businessAddress Address1, businessName string, businessPhone string, businessTaxId string, businessType string, doingBusinessAs string, enabled bool, maxTransactionAmount int32, partnerId int32, processor Processor, ) *ApplicationRequest`
+`func NewApplicationRequest(bankId int32, businessAddress Address1, businessName string, businessPhone string, businessTaxId string, businessType string, doingBusinessAs string, enabled bool, maxTransactionAmount int32, partnerId int32, ) *ApplicationRequest`
 
 NewApplicationRequest instantiates a new ApplicationRequest object
 This constructor will assign default values to properties that have it defined,
@@ -445,26 +444,6 @@ SetPrincipalPercentageOwnership sets PrincipalPercentageOwnership field to given
 `func (o *ApplicationRequest) HasPrincipalPercentageOwnership() bool`
 
 HasPrincipalPercentageOwnership returns a boolean if a field has been set.
-
-### GetProcessor
-
-`func (o *ApplicationRequest) GetProcessor() Processor`
-
-GetProcessor returns the Processor field if non-nil, zero value otherwise.
-
-### GetProcessorOk
-
-`func (o *ApplicationRequest) GetProcessorOk() (*Processor, bool)`
-
-GetProcessorOk returns a tuple with the Processor field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProcessor
-
-`func (o *ApplicationRequest) SetProcessor(v Processor)`
-
-SetProcessor sets Processor field to given value.
-
 
 ### GetTaxId
 

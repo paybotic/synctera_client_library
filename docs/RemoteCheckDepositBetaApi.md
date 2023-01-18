@@ -32,7 +32,7 @@ import (
 )
 
 func main() {
-    deposit := *openapiclient.NewDeposit("a2b17b47-49a3-4f69-88bf-b7a0abb555f2", "b6d8065d-7122-40df-922e-6f2ba88a5d50", int32(5005), time.Now(), time.Now(), int32(2979), "USD", "350bba5f-27e1-4eec-ad0a-94b322d7fc59", "38ebff87-fb06-44a0-9a06-72f0175dfc62", "Status_example", "50f24553-6017-4d36-82b9-43a251ee4358", openapiclient.vendor_info1{VendorJson: openapiclient.NewVendorJson("ContentType_example", map[string]interface{}(123), "SOCURE")}) // Deposit | Attributes of the Remote Check Deposit to create (optional)
+    deposit := *openapiclient.NewDeposit("6b77f6cb-d6ec-4f74-91e5-190c495344df", "b50a3c7b-ab03-4458-9026-fb3d06cb3780", int32(8302), time.Now(), time.Now(), int32(6478), "USD", "2b17b474-9a3f-469c-8bfb-7a0abb555f2b", "6d8065d7-1220-4df1-a2e6-f2ba88a5d508", "Status_example", "4350bba5-f27e-41ee-86d0-a94b322d7fc5", openapiclient.vendor_info1{VendorJson: openapiclient.NewVendorJson("ContentType_example", map[string]interface{}(123), "SOCURE")}) // Deposit | Attributes of the Remote Check Deposit to create (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -98,7 +98,7 @@ import (
 )
 
 func main() {
-    depositId := "4d463562-87b0-40bf-ba3f-7b52833f4898" // string | ID of a deposit for a remote deposit capture
+    depositId := "ff23b9d0-4e64-4b98-9f4a-3591ed08121a" // string | ID of a deposit for a remote deposit capture
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
