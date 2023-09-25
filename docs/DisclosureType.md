@@ -11,6 +11,8 @@
 
 * `KYC_DATA_COLLECTION` (value: `"KYC_DATA_COLLECTION"`)
 
+* `OWNER_CERTIFICATION` (value: `"OWNER_CERTIFICATION"`)
+
 * `PRIVACY_NOTICE` (value: `"PRIVACY_NOTICE"`)
 
 * `REG_CC` (value: `"REG_CC"`)
@@ -18,6 +20,12 @@
 * `REG_DD` (value: `"REG_DD"`)
 
 * `REG_E` (value: `"REG_E"`)
+
+* `SC_ACCOUNT_AGREEMENT` (value: `"SC_ACCOUNT_AGREEMENT"`)
+
+* `SC_AUTO_PAYMENT` (value: `"SC_AUTO_PAYMENT"`)
+
+* `SC_SECURITY_AGREEMENT` (value: `"SC_SECURITY_AGREEMENT"`)
 
 * `TERMS_AND_CONDITIONS` (value: `"TERMS_AND_CONDITIONS"`)
 

@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **AccountNo** | **string** | Receiving account number | 
 **Amount** | **int32** | Transaction amount in cents | 
 **BankId** | **int32** |  | 
+**CompanyEntryDescription** | Pointer to **string** | Company Entry Description field in ACH batch header. Originator inserts this field&#39;s value to provide the Receiver with a description of the entry&#39;s purpose. | [optional] 
+**CompanyName** | Pointer to **string** | Company Name field in ACH batch header. | [optional] 
 **EffectiveDate** | **string** | Effective date of the transaction | 
 **ExternalId** | **string** | Transaction ID in the ledger | 
 **Hold** | Pointer to [**HoldData**](HoldData.md) |  | [optional] 
@@ -124,6 +126,56 @@ and a boolean to check if the value has been set.
 
 SetBankId sets BankId field to given value.
 
+
+### GetCompanyEntryDescription
+
+`func (o *OutgoingAch) GetCompanyEntryDescription() string`
+
+GetCompanyEntryDescription returns the CompanyEntryDescription field if non-nil, zero value otherwise.
+
+### GetCompanyEntryDescriptionOk
+
+`func (o *OutgoingAch) GetCompanyEntryDescriptionOk() (*string, bool)`
+
+GetCompanyEntryDescriptionOk returns a tuple with the CompanyEntryDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompanyEntryDescription
+
+`func (o *OutgoingAch) SetCompanyEntryDescription(v string)`
+
+SetCompanyEntryDescription sets CompanyEntryDescription field to given value.
+
+### HasCompanyEntryDescription
+
+`func (o *OutgoingAch) HasCompanyEntryDescription() bool`
+
+HasCompanyEntryDescription returns a boolean if a field has been set.
+
+### GetCompanyName
+
+`func (o *OutgoingAch) GetCompanyName() string`
+
+GetCompanyName returns the CompanyName field if non-nil, zero value otherwise.
+
+### GetCompanyNameOk
+
+`func (o *OutgoingAch) GetCompanyNameOk() (*string, bool)`
+
+GetCompanyNameOk returns a tuple with the CompanyName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompanyName
+
+`func (o *OutgoingAch) SetCompanyName(v string)`
+
+SetCompanyName sets CompanyName field to given value.
+
+### HasCompanyName
+
+`func (o *OutgoingAch) HasCompanyName() bool`
+
+HasCompanyName returns a boolean if a field has been set.
 
 ### GetEffectiveDate
 

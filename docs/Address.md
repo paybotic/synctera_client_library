@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **AddressLine2** | Pointer to **string** | Street address line 2 | [optional] 
 **City** | Pointer to **string** | City | [optional] 
 **CountryCode** | **string** | ISO-3166-1 Alpha-2 country code | 
-**PostalCode** | Pointer to **string** | Postal code | [optional] 
-**State** | Pointer to **string** | State, region, province, or prefecture | [optional] 
+**PostalCode** | Pointer to **string** | Postal code. For US, formats of 12345 or 12345-1234 are accepted. For CA, formats of A1A 1A1 or A1A1A1 (regardless of case) are accepted, and will be converted to A1A 1A1 format.  | [optional] 
+**State** | Pointer to **string** | State, region, province, or prefecture. This is the ISO-3166-2 subdivision code, excluding the country prefix. For example, TX for Texas USA or TAM for Tamaulipas Mexico. Its length varies by country, e.g. 2 characters for US, 3 for MX.  | [optional] 
 
 ## Methods
 

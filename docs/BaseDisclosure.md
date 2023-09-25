@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AcknowledgingPersonId** | Pointer to **string** | Unique ID for the person acknowledging the disclosure. Applicable for disclosures where the person  acknowledging is different from the subject of the disclosure. Required for OWNER_CERTIFICATION disclosures.  | [optional] 
 **BusinessId** | Pointer to **string** | Unique ID for the business. Exactly one of &#x60;business_id&#x60; or &#x60;person_id&#x60; must be set.  | [optional] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
 **DisclosureDate** | Pointer to **time.Time** | Date and time the disclosure was made. | [optional] 
@@ -33,6 +34,31 @@ will change when the set of required properties is changed
 NewBaseDisclosureWithDefaults instantiates a new BaseDisclosure object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAcknowledgingPersonId
+
+`func (o *BaseDisclosure) GetAcknowledgingPersonId() string`
+
+GetAcknowledgingPersonId returns the AcknowledgingPersonId field if non-nil, zero value otherwise.
+
+### GetAcknowledgingPersonIdOk
+
+`func (o *BaseDisclosure) GetAcknowledgingPersonIdOk() (*string, bool)`
+
+GetAcknowledgingPersonIdOk returns a tuple with the AcknowledgingPersonId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAcknowledgingPersonId
+
+`func (o *BaseDisclosure) SetAcknowledgingPersonId(v string)`
+
+SetAcknowledgingPersonId sets AcknowledgingPersonId field to given value.
+
+### HasAcknowledgingPersonId
+
+`func (o *BaseDisclosure) HasAcknowledgingPersonId() bool`
+
+HasAcknowledgingPersonId returns a boolean if a field has been set.
 
 ### GetBusinessId
 

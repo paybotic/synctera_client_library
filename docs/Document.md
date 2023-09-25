@@ -10,13 +10,12 @@ Name | Type | Description | Notes
 **Encryption** | Pointer to [**Encryption**](Encryption.md) |  | [optional] [default to ENCRYPTION_NOT_REQUIRED]
 **FileName** | Pointer to **string** | The name of the document | [optional] [readonly] 
 **Id** | Pointer to **string** | The unique identifier for this resource | [optional] [readonly] 
-**IsRestricted** | Pointer to **bool** | whether this document should be restricted (special permissions will be used to access restricted documents) | [optional] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 
 **Name** | Pointer to **string** | A user-friendly name for the document | [optional] 
 **RelatedResourceId** | Pointer to **string** | The ID of the resource related to the document | [optional] 
 **RelatedResourceType** | Pointer to [**RelatedResourceType**](RelatedResourceType.md) |  | [optional] 
-**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 **Type** | Pointer to [**DocumentType**](DocumentType.md) |  | [optional] 
 **Version** | Pointer to **int32** | The document version | [optional] 
 
@@ -188,31 +187,6 @@ SetId sets Id field to given value.
 `func (o *Document) HasId() bool`
 
 HasId returns a boolean if a field has been set.
-
-### GetIsRestricted
-
-`func (o *Document) GetIsRestricted() bool`
-
-GetIsRestricted returns the IsRestricted field if non-nil, zero value otherwise.
-
-### GetIsRestrictedOk
-
-`func (o *Document) GetIsRestrictedOk() (*bool, bool)`
-
-GetIsRestrictedOk returns a tuple with the IsRestricted field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsRestricted
-
-`func (o *Document) SetIsRestricted(v bool)`
-
-SetIsRestricted sets IsRestricted field to given value.
-
-### HasIsRestricted
-
-`func (o *Document) HasIsRestricted() bool`
-
-HasIsRestricted returns a boolean if a field has been set.
 
 ### GetLastUpdatedTime
 

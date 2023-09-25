@@ -7,20 +7,22 @@ Name | Type | Description | Notes
 **BanStatus** | Pointer to [**BanStatus**](BanStatus.md) |  | [optional] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
 **Email** | Pointer to **string** | Customer&#39;s email | [optional] 
+**HasAccounts** | Pointer to **bool** | This flag indicates whether the person or business has accounts. | [optional] [readonly] 
 **Id** | Pointer to **string** | Customer unique identifier | [optional] [readonly] 
 **KycExempt** | Pointer to **bool** | Customer&#39;s KYC exemption | [optional] [readonly] 
 **KycLastRun** | Pointer to **time.Time** | Date and time KYC was last run on the customer | [optional] [readonly] 
 **KycStatus** | Pointer to [**CustomerKycStatus**](CustomerKycStatus.md) |  | [optional] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
-**LegalAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
+**LegalAddress** | Pointer to [**LegalAddress**](LegalAddress.md) |  | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** | User-supplied metadata. Do not use to store PII. | [optional] 
 **MiddleName** | Pointer to **string** | Customer&#39;s middle name | [optional] 
+**Note** | Pointer to **string** | Add an optional note when creating or updating a customer. A note is required when updating a customers&#39;s ban_status between SUSPENDED and ALLOWED. | [optional] 
 **PhoneNumber** | Pointer to **string** | Customer&#39;s mobile phone number with country code in E.164 format. Must have a valid country code. Area code and local phone number are not validated. | [optional] 
-**RelatedCustomers** | Pointer to [**[]Relationship1**](Relationship1.md) | Customer&#39;s relationships with other accounts eg. guardian | [optional] 
-**ShippingAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
+**RelatedCustomers** | Pointer to [**[]Relationship1**](Relationship1.md) | Customer&#39;s relationships with other accounts eg. guardian. This property is no longer supported. Setting it will return an error. | [optional] 
+**ShippingAddress** | Pointer to [**ShippingAddress**](ShippingAddress.md) |  | [optional] 
 **Ssn** | Pointer to **string** | Customer&#39;s full tax ID eg SSN formatted with hyphens. This optional parameter is required when running KYC on a customer. Input must match the pattern ^\\d{3}-\\d{2}-\\d{4}$. The response contains the last 4 digits only (e.g. 6789). | [optional] 
 **SsnSource** | Pointer to [**SsnSource**](SsnSource.md) |  | [optional] 
-**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 
 ## Methods
 
@@ -115,6 +117,31 @@ SetEmail sets Email field to given value.
 `func (o *BasePerson) HasEmail() bool`
 
 HasEmail returns a boolean if a field has been set.
+
+### GetHasAccounts
+
+`func (o *BasePerson) GetHasAccounts() bool`
+
+GetHasAccounts returns the HasAccounts field if non-nil, zero value otherwise.
+
+### GetHasAccountsOk
+
+`func (o *BasePerson) GetHasAccountsOk() (*bool, bool)`
+
+GetHasAccountsOk returns a tuple with the HasAccounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasAccounts
+
+`func (o *BasePerson) SetHasAccounts(v bool)`
+
+SetHasAccounts sets HasAccounts field to given value.
+
+### HasHasAccounts
+
+`func (o *BasePerson) HasHasAccounts() bool`
+
+HasHasAccounts returns a boolean if a field has been set.
 
 ### GetId
 
@@ -243,20 +270,20 @@ HasLastUpdatedTime returns a boolean if a field has been set.
 
 ### GetLegalAddress
 
-`func (o *BasePerson) GetLegalAddress() Address`
+`func (o *BasePerson) GetLegalAddress() LegalAddress`
 
 GetLegalAddress returns the LegalAddress field if non-nil, zero value otherwise.
 
 ### GetLegalAddressOk
 
-`func (o *BasePerson) GetLegalAddressOk() (*Address, bool)`
+`func (o *BasePerson) GetLegalAddressOk() (*LegalAddress, bool)`
 
 GetLegalAddressOk returns a tuple with the LegalAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLegalAddress
 
-`func (o *BasePerson) SetLegalAddress(v Address)`
+`func (o *BasePerson) SetLegalAddress(v LegalAddress)`
 
 SetLegalAddress sets LegalAddress field to given value.
 
@@ -316,6 +343,31 @@ SetMiddleName sets MiddleName field to given value.
 
 HasMiddleName returns a boolean if a field has been set.
 
+### GetNote
+
+`func (o *BasePerson) GetNote() string`
+
+GetNote returns the Note field if non-nil, zero value otherwise.
+
+### GetNoteOk
+
+`func (o *BasePerson) GetNoteOk() (*string, bool)`
+
+GetNoteOk returns a tuple with the Note field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNote
+
+`func (o *BasePerson) SetNote(v string)`
+
+SetNote sets Note field to given value.
+
+### HasNote
+
+`func (o *BasePerson) HasNote() bool`
+
+HasNote returns a boolean if a field has been set.
+
 ### GetPhoneNumber
 
 `func (o *BasePerson) GetPhoneNumber() string`
@@ -368,20 +420,20 @@ HasRelatedCustomers returns a boolean if a field has been set.
 
 ### GetShippingAddress
 
-`func (o *BasePerson) GetShippingAddress() Address`
+`func (o *BasePerson) GetShippingAddress() ShippingAddress`
 
 GetShippingAddress returns the ShippingAddress field if non-nil, zero value otherwise.
 
 ### GetShippingAddressOk
 
-`func (o *BasePerson) GetShippingAddressOk() (*Address, bool)`
+`func (o *BasePerson) GetShippingAddressOk() (*ShippingAddress, bool)`
 
 GetShippingAddressOk returns a tuple with the ShippingAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetShippingAddress
 
-`func (o *BasePerson) SetShippingAddress(v Address)`
+`func (o *BasePerson) SetShippingAddress(v ShippingAddress)`
 
 SetShippingAddress sets ShippingAddress field to given value.
 

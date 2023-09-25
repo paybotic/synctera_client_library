@@ -3,17 +3,17 @@
 ## Enum
 
 
-* `UNVERIFIED` (value: `"UNVERIFIED"`)
-
-* `REVIEW` (value: `"REVIEW"`)
+* `ACCEPTED` (value: `"ACCEPTED"`)
 
 * `PROVIDER_FAILURE` (value: `"PROVIDER_FAILURE"`)
 
-* `ACCEPTED` (value: `"ACCEPTED"`)
+* `PROVISIONAL` (value: `"PROVISIONAL"`)
 
 * `REJECTED` (value: `"REJECTED"`)
 
-* `PROVISIONAL` (value: `"PROVISIONAL"`)
+* `REVIEW` (value: `"REVIEW"`)
+
+* `UNVERIFIED` (value: `"UNVERIFIED"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

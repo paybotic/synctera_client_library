@@ -1,13 +1,13 @@
-# \CashPickupsAlphaApi
+# \CashPickupsAlphaAPI
 
-All URIs are relative to *https://api.synctera.com/v0*
+All URIs are relative to *https://api-sandbox.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateCashPickup**](CashPickupsAlphaApi.md#CreateCashPickup) | **Post** /cash_pickups | Create a cash pickup
-[**GetCashPickup**](CashPickupsAlphaApi.md#GetCashPickup) | **Get** /cash_pickups/{cash_pickup_id} | Get a cash pickup
-[**ListCashPickups**](CashPickupsAlphaApi.md#ListCashPickups) | **Get** /cash_pickups | List cash pickups
-[**PatchCashPickup**](CashPickupsAlphaApi.md#PatchCashPickup) | **Patch** /cash_pickups/{cash_pickup_id} | Update a cash pickup
+[**CreateCashPickup**](CashPickupsAlphaAPI.md#CreateCashPickup) | **Post** /cash_pickups | Create a cash pickup
+[**GetCashPickup**](CashPickupsAlphaAPI.md#GetCashPickup) | **Get** /cash_pickups/{cash_pickup_id} | Get a cash pickup
+[**ListCashPickups**](CashPickupsAlphaAPI.md#ListCashPickups) | **Get** /cash_pickups | List cash pickups
+[**PatchCashPickup**](CashPickupsAlphaAPI.md#PatchCashPickup) | **Patch** /cash_pickups/{cash_pickup_id} | Update a cash pickup
 
 
 
@@ -28,7 +28,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -36,13 +36,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CashPickupsAlphaApi.CreateCashPickup(context.Background()).CashPickupPostRequest(cashPickupPostRequest).Execute()
+    resp, r, err := apiClient.CashPickupsAlphaAPI.CreateCashPickup(context.Background()).CashPickupPostRequest(cashPickupPostRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CashPickupsAlphaApi.CreateCashPickup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CashPickupsAlphaAPI.CreateCashPickup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `CreateCashPickup`: CashPickup
-    fmt.Fprintf(os.Stdout, "Response from `CashPickupsAlphaApi.CreateCashPickup`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CashPickupsAlphaAPI.CreateCashPickup`: %v\n", resp)
 }
 ```
 
@@ -94,7 +94,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -102,13 +102,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CashPickupsAlphaApi.GetCashPickup(context.Background(), cashPickupId).Execute()
+    resp, r, err := apiClient.CashPickupsAlphaAPI.GetCashPickup(context.Background(), cashPickupId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CashPickupsAlphaApi.GetCashPickup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CashPickupsAlphaAPI.GetCashPickup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetCashPickup`: CashPickup
-    fmt.Fprintf(os.Stdout, "Response from `CashPickupsAlphaApi.GetCashPickup`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CashPickupsAlphaAPI.GetCashPickup`: %v\n", resp)
 }
 ```
 
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 
 ## ListCashPickups
 
-> CashPickupList ListCashPickups(ctx).Limit(limit).PageToken(pageToken).Execute()
+> CashPickupList ListCashPickups(ctx).PageToken(pageToken).Limit(limit).Execute()
 
 List cash pickups
 
@@ -164,22 +164,22 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    limit := int32(100) // int32 |  (optional) (default to 100)
     pageToken := "a8937a0d" // string |  (optional)
+    limit := int32(100) // int32 |  (optional) (default to 100)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CashPickupsAlphaApi.ListCashPickups(context.Background()).Limit(limit).PageToken(pageToken).Execute()
+    resp, r, err := apiClient.CashPickupsAlphaAPI.ListCashPickups(context.Background()).PageToken(pageToken).Limit(limit).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CashPickupsAlphaApi.ListCashPickups``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CashPickupsAlphaAPI.ListCashPickups``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListCashPickups`: CashPickupList
-    fmt.Fprintf(os.Stdout, "Response from `CashPickupsAlphaApi.ListCashPickups`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CashPickupsAlphaAPI.ListCashPickups`: %v\n", resp)
 }
 ```
 
@@ -194,8 +194,8 @@ Other parameters are passed through a pointer to a apiListCashPickupsRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
+ **limit** | **int32** |  | [default to 100]
 
 ### Return type
 
@@ -232,22 +232,22 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     cashPickupId := "1d2a39f5-e39b-4cd4-96a1-8727187469a9" // string | The unique identifier of a cash pickup
-    cashPickupPatchRequest := *openapiclient.NewCashPickupPatchRequest("23f71110-3b25-4f3d-a1c3-915d699d8db6", int32(10000), "ReferenceId_example") // CashPickupPatchRequest | cash pickup to update
+    cashPickupPatchRequest := *openapiclient.NewCashPickupPatchRequest() // CashPickupPatchRequest | cash pickup to update
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CashPickupsAlphaApi.PatchCashPickup(context.Background(), cashPickupId).CashPickupPatchRequest(cashPickupPatchRequest).Execute()
+    resp, r, err := apiClient.CashPickupsAlphaAPI.PatchCashPickup(context.Background(), cashPickupId).CashPickupPatchRequest(cashPickupPatchRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CashPickupsAlphaApi.PatchCashPickup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CashPickupsAlphaAPI.PatchCashPickup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `PatchCashPickup`: CashPickup
-    fmt.Fprintf(os.Stdout, "Response from `CashPickupsAlphaApi.PatchCashPickup`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CashPickupsAlphaAPI.PatchCashPickup`: %v\n", resp)
 }
 ```
 

@@ -13,13 +13,14 @@ Name | Type | Description | Notes
 **LastFour** | **string** | The last 4 digits of the card PAN | [readonly] 
 **LastModifiedTime** | Pointer to **time.Time** |  | [optional] 
 **Name** | **string** | The cardholder name | 
+**Status** | [**ExternalCardStatus**](ExternalCardStatus.md) |  | 
 **Verifications** | Pointer to [**ExternalCardVerifications**](ExternalCardVerifications.md) |  | [optional] 
 
 ## Methods
 
 ### NewExternalCardResponse
 
-`func NewExternalCardResponse(currency string, customerId string, expirationMonth string, expirationYear string, id string, lastFour string, name string, ) *ExternalCardResponse`
+`func NewExternalCardResponse(currency string, customerId string, expirationMonth string, expirationYear string, id string, lastFour string, name string, status ExternalCardStatus, ) *ExternalCardResponse`
 
 NewExternalCardResponse instantiates a new ExternalCardResponse object
 This constructor will assign default values to properties that have it defined,
@@ -222,6 +223,26 @@ and a boolean to check if the value has been set.
 `func (o *ExternalCardResponse) SetName(v string)`
 
 SetName sets Name field to given value.
+
+
+### GetStatus
+
+`func (o *ExternalCardResponse) GetStatus() ExternalCardStatus`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *ExternalCardResponse) GetStatusOk() (*ExternalCardStatus, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *ExternalCardResponse) SetStatus(v ExternalCardStatus)`
+
+SetStatus sets Status field to given value.
 
 
 ### GetVerifications

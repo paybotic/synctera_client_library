@@ -4,16 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AchRoutingNumber** | **string** | The routing number used for US ACH payments.  | 
+**AchRoutingNumber** | Pointer to **string** | The routing number used for US ACH payments.  | [optional] 
 **BankCountries** | **[]string** | The countries that this bank operates the account in | 
 **BankName** | **string** | The name of the bank managing the account | 
-**WireRoutingNumber** | Pointer to **string** | The routing number used for US wire payments.  | [optional] 
+**EftCaRoutingNumber** | Pointer to **string** | &gt; 🚧 Alpha &gt; This is an Alpha property. Feedback from the community is welcome. We may make breaking changes to this property. The 9 digit routing number used for EFT CA payments, identifying a Canadian bank.  The format is 0xxxyyyyy where xxx is the institution number and yyyyy is the transit number. On write, Synctera will store the entire routing number; on read, we only return the last 4 characters.  | [optional] 
+**InternationalWireDetails** | Pointer to [**InternationalWireDetails**](InternationalWireDetails.md) |  | [optional] 
+**WireRoutingNumber** | Pointer to **string** | The routing number used for US domestic wire payments.  | [optional] 
 
 ## Methods
 
 ### NewAddAccountsRequestRoutingIdentifiers
 
-`func NewAddAccountsRequestRoutingIdentifiers(achRoutingNumber string, bankCountries []string, bankName string, ) *AddAccountsRequestRoutingIdentifiers`
+`func NewAddAccountsRequestRoutingIdentifiers(bankCountries []string, bankName string, ) *AddAccountsRequestRoutingIdentifiers`
 
 NewAddAccountsRequestRoutingIdentifiers instantiates a new AddAccountsRequestRoutingIdentifiers object
 This constructor will assign default values to properties that have it defined,
@@ -47,6 +49,11 @@ and a boolean to check if the value has been set.
 
 SetAchRoutingNumber sets AchRoutingNumber field to given value.
 
+### HasAchRoutingNumber
+
+`func (o *AddAccountsRequestRoutingIdentifiers) HasAchRoutingNumber() bool`
+
+HasAchRoutingNumber returns a boolean if a field has been set.
 
 ### GetBankCountries
 
@@ -87,6 +94,56 @@ and a boolean to check if the value has been set.
 
 SetBankName sets BankName field to given value.
 
+
+### GetEftCaRoutingNumber
+
+`func (o *AddAccountsRequestRoutingIdentifiers) GetEftCaRoutingNumber() string`
+
+GetEftCaRoutingNumber returns the EftCaRoutingNumber field if non-nil, zero value otherwise.
+
+### GetEftCaRoutingNumberOk
+
+`func (o *AddAccountsRequestRoutingIdentifiers) GetEftCaRoutingNumberOk() (*string, bool)`
+
+GetEftCaRoutingNumberOk returns a tuple with the EftCaRoutingNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEftCaRoutingNumber
+
+`func (o *AddAccountsRequestRoutingIdentifiers) SetEftCaRoutingNumber(v string)`
+
+SetEftCaRoutingNumber sets EftCaRoutingNumber field to given value.
+
+### HasEftCaRoutingNumber
+
+`func (o *AddAccountsRequestRoutingIdentifiers) HasEftCaRoutingNumber() bool`
+
+HasEftCaRoutingNumber returns a boolean if a field has been set.
+
+### GetInternationalWireDetails
+
+`func (o *AddAccountsRequestRoutingIdentifiers) GetInternationalWireDetails() InternationalWireDetails`
+
+GetInternationalWireDetails returns the InternationalWireDetails field if non-nil, zero value otherwise.
+
+### GetInternationalWireDetailsOk
+
+`func (o *AddAccountsRequestRoutingIdentifiers) GetInternationalWireDetailsOk() (*InternationalWireDetails, bool)`
+
+GetInternationalWireDetailsOk returns a tuple with the InternationalWireDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInternationalWireDetails
+
+`func (o *AddAccountsRequestRoutingIdentifiers) SetInternationalWireDetails(v InternationalWireDetails)`
+
+SetInternationalWireDetails sets InternationalWireDetails field to given value.
+
+### HasInternationalWireDetails
+
+`func (o *AddAccountsRequestRoutingIdentifiers) HasInternationalWireDetails() bool`
+
+HasInternationalWireDetails returns a boolean if a field has been set.
 
 ### GetWireRoutingNumber
 

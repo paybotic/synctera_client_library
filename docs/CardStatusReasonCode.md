@@ -3,67 +3,67 @@
 ## Enum
 
 
-* `NEW` (value: `"NEW"`)
+* `ACT` (value: `"ACT"`)
 
-* `REQ` (value: `"REQ"`)
+* `ADD` (value: `"ADD"`)
 
-* `INA` (value: `"INA"`)
-
-* `UNK` (value: `"UNK"`)
-
-* `NEG` (value: `"NEG"`)
-
-* `REV` (value: `"REV"`)
-
-* `SUS` (value: `"SUS"`)
-
-* `OUT` (value: `"OUT"`)
-
-* `FRD` (value: `"FRD"`)
-
-* `MAT` (value: `"MAT"`)
-
-* `LOS` (value: `"LOS"`)
+* `AUX` (value: `"AUX"`)
 
 * `CLO` (value: `"CLO"`)
 
 * `COM` (value: `"COM"`)
 
-* `TMP` (value: `"TMP"`)
-
-* `PRC` (value: `"PRC"`)
-
-* `ISS` (value: `"ISS"`)
-
-* `EXP` (value: `"EXP"`)
-
-* `KYC` (value: `"KYC"`)
-
-* `INF` (value: `"INF"`)
-
-* `ACT` (value: `"ACT"`)
-
-* `AUX` (value: `"AUX"`)
-
-* `PIN` (value: `"PIN"`)
-
-* `STO` (value: `"STO"`)
-
-* `ADD` (value: `"ADD"`)
-
-* `NAM` (value: `"NAM"`)
-
-* `SSN` (value: `"SSN"`)
-
 * `DOB` (value: `"DOB"`)
 
 * `EML` (value: `"EML"`)
 
-* `PHO` (value: `"PHO"`)
+* `EXP` (value: `"EXP"`)
+
+* `FRD` (value: `"FRD"`)
 
 * `FUL` (value: `"FUL"`)
 
+* `INA` (value: `"INA"`)
+
+* `INF` (value: `"INF"`)
+
+* `ISS` (value: `"ISS"`)
+
+* `KYC` (value: `"KYC"`)
+
+* `LOS` (value: `"LOS"`)
+
+* `MAT` (value: `"MAT"`)
+
+* `NAM` (value: `"NAM"`)
+
+* `NEG` (value: `"NEG"`)
+
+* `NEW` (value: `"NEW"`)
+
 * `OTH` (value: `"OTH"`)
+
+* `OUT` (value: `"OUT"`)
+
+* `PHO` (value: `"PHO"`)
+
+* `PIN` (value: `"PIN"`)
+
+* `PRC` (value: `"PRC"`)
+
+* `REQ` (value: `"REQ"`)
+
+* `REV` (value: `"REV"`)
+
+* `SSN` (value: `"SSN"`)
+
+* `STO` (value: `"STO"`)
+
+* `SUS` (value: `"SUS"`)
+
+* `TMP` (value: `"TMP"`)
+
+* `UNK` (value: `"UNK"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

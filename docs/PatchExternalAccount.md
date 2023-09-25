@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountIdentifiers** | Pointer to [**PatchAccountsRequestAccountIdentifiers**](PatchAccountsRequestAccountIdentifiers.md) |  | [optional] 
 **AccountOwnerNames** | Pointer to **[]string** | The names of the account owners. | [optional] 
+**Currency** | Pointer to **string** | The currency of the account in ISO 4217 format | [optional] 
 **Nickname** | Pointer to **string** | A user-meaningful name for the account | [optional] 
 **RoutingIdentifiers** | Pointer to [**PatchAccountsRequestRoutingIdentifiers**](PatchAccountsRequestRoutingIdentifiers.md) |  | [optional] 
 **Type** | Pointer to **string** | The type of the account | [optional] 
@@ -79,6 +80,31 @@ SetAccountOwnerNames sets AccountOwnerNames field to given value.
 `func (o *PatchExternalAccount) HasAccountOwnerNames() bool`
 
 HasAccountOwnerNames returns a boolean if a field has been set.
+
+### GetCurrency
+
+`func (o *PatchExternalAccount) GetCurrency() string`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *PatchExternalAccount) GetCurrencyOk() (*string, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *PatchExternalAccount) SetCurrency(v string)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *PatchExternalAccount) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
 
 ### GetNickname
 

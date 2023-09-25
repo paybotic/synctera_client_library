@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | Generated ID for internal account | [optional] [readonly] 
 **IsSystemAcc** | Pointer to **bool** | Is a system-controlled internal account. When this field is true, this internal account will be reserved exclusively for internal use by the Synctera platform and any internal transfers to or from this internal account will be declined. | [optional] [default to false]
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
-**Purpose** | Pointer to [**InternalAccountPurpose**](InternalAccountPurpose.md) |  | [optional] [default to INTERNALACCOUNTPURPOSE_PROFIT_AND_LOSS]
+**Purpose** | Pointer to [**InternalAccountPurpose**](InternalAccountPurpose.md) |  | [optional] 
 **Status** | **string** |  | 
 
 ## Methods

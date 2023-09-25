@@ -1,27 +1,28 @@
 # EventType
 
-## Enum
+## Properties
 
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
 
-* `USERTRANSITION` (value: `"usertransition"`)
+## Methods
 
-* `BUSINESSTRANSITION` (value: `"businesstransition"`)
+### NewEventType
 
-* `CARDTRANSITION` (value: `"cardtransition"`)
+`func NewEventType() *EventType`
 
-* `TRANSACTION` (value: `"transaction"`)
+NewEventType instantiates a new EventType object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
 
-* `DIGITALWALLETTOKENTRANSITION` (value: `"digitalwallettokentransition"`)
+### NewEventTypeWithDefaults
 
-* `CHARGEBACKTRANSITION` (value: `"chargebacktransition"`)
+`func NewEventTypeWithDefaults() *EventType`
 
-* `COMMANDOMODETRANSITION` (value: `"commandomodetransition"`)
-
-* `CASETRANSITION` (value: `"casetransition"`)
-
-* `DIRECTDEPOSITTRANSITION` (value: `"directdeposittransition"`)
-
-* `BANKTRANSFERTRANSITION` (value: `"banktransfertransition"`)
+NewEventTypeWithDefaults instantiates a new EventType object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,21 +4,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AdditionalData** | [**AdditionalOwnerData**](AdditionalOwnerData.md) |  | 
+**AdditionalData** | [**PayerPayeeAdditionalData**](PayerPayeeAdditionalData.md) |  | 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
-**FromPersonId** | **string** | Unique ID for the subject person.  | 
+**FromBusinessId** | **string** | Unique ID for the subject business.  | 
 **Id** | Pointer to **string** | Relationship unique identifier. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 
-**RelationshipType** | **string** | The relationship type. One of the following: * &#x60;BENEFICIAL_OWNER_OF&#x60; – a person who directly or indirectly owns a portion of the business. * &#x60;MANAGING_PERSON_OF&#x60; – a person who is an officer, director, or other notable person of an organization. * &#x60;OWNER_OF&#x60; – a business with ownership of another business.  | 
+**RelationshipType** | [**RelationshipTypes**](RelationshipTypes.md) |  | 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 **ToBusinessId** | **string** | Unique ID for the related business.  | 
-**FromBusinessId** | **string** | Unique ID for the subject business.  | 
+**FromPersonId** | **string** | Unique ID for the subject person.  | 
+**ToPersonId** | Pointer to **string** | Unique ID for the related person.  | [optional] 
 
 ## Methods
 
 ### NewRelationshipIn
 
-`func NewRelationshipIn(additionalData AdditionalOwnerData, fromPersonId string, relationshipType string, toBusinessId string, fromBusinessId string, ) *RelationshipIn`
+`func NewRelationshipIn(additionalData PayerPayeeAdditionalData, fromBusinessId string, relationshipType RelationshipTypes, toBusinessId string, fromPersonId string, ) *RelationshipIn`
 
 NewRelationshipIn instantiates a new RelationshipIn object
 This constructor will assign default values to properties that have it defined,
@@ -35,20 +37,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAdditionalData
 
-`func (o *RelationshipIn) GetAdditionalData() AdditionalOwnerData`
+`func (o *RelationshipIn) GetAdditionalData() PayerPayeeAdditionalData`
 
 GetAdditionalData returns the AdditionalData field if non-nil, zero value otherwise.
 
 ### GetAdditionalDataOk
 
-`func (o *RelationshipIn) GetAdditionalDataOk() (*AdditionalOwnerData, bool)`
+`func (o *RelationshipIn) GetAdditionalDataOk() (*PayerPayeeAdditionalData, bool)`
 
 GetAdditionalDataOk returns a tuple with the AdditionalData field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAdditionalData
 
-`func (o *RelationshipIn) SetAdditionalData(v AdditionalOwnerData)`
+`func (o *RelationshipIn) SetAdditionalData(v PayerPayeeAdditionalData)`
 
 SetAdditionalData sets AdditionalData field to given value.
 
@@ -78,24 +80,24 @@ SetCreationTime sets CreationTime field to given value.
 
 HasCreationTime returns a boolean if a field has been set.
 
-### GetFromPersonId
+### GetFromBusinessId
 
-`func (o *RelationshipIn) GetFromPersonId() string`
+`func (o *RelationshipIn) GetFromBusinessId() string`
 
-GetFromPersonId returns the FromPersonId field if non-nil, zero value otherwise.
+GetFromBusinessId returns the FromBusinessId field if non-nil, zero value otherwise.
 
-### GetFromPersonIdOk
+### GetFromBusinessIdOk
 
-`func (o *RelationshipIn) GetFromPersonIdOk() (*string, bool)`
+`func (o *RelationshipIn) GetFromBusinessIdOk() (*string, bool)`
 
-GetFromPersonIdOk returns a tuple with the FromPersonId field if it's non-nil, zero value otherwise
+GetFromBusinessIdOk returns a tuple with the FromBusinessId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFromPersonId
+### SetFromBusinessId
 
-`func (o *RelationshipIn) SetFromPersonId(v string)`
+`func (o *RelationshipIn) SetFromBusinessId(v string)`
 
-SetFromPersonId sets FromPersonId field to given value.
+SetFromBusinessId sets FromBusinessId field to given value.
 
 
 ### GetId
@@ -175,23 +177,48 @@ HasMetadata returns a boolean if a field has been set.
 
 ### GetRelationshipType
 
-`func (o *RelationshipIn) GetRelationshipType() string`
+`func (o *RelationshipIn) GetRelationshipType() RelationshipTypes`
 
 GetRelationshipType returns the RelationshipType field if non-nil, zero value otherwise.
 
 ### GetRelationshipTypeOk
 
-`func (o *RelationshipIn) GetRelationshipTypeOk() (*string, bool)`
+`func (o *RelationshipIn) GetRelationshipTypeOk() (*RelationshipTypes, bool)`
 
 GetRelationshipTypeOk returns a tuple with the RelationshipType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRelationshipType
 
-`func (o *RelationshipIn) SetRelationshipType(v string)`
+`func (o *RelationshipIn) SetRelationshipType(v RelationshipTypes)`
 
 SetRelationshipType sets RelationshipType field to given value.
 
+
+### GetTenant
+
+`func (o *RelationshipIn) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *RelationshipIn) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *RelationshipIn) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *RelationshipIn) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetToBusinessId
 
@@ -213,25 +240,50 @@ and a boolean to check if the value has been set.
 SetToBusinessId sets ToBusinessId field to given value.
 
 
-### GetFromBusinessId
+### GetFromPersonId
 
-`func (o *RelationshipIn) GetFromBusinessId() string`
+`func (o *RelationshipIn) GetFromPersonId() string`
 
-GetFromBusinessId returns the FromBusinessId field if non-nil, zero value otherwise.
+GetFromPersonId returns the FromPersonId field if non-nil, zero value otherwise.
 
-### GetFromBusinessIdOk
+### GetFromPersonIdOk
 
-`func (o *RelationshipIn) GetFromBusinessIdOk() (*string, bool)`
+`func (o *RelationshipIn) GetFromPersonIdOk() (*string, bool)`
 
-GetFromBusinessIdOk returns a tuple with the FromBusinessId field if it's non-nil, zero value otherwise
+GetFromPersonIdOk returns a tuple with the FromPersonId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFromBusinessId
+### SetFromPersonId
 
-`func (o *RelationshipIn) SetFromBusinessId(v string)`
+`func (o *RelationshipIn) SetFromPersonId(v string)`
 
-SetFromBusinessId sets FromBusinessId field to given value.
+SetFromPersonId sets FromPersonId field to given value.
 
+
+### GetToPersonId
+
+`func (o *RelationshipIn) GetToPersonId() string`
+
+GetToPersonId returns the ToPersonId field if non-nil, zero value otherwise.
+
+### GetToPersonIdOk
+
+`func (o *RelationshipIn) GetToPersonIdOk() (*string, bool)`
+
+GetToPersonIdOk returns a tuple with the ToPersonId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetToPersonId
+
+`func (o *RelationshipIn) SetToPersonId(v string)`
+
+SetToPersonId sets ToPersonId field to given value.
+
+### HasToPersonId
+
+`func (o *RelationshipIn) HasToPersonId() bool`
+
+HasToPersonId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

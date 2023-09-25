@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RiskRatings** | [**[]RiskRating**](RiskRating.md) | Array of customer risk ratings | 
 **NextPageToken** | Pointer to **string** | If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows. | [optional] 
+**RiskRatings** | [**[]RiskRating**](RiskRating.md) | Array of customer risk ratings | 
 
 ## Methods
 
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewRiskRatingListWithDefaults instantiates a new RiskRatingList object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetRiskRatings
-
-`func (o *RiskRatingList) GetRiskRatings() []RiskRating`
-
-GetRiskRatings returns the RiskRatings field if non-nil, zero value otherwise.
-
-### GetRiskRatingsOk
-
-`func (o *RiskRatingList) GetRiskRatingsOk() (*[]RiskRating, bool)`
-
-GetRiskRatingsOk returns a tuple with the RiskRatings field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRiskRatings
-
-`func (o *RiskRatingList) SetRiskRatings(v []RiskRating)`
-
-SetRiskRatings sets RiskRatings field to given value.
-
 
 ### GetNextPageToken
 
@@ -70,6 +50,26 @@ SetNextPageToken sets NextPageToken field to given value.
 `func (o *RiskRatingList) HasNextPageToken() bool`
 
 HasNextPageToken returns a boolean if a field has been set.
+
+### GetRiskRatings
+
+`func (o *RiskRatingList) GetRiskRatings() []RiskRating`
+
+GetRiskRatings returns the RiskRatings field if non-nil, zero value otherwise.
+
+### GetRiskRatingsOk
+
+`func (o *RiskRatingList) GetRiskRatingsOk() (*[]RiskRating, bool)`
+
+GetRiskRatingsOk returns a tuple with the RiskRatings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRiskRatings
+
+`func (o *RiskRatingList) SetRiskRatings(v []RiskRating)`
+
+SetRiskRatings sets RiskRatings field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

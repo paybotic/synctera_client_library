@@ -1,10 +1,10 @@
-# \CardWebhookSimulationsApi
+# \CardWebhookSimulationsAPI
 
-All URIs are relative to *https://api.synctera.com/v0*
+All URIs are relative to *https://api-sandbox.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**SimulateCardFulfillmentEvent**](CardWebhookSimulationsApi.md#SimulateCardFulfillmentEvent) | **Post** /cards/{card_id}/webhook_simulations/fulfillment | Simulate Card Fulfillment Event
+[**SimulateCardFulfillmentEvent**](CardWebhookSimulationsAPI.md#SimulateCardFulfillmentEvent) | **Post** /cards/{card_id}/webhook_simulations/fulfillment | Simulate Card Fulfillment Event
 
 
 
@@ -25,22 +25,22 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    simulateCardFulfillment := *openapiclient.NewSimulateCardFulfillment(openapiclient.card_fulfillment_status("ISSUED")) // SimulateCardFulfillment | Desired simulated fulfillment status change value
+    simulateCardFulfillment := *openapiclient.NewSimulateCardFulfillment(openapiclient.card_fulfillment_status("DIGITALLY_PRESENTED")) // SimulateCardFulfillment | Desired simulated fulfillment status change value
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardWebhookSimulationsApi.SimulateCardFulfillmentEvent(context.Background(), cardId).SimulateCardFulfillment(simulateCardFulfillment).Execute()
+    resp, r, err := apiClient.CardWebhookSimulationsAPI.SimulateCardFulfillmentEvent(context.Background(), cardId).SimulateCardFulfillment(simulateCardFulfillment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardWebhookSimulationsApi.SimulateCardFulfillmentEvent``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CardWebhookSimulationsAPI.SimulateCardFulfillmentEvent``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `SimulateCardFulfillmentEvent`: SimulateCardFulfillment
-    fmt.Fprintf(os.Stdout, "Response from `CardWebhookSimulationsApi.SimulateCardFulfillmentEvent`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CardWebhookSimulationsAPI.SimulateCardFulfillmentEvent`: %v\n", resp)
 }
 ```
 

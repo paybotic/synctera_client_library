@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Form** | **string** | PHYSICAL or VIRTUAL. | 
 **Active** | **bool** | Indicates whether the Card Product is active | 
 **CardProgramId** | **string** | Card Program ID | 
 **Color** | Pointer to **string** | Color code for dynamic card elements such as PAN and card holder name | [optional] 
@@ -22,13 +21,15 @@ Name | Type | Description | Notes
 **PhysicalCardFormat** | Pointer to [**PhysicalCardFormat**](PhysicalCardFormat.md) |  | [optional] 
 **ReturnAddress** | Pointer to [**Shipping**](Shipping.md) |  | [optional] 
 **StartDate** | **time.Time** | The time when the Card Product goes live | 
+**ThreeDsPolicy** | [**ThreeDsPolicy**](ThreeDsPolicy.md) |  | 
 **TxnEnhancer** | Pointer to [**TxnEnhancer**](TxnEnhancer.md) |  | [optional] [default to TXNENHANCER_NONE]
+**Form** | **string** | PHYSICAL or VIRTUAL. | 
 
 ## Methods
 
 ### NewCardProductResponse
 
-`func NewCardProductResponse(form string, active bool, cardProgramId string, creationTime time.Time, digitalWalletTokenization DigitalWalletTokenization, endDate time.Time, id string, lastModifiedTime time.Time, name string, startDate time.Time, ) *CardProductResponse`
+`func NewCardProductResponse(active bool, cardProgramId string, creationTime time.Time, digitalWalletTokenization DigitalWalletTokenization, endDate time.Time, id string, lastModifiedTime time.Time, name string, startDate time.Time, threeDsPolicy ThreeDsPolicy, form string, ) *CardProductResponse`
 
 NewCardProductResponse instantiates a new CardProductResponse object
 This constructor will assign default values to properties that have it defined,
@@ -42,26 +43,6 @@ will change when the set of required properties is changed
 NewCardProductResponseWithDefaults instantiates a new CardProductResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetForm
-
-`func (o *CardProductResponse) GetForm() string`
-
-GetForm returns the Form field if non-nil, zero value otherwise.
-
-### GetFormOk
-
-`func (o *CardProductResponse) GetFormOk() (*string, bool)`
-
-GetFormOk returns a tuple with the Form field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetForm
-
-`func (o *CardProductResponse) SetForm(v string)`
-
-SetForm sets Form field to given value.
-
 
 ### GetActive
 
@@ -443,6 +424,26 @@ and a boolean to check if the value has been set.
 SetStartDate sets StartDate field to given value.
 
 
+### GetThreeDsPolicy
+
+`func (o *CardProductResponse) GetThreeDsPolicy() ThreeDsPolicy`
+
+GetThreeDsPolicy returns the ThreeDsPolicy field if non-nil, zero value otherwise.
+
+### GetThreeDsPolicyOk
+
+`func (o *CardProductResponse) GetThreeDsPolicyOk() (*ThreeDsPolicy, bool)`
+
+GetThreeDsPolicyOk returns a tuple with the ThreeDsPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetThreeDsPolicy
+
+`func (o *CardProductResponse) SetThreeDsPolicy(v ThreeDsPolicy)`
+
+SetThreeDsPolicy sets ThreeDsPolicy field to given value.
+
+
 ### GetTxnEnhancer
 
 `func (o *CardProductResponse) GetTxnEnhancer() TxnEnhancer`
@@ -467,6 +468,26 @@ SetTxnEnhancer sets TxnEnhancer field to given value.
 `func (o *CardProductResponse) HasTxnEnhancer() bool`
 
 HasTxnEnhancer returns a boolean if a field has been set.
+
+### GetForm
+
+`func (o *CardProductResponse) GetForm() string`
+
+GetForm returns the Form field if non-nil, zero value otherwise.
+
+### GetFormOk
+
+`func (o *CardProductResponse) GetFormOk() (*string, bool)`
+
+GetFormOk returns a tuple with the Form field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetForm
+
+`func (o *CardProductResponse) SetForm(v string)`
+
+SetForm sets Form field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

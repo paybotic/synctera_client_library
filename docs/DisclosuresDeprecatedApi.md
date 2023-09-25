@@ -1,11 +1,11 @@
-# \DisclosuresDeprecatedApi
+# \DisclosuresDeprecatedAPI
 
-All URIs are relative to *https://api.synctera.com/v0*
+All URIs are relative to *https://api-sandbox.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateDisclosure1**](DisclosuresDeprecatedApi.md#CreateDisclosure1) | **Post** /customers/{customer_id}/disclosures | Create a Disclosure
-[**ListDisclosures1**](DisclosuresDeprecatedApi.md#ListDisclosures1) | **Get** /customers/{customer_id}/disclosures | List Disclosures
+[**CreateDisclosure1**](DisclosuresDeprecatedAPI.md#CreateDisclosure1) | **Post** /customers/{customer_id}/disclosures | Create a Disclosure
+[**ListDisclosures1**](DisclosuresDeprecatedAPI.md#ListDisclosures1) | **Get** /customers/{customer_id}/disclosures | List Disclosures
 
 
 
@@ -27,7 +27,7 @@ import (
     "fmt"
     "os"
     "time"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -37,13 +37,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DisclosuresDeprecatedApi.CreateDisclosure1(context.Background(), customerId).Disclosure1(disclosure1).IdempotencyKey(idempotencyKey).Execute()
+    resp, r, err := apiClient.DisclosuresDeprecatedAPI.CreateDisclosure1(context.Background(), customerId).Disclosure1(disclosure1).IdempotencyKey(idempotencyKey).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DisclosuresDeprecatedApi.CreateDisclosure1``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DisclosuresDeprecatedAPI.CreateDisclosure1``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `CreateDisclosure1`: Disclosure1
-    fmt.Fprintf(os.Stdout, "Response from `DisclosuresDeprecatedApi.CreateDisclosure1`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `DisclosuresDeprecatedAPI.CreateDisclosure1`: %v\n", resp)
 }
 ```
 
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ## ListDisclosures1
 
-> DisclosureResponse ListDisclosures1(ctx, customerId).Limit(limit).PageToken(pageToken).Execute()
+> DisclosureResponse ListDisclosures1(ctx, customerId).PageToken(pageToken).Limit(limit).Execute()
 
 List Disclosures
 
@@ -101,23 +101,23 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier
-    limit := int32(100) // int32 |  (optional) (default to 100)
     pageToken := "a8937a0d" // string |  (optional)
+    limit := int32(100) // int32 |  (optional) (default to 100)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DisclosuresDeprecatedApi.ListDisclosures1(context.Background(), customerId).Limit(limit).PageToken(pageToken).Execute()
+    resp, r, err := apiClient.DisclosuresDeprecatedAPI.ListDisclosures1(context.Background(), customerId).PageToken(pageToken).Limit(limit).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DisclosuresDeprecatedApi.ListDisclosures1``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DisclosuresDeprecatedAPI.ListDisclosures1``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListDisclosures1`: DisclosureResponse
-    fmt.Fprintf(os.Stdout, "Response from `DisclosuresDeprecatedApi.ListDisclosures1`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `DisclosuresDeprecatedAPI.ListDisclosures1`: %v\n", resp)
 }
 ```
 
@@ -137,8 +137,8 @@ Other parameters are passed through a pointer to a apiListDisclosures1Request st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
+ **limit** | **int32** |  | [default to 100]
 
 ### Return type
 

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BusinessId** | Pointer to **string** | Business associated with the current account | [optional] 
-**CustomerId** | Pointer to **string** | Personal customer associated with the current account. | [optional] 
+**BusinessId** | Pointer to **string** | Business associated with the current account. One of business_id or customer_id must be specified. | [optional] 
+**CustomerId** | Pointer to **string** | Personal customer associated with the current account. One of customer_id or business_id must be specified. | [optional] 
 **Id** | Pointer to **string** | ID of account relationship | [optional] [readonly] 
 **PersonId** | Pointer to **string** | Person associated with the current account. This attribute is deprecated and will be removed in a future API version. Use customer_id instead. | [optional] 
 **RelationshipType** | [**AccountRelationshipType**](AccountRelationshipType.md) |  | 

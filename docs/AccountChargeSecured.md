@@ -20,17 +20,15 @@ Name | Type | Description | Notes
 **Iban** | Pointer to **string** | International bank account number | [optional] 
 **Id** | Pointer to **string** | Account ID | [optional] [readonly] 
 **IsAccountPool** | Pointer to **bool** | Account is investment (variable balance) account or a multi-balance account pool. Default false | [optional] 
-**IsAchEnabled** | Pointer to **bool** | A flag to indicate whether ACH transactions are enabled. | [optional] [readonly] 
-**IsCardEnabled** | Pointer to **bool** | A flag to indicate whether card transactions are enabled. | [optional] [readonly] 
-**IsP2pEnabled** | Pointer to **bool** | A flag to indicate whether P2P transactions are enabled. | [optional] [readonly] 
-**IsWireEnabled** | Pointer to **bool** | A flag to indicate whether wire transactions are enabled. | [optional] [readonly] 
+**IsSarEnabled** | Pointer to **bool** | A flag to indicate whether SAR generation is enabled. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to **time.Time** | Timestamp of the last account modification in RFC3339 format | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | User provided account metadata | [optional] 
 **Nickname** | Pointer to **string** | User provided account nickname | [optional] 
 **Status** | Pointer to [**Status**](Status.md) |  | [optional] 
 **SwiftCode** | Pointer to **string** | SWIFT code | [optional] 
-**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
+**Note** | Pointer to **string** | Add an optional note when creating or updating a charged secured account. A note is required when updating the status to or from SUSPENDED | [optional] 
 **Security** | Pointer to [**Security**](Security.md) |  | [optional] 
+**SpendControlIds** | Pointer to **[]string** | List of spend control IDs to control spending for the account | [optional] 
 
 ## Methods
 
@@ -451,105 +449,30 @@ SetIsAccountPool sets IsAccountPool field to given value.
 
 HasIsAccountPool returns a boolean if a field has been set.
 
-### GetIsAchEnabled
+### GetIsSarEnabled
 
-`func (o *AccountChargeSecured) GetIsAchEnabled() bool`
+`func (o *AccountChargeSecured) GetIsSarEnabled() bool`
 
-GetIsAchEnabled returns the IsAchEnabled field if non-nil, zero value otherwise.
+GetIsSarEnabled returns the IsSarEnabled field if non-nil, zero value otherwise.
 
-### GetIsAchEnabledOk
+### GetIsSarEnabledOk
 
-`func (o *AccountChargeSecured) GetIsAchEnabledOk() (*bool, bool)`
+`func (o *AccountChargeSecured) GetIsSarEnabledOk() (*bool, bool)`
 
-GetIsAchEnabledOk returns a tuple with the IsAchEnabled field if it's non-nil, zero value otherwise
+GetIsSarEnabledOk returns a tuple with the IsSarEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIsAchEnabled
+### SetIsSarEnabled
 
-`func (o *AccountChargeSecured) SetIsAchEnabled(v bool)`
+`func (o *AccountChargeSecured) SetIsSarEnabled(v bool)`
 
-SetIsAchEnabled sets IsAchEnabled field to given value.
+SetIsSarEnabled sets IsSarEnabled field to given value.
 
-### HasIsAchEnabled
+### HasIsSarEnabled
 
-`func (o *AccountChargeSecured) HasIsAchEnabled() bool`
+`func (o *AccountChargeSecured) HasIsSarEnabled() bool`
 
-HasIsAchEnabled returns a boolean if a field has been set.
-
-### GetIsCardEnabled
-
-`func (o *AccountChargeSecured) GetIsCardEnabled() bool`
-
-GetIsCardEnabled returns the IsCardEnabled field if non-nil, zero value otherwise.
-
-### GetIsCardEnabledOk
-
-`func (o *AccountChargeSecured) GetIsCardEnabledOk() (*bool, bool)`
-
-GetIsCardEnabledOk returns a tuple with the IsCardEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsCardEnabled
-
-`func (o *AccountChargeSecured) SetIsCardEnabled(v bool)`
-
-SetIsCardEnabled sets IsCardEnabled field to given value.
-
-### HasIsCardEnabled
-
-`func (o *AccountChargeSecured) HasIsCardEnabled() bool`
-
-HasIsCardEnabled returns a boolean if a field has been set.
-
-### GetIsP2pEnabled
-
-`func (o *AccountChargeSecured) GetIsP2pEnabled() bool`
-
-GetIsP2pEnabled returns the IsP2pEnabled field if non-nil, zero value otherwise.
-
-### GetIsP2pEnabledOk
-
-`func (o *AccountChargeSecured) GetIsP2pEnabledOk() (*bool, bool)`
-
-GetIsP2pEnabledOk returns a tuple with the IsP2pEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsP2pEnabled
-
-`func (o *AccountChargeSecured) SetIsP2pEnabled(v bool)`
-
-SetIsP2pEnabled sets IsP2pEnabled field to given value.
-
-### HasIsP2pEnabled
-
-`func (o *AccountChargeSecured) HasIsP2pEnabled() bool`
-
-HasIsP2pEnabled returns a boolean if a field has been set.
-
-### GetIsWireEnabled
-
-`func (o *AccountChargeSecured) GetIsWireEnabled() bool`
-
-GetIsWireEnabled returns the IsWireEnabled field if non-nil, zero value otherwise.
-
-### GetIsWireEnabledOk
-
-`func (o *AccountChargeSecured) GetIsWireEnabledOk() (*bool, bool)`
-
-GetIsWireEnabledOk returns a tuple with the IsWireEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsWireEnabled
-
-`func (o *AccountChargeSecured) SetIsWireEnabled(v bool)`
-
-SetIsWireEnabled sets IsWireEnabled field to given value.
-
-### HasIsWireEnabled
-
-`func (o *AccountChargeSecured) HasIsWireEnabled() bool`
-
-HasIsWireEnabled returns a boolean if a field has been set.
+HasIsSarEnabled returns a boolean if a field has been set.
 
 ### GetLastUpdatedTime
 
@@ -676,30 +599,30 @@ SetSwiftCode sets SwiftCode field to given value.
 
 HasSwiftCode returns a boolean if a field has been set.
 
-### GetTenant
+### GetNote
 
-`func (o *AccountChargeSecured) GetTenant() string`
+`func (o *AccountChargeSecured) GetNote() string`
 
-GetTenant returns the Tenant field if non-nil, zero value otherwise.
+GetNote returns the Note field if non-nil, zero value otherwise.
 
-### GetTenantOk
+### GetNoteOk
 
-`func (o *AccountChargeSecured) GetTenantOk() (*string, bool)`
+`func (o *AccountChargeSecured) GetNoteOk() (*string, bool)`
 
-GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+GetNoteOk returns a tuple with the Note field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTenant
+### SetNote
 
-`func (o *AccountChargeSecured) SetTenant(v string)`
+`func (o *AccountChargeSecured) SetNote(v string)`
 
-SetTenant sets Tenant field to given value.
+SetNote sets Note field to given value.
 
-### HasTenant
+### HasNote
 
-`func (o *AccountChargeSecured) HasTenant() bool`
+`func (o *AccountChargeSecured) HasNote() bool`
 
-HasTenant returns a boolean if a field has been set.
+HasNote returns a boolean if a field has been set.
 
 ### GetSecurity
 
@@ -725,6 +648,31 @@ SetSecurity sets Security field to given value.
 `func (o *AccountChargeSecured) HasSecurity() bool`
 
 HasSecurity returns a boolean if a field has been set.
+
+### GetSpendControlIds
+
+`func (o *AccountChargeSecured) GetSpendControlIds() []string`
+
+GetSpendControlIds returns the SpendControlIds field if non-nil, zero value otherwise.
+
+### GetSpendControlIdsOk
+
+`func (o *AccountChargeSecured) GetSpendControlIdsOk() (*[]string, bool)`
+
+GetSpendControlIdsOk returns a tuple with the SpendControlIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpendControlIds
+
+`func (o *AccountChargeSecured) SetSpendControlIds(v []string)`
+
+SetSpendControlIds sets SpendControlIds field to given value.
+
+### HasSpendControlIds
+
+`func (o *AccountChargeSecured) HasSpendControlIds() bool`
+
+HasSpendControlIds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

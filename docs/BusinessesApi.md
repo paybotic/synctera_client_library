@@ -1,13 +1,13 @@
-# \BusinessesApi
+# \BusinessesAPI
 
-All URIs are relative to *https://api.synctera.com/v0*
+All URIs are relative to *https://api-sandbox.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateBusiness**](BusinessesApi.md#CreateBusiness) | **Post** /businesses | Create a business
-[**GetBusiness**](BusinessesApi.md#GetBusiness) | **Get** /businesses/{business_id} | Get business
-[**ListBusinesses**](BusinessesApi.md#ListBusinesses) | **Get** /businesses | List business
-[**UpdateBusiness**](BusinessesApi.md#UpdateBusiness) | **Patch** /businesses/{business_id} | Patch business
+[**CreateBusiness**](BusinessesAPI.md#CreateBusiness) | **Post** /businesses | Create a business
+[**GetBusiness**](BusinessesAPI.md#GetBusiness) | **Get** /businesses/{business_id} | Get business
+[**ListBusinesses**](BusinessesAPI.md#ListBusinesses) | **Get** /businesses | List business
+[**UpdateBusiness**](BusinessesAPI.md#UpdateBusiness) | **Patch** /businesses/{business_id} | Patch business
 
 
 
@@ -28,7 +28,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -37,13 +37,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.BusinessesApi.CreateBusiness(context.Background()).Business(business).IdempotencyKey(idempotencyKey).Execute()
+    resp, r, err := apiClient.BusinessesAPI.CreateBusiness(context.Background()).Business(business).IdempotencyKey(idempotencyKey).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BusinessesApi.CreateBusiness``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `BusinessesAPI.CreateBusiness``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `CreateBusiness`: Business
-    fmt.Fprintf(os.Stdout, "Response from `BusinessesApi.CreateBusiness`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `BusinessesAPI.CreateBusiness`: %v\n", resp)
 }
 ```
 
@@ -96,7 +96,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -104,13 +104,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.BusinessesApi.GetBusiness(context.Background(), businessId).Execute()
+    resp, r, err := apiClient.BusinessesAPI.GetBusiness(context.Background(), businessId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BusinessesApi.GetBusiness``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `BusinessesAPI.GetBusiness``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetBusiness`: Business
-    fmt.Fprintf(os.Stdout, "Response from `BusinessesApi.GetBusiness`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `BusinessesAPI.GetBusiness`: %v\n", resp)
 }
 ```
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ## ListBusinesses
 
-> BusinessList ListBusinesses(ctx).Id(id).EntityName(entityName).PhoneNumber(phoneNumber).Status(status).IsCustomer(isCustomer).SortBy(sortBy).Limit(limit).PageToken(pageToken).Execute()
+> BusinessList ListBusinesses(ctx).Status(status).IsCustomer(isCustomer).SortBy(sortBy).HasAccounts(hasAccounts).Id(id).PhoneNumber(phoneNumber).PageToken(pageToken).Limit(limit).EntityName(entityName).Execute()
 
 List business
 
@@ -166,28 +166,29 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    id := []string{"Inner_example"} // []string | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  (optional)
-    entityName := "Apex Corporation" // string |  (optional)
-    phoneNumber := "+12065550100" // string |  (optional)
     status := "status_example" // string |  (optional)
     isCustomer := true // bool | If true, show only customers. If false, show non-customer parties. (optional)
     sortBy := []string{"SortBy_example"} // []string | Specifies the sort order for the returned businesses.  (optional)
-    limit := int32(100) // int32 |  (optional) (default to 100)
+    hasAccounts := true // bool | Filter on resources that have an account(s)  (optional)
+    id := []string{"Inner_example"} // []string | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  (optional)
+    phoneNumber := "+12065550100" // string |  (optional)
     pageToken := "a8937a0d" // string |  (optional)
+    limit := int32(100) // int32 |  (optional) (default to 100)
+    entityName := "Apex Corporation" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.BusinessesApi.ListBusinesses(context.Background()).Id(id).EntityName(entityName).PhoneNumber(phoneNumber).Status(status).IsCustomer(isCustomer).SortBy(sortBy).Limit(limit).PageToken(pageToken).Execute()
+    resp, r, err := apiClient.BusinessesAPI.ListBusinesses(context.Background()).Status(status).IsCustomer(isCustomer).SortBy(sortBy).HasAccounts(hasAccounts).Id(id).PhoneNumber(phoneNumber).PageToken(pageToken).Limit(limit).EntityName(entityName).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BusinessesApi.ListBusinesses``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `BusinessesAPI.ListBusinesses``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListBusinesses`: BusinessList
-    fmt.Fprintf(os.Stdout, "Response from `BusinessesApi.ListBusinesses`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `BusinessesAPI.ListBusinesses`: %v\n", resp)
 }
 ```
 
@@ -202,14 +203,15 @@ Other parameters are passed through a pointer to a apiListBusinessesRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **[]string** | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  | 
- **entityName** | **string** |  | 
- **phoneNumber** | **string** |  | 
  **status** | **string** |  | 
  **isCustomer** | **bool** | If true, show only customers. If false, show non-customer parties. | 
  **sortBy** | **[]string** | Specifies the sort order for the returned businesses.  | 
- **limit** | **int32** |  | [default to 100]
+ **hasAccounts** | **bool** | Filter on resources that have an account(s)  | 
+ **id** | **[]string** | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  | 
+ **phoneNumber** | **string** |  | 
  **pageToken** | **string** |  | 
+ **limit** | **int32** |  | [default to 100]
+ **entityName** | **string** |  | 
 
 ### Return type
 
@@ -246,7 +248,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -256,13 +258,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.BusinessesApi.UpdateBusiness(context.Background(), businessId).PatchBusiness(patchBusiness).IdempotencyKey(idempotencyKey).Execute()
+    resp, r, err := apiClient.BusinessesAPI.UpdateBusiness(context.Background(), businessId).PatchBusiness(patchBusiness).IdempotencyKey(idempotencyKey).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BusinessesApi.UpdateBusiness``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `BusinessesAPI.UpdateBusiness``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `UpdateBusiness`: Business
-    fmt.Fprintf(os.Stdout, "Response from `BusinessesApi.UpdateBusiness`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `BusinessesAPI.UpdateBusiness`: %v\n", resp)
 }
 ```
 

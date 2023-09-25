@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **PhysicalCardFormat** | Pointer to [**PhysicalCardFormat**](PhysicalCardFormat.md) |  | [optional] 
 **ReturnAddress** | Pointer to [**Shipping**](Shipping.md) |  | [optional] 
 **StartDate** | **time.Time** | The time when the Card Product goes live | 
+**ThreeDsPolicy** | Pointer to [**ThreeDsPolicy**](ThreeDsPolicy.md) |  | [optional] 
 **TxnEnhancer** | Pointer to [**TxnEnhancer**](TxnEnhancer.md) |  | [optional] [default to TXNENHANCER_NONE]
 
 ## Methods
@@ -467,6 +468,31 @@ and a boolean to check if the value has been set.
 
 SetStartDate sets StartDate field to given value.
 
+
+### GetThreeDsPolicy
+
+`func (o *CardProduct) GetThreeDsPolicy() ThreeDsPolicy`
+
+GetThreeDsPolicy returns the ThreeDsPolicy field if non-nil, zero value otherwise.
+
+### GetThreeDsPolicyOk
+
+`func (o *CardProduct) GetThreeDsPolicyOk() (*ThreeDsPolicy, bool)`
+
+GetThreeDsPolicyOk returns a tuple with the ThreeDsPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetThreeDsPolicy
+
+`func (o *CardProduct) SetThreeDsPolicy(v ThreeDsPolicy)`
+
+SetThreeDsPolicy sets ThreeDsPolicy field to given value.
+
+### HasThreeDsPolicy
+
+`func (o *CardProduct) HasThreeDsPolicy() bool`
+
+HasThreeDsPolicy returns a boolean if a field has been set.
 
 ### GetTxnEnhancer
 

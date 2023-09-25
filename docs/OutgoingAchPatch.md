@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FundsAvailabilityTime** | Pointer to **time.Time** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
+**FundsAvailabilityTime** | Pointer to **NullableTime** |  | [optional] 
+**Status** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -51,6 +51,16 @@ SetFundsAvailabilityTime sets FundsAvailabilityTime field to given value.
 
 HasFundsAvailabilityTime returns a boolean if a field has been set.
 
+### SetFundsAvailabilityTimeNil
+
+`func (o *OutgoingAchPatch) SetFundsAvailabilityTimeNil(b bool)`
+
+ SetFundsAvailabilityTimeNil sets the value for FundsAvailabilityTime to be an explicit nil
+
+### UnsetFundsAvailabilityTime
+`func (o *OutgoingAchPatch) UnsetFundsAvailabilityTime()`
+
+UnsetFundsAvailabilityTime ensures that no value is present for FundsAvailabilityTime, not even an explicit nil
 ### GetStatus
 
 `func (o *OutgoingAchPatch) GetStatus() string`
@@ -76,6 +86,16 @@ SetStatus sets Status field to given value.
 
 HasStatus returns a boolean if a field has been set.
 
+### SetStatusNil
+
+`func (o *OutgoingAchPatch) SetStatusNil(b bool)`
+
+ SetStatusNil sets the value for Status to be an explicit nil
+
+### UnsetStatus
+`func (o *OutgoingAchPatch) UnsetStatus()`
+
+UnsetStatus ensures that no value is present for Status, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountType** | Pointer to [**InternalAccountType**](InternalAccountType.md) |  | [optional] 
 **Description** | Pointer to **string** | A user provided description for the current account | [optional] 
-**Purpose** | Pointer to [**InternalAccountPurpose**](InternalAccountPurpose.md) |  | [optional] [default to INTERNALACCOUNTPURPOSE_PROFIT_AND_LOSS]
+**Purpose** | Pointer to [**InternalAccountPurpose**](InternalAccountPurpose.md) |  | [optional] 
 
 ## Methods
 

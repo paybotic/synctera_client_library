@@ -10,19 +10,20 @@ Name | Type | Description | Notes
 **Dob** | Pointer to **string** | Person&#39;s date of birth in RFC 3339 full-date format (YYYY-MM-DD). | [optional] 
 **Email** | Pointer to **string** | Person&#39;s email. | [optional] 
 **FirstName** | Pointer to **string** | Person&#39;s first name. | [optional] 
+**HasAccounts** | Pointer to **bool** | This flag indicates whether the person or business has accounts. | [optional] [readonly] 
 **Id** | Pointer to **string** | Person&#39;s unique identifier. | [optional] [readonly] 
 **IsCustomer** | Pointer to **bool** | True for personal and business customers with a direct relationship with the fintech or bank. Set this to true for any customer related to an account.  | [optional] 
 **LastName** | Pointer to **string** | Person&#39;s last name. | [optional] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
-**LegalAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
+**LegalAddress** | Pointer to [**LegalAddress**](LegalAddress.md) |  | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 
 **MiddleName** | Pointer to **string** | Person&#39;s middle name. | [optional] 
 **PhoneNumber** | Pointer to **string** | Person&#39;s mobile phone number with country code in E.164 format. Must have a valid country code. Area code and local phone number are not validated | [optional] 
-**ShippingAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
+**ShippingAddress** | Pointer to [**ShippingAddress**](ShippingAddress.md) |  | [optional] 
 **Ssn** | Pointer to **string** | Person&#39;s full tax ID eg SSN formatted with hyphens. The response contains the last 4 digits only (e.g. 6789). | [optional] 
 **SsnSource** | Pointer to [**SsnSource**](SsnSource.md) |  | [optional] 
-**Status** | Pointer to [**Status1**](Status1.md) |  | [optional] 
-**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
+**Status** | Pointer to [**Status2**](Status2.md) |  | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 **VerificationLastRun** | Pointer to **time.Time** | Date and time KYC verification was last run on the person. | [optional] [readonly] 
 **VerificationStatus** | Pointer to [**VerificationStatus**](VerificationStatus.md) |  | [optional] 
 
@@ -195,6 +196,31 @@ SetFirstName sets FirstName field to given value.
 
 HasFirstName returns a boolean if a field has been set.
 
+### GetHasAccounts
+
+`func (o *BasePerson1) GetHasAccounts() bool`
+
+GetHasAccounts returns the HasAccounts field if non-nil, zero value otherwise.
+
+### GetHasAccountsOk
+
+`func (o *BasePerson1) GetHasAccountsOk() (*bool, bool)`
+
+GetHasAccountsOk returns a tuple with the HasAccounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasAccounts
+
+`func (o *BasePerson1) SetHasAccounts(v bool)`
+
+SetHasAccounts sets HasAccounts field to given value.
+
+### HasHasAccounts
+
+`func (o *BasePerson1) HasHasAccounts() bool`
+
+HasHasAccounts returns a boolean if a field has been set.
+
 ### GetId
 
 `func (o *BasePerson1) GetId() string`
@@ -297,20 +323,20 @@ HasLastUpdatedTime returns a boolean if a field has been set.
 
 ### GetLegalAddress
 
-`func (o *BasePerson1) GetLegalAddress() Address`
+`func (o *BasePerson1) GetLegalAddress() LegalAddress`
 
 GetLegalAddress returns the LegalAddress field if non-nil, zero value otherwise.
 
 ### GetLegalAddressOk
 
-`func (o *BasePerson1) GetLegalAddressOk() (*Address, bool)`
+`func (o *BasePerson1) GetLegalAddressOk() (*LegalAddress, bool)`
 
 GetLegalAddressOk returns a tuple with the LegalAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLegalAddress
 
-`func (o *BasePerson1) SetLegalAddress(v Address)`
+`func (o *BasePerson1) SetLegalAddress(v LegalAddress)`
 
 SetLegalAddress sets LegalAddress field to given value.
 
@@ -397,20 +423,20 @@ HasPhoneNumber returns a boolean if a field has been set.
 
 ### GetShippingAddress
 
-`func (o *BasePerson1) GetShippingAddress() Address`
+`func (o *BasePerson1) GetShippingAddress() ShippingAddress`
 
 GetShippingAddress returns the ShippingAddress field if non-nil, zero value otherwise.
 
 ### GetShippingAddressOk
 
-`func (o *BasePerson1) GetShippingAddressOk() (*Address, bool)`
+`func (o *BasePerson1) GetShippingAddressOk() (*ShippingAddress, bool)`
 
 GetShippingAddressOk returns a tuple with the ShippingAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetShippingAddress
 
-`func (o *BasePerson1) SetShippingAddress(v Address)`
+`func (o *BasePerson1) SetShippingAddress(v ShippingAddress)`
 
 SetShippingAddress sets ShippingAddress field to given value.
 
@@ -472,20 +498,20 @@ HasSsnSource returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *BasePerson1) GetStatus() Status1`
+`func (o *BasePerson1) GetStatus() Status2`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *BasePerson1) GetStatusOk() (*Status1, bool)`
+`func (o *BasePerson1) GetStatusOk() (*Status2, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *BasePerson1) SetStatus(v Status1)`
+`func (o *BasePerson1) SetStatus(v Status2)`
 
 SetStatus sets Status field to given value.
 

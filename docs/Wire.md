@@ -8,21 +8,26 @@ Name | Type | Description | Notes
 **BankMessage** | Pointer to **string** | Instructions intended for the financial institutions that are processing the wire. | [optional] 
 **CreationTime** | **time.Time** |  | [readonly] 
 **Currency** | **string** | 3-character currency code | 
-**CustomerId** | **string** | The customer UUID representing the person initiating the Wire transfer | 
+**CustomerId** | Pointer to **string** | The customer UUID representing the person initiating the Wire transfer | [optional] 
+**EffectiveDate** | **string** | The effective date of the transaction once it gets posted | 
 **Id** | **string** | wire ID | [readonly] 
 **LastUpdatedTime** | **time.Time** |  | [readonly] 
-**OriginatingAccountId** | **string** | Sender account ID | 
-**ReceivingAccountId** | **string** | The external account uuid representing the recipient of the wire. | 
+**OriginatingAccountId** | Pointer to **string** | Sender account ID | [optional] 
+**OriginatingAccountNumber** | **string** | The account number representing the sender account. If the outgoing wire is a return, it refers to the sender of the initial wire not the sender of the return. | 
+**ReceivingAccountId** | Pointer to **string** | The external account uuid representing the recipient of the wire. | [optional] 
+**ReceivingAccountNumber** | **string** | The account number representing the recipient account. If the outgoing wire is a return, it refers to the recipient of the initial wire not the destination of the return. | 
 **RecipientMessage** | Pointer to **string** | Information from the originator to the beneficiary (recipient). | [optional] 
+**ReturnData** | Pointer to [**ReturnData**](ReturnData.md) |  | [optional] 
 **SenderReferenceId** | **string** | Sender&#39;s id associated with fedwire transfer | [readonly] 
 **Status** | **string** | The current status of the transfer | [readonly] 
 **TransactionId** | **string** | ID of the resulting transaction resource | [readonly] 
+**TransactionInId** | Pointer to **string** | The transaction uuid of the incoming wire that triggered an outgoing return. This is only used if the outgoing wire is a return. | [optional] 
 
 ## Methods
 
 ### NewWire
 
-`func NewWire(amount int32, creationTime time.Time, currency string, customerId string, id string, lastUpdatedTime time.Time, originatingAccountId string, receivingAccountId string, senderReferenceId string, status string, transactionId string, ) *Wire`
+`func NewWire(amount int32, creationTime time.Time, currency string, effectiveDate string, id string, lastUpdatedTime time.Time, originatingAccountNumber string, receivingAccountNumber string, senderReferenceId string, status string, transactionId string, ) *Wire`
 
 NewWire instantiates a new Wire object
 This constructor will assign default values to properties that have it defined,
@@ -141,6 +146,31 @@ and a boolean to check if the value has been set.
 
 SetCustomerId sets CustomerId field to given value.
 
+### HasCustomerId
+
+`func (o *Wire) HasCustomerId() bool`
+
+HasCustomerId returns a boolean if a field has been set.
+
+### GetEffectiveDate
+
+`func (o *Wire) GetEffectiveDate() string`
+
+GetEffectiveDate returns the EffectiveDate field if non-nil, zero value otherwise.
+
+### GetEffectiveDateOk
+
+`func (o *Wire) GetEffectiveDateOk() (*string, bool)`
+
+GetEffectiveDateOk returns a tuple with the EffectiveDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEffectiveDate
+
+`func (o *Wire) SetEffectiveDate(v string)`
+
+SetEffectiveDate sets EffectiveDate field to given value.
+
 
 ### GetId
 
@@ -201,6 +231,31 @@ and a boolean to check if the value has been set.
 
 SetOriginatingAccountId sets OriginatingAccountId field to given value.
 
+### HasOriginatingAccountId
+
+`func (o *Wire) HasOriginatingAccountId() bool`
+
+HasOriginatingAccountId returns a boolean if a field has been set.
+
+### GetOriginatingAccountNumber
+
+`func (o *Wire) GetOriginatingAccountNumber() string`
+
+GetOriginatingAccountNumber returns the OriginatingAccountNumber field if non-nil, zero value otherwise.
+
+### GetOriginatingAccountNumberOk
+
+`func (o *Wire) GetOriginatingAccountNumberOk() (*string, bool)`
+
+GetOriginatingAccountNumberOk returns a tuple with the OriginatingAccountNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginatingAccountNumber
+
+`func (o *Wire) SetOriginatingAccountNumber(v string)`
+
+SetOriginatingAccountNumber sets OriginatingAccountNumber field to given value.
+
 
 ### GetReceivingAccountId
 
@@ -220,6 +275,31 @@ and a boolean to check if the value has been set.
 `func (o *Wire) SetReceivingAccountId(v string)`
 
 SetReceivingAccountId sets ReceivingAccountId field to given value.
+
+### HasReceivingAccountId
+
+`func (o *Wire) HasReceivingAccountId() bool`
+
+HasReceivingAccountId returns a boolean if a field has been set.
+
+### GetReceivingAccountNumber
+
+`func (o *Wire) GetReceivingAccountNumber() string`
+
+GetReceivingAccountNumber returns the ReceivingAccountNumber field if non-nil, zero value otherwise.
+
+### GetReceivingAccountNumberOk
+
+`func (o *Wire) GetReceivingAccountNumberOk() (*string, bool)`
+
+GetReceivingAccountNumberOk returns a tuple with the ReceivingAccountNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReceivingAccountNumber
+
+`func (o *Wire) SetReceivingAccountNumber(v string)`
+
+SetReceivingAccountNumber sets ReceivingAccountNumber field to given value.
 
 
 ### GetRecipientMessage
@@ -246,6 +326,31 @@ SetRecipientMessage sets RecipientMessage field to given value.
 `func (o *Wire) HasRecipientMessage() bool`
 
 HasRecipientMessage returns a boolean if a field has been set.
+
+### GetReturnData
+
+`func (o *Wire) GetReturnData() ReturnData`
+
+GetReturnData returns the ReturnData field if non-nil, zero value otherwise.
+
+### GetReturnDataOk
+
+`func (o *Wire) GetReturnDataOk() (*ReturnData, bool)`
+
+GetReturnDataOk returns a tuple with the ReturnData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReturnData
+
+`func (o *Wire) SetReturnData(v ReturnData)`
+
+SetReturnData sets ReturnData field to given value.
+
+### HasReturnData
+
+`func (o *Wire) HasReturnData() bool`
+
+HasReturnData returns a boolean if a field has been set.
 
 ### GetSenderReferenceId
 
@@ -306,6 +411,31 @@ and a boolean to check if the value has been set.
 
 SetTransactionId sets TransactionId field to given value.
 
+
+### GetTransactionInId
+
+`func (o *Wire) GetTransactionInId() string`
+
+GetTransactionInId returns the TransactionInId field if non-nil, zero value otherwise.
+
+### GetTransactionInIdOk
+
+`func (o *Wire) GetTransactionInIdOk() (*string, bool)`
+
+GetTransactionInIdOk returns a tuple with the TransactionInId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransactionInId
+
+`func (o *Wire) SetTransactionInId(v string)`
+
+SetTransactionInId sets TransactionInId field to given value.
+
+### HasTransactionInId
+
+`func (o *Wire) HasTransactionInId() bool`
+
+HasTransactionInId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

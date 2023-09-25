@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **ReceivingAccountAlias** | Pointer to **string** | An alias representing a GL account to credit. This is an alternative to specifying by account id | [optional] 
 **ReceivingAccountCustomerId** | Pointer to **string** | The customer id of the owner of the receiving account. | [optional] 
 **ReceivingAccountId** | Pointer to **string** | The UUID of the account being credited | [optional] 
+**Tenant** | Pointer to **string** | The tenant associated with this resource, in the form \&quot;&lt;bankid&gt;_&lt;partnerid&gt;\&quot; | [optional] 
 **Type** | **string** | The desired transaction type to use for this transfer | 
 **Id** | **string** | The transaction id associated with the transfer | 
 **Status** | **string** | The status of the internal transfer auth. A value of &#x60;PENDING&#x60; indicates that the funds have been reserved and the transaction is ready to be either completed or canceled. A value of &#x60;COMPLETE&#x60; indicates the funds have been successfully moved and no more action can be performed. A value of &#x60;CANCELED&#x60; or &#x60;EXPIRED&#x60; means that the transaction has rolled back and the funds have been returned to the originating account, either by explicitly canceling via the API, or due to the expiry time having passed. | 
@@ -354,6 +355,31 @@ SetReceivingAccountId sets ReceivingAccountId field to given value.
 `func (o *InternalTransferResponse) HasReceivingAccountId() bool`
 
 HasReceivingAccountId returns a boolean if a field has been set.
+
+### GetTenant
+
+`func (o *InternalTransferResponse) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *InternalTransferResponse) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *InternalTransferResponse) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *InternalTransferResponse) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetType
 

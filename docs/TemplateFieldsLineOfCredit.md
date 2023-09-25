@@ -7,9 +7,7 @@ Name | Type | Description | Notes
 **AccountType** | [**AccountType**](AccountType.md) |  | 
 **BankCountry** | **string** | Bank country of the account. ISO 3166-1 Alpha-2 or Alpha-3 country code. | 
 **Currency** | **string** | Account currency. ISO 4217 alphabetic currency code | 
-**ChargeoffPeriod** | Pointer to **int32** | The number of days an account can stay delinquent before marking an account as charged-off.  | [optional] [default to 90]
-**DelinquencyPeriod** | Pointer to **int32** | The number of days past the due date to wait for a minimum payment before marking an account as delinquent.  | [optional] [default to 30]
-**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] [default to 30]
+**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment. The default will be set to 21 days.  | [optional] [default to 21]
 **InterestProductId** | Pointer to **string** | An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_DAILY.  | [optional] 
 **MinimumPayment** | [**MinimumPaymentPartial**](MinimumPaymentPartial.md) |  | 
 
@@ -91,56 +89,6 @@ and a boolean to check if the value has been set.
 
 SetCurrency sets Currency field to given value.
 
-
-### GetChargeoffPeriod
-
-`func (o *TemplateFieldsLineOfCredit) GetChargeoffPeriod() int32`
-
-GetChargeoffPeriod returns the ChargeoffPeriod field if non-nil, zero value otherwise.
-
-### GetChargeoffPeriodOk
-
-`func (o *TemplateFieldsLineOfCredit) GetChargeoffPeriodOk() (*int32, bool)`
-
-GetChargeoffPeriodOk returns a tuple with the ChargeoffPeriod field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChargeoffPeriod
-
-`func (o *TemplateFieldsLineOfCredit) SetChargeoffPeriod(v int32)`
-
-SetChargeoffPeriod sets ChargeoffPeriod field to given value.
-
-### HasChargeoffPeriod
-
-`func (o *TemplateFieldsLineOfCredit) HasChargeoffPeriod() bool`
-
-HasChargeoffPeriod returns a boolean if a field has been set.
-
-### GetDelinquencyPeriod
-
-`func (o *TemplateFieldsLineOfCredit) GetDelinquencyPeriod() int32`
-
-GetDelinquencyPeriod returns the DelinquencyPeriod field if non-nil, zero value otherwise.
-
-### GetDelinquencyPeriodOk
-
-`func (o *TemplateFieldsLineOfCredit) GetDelinquencyPeriodOk() (*int32, bool)`
-
-GetDelinquencyPeriodOk returns a tuple with the DelinquencyPeriod field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDelinquencyPeriod
-
-`func (o *TemplateFieldsLineOfCredit) SetDelinquencyPeriod(v int32)`
-
-SetDelinquencyPeriod sets DelinquencyPeriod field to given value.
-
-### HasDelinquencyPeriod
-
-`func (o *TemplateFieldsLineOfCredit) HasDelinquencyPeriod() bool`
-
-HasDelinquencyPeriod returns a boolean if a field has been set.
 
 ### GetGracePeriod
 

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **LastModifiedTime** | Pointer to **time.Time** |  | [optional] 
 **RequestedTime** | Pointer to **time.Time** |  | [optional] 
 **State** | Pointer to [**DigitalWalletTokenState**](DigitalWalletTokenState.md) |  | [optional] 
-**Type** | Pointer to **string** | Type of the Digital Wallet | [optional] 
+**Type** | Pointer to **string** | Type of the Digital Wallet. Can be one of APPLE_PAY, ANDROID_PAY, SAMSUNG_PAY or something else when cards are added on file to a merchant. | [optional] 
 
 ## Methods
 

@@ -20,21 +20,18 @@ Name | Type | Description | Notes
 **Iban** | Pointer to **string** | International bank account number | [optional] 
 **Id** | Pointer to **string** | Account ID | [optional] [readonly] 
 **IsAccountPool** | Pointer to **bool** | Account is investment (variable balance) account or a multi-balance account pool. Default false | [optional] 
-**IsAchEnabled** | Pointer to **bool** | A flag to indicate whether ACH transactions are enabled. | [optional] [readonly] 
-**IsCardEnabled** | Pointer to **bool** | A flag to indicate whether card transactions are enabled. | [optional] [readonly] 
-**IsP2pEnabled** | Pointer to **bool** | A flag to indicate whether P2P transactions are enabled. | [optional] [readonly] 
-**IsWireEnabled** | Pointer to **bool** | A flag to indicate whether wire transactions are enabled. | [optional] [readonly] 
+**IsSarEnabled** | Pointer to **bool** | A flag to indicate whether SAR generation is enabled. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to **time.Time** | Timestamp of the last account modification in RFC3339 format | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | User provided account metadata | [optional] 
 **Nickname** | Pointer to **string** | User provided account nickname | [optional] 
 **Status** | Pointer to [**Status**](Status.md) |  | [optional] 
 **SwiftCode** | Pointer to **string** | SWIFT code | [optional] 
-**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
 **BalanceCeiling** | Pointer to [**BalanceCeiling**](BalanceCeiling.md) |  | [optional] 
 **BalanceFloor** | Pointer to [**BalanceFloor**](BalanceFloor.md) |  | [optional] 
 **FeeProductIds** | Pointer to **[]string** | A list of fee account products that the current account associates with. | [optional] 
-**InterestProductId** | Pointer to **string** | An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_MONTHLY.  | [optional] 
-**OverdraftLimit** | Pointer to **int64** | Account&#39;s overdraft limit | [optional] 
+**InterestProductId** | Pointer to **string** | An interest account product that the current account associates with.  | [optional] 
+**Note** | Pointer to **string** | Add an optional note when creating or updating a depository account. A note is required when updating the status to or from SUSPENDED | [optional] 
+**OverdraftLimit** | Pointer to **int64** | This field is unused and will be removed in a future API version.  | [optional] 
 **SpendControlIds** | Pointer to **[]string** | List of spend control IDs to control spending for the account | [optional] 
 **SpendingLimits** | Pointer to [**SpendingLimits**](SpendingLimits.md) |  | [optional] 
 
@@ -457,105 +454,30 @@ SetIsAccountPool sets IsAccountPool field to given value.
 
 HasIsAccountPool returns a boolean if a field has been set.
 
-### GetIsAchEnabled
+### GetIsSarEnabled
 
-`func (o *AccountDepository) GetIsAchEnabled() bool`
+`func (o *AccountDepository) GetIsSarEnabled() bool`
 
-GetIsAchEnabled returns the IsAchEnabled field if non-nil, zero value otherwise.
+GetIsSarEnabled returns the IsSarEnabled field if non-nil, zero value otherwise.
 
-### GetIsAchEnabledOk
+### GetIsSarEnabledOk
 
-`func (o *AccountDepository) GetIsAchEnabledOk() (*bool, bool)`
+`func (o *AccountDepository) GetIsSarEnabledOk() (*bool, bool)`
 
-GetIsAchEnabledOk returns a tuple with the IsAchEnabled field if it's non-nil, zero value otherwise
+GetIsSarEnabledOk returns a tuple with the IsSarEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIsAchEnabled
+### SetIsSarEnabled
 
-`func (o *AccountDepository) SetIsAchEnabled(v bool)`
+`func (o *AccountDepository) SetIsSarEnabled(v bool)`
 
-SetIsAchEnabled sets IsAchEnabled field to given value.
+SetIsSarEnabled sets IsSarEnabled field to given value.
 
-### HasIsAchEnabled
+### HasIsSarEnabled
 
-`func (o *AccountDepository) HasIsAchEnabled() bool`
+`func (o *AccountDepository) HasIsSarEnabled() bool`
 
-HasIsAchEnabled returns a boolean if a field has been set.
-
-### GetIsCardEnabled
-
-`func (o *AccountDepository) GetIsCardEnabled() bool`
-
-GetIsCardEnabled returns the IsCardEnabled field if non-nil, zero value otherwise.
-
-### GetIsCardEnabledOk
-
-`func (o *AccountDepository) GetIsCardEnabledOk() (*bool, bool)`
-
-GetIsCardEnabledOk returns a tuple with the IsCardEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsCardEnabled
-
-`func (o *AccountDepository) SetIsCardEnabled(v bool)`
-
-SetIsCardEnabled sets IsCardEnabled field to given value.
-
-### HasIsCardEnabled
-
-`func (o *AccountDepository) HasIsCardEnabled() bool`
-
-HasIsCardEnabled returns a boolean if a field has been set.
-
-### GetIsP2pEnabled
-
-`func (o *AccountDepository) GetIsP2pEnabled() bool`
-
-GetIsP2pEnabled returns the IsP2pEnabled field if non-nil, zero value otherwise.
-
-### GetIsP2pEnabledOk
-
-`func (o *AccountDepository) GetIsP2pEnabledOk() (*bool, bool)`
-
-GetIsP2pEnabledOk returns a tuple with the IsP2pEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsP2pEnabled
-
-`func (o *AccountDepository) SetIsP2pEnabled(v bool)`
-
-SetIsP2pEnabled sets IsP2pEnabled field to given value.
-
-### HasIsP2pEnabled
-
-`func (o *AccountDepository) HasIsP2pEnabled() bool`
-
-HasIsP2pEnabled returns a boolean if a field has been set.
-
-### GetIsWireEnabled
-
-`func (o *AccountDepository) GetIsWireEnabled() bool`
-
-GetIsWireEnabled returns the IsWireEnabled field if non-nil, zero value otherwise.
-
-### GetIsWireEnabledOk
-
-`func (o *AccountDepository) GetIsWireEnabledOk() (*bool, bool)`
-
-GetIsWireEnabledOk returns a tuple with the IsWireEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsWireEnabled
-
-`func (o *AccountDepository) SetIsWireEnabled(v bool)`
-
-SetIsWireEnabled sets IsWireEnabled field to given value.
-
-### HasIsWireEnabled
-
-`func (o *AccountDepository) HasIsWireEnabled() bool`
-
-HasIsWireEnabled returns a boolean if a field has been set.
+HasIsSarEnabled returns a boolean if a field has been set.
 
 ### GetLastUpdatedTime
 
@@ -682,31 +604,6 @@ SetSwiftCode sets SwiftCode field to given value.
 
 HasSwiftCode returns a boolean if a field has been set.
 
-### GetTenant
-
-`func (o *AccountDepository) GetTenant() string`
-
-GetTenant returns the Tenant field if non-nil, zero value otherwise.
-
-### GetTenantOk
-
-`func (o *AccountDepository) GetTenantOk() (*string, bool)`
-
-GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTenant
-
-`func (o *AccountDepository) SetTenant(v string)`
-
-SetTenant sets Tenant field to given value.
-
-### HasTenant
-
-`func (o *AccountDepository) HasTenant() bool`
-
-HasTenant returns a boolean if a field has been set.
-
 ### GetBalanceCeiling
 
 `func (o *AccountDepository) GetBalanceCeiling() BalanceCeiling`
@@ -806,6 +703,31 @@ SetInterestProductId sets InterestProductId field to given value.
 `func (o *AccountDepository) HasInterestProductId() bool`
 
 HasInterestProductId returns a boolean if a field has been set.
+
+### GetNote
+
+`func (o *AccountDepository) GetNote() string`
+
+GetNote returns the Note field if non-nil, zero value otherwise.
+
+### GetNoteOk
+
+`func (o *AccountDepository) GetNoteOk() (*string, bool)`
+
+GetNoteOk returns a tuple with the Note field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNote
+
+`func (o *AccountDepository) SetNote(v string)`
+
+SetNote sets Note field to given value.
+
+### HasNote
+
+`func (o *AccountDepository) HasNote() bool`
+
+HasNote returns a boolean if a field has been set.
 
 ### GetOverdraftLimit
 

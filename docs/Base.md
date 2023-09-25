@@ -4,21 +4,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ComplianceRestrictions** | Pointer to **[]string** | The types of compliance that the business needs to adhere to * &#x60;LICENSED_CANNABIS&#x60; – A type of compliance restriction where the business would need a cannabis license in order to operate.  | [optional] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
 **Ein** | Pointer to **string** | U.S. Employer Identification Number (EIN) for this business, in the format xx-xxxxxxx. | [optional] 
 **Email** | Pointer to **string** | Business&#39;s email. | [optional] 
 **EntityName** | Pointer to **string** | Business&#39;s legal name. | [optional] 
 **FormationDate** | Pointer to **string** | Date the business was legally registered in RFC 3339 full-date format (YYYY-MM-DD). | [optional] 
 **FormationState** | Pointer to **string** | U.S. state where the business is legally registered (2-letter abbreviation). | [optional] 
+**HasAccounts** | Pointer to **bool** | This flag indicates whether the person or business has accounts. | [optional] [readonly] 
 **Id** | Pointer to **string** | Business&#39;s unique identifier. | [optional] [readonly] 
 **IsCustomer** | Pointer to **bool** | True for personal and business customers with a direct relationship with the fintech or bank. Set this to true for any customer related to an account.  | [optional] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
-**LegalAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
+**LegalAddress** | Pointer to [**LegalAddress**](LegalAddress.md) |  | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 
 **PhoneNumber** | Pointer to **string** | Business&#39;s phone number with country code in E.164 format. Must have a valid country code. Area code and local phone number are not validated. | [optional] 
 **Status** | Pointer to **string** | Status of the business. One of the following: * &#x60;PROSPECT&#x60; – a potential customer, used for information-gathering and disclosures. * &#x60;ACTIVE&#x60; –  is an integrator defined status.  Integrators should set a business to active if they believe the person to be qualified for conducting business.  Synctera will combine this status with other statuses such a verification to determine if the business is eligible for specific actions such as initiating transactions or issuing a card. * &#x60;FROZEN&#x60; – business&#39;s actions are blocked for security, legal, or other reasons. * &#x60;SANCTION&#x60; – business is on a sanctions list and should be carefully monitored. * &#x60;DISSOLVED&#x60; – an inactive status indicating a business entity has filed articles of dissolution or a certificate of termination to terminate its existence. * &#x60;CANCELLED&#x60; – an inactive status indicating that a business entity has filed a cancellation or has failed to file its periodic report after notice of forfeiture of its rights to do business. * &#x60;SUSPENDED&#x60; – an inactive status indicating that the business entity has lost the right to operate in it&#39;s registered jurisdiction. * &#x60;MERGED&#x60; – an inactive status indicating that the business entity has terminated existence by merging into another entity. * &#x60;INACTIVE&#x60; – an inactive status indicating that the business entity is no longer active. * &#x60;CONVERTED&#x60; – An inactive status indicating that the business entity has been converted to another type of business entity in the same jurisdiction.  | [optional] 
 **Structure** | Pointer to **string** | Business&#39;s legal structure. | [optional] 
-**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 **TradeNames** | Pointer to **[]string** | Other names by which this business is known. | [optional] 
 **VerificationLastRun** | Pointer to **time.Time** | Date and time KYB verification was last run on the business. | [optional] [readonly] 
 **VerificationStatus** | Pointer to [**VerificationStatus**](VerificationStatus.md) |  | [optional] 
@@ -42,6 +44,31 @@ will change when the set of required properties is changed
 NewBaseWithDefaults instantiates a new Base object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetComplianceRestrictions
+
+`func (o *Base) GetComplianceRestrictions() []string`
+
+GetComplianceRestrictions returns the ComplianceRestrictions field if non-nil, zero value otherwise.
+
+### GetComplianceRestrictionsOk
+
+`func (o *Base) GetComplianceRestrictionsOk() (*[]string, bool)`
+
+GetComplianceRestrictionsOk returns a tuple with the ComplianceRestrictions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComplianceRestrictions
+
+`func (o *Base) SetComplianceRestrictions(v []string)`
+
+SetComplianceRestrictions sets ComplianceRestrictions field to given value.
+
+### HasComplianceRestrictions
+
+`func (o *Base) HasComplianceRestrictions() bool`
+
+HasComplianceRestrictions returns a boolean if a field has been set.
 
 ### GetCreationTime
 
@@ -193,6 +220,31 @@ SetFormationState sets FormationState field to given value.
 
 HasFormationState returns a boolean if a field has been set.
 
+### GetHasAccounts
+
+`func (o *Base) GetHasAccounts() bool`
+
+GetHasAccounts returns the HasAccounts field if non-nil, zero value otherwise.
+
+### GetHasAccountsOk
+
+`func (o *Base) GetHasAccountsOk() (*bool, bool)`
+
+GetHasAccountsOk returns a tuple with the HasAccounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasAccounts
+
+`func (o *Base) SetHasAccounts(v bool)`
+
+SetHasAccounts sets HasAccounts field to given value.
+
+### HasHasAccounts
+
+`func (o *Base) HasHasAccounts() bool`
+
+HasHasAccounts returns a boolean if a field has been set.
+
 ### GetId
 
 `func (o *Base) GetId() string`
@@ -270,20 +322,20 @@ HasLastUpdatedTime returns a boolean if a field has been set.
 
 ### GetLegalAddress
 
-`func (o *Base) GetLegalAddress() Address`
+`func (o *Base) GetLegalAddress() LegalAddress`
 
 GetLegalAddress returns the LegalAddress field if non-nil, zero value otherwise.
 
 ### GetLegalAddressOk
 
-`func (o *Base) GetLegalAddressOk() (*Address, bool)`
+`func (o *Base) GetLegalAddressOk() (*LegalAddress, bool)`
 
 GetLegalAddressOk returns a tuple with the LegalAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLegalAddress
 
-`func (o *Base) SetLegalAddress(v Address)`
+`func (o *Base) SetLegalAddress(v LegalAddress)`
 
 SetLegalAddress sets LegalAddress field to given value.
 

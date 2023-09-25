@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **Merchant** | Pointer to [**Merchant**](Merchant.md) |  | [optional] 
 **OriginatingAccountId** | **string** | The ID of the account to which the transfer will be initiated/received | 
 **Type** | [**TransferTypeRequest**](TransferTypeRequest.md) |  | 
+**OriginatingCustomerId** | Pointer to **string** | For person-to-person PUSH transactions, this is the &#x60;customer_id&#x60; of the sender who must have privileges to access funds in the originating account in order to send funds to the recipient cardholder | [optional] 
+**ThreeDsId** | Pointer to **string** | Unique identifier of an External Card Transfer 3-D Secure Authorization - conditionally required according to your program&#39;s 3DS policy | [optional] 
 
 ## Methods
 
@@ -154,6 +156,56 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
+
+### GetOriginatingCustomerId
+
+`func (o *TransferRequest) GetOriginatingCustomerId() string`
+
+GetOriginatingCustomerId returns the OriginatingCustomerId field if non-nil, zero value otherwise.
+
+### GetOriginatingCustomerIdOk
+
+`func (o *TransferRequest) GetOriginatingCustomerIdOk() (*string, bool)`
+
+GetOriginatingCustomerIdOk returns a tuple with the OriginatingCustomerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginatingCustomerId
+
+`func (o *TransferRequest) SetOriginatingCustomerId(v string)`
+
+SetOriginatingCustomerId sets OriginatingCustomerId field to given value.
+
+### HasOriginatingCustomerId
+
+`func (o *TransferRequest) HasOriginatingCustomerId() bool`
+
+HasOriginatingCustomerId returns a boolean if a field has been set.
+
+### GetThreeDsId
+
+`func (o *TransferRequest) GetThreeDsId() string`
+
+GetThreeDsId returns the ThreeDsId field if non-nil, zero value otherwise.
+
+### GetThreeDsIdOk
+
+`func (o *TransferRequest) GetThreeDsIdOk() (*string, bool)`
+
+GetThreeDsIdOk returns a tuple with the ThreeDsId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetThreeDsId
+
+`func (o *TransferRequest) SetThreeDsId(v string)`
+
+SetThreeDsId sets ThreeDsId field to given value.
+
+### HasThreeDsId
+
+`func (o *TransferRequest) HasThreeDsId() bool`
+
+HasThreeDsId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

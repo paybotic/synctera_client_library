@@ -1,23 +1,23 @@
-# \WatchlistDeprecatedApi
+# \WatchlistDeprecatedAPI
 
-All URIs are relative to *https://api.synctera.com/v0*
+All URIs are relative to *https://api-sandbox.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetWatchlistAlert**](WatchlistDeprecatedApi.md#GetWatchlistAlert) | **Get** /customers/{customer_id}/watchlists/alerts/{alert_id} | Retrieve watchlist monitoring alert
-[**GetWatchlistSubscription**](WatchlistDeprecatedApi.md#GetWatchlistSubscription) | **Get** /customers/{customer_id}/watchlists/subscriptions/{subscription_id} | Retrieve watchlist monitoring subscription
-[**ListWatchlistAlerts**](WatchlistDeprecatedApi.md#ListWatchlistAlerts) | **Get** /customers/{customer_id}/watchlists/alerts | List watchlist monitoring alerts for a customer
-[**ListWatchlistSubscriptions**](WatchlistDeprecatedApi.md#ListWatchlistSubscriptions) | **Get** /customers/{customer_id}/watchlists/subscriptions | List watchlist monitoring subscriptions for a customer
-[**SuppressWatchlistEntityAlert**](WatchlistDeprecatedApi.md#SuppressWatchlistEntityAlert) | **Post** /customers/{customer_id}/watchlists/suppressions | Suppress entity alert
-[**UpdateWatchlistAlert**](WatchlistDeprecatedApi.md#UpdateWatchlistAlert) | **Put** /customers/{customer_id}/watchlists/alerts/{alert_id} | Update watchlist alert
-[**UpdateWatchlistSubscription**](WatchlistDeprecatedApi.md#UpdateWatchlistSubscription) | **Put** /customers/{customer_id}/watchlists/subscriptions/{subscription_id} | Update watchlist monitoring subscription
-[**WatchlistSubscribe**](WatchlistDeprecatedApi.md#WatchlistSubscribe) | **Post** /customers/{customer_id}/watchlists/subscriptions | Subscribe a customer to watchlist monitoring
+[**GetWatchlistAlert**](WatchlistDeprecatedAPI.md#GetWatchlistAlert) | **Get** /customers/{customer_id}/watchlists/alerts/{alert_id} | Retrieve watchlist monitoring alert
+[**GetWatchlistSubscription**](WatchlistDeprecatedAPI.md#GetWatchlistSubscription) | **Get** /customers/{customer_id}/watchlists/subscriptions/{subscription_id} | Retrieve watchlist monitoring subscription
+[**ListWatchlistAlerts**](WatchlistDeprecatedAPI.md#ListWatchlistAlerts) | **Get** /customers/{customer_id}/watchlists/alerts | List watchlist monitoring alerts for a customer
+[**ListWatchlistSubscriptions**](WatchlistDeprecatedAPI.md#ListWatchlistSubscriptions) | **Get** /customers/{customer_id}/watchlists/subscriptions | List watchlist monitoring subscriptions for a customer
+[**SuppressWatchlistEntityAlert**](WatchlistDeprecatedAPI.md#SuppressWatchlistEntityAlert) | **Post** /customers/{customer_id}/watchlists/suppressions | Suppress entity alert
+[**UpdateWatchlistAlert**](WatchlistDeprecatedAPI.md#UpdateWatchlistAlert) | **Put** /customers/{customer_id}/watchlists/alerts/{alert_id} | Update watchlist alert
+[**UpdateWatchlistSubscription**](WatchlistDeprecatedAPI.md#UpdateWatchlistSubscription) | **Put** /customers/{customer_id}/watchlists/subscriptions/{subscription_id} | Update watchlist monitoring subscription
+[**WatchlistSubscribe**](WatchlistDeprecatedAPI.md#WatchlistSubscribe) | **Post** /customers/{customer_id}/watchlists/subscriptions | Subscribe a customer to watchlist monitoring
 
 
 
 ## GetWatchlistAlert
 
-> WatchlistAlert GetWatchlistAlert(ctx, customerId, alertId).Execute()
+> WatchlistAlert GetWatchlistAlert(ctx, alertId, customerId).Execute()
 
 Retrieve watchlist monitoring alert
 
@@ -30,22 +30,22 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier
     alertId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for this watchlist alert.
+    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WatchlistDeprecatedApi.GetWatchlistAlert(context.Background(), customerId, alertId).Execute()
+    resp, r, err := apiClient.WatchlistDeprecatedAPI.GetWatchlistAlert(context.Background(), alertId, customerId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedApi.GetWatchlistAlert``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedAPI.GetWatchlistAlert``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetWatchlistAlert`: WatchlistAlert
-    fmt.Fprintf(os.Stdout, "Response from `WatchlistDeprecatedApi.GetWatchlistAlert`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `WatchlistDeprecatedAPI.GetWatchlistAlert`: %v\n", resp)
 }
 ```
 
@@ -55,8 +55,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**customerId** | **string** | The customer&#39;s unique identifier | 
 **alertId** | **string** | Unique identifier for this watchlist alert. | 
+**customerId** | **string** | The customer&#39;s unique identifier | 
 
 ### Other Parameters
 
@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 
 ## GetWatchlistSubscription
 
-> WatchlistSubscription GetWatchlistSubscription(ctx, customerId, subscriptionId).Execute()
+> WatchlistSubscription GetWatchlistSubscription(ctx, subscriptionId, customerId).Execute()
 
 Retrieve watchlist monitoring subscription
 
@@ -101,22 +101,22 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier
     subscriptionId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Watchlist monitoring subscription ID
+    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WatchlistDeprecatedApi.GetWatchlistSubscription(context.Background(), customerId, subscriptionId).Execute()
+    resp, r, err := apiClient.WatchlistDeprecatedAPI.GetWatchlistSubscription(context.Background(), subscriptionId, customerId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedApi.GetWatchlistSubscription``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedAPI.GetWatchlistSubscription``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetWatchlistSubscription`: WatchlistSubscription
-    fmt.Fprintf(os.Stdout, "Response from `WatchlistDeprecatedApi.GetWatchlistSubscription`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `WatchlistDeprecatedAPI.GetWatchlistSubscription`: %v\n", resp)
 }
 ```
 
@@ -126,8 +126,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**customerId** | **string** | The customer&#39;s unique identifier | 
 **subscriptionId** | **string** | Watchlist monitoring subscription ID | 
+**customerId** | **string** | The customer&#39;s unique identifier | 
 
 ### Other Parameters
 
@@ -172,7 +172,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -180,13 +180,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WatchlistDeprecatedApi.ListWatchlistAlerts(context.Background(), customerId).Execute()
+    resp, r, err := apiClient.WatchlistDeprecatedAPI.ListWatchlistAlerts(context.Background(), customerId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedApi.ListWatchlistAlerts``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedAPI.ListWatchlistAlerts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListWatchlistAlerts`: WatchlistAlertList
-    fmt.Fprintf(os.Stdout, "Response from `WatchlistDeprecatedApi.ListWatchlistAlerts`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `WatchlistDeprecatedAPI.ListWatchlistAlerts`: %v\n", resp)
 }
 ```
 
@@ -240,7 +240,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -248,13 +248,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WatchlistDeprecatedApi.ListWatchlistSubscriptions(context.Background(), customerId).Execute()
+    resp, r, err := apiClient.WatchlistDeprecatedAPI.ListWatchlistSubscriptions(context.Background(), customerId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedApi.ListWatchlistSubscriptions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedAPI.ListWatchlistSubscriptions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListWatchlistSubscriptions`: WatchlistSubscriptionList
-    fmt.Fprintf(os.Stdout, "Response from `WatchlistDeprecatedApi.ListWatchlistSubscriptions`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `WatchlistDeprecatedAPI.ListWatchlistSubscriptions`: %v\n", resp)
 }
 ```
 
@@ -308,7 +308,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -318,9 +318,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WatchlistDeprecatedApi.SuppressWatchlistEntityAlert(context.Background(), customerId).WatchlistSuppress(watchlistSuppress).IdempotencyKey(idempotencyKey).Execute()
+    r, err := apiClient.WatchlistDeprecatedAPI.SuppressWatchlistEntityAlert(context.Background(), customerId).WatchlistSuppress(watchlistSuppress).IdempotencyKey(idempotencyKey).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedApi.SuppressWatchlistEntityAlert``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedAPI.SuppressWatchlistEntityAlert``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -365,7 +365,7 @@ Name | Type | Description  | Notes
 
 ## UpdateWatchlistAlert
 
-> UpdateWatchlistAlert(ctx, customerId, alertId).WatchlistAlert(watchlistAlert).Execute()
+> UpdateWatchlistAlert(ctx, alertId, customerId).WatchlistAlert(watchlistAlert).Execute()
 
 Update watchlist alert
 
@@ -378,19 +378,19 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier
     alertId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for this watchlist alert.
+    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier
     watchlistAlert := *openapiclient.NewWatchlistAlert("Status_example") // WatchlistAlert | A watchlist body
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WatchlistDeprecatedApi.UpdateWatchlistAlert(context.Background(), customerId, alertId).WatchlistAlert(watchlistAlert).Execute()
+    r, err := apiClient.WatchlistDeprecatedAPI.UpdateWatchlistAlert(context.Background(), alertId, customerId).WatchlistAlert(watchlistAlert).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedApi.UpdateWatchlistAlert``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedAPI.UpdateWatchlistAlert``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -402,8 +402,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**customerId** | **string** | The customer&#39;s unique identifier | 
 **alertId** | **string** | Unique identifier for this watchlist alert. | 
+**customerId** | **string** | The customer&#39;s unique identifier | 
 
 ### Other Parameters
 
@@ -436,7 +436,7 @@ Name | Type | Description  | Notes
 
 ## UpdateWatchlistSubscription
 
-> WatchlistSubscription UpdateWatchlistSubscription(ctx, customerId, subscriptionId).WatchlistSubscription(watchlistSubscription).Execute()
+> WatchlistSubscription UpdateWatchlistSubscription(ctx, subscriptionId, customerId).WatchlistSubscription(watchlistSubscription).Execute()
 
 Update watchlist monitoring subscription
 
@@ -449,23 +449,23 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier
     subscriptionId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Watchlist monitoring subscription ID
+    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier
     watchlistSubscription := *openapiclient.NewWatchlistSubscription(false) // WatchlistSubscription | Watchlist monitoring subscription to be updated. The only field that matters is `status`; all other fields are ignored. 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WatchlistDeprecatedApi.UpdateWatchlistSubscription(context.Background(), customerId, subscriptionId).WatchlistSubscription(watchlistSubscription).Execute()
+    resp, r, err := apiClient.WatchlistDeprecatedAPI.UpdateWatchlistSubscription(context.Background(), subscriptionId, customerId).WatchlistSubscription(watchlistSubscription).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedApi.UpdateWatchlistSubscription``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedAPI.UpdateWatchlistSubscription``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `UpdateWatchlistSubscription`: WatchlistSubscription
-    fmt.Fprintf(os.Stdout, "Response from `WatchlistDeprecatedApi.UpdateWatchlistSubscription`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `WatchlistDeprecatedAPI.UpdateWatchlistSubscription`: %v\n", resp)
 }
 ```
 
@@ -475,8 +475,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**customerId** | **string** | The customer&#39;s unique identifier | 
 **subscriptionId** | **string** | Watchlist monitoring subscription ID | 
+**customerId** | **string** | The customer&#39;s unique identifier | 
 
 ### Other Parameters
 
@@ -522,7 +522,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -532,13 +532,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WatchlistDeprecatedApi.WatchlistSubscribe(context.Background(), customerId).WatchlistSubscription(watchlistSubscription).IdempotencyKey(idempotencyKey).Execute()
+    resp, r, err := apiClient.WatchlistDeprecatedAPI.WatchlistSubscribe(context.Background(), customerId).WatchlistSubscription(watchlistSubscription).IdempotencyKey(idempotencyKey).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedApi.WatchlistSubscribe``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WatchlistDeprecatedAPI.WatchlistSubscribe``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `WatchlistSubscribe`: WatchlistSubscription
-    fmt.Fprintf(os.Stdout, "Response from `WatchlistDeprecatedApi.WatchlistSubscribe`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `WatchlistDeprecatedAPI.WatchlistSubscribe`: %v\n", resp)
 }
 ```
 

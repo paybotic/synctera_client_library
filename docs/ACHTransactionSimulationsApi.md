@@ -1,11 +1,11 @@
-# \ACHTransactionSimulationsApi
+# \ACHTransactionSimulationsAPI
 
-All URIs are relative to *https://api.synctera.com/v0*
+All URIs are relative to *https://api-sandbox.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AchReturnSimulation**](ACHTransactionSimulationsApi.md#AchReturnSimulation) | **Post** /ach/transaction_simulations/receiving_return | Simulate receiving ACH return
-[**AchTransactionSimulation**](ACHTransactionSimulationsApi.md#AchTransactionSimulation) | **Post** /ach/transaction_simulations/receiving_transaction | Simulate receiving ACH transaction
+[**AchReturnSimulation**](ACHTransactionSimulationsAPI.md#AchReturnSimulation) | **Post** /ach/transaction_simulations/receiving_return | Simulate receiving ACH return
+[**AchTransactionSimulation**](ACHTransactionSimulationsAPI.md#AchTransactionSimulation) | **Post** /ach/transaction_simulations/receiving_transaction | Simulate receiving ACH transaction
 
 
 
@@ -26,7 +26,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -34,13 +34,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ACHTransactionSimulationsApi.AchReturnSimulation(context.Background()).AchReturnSimulationRequest(achReturnSimulationRequest).Execute()
+    resp, r, err := apiClient.ACHTransactionSimulationsAPI.AchReturnSimulation(context.Background()).AchReturnSimulationRequest(achReturnSimulationRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ACHTransactionSimulationsApi.AchReturnSimulation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ACHTransactionSimulationsAPI.AchReturnSimulation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `AchReturnSimulation`: map[string]interface{}
-    fmt.Fprintf(os.Stdout, "Response from `ACHTransactionSimulationsApi.AchReturnSimulation`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `ACHTransactionSimulationsAPI.AchReturnSimulation`: %v\n", resp)
 }
 ```
 
@@ -93,7 +93,7 @@ import (
     "fmt"
     "os"
     "time"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -101,13 +101,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ACHTransactionSimulationsApi.AchTransactionSimulation(context.Background()).AchTransactionSimulationRequest(achTransactionSimulationRequest).Execute()
+    resp, r, err := apiClient.ACHTransactionSimulationsAPI.AchTransactionSimulation(context.Background()).AchTransactionSimulationRequest(achTransactionSimulationRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ACHTransactionSimulationsApi.AchTransactionSimulation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ACHTransactionSimulationsAPI.AchTransactionSimulation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `AchTransactionSimulation`: map[string]interface{}
-    fmt.Fprintf(os.Stdout, "Response from `ACHTransactionSimulationsApi.AchTransactionSimulation`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `ACHTransactionSimulationsAPI.AchTransactionSimulation`: %v\n", resp)
 }
 ```
 

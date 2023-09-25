@@ -1,12 +1,12 @@
-# \InternalTransferApi
+# \InternalTransferAPI
 
-All URIs are relative to *https://api.synctera.com/v0*
+All URIs are relative to *https://api-sandbox.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateInternalTransfer**](InternalTransferApi.md#CreateInternalTransfer) | **Post** /transactions/internal_transfer | Create an internal transfer
-[**GetInternalTransferByID**](InternalTransferApi.md#GetInternalTransferByID) | **Get** /transactions/internal_transfer/{id} | Get an internal transfer
-[**UpdateInternalTransferByID**](InternalTransferApi.md#UpdateInternalTransferByID) | **Patch** /transactions/internal_transfer/{id} | Update an internal transfer
+[**CreateInternalTransfer**](InternalTransferAPI.md#CreateInternalTransfer) | **Post** /transactions/internal_transfer | Create an internal transfer
+[**GetInternalTransferByID**](InternalTransferAPI.md#GetInternalTransferByID) | **Get** /transactions/internal_transfer/{id} | Get an internal transfer
+[**UpdateInternalTransferByID**](InternalTransferAPI.md#UpdateInternalTransferByID) | **Patch** /transactions/internal_transfer/{id} | Update an internal transfer
 
 
 
@@ -27,7 +27,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -36,13 +36,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.InternalTransferApi.CreateInternalTransfer(context.Background()).InternalTransfer(internalTransfer).IdempotencyKey(idempotencyKey).Execute()
+    resp, r, err := apiClient.InternalTransferAPI.CreateInternalTransfer(context.Background()).InternalTransfer(internalTransfer).IdempotencyKey(idempotencyKey).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `InternalTransferApi.CreateInternalTransfer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `InternalTransferAPI.CreateInternalTransfer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `CreateInternalTransfer`: InternalTransferResponse
-    fmt.Fprintf(os.Stdout, "Response from `InternalTransferApi.CreateInternalTransfer`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `InternalTransferAPI.CreateInternalTransfer`: %v\n", resp)
 }
 ```
 
@@ -95,7 +95,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -103,13 +103,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.InternalTransferApi.GetInternalTransferByID(context.Background(), id).Execute()
+    resp, r, err := apiClient.InternalTransferAPI.GetInternalTransferByID(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `InternalTransferApi.GetInternalTransferByID``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `InternalTransferAPI.GetInternalTransferByID``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetInternalTransferByID`: InternalTransferResponse
-    fmt.Fprintf(os.Stdout, "Response from `InternalTransferApi.GetInternalTransferByID`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `InternalTransferAPI.GetInternalTransferByID`: %v\n", resp)
 }
 ```
 
@@ -165,7 +165,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -174,13 +174,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.InternalTransferApi.UpdateInternalTransferByID(context.Background(), id).InternalTransferPatch(internalTransferPatch).Execute()
+    resp, r, err := apiClient.InternalTransferAPI.UpdateInternalTransferByID(context.Background(), id).InternalTransferPatch(internalTransferPatch).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `InternalTransferApi.UpdateInternalTransferByID``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `InternalTransferAPI.UpdateInternalTransferByID``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `UpdateInternalTransferByID`: InternalTransferResponse
-    fmt.Fprintf(os.Stdout, "Response from `InternalTransferApi.UpdateInternalTransferByID`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `InternalTransferAPI.UpdateInternalTransferByID`: %v\n", resp)
 }
 ```
 

@@ -3,11 +3,11 @@
 ## Enum
 
 
+* `ACTIVE` (value: `"ACTIVE"`)
+
 * `REQUESTED` (value: `"REQUESTED"`)
 
 * `REQUEST_DECLINED` (value: `"REQUEST_DECLINED"`)
-
-* `ACTIVE` (value: `"ACTIVE"`)
 
 * `SUSPENDED` (value: `"SUSPENDED"`)
 

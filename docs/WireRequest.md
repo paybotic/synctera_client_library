@@ -11,13 +11,13 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to **map[string]interface{}** | Additional transfer metadata structured as key-value pairs | [optional] 
 **OriginatingAccountId** | **string** | Sender account ID | 
 **ReceivingAccountId** | **string** | The external account uuid representing the recipient of the wire. | 
-**RecipientMessage** | Pointer to **string** | Information from the originator to the beneficiary (recipient). | [optional] 
+**RecipientMessage** | **string** | Information from the originator to the beneficiary (recipient). | 
 
 ## Methods
 
 ### NewWireRequest
 
-`func NewWireRequest(amount int32, currency string, customerId string, originatingAccountId string, receivingAccountId string, ) *WireRequest`
+`func NewWireRequest(amount int32, currency string, customerId string, originatingAccountId string, receivingAccountId string, recipientMessage string, ) *WireRequest`
 
 NewWireRequest instantiates a new WireRequest object
 This constructor will assign default values to properties that have it defined,
@@ -201,11 +201,6 @@ and a boolean to check if the value has been set.
 
 SetRecipientMessage sets RecipientMessage field to given value.
 
-### HasRecipientMessage
-
-`func (o *WireRequest) HasRecipientMessage() bool`
-
-HasRecipientMessage returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

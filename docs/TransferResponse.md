@@ -9,19 +9,22 @@ Name | Type | Description | Notes
 **CountryCode** | **string** | ISO-3166-1 Alpha-2 country code | 
 **CreatedTime** | **time.Time** |  | 
 **Currency** | **string** | ISO 4217  Alpha-3 currency code | 
-**CustomerId** | **string** | The ID of the customer for which card is being activated | 
-**Id** | **string** | The id of the transfer | 
+**CustomerId** | **string** | The ID of the customer to whom the card belongs | 
+**ExternalCardId** | **string** | The ID of the external card from/to which the transfer was initiated/received | 
+**Id** | **string** | The ID of the transfer | 
 **LastModifiedTime** | **time.Time** |  | 
 **Merchant** | [**Merchant**](Merchant.md) |  | 
 **Status** | **string** | The status of the transfer | 
 **TransactionId** | Pointer to **string** | The transaction ID | [optional] 
 **Type** | [**TransferType**](TransferType.md) |  | 
+**ThreeDsId** | Pointer to **string** | Unique identifier of an External Card Transfer 3-D Secure Authorization - conditionally required according to your program&#39;s 3DS policy | [optional] 
+**OriginatingCustomerId** | Pointer to **string** | For person-to-person PUSH transactions, this is the &#x60;customer_id&#x60; of the sender who must have privileges to access funds in the originating account in order to send funds to the recipient cardholder | [optional] 
 
 ## Methods
 
 ### NewTransferResponse
 
-`func NewTransferResponse(accountId string, amount int32, countryCode string, createdTime time.Time, currency string, customerId string, id string, lastModifiedTime time.Time, merchant Merchant, status string, type_ TransferType, ) *TransferResponse`
+`func NewTransferResponse(accountId string, amount int32, countryCode string, createdTime time.Time, currency string, customerId string, externalCardId string, id string, lastModifiedTime time.Time, merchant Merchant, status string, type_ TransferType, ) *TransferResponse`
 
 NewTransferResponse instantiates a new TransferResponse object
 This constructor will assign default values to properties that have it defined,
@@ -156,6 +159,26 @@ and a boolean to check if the value has been set.
 SetCustomerId sets CustomerId field to given value.
 
 
+### GetExternalCardId
+
+`func (o *TransferResponse) GetExternalCardId() string`
+
+GetExternalCardId returns the ExternalCardId field if non-nil, zero value otherwise.
+
+### GetExternalCardIdOk
+
+`func (o *TransferResponse) GetExternalCardIdOk() (*string, bool)`
+
+GetExternalCardIdOk returns a tuple with the ExternalCardId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalCardId
+
+`func (o *TransferResponse) SetExternalCardId(v string)`
+
+SetExternalCardId sets ExternalCardId field to given value.
+
+
 ### GetId
 
 `func (o *TransferResponse) GetId() string`
@@ -280,6 +303,56 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
+
+### GetThreeDsId
+
+`func (o *TransferResponse) GetThreeDsId() string`
+
+GetThreeDsId returns the ThreeDsId field if non-nil, zero value otherwise.
+
+### GetThreeDsIdOk
+
+`func (o *TransferResponse) GetThreeDsIdOk() (*string, bool)`
+
+GetThreeDsIdOk returns a tuple with the ThreeDsId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetThreeDsId
+
+`func (o *TransferResponse) SetThreeDsId(v string)`
+
+SetThreeDsId sets ThreeDsId field to given value.
+
+### HasThreeDsId
+
+`func (o *TransferResponse) HasThreeDsId() bool`
+
+HasThreeDsId returns a boolean if a field has been set.
+
+### GetOriginatingCustomerId
+
+`func (o *TransferResponse) GetOriginatingCustomerId() string`
+
+GetOriginatingCustomerId returns the OriginatingCustomerId field if non-nil, zero value otherwise.
+
+### GetOriginatingCustomerIdOk
+
+`func (o *TransferResponse) GetOriginatingCustomerIdOk() (*string, bool)`
+
+GetOriginatingCustomerIdOk returns a tuple with the OriginatingCustomerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginatingCustomerId
+
+`func (o *TransferResponse) SetOriginatingCustomerId(v string)`
+
+SetOriginatingCustomerId sets OriginatingCustomerId field to given value.
+
+### HasOriginatingCustomerId
+
+`func (o *TransferResponse) HasOriginatingCustomerId() bool`
+
+HasOriginatingCustomerId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

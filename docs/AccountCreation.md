@@ -4,6 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BalanceCeiling** | Pointer to [**BalanceCeiling**](BalanceCeiling.md) |  | [optional] 
+**BalanceFloor** | Pointer to [**BalanceFloor**](BalanceFloor.md) |  | [optional] 
+**FeeProductIds** | Pointer to **[]string** | A list of fee account products that the current account associates with. | [optional] 
+**InterestProductId** | Pointer to **string** | An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_DAILY.  | [optional] 
+**Note** | Pointer to **string** | Add an optional note when creating or updating a line of credit account. A note is required when updating the status to or from SUSPENDED | [optional] 
+**OverdraftLimit** | Pointer to **int64** | This field is unused and will be removed in a future API version.  | [optional] 
+**SpendControlIds** | Pointer to **[]string** | List of spend control IDs to control spending for the account | [optional] 
+**SpendingLimits** | Pointer to [**SpendingLimits**](SpendingLimits.md) |  | [optional] 
 **AccessStatus** | Pointer to [**AccountAccessStatus**](AccountAccessStatus.md) |  | [optional] 
 **AccountNumber** | Pointer to **string** | Account number | [optional] [readonly] 
 **AccountNumberMasked** | Pointer to **string** | The response will contain the bank fintech ID (3 or 6 digits) plus the last 4 digits, with the digits in between replaced with * characters. Shadow mode account numbers will not be masked. | [optional] [readonly] 
@@ -20,29 +28,16 @@ Name | Type | Description | Notes
 **Iban** | Pointer to **string** | International bank account number | [optional] 
 **Id** | Pointer to **string** | Account ID | [optional] [readonly] 
 **IsAccountPool** | Pointer to **bool** | Account is investment (variable balance) account or a multi-balance account pool. Default false | [optional] 
-**IsAchEnabled** | Pointer to **bool** | A flag to indicate whether ACH transactions are enabled. | [optional] [readonly] 
-**IsCardEnabled** | Pointer to **bool** | A flag to indicate whether card transactions are enabled. | [optional] [readonly] 
-**IsP2pEnabled** | Pointer to **bool** | A flag to indicate whether P2P transactions are enabled. | [optional] [readonly] 
-**IsWireEnabled** | Pointer to **bool** | A flag to indicate whether wire transactions are enabled. | [optional] [readonly] 
+**IsSarEnabled** | Pointer to **bool** | A flag to indicate whether SAR generation is enabled. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to **time.Time** | Timestamp of the last account modification in RFC3339 format | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | User provided account metadata | [optional] 
 **Nickname** | Pointer to **string** | User provided account nickname | [optional] 
 **Status** | Pointer to [**Status**](Status.md) |  | [optional] 
 **SwiftCode** | Pointer to **string** | SWIFT code | [optional] 
-**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
-**BalanceCeiling** | Pointer to [**BalanceCeiling**](BalanceCeiling.md) |  | [optional] 
-**BalanceFloor** | Pointer to [**BalanceFloor**](BalanceFloor.md) |  | [optional] 
-**FeeProductIds** | Pointer to **[]string** | A list of fee account products that the current account associates with. | [optional] 
-**InterestProductId** | Pointer to **string** | An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_DAILY.  | [optional] 
-**OverdraftLimit** | Pointer to **int64** | Account&#39;s overdraft limit | [optional] 
-**SpendControlIds** | Pointer to **[]string** | List of spend control IDs to control spending for the account | [optional] 
-**SpendingLimits** | Pointer to [**SpendingLimits**](SpendingLimits.md) |  | [optional] 
-**ChargeoffPeriod** | Pointer to **int32** | The number of days an account can stay delinquent before marking an account as charged-off.  | [optional] [default to 90]
-**CreditLimit** | Pointer to **int64** | The credit limit for this line of credit account in cents. Minimum is 0.  | [optional] 
-**DelinquencyPeriod** | Pointer to **int32** | The number of days past the due date to wait for a minimum payment before marking an account as delinquent.  | [optional] [default to 30]
-**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] 
-**MinimumPayment** | Pointer to [**MinimumPaymentPartial**](MinimumPaymentPartial.md) |  | [optional] 
 **Security** | Pointer to [**Security**](Security.md) |  | [optional] 
+**CreditLimit** | Pointer to **int64** | The credit limit for this line of credit account in cents. Minimum is 0.  | [optional] 
+**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment. The default will be set to 21 days.  | [optional] 
+**MinimumPayment** | Pointer to [**MinimumPaymentPartial**](MinimumPaymentPartial.md) |  | [optional] 
 **AccountTemplateId** | Pointer to **string** | Account template ID. If not specified: * &#x60;account_type&#x60; is *required*. * If there is a single account template of the correct type, that account template   is automatically used. * Otherwise, the request is an error.  | [optional] 
 **Relationships** | Pointer to [**[]Relationship**](Relationship.md) | List of the relationship for this account to the parties | [optional] 
 
@@ -64,6 +59,206 @@ will change when the set of required properties is changed
 NewAccountCreationWithDefaults instantiates a new AccountCreation object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBalanceCeiling
+
+`func (o *AccountCreation) GetBalanceCeiling() BalanceCeiling`
+
+GetBalanceCeiling returns the BalanceCeiling field if non-nil, zero value otherwise.
+
+### GetBalanceCeilingOk
+
+`func (o *AccountCreation) GetBalanceCeilingOk() (*BalanceCeiling, bool)`
+
+GetBalanceCeilingOk returns a tuple with the BalanceCeiling field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBalanceCeiling
+
+`func (o *AccountCreation) SetBalanceCeiling(v BalanceCeiling)`
+
+SetBalanceCeiling sets BalanceCeiling field to given value.
+
+### HasBalanceCeiling
+
+`func (o *AccountCreation) HasBalanceCeiling() bool`
+
+HasBalanceCeiling returns a boolean if a field has been set.
+
+### GetBalanceFloor
+
+`func (o *AccountCreation) GetBalanceFloor() BalanceFloor`
+
+GetBalanceFloor returns the BalanceFloor field if non-nil, zero value otherwise.
+
+### GetBalanceFloorOk
+
+`func (o *AccountCreation) GetBalanceFloorOk() (*BalanceFloor, bool)`
+
+GetBalanceFloorOk returns a tuple with the BalanceFloor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBalanceFloor
+
+`func (o *AccountCreation) SetBalanceFloor(v BalanceFloor)`
+
+SetBalanceFloor sets BalanceFloor field to given value.
+
+### HasBalanceFloor
+
+`func (o *AccountCreation) HasBalanceFloor() bool`
+
+HasBalanceFloor returns a boolean if a field has been set.
+
+### GetFeeProductIds
+
+`func (o *AccountCreation) GetFeeProductIds() []string`
+
+GetFeeProductIds returns the FeeProductIds field if non-nil, zero value otherwise.
+
+### GetFeeProductIdsOk
+
+`func (o *AccountCreation) GetFeeProductIdsOk() (*[]string, bool)`
+
+GetFeeProductIdsOk returns a tuple with the FeeProductIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFeeProductIds
+
+`func (o *AccountCreation) SetFeeProductIds(v []string)`
+
+SetFeeProductIds sets FeeProductIds field to given value.
+
+### HasFeeProductIds
+
+`func (o *AccountCreation) HasFeeProductIds() bool`
+
+HasFeeProductIds returns a boolean if a field has been set.
+
+### GetInterestProductId
+
+`func (o *AccountCreation) GetInterestProductId() string`
+
+GetInterestProductId returns the InterestProductId field if non-nil, zero value otherwise.
+
+### GetInterestProductIdOk
+
+`func (o *AccountCreation) GetInterestProductIdOk() (*string, bool)`
+
+GetInterestProductIdOk returns a tuple with the InterestProductId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInterestProductId
+
+`func (o *AccountCreation) SetInterestProductId(v string)`
+
+SetInterestProductId sets InterestProductId field to given value.
+
+### HasInterestProductId
+
+`func (o *AccountCreation) HasInterestProductId() bool`
+
+HasInterestProductId returns a boolean if a field has been set.
+
+### GetNote
+
+`func (o *AccountCreation) GetNote() string`
+
+GetNote returns the Note field if non-nil, zero value otherwise.
+
+### GetNoteOk
+
+`func (o *AccountCreation) GetNoteOk() (*string, bool)`
+
+GetNoteOk returns a tuple with the Note field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNote
+
+`func (o *AccountCreation) SetNote(v string)`
+
+SetNote sets Note field to given value.
+
+### HasNote
+
+`func (o *AccountCreation) HasNote() bool`
+
+HasNote returns a boolean if a field has been set.
+
+### GetOverdraftLimit
+
+`func (o *AccountCreation) GetOverdraftLimit() int64`
+
+GetOverdraftLimit returns the OverdraftLimit field if non-nil, zero value otherwise.
+
+### GetOverdraftLimitOk
+
+`func (o *AccountCreation) GetOverdraftLimitOk() (*int64, bool)`
+
+GetOverdraftLimitOk returns a tuple with the OverdraftLimit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOverdraftLimit
+
+`func (o *AccountCreation) SetOverdraftLimit(v int64)`
+
+SetOverdraftLimit sets OverdraftLimit field to given value.
+
+### HasOverdraftLimit
+
+`func (o *AccountCreation) HasOverdraftLimit() bool`
+
+HasOverdraftLimit returns a boolean if a field has been set.
+
+### GetSpendControlIds
+
+`func (o *AccountCreation) GetSpendControlIds() []string`
+
+GetSpendControlIds returns the SpendControlIds field if non-nil, zero value otherwise.
+
+### GetSpendControlIdsOk
+
+`func (o *AccountCreation) GetSpendControlIdsOk() (*[]string, bool)`
+
+GetSpendControlIdsOk returns a tuple with the SpendControlIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpendControlIds
+
+`func (o *AccountCreation) SetSpendControlIds(v []string)`
+
+SetSpendControlIds sets SpendControlIds field to given value.
+
+### HasSpendControlIds
+
+`func (o *AccountCreation) HasSpendControlIds() bool`
+
+HasSpendControlIds returns a boolean if a field has been set.
+
+### GetSpendingLimits
+
+`func (o *AccountCreation) GetSpendingLimits() SpendingLimits`
+
+GetSpendingLimits returns the SpendingLimits field if non-nil, zero value otherwise.
+
+### GetSpendingLimitsOk
+
+`func (o *AccountCreation) GetSpendingLimitsOk() (*SpendingLimits, bool)`
+
+GetSpendingLimitsOk returns a tuple with the SpendingLimits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpendingLimits
+
+`func (o *AccountCreation) SetSpendingLimits(v SpendingLimits)`
+
+SetSpendingLimits sets SpendingLimits field to given value.
+
+### HasSpendingLimits
+
+`func (o *AccountCreation) HasSpendingLimits() bool`
+
+HasSpendingLimits returns a boolean if a field has been set.
 
 ### GetAccessStatus
 
@@ -465,105 +660,30 @@ SetIsAccountPool sets IsAccountPool field to given value.
 
 HasIsAccountPool returns a boolean if a field has been set.
 
-### GetIsAchEnabled
+### GetIsSarEnabled
 
-`func (o *AccountCreation) GetIsAchEnabled() bool`
+`func (o *AccountCreation) GetIsSarEnabled() bool`
 
-GetIsAchEnabled returns the IsAchEnabled field if non-nil, zero value otherwise.
+GetIsSarEnabled returns the IsSarEnabled field if non-nil, zero value otherwise.
 
-### GetIsAchEnabledOk
+### GetIsSarEnabledOk
 
-`func (o *AccountCreation) GetIsAchEnabledOk() (*bool, bool)`
+`func (o *AccountCreation) GetIsSarEnabledOk() (*bool, bool)`
 
-GetIsAchEnabledOk returns a tuple with the IsAchEnabled field if it's non-nil, zero value otherwise
+GetIsSarEnabledOk returns a tuple with the IsSarEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIsAchEnabled
+### SetIsSarEnabled
 
-`func (o *AccountCreation) SetIsAchEnabled(v bool)`
+`func (o *AccountCreation) SetIsSarEnabled(v bool)`
 
-SetIsAchEnabled sets IsAchEnabled field to given value.
+SetIsSarEnabled sets IsSarEnabled field to given value.
 
-### HasIsAchEnabled
+### HasIsSarEnabled
 
-`func (o *AccountCreation) HasIsAchEnabled() bool`
+`func (o *AccountCreation) HasIsSarEnabled() bool`
 
-HasIsAchEnabled returns a boolean if a field has been set.
-
-### GetIsCardEnabled
-
-`func (o *AccountCreation) GetIsCardEnabled() bool`
-
-GetIsCardEnabled returns the IsCardEnabled field if non-nil, zero value otherwise.
-
-### GetIsCardEnabledOk
-
-`func (o *AccountCreation) GetIsCardEnabledOk() (*bool, bool)`
-
-GetIsCardEnabledOk returns a tuple with the IsCardEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsCardEnabled
-
-`func (o *AccountCreation) SetIsCardEnabled(v bool)`
-
-SetIsCardEnabled sets IsCardEnabled field to given value.
-
-### HasIsCardEnabled
-
-`func (o *AccountCreation) HasIsCardEnabled() bool`
-
-HasIsCardEnabled returns a boolean if a field has been set.
-
-### GetIsP2pEnabled
-
-`func (o *AccountCreation) GetIsP2pEnabled() bool`
-
-GetIsP2pEnabled returns the IsP2pEnabled field if non-nil, zero value otherwise.
-
-### GetIsP2pEnabledOk
-
-`func (o *AccountCreation) GetIsP2pEnabledOk() (*bool, bool)`
-
-GetIsP2pEnabledOk returns a tuple with the IsP2pEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsP2pEnabled
-
-`func (o *AccountCreation) SetIsP2pEnabled(v bool)`
-
-SetIsP2pEnabled sets IsP2pEnabled field to given value.
-
-### HasIsP2pEnabled
-
-`func (o *AccountCreation) HasIsP2pEnabled() bool`
-
-HasIsP2pEnabled returns a boolean if a field has been set.
-
-### GetIsWireEnabled
-
-`func (o *AccountCreation) GetIsWireEnabled() bool`
-
-GetIsWireEnabled returns the IsWireEnabled field if non-nil, zero value otherwise.
-
-### GetIsWireEnabledOk
-
-`func (o *AccountCreation) GetIsWireEnabledOk() (*bool, bool)`
-
-GetIsWireEnabledOk returns a tuple with the IsWireEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsWireEnabled
-
-`func (o *AccountCreation) SetIsWireEnabled(v bool)`
-
-SetIsWireEnabled sets IsWireEnabled field to given value.
-
-### HasIsWireEnabled
-
-`func (o *AccountCreation) HasIsWireEnabled() bool`
-
-HasIsWireEnabled returns a boolean if a field has been set.
+HasIsSarEnabled returns a boolean if a field has been set.
 
 ### GetLastUpdatedTime
 
@@ -690,230 +810,30 @@ SetSwiftCode sets SwiftCode field to given value.
 
 HasSwiftCode returns a boolean if a field has been set.
 
-### GetTenant
+### GetSecurity
 
-`func (o *AccountCreation) GetTenant() string`
+`func (o *AccountCreation) GetSecurity() Security`
 
-GetTenant returns the Tenant field if non-nil, zero value otherwise.
+GetSecurity returns the Security field if non-nil, zero value otherwise.
 
-### GetTenantOk
+### GetSecurityOk
 
-`func (o *AccountCreation) GetTenantOk() (*string, bool)`
+`func (o *AccountCreation) GetSecurityOk() (*Security, bool)`
 
-GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+GetSecurityOk returns a tuple with the Security field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTenant
+### SetSecurity
 
-`func (o *AccountCreation) SetTenant(v string)`
+`func (o *AccountCreation) SetSecurity(v Security)`
 
-SetTenant sets Tenant field to given value.
+SetSecurity sets Security field to given value.
 
-### HasTenant
+### HasSecurity
 
-`func (o *AccountCreation) HasTenant() bool`
+`func (o *AccountCreation) HasSecurity() bool`
 
-HasTenant returns a boolean if a field has been set.
-
-### GetBalanceCeiling
-
-`func (o *AccountCreation) GetBalanceCeiling() BalanceCeiling`
-
-GetBalanceCeiling returns the BalanceCeiling field if non-nil, zero value otherwise.
-
-### GetBalanceCeilingOk
-
-`func (o *AccountCreation) GetBalanceCeilingOk() (*BalanceCeiling, bool)`
-
-GetBalanceCeilingOk returns a tuple with the BalanceCeiling field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBalanceCeiling
-
-`func (o *AccountCreation) SetBalanceCeiling(v BalanceCeiling)`
-
-SetBalanceCeiling sets BalanceCeiling field to given value.
-
-### HasBalanceCeiling
-
-`func (o *AccountCreation) HasBalanceCeiling() bool`
-
-HasBalanceCeiling returns a boolean if a field has been set.
-
-### GetBalanceFloor
-
-`func (o *AccountCreation) GetBalanceFloor() BalanceFloor`
-
-GetBalanceFloor returns the BalanceFloor field if non-nil, zero value otherwise.
-
-### GetBalanceFloorOk
-
-`func (o *AccountCreation) GetBalanceFloorOk() (*BalanceFloor, bool)`
-
-GetBalanceFloorOk returns a tuple with the BalanceFloor field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBalanceFloor
-
-`func (o *AccountCreation) SetBalanceFloor(v BalanceFloor)`
-
-SetBalanceFloor sets BalanceFloor field to given value.
-
-### HasBalanceFloor
-
-`func (o *AccountCreation) HasBalanceFloor() bool`
-
-HasBalanceFloor returns a boolean if a field has been set.
-
-### GetFeeProductIds
-
-`func (o *AccountCreation) GetFeeProductIds() []string`
-
-GetFeeProductIds returns the FeeProductIds field if non-nil, zero value otherwise.
-
-### GetFeeProductIdsOk
-
-`func (o *AccountCreation) GetFeeProductIdsOk() (*[]string, bool)`
-
-GetFeeProductIdsOk returns a tuple with the FeeProductIds field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFeeProductIds
-
-`func (o *AccountCreation) SetFeeProductIds(v []string)`
-
-SetFeeProductIds sets FeeProductIds field to given value.
-
-### HasFeeProductIds
-
-`func (o *AccountCreation) HasFeeProductIds() bool`
-
-HasFeeProductIds returns a boolean if a field has been set.
-
-### GetInterestProductId
-
-`func (o *AccountCreation) GetInterestProductId() string`
-
-GetInterestProductId returns the InterestProductId field if non-nil, zero value otherwise.
-
-### GetInterestProductIdOk
-
-`func (o *AccountCreation) GetInterestProductIdOk() (*string, bool)`
-
-GetInterestProductIdOk returns a tuple with the InterestProductId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInterestProductId
-
-`func (o *AccountCreation) SetInterestProductId(v string)`
-
-SetInterestProductId sets InterestProductId field to given value.
-
-### HasInterestProductId
-
-`func (o *AccountCreation) HasInterestProductId() bool`
-
-HasInterestProductId returns a boolean if a field has been set.
-
-### GetOverdraftLimit
-
-`func (o *AccountCreation) GetOverdraftLimit() int64`
-
-GetOverdraftLimit returns the OverdraftLimit field if non-nil, zero value otherwise.
-
-### GetOverdraftLimitOk
-
-`func (o *AccountCreation) GetOverdraftLimitOk() (*int64, bool)`
-
-GetOverdraftLimitOk returns a tuple with the OverdraftLimit field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOverdraftLimit
-
-`func (o *AccountCreation) SetOverdraftLimit(v int64)`
-
-SetOverdraftLimit sets OverdraftLimit field to given value.
-
-### HasOverdraftLimit
-
-`func (o *AccountCreation) HasOverdraftLimit() bool`
-
-HasOverdraftLimit returns a boolean if a field has been set.
-
-### GetSpendControlIds
-
-`func (o *AccountCreation) GetSpendControlIds() []string`
-
-GetSpendControlIds returns the SpendControlIds field if non-nil, zero value otherwise.
-
-### GetSpendControlIdsOk
-
-`func (o *AccountCreation) GetSpendControlIdsOk() (*[]string, bool)`
-
-GetSpendControlIdsOk returns a tuple with the SpendControlIds field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSpendControlIds
-
-`func (o *AccountCreation) SetSpendControlIds(v []string)`
-
-SetSpendControlIds sets SpendControlIds field to given value.
-
-### HasSpendControlIds
-
-`func (o *AccountCreation) HasSpendControlIds() bool`
-
-HasSpendControlIds returns a boolean if a field has been set.
-
-### GetSpendingLimits
-
-`func (o *AccountCreation) GetSpendingLimits() SpendingLimits`
-
-GetSpendingLimits returns the SpendingLimits field if non-nil, zero value otherwise.
-
-### GetSpendingLimitsOk
-
-`func (o *AccountCreation) GetSpendingLimitsOk() (*SpendingLimits, bool)`
-
-GetSpendingLimitsOk returns a tuple with the SpendingLimits field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSpendingLimits
-
-`func (o *AccountCreation) SetSpendingLimits(v SpendingLimits)`
-
-SetSpendingLimits sets SpendingLimits field to given value.
-
-### HasSpendingLimits
-
-`func (o *AccountCreation) HasSpendingLimits() bool`
-
-HasSpendingLimits returns a boolean if a field has been set.
-
-### GetChargeoffPeriod
-
-`func (o *AccountCreation) GetChargeoffPeriod() int32`
-
-GetChargeoffPeriod returns the ChargeoffPeriod field if non-nil, zero value otherwise.
-
-### GetChargeoffPeriodOk
-
-`func (o *AccountCreation) GetChargeoffPeriodOk() (*int32, bool)`
-
-GetChargeoffPeriodOk returns a tuple with the ChargeoffPeriod field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChargeoffPeriod
-
-`func (o *AccountCreation) SetChargeoffPeriod(v int32)`
-
-SetChargeoffPeriod sets ChargeoffPeriod field to given value.
-
-### HasChargeoffPeriod
-
-`func (o *AccountCreation) HasChargeoffPeriod() bool`
-
-HasChargeoffPeriod returns a boolean if a field has been set.
+HasSecurity returns a boolean if a field has been set.
 
 ### GetCreditLimit
 
@@ -939,31 +859,6 @@ SetCreditLimit sets CreditLimit field to given value.
 `func (o *AccountCreation) HasCreditLimit() bool`
 
 HasCreditLimit returns a boolean if a field has been set.
-
-### GetDelinquencyPeriod
-
-`func (o *AccountCreation) GetDelinquencyPeriod() int32`
-
-GetDelinquencyPeriod returns the DelinquencyPeriod field if non-nil, zero value otherwise.
-
-### GetDelinquencyPeriodOk
-
-`func (o *AccountCreation) GetDelinquencyPeriodOk() (*int32, bool)`
-
-GetDelinquencyPeriodOk returns a tuple with the DelinquencyPeriod field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDelinquencyPeriod
-
-`func (o *AccountCreation) SetDelinquencyPeriod(v int32)`
-
-SetDelinquencyPeriod sets DelinquencyPeriod field to given value.
-
-### HasDelinquencyPeriod
-
-`func (o *AccountCreation) HasDelinquencyPeriod() bool`
-
-HasDelinquencyPeriod returns a boolean if a field has been set.
 
 ### GetGracePeriod
 
@@ -1014,31 +909,6 @@ SetMinimumPayment sets MinimumPayment field to given value.
 `func (o *AccountCreation) HasMinimumPayment() bool`
 
 HasMinimumPayment returns a boolean if a field has been set.
-
-### GetSecurity
-
-`func (o *AccountCreation) GetSecurity() Security`
-
-GetSecurity returns the Security field if non-nil, zero value otherwise.
-
-### GetSecurityOk
-
-`func (o *AccountCreation) GetSecurityOk() (*Security, bool)`
-
-GetSecurityOk returns a tuple with the Security field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSecurity
-
-`func (o *AccountCreation) SetSecurity(v Security)`
-
-SetSecurity sets Security field to given value.
-
-### HasSecurity
-
-`func (o *AccountCreation) HasSecurity() bool`
-
-HasSecurity returns a boolean if a field has been set.
 
 ### GetAccountTemplateId
 

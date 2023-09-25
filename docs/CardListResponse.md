@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Cards** | [**[]CardResponse**](CardResponse.md) | Array of Cards | 
 **NextPageToken** | Pointer to **string** | If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows. | [optional] 
+**Cards** | [**[]CardResponse**](CardResponse.md) | Array of Cards | 
 
 ## Methods
 
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewCardListResponseWithDefaults instantiates a new CardListResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetCards
-
-`func (o *CardListResponse) GetCards() []CardResponse`
-
-GetCards returns the Cards field if non-nil, zero value otherwise.
-
-### GetCardsOk
-
-`func (o *CardListResponse) GetCardsOk() (*[]CardResponse, bool)`
-
-GetCardsOk returns a tuple with the Cards field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCards
-
-`func (o *CardListResponse) SetCards(v []CardResponse)`
-
-SetCards sets Cards field to given value.
-
 
 ### GetNextPageToken
 
@@ -70,6 +50,26 @@ SetNextPageToken sets NextPageToken field to given value.
 `func (o *CardListResponse) HasNextPageToken() bool`
 
 HasNextPageToken returns a boolean if a field has been set.
+
+### GetCards
+
+`func (o *CardListResponse) GetCards() []CardResponse`
+
+GetCards returns the Cards field if non-nil, zero value otherwise.
+
+### GetCardsOk
+
+`func (o *CardListResponse) GetCardsOk() (*[]CardResponse, bool)`
+
+GetCardsOk returns a tuple with the Cards field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCards
+
+`func (o *CardListResponse) SetCards(v []CardResponse)`
+
+SetCards sets Cards field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

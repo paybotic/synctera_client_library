@@ -7,17 +7,16 @@ Name | Type | Description | Notes
 **AccountType** | [**AccountType**](AccountType.md) |  | 
 **BankCountry** | **string** | Bank country of the account. ISO 3166-1 Alpha-2 or Alpha-3 country code. | 
 **Currency** | **string** | Account currency. ISO 4217 alphabetic currency code | 
-**ChargeoffPeriod** | Pointer to **int32** | The number of days an account can stay delinquent before marking an account as charged-off.  | [optional] [default to 90]
-**DelinquencyPeriod** | Pointer to **int32** | The number of days past the due date to wait for a minimum payment before marking an account as delinquent.  | [optional] [default to 30]
-**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] [default to 30]
-**InterestProductId** | **string** | An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_DAILY, and its rates set to 0%.  | 
+**AutoPaymentPeriod** | Pointer to **int32** | The number of days past the billing period to initiate an auto payment.  Only applicable for accounts with type &#x60;CHARGE_SECURED&#x60;, where the account holder has opted in for auto payment functionality. This value must be lower than or equal the &#x60;grace_period&#x60; setting on the account. If this value is 0, the auto payment will happen on the same day as the statement is generated. Auto payment only occurs if regular payments are not received on time.  | [optional] 
+**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment. The default will be set to 21 days.  | [optional] [default to 21]
 **MinimumPayment** | [**MinimumPaymentFull**](MinimumPaymentFull.md) |  | 
+**SpendControlIds** | Pointer to **[]string** | List of spend control IDs to control spending for the account | [optional] 
 
 ## Methods
 
 ### NewTemplateFieldsChargeSecured
 
-`func NewTemplateFieldsChargeSecured(accountType AccountType, bankCountry string, currency string, interestProductId string, minimumPayment MinimumPaymentFull, ) *TemplateFieldsChargeSecured`
+`func NewTemplateFieldsChargeSecured(accountType AccountType, bankCountry string, currency string, minimumPayment MinimumPaymentFull, ) *TemplateFieldsChargeSecured`
 
 NewTemplateFieldsChargeSecured instantiates a new TemplateFieldsChargeSecured object
 This constructor will assign default values to properties that have it defined,
@@ -92,55 +91,30 @@ and a boolean to check if the value has been set.
 SetCurrency sets Currency field to given value.
 
 
-### GetChargeoffPeriod
+### GetAutoPaymentPeriod
 
-`func (o *TemplateFieldsChargeSecured) GetChargeoffPeriod() int32`
+`func (o *TemplateFieldsChargeSecured) GetAutoPaymentPeriod() int32`
 
-GetChargeoffPeriod returns the ChargeoffPeriod field if non-nil, zero value otherwise.
+GetAutoPaymentPeriod returns the AutoPaymentPeriod field if non-nil, zero value otherwise.
 
-### GetChargeoffPeriodOk
+### GetAutoPaymentPeriodOk
 
-`func (o *TemplateFieldsChargeSecured) GetChargeoffPeriodOk() (*int32, bool)`
+`func (o *TemplateFieldsChargeSecured) GetAutoPaymentPeriodOk() (*int32, bool)`
 
-GetChargeoffPeriodOk returns a tuple with the ChargeoffPeriod field if it's non-nil, zero value otherwise
+GetAutoPaymentPeriodOk returns a tuple with the AutoPaymentPeriod field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetChargeoffPeriod
+### SetAutoPaymentPeriod
 
-`func (o *TemplateFieldsChargeSecured) SetChargeoffPeriod(v int32)`
+`func (o *TemplateFieldsChargeSecured) SetAutoPaymentPeriod(v int32)`
 
-SetChargeoffPeriod sets ChargeoffPeriod field to given value.
+SetAutoPaymentPeriod sets AutoPaymentPeriod field to given value.
 
-### HasChargeoffPeriod
+### HasAutoPaymentPeriod
 
-`func (o *TemplateFieldsChargeSecured) HasChargeoffPeriod() bool`
+`func (o *TemplateFieldsChargeSecured) HasAutoPaymentPeriod() bool`
 
-HasChargeoffPeriod returns a boolean if a field has been set.
-
-### GetDelinquencyPeriod
-
-`func (o *TemplateFieldsChargeSecured) GetDelinquencyPeriod() int32`
-
-GetDelinquencyPeriod returns the DelinquencyPeriod field if non-nil, zero value otherwise.
-
-### GetDelinquencyPeriodOk
-
-`func (o *TemplateFieldsChargeSecured) GetDelinquencyPeriodOk() (*int32, bool)`
-
-GetDelinquencyPeriodOk returns a tuple with the DelinquencyPeriod field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDelinquencyPeriod
-
-`func (o *TemplateFieldsChargeSecured) SetDelinquencyPeriod(v int32)`
-
-SetDelinquencyPeriod sets DelinquencyPeriod field to given value.
-
-### HasDelinquencyPeriod
-
-`func (o *TemplateFieldsChargeSecured) HasDelinquencyPeriod() bool`
-
-HasDelinquencyPeriod returns a boolean if a field has been set.
+HasAutoPaymentPeriod returns a boolean if a field has been set.
 
 ### GetGracePeriod
 
@@ -167,26 +141,6 @@ SetGracePeriod sets GracePeriod field to given value.
 
 HasGracePeriod returns a boolean if a field has been set.
 
-### GetInterestProductId
-
-`func (o *TemplateFieldsChargeSecured) GetInterestProductId() string`
-
-GetInterestProductId returns the InterestProductId field if non-nil, zero value otherwise.
-
-### GetInterestProductIdOk
-
-`func (o *TemplateFieldsChargeSecured) GetInterestProductIdOk() (*string, bool)`
-
-GetInterestProductIdOk returns a tuple with the InterestProductId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInterestProductId
-
-`func (o *TemplateFieldsChargeSecured) SetInterestProductId(v string)`
-
-SetInterestProductId sets InterestProductId field to given value.
-
-
 ### GetMinimumPayment
 
 `func (o *TemplateFieldsChargeSecured) GetMinimumPayment() MinimumPaymentFull`
@@ -206,6 +160,31 @@ and a boolean to check if the value has been set.
 
 SetMinimumPayment sets MinimumPayment field to given value.
 
+
+### GetSpendControlIds
+
+`func (o *TemplateFieldsChargeSecured) GetSpendControlIds() []string`
+
+GetSpendControlIds returns the SpendControlIds field if non-nil, zero value otherwise.
+
+### GetSpendControlIdsOk
+
+`func (o *TemplateFieldsChargeSecured) GetSpendControlIdsOk() (*[]string, bool)`
+
+GetSpendControlIdsOk returns a tuple with the SpendControlIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpendControlIds
+
+`func (o *TemplateFieldsChargeSecured) SetSpendControlIds(v []string)`
+
+SetSpendControlIds sets SpendControlIds field to given value.
+
+### HasSpendControlIds
+
+`func (o *TemplateFieldsChargeSecured) HasSpendControlIds() bool`
+
+HasSpendControlIds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

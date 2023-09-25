@@ -3,19 +3,19 @@
 ## Enum
 
 
-* `UNVERIFIED` (value: `"UNVERIFIED"`)
+* `ACCEPTED` (value: `"ACCEPTED"`)
 
 * `PENDING` (value: `"PENDING"`)
 
 * `PROVISIONAL` (value: `"PROVISIONAL"`)
 
-* `ACCEPTED` (value: `"ACCEPTED"`)
+* `REJECTED` (value: `"REJECTED"`)
 
 * `REVIEW` (value: `"REVIEW"`)
 
-* `VENDOR_ERROR` (value: `"VENDOR_ERROR"`)
+* `UNVERIFIED` (value: `"UNVERIFIED"`)
 
-* `REJECTED` (value: `"REJECTED"`)
+* `VENDOR_ERROR` (value: `"VENDOR_ERROR"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

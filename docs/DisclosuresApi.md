@@ -1,12 +1,12 @@
-# \DisclosuresApi
+# \DisclosuresAPI
 
-All URIs are relative to *https://api.synctera.com/v0*
+All URIs are relative to *https://api-sandbox.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateDisclosure**](DisclosuresApi.md#CreateDisclosure) | **Post** /disclosures | Create disclosure record
-[**GetDisclosure**](DisclosuresApi.md#GetDisclosure) | **Get** /disclosures/{disclosure_id} | Get disclosure
-[**ListDisclosures**](DisclosuresApi.md#ListDisclosures) | **Get** /disclosures | List disclosures
+[**CreateDisclosure**](DisclosuresAPI.md#CreateDisclosure) | **Post** /disclosures | Create disclosure record
+[**GetDisclosure**](DisclosuresAPI.md#GetDisclosure) | **Get** /disclosures/{disclosure_id} | Get disclosure
+[**ListDisclosures**](DisclosuresAPI.md#ListDisclosures) | **Get** /disclosures | List disclosures
 
 
 
@@ -28,7 +28,7 @@ import (
     "fmt"
     "os"
     "time"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -37,13 +37,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DisclosuresApi.CreateDisclosure(context.Background()).Disclosure(disclosure).IdempotencyKey(idempotencyKey).Execute()
+    resp, r, err := apiClient.DisclosuresAPI.CreateDisclosure(context.Background()).Disclosure(disclosure).IdempotencyKey(idempotencyKey).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DisclosuresApi.CreateDisclosure``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DisclosuresAPI.CreateDisclosure``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `CreateDisclosure`: Disclosure
-    fmt.Fprintf(os.Stdout, "Response from `DisclosuresApi.CreateDisclosure`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `DisclosuresAPI.CreateDisclosure`: %v\n", resp)
 }
 ```
 
@@ -96,7 +96,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -104,13 +104,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DisclosuresApi.GetDisclosure(context.Background(), disclosureId).Execute()
+    resp, r, err := apiClient.DisclosuresAPI.GetDisclosure(context.Background(), disclosureId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DisclosuresApi.GetDisclosure``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DisclosuresAPI.GetDisclosure``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetDisclosure`: Disclosure
-    fmt.Fprintf(os.Stdout, "Response from `DisclosuresApi.GetDisclosure`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `DisclosuresAPI.GetDisclosure`: %v\n", resp)
 }
 ```
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ## ListDisclosures
 
-> DisclosureList ListDisclosures(ctx).Id(id).PersonId(personId).BusinessId(businessId).Limit(limit).PageToken(pageToken).Execute()
+> DisclosureList ListDisclosures(ctx).BusinessId(businessId).PageToken(pageToken).Id(id).PersonId(personId).AcknowledgingPersonId(acknowledgingPersonId).Limit(limit).Execute()
 
 List disclosures
 
@@ -166,25 +166,26 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
+    businessId := []string{"Inner_example"} // []string | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  (optional)
+    pageToken := "a8937a0d" // string |  (optional)
     id := []string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"} // []string | Unique resource identifier (optional)
     personId := []string{"Inner_example"} // []string | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  (optional)
-    businessId := []string{"Inner_example"} // []string | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  (optional)
+    acknowledgingPersonId := []string{"Inner_example"} // []string | Return only disclosures that have the specified acknowledging_person_id. Multiple IDs can be provided as a comma-separated list.  (optional)
     limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "a8937a0d" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DisclosuresApi.ListDisclosures(context.Background()).Id(id).PersonId(personId).BusinessId(businessId).Limit(limit).PageToken(pageToken).Execute()
+    resp, r, err := apiClient.DisclosuresAPI.ListDisclosures(context.Background()).BusinessId(businessId).PageToken(pageToken).Id(id).PersonId(personId).AcknowledgingPersonId(acknowledgingPersonId).Limit(limit).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DisclosuresApi.ListDisclosures``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DisclosuresAPI.ListDisclosures``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListDisclosures`: DisclosureList
-    fmt.Fprintf(os.Stdout, "Response from `DisclosuresApi.ListDisclosures`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `DisclosuresAPI.ListDisclosures`: %v\n", resp)
 }
 ```
 
@@ -199,11 +200,12 @@ Other parameters are passed through a pointer to a apiListDisclosuresRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **businessId** | **[]string** | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  | 
+ **pageToken** | **string** |  | 
  **id** | **[]string** | Unique resource identifier | 
  **personId** | **[]string** | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  | 
- **businessId** | **[]string** | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  | 
+ **acknowledgingPersonId** | **[]string** | Return only disclosures that have the specified acknowledging_person_id. Multiple IDs can be provided as a comma-separated list.  | 
  **limit** | **int32** |  | [default to 100]
- **pageToken** | **string** |  | 
 
 ### Return type
 

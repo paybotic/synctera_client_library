@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExternalAccounts** | [**[]ExternalAccount**](ExternalAccount.md) | Array of external accounts | 
 **NextPageToken** | Pointer to **string** | If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows. | [optional] 
+**ExternalAccounts** | [**[]ExternalAccount**](ExternalAccount.md) | Array of external accounts | 
 
 ## Methods
 
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewExternalAccountsListWithDefaults instantiates a new ExternalAccountsList object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetExternalAccounts
-
-`func (o *ExternalAccountsList) GetExternalAccounts() []ExternalAccount`
-
-GetExternalAccounts returns the ExternalAccounts field if non-nil, zero value otherwise.
-
-### GetExternalAccountsOk
-
-`func (o *ExternalAccountsList) GetExternalAccountsOk() (*[]ExternalAccount, bool)`
-
-GetExternalAccountsOk returns a tuple with the ExternalAccounts field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExternalAccounts
-
-`func (o *ExternalAccountsList) SetExternalAccounts(v []ExternalAccount)`
-
-SetExternalAccounts sets ExternalAccounts field to given value.
-
 
 ### GetNextPageToken
 
@@ -70,6 +50,26 @@ SetNextPageToken sets NextPageToken field to given value.
 `func (o *ExternalAccountsList) HasNextPageToken() bool`
 
 HasNextPageToken returns a boolean if a field has been set.
+
+### GetExternalAccounts
+
+`func (o *ExternalAccountsList) GetExternalAccounts() []ExternalAccount`
+
+GetExternalAccounts returns the ExternalAccounts field if non-nil, zero value otherwise.
+
+### GetExternalAccountsOk
+
+`func (o *ExternalAccountsList) GetExternalAccountsOk() (*[]ExternalAccount, bool)`
+
+GetExternalAccountsOk returns a tuple with the ExternalAccounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalAccounts
+
+`func (o *ExternalAccountsList) SetExternalAccounts(v []ExternalAccount)`
+
+SetExternalAccounts sets ExternalAccounts field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

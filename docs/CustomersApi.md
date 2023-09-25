@@ -1,22 +1,21 @@
-# \CustomersApi
+# \CustomersAPI
 
-All URIs are relative to *https://api.synctera.com/v0*
+All URIs are relative to *https://api-sandbox.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateCustomer**](CustomersApi.md#CreateCustomer) | **Post** /customers | Create a Customer
-[**CreateCustomerEmployment**](CustomersApi.md#CreateCustomerEmployment) | **Post** /customers/{customer_id}/employment | Create employment record
-[**CreateCustomerRiskRating**](CustomersApi.md#CreateCustomerRiskRating) | **Post** /customers/{customer_id}/risk_ratings | Create customer risk rating
-[**GetAllCustomerEmployment**](CustomersApi.md#GetAllCustomerEmployment) | **Get** /customers/{customer_id}/employment | List customer employment records
-[**GetAllCustomerRiskRatings**](CustomersApi.md#GetAllCustomerRiskRatings) | **Get** /customers/{customer_id}/risk_ratings | List customer risk ratings
-[**GetCustomer**](CustomersApi.md#GetCustomer) | **Get** /customers/{customer_id} | Get Customer
-[**GetCustomerRiskRating**](CustomersApi.md#GetCustomerRiskRating) | **Get** /customers/{customer_id}/risk_ratings/{risk_rating_id} | Get customer risk rating
-[**GetPartyEmployment**](CustomersApi.md#GetPartyEmployment) | **Get** /customers/{customer_id}/employment/{employment_id} | Get customer employment record
-[**ListCustomers**](CustomersApi.md#ListCustomers) | **Get** /customers | List Customers
-[**PatchCustomer**](CustomersApi.md#PatchCustomer) | **Patch** /customers/{customer_id} | Patch Customer
-[**PrefillCustomer**](CustomersApi.md#PrefillCustomer) | **Post** /customers/{customer_id}/prefill | Prefill customer
-[**UpdateCustomer**](CustomersApi.md#UpdateCustomer) | **Put** /customers/{customer_id} | Update Customer
-[**UpdatePartyEmployment**](CustomersApi.md#UpdatePartyEmployment) | **Put** /customers/{customer_id}/employment/{employment_id} | Update customer employment record
+[**CreateCustomer**](CustomersAPI.md#CreateCustomer) | **Post** /customers | Create a Customer
+[**CreateCustomerEmployment**](CustomersAPI.md#CreateCustomerEmployment) | **Post** /customers/{customer_id}/employment | Create employment record
+[**CreateCustomerRiskRating**](CustomersAPI.md#CreateCustomerRiskRating) | **Post** /customers/{customer_id}/risk_ratings | Create customer risk rating
+[**GetAllCustomerEmployment**](CustomersAPI.md#GetAllCustomerEmployment) | **Get** /customers/{customer_id}/employment | List customer employment records
+[**GetAllCustomerRiskRatings**](CustomersAPI.md#GetAllCustomerRiskRatings) | **Get** /customers/{customer_id}/risk_ratings | List customer risk ratings
+[**GetCustomer**](CustomersAPI.md#GetCustomer) | **Get** /customers/{customer_id} | Get Customer
+[**GetCustomerRiskRating**](CustomersAPI.md#GetCustomerRiskRating) | **Get** /customers/{customer_id}/risk_ratings/{risk_rating_id} | Get customer risk rating
+[**GetPartyEmployment**](CustomersAPI.md#GetPartyEmployment) | **Get** /customers/{customer_id}/employment/{employment_id} | Get customer employment record
+[**ListCustomers**](CustomersAPI.md#ListCustomers) | **Get** /customers | List Customers
+[**PatchCustomer**](CustomersAPI.md#PatchCustomer) | **Patch** /customers/{customer_id} | Patch Customer
+[**UpdateCustomer**](CustomersAPI.md#UpdateCustomer) | **Put** /customers/{customer_id} | Update Customer
+[**UpdatePartyEmployment**](CustomersAPI.md#UpdatePartyEmployment) | **Put** /customers/{customer_id}/employment/{employment_id} | Update customer employment record
 
 
 
@@ -37,7 +36,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -46,13 +45,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CustomersApi.CreateCustomer(context.Background()).CustomerInBody(customerInBody).IdempotencyKey(idempotencyKey).Execute()
+    resp, r, err := apiClient.CustomersAPI.CreateCustomer(context.Background()).CustomerInBody(customerInBody).IdempotencyKey(idempotencyKey).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CustomersApi.CreateCustomer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomersAPI.CreateCustomer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `CreateCustomer`: CustomerInBody
-    fmt.Fprintf(os.Stdout, "Response from `CustomersApi.CreateCustomer`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CustomersAPI.CreateCustomer`: %v\n", resp)
 }
 ```
 
@@ -105,7 +104,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -115,13 +114,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CustomersApi.CreateCustomerEmployment(context.Background(), customerId).Employment(employment).IdempotencyKey(idempotencyKey).Execute()
+    resp, r, err := apiClient.CustomersAPI.CreateCustomerEmployment(context.Background(), customerId).Employment(employment).IdempotencyKey(idempotencyKey).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CustomersApi.CreateCustomerEmployment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomersAPI.CreateCustomerEmployment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `CreateCustomerEmployment`: Employment
-    fmt.Fprintf(os.Stdout, "Response from `CustomersApi.CreateCustomerEmployment`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CustomersAPI.CreateCustomerEmployment`: %v\n", resp)
 }
 ```
 
@@ -179,7 +178,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -189,13 +188,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CustomersApi.CreateCustomerRiskRating(context.Background(), customerId).IdempotencyKey(idempotencyKey).RiskRating(riskRating).Execute()
+    resp, r, err := apiClient.CustomersAPI.CreateCustomerRiskRating(context.Background(), customerId).IdempotencyKey(idempotencyKey).RiskRating(riskRating).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CustomersApi.CreateCustomerRiskRating``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomersAPI.CreateCustomerRiskRating``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `CreateCustomerRiskRating`: RiskRating
-    fmt.Fprintf(os.Stdout, "Response from `CustomersApi.CreateCustomerRiskRating`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CustomersAPI.CreateCustomerRiskRating`: %v\n", resp)
 }
 ```
 
@@ -253,7 +252,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -262,13 +261,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CustomersApi.GetAllCustomerEmployment(context.Background(), customerId).IncludeHistory(includeHistory).Execute()
+    resp, r, err := apiClient.CustomersAPI.GetAllCustomerEmployment(context.Background(), customerId).IncludeHistory(includeHistory).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CustomersApi.GetAllCustomerEmployment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomersAPI.GetAllCustomerEmployment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetAllCustomerEmployment`: EmploymentList
-    fmt.Fprintf(os.Stdout, "Response from `CustomersApi.GetAllCustomerEmployment`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CustomersAPI.GetAllCustomerEmployment`: %v\n", resp)
 }
 ```
 
@@ -325,7 +324,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -334,13 +333,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CustomersApi.GetAllCustomerRiskRatings(context.Background(), customerId).IncludeHistory(includeHistory).Execute()
+    resp, r, err := apiClient.CustomersAPI.GetAllCustomerRiskRatings(context.Background(), customerId).IncludeHistory(includeHistory).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CustomersApi.GetAllCustomerRiskRatings``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomersAPI.GetAllCustomerRiskRatings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetAllCustomerRiskRatings`: RiskRatingList
-    fmt.Fprintf(os.Stdout, "Response from `CustomersApi.GetAllCustomerRiskRatings`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CustomersAPI.GetAllCustomerRiskRatings`: %v\n", resp)
 }
 ```
 
@@ -397,7 +396,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -405,13 +404,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CustomersApi.GetCustomer(context.Background(), customerId).Execute()
+    resp, r, err := apiClient.CustomersAPI.GetCustomer(context.Background(), customerId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CustomersApi.GetCustomer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomersAPI.GetCustomer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetCustomer`: CustomerInBody
-    fmt.Fprintf(os.Stdout, "Response from `CustomersApi.GetCustomer`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CustomersAPI.GetCustomer`: %v\n", resp)
 }
 ```
 
@@ -467,7 +466,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -476,13 +475,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CustomersApi.GetCustomerRiskRating(context.Background(), customerId, riskRatingId).Execute()
+    resp, r, err := apiClient.CustomersAPI.GetCustomerRiskRating(context.Background(), customerId, riskRatingId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CustomersApi.GetCustomerRiskRating``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomersAPI.GetCustomerRiskRating``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetCustomerRiskRating`: RiskRating
-    fmt.Fprintf(os.Stdout, "Response from `CustomersApi.GetCustomerRiskRating`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CustomersAPI.GetCustomerRiskRating`: %v\n", resp)
 }
 ```
 
@@ -525,7 +524,7 @@ Name | Type | Description  | Notes
 
 ## GetPartyEmployment
 
-> Employment GetPartyEmployment(ctx, customerId, employmentId).Execute()
+> Employment GetPartyEmployment(ctx, employmentId, customerId).Execute()
 
 Get customer employment record
 
@@ -540,22 +539,22 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier
     employmentId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique ID for the employment record.
+    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CustomersApi.GetPartyEmployment(context.Background(), customerId, employmentId).Execute()
+    resp, r, err := apiClient.CustomersAPI.GetPartyEmployment(context.Background(), employmentId, customerId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CustomersApi.GetPartyEmployment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomersAPI.GetPartyEmployment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetPartyEmployment`: Employment
-    fmt.Fprintf(os.Stdout, "Response from `CustomersApi.GetPartyEmployment`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CustomersAPI.GetPartyEmployment`: %v\n", resp)
 }
 ```
 
@@ -565,8 +564,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**customerId** | **string** | The customer&#39;s unique identifier | 
 **employmentId** | **string** | Unique ID for the employment record. | 
+**customerId** | **string** | The customer&#39;s unique identifier | 
 
 ### Other Parameters
 
@@ -598,7 +597,7 @@ Name | Type | Description  | Notes
 
 ## ListCustomers
 
-> CustomerList ListCustomers(ctx).Id(id).FirstName(firstName).LastName(lastName).PhoneNumber(phoneNumber).Email(email).SsnLast4(ssnLast4).Status(status).Limit(limit).PageToken(pageToken).SortBy(sortBy).Execute()
+> CustomerList ListCustomers(ctx).HasAccounts(hasAccounts).SsnLast4(ssnLast4).LastName(lastName).Email(email).FirstName(firstName).Status(status).PhoneNumber(phoneNumber).PageToken(pageToken).Id(id).Limit(limit).SortBy(sortBy).Execute()
 
 List Customers
 
@@ -613,30 +612,31 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    id := []string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"} // []string | Unique resource identifier (optional)
-    firstName := "Alice" // string |  (optional)
-    lastName := "Smith" // string |  (optional)
-    phoneNumber := "+12065550100" // string |  (optional)
-    email := "john.doe@example.com" // string |  (optional)
+    hasAccounts := true // bool | Filter on resources that have an account(s)  (optional)
     ssnLast4 := "6789" // string |  (optional)
+    lastName := "Smith" // string |  (optional)
+    email := "john.doe@example.com" // string |  (optional)
+    firstName := "Alice" // string |  (optional)
     status := "ACTIVE" // string |  (optional)
-    limit := int32(100) // int32 |  (optional) (default to 100)
+    phoneNumber := "+12065550100" // string |  (optional)
     pageToken := "a8937a0d" // string |  (optional)
+    id := []string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"} // []string | Unique resource identifier (optional)
+    limit := int32(100) // int32 |  (optional) (default to 100)
     sortBy := []string{"SortBy_example"} // []string | Specifies the sort order for the returned customers.  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CustomersApi.ListCustomers(context.Background()).Id(id).FirstName(firstName).LastName(lastName).PhoneNumber(phoneNumber).Email(email).SsnLast4(ssnLast4).Status(status).Limit(limit).PageToken(pageToken).SortBy(sortBy).Execute()
+    resp, r, err := apiClient.CustomersAPI.ListCustomers(context.Background()).HasAccounts(hasAccounts).SsnLast4(ssnLast4).LastName(lastName).Email(email).FirstName(firstName).Status(status).PhoneNumber(phoneNumber).PageToken(pageToken).Id(id).Limit(limit).SortBy(sortBy).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CustomersApi.ListCustomers``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomersAPI.ListCustomers``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListCustomers`: CustomerList
-    fmt.Fprintf(os.Stdout, "Response from `CustomersApi.ListCustomers`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CustomersAPI.ListCustomers`: %v\n", resp)
 }
 ```
 
@@ -651,15 +651,16 @@ Other parameters are passed through a pointer to a apiListCustomersRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **[]string** | Unique resource identifier | 
- **firstName** | **string** |  | 
- **lastName** | **string** |  | 
- **phoneNumber** | **string** |  | 
- **email** | **string** |  | 
+ **hasAccounts** | **bool** | Filter on resources that have an account(s)  | 
  **ssnLast4** | **string** |  | 
+ **lastName** | **string** |  | 
+ **email** | **string** |  | 
+ **firstName** | **string** |  | 
  **status** | **string** |  | 
- **limit** | **int32** |  | [default to 100]
+ **phoneNumber** | **string** |  | 
  **pageToken** | **string** |  | 
+ **id** | **[]string** | Unique resource identifier | 
+ **limit** | **int32** |  | [default to 100]
  **sortBy** | **[]string** | Specifies the sort order for the returned customers.  | 
 
 ### Return type
@@ -697,7 +698,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -707,13 +708,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CustomersApi.PatchCustomer(context.Background(), customerId).PatchCustomer(patchCustomer).IdempotencyKey(idempotencyKey).Execute()
+    resp, r, err := apiClient.CustomersAPI.PatchCustomer(context.Background(), customerId).PatchCustomer(patchCustomer).IdempotencyKey(idempotencyKey).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CustomersApi.PatchCustomer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomersAPI.PatchCustomer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `PatchCustomer`: CustomerInBody
-    fmt.Fprintf(os.Stdout, "Response from `CustomersApi.PatchCustomer`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CustomersAPI.PatchCustomer`: %v\n", resp)
 }
 ```
 
@@ -754,80 +755,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PrefillCustomer
-
-> PrefillRequest PrefillCustomer(ctx, customerId).PrefillRequest(prefillRequest).IdempotencyKey(idempotencyKey).Execute()
-
-Prefill customer
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier
-    prefillRequest := *openapiclient.NewPrefillRequest() // PrefillRequest | 
-    idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CustomersApi.PrefillCustomer(context.Background(), customerId).PrefillRequest(prefillRequest).IdempotencyKey(idempotencyKey).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CustomersApi.PrefillCustomer``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PrefillCustomer`: PrefillRequest
-    fmt.Fprintf(os.Stdout, "Response from `CustomersApi.PrefillCustomer`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**customerId** | **string** | The customer&#39;s unique identifier | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPrefillCustomerRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **prefillRequest** | [**PrefillRequest**](PrefillRequest.md) |  | 
- **idempotencyKey** | **string** | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. | 
-
-### Return type
-
-[**PrefillRequest**](PrefillRequest.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json, application/problem+json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UpdateCustomer
 
 > CustomerInBody UpdateCustomer(ctx, customerId).CustomerInBody(customerInBody).Execute()
@@ -845,7 +772,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -854,13 +781,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CustomersApi.UpdateCustomer(context.Background(), customerId).CustomerInBody(customerInBody).Execute()
+    resp, r, err := apiClient.CustomersAPI.UpdateCustomer(context.Background(), customerId).CustomerInBody(customerInBody).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CustomersApi.UpdateCustomer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomersAPI.UpdateCustomer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `UpdateCustomer`: CustomerInBody
-    fmt.Fprintf(os.Stdout, "Response from `CustomersApi.UpdateCustomer`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CustomersAPI.UpdateCustomer`: %v\n", resp)
 }
 ```
 
@@ -902,7 +829,7 @@ Name | Type | Description  | Notes
 
 ## UpdatePartyEmployment
 
-> Employment UpdatePartyEmployment(ctx, customerId, employmentId).Employment(employment).Execute()
+> Employment UpdatePartyEmployment(ctx, employmentId, customerId).Employment(employment).Execute()
 
 Update customer employment record
 
@@ -917,23 +844,23 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier
     employmentId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique ID for the employment record.
+    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier
     employment := *openapiclient.NewEmployment("ABC, Inc.") // Employment | Customer employment to update.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CustomersApi.UpdatePartyEmployment(context.Background(), customerId, employmentId).Employment(employment).Execute()
+    resp, r, err := apiClient.CustomersAPI.UpdatePartyEmployment(context.Background(), employmentId, customerId).Employment(employment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CustomersApi.UpdatePartyEmployment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomersAPI.UpdatePartyEmployment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `UpdatePartyEmployment`: Employment
-    fmt.Fprintf(os.Stdout, "Response from `CustomersApi.UpdatePartyEmployment`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CustomersAPI.UpdatePartyEmployment`: %v\n", resp)
 }
 ```
 
@@ -943,8 +870,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**customerId** | **string** | The customer&#39;s unique identifier | 
 **employmentId** | **string** | Unique ID for the employment record. | 
+**customerId** | **string** | The customer&#39;s unique identifier | 
 
 ### Other Parameters
 

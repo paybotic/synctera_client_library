@@ -4,21 +4,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AdditionalData** | Pointer to [**AdditionalOwnerData**](AdditionalOwnerData.md) |  | [optional] 
+**AdditionalData** | Pointer to [**PayerPayeeAdditionalData**](PayerPayeeAdditionalData.md) |  | [optional] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
 **FromPersonId** | Pointer to **string** | Unique ID for the subject person.  | [optional] 
 **Id** | Pointer to **string** | Relationship unique identifier. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 
-**RelationshipType** | **string** | The relationship type. One of the following: * &#x60;BENEFICIAL_OWNER_OF&#x60; – a person who directly or indirectly owns a portion of the business. * &#x60;MANAGING_PERSON_OF&#x60; – a person who is an officer, director, or other notable person of an organization. * &#x60;OWNER_OF&#x60; – a business with ownership of another business.  | 
+**RelationshipType** | [**RelationshipTypes**](RelationshipTypes.md) |  | 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 **ToBusinessId** | Pointer to **string** | Unique ID for the related business.  | [optional] 
 **FromBusinessId** | Pointer to **string** | Unique ID for the subject business.  | [optional] 
+**ToPersonId** | Pointer to **string** | Unique ID for the related person.  | [optional] 
 
 ## Methods
 
 ### NewPatchRelationshipIn
 
-`func NewPatchRelationshipIn(relationshipType string, ) *PatchRelationshipIn`
+`func NewPatchRelationshipIn(relationshipType RelationshipTypes, ) *PatchRelationshipIn`
 
 NewPatchRelationshipIn instantiates a new PatchRelationshipIn object
 This constructor will assign default values to properties that have it defined,
@@ -35,20 +37,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAdditionalData
 
-`func (o *PatchRelationshipIn) GetAdditionalData() AdditionalOwnerData`
+`func (o *PatchRelationshipIn) GetAdditionalData() PayerPayeeAdditionalData`
 
 GetAdditionalData returns the AdditionalData field if non-nil, zero value otherwise.
 
 ### GetAdditionalDataOk
 
-`func (o *PatchRelationshipIn) GetAdditionalDataOk() (*AdditionalOwnerData, bool)`
+`func (o *PatchRelationshipIn) GetAdditionalDataOk() (*PayerPayeeAdditionalData, bool)`
 
 GetAdditionalDataOk returns a tuple with the AdditionalData field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAdditionalData
 
-`func (o *PatchRelationshipIn) SetAdditionalData(v AdditionalOwnerData)`
+`func (o *PatchRelationshipIn) SetAdditionalData(v PayerPayeeAdditionalData)`
 
 SetAdditionalData sets AdditionalData field to given value.
 
@@ -185,23 +187,48 @@ HasMetadata returns a boolean if a field has been set.
 
 ### GetRelationshipType
 
-`func (o *PatchRelationshipIn) GetRelationshipType() string`
+`func (o *PatchRelationshipIn) GetRelationshipType() RelationshipTypes`
 
 GetRelationshipType returns the RelationshipType field if non-nil, zero value otherwise.
 
 ### GetRelationshipTypeOk
 
-`func (o *PatchRelationshipIn) GetRelationshipTypeOk() (*string, bool)`
+`func (o *PatchRelationshipIn) GetRelationshipTypeOk() (*RelationshipTypes, bool)`
 
 GetRelationshipTypeOk returns a tuple with the RelationshipType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRelationshipType
 
-`func (o *PatchRelationshipIn) SetRelationshipType(v string)`
+`func (o *PatchRelationshipIn) SetRelationshipType(v RelationshipTypes)`
 
 SetRelationshipType sets RelationshipType field to given value.
 
+
+### GetTenant
+
+`func (o *PatchRelationshipIn) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *PatchRelationshipIn) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *PatchRelationshipIn) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *PatchRelationshipIn) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetToBusinessId
 
@@ -252,6 +279,31 @@ SetFromBusinessId sets FromBusinessId field to given value.
 `func (o *PatchRelationshipIn) HasFromBusinessId() bool`
 
 HasFromBusinessId returns a boolean if a field has been set.
+
+### GetToPersonId
+
+`func (o *PatchRelationshipIn) GetToPersonId() string`
+
+GetToPersonId returns the ToPersonId field if non-nil, zero value otherwise.
+
+### GetToPersonIdOk
+
+`func (o *PatchRelationshipIn) GetToPersonIdOk() (*string, bool)`
+
+GetToPersonIdOk returns a tuple with the ToPersonId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetToPersonId
+
+`func (o *PatchRelationshipIn) SetToPersonId(v string)`
+
+SetToPersonId sets ToPersonId field to given value.
+
+### HasToPersonId
+
+`func (o *PatchRelationshipIn) HasToPersonId() bool`
+
+HasToPersonId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

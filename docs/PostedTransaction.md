@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Created** | **time.Time** | The creation date of the transaction | 
 **Data** | [**PostedTransactionData**](PostedTransactionData.md) |  | 
+**Disputes** | Pointer to [**[]TransactionDispute**](TransactionDispute.md) | The set of disputes related to this transaction. Since a dispute can be for a partial amount of a transaction, a single transaction can be involved in multiple disputes. | [optional] 
 **EffectiveDate** | **time.Time** | The \&quot;effective date\&quot; of a transaction. This may be earlier than posted_date in some cases (for example, a transaction that occurs on a Saturday may not be posted until the following Monday, but would have an effective date of Saturday) | 
 **Id** | **int64** |  | 
 **Idemkey** | **string** | The idempotency key used when initially creating this transaction. | 
@@ -79,6 +80,31 @@ and a boolean to check if the value has been set.
 
 SetData sets Data field to given value.
 
+
+### GetDisputes
+
+`func (o *PostedTransaction) GetDisputes() []TransactionDispute`
+
+GetDisputes returns the Disputes field if non-nil, zero value otherwise.
+
+### GetDisputesOk
+
+`func (o *PostedTransaction) GetDisputesOk() (*[]TransactionDispute, bool)`
+
+GetDisputesOk returns a tuple with the Disputes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisputes
+
+`func (o *PostedTransaction) SetDisputes(v []TransactionDispute)`
+
+SetDisputes sets Disputes field to given value.
+
+### HasDisputes
+
+`func (o *PostedTransaction) HasDisputes() bool`
+
+HasDisputes returns a boolean if a field has been set.
 
 ### GetEffectiveDate
 
