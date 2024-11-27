@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountNumber** | **string** | Number of the receiving account | 
-**Amount** | **int32** | Amount to transfer in cents (e.g. 100 &#x3D; $1). | 
+**Amount** | **int32** | Amount to transfer in cents (e.g. 100 &#x3D; $1). Generates a prenote if set to 0. | 
 **DcSign** | **string** | The type of transaction (debit or credit) in relation to the receiving account. A credit is a transfer in and a debit is a transfer pulling money out of the receiving account. | 
 **EffectiveDate** | **string** | Effective date of the transaction. Transactions with the current date or date in the past are posted immediately. Future-dated transactions are scheduled to be posted on the chosen date. | 
 

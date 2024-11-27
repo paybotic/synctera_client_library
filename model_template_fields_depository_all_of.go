@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -17,10 +17,10 @@ import (
 // TemplateFieldsDepositoryAllOf struct for TemplateFieldsDepositoryAllOf
 type TemplateFieldsDepositoryAllOf struct {
 	BalanceCeiling *BalanceCeiling `json:"balance_ceiling,omitempty"`
-	BalanceFloor *BalanceFloor `json:"balance_floor,omitempty"`
+	BalanceFloor   *BalanceFloor   `json:"balance_floor,omitempty"`
 	// A list of fee account products that the current account associates with.
 	FeeProductIds []string `json:"fee_product_ids,omitempty"`
-	// An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_MONTHLY. 
+	// An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_MONTHLY.
 	InterestProductId *string `json:"interest_product_id,omitempty"`
 	// Enable ACH transaction.
 	IsAchEnabled *bool `json:"is_ach_enabled,omitempty"`
@@ -33,8 +33,8 @@ type TemplateFieldsDepositoryAllOf struct {
 	// Account's overdraft limit. Default is 0. Unit in cents.
 	OverdraftLimit *int64 `json:"overdraft_limit,omitempty"`
 	// List of spend control IDs to control spending for the account
-	SpendControlIds []string `json:"spend_control_ids,omitempty"`
-	SpendingLimits *SpendingLimits `json:"spending_limits,omitempty"`
+	SpendControlIds []string        `json:"spend_control_ids,omitempty"`
+	SpendingLimits  *SpendingLimits `json:"spending_limits,omitempty"`
 }
 
 // NewTemplateFieldsDepositoryAllOf instantiates a new TemplateFieldsDepositoryAllOf object
@@ -495,5 +495,3 @@ func (v *NullableTemplateFieldsDepositoryAllOf) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

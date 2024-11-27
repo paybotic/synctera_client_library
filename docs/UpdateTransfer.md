@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | Pointer to **string** | Field value must be set to CANCELED | [optional] 
+**Status** | **string** | Field value must be set to CANCELED. It can only be changed when status is PENDING. | 
 
 ## Methods
 
 ### NewUpdateTransfer
 
-`func NewUpdateTransfer() *UpdateTransfer`
+`func NewUpdateTransfer(status string, ) *UpdateTransfer`
 
 NewUpdateTransfer instantiates a new UpdateTransfer object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +44,6 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
-### HasStatus
-
-`func (o *UpdateTransfer) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

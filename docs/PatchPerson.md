@@ -7,24 +7,26 @@ Name | Type | Description | Notes
 **BanStatus** | Pointer to [**BanStatus**](BanStatus.md) |  | [optional] 
 **ChosenName** | Pointer to **string** | Person&#39;s chosen name. | [optional] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
-**Dob** | Pointer to **string** | Person&#39;s date of birth in RFC 3339 full-date format (YYYY-MM-DD). | [optional] 
+**Dob** | Pointer to **string** | Person&#39;s date of birth in RFC 3339 full-date format (YYYY-MM-DD). Must be on or after 1900-01-01 and before current date. | [optional] 
 **Email** | Pointer to **string** | Person&#39;s email. | [optional] 
 **FirstName** | Pointer to **string** | Person&#39;s first name. | [optional] 
+**HasAccounts** | Pointer to **bool** | This flag indicates whether the person or business has accounts. | [optional] [readonly] 
 **Id** | Pointer to **string** | Person&#39;s unique identifier. | [optional] [readonly] 
 **IsCustomer** | Pointer to **bool** | True for personal and business customers with a direct relationship with the fintech or bank. Set this to true for any customer related to an account.  | [optional] 
 **LastName** | Pointer to **string** | Person&#39;s last name. | [optional] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
-**LegalAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
+**LegalAddress** | Pointer to [**LegalAddress**](LegalAddress.md) |  | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 
 **MiddleName** | Pointer to **string** | Person&#39;s middle name. | [optional] 
 **PhoneNumber** | Pointer to **string** | Person&#39;s mobile phone number with country code in E.164 format. Must have a valid country code. Area code and local phone number are not validated | [optional] 
-**ShippingAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
+**ShippingAddress** | Pointer to [**ShippingAddress**](ShippingAddress.md) |  | [optional] 
 **Ssn** | Pointer to **string** | Person&#39;s full tax ID eg SSN formatted with hyphens. The response contains the last 4 digits only (e.g. 6789). | [optional] 
 **SsnSource** | Pointer to [**SsnSource**](SsnSource.md) |  | [optional] 
-**Status** | Pointer to [**Status1**](Status1.md) |  | [optional] 
-**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
+**Status** | Pointer to [**PersonStatus**](PersonStatus.md) |  | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 **VerificationLastRun** | Pointer to **time.Time** | Date and time KYC verification was last run on the person. | [optional] [readonly] 
 **VerificationStatus** | Pointer to [**VerificationStatus**](VerificationStatus.md) |  | [optional] 
+**Note** | Pointer to **string** | Text to be added to a note when updating a person. A note is required when changing a person&#39;s ban_status between SUSPENDED and ALLOWED. | [optional] 
 
 ## Methods
 
@@ -195,6 +197,31 @@ SetFirstName sets FirstName field to given value.
 
 HasFirstName returns a boolean if a field has been set.
 
+### GetHasAccounts
+
+`func (o *PatchPerson) GetHasAccounts() bool`
+
+GetHasAccounts returns the HasAccounts field if non-nil, zero value otherwise.
+
+### GetHasAccountsOk
+
+`func (o *PatchPerson) GetHasAccountsOk() (*bool, bool)`
+
+GetHasAccountsOk returns a tuple with the HasAccounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasAccounts
+
+`func (o *PatchPerson) SetHasAccounts(v bool)`
+
+SetHasAccounts sets HasAccounts field to given value.
+
+### HasHasAccounts
+
+`func (o *PatchPerson) HasHasAccounts() bool`
+
+HasHasAccounts returns a boolean if a field has been set.
+
 ### GetId
 
 `func (o *PatchPerson) GetId() string`
@@ -297,20 +324,20 @@ HasLastUpdatedTime returns a boolean if a field has been set.
 
 ### GetLegalAddress
 
-`func (o *PatchPerson) GetLegalAddress() Address`
+`func (o *PatchPerson) GetLegalAddress() LegalAddress`
 
 GetLegalAddress returns the LegalAddress field if non-nil, zero value otherwise.
 
 ### GetLegalAddressOk
 
-`func (o *PatchPerson) GetLegalAddressOk() (*Address, bool)`
+`func (o *PatchPerson) GetLegalAddressOk() (*LegalAddress, bool)`
 
 GetLegalAddressOk returns a tuple with the LegalAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLegalAddress
 
-`func (o *PatchPerson) SetLegalAddress(v Address)`
+`func (o *PatchPerson) SetLegalAddress(v LegalAddress)`
 
 SetLegalAddress sets LegalAddress field to given value.
 
@@ -397,20 +424,20 @@ HasPhoneNumber returns a boolean if a field has been set.
 
 ### GetShippingAddress
 
-`func (o *PatchPerson) GetShippingAddress() Address`
+`func (o *PatchPerson) GetShippingAddress() ShippingAddress`
 
 GetShippingAddress returns the ShippingAddress field if non-nil, zero value otherwise.
 
 ### GetShippingAddressOk
 
-`func (o *PatchPerson) GetShippingAddressOk() (*Address, bool)`
+`func (o *PatchPerson) GetShippingAddressOk() (*ShippingAddress, bool)`
 
 GetShippingAddressOk returns a tuple with the ShippingAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetShippingAddress
 
-`func (o *PatchPerson) SetShippingAddress(v Address)`
+`func (o *PatchPerson) SetShippingAddress(v ShippingAddress)`
 
 SetShippingAddress sets ShippingAddress field to given value.
 
@@ -472,20 +499,20 @@ HasSsnSource returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *PatchPerson) GetStatus() Status1`
+`func (o *PatchPerson) GetStatus() PersonStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *PatchPerson) GetStatusOk() (*Status1, bool)`
+`func (o *PatchPerson) GetStatusOk() (*PersonStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *PatchPerson) SetStatus(v Status1)`
+`func (o *PatchPerson) SetStatus(v PersonStatus)`
 
 SetStatus sets Status field to given value.
 
@@ -569,6 +596,31 @@ SetVerificationStatus sets VerificationStatus field to given value.
 `func (o *PatchPerson) HasVerificationStatus() bool`
 
 HasVerificationStatus returns a boolean if a field has been set.
+
+### GetNote
+
+`func (o *PatchPerson) GetNote() string`
+
+GetNote returns the Note field if non-nil, zero value otherwise.
+
+### GetNoteOk
+
+`func (o *PatchPerson) GetNoteOk() (*string, bool)`
+
+GetNoteOk returns a tuple with the Note field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNote
+
+`func (o *PatchPerson) SetNote(v string)`
+
+SetNote sets Note field to given value.
+
+### HasNote
+
+`func (o *PatchPerson) HasNote() bool`
+
+HasNote returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

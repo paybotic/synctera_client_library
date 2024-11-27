@@ -6,46 +6,61 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccessStatus** | Pointer to [**AccountAccessStatus**](AccountAccessStatus.md) |  | [optional] 
 **AccessStatusLastUpdatedTime** | Pointer to **time.Time** | Timestamp of the last modification of the access_status. RFC3339 format. | [optional] [readonly] 
+**AccountClosure** | Pointer to [**AccountClosure**](AccountClosure.md) |  | [optional] 
 **AccountNumber** | Pointer to **string** | Account number | [optional] [readonly] 
 **AccountNumberMasked** | Pointer to **string** | The response will contain the bank fintech ID (3 or 6 digits) plus the last 4 digits, with the digits in between replaced with * characters. Shadow mode account numbers will not be masked. | [optional] [readonly] 
 **AccountPurpose** | Pointer to **string** | Purpose of the account | [optional] 
 **AccountType** | Pointer to [**AccountType**](AccountType.md) |  | [optional] 
 **ApplicationId** | Pointer to **string** | The application ID for this account.  | [optional] 
+**AutoPaymentPeriod** | Pointer to **int32** | The number of days past the billing period to initiate an auto payment. Only applicable for accounts with type &#x60;CHARGE_SECURED&#x60;, where the account holder has opted in for auto payment functionality. This value must be lower than or equal the &#x60;grace_period&#x60; setting on the account. If this value is 0, the auto payment will happen on the same day as the statement is generated. Auto payment only occurs if regular payments are not received on time.  | [optional] 
 **BalanceCeiling** | Pointer to [**BalanceCeiling**](BalanceCeiling.md) |  | [optional] 
 **BalanceFloor** | Pointer to [**BalanceFloor**](BalanceFloor.md) |  | [optional] 
 **Balances** | Pointer to [**[]Balance**](Balance.md) | A list of balances for account based on different type | [optional] [readonly] 
+**BankAccountId** | Pointer to **string** | Identifier of the bank side account that this account is a part of | [optional] [readonly] 
 **BankRouting** | Pointer to **string** | Bank routing number | [optional] [readonly] 
 **BillingPeriod** | Pointer to [**BillingPeriod**](BillingPeriod.md) |  | [optional] 
 **BusinessIds** | Pointer to **[]string** | A list of the business IDs of the account holders. | [optional] [readonly] 
-**ChargeoffPeriod** | Pointer to **int32** | The number of days an account can stay delinquent before marking an account as charged-off.  | [optional] [default to 90]
+**CloseDate** | Pointer to **string** | The account close date. This is the bank&#39;s posting date when the account resource&#39;s status was changed to CLOSED or CHARGED_OFF. | [optional] [readonly] 
 **CreationTime** | Pointer to **time.Time** | Account creation timestamp in RFC3339 format | [optional] [readonly] 
 **CreditLimit** | Pointer to **int64** | The credit limit for this line of credit account in cents. Minimum is 0.  | [optional] 
 **Currency** | Pointer to **string** | Account currency or account settlement currency. ISO 4217 alphabetic currency code. Default USD | [optional] 
 **CustomerIds** | Pointer to **[]string** | A list of the customer IDs of the account holders. | [optional] [readonly] 
 **CustomerType** | Pointer to [**CustomerType**](CustomerType.md) |  | [optional] 
-**DelinquencyPeriod** | Pointer to **int32** | The number of days past the due date to wait for a minimum payment before marking an account as delinquent.  | [optional] [default to 30]
+**DaysPastDue** | Pointer to **int32** | The number of days since the account went past due on their minimum payments. | [optional] 
 **ExchangeRateType** | Pointer to **string** | Exchange rate type | [optional] 
 **FeeProductIds** | Pointer to **[]string** | A list of fee account products that the current account associates with. | [optional] 
-**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] 
+**FundsOwnership** | Pointer to [**FundsOwnership**](FundsOwnership.md) |  | [optional] 
+**GeneralLedgerCategory** | Pointer to [**GeneralLedgerCategory**](GeneralLedgerCategory.md) |  | [optional] 
+**GeneralLedgerType** | Pointer to [**GeneralLedgerType**](GeneralLedgerType.md) |  | [optional] 
+**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment. The default will be set to 21 days.  | [optional] 
 **Iban** | Pointer to **string** | International bank account number | [optional] 
 **Id** | Pointer to **string** | Account ID | [optional] [readonly] 
 **InterestProductId** | Pointer to **string** | An interest account product that the current account associates with. | [optional] 
 **IsAccountPool** | Pointer to **bool** | Account is investment (variable balance) account or a multi-balance account pool. Default false | [optional] 
 **IsAchEnabled** | Pointer to **bool** | A flag to indicate whether ACH transactions are enabled. | [optional] [readonly] 
 **IsCardEnabled** | Pointer to **bool** | A flag to indicate whether card transactions are enabled. | [optional] [readonly] 
+**IsEftCaEnabled** | Pointer to **bool** | A flag to indicate whether EFT Canada transactions are enabled. | [optional] [readonly] 
+**IsExternalCardEnabled** | Pointer to **bool** | A flag to indicate whether external card transactions are enabled. | [optional] [readonly] 
 **IsP2pEnabled** | Pointer to **bool** | A flag to indicate whether P2P transactions are enabled. | [optional] [readonly] 
+**IsSarEnabled** | Pointer to **bool** | A flag to indicate whether SAR generation is enabled. | [optional] [readonly] 
+**IsSecurity** | Pointer to **bool** | A flag to indicate whether this account is being used as security for another account. | [optional] [readonly] 
+**IsSyncteraPayEnabled** | Pointer to **bool** | A flag to indicate whether Synctera Pay transactions are enabled. | [optional] [readonly] 
+**IsSystemAutoPayEnabled** | Pointer to **bool** | A flag to indicate whether auto pay feature is enabled. | [optional] 
 **IsWireEnabled** | Pointer to **bool** | A flag to indicate whether wire transactions are enabled. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to **time.Time** | Timestamp of the last account modification in RFC3339 format | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | User provided account metadata | [optional] 
 **MinimumPayment** | Pointer to [**MinimumPayment**](MinimumPayment.md) |  | [optional] 
 **Nickname** | Pointer to **string** | User provided account nickname | [optional] 
-**OverdraftLimit** | Pointer to **int64** | Account&#39;s overdraft limit | [optional] 
+**OpenDate** | Pointer to **string** | The account open date. This is the bank&#39;s posting date when the account resource was created. | [optional] [readonly] 
+**OverdraftLimit** | Pointer to **int64** | This field is unused and will be removed in a future API version.  | [optional] 
+**Restrictions** | Pointer to [**AccountRestrictions**](AccountRestrictions.md) |  | [optional] 
 **Security** | Pointer to [**Security**](Security.md) |  | [optional] 
 **SpendControlIds** | Pointer to **[]string** | List of spend control IDs to control spending for the account | [optional] 
 **SpendingLimits** | Pointer to [**SpendingLimits**](SpendingLimits.md) |  | [optional] 
-**Status** | Pointer to [**Status**](Status.md) |  | [optional] 
+**Status** | Pointer to [**AccountStatus**](AccountStatus.md) |  | [optional] 
+**StopPayments** | Pointer to [**[]StopPayment**](StopPayment.md) |  | [optional] [readonly] 
 **SwiftCode** | Pointer to **string** | SWIFT code | [optional] 
-**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 
 ## Methods
 
@@ -115,6 +130,31 @@ SetAccessStatusLastUpdatedTime sets AccessStatusLastUpdatedTime field to given v
 `func (o *AccountGenericResponse) HasAccessStatusLastUpdatedTime() bool`
 
 HasAccessStatusLastUpdatedTime returns a boolean if a field has been set.
+
+### GetAccountClosure
+
+`func (o *AccountGenericResponse) GetAccountClosure() AccountClosure`
+
+GetAccountClosure returns the AccountClosure field if non-nil, zero value otherwise.
+
+### GetAccountClosureOk
+
+`func (o *AccountGenericResponse) GetAccountClosureOk() (*AccountClosure, bool)`
+
+GetAccountClosureOk returns a tuple with the AccountClosure field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountClosure
+
+`func (o *AccountGenericResponse) SetAccountClosure(v AccountClosure)`
+
+SetAccountClosure sets AccountClosure field to given value.
+
+### HasAccountClosure
+
+`func (o *AccountGenericResponse) HasAccountClosure() bool`
+
+HasAccountClosure returns a boolean if a field has been set.
 
 ### GetAccountNumber
 
@@ -241,6 +281,31 @@ SetApplicationId sets ApplicationId field to given value.
 
 HasApplicationId returns a boolean if a field has been set.
 
+### GetAutoPaymentPeriod
+
+`func (o *AccountGenericResponse) GetAutoPaymentPeriod() int32`
+
+GetAutoPaymentPeriod returns the AutoPaymentPeriod field if non-nil, zero value otherwise.
+
+### GetAutoPaymentPeriodOk
+
+`func (o *AccountGenericResponse) GetAutoPaymentPeriodOk() (*int32, bool)`
+
+GetAutoPaymentPeriodOk returns a tuple with the AutoPaymentPeriod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoPaymentPeriod
+
+`func (o *AccountGenericResponse) SetAutoPaymentPeriod(v int32)`
+
+SetAutoPaymentPeriod sets AutoPaymentPeriod field to given value.
+
+### HasAutoPaymentPeriod
+
+`func (o *AccountGenericResponse) HasAutoPaymentPeriod() bool`
+
+HasAutoPaymentPeriod returns a boolean if a field has been set.
+
 ### GetBalanceCeiling
 
 `func (o *AccountGenericResponse) GetBalanceCeiling() BalanceCeiling`
@@ -315,6 +380,31 @@ SetBalances sets Balances field to given value.
 `func (o *AccountGenericResponse) HasBalances() bool`
 
 HasBalances returns a boolean if a field has been set.
+
+### GetBankAccountId
+
+`func (o *AccountGenericResponse) GetBankAccountId() string`
+
+GetBankAccountId returns the BankAccountId field if non-nil, zero value otherwise.
+
+### GetBankAccountIdOk
+
+`func (o *AccountGenericResponse) GetBankAccountIdOk() (*string, bool)`
+
+GetBankAccountIdOk returns a tuple with the BankAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBankAccountId
+
+`func (o *AccountGenericResponse) SetBankAccountId(v string)`
+
+SetBankAccountId sets BankAccountId field to given value.
+
+### HasBankAccountId
+
+`func (o *AccountGenericResponse) HasBankAccountId() bool`
+
+HasBankAccountId returns a boolean if a field has been set.
 
 ### GetBankRouting
 
@@ -391,30 +481,30 @@ SetBusinessIds sets BusinessIds field to given value.
 
 HasBusinessIds returns a boolean if a field has been set.
 
-### GetChargeoffPeriod
+### GetCloseDate
 
-`func (o *AccountGenericResponse) GetChargeoffPeriod() int32`
+`func (o *AccountGenericResponse) GetCloseDate() string`
 
-GetChargeoffPeriod returns the ChargeoffPeriod field if non-nil, zero value otherwise.
+GetCloseDate returns the CloseDate field if non-nil, zero value otherwise.
 
-### GetChargeoffPeriodOk
+### GetCloseDateOk
 
-`func (o *AccountGenericResponse) GetChargeoffPeriodOk() (*int32, bool)`
+`func (o *AccountGenericResponse) GetCloseDateOk() (*string, bool)`
 
-GetChargeoffPeriodOk returns a tuple with the ChargeoffPeriod field if it's non-nil, zero value otherwise
+GetCloseDateOk returns a tuple with the CloseDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetChargeoffPeriod
+### SetCloseDate
 
-`func (o *AccountGenericResponse) SetChargeoffPeriod(v int32)`
+`func (o *AccountGenericResponse) SetCloseDate(v string)`
 
-SetChargeoffPeriod sets ChargeoffPeriod field to given value.
+SetCloseDate sets CloseDate field to given value.
 
-### HasChargeoffPeriod
+### HasCloseDate
 
-`func (o *AccountGenericResponse) HasChargeoffPeriod() bool`
+`func (o *AccountGenericResponse) HasCloseDate() bool`
 
-HasChargeoffPeriod returns a boolean if a field has been set.
+HasCloseDate returns a boolean if a field has been set.
 
 ### GetCreationTime
 
@@ -541,30 +631,30 @@ SetCustomerType sets CustomerType field to given value.
 
 HasCustomerType returns a boolean if a field has been set.
 
-### GetDelinquencyPeriod
+### GetDaysPastDue
 
-`func (o *AccountGenericResponse) GetDelinquencyPeriod() int32`
+`func (o *AccountGenericResponse) GetDaysPastDue() int32`
 
-GetDelinquencyPeriod returns the DelinquencyPeriod field if non-nil, zero value otherwise.
+GetDaysPastDue returns the DaysPastDue field if non-nil, zero value otherwise.
 
-### GetDelinquencyPeriodOk
+### GetDaysPastDueOk
 
-`func (o *AccountGenericResponse) GetDelinquencyPeriodOk() (*int32, bool)`
+`func (o *AccountGenericResponse) GetDaysPastDueOk() (*int32, bool)`
 
-GetDelinquencyPeriodOk returns a tuple with the DelinquencyPeriod field if it's non-nil, zero value otherwise
+GetDaysPastDueOk returns a tuple with the DaysPastDue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDelinquencyPeriod
+### SetDaysPastDue
 
-`func (o *AccountGenericResponse) SetDelinquencyPeriod(v int32)`
+`func (o *AccountGenericResponse) SetDaysPastDue(v int32)`
 
-SetDelinquencyPeriod sets DelinquencyPeriod field to given value.
+SetDaysPastDue sets DaysPastDue field to given value.
 
-### HasDelinquencyPeriod
+### HasDaysPastDue
 
-`func (o *AccountGenericResponse) HasDelinquencyPeriod() bool`
+`func (o *AccountGenericResponse) HasDaysPastDue() bool`
 
-HasDelinquencyPeriod returns a boolean if a field has been set.
+HasDaysPastDue returns a boolean if a field has been set.
 
 ### GetExchangeRateType
 
@@ -615,6 +705,81 @@ SetFeeProductIds sets FeeProductIds field to given value.
 `func (o *AccountGenericResponse) HasFeeProductIds() bool`
 
 HasFeeProductIds returns a boolean if a field has been set.
+
+### GetFundsOwnership
+
+`func (o *AccountGenericResponse) GetFundsOwnership() FundsOwnership`
+
+GetFundsOwnership returns the FundsOwnership field if non-nil, zero value otherwise.
+
+### GetFundsOwnershipOk
+
+`func (o *AccountGenericResponse) GetFundsOwnershipOk() (*FundsOwnership, bool)`
+
+GetFundsOwnershipOk returns a tuple with the FundsOwnership field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFundsOwnership
+
+`func (o *AccountGenericResponse) SetFundsOwnership(v FundsOwnership)`
+
+SetFundsOwnership sets FundsOwnership field to given value.
+
+### HasFundsOwnership
+
+`func (o *AccountGenericResponse) HasFundsOwnership() bool`
+
+HasFundsOwnership returns a boolean if a field has been set.
+
+### GetGeneralLedgerCategory
+
+`func (o *AccountGenericResponse) GetGeneralLedgerCategory() GeneralLedgerCategory`
+
+GetGeneralLedgerCategory returns the GeneralLedgerCategory field if non-nil, zero value otherwise.
+
+### GetGeneralLedgerCategoryOk
+
+`func (o *AccountGenericResponse) GetGeneralLedgerCategoryOk() (*GeneralLedgerCategory, bool)`
+
+GetGeneralLedgerCategoryOk returns a tuple with the GeneralLedgerCategory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGeneralLedgerCategory
+
+`func (o *AccountGenericResponse) SetGeneralLedgerCategory(v GeneralLedgerCategory)`
+
+SetGeneralLedgerCategory sets GeneralLedgerCategory field to given value.
+
+### HasGeneralLedgerCategory
+
+`func (o *AccountGenericResponse) HasGeneralLedgerCategory() bool`
+
+HasGeneralLedgerCategory returns a boolean if a field has been set.
+
+### GetGeneralLedgerType
+
+`func (o *AccountGenericResponse) GetGeneralLedgerType() GeneralLedgerType`
+
+GetGeneralLedgerType returns the GeneralLedgerType field if non-nil, zero value otherwise.
+
+### GetGeneralLedgerTypeOk
+
+`func (o *AccountGenericResponse) GetGeneralLedgerTypeOk() (*GeneralLedgerType, bool)`
+
+GetGeneralLedgerTypeOk returns a tuple with the GeneralLedgerType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGeneralLedgerType
+
+`func (o *AccountGenericResponse) SetGeneralLedgerType(v GeneralLedgerType)`
+
+SetGeneralLedgerType sets GeneralLedgerType field to given value.
+
+### HasGeneralLedgerType
+
+`func (o *AccountGenericResponse) HasGeneralLedgerType() bool`
+
+HasGeneralLedgerType returns a boolean if a field has been set.
 
 ### GetGracePeriod
 
@@ -791,6 +956,56 @@ SetIsCardEnabled sets IsCardEnabled field to given value.
 
 HasIsCardEnabled returns a boolean if a field has been set.
 
+### GetIsEftCaEnabled
+
+`func (o *AccountGenericResponse) GetIsEftCaEnabled() bool`
+
+GetIsEftCaEnabled returns the IsEftCaEnabled field if non-nil, zero value otherwise.
+
+### GetIsEftCaEnabledOk
+
+`func (o *AccountGenericResponse) GetIsEftCaEnabledOk() (*bool, bool)`
+
+GetIsEftCaEnabledOk returns a tuple with the IsEftCaEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsEftCaEnabled
+
+`func (o *AccountGenericResponse) SetIsEftCaEnabled(v bool)`
+
+SetIsEftCaEnabled sets IsEftCaEnabled field to given value.
+
+### HasIsEftCaEnabled
+
+`func (o *AccountGenericResponse) HasIsEftCaEnabled() bool`
+
+HasIsEftCaEnabled returns a boolean if a field has been set.
+
+### GetIsExternalCardEnabled
+
+`func (o *AccountGenericResponse) GetIsExternalCardEnabled() bool`
+
+GetIsExternalCardEnabled returns the IsExternalCardEnabled field if non-nil, zero value otherwise.
+
+### GetIsExternalCardEnabledOk
+
+`func (o *AccountGenericResponse) GetIsExternalCardEnabledOk() (*bool, bool)`
+
+GetIsExternalCardEnabledOk returns a tuple with the IsExternalCardEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsExternalCardEnabled
+
+`func (o *AccountGenericResponse) SetIsExternalCardEnabled(v bool)`
+
+SetIsExternalCardEnabled sets IsExternalCardEnabled field to given value.
+
+### HasIsExternalCardEnabled
+
+`func (o *AccountGenericResponse) HasIsExternalCardEnabled() bool`
+
+HasIsExternalCardEnabled returns a boolean if a field has been set.
+
 ### GetIsP2pEnabled
 
 `func (o *AccountGenericResponse) GetIsP2pEnabled() bool`
@@ -815,6 +1030,106 @@ SetIsP2pEnabled sets IsP2pEnabled field to given value.
 `func (o *AccountGenericResponse) HasIsP2pEnabled() bool`
 
 HasIsP2pEnabled returns a boolean if a field has been set.
+
+### GetIsSarEnabled
+
+`func (o *AccountGenericResponse) GetIsSarEnabled() bool`
+
+GetIsSarEnabled returns the IsSarEnabled field if non-nil, zero value otherwise.
+
+### GetIsSarEnabledOk
+
+`func (o *AccountGenericResponse) GetIsSarEnabledOk() (*bool, bool)`
+
+GetIsSarEnabledOk returns a tuple with the IsSarEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSarEnabled
+
+`func (o *AccountGenericResponse) SetIsSarEnabled(v bool)`
+
+SetIsSarEnabled sets IsSarEnabled field to given value.
+
+### HasIsSarEnabled
+
+`func (o *AccountGenericResponse) HasIsSarEnabled() bool`
+
+HasIsSarEnabled returns a boolean if a field has been set.
+
+### GetIsSecurity
+
+`func (o *AccountGenericResponse) GetIsSecurity() bool`
+
+GetIsSecurity returns the IsSecurity field if non-nil, zero value otherwise.
+
+### GetIsSecurityOk
+
+`func (o *AccountGenericResponse) GetIsSecurityOk() (*bool, bool)`
+
+GetIsSecurityOk returns a tuple with the IsSecurity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSecurity
+
+`func (o *AccountGenericResponse) SetIsSecurity(v bool)`
+
+SetIsSecurity sets IsSecurity field to given value.
+
+### HasIsSecurity
+
+`func (o *AccountGenericResponse) HasIsSecurity() bool`
+
+HasIsSecurity returns a boolean if a field has been set.
+
+### GetIsSyncteraPayEnabled
+
+`func (o *AccountGenericResponse) GetIsSyncteraPayEnabled() bool`
+
+GetIsSyncteraPayEnabled returns the IsSyncteraPayEnabled field if non-nil, zero value otherwise.
+
+### GetIsSyncteraPayEnabledOk
+
+`func (o *AccountGenericResponse) GetIsSyncteraPayEnabledOk() (*bool, bool)`
+
+GetIsSyncteraPayEnabledOk returns a tuple with the IsSyncteraPayEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSyncteraPayEnabled
+
+`func (o *AccountGenericResponse) SetIsSyncteraPayEnabled(v bool)`
+
+SetIsSyncteraPayEnabled sets IsSyncteraPayEnabled field to given value.
+
+### HasIsSyncteraPayEnabled
+
+`func (o *AccountGenericResponse) HasIsSyncteraPayEnabled() bool`
+
+HasIsSyncteraPayEnabled returns a boolean if a field has been set.
+
+### GetIsSystemAutoPayEnabled
+
+`func (o *AccountGenericResponse) GetIsSystemAutoPayEnabled() bool`
+
+GetIsSystemAutoPayEnabled returns the IsSystemAutoPayEnabled field if non-nil, zero value otherwise.
+
+### GetIsSystemAutoPayEnabledOk
+
+`func (o *AccountGenericResponse) GetIsSystemAutoPayEnabledOk() (*bool, bool)`
+
+GetIsSystemAutoPayEnabledOk returns a tuple with the IsSystemAutoPayEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSystemAutoPayEnabled
+
+`func (o *AccountGenericResponse) SetIsSystemAutoPayEnabled(v bool)`
+
+SetIsSystemAutoPayEnabled sets IsSystemAutoPayEnabled field to given value.
+
+### HasIsSystemAutoPayEnabled
+
+`func (o *AccountGenericResponse) HasIsSystemAutoPayEnabled() bool`
+
+HasIsSystemAutoPayEnabled returns a boolean if a field has been set.
 
 ### GetIsWireEnabled
 
@@ -941,6 +1256,31 @@ SetNickname sets Nickname field to given value.
 
 HasNickname returns a boolean if a field has been set.
 
+### GetOpenDate
+
+`func (o *AccountGenericResponse) GetOpenDate() string`
+
+GetOpenDate returns the OpenDate field if non-nil, zero value otherwise.
+
+### GetOpenDateOk
+
+`func (o *AccountGenericResponse) GetOpenDateOk() (*string, bool)`
+
+GetOpenDateOk returns a tuple with the OpenDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenDate
+
+`func (o *AccountGenericResponse) SetOpenDate(v string)`
+
+SetOpenDate sets OpenDate field to given value.
+
+### HasOpenDate
+
+`func (o *AccountGenericResponse) HasOpenDate() bool`
+
+HasOpenDate returns a boolean if a field has been set.
+
 ### GetOverdraftLimit
 
 `func (o *AccountGenericResponse) GetOverdraftLimit() int64`
@@ -965,6 +1305,31 @@ SetOverdraftLimit sets OverdraftLimit field to given value.
 `func (o *AccountGenericResponse) HasOverdraftLimit() bool`
 
 HasOverdraftLimit returns a boolean if a field has been set.
+
+### GetRestrictions
+
+`func (o *AccountGenericResponse) GetRestrictions() AccountRestrictions`
+
+GetRestrictions returns the Restrictions field if non-nil, zero value otherwise.
+
+### GetRestrictionsOk
+
+`func (o *AccountGenericResponse) GetRestrictionsOk() (*AccountRestrictions, bool)`
+
+GetRestrictionsOk returns a tuple with the Restrictions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestrictions
+
+`func (o *AccountGenericResponse) SetRestrictions(v AccountRestrictions)`
+
+SetRestrictions sets Restrictions field to given value.
+
+### HasRestrictions
+
+`func (o *AccountGenericResponse) HasRestrictions() bool`
+
+HasRestrictions returns a boolean if a field has been set.
 
 ### GetSecurity
 
@@ -1043,20 +1408,20 @@ HasSpendingLimits returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *AccountGenericResponse) GetStatus() Status`
+`func (o *AccountGenericResponse) GetStatus() AccountStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *AccountGenericResponse) GetStatusOk() (*Status, bool)`
+`func (o *AccountGenericResponse) GetStatusOk() (*AccountStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *AccountGenericResponse) SetStatus(v Status)`
+`func (o *AccountGenericResponse) SetStatus(v AccountStatus)`
 
 SetStatus sets Status field to given value.
 
@@ -1065,6 +1430,31 @@ SetStatus sets Status field to given value.
 `func (o *AccountGenericResponse) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetStopPayments
+
+`func (o *AccountGenericResponse) GetStopPayments() []StopPayment`
+
+GetStopPayments returns the StopPayments field if non-nil, zero value otherwise.
+
+### GetStopPaymentsOk
+
+`func (o *AccountGenericResponse) GetStopPaymentsOk() (*[]StopPayment, bool)`
+
+GetStopPaymentsOk returns a tuple with the StopPayments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStopPayments
+
+`func (o *AccountGenericResponse) SetStopPayments(v []StopPayment)`
+
+SetStopPayments sets StopPayments field to given value.
+
+### HasStopPayments
+
+`func (o *AccountGenericResponse) HasStopPayments() bool`
+
+HasStopPayments returns a boolean if a field has been set.
 
 ### GetSwiftCode
 

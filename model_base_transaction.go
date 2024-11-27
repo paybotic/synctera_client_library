@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -25,15 +25,15 @@ type BaseTransaction struct {
 	CreationTime time.Time `json:"creation_time"`
 	// ISO 4217 alphabetic currency code of the transfer amount
 	Currency string `json:"currency"`
-	// The uuid of the customer that initiated the transaction (if any) 
+	// The uuid of the customer that initiated the transaction (if any)
 	CustomerId *string `json:"customer_id,omitempty"`
 	// The `dc_sign` represents the direction money was moved. A value of `DEBIT` is money moving out of an account, a value of `CREDIT` is money moving into an account
-	DcSign string `json:"dc_sign"`
+	DcSign  string                  `json:"dc_sign"`
 	Decline *BaseTransactionDecline `json:"decline,omitempty"`
 	// A human-friendly description of the transaction, provided by the integrator
 	Description *string `json:"description,omitempty"`
 	// The effective date of the transaction. This usually aligns with network settlement date, which differs between transaction types. The effective date is also used to determine effective daily balances for the purposes of interest calculation.
-	EffectiveDate string `json:"effective_date"`
+	EffectiveDate       string                   `json:"effective_date"`
 	EnhancedTransaction *EnhancedTransactionData `json:"enhanced_transaction,omitempty"`
 	// Determines whether or not a transaction or auth was \"forced\" or not. A forced transaction skips any account balance checks
 	ForcePost bool `json:"force_post"`
@@ -894,5 +894,3 @@ func (v *NullableBaseTransaction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

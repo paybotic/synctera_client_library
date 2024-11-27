@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -17,30 +17,30 @@ import (
 // ApplicationRequest struct for ApplicationRequest
 type ApplicationRequest struct {
 	// Bank ID
-	BankId int32 `json:"bank_id"`
-	BusinessAddress Address1 `json:"business_address"`
-	BusinessName string `json:"business_name"`
-	BusinessPhone string `json:"business_phone"`
-	BusinessTaxId string `json:"business_tax_id"`
-	BusinessType string `json:"business_type"`
-	Dob *ExternalPaymentDate `json:"dob,omitempty"`
-	DoingBusinessAs string `json:"doing_business_as"`
-	Email *string `json:"email,omitempty"`
+	BankId          int32                `json:"bank_id"`
+	BusinessAddress Address1             `json:"business_address"`
+	BusinessName    string               `json:"business_name"`
+	BusinessPhone   string               `json:"business_phone"`
+	BusinessTaxId   string               `json:"business_tax_id"`
+	BusinessType    string               `json:"business_type"`
+	Dob             *ExternalPaymentDate `json:"dob,omitempty"`
+	DoingBusinessAs string               `json:"doing_business_as"`
+	Email           *string              `json:"email,omitempty"`
 	// To enable or disable aft/oct feature
-	Enabled bool `json:"enabled"`
-	FirstName *string `json:"first_name,omitempty"`
+	Enabled           bool                 `json:"enabled"`
+	FirstName         *string              `json:"first_name,omitempty"`
 	IncorporationDate *ExternalPaymentDate `json:"incorporation_date,omitempty"`
-	LastName *string `json:"last_name,omitempty"`
+	LastName          *string              `json:"last_name,omitempty"`
 	// Maximum amount that can be transacted for a single transaction in cents
 	MaxTransactionAmount int32 `json:"max_transaction_amount"`
 	// Partner ID
-	PartnerId int32 `json:"partner_id"`
-	PersonalAddress *Address1 `json:"personal_address,omitempty"`
-	Phone *string `json:"phone,omitempty"`
-	PrincipalPercentageOwnership *string `json:"principal_percentage_ownership,omitempty"`
-	TaxId *string `json:"tax_id,omitempty"`
-	Title *string `json:"title,omitempty"`
-	Url *string `json:"url,omitempty"`
+	PartnerId                    int32     `json:"partner_id"`
+	PersonalAddress              *Address1 `json:"personal_address,omitempty"`
+	Phone                        *string   `json:"phone,omitempty"`
+	PrincipalPercentageOwnership *string   `json:"principal_percentage_ownership,omitempty"`
+	TaxId                        *string   `json:"tax_id,omitempty"`
+	Title                        *string   `json:"title,omitempty"`
+	Url                          *string   `json:"url,omitempty"`
 }
 
 // NewApplicationRequest instantiates a new ApplicationRequest object
@@ -765,5 +765,3 @@ func (v *NullableApplicationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

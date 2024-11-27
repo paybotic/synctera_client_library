@@ -4,27 +4,30 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Dob** | Pointer to **string** | Customer&#39;s date of birth in RFC 3339 full-date format (YYYY-MM-DD) | [optional] 
-**FirstName** | Pointer to **string** | Customer&#39;s first name | [optional] 
-**LastName** | Pointer to **string** | Customer&#39;s last name | [optional] 
-**Status** | **string** | Customer&#39;s status | 
+**Addresses** | Pointer to [**[]Address**](Address.md) | All of the customer&#39;s addresses | [optional] [readonly] 
 **BanStatus** | Pointer to [**BanStatus**](BanStatus.md) |  | [optional] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
 **Email** | Pointer to **string** | Customer&#39;s email | [optional] 
+**HasAccounts** | Pointer to **bool** | This flag indicates whether the person or business has accounts. | [optional] [readonly] 
 **Id** | Pointer to **string** | Customer unique identifier | [optional] [readonly] 
 **KycExempt** | Pointer to **bool** | Customer&#39;s KYC exemption | [optional] [readonly] 
 **KycLastRun** | Pointer to **time.Time** | Date and time KYC was last run on the customer | [optional] [readonly] 
 **KycStatus** | Pointer to [**CustomerKycStatus**](CustomerKycStatus.md) |  | [optional] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
-**LegalAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
+**LegalAddress** | Pointer to [**LegalAddress**](LegalAddress.md) |  | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** | User-supplied metadata. Do not use to store PII. | [optional] 
 **MiddleName** | Pointer to **string** | Customer&#39;s middle name | [optional] 
+**Note** | Pointer to **string** | Add an optional note when creating or updating a customer. A note is required when updating a customers&#39;s ban_status between SUSPENDED and ALLOWED. | [optional] 
 **PhoneNumber** | Pointer to **string** | Customer&#39;s mobile phone number with country code in E.164 format. Must have a valid country code. Area code and local phone number are not validated. | [optional] 
-**RelatedCustomers** | Pointer to [**[]Relationship1**](Relationship1.md) | Customer&#39;s relationships with other accounts eg. guardian | [optional] 
-**ShippingAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
+**RelatedCustomers** | Pointer to [**[]Relationship**](Relationship.md) | Customer&#39;s relationships with other accounts eg. guardian. This property is no longer supported. Setting it will return an error. | [optional] 
+**ShippingAddress** | Pointer to [**ShippingAddress**](ShippingAddress.md) |  | [optional] 
 **Ssn** | Pointer to **string** | Customer&#39;s full tax ID eg SSN formatted with hyphens. This optional parameter is required when running KYC on a customer. Input must match the pattern ^\\d{3}-\\d{2}-\\d{4}$. The response contains the last 4 digits only (e.g. 6789). | [optional] 
 **SsnSource** | Pointer to [**SsnSource**](SsnSource.md) |  | [optional] 
-**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
+**Dob** | Pointer to **string** | Customer&#39;s date of birth in RFC 3339 full-date format (YYYY-MM-DD) | [optional] 
+**FirstName** | Pointer to **string** | Customer&#39;s first name | [optional] 
+**LastName** | Pointer to **string** | Customer&#39;s last name | [optional] 
+**Status** | **string** | Customer&#39;s status | 
 
 ## Methods
 
@@ -45,100 +48,30 @@ NewProspectWithDefaults instantiates a new Prospect object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetDob
+### GetAddresses
 
-`func (o *Prospect) GetDob() string`
+`func (o *Prospect) GetAddresses() []Address`
 
-GetDob returns the Dob field if non-nil, zero value otherwise.
+GetAddresses returns the Addresses field if non-nil, zero value otherwise.
 
-### GetDobOk
+### GetAddressesOk
 
-`func (o *Prospect) GetDobOk() (*string, bool)`
+`func (o *Prospect) GetAddressesOk() (*[]Address, bool)`
 
-GetDobOk returns a tuple with the Dob field if it's non-nil, zero value otherwise
+GetAddressesOk returns a tuple with the Addresses field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDob
+### SetAddresses
 
-`func (o *Prospect) SetDob(v string)`
+`func (o *Prospect) SetAddresses(v []Address)`
 
-SetDob sets Dob field to given value.
+SetAddresses sets Addresses field to given value.
 
-### HasDob
+### HasAddresses
 
-`func (o *Prospect) HasDob() bool`
+`func (o *Prospect) HasAddresses() bool`
 
-HasDob returns a boolean if a field has been set.
-
-### GetFirstName
-
-`func (o *Prospect) GetFirstName() string`
-
-GetFirstName returns the FirstName field if non-nil, zero value otherwise.
-
-### GetFirstNameOk
-
-`func (o *Prospect) GetFirstNameOk() (*string, bool)`
-
-GetFirstNameOk returns a tuple with the FirstName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFirstName
-
-`func (o *Prospect) SetFirstName(v string)`
-
-SetFirstName sets FirstName field to given value.
-
-### HasFirstName
-
-`func (o *Prospect) HasFirstName() bool`
-
-HasFirstName returns a boolean if a field has been set.
-
-### GetLastName
-
-`func (o *Prospect) GetLastName() string`
-
-GetLastName returns the LastName field if non-nil, zero value otherwise.
-
-### GetLastNameOk
-
-`func (o *Prospect) GetLastNameOk() (*string, bool)`
-
-GetLastNameOk returns a tuple with the LastName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLastName
-
-`func (o *Prospect) SetLastName(v string)`
-
-SetLastName sets LastName field to given value.
-
-### HasLastName
-
-`func (o *Prospect) HasLastName() bool`
-
-HasLastName returns a boolean if a field has been set.
-
-### GetStatus
-
-`func (o *Prospect) GetStatus() string`
-
-GetStatus returns the Status field if non-nil, zero value otherwise.
-
-### GetStatusOk
-
-`func (o *Prospect) GetStatusOk() (*string, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *Prospect) SetStatus(v string)`
-
-SetStatus sets Status field to given value.
-
+HasAddresses returns a boolean if a field has been set.
 
 ### GetBanStatus
 
@@ -214,6 +147,31 @@ SetEmail sets Email field to given value.
 `func (o *Prospect) HasEmail() bool`
 
 HasEmail returns a boolean if a field has been set.
+
+### GetHasAccounts
+
+`func (o *Prospect) GetHasAccounts() bool`
+
+GetHasAccounts returns the HasAccounts field if non-nil, zero value otherwise.
+
+### GetHasAccountsOk
+
+`func (o *Prospect) GetHasAccountsOk() (*bool, bool)`
+
+GetHasAccountsOk returns a tuple with the HasAccounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasAccounts
+
+`func (o *Prospect) SetHasAccounts(v bool)`
+
+SetHasAccounts sets HasAccounts field to given value.
+
+### HasHasAccounts
+
+`func (o *Prospect) HasHasAccounts() bool`
+
+HasHasAccounts returns a boolean if a field has been set.
 
 ### GetId
 
@@ -342,20 +300,20 @@ HasLastUpdatedTime returns a boolean if a field has been set.
 
 ### GetLegalAddress
 
-`func (o *Prospect) GetLegalAddress() Address`
+`func (o *Prospect) GetLegalAddress() LegalAddress`
 
 GetLegalAddress returns the LegalAddress field if non-nil, zero value otherwise.
 
 ### GetLegalAddressOk
 
-`func (o *Prospect) GetLegalAddressOk() (*Address, bool)`
+`func (o *Prospect) GetLegalAddressOk() (*LegalAddress, bool)`
 
 GetLegalAddressOk returns a tuple with the LegalAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLegalAddress
 
-`func (o *Prospect) SetLegalAddress(v Address)`
+`func (o *Prospect) SetLegalAddress(v LegalAddress)`
 
 SetLegalAddress sets LegalAddress field to given value.
 
@@ -415,6 +373,31 @@ SetMiddleName sets MiddleName field to given value.
 
 HasMiddleName returns a boolean if a field has been set.
 
+### GetNote
+
+`func (o *Prospect) GetNote() string`
+
+GetNote returns the Note field if non-nil, zero value otherwise.
+
+### GetNoteOk
+
+`func (o *Prospect) GetNoteOk() (*string, bool)`
+
+GetNoteOk returns a tuple with the Note field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNote
+
+`func (o *Prospect) SetNote(v string)`
+
+SetNote sets Note field to given value.
+
+### HasNote
+
+`func (o *Prospect) HasNote() bool`
+
+HasNote returns a boolean if a field has been set.
+
 ### GetPhoneNumber
 
 `func (o *Prospect) GetPhoneNumber() string`
@@ -442,20 +425,20 @@ HasPhoneNumber returns a boolean if a field has been set.
 
 ### GetRelatedCustomers
 
-`func (o *Prospect) GetRelatedCustomers() []Relationship1`
+`func (o *Prospect) GetRelatedCustomers() []Relationship`
 
 GetRelatedCustomers returns the RelatedCustomers field if non-nil, zero value otherwise.
 
 ### GetRelatedCustomersOk
 
-`func (o *Prospect) GetRelatedCustomersOk() (*[]Relationship1, bool)`
+`func (o *Prospect) GetRelatedCustomersOk() (*[]Relationship, bool)`
 
 GetRelatedCustomersOk returns a tuple with the RelatedCustomers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRelatedCustomers
 
-`func (o *Prospect) SetRelatedCustomers(v []Relationship1)`
+`func (o *Prospect) SetRelatedCustomers(v []Relationship)`
 
 SetRelatedCustomers sets RelatedCustomers field to given value.
 
@@ -467,20 +450,20 @@ HasRelatedCustomers returns a boolean if a field has been set.
 
 ### GetShippingAddress
 
-`func (o *Prospect) GetShippingAddress() Address`
+`func (o *Prospect) GetShippingAddress() ShippingAddress`
 
 GetShippingAddress returns the ShippingAddress field if non-nil, zero value otherwise.
 
 ### GetShippingAddressOk
 
-`func (o *Prospect) GetShippingAddressOk() (*Address, bool)`
+`func (o *Prospect) GetShippingAddressOk() (*ShippingAddress, bool)`
 
 GetShippingAddressOk returns a tuple with the ShippingAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetShippingAddress
 
-`func (o *Prospect) SetShippingAddress(v Address)`
+`func (o *Prospect) SetShippingAddress(v ShippingAddress)`
 
 SetShippingAddress sets ShippingAddress field to given value.
 
@@ -564,6 +547,101 @@ SetTenant sets Tenant field to given value.
 `func (o *Prospect) HasTenant() bool`
 
 HasTenant returns a boolean if a field has been set.
+
+### GetDob
+
+`func (o *Prospect) GetDob() string`
+
+GetDob returns the Dob field if non-nil, zero value otherwise.
+
+### GetDobOk
+
+`func (o *Prospect) GetDobOk() (*string, bool)`
+
+GetDobOk returns a tuple with the Dob field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDob
+
+`func (o *Prospect) SetDob(v string)`
+
+SetDob sets Dob field to given value.
+
+### HasDob
+
+`func (o *Prospect) HasDob() bool`
+
+HasDob returns a boolean if a field has been set.
+
+### GetFirstName
+
+`func (o *Prospect) GetFirstName() string`
+
+GetFirstName returns the FirstName field if non-nil, zero value otherwise.
+
+### GetFirstNameOk
+
+`func (o *Prospect) GetFirstNameOk() (*string, bool)`
+
+GetFirstNameOk returns a tuple with the FirstName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFirstName
+
+`func (o *Prospect) SetFirstName(v string)`
+
+SetFirstName sets FirstName field to given value.
+
+### HasFirstName
+
+`func (o *Prospect) HasFirstName() bool`
+
+HasFirstName returns a boolean if a field has been set.
+
+### GetLastName
+
+`func (o *Prospect) GetLastName() string`
+
+GetLastName returns the LastName field if non-nil, zero value otherwise.
+
+### GetLastNameOk
+
+`func (o *Prospect) GetLastNameOk() (*string, bool)`
+
+GetLastNameOk returns a tuple with the LastName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastName
+
+`func (o *Prospect) SetLastName(v string)`
+
+SetLastName sets LastName field to given value.
+
+### HasLastName
+
+`func (o *Prospect) HasLastName() bool`
+
+HasLastName returns a boolean if a field has been set.
+
+### GetStatus
+
+`func (o *Prospect) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *Prospect) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *Prospect) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Active** | Pointer to **bool** | Current status of the Authorization gateway | [optional] 
 **CardProducts** | Pointer to **[]string** | List of Card Product unique identifiers that will utilize the Gateway | [optional] 
 **CustomHeaders** | Pointer to **map[string]string** | Custom Headers of the Authorization gateway | [optional] 
+**Standin** | Pointer to [**GatewayStandin**](GatewayStandin.md) |  | [optional] 
 **Url** | Pointer to **string** | URL of the Authorization gateway | [optional] 
 
 ## Methods
@@ -102,6 +103,31 @@ SetCustomHeaders sets CustomHeaders field to given value.
 `func (o *UpdateGatewayRequest) HasCustomHeaders() bool`
 
 HasCustomHeaders returns a boolean if a field has been set.
+
+### GetStandin
+
+`func (o *UpdateGatewayRequest) GetStandin() GatewayStandin`
+
+GetStandin returns the Standin field if non-nil, zero value otherwise.
+
+### GetStandinOk
+
+`func (o *UpdateGatewayRequest) GetStandinOk() (*GatewayStandin, bool)`
+
+GetStandinOk returns a tuple with the Standin field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStandin
+
+`func (o *UpdateGatewayRequest) SetStandin(v GatewayStandin)`
+
+SetStandin sets Standin field to given value.
+
+### HasStandin
+
+`func (o *UpdateGatewayRequest) HasStandin() bool`
+
+HasStandin returns a boolean if a field has been set.
 
 ### GetUrl
 

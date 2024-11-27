@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Form** | **string** | PHYSICAL or VIRTUAL. | 
 **AccountId** | **string** | The ID of the account to which the card will be linked | 
+**BusinessId** | Pointer to **string** | The business ID associated with this card. If no customer_id is supplied, a card can still be issued to a business, but cannot be activated or used until a customer is assigned via the PATCH /cards/{card_id} endpoint. | [optional] 
 **CardProductId** | **string** | The card product to which the card is attached | 
 **CreationTime** | Pointer to **time.Time** | The timestamp representing when the card issuance request was made | [optional] [readonly] 
-**CustomerId** | **string** | The ID of the customer to whom the card will be issued | 
+**CustomerId** | Pointer to **string** | The ID of the customer to whom the card will be issued. If a business_id is passed, but a customer_id not passed at the time of card creation the card cannot be activated or used for spend until it&#39;s assigned to a human customer via the PATCH /cards/{card_id} endpoint. If no business_id is passed, a customer_id is required. | [optional] 
 **EmbossName** | Pointer to [**EmbossName**](EmbossName.md) |  | [optional] 
 **ExpirationMonth** | Pointer to **string** |  | [optional] [readonly] 
 **ExpirationTime** | Pointer to **time.Time** | The timestamp representing when the card would expire at | [optional] [readonly] 
@@ -21,7 +21,9 @@ Name | Type | Description | Notes
 **ReissueReason** | Pointer to **string** | This is the reason the card needs to be reissued, if any. The reason determines several behaviours:   - whether or not the new card will use the same PAN as the original card   - the old card will be terminated and if so, when it will be terminated  Reason                 | Same PAN | Terminate Old Card ---------------------- | -------- | ------------------ EXPIRATION             | yes      | on activation LOST                   | no       | immediately STOLEN                 | no       | immediately DAMAGED                | yes      | on activation VIRTUAL_TO_PHYSICAL(*) | yes      | on activation PRODUCT_CHANGE         | yes      | on activation NAME_CHANGE(**)        | yes      | on activation APPEARANCE             | yes      | on activation  (*) VIRTUAL_TO_PHYSICAL is deprecated. Please use PRODUCT_CHANGE whenever reissuing from one card product to another, including from a virtual product to a physical product.  (**) NAME_CHANGE is deprecated. Please use APPEARANCE whenever reissuing in order to change the appearance of a card, such as the printed name or custom image.  For all reasons, the new card will use the same PIN as the original card and digital wallet tokens will reassigned to the new card  | [optional] 
 **ReissuedFromId** | Pointer to **string** | When reissuing a card, specify the card to be replaced here. When getting a card&#39;s details, if this card was issued as a reissuance of another card, this ID refers to the card was replaced. If this field is set, then reissue_reason must also be set.  | [optional] 
 **ReissuedToId** | Pointer to **string** | If this card was reissued, this ID refers to the card that replaced it. | [optional] [readonly] 
-**Type** | **string** | Indicates the type of card to be issued | 
+**TimestampPinSet** | Pointer to **time.Time** | Time when the PIN was last set or changed. | [optional] [readonly] 
+**Type** | [**CardType**](CardType.md) |  | 
+**Form** | **string** | PHYSICAL or VIRTUAL. | 
 **CardImageId** | Pointer to **string** | The ID of the custom card image used for this card | [optional] 
 **Shipping** | Pointer to [**Shipping**](Shipping.md) |  | [optional] 
 
@@ -29,7 +31,7 @@ Name | Type | Description | Notes
 
 ### NewPhysicalCardIssuanceRequest
 
-`func NewPhysicalCardIssuanceRequest(form string, accountId string, cardProductId string, customerId string, type_ string, ) *PhysicalCardIssuanceRequest`
+`func NewPhysicalCardIssuanceRequest(accountId string, cardProductId string, type_ CardType, form string, ) *PhysicalCardIssuanceRequest`
 
 NewPhysicalCardIssuanceRequest instantiates a new PhysicalCardIssuanceRequest object
 This constructor will assign default values to properties that have it defined,
@@ -43,26 +45,6 @@ will change when the set of required properties is changed
 NewPhysicalCardIssuanceRequestWithDefaults instantiates a new PhysicalCardIssuanceRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetForm
-
-`func (o *PhysicalCardIssuanceRequest) GetForm() string`
-
-GetForm returns the Form field if non-nil, zero value otherwise.
-
-### GetFormOk
-
-`func (o *PhysicalCardIssuanceRequest) GetFormOk() (*string, bool)`
-
-GetFormOk returns a tuple with the Form field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetForm
-
-`func (o *PhysicalCardIssuanceRequest) SetForm(v string)`
-
-SetForm sets Form field to given value.
-
 
 ### GetAccountId
 
@@ -83,6 +65,31 @@ and a boolean to check if the value has been set.
 
 SetAccountId sets AccountId field to given value.
 
+
+### GetBusinessId
+
+`func (o *PhysicalCardIssuanceRequest) GetBusinessId() string`
+
+GetBusinessId returns the BusinessId field if non-nil, zero value otherwise.
+
+### GetBusinessIdOk
+
+`func (o *PhysicalCardIssuanceRequest) GetBusinessIdOk() (*string, bool)`
+
+GetBusinessIdOk returns a tuple with the BusinessId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBusinessId
+
+`func (o *PhysicalCardIssuanceRequest) SetBusinessId(v string)`
+
+SetBusinessId sets BusinessId field to given value.
+
+### HasBusinessId
+
+`func (o *PhysicalCardIssuanceRequest) HasBusinessId() bool`
+
+HasBusinessId returns a boolean if a field has been set.
 
 ### GetCardProductId
 
@@ -148,6 +155,11 @@ and a boolean to check if the value has been set.
 
 SetCustomerId sets CustomerId field to given value.
 
+### HasCustomerId
+
+`func (o *PhysicalCardIssuanceRequest) HasCustomerId() bool`
+
+HasCustomerId returns a boolean if a field has been set.
 
 ### GetEmbossName
 
@@ -449,24 +461,69 @@ SetReissuedToId sets ReissuedToId field to given value.
 
 HasReissuedToId returns a boolean if a field has been set.
 
+### GetTimestampPinSet
+
+`func (o *PhysicalCardIssuanceRequest) GetTimestampPinSet() time.Time`
+
+GetTimestampPinSet returns the TimestampPinSet field if non-nil, zero value otherwise.
+
+### GetTimestampPinSetOk
+
+`func (o *PhysicalCardIssuanceRequest) GetTimestampPinSetOk() (*time.Time, bool)`
+
+GetTimestampPinSetOk returns a tuple with the TimestampPinSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimestampPinSet
+
+`func (o *PhysicalCardIssuanceRequest) SetTimestampPinSet(v time.Time)`
+
+SetTimestampPinSet sets TimestampPinSet field to given value.
+
+### HasTimestampPinSet
+
+`func (o *PhysicalCardIssuanceRequest) HasTimestampPinSet() bool`
+
+HasTimestampPinSet returns a boolean if a field has been set.
+
 ### GetType
 
-`func (o *PhysicalCardIssuanceRequest) GetType() string`
+`func (o *PhysicalCardIssuanceRequest) GetType() CardType`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *PhysicalCardIssuanceRequest) GetTypeOk() (*string, bool)`
+`func (o *PhysicalCardIssuanceRequest) GetTypeOk() (*CardType, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *PhysicalCardIssuanceRequest) SetType(v string)`
+`func (o *PhysicalCardIssuanceRequest) SetType(v CardType)`
 
 SetType sets Type field to given value.
+
+
+### GetForm
+
+`func (o *PhysicalCardIssuanceRequest) GetForm() string`
+
+GetForm returns the Form field if non-nil, zero value otherwise.
+
+### GetFormOk
+
+`func (o *PhysicalCardIssuanceRequest) GetFormOk() (*string, bool)`
+
+GetFormOk returns a tuple with the Form field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetForm
+
+`func (o *PhysicalCardIssuanceRequest) SetForm(v string)`
+
+SetForm sets Form field to given value.
 
 
 ### GetCardImageId

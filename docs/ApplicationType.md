@@ -3,6 +3,8 @@
 ## Enum
 
 
+* `CREDIT` (value: `"CREDIT"`)
+
 * `LINE_OF_CREDIT` (value: `"LINE_OF_CREDIT"`)
 
 * `RESTRICTED_ACCOUNT` (value: `"RESTRICTED_ACCOUNT"`)

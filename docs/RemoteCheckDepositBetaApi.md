@@ -1,18 +1,18 @@
-# \RemoteCheckDepositBetaApi
+# \RemoteCheckDepositBetaAPI
 
-All URIs are relative to *https://api.synctera.com/v0*
+All URIs are relative to *https://api-sandbox.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateRdcDeposit**](RemoteCheckDepositBetaApi.md#CreateRdcDeposit) | **Post** /rdc/deposits | Create a Remote Check Deposit
-[**GetRdcDeposit**](RemoteCheckDepositBetaApi.md#GetRdcDeposit) | **Get** /rdc/deposits/{deposit_id} | Get Remote Check Deposit
-[**ListRdcDeposits**](RemoteCheckDepositBetaApi.md#ListRdcDeposits) | **Get** /rdc/deposits | List Remote Check Deposits
+[**CreateRdcDeposit**](RemoteCheckDepositBetaAPI.md#CreateRdcDeposit) | **Post** /rdc/deposits | Create a Remote Check Deposit
+[**GetRdcDeposit**](RemoteCheckDepositBetaAPI.md#GetRdcDeposit) | **Get** /rdc/deposits/{deposit_id} | Get Remote Check Deposit
+[**ListRdcDeposits**](RemoteCheckDepositBetaAPI.md#ListRdcDeposits) | **Get** /rdc/deposits | List Remote Check Deposits
 
 
 
 ## CreateRdcDeposit
 
-> Deposit CreateRdcDeposit(ctx).Deposit(deposit).Execute()
+> DepositGet CreateRdcDeposit(ctx).DepositPost(depositPost).Execute()
 
 Create a Remote Check Deposit
 
@@ -24,25 +24,24 @@ Create a Remote Check Deposit
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    "time"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    deposit := *openapiclient.NewDeposit("6b77f6cb-d6ec-4f74-91e5-190c495344df", "b50a3c7b-ab03-4458-9026-fb3d06cb3780", int32(8302), time.Now(), time.Now(), int32(6478), "USD", "2b17b474-9a3f-469c-8bfb-7a0abb555f2b", "6d8065d7-1220-4df1-a2e6-f2ba88a5d508", "Status_example", "4350bba5-f27e-41ee-86d0-a94b322d7fc5", openapiclient.vendor_info1{VendorJson: openapiclient.NewVendorJson("ContentType_example", map[string]interface{}(123), "SOCURE")}) // Deposit | Attributes of the Remote Check Deposit to create (optional)
+	depositPost := *openapiclient.NewDepositPost("b01db9c7-78f2-4a99-8aca-1231d32f9b96", "b01db9c7-78f2-4a99-8aca-1231d32f9b96", int32(12345), "USD", "b01db9c7-78f2-4a99-8aca-1231d32f9b96") // DepositPost | Attributes of the Remote Check Deposit to create (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RemoteCheckDepositBetaApi.CreateRdcDeposit(context.Background()).Deposit(deposit).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RemoteCheckDepositBetaApi.CreateRdcDeposit``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateRdcDeposit`: Deposit
-    fmt.Fprintf(os.Stdout, "Response from `RemoteCheckDepositBetaApi.CreateRdcDeposit`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RemoteCheckDepositBetaAPI.CreateRdcDeposit(context.Background()).DepositPost(depositPost).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RemoteCheckDepositBetaAPI.CreateRdcDeposit``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateRdcDeposit`: DepositGet
+	fmt.Fprintf(os.Stdout, "Response from `RemoteCheckDepositBetaAPI.CreateRdcDeposit`: %v\n", resp)
 }
 ```
 
@@ -57,11 +56,11 @@ Other parameters are passed through a pointer to a apiCreateRdcDepositRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **deposit** | [**Deposit**](Deposit.md) | Attributes of the Remote Check Deposit to create | 
+ **depositPost** | [**DepositPost**](DepositPost.md) | Attributes of the Remote Check Deposit to create | 
 
 ### Return type
 
-[**Deposit**](Deposit.md)
+[**DepositGet**](DepositGet.md)
 
 ### Authorization
 
@@ -79,7 +78,7 @@ Name | Type | Description  | Notes
 
 ## GetRdcDeposit
 
-> Deposit GetRdcDeposit(ctx, depositId).Execute()
+> DepositGet GetRdcDeposit(ctx, depositId).Execute()
 
 Get Remote Check Deposit
 
@@ -91,24 +90,24 @@ Get Remote Check Deposit
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    depositId := "ff23b9d0-4e64-4b98-9f4a-3591ed08121a" // string | ID of a deposit for a remote deposit capture
+	depositId := "b01db9c7-78f2-4a99-8aca-1231d32f9b96" // string | ID of a deposit for a remote deposit capture
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RemoteCheckDepositBetaApi.GetRdcDeposit(context.Background(), depositId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RemoteCheckDepositBetaApi.GetRdcDeposit``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetRdcDeposit`: Deposit
-    fmt.Fprintf(os.Stdout, "Response from `RemoteCheckDepositBetaApi.GetRdcDeposit`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RemoteCheckDepositBetaAPI.GetRdcDeposit(context.Background(), depositId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RemoteCheckDepositBetaAPI.GetRdcDeposit``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRdcDeposit`: DepositGet
+	fmt.Fprintf(os.Stdout, "Response from `RemoteCheckDepositBetaAPI.GetRdcDeposit`: %v\n", resp)
 }
 ```
 
@@ -131,7 +130,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Deposit**](Deposit.md)
+[**DepositGet**](DepositGet.md)
 
 ### Authorization
 
@@ -149,7 +148,7 @@ Name | Type | Description  | Notes
 
 ## ListRdcDeposits
 
-> DepositList ListRdcDeposits(ctx).AccountId(accountId).Limit(limit).PageToken(pageToken).Execute()
+> DepositList ListRdcDeposits(ctx).AccountId(accountId).PageToken(pageToken).Limit(limit).Execute()
 
 List Remote Check Deposits
 
@@ -161,26 +160,26 @@ List Remote Check Deposits
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    accountId := "12dbc24c-3cfc-46dc-a164-0977434afabf" // string | Unique identifier for the account. (optional)
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "a8937a0d" // string |  (optional)
+	accountId := "b01db9c7-78f2-4a99-8aca-1231d32f9b96" // string | Unique identifier for the account. (optional)
+	pageToken := "a8937a0d" // string |  (optional)
+	limit := int32(100) // int32 |  (optional) (default to 100)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RemoteCheckDepositBetaApi.ListRdcDeposits(context.Background()).AccountId(accountId).Limit(limit).PageToken(pageToken).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RemoteCheckDepositBetaApi.ListRdcDeposits``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListRdcDeposits`: DepositList
-    fmt.Fprintf(os.Stdout, "Response from `RemoteCheckDepositBetaApi.ListRdcDeposits`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RemoteCheckDepositBetaAPI.ListRdcDeposits(context.Background()).AccountId(accountId).PageToken(pageToken).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RemoteCheckDepositBetaAPI.ListRdcDeposits``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListRdcDeposits`: DepositList
+	fmt.Fprintf(os.Stdout, "Response from `RemoteCheckDepositBetaAPI.ListRdcDeposits`: %v\n", resp)
 }
 ```
 
@@ -196,8 +195,8 @@ Other parameters are passed through a pointer to a apiListRdcDepositsRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **accountId** | **string** | Unique identifier for the account. | 
- **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
+ **limit** | **int32** |  | [default to 100]
 
 ### Return type
 

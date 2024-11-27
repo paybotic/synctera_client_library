@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -19,13 +19,12 @@ import (
 	"strings"
 )
 
-
 // CashPickupsAlphaApiService CashPickupsAlphaApi service
 type CashPickupsAlphaApiService service
 
 type ApiCreateCashPickupRequest struct {
-	ctx context.Context
-	ApiService *CashPickupsAlphaApiService
+	ctx                   context.Context
+	ApiService            *CashPickupsAlphaApiService
 	cashPickupPostRequest *CashPickupPostRequest
 }
 
@@ -44,24 +43,25 @@ CreateCashPickup Create a cash pickup
 
 Create a cash pickup
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCashPickupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCashPickupRequest
 */
 func (a *CashPickupsAlphaApiService) CreateCashPickup(ctx context.Context) ApiCreateCashPickupRequest {
 	return ApiCreateCashPickupRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CashPickup
+//
+//	@return CashPickup
 func (a *CashPickupsAlphaApiService) CreateCashPickupExecute(r ApiCreateCashPickupRequest) (*CashPickup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CashPickup
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CashPickup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CashPickupsAlphaApiService.CreateCashPickup")
@@ -184,8 +184,8 @@ func (a *CashPickupsAlphaApiService) CreateCashPickupExecute(r ApiCreateCashPick
 }
 
 type ApiGetCashPickupRequest struct {
-	ctx context.Context
-	ApiService *CashPickupsAlphaApiService
+	ctx          context.Context
+	ApiService   *CashPickupsAlphaApiService
 	cashPickupId string
 }
 
@@ -198,26 +198,27 @@ GetCashPickup Get a cash pickup
 
 Get a cash pickup
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cashPickupId The unique identifier of a cash pickup
- @return ApiGetCashPickupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cashPickupId The unique identifier of a cash pickup
+	@return ApiGetCashPickupRequest
 */
 func (a *CashPickupsAlphaApiService) GetCashPickup(ctx context.Context, cashPickupId string) ApiGetCashPickupRequest {
 	return ApiGetCashPickupRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:   a,
+		ctx:          ctx,
 		cashPickupId: cashPickupId,
 	}
 }
 
 // Execute executes the request
-//  @return CashPickup
+//
+//	@return CashPickup
 func (a *CashPickupsAlphaApiService) GetCashPickupExecute(r ApiGetCashPickupRequest) (*CashPickup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CashPickup
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CashPickup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CashPickupsAlphaApiService.GetCashPickup")
@@ -326,10 +327,10 @@ func (a *CashPickupsAlphaApiService) GetCashPickupExecute(r ApiGetCashPickupRequ
 }
 
 type ApiListCashPickupsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CashPickupsAlphaApiService
-	limit *int32
-	pageToken *string
+	limit      *int32
+	pageToken  *string
 }
 
 func (r ApiListCashPickupsRequest) Limit(limit int32) ApiListCashPickupsRequest {
@@ -351,24 +352,25 @@ ListCashPickups List cash pickups
 
 Get paginated list of cash pickups
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListCashPickupsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListCashPickupsRequest
 */
 func (a *CashPickupsAlphaApiService) ListCashPickups(ctx context.Context) ApiListCashPickupsRequest {
 	return ApiListCashPickupsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CashPickupList
+//
+//	@return CashPickupList
 func (a *CashPickupsAlphaApiService) ListCashPickupsExecute(r ApiListCashPickupsRequest) (*CashPickupList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CashPickupList
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CashPickupList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CashPickupsAlphaApiService.ListCashPickups")
@@ -472,9 +474,9 @@ func (a *CashPickupsAlphaApiService) ListCashPickupsExecute(r ApiListCashPickups
 }
 
 type ApiPatchCashPickupRequest struct {
-	ctx context.Context
-	ApiService *CashPickupsAlphaApiService
-	cashPickupId string
+	ctx                    context.Context
+	ApiService             *CashPickupsAlphaApiService
+	cashPickupId           string
 	cashPickupPatchRequest *CashPickupPatchRequest
 }
 
@@ -493,26 +495,27 @@ PatchCashPickup Update a cash pickup
 
 Update a cash pickup
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cashPickupId The unique identifier of a cash pickup
- @return ApiPatchCashPickupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cashPickupId The unique identifier of a cash pickup
+	@return ApiPatchCashPickupRequest
 */
 func (a *CashPickupsAlphaApiService) PatchCashPickup(ctx context.Context, cashPickupId string) ApiPatchCashPickupRequest {
 	return ApiPatchCashPickupRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:   a,
+		ctx:          ctx,
 		cashPickupId: cashPickupId,
 	}
 }
 
 // Execute executes the request
-//  @return CashPickup
+//
+//	@return CashPickup
 func (a *CashPickupsAlphaApiService) PatchCashPickupExecute(r ApiPatchCashPickupRequest) (*CashPickup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CashPickup
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CashPickup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CashPickupsAlphaApiService.PatchCashPickup")

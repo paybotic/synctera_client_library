@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccrualPeriod** | **string** |  | 
+**AccrualPeriod** | **string** | How often interest gets calculated against the balance. Note: although two options are displayed here, only DAILY is supported at the moment.  | 
 **Rate** | **int32** | Rate in basis points. E.g. 5 represents 0.05% | 
 **ValidFrom** | **string** | Rate effective start date. Inclusive. | 
 **ValidTo** | Pointer to **string** | Rate effective end date. Exclusive. | [optional] 

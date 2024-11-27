@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Mcc** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **PartialApprovalCapable** | Pointer to **bool** |  | [optional] [default to false]
-**State** | Pointer to **string** |  | [optional] 
+**State** | Pointer to **string** | Two-Letter USPS State Abbreviation | [optional] 
 **Zip** | Pointer to **string** |  | [optional] 
 
 ## Methods

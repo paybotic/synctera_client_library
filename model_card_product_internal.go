@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -26,14 +26,14 @@ type CardProductInternal struct {
 	// Color code for dynamic card elements such as PAN and card holder name
 	Color *string `json:"color,omitempty"`
 	// The timestamp representing when the Card Product was created
-	CreationTime *time.Time `json:"creation_time,omitempty"`
+	CreationTime              *time.Time                 `json:"creation_time,omitempty"`
 	DigitalWalletTokenization *DigitalWalletTokenization `json:"digital_wallet_tokenization,omitempty"`
 	// The time when the Card Product is decommissioned
 	EndDate *time.Time `json:"end_date,omitempty"`
 	// Card Product ID
 	Id *string `json:"id,omitempty"`
 	// Indicates whether or not there is an overlay image of the card product available
-	Image *bool `json:"image,omitempty"`
+	Image     *bool          `json:"image,omitempty"`
 	ImageMode *CardImageMode `json:"image_mode,omitempty"`
 	// Allow issuing cards on this product without requiring KYC
 	IssueWithoutKyc *bool `json:"issue_without_kyc,omitempty"`
@@ -44,11 +44,11 @@ type CardProductInternal struct {
 	// Card orientation
 	Orientation *string `json:"orientation,omitempty"`
 	// Card fulfillment provider’s package ID
-	PackageId *string `json:"package_id,omitempty"`
+	PackageId          *string             `json:"package_id,omitempty"`
 	PhysicalCardFormat *PhysicalCardFormat `json:"physical_card_format,omitempty"`
-	ReturnAddress *Shipping `json:"return_address,omitempty"`
+	ReturnAddress      *Shipping           `json:"return_address,omitempty"`
 	// The time when the Card Product goes live
-	StartDate time.Time `json:"start_date"`
+	StartDate   time.Time    `json:"start_date"`
 	TxnEnhancer *TxnEnhancer `json:"txn_enhancer,omitempty"`
 	// Account Range ID
 	AccountRangeId string `json:"account_range_id"`
@@ -923,5 +923,3 @@ func (v *NullableCardProductInternal) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

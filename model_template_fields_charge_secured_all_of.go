@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -16,15 +16,15 @@ import (
 
 // TemplateFieldsChargeSecuredAllOf struct for TemplateFieldsChargeSecuredAllOf
 type TemplateFieldsChargeSecuredAllOf struct {
-	// The number of days an account can stay delinquent before marking an account as charged-off. 
+	// The number of days an account can stay delinquent before marking an account as charged-off.
 	ChargeoffPeriod *int32 `json:"chargeoff_period,omitempty"`
-	// The number of days past the due date to wait for a minimum payment before marking an account as delinquent. 
+	// The number of days past the due date to wait for a minimum payment before marking an account as delinquent.
 	DelinquencyPeriod *int32 `json:"delinquency_period,omitempty"`
-	// The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment. 
+	// The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.
 	GracePeriod *int32 `json:"grace_period,omitempty"`
-	// An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_DAILY, and its rates set to 0%. 
-	InterestProductId string `json:"interest_product_id"`
-	MinimumPayment MinimumPaymentFull `json:"minimum_payment"`
+	// An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_DAILY, and its rates set to 0%.
+	InterestProductId string             `json:"interest_product_id"`
+	MinimumPayment    MinimumPaymentFull `json:"minimum_payment"`
 }
 
 // NewTemplateFieldsChargeSecuredAllOf instantiates a new TemplateFieldsChargeSecuredAllOf object
@@ -257,5 +257,3 @@ func (v *NullableTemplateFieldsChargeSecuredAllOf) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

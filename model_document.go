@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -22,8 +22,8 @@ type Document struct {
 	// The date and time the resource was created
 	CreationTime *time.Time `json:"creation_time,omitempty"`
 	// A description of the document
-	Description *string `json:"description,omitempty"`
-	Encryption *Encryption `json:"encryption,omitempty"`
+	Description *string     `json:"description,omitempty"`
+	Encryption  *Encryption `json:"encryption,omitempty"`
 	// The name of the document
 	FileName *string `json:"file_name,omitempty"`
 	// The unique identifier for this resource
@@ -32,16 +32,16 @@ type Document struct {
 	IsRestricted *bool `json:"is_restricted,omitempty"`
 	// The date and time the resource was last updated
 	LastUpdatedTime *time.Time `json:"last_updated_time,omitempty"`
-	// Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data. 
+	// Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	// A user-friendly name for the document
 	Name *string `json:"name,omitempty"`
 	// The ID of the resource related to the document
-	RelatedResourceId *string `json:"related_resource_id,omitempty"`
+	RelatedResourceId   *string              `json:"related_resource_id,omitempty"`
 	RelatedResourceType *RelatedResourceType `json:"related_resource_type,omitempty"`
-	// The id of the tenant containing the resource. 
-	Tenant *string `json:"tenant,omitempty"`
-	Type *DocumentType `json:"type,omitempty"`
+	// The id of the tenant containing the resource.
+	Tenant *string       `json:"tenant,omitempty"`
+	Type   *DocumentType `json:"type,omitempty"`
 	// The document version
 	Version *int32 `json:"version,omitempty"`
 }
@@ -632,5 +632,3 @@ func (v *NullableDocument) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

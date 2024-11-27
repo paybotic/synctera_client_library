@@ -5,18 +5,19 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Description** | Pointer to **string** | A description of what the webhook is used for | [optional] 
-**EnabledEvents** | [**[]EventType1**](EventType1.md) | A list of the events that will trigger the webhook | 
+**EnabledEvents** | [**[]EventType**](EventType.md) | A list of the events that will trigger the webhook. Subscribing to a wildcard event, e.g. ACCOUNT.*, will send all webhooks for all events that match that pattern. Note that this can include new event types added after the subscription was created. | 
 **Id** | Pointer to **string** | The unique ID of the webhook | [optional] [readonly] 
 **IsEnabled** | **bool** | Set the webhook to be enabled or disabled | 
 **LastUpdated** | Pointer to **time.Time** | Timestamp that this webhook was created or the last time any field was changed | [optional] [readonly] 
 **Metadata** | Pointer to **string** | Additional information stored to the webhook | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 **Url** | **string** | URL that the webhook will send request to | 
 
 ## Methods
 
 ### NewWebhook
 
-`func NewWebhook(enabledEvents []EventType1, isEnabled bool, url string, ) *Webhook`
+`func NewWebhook(enabledEvents []EventType, isEnabled bool, url string, ) *Webhook`
 
 NewWebhook instantiates a new Webhook object
 This constructor will assign default values to properties that have it defined,
@@ -58,20 +59,20 @@ HasDescription returns a boolean if a field has been set.
 
 ### GetEnabledEvents
 
-`func (o *Webhook) GetEnabledEvents() []EventType1`
+`func (o *Webhook) GetEnabledEvents() []EventType`
 
 GetEnabledEvents returns the EnabledEvents field if non-nil, zero value otherwise.
 
 ### GetEnabledEventsOk
 
-`func (o *Webhook) GetEnabledEventsOk() (*[]EventType1, bool)`
+`func (o *Webhook) GetEnabledEventsOk() (*[]EventType, bool)`
 
 GetEnabledEventsOk returns a tuple with the EnabledEvents field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnabledEvents
 
-`func (o *Webhook) SetEnabledEvents(v []EventType1)`
+`func (o *Webhook) SetEnabledEvents(v []EventType)`
 
 SetEnabledEvents sets EnabledEvents field to given value.
 
@@ -170,6 +171,31 @@ SetMetadata sets Metadata field to given value.
 `func (o *Webhook) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetTenant
+
+`func (o *Webhook) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *Webhook) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *Webhook) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *Webhook) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetUrl
 

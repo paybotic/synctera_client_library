@@ -17,15 +17,17 @@ Name | Type | Description | Notes
 **ReceivingAccountAlias** | Pointer to **string** | An alias representing a GL account to credit. This is an alternative to specifying by account id | [optional] 
 **ReceivingAccountCustomerId** | Pointer to **string** | The customer id of the owner of the receiving account. | [optional] 
 **ReceivingAccountId** | Pointer to **string** | The UUID of the account being credited | [optional] 
+**ReferenceId** | Pointer to **string** | Network reference id | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 **Type** | **string** | The desired transaction type to use for this transfer | 
 **Id** | **string** | The transaction id associated with the transfer | 
-**Status** | **string** | The status of the internal transfer auth. A value of &#x60;PENDING&#x60; indicates that the funds have been reserved and the transaction is ready to be either completed or canceled. A value of &#x60;COMPLETE&#x60; indicates the funds have been successfully moved and no more action can be performed. A value of &#x60;CANCELED&#x60; or &#x60;EXPIRED&#x60; means that the transaction has rolled back and the funds have been returned to the originating account, either by explicitly canceling via the API, or due to the expiry time having passed. | 
+**Status** | [**InternalTransferResponseStatus**](InternalTransferResponseStatus.md) |  | 
 
 ## Methods
 
 ### NewInternalTransferResponse
 
-`func NewInternalTransferResponse(amount int64, currency string, type_ string, id string, status string, ) *InternalTransferResponse`
+`func NewInternalTransferResponse(amount int64, currency string, type_ string, id string, status InternalTransferResponseStatus, ) *InternalTransferResponse`
 
 NewInternalTransferResponse instantiates a new InternalTransferResponse object
 This constructor will assign default values to properties that have it defined,
@@ -355,6 +357,56 @@ SetReceivingAccountId sets ReceivingAccountId field to given value.
 
 HasReceivingAccountId returns a boolean if a field has been set.
 
+### GetReferenceId
+
+`func (o *InternalTransferResponse) GetReferenceId() string`
+
+GetReferenceId returns the ReferenceId field if non-nil, zero value otherwise.
+
+### GetReferenceIdOk
+
+`func (o *InternalTransferResponse) GetReferenceIdOk() (*string, bool)`
+
+GetReferenceIdOk returns a tuple with the ReferenceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReferenceId
+
+`func (o *InternalTransferResponse) SetReferenceId(v string)`
+
+SetReferenceId sets ReferenceId field to given value.
+
+### HasReferenceId
+
+`func (o *InternalTransferResponse) HasReferenceId() bool`
+
+HasReferenceId returns a boolean if a field has been set.
+
+### GetTenant
+
+`func (o *InternalTransferResponse) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *InternalTransferResponse) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *InternalTransferResponse) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *InternalTransferResponse) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
+
 ### GetType
 
 `func (o *InternalTransferResponse) GetType() string`
@@ -397,20 +449,20 @@ SetId sets Id field to given value.
 
 ### GetStatus
 
-`func (o *InternalTransferResponse) GetStatus() string`
+`func (o *InternalTransferResponse) GetStatus() InternalTransferResponseStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *InternalTransferResponse) GetStatusOk() (*string, bool)`
+`func (o *InternalTransferResponse) GetStatusOk() (*InternalTransferResponseStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *InternalTransferResponse) SetStatus(v string)`
+`func (o *InternalTransferResponse) SetStatus(v InternalTransferResponseStatus)`
 
 SetStatus sets Status field to given value.
 

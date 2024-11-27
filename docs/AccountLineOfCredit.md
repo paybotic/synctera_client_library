@@ -4,6 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**IsAchEnabled** | Pointer to **bool** | A flag to indicate whether ACH transactions are enabled. | [optional] 
+**IsEftCaEnabled** | Pointer to **bool** | A flag to indicate whether EFT Canada transactions are enabled. | [optional] 
+**IsP2pEnabled** | Pointer to **bool** | A flag to indicate whether P2P transactions are enabled. | [optional] 
+**IsSyncteraPayEnabled** | Pointer to **bool** | A flag to indicate whether Synctera Pay transactions are enabled. | [optional] 
+**IsWireEnabled** | Pointer to **bool** | A flag to indicate whether wire transactions are enabled. | [optional] 
 **AccessStatus** | Pointer to [**AccountAccessStatus**](AccountAccessStatus.md) |  | [optional] 
 **AccountNumber** | Pointer to **string** | Account number | [optional] [readonly] 
 **AccountNumberMasked** | Pointer to **string** | The response will contain the bank fintech ID (3 or 6 digits) plus the last 4 digits, with the digits in between replaced with * characters. Shadow mode account numbers will not be masked. | [optional] [readonly] 
@@ -20,22 +25,17 @@ Name | Type | Description | Notes
 **Iban** | Pointer to **string** | International bank account number | [optional] 
 **Id** | Pointer to **string** | Account ID | [optional] [readonly] 
 **IsAccountPool** | Pointer to **bool** | Account is investment (variable balance) account or a multi-balance account pool. Default false | [optional] 
-**IsAchEnabled** | Pointer to **bool** | A flag to indicate whether ACH transactions are enabled. | [optional] [readonly] 
-**IsCardEnabled** | Pointer to **bool** | A flag to indicate whether card transactions are enabled. | [optional] [readonly] 
-**IsP2pEnabled** | Pointer to **bool** | A flag to indicate whether P2P transactions are enabled. | [optional] [readonly] 
-**IsWireEnabled** | Pointer to **bool** | A flag to indicate whether wire transactions are enabled. | [optional] [readonly] 
+**IsSarEnabled** | Pointer to **bool** | A flag to indicate whether SAR generation is enabled. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to **time.Time** | Timestamp of the last account modification in RFC3339 format | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | User provided account metadata | [optional] 
 **Nickname** | Pointer to **string** | User provided account nickname | [optional] 
-**Status** | Pointer to [**Status**](Status.md) |  | [optional] 
+**Status** | Pointer to [**AccountStatus**](AccountStatus.md) |  | [optional] 
 **SwiftCode** | Pointer to **string** | SWIFT code | [optional] 
-**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
-**ChargeoffPeriod** | Pointer to **int32** | The number of days an account can stay delinquent before marking an account as charged-off.  | [optional] [default to 90]
 **CreditLimit** | Pointer to **int64** | The credit limit for this line of credit account in cents. Minimum is 0.  | [optional] 
-**DelinquencyPeriod** | Pointer to **int32** | The number of days past the due date to wait for a minimum payment before marking an account as delinquent.  | [optional] [default to 30]
-**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment.  | [optional] 
+**GracePeriod** | Pointer to **int32** | The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment. The default will be set to 21 days.  | [optional] 
 **InterestProductId** | Pointer to **string** | An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_DAILY.  | [optional] 
 **MinimumPayment** | Pointer to [**MinimumPaymentPartial**](MinimumPaymentPartial.md) |  | [optional] 
+**Note** | Pointer to **string** | Add an optional note when creating or updating an account. A note is required when updating the status to or from SUSPENDED | [optional] 
 
 ## Methods
 
@@ -55,6 +55,131 @@ will change when the set of required properties is changed
 NewAccountLineOfCreditWithDefaults instantiates a new AccountLineOfCredit object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetIsAchEnabled
+
+`func (o *AccountLineOfCredit) GetIsAchEnabled() bool`
+
+GetIsAchEnabled returns the IsAchEnabled field if non-nil, zero value otherwise.
+
+### GetIsAchEnabledOk
+
+`func (o *AccountLineOfCredit) GetIsAchEnabledOk() (*bool, bool)`
+
+GetIsAchEnabledOk returns a tuple with the IsAchEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsAchEnabled
+
+`func (o *AccountLineOfCredit) SetIsAchEnabled(v bool)`
+
+SetIsAchEnabled sets IsAchEnabled field to given value.
+
+### HasIsAchEnabled
+
+`func (o *AccountLineOfCredit) HasIsAchEnabled() bool`
+
+HasIsAchEnabled returns a boolean if a field has been set.
+
+### GetIsEftCaEnabled
+
+`func (o *AccountLineOfCredit) GetIsEftCaEnabled() bool`
+
+GetIsEftCaEnabled returns the IsEftCaEnabled field if non-nil, zero value otherwise.
+
+### GetIsEftCaEnabledOk
+
+`func (o *AccountLineOfCredit) GetIsEftCaEnabledOk() (*bool, bool)`
+
+GetIsEftCaEnabledOk returns a tuple with the IsEftCaEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsEftCaEnabled
+
+`func (o *AccountLineOfCredit) SetIsEftCaEnabled(v bool)`
+
+SetIsEftCaEnabled sets IsEftCaEnabled field to given value.
+
+### HasIsEftCaEnabled
+
+`func (o *AccountLineOfCredit) HasIsEftCaEnabled() bool`
+
+HasIsEftCaEnabled returns a boolean if a field has been set.
+
+### GetIsP2pEnabled
+
+`func (o *AccountLineOfCredit) GetIsP2pEnabled() bool`
+
+GetIsP2pEnabled returns the IsP2pEnabled field if non-nil, zero value otherwise.
+
+### GetIsP2pEnabledOk
+
+`func (o *AccountLineOfCredit) GetIsP2pEnabledOk() (*bool, bool)`
+
+GetIsP2pEnabledOk returns a tuple with the IsP2pEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsP2pEnabled
+
+`func (o *AccountLineOfCredit) SetIsP2pEnabled(v bool)`
+
+SetIsP2pEnabled sets IsP2pEnabled field to given value.
+
+### HasIsP2pEnabled
+
+`func (o *AccountLineOfCredit) HasIsP2pEnabled() bool`
+
+HasIsP2pEnabled returns a boolean if a field has been set.
+
+### GetIsSyncteraPayEnabled
+
+`func (o *AccountLineOfCredit) GetIsSyncteraPayEnabled() bool`
+
+GetIsSyncteraPayEnabled returns the IsSyncteraPayEnabled field if non-nil, zero value otherwise.
+
+### GetIsSyncteraPayEnabledOk
+
+`func (o *AccountLineOfCredit) GetIsSyncteraPayEnabledOk() (*bool, bool)`
+
+GetIsSyncteraPayEnabledOk returns a tuple with the IsSyncteraPayEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSyncteraPayEnabled
+
+`func (o *AccountLineOfCredit) SetIsSyncteraPayEnabled(v bool)`
+
+SetIsSyncteraPayEnabled sets IsSyncteraPayEnabled field to given value.
+
+### HasIsSyncteraPayEnabled
+
+`func (o *AccountLineOfCredit) HasIsSyncteraPayEnabled() bool`
+
+HasIsSyncteraPayEnabled returns a boolean if a field has been set.
+
+### GetIsWireEnabled
+
+`func (o *AccountLineOfCredit) GetIsWireEnabled() bool`
+
+GetIsWireEnabled returns the IsWireEnabled field if non-nil, zero value otherwise.
+
+### GetIsWireEnabledOk
+
+`func (o *AccountLineOfCredit) GetIsWireEnabledOk() (*bool, bool)`
+
+GetIsWireEnabledOk returns a tuple with the IsWireEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsWireEnabled
+
+`func (o *AccountLineOfCredit) SetIsWireEnabled(v bool)`
+
+SetIsWireEnabled sets IsWireEnabled field to given value.
+
+### HasIsWireEnabled
+
+`func (o *AccountLineOfCredit) HasIsWireEnabled() bool`
+
+HasIsWireEnabled returns a boolean if a field has been set.
 
 ### GetAccessStatus
 
@@ -456,105 +581,30 @@ SetIsAccountPool sets IsAccountPool field to given value.
 
 HasIsAccountPool returns a boolean if a field has been set.
 
-### GetIsAchEnabled
+### GetIsSarEnabled
 
-`func (o *AccountLineOfCredit) GetIsAchEnabled() bool`
+`func (o *AccountLineOfCredit) GetIsSarEnabled() bool`
 
-GetIsAchEnabled returns the IsAchEnabled field if non-nil, zero value otherwise.
+GetIsSarEnabled returns the IsSarEnabled field if non-nil, zero value otherwise.
 
-### GetIsAchEnabledOk
+### GetIsSarEnabledOk
 
-`func (o *AccountLineOfCredit) GetIsAchEnabledOk() (*bool, bool)`
+`func (o *AccountLineOfCredit) GetIsSarEnabledOk() (*bool, bool)`
 
-GetIsAchEnabledOk returns a tuple with the IsAchEnabled field if it's non-nil, zero value otherwise
+GetIsSarEnabledOk returns a tuple with the IsSarEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIsAchEnabled
+### SetIsSarEnabled
 
-`func (o *AccountLineOfCredit) SetIsAchEnabled(v bool)`
+`func (o *AccountLineOfCredit) SetIsSarEnabled(v bool)`
 
-SetIsAchEnabled sets IsAchEnabled field to given value.
+SetIsSarEnabled sets IsSarEnabled field to given value.
 
-### HasIsAchEnabled
+### HasIsSarEnabled
 
-`func (o *AccountLineOfCredit) HasIsAchEnabled() bool`
+`func (o *AccountLineOfCredit) HasIsSarEnabled() bool`
 
-HasIsAchEnabled returns a boolean if a field has been set.
-
-### GetIsCardEnabled
-
-`func (o *AccountLineOfCredit) GetIsCardEnabled() bool`
-
-GetIsCardEnabled returns the IsCardEnabled field if non-nil, zero value otherwise.
-
-### GetIsCardEnabledOk
-
-`func (o *AccountLineOfCredit) GetIsCardEnabledOk() (*bool, bool)`
-
-GetIsCardEnabledOk returns a tuple with the IsCardEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsCardEnabled
-
-`func (o *AccountLineOfCredit) SetIsCardEnabled(v bool)`
-
-SetIsCardEnabled sets IsCardEnabled field to given value.
-
-### HasIsCardEnabled
-
-`func (o *AccountLineOfCredit) HasIsCardEnabled() bool`
-
-HasIsCardEnabled returns a boolean if a field has been set.
-
-### GetIsP2pEnabled
-
-`func (o *AccountLineOfCredit) GetIsP2pEnabled() bool`
-
-GetIsP2pEnabled returns the IsP2pEnabled field if non-nil, zero value otherwise.
-
-### GetIsP2pEnabledOk
-
-`func (o *AccountLineOfCredit) GetIsP2pEnabledOk() (*bool, bool)`
-
-GetIsP2pEnabledOk returns a tuple with the IsP2pEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsP2pEnabled
-
-`func (o *AccountLineOfCredit) SetIsP2pEnabled(v bool)`
-
-SetIsP2pEnabled sets IsP2pEnabled field to given value.
-
-### HasIsP2pEnabled
-
-`func (o *AccountLineOfCredit) HasIsP2pEnabled() bool`
-
-HasIsP2pEnabled returns a boolean if a field has been set.
-
-### GetIsWireEnabled
-
-`func (o *AccountLineOfCredit) GetIsWireEnabled() bool`
-
-GetIsWireEnabled returns the IsWireEnabled field if non-nil, zero value otherwise.
-
-### GetIsWireEnabledOk
-
-`func (o *AccountLineOfCredit) GetIsWireEnabledOk() (*bool, bool)`
-
-GetIsWireEnabledOk returns a tuple with the IsWireEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsWireEnabled
-
-`func (o *AccountLineOfCredit) SetIsWireEnabled(v bool)`
-
-SetIsWireEnabled sets IsWireEnabled field to given value.
-
-### HasIsWireEnabled
-
-`func (o *AccountLineOfCredit) HasIsWireEnabled() bool`
-
-HasIsWireEnabled returns a boolean if a field has been set.
+HasIsSarEnabled returns a boolean if a field has been set.
 
 ### GetLastUpdatedTime
 
@@ -633,20 +683,20 @@ HasNickname returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *AccountLineOfCredit) GetStatus() Status`
+`func (o *AccountLineOfCredit) GetStatus() AccountStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *AccountLineOfCredit) GetStatusOk() (*Status, bool)`
+`func (o *AccountLineOfCredit) GetStatusOk() (*AccountStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *AccountLineOfCredit) SetStatus(v Status)`
+`func (o *AccountLineOfCredit) SetStatus(v AccountStatus)`
 
 SetStatus sets Status field to given value.
 
@@ -681,56 +731,6 @@ SetSwiftCode sets SwiftCode field to given value.
 
 HasSwiftCode returns a boolean if a field has been set.
 
-### GetTenant
-
-`func (o *AccountLineOfCredit) GetTenant() string`
-
-GetTenant returns the Tenant field if non-nil, zero value otherwise.
-
-### GetTenantOk
-
-`func (o *AccountLineOfCredit) GetTenantOk() (*string, bool)`
-
-GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTenant
-
-`func (o *AccountLineOfCredit) SetTenant(v string)`
-
-SetTenant sets Tenant field to given value.
-
-### HasTenant
-
-`func (o *AccountLineOfCredit) HasTenant() bool`
-
-HasTenant returns a boolean if a field has been set.
-
-### GetChargeoffPeriod
-
-`func (o *AccountLineOfCredit) GetChargeoffPeriod() int32`
-
-GetChargeoffPeriod returns the ChargeoffPeriod field if non-nil, zero value otherwise.
-
-### GetChargeoffPeriodOk
-
-`func (o *AccountLineOfCredit) GetChargeoffPeriodOk() (*int32, bool)`
-
-GetChargeoffPeriodOk returns a tuple with the ChargeoffPeriod field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChargeoffPeriod
-
-`func (o *AccountLineOfCredit) SetChargeoffPeriod(v int32)`
-
-SetChargeoffPeriod sets ChargeoffPeriod field to given value.
-
-### HasChargeoffPeriod
-
-`func (o *AccountLineOfCredit) HasChargeoffPeriod() bool`
-
-HasChargeoffPeriod returns a boolean if a field has been set.
-
 ### GetCreditLimit
 
 `func (o *AccountLineOfCredit) GetCreditLimit() int64`
@@ -755,31 +755,6 @@ SetCreditLimit sets CreditLimit field to given value.
 `func (o *AccountLineOfCredit) HasCreditLimit() bool`
 
 HasCreditLimit returns a boolean if a field has been set.
-
-### GetDelinquencyPeriod
-
-`func (o *AccountLineOfCredit) GetDelinquencyPeriod() int32`
-
-GetDelinquencyPeriod returns the DelinquencyPeriod field if non-nil, zero value otherwise.
-
-### GetDelinquencyPeriodOk
-
-`func (o *AccountLineOfCredit) GetDelinquencyPeriodOk() (*int32, bool)`
-
-GetDelinquencyPeriodOk returns a tuple with the DelinquencyPeriod field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDelinquencyPeriod
-
-`func (o *AccountLineOfCredit) SetDelinquencyPeriod(v int32)`
-
-SetDelinquencyPeriod sets DelinquencyPeriod field to given value.
-
-### HasDelinquencyPeriod
-
-`func (o *AccountLineOfCredit) HasDelinquencyPeriod() bool`
-
-HasDelinquencyPeriod returns a boolean if a field has been set.
 
 ### GetGracePeriod
 
@@ -855,6 +830,31 @@ SetMinimumPayment sets MinimumPayment field to given value.
 `func (o *AccountLineOfCredit) HasMinimumPayment() bool`
 
 HasMinimumPayment returns a boolean if a field has been set.
+
+### GetNote
+
+`func (o *AccountLineOfCredit) GetNote() string`
+
+GetNote returns the Note field if non-nil, zero value otherwise.
+
+### GetNoteOk
+
+`func (o *AccountLineOfCredit) GetNoteOk() (*string, bool)`
+
+GetNoteOk returns a tuple with the Note field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNote
+
+`func (o *AccountLineOfCredit) SetNote(v string)`
+
+SetNote sets Note field to given value.
+
+### HasNote
+
+`func (o *AccountLineOfCredit) HasNote() bool`
+
+HasNote returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

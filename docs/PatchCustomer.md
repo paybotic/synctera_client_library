@@ -4,15 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BanStatus** | Pointer to [**BanStatus**](BanStatus.md) |  | [optional] 
 **Dob** | Pointer to **string** | Customer&#39;s date of birth in RFC 3339 full-date format (YYYY-MM-DD) | [optional] 
 **Email** | Pointer to **string** | Customer&#39;s email | [optional] 
 **FirstName** | Pointer to **string** | Customer&#39;s first name | [optional] 
 **LastName** | Pointer to **string** | Customer&#39;s last name | [optional] 
-**LegalAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
+**LegalAddress** | Pointer to [**LegalAddress**](LegalAddress.md) |  | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** | User-supplied JSON format metadata. Do not use to store PII. | [optional] 
 **MiddleName** | Pointer to **string** | Customer&#39;s middle name | [optional] 
+**Note** | Pointer to **string** | Add an optional note when creating or updating a customer. A note is required when updating a customers&#39;s ban_status between SUSPENDED and ALLOWED. | [optional] 
 **PhoneNumber** | Pointer to **string** | Customer&#39;s mobile phone number with country code in E.164 format. Must have a valid country code. Area code and local phone number are not validated. | [optional] 
-**ShippingAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
+**ShippingAddress** | Pointer to [**ShippingAddress**](ShippingAddress.md) |  | [optional] 
 **Ssn** | Pointer to **string** | Customer&#39;s full tax ID eg SSN formatted with hyphens. This optional parameter is required when running KYC on a customer. Must be compiled with ^\\d{3}-\\d{2}-\\d{4}$. Response contains the last 4 digits only (e.g. 6789). | [optional] 
 **Status** | Pointer to **string** | Customer&#39;s status | [optional] 
 
@@ -34,6 +36,31 @@ will change when the set of required properties is changed
 NewPatchCustomerWithDefaults instantiates a new PatchCustomer object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBanStatus
+
+`func (o *PatchCustomer) GetBanStatus() BanStatus`
+
+GetBanStatus returns the BanStatus field if non-nil, zero value otherwise.
+
+### GetBanStatusOk
+
+`func (o *PatchCustomer) GetBanStatusOk() (*BanStatus, bool)`
+
+GetBanStatusOk returns a tuple with the BanStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBanStatus
+
+`func (o *PatchCustomer) SetBanStatus(v BanStatus)`
+
+SetBanStatus sets BanStatus field to given value.
+
+### HasBanStatus
+
+`func (o *PatchCustomer) HasBanStatus() bool`
+
+HasBanStatus returns a boolean if a field has been set.
 
 ### GetDob
 
@@ -137,20 +164,20 @@ HasLastName returns a boolean if a field has been set.
 
 ### GetLegalAddress
 
-`func (o *PatchCustomer) GetLegalAddress() Address`
+`func (o *PatchCustomer) GetLegalAddress() LegalAddress`
 
 GetLegalAddress returns the LegalAddress field if non-nil, zero value otherwise.
 
 ### GetLegalAddressOk
 
-`func (o *PatchCustomer) GetLegalAddressOk() (*Address, bool)`
+`func (o *PatchCustomer) GetLegalAddressOk() (*LegalAddress, bool)`
 
 GetLegalAddressOk returns a tuple with the LegalAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLegalAddress
 
-`func (o *PatchCustomer) SetLegalAddress(v Address)`
+`func (o *PatchCustomer) SetLegalAddress(v LegalAddress)`
 
 SetLegalAddress sets LegalAddress field to given value.
 
@@ -210,6 +237,31 @@ SetMiddleName sets MiddleName field to given value.
 
 HasMiddleName returns a boolean if a field has been set.
 
+### GetNote
+
+`func (o *PatchCustomer) GetNote() string`
+
+GetNote returns the Note field if non-nil, zero value otherwise.
+
+### GetNoteOk
+
+`func (o *PatchCustomer) GetNoteOk() (*string, bool)`
+
+GetNoteOk returns a tuple with the Note field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNote
+
+`func (o *PatchCustomer) SetNote(v string)`
+
+SetNote sets Note field to given value.
+
+### HasNote
+
+`func (o *PatchCustomer) HasNote() bool`
+
+HasNote returns a boolean if a field has been set.
+
 ### GetPhoneNumber
 
 `func (o *PatchCustomer) GetPhoneNumber() string`
@@ -237,20 +289,20 @@ HasPhoneNumber returns a boolean if a field has been set.
 
 ### GetShippingAddress
 
-`func (o *PatchCustomer) GetShippingAddress() Address`
+`func (o *PatchCustomer) GetShippingAddress() ShippingAddress`
 
 GetShippingAddress returns the ShippingAddress field if non-nil, zero value otherwise.
 
 ### GetShippingAddressOk
 
-`func (o *PatchCustomer) GetShippingAddressOk() (*Address, bool)`
+`func (o *PatchCustomer) GetShippingAddressOk() (*ShippingAddress, bool)`
 
 GetShippingAddressOk returns a tuple with the ShippingAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetShippingAddress
 
-`func (o *PatchCustomer) SetShippingAddress(v Address)`
+`func (o *PatchCustomer) SetShippingAddress(v ShippingAddress)`
 
 SetShippingAddress sets ShippingAddress field to given value.
 

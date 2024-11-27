@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -19,13 +19,12 @@ import (
 	"strings"
 )
 
-
 // ReconciliationsApiService ReconciliationsApi service
 type ReconciliationsApiService service
 
 type ApiCreateReconciliationRequest struct {
-	ctx context.Context
-	ApiService *ReconciliationsApiService
+	ctx                 context.Context
+	ApiService          *ReconciliationsApiService
 	reconciliationInput *ReconciliationInput
 }
 
@@ -42,27 +41,27 @@ func (r ApiCreateReconciliationRequest) Execute() (*Reconciliation, *http.Respon
 /*
 CreateReconciliation Create a reconciliation
 
-Create a new reconciliation job
+# Create a new reconciliation job
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateReconciliationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateReconciliationRequest
 */
 func (a *ReconciliationsApiService) CreateReconciliation(ctx context.Context) ApiCreateReconciliationRequest {
 	return ApiCreateReconciliationRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return Reconciliation
+//
+//	@return Reconciliation
 func (a *ReconciliationsApiService) CreateReconciliationExecute(r ApiCreateReconciliationRequest) (*Reconciliation, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Reconciliation
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Reconciliation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReconciliationsApiService.CreateReconciliation")
@@ -172,8 +171,8 @@ func (a *ReconciliationsApiService) CreateReconciliationExecute(r ApiCreateRecon
 }
 
 type ApiGetReconciliationRequest struct {
-	ctx context.Context
-	ApiService *ReconciliationsApiService
+	ctx              context.Context
+	ApiService       *ReconciliationsApiService
 	reconciliationId string
 }
 
@@ -186,26 +185,27 @@ GetReconciliation Get reconciliation
 
 Retrieves one reconciliation by id
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param reconciliationId Reconciliation id
- @return ApiGetReconciliationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param reconciliationId Reconciliation id
+	@return ApiGetReconciliationRequest
 */
 func (a *ReconciliationsApiService) GetReconciliation(ctx context.Context, reconciliationId string) ApiGetReconciliationRequest {
 	return ApiGetReconciliationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:       a,
+		ctx:              ctx,
 		reconciliationId: reconciliationId,
 	}
 }
 
 // Execute executes the request
-//  @return Reconciliation
+//
+//	@return Reconciliation
 func (a *ReconciliationsApiService) GetReconciliationExecute(r ApiGetReconciliationRequest) (*Reconciliation, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Reconciliation
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Reconciliation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReconciliationsApiService.GetReconciliation")
@@ -304,10 +304,10 @@ func (a *ReconciliationsApiService) GetReconciliationExecute(r ApiGetReconciliat
 }
 
 type ApiListReconciliationsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ReconciliationsApiService
-	limit *int32
-	pageToken *string
+	limit      *int32
+	pageToken  *string
 }
 
 func (r ApiListReconciliationsRequest) Limit(limit int32) ApiListReconciliationsRequest {
@@ -329,24 +329,25 @@ ListReconciliations List reconciliations
 
 Retrieves paginated list of reconciliations
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListReconciliationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListReconciliationsRequest
 */
 func (a *ReconciliationsApiService) ListReconciliations(ctx context.Context) ApiListReconciliationsRequest {
 	return ApiListReconciliationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ReconciliationList
+//
+//	@return ReconciliationList
 func (a *ReconciliationsApiService) ListReconciliationsExecute(r ApiListReconciliationsRequest) (*ReconciliationList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReconciliationList
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReconciliationList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReconciliationsApiService.ListReconciliations")

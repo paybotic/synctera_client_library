@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Event** | Pointer to [**EventType1**](EventType1.md) |  | [optional] 
+**Event** | Pointer to [**EventType**](EventType.md) |  | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetEvent
 
-`func (o *TriggerEventRequest) GetEvent() EventType1`
+`func (o *TriggerEventRequest) GetEvent() EventType`
 
 GetEvent returns the Event field if non-nil, zero value otherwise.
 
 ### GetEventOk
 
-`func (o *TriggerEventRequest) GetEventOk() (*EventType1, bool)`
+`func (o *TriggerEventRequest) GetEventOk() (*EventType, bool)`
 
 GetEventOk returns a tuple with the Event field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEvent
 
-`func (o *TriggerEventRequest) SetEvent(v EventType1)`
+`func (o *TriggerEventRequest) SetEvent(v EventType)`
 
 SetEvent sets Event field to given value.
 

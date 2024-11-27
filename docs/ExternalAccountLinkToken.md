@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **CountryCodes** | **[]string** | Country codes in the ISO-3166-1 alpha-2 country code standard. | 
 **CustomerId** | Pointer to **string** | The identifier for the personal customer associated with this external account. Exactly one of &#x60;customer_id&#x60; or &#x60;business_id&#x60; must be specified.  | [optional] 
 **Expiration** | Pointer to **time.Time** | The expiration date for the link_token. Expires in 4 hours. | [optional] [readonly] 
-**Language** | **string** | The language that corresponds to the link token. For Plaid, see their [documentation](https://plaid.com/docs/api/tokens/#link-token-create-request-language) for a list of allowed values.  | 
+**Language** | [**ExternalAccountLanguage**](ExternalAccountLanguage.md) |  | 
 **LinkCustomizationName** | Pointer to **string** | The name of the Link customization from the Plaid Dashboard to be applied to Link. If not specified, the default customization will be used. When using a Link customization, the language in the customization must match the language selected via the language parameter, and the countries in the customization should match the country codes selected via country_codes.  | [optional] 
 **LinkToken** | Pointer to **string** | A link_token, which can be supplied to Link in order to initialize it and receive a public_token, which can be exchanged for an access_token.  | [optional] [readonly] 
 **RedirectUri** | Pointer to **string** | A URI indicating the destination where a user should be forwarded after completing the Link flow; used to support OAuth authentication flows when launching Link in the browser or via a webview.  | [optional] 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewExternalAccountLinkToken
 
-`func NewExternalAccountLinkToken(clientName string, countryCodes []string, language string, type_ string, ) *ExternalAccountLinkToken`
+`func NewExternalAccountLinkToken(clientName string, countryCodes []string, language ExternalAccountLanguage, type_ string, ) *ExternalAccountLinkToken`
 
 NewExternalAccountLinkToken instantiates a new ExternalAccountLinkToken object
 This constructor will assign default values to properties that have it defined,
@@ -156,20 +156,20 @@ HasExpiration returns a boolean if a field has been set.
 
 ### GetLanguage
 
-`func (o *ExternalAccountLinkToken) GetLanguage() string`
+`func (o *ExternalAccountLinkToken) GetLanguage() ExternalAccountLanguage`
 
 GetLanguage returns the Language field if non-nil, zero value otherwise.
 
 ### GetLanguageOk
 
-`func (o *ExternalAccountLinkToken) GetLanguageOk() (*string, bool)`
+`func (o *ExternalAccountLinkToken) GetLanguageOk() (*ExternalAccountLanguage, bool)`
 
 GetLanguageOk returns a tuple with the Language field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLanguage
 
-`func (o *ExternalAccountLinkToken) SetLanguage(v string)`
+`func (o *ExternalAccountLinkToken) SetLanguage(v ExternalAccountLanguage)`
 
 SetLanguage sets Language field to given value.
 

@@ -6,15 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ContentType** | **string** | Describes the content-type encoding received from the vendor. | 
 **Details** | Pointer to [**[]VerificationVendorInfoDetail**](VerificationVendorInfoDetail.md) | Array of vendor specific information. | [optional] [readonly] 
-**Json** | **map[string]interface{}** | Data representation in JSON. | 
 **Vendor** | **string** | Name of the vendor used. | 
 **Xml** | **string** | Data representaion in XML. | 
+**Json** | **map[string]interface{}** | Data representation in JSON. | 
 
 ## Methods
 
 ### NewVerificationVendorInfo
 
-`func NewVerificationVendorInfo(contentType string, json map[string]interface{}, vendor string, xml string, ) *VerificationVendorInfo`
+`func NewVerificationVendorInfo(contentType string, vendor string, xml string, json map[string]interface{}, ) *VerificationVendorInfo`
 
 NewVerificationVendorInfo instantiates a new VerificationVendorInfo object
 This constructor will assign default values to properties that have it defined,
@@ -74,26 +74,6 @@ SetDetails sets Details field to given value.
 
 HasDetails returns a boolean if a field has been set.
 
-### GetJson
-
-`func (o *VerificationVendorInfo) GetJson() map[string]interface{}`
-
-GetJson returns the Json field if non-nil, zero value otherwise.
-
-### GetJsonOk
-
-`func (o *VerificationVendorInfo) GetJsonOk() (*map[string]interface{}, bool)`
-
-GetJsonOk returns a tuple with the Json field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetJson
-
-`func (o *VerificationVendorInfo) SetJson(v map[string]interface{})`
-
-SetJson sets Json field to given value.
-
-
 ### GetVendor
 
 `func (o *VerificationVendorInfo) GetVendor() string`
@@ -132,6 +112,26 @@ and a boolean to check if the value has been set.
 `func (o *VerificationVendorInfo) SetXml(v string)`
 
 SetXml sets Xml field to given value.
+
+
+### GetJson
+
+`func (o *VerificationVendorInfo) GetJson() map[string]interface{}`
+
+GetJson returns the Json field if non-nil, zero value otherwise.
+
+### GetJsonOk
+
+`func (o *VerificationVendorInfo) GetJsonOk() (*map[string]interface{}, bool)`
+
+GetJsonOk returns a tuple with the Json field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJson
+
+`func (o *VerificationVendorInfo) SetJson(v map[string]interface{})`
+
+SetJson sets Json field to given value.
 
 
 

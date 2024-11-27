@@ -4,17 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BusinessId** | Pointer to **string** | Business associated with the current account | [optional] 
-**CustomerId** | Pointer to **string** | Personal customer associated with the current account. | [optional] 
-**Id** | Pointer to **string** | ID of account relationship | [optional] [readonly] 
-**PersonId** | Pointer to **string** | Person associated with the current account. This attribute is deprecated and will be removed in a future API version. Use customer_id instead. | [optional] 
-**RelationshipType** | [**AccountRelationshipType**](AccountRelationshipType.md) |  | 
+**Id** | **string** | ID of related entity | 
+**RelationshipRole** | [**RelationshipRole**](RelationshipRole.md) |  | 
 
 ## Methods
 
 ### NewRelationship
 
-`func NewRelationship(relationshipType AccountRelationshipType, ) *Relationship`
+`func NewRelationship(id string, relationshipRole RelationshipRole, ) *Relationship`
 
 NewRelationship instantiates a new Relationship object
 This constructor will assign default values to properties that have it defined,
@@ -28,56 +25,6 @@ will change when the set of required properties is changed
 NewRelationshipWithDefaults instantiates a new Relationship object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetBusinessId
-
-`func (o *Relationship) GetBusinessId() string`
-
-GetBusinessId returns the BusinessId field if non-nil, zero value otherwise.
-
-### GetBusinessIdOk
-
-`func (o *Relationship) GetBusinessIdOk() (*string, bool)`
-
-GetBusinessIdOk returns a tuple with the BusinessId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBusinessId
-
-`func (o *Relationship) SetBusinessId(v string)`
-
-SetBusinessId sets BusinessId field to given value.
-
-### HasBusinessId
-
-`func (o *Relationship) HasBusinessId() bool`
-
-HasBusinessId returns a boolean if a field has been set.
-
-### GetCustomerId
-
-`func (o *Relationship) GetCustomerId() string`
-
-GetCustomerId returns the CustomerId field if non-nil, zero value otherwise.
-
-### GetCustomerIdOk
-
-`func (o *Relationship) GetCustomerIdOk() (*string, bool)`
-
-GetCustomerIdOk returns a tuple with the CustomerId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomerId
-
-`func (o *Relationship) SetCustomerId(v string)`
-
-SetCustomerId sets CustomerId field to given value.
-
-### HasCustomerId
-
-`func (o *Relationship) HasCustomerId() bool`
-
-HasCustomerId returns a boolean if a field has been set.
 
 ### GetId
 
@@ -98,55 +45,25 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
 
-`func (o *Relationship) HasId() bool`
+### GetRelationshipRole
 
-HasId returns a boolean if a field has been set.
+`func (o *Relationship) GetRelationshipRole() RelationshipRole`
 
-### GetPersonId
+GetRelationshipRole returns the RelationshipRole field if non-nil, zero value otherwise.
 
-`func (o *Relationship) GetPersonId() string`
+### GetRelationshipRoleOk
 
-GetPersonId returns the PersonId field if non-nil, zero value otherwise.
+`func (o *Relationship) GetRelationshipRoleOk() (*RelationshipRole, bool)`
 
-### GetPersonIdOk
-
-`func (o *Relationship) GetPersonIdOk() (*string, bool)`
-
-GetPersonIdOk returns a tuple with the PersonId field if it's non-nil, zero value otherwise
+GetRelationshipRoleOk returns a tuple with the RelationshipRole field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPersonId
+### SetRelationshipRole
 
-`func (o *Relationship) SetPersonId(v string)`
+`func (o *Relationship) SetRelationshipRole(v RelationshipRole)`
 
-SetPersonId sets PersonId field to given value.
-
-### HasPersonId
-
-`func (o *Relationship) HasPersonId() bool`
-
-HasPersonId returns a boolean if a field has been set.
-
-### GetRelationshipType
-
-`func (o *Relationship) GetRelationshipType() AccountRelationshipType`
-
-GetRelationshipType returns the RelationshipType field if non-nil, zero value otherwise.
-
-### GetRelationshipTypeOk
-
-`func (o *Relationship) GetRelationshipTypeOk() (*AccountRelationshipType, bool)`
-
-GetRelationshipTypeOk returns a tuple with the RelationshipType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRelationshipType
-
-`func (o *Relationship) SetRelationshipType(v AccountRelationshipType)`
-
-SetRelationshipType sets RelationshipType field to given value.
+SetRelationshipRole sets RelationshipRole field to given value.
 
 
 

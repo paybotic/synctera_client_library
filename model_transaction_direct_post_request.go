@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -26,7 +26,7 @@ type TransactionDirectPostRequest struct {
 	Amount int64 `json:"amount"`
 	// ISO 4217 alphabetic currency code of the transfer amount
 	Currency string `json:"currency"`
-	DcSign DcSign `json:"dc_sign"`
+	DcSign   DcSign `json:"dc_sign"`
 	// The description of the transaction
 	Description *string `json:"description,omitempty"`
 	// The effective date of the transaction once it gets posted
@@ -808,5 +808,3 @@ func (v *NullableTransactionDirectPostRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

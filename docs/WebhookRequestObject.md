@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **EventTime** | **time.Time** | Timestamp of the current event raised | 
 **Id** | **string** | The unique ID of the current event | 
 **Metadata** | **string** | Metadata that stored in the webhook subscription | 
+**ResourceId** | Pointer to **string** | The ID of the resource this event occurred on, if available. | [optional] [readonly] 
 **ResponseHistory** | Pointer to [**[]ResponseHistoryItem**](ResponseHistoryItem.md) | Response history of the webhook request | [optional] 
 **Status** | Pointer to **string** | Current event status. Failing event will keep retry until it is purged. | [optional] 
 **Type** | [**EventTypeExplicit**](EventTypeExplicit.md) |  | 
@@ -143,6 +144,31 @@ and a boolean to check if the value has been set.
 
 SetMetadata sets Metadata field to given value.
 
+
+### GetResourceId
+
+`func (o *WebhookRequestObject) GetResourceId() string`
+
+GetResourceId returns the ResourceId field if non-nil, zero value otherwise.
+
+### GetResourceIdOk
+
+`func (o *WebhookRequestObject) GetResourceIdOk() (*string, bool)`
+
+GetResourceIdOk returns a tuple with the ResourceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourceId
+
+`func (o *WebhookRequestObject) SetResourceId(v string)`
+
+SetResourceId sets ResourceId field to given value.
+
+### HasResourceId
+
+`func (o *WebhookRequestObject) HasResourceId() bool`
+
+HasResourceId returns a boolean if a field has been set.
 
 ### GetResponseHistory
 

@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -19,50 +19,49 @@ import (
 	"strings"
 )
 
-
 // SpendControlsBetaApiService SpendControlsBetaApi service
 type SpendControlsBetaApiService service
 
-type ApiCreateSpendControlRequest struct {
-	ctx context.Context
-	ApiService *SpendControlsBetaApiService
-	spendControl *SpendControl
+type ApiCreateSpendControlBetaRequest struct {
+	ctx                  context.Context
+	ApiService           *SpendControlsBetaApiService
+	spendControlRequest *SpendControlRequest
 }
 
 // Details of the spend control to create
-func (r ApiCreateSpendControlRequest) SpendControl(spendControl SpendControl) ApiCreateSpendControlRequest {
-	r.spendControl = &spendControl
+func (r ApiCreateSpendControlBetaRequest) SpendControlRequest(spendControlRequest SpendControlRequest) ApiCreateSpendControlBetaRequest {
+	r.spendControlRequest = &spendControlRequest
 	return r
 }
 
-func (r ApiCreateSpendControlRequest) Execute() (*SpendControlResponse, *http.Response, error) {
+func (r ApiCreateSpendControlBetaRequest) Execute() (*SpendControlResponse, *http.Response, error) {
 	return r.ApiService.CreateSpendControlExecute(r)
 }
 
 /*
 CreateSpendControl Create Spend Control
 
-Create a spend control
+# Create a spend control
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSpendControlRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSpendControlBetaRequest
 */
-func (a *SpendControlsBetaApiService) CreateSpendControl(ctx context.Context) ApiCreateSpendControlRequest {
-	return ApiCreateSpendControlRequest{
+func (a *SpendControlsBetaApiService) CreateSpendControl(ctx context.Context) ApiCreateSpendControlBetaRequest {
+	return ApiCreateSpendControlBetaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return SpendControlResponse
-func (a *SpendControlsBetaApiService) CreateSpendControlExecute(r ApiCreateSpendControlRequest) (*SpendControlResponse, *http.Response, error) {
+//
+//	@return SpendControlResponse
+func (a *SpendControlsBetaApiService) CreateSpendControlExecute(r ApiCreateSpendControlBetaRequest) (*SpendControlResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SpendControlResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SpendControlResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SpendControlsBetaApiService.CreateSpendControl")
@@ -75,8 +74,8 @@ func (a *SpendControlsBetaApiService) CreateSpendControlExecute(r ApiCreateSpend
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.spendControl == nil {
-		return localVarReturnValue, nil, reportError("spendControl is required and must be specified")
+	if r.spendControlRequest == nil {
+		return localVarReturnValue, nil, reportError("spendControlRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -97,7 +96,7 @@ func (a *SpendControlsBetaApiService) CreateSpendControlExecute(r ApiCreateSpend
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.spendControl
+	localVarPostBody = r.spendControlRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -184,42 +183,42 @@ func (a *SpendControlsBetaApiService) CreateSpendControlExecute(r ApiCreateSpend
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSpendControlRequest struct {
-	ctx context.Context
-	ApiService *SpendControlsBetaApiService
+type ApiGetSpendControlBetaRequest struct {
+	ctx            context.Context
+	ApiService     *SpendControlsBetaApiService
 	spendControlId string
 }
 
-func (r ApiGetSpendControlRequest) Execute() (*SpendControlResponse, *http.Response, error) {
+func (r ApiGetSpendControlBetaRequest) Execute() (*SpendControlResponse, *http.Response, error) {
 	return r.ApiService.GetSpendControlExecute(r)
 }
 
 /*
 GetSpendControl Get Spend Control
 
-Get spend control
+# Get spend control
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param spendControlId
- @return ApiGetSpendControlRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param spendControlId
+	@return ApiGetSpendControlBetaRequest
 */
-func (a *SpendControlsBetaApiService) GetSpendControl(ctx context.Context, spendControlId string) ApiGetSpendControlRequest {
-	return ApiGetSpendControlRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *SpendControlsBetaApiService) GetSpendControl(ctx context.Context, spendControlId string) ApiGetSpendControlBetaRequest {
+	return ApiGetSpendControlBetaRequest{
+		ApiService:     a,
+		ctx:            ctx,
 		spendControlId: spendControlId,
 	}
 }
 
 // Execute executes the request
-//  @return SpendControlResponse
-func (a *SpendControlsBetaApiService) GetSpendControlExecute(r ApiGetSpendControlRequest) (*SpendControlResponse, *http.Response, error) {
+//
+//	@return SpendControlResponse
+func (a *SpendControlsBetaApiService) GetSpendControlExecute(r ApiGetSpendControlBetaRequest) (*SpendControlResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SpendControlResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SpendControlResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SpendControlsBetaApiService.GetSpendControl")
@@ -337,128 +336,65 @@ func (a *SpendControlsBetaApiService) GetSpendControlExecute(r ApiGetSpendContro
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListSpendControlsRequest struct {
-	ctx context.Context
+type ApiListSpendControlsBetaRequest struct {
+	ctx        context.Context
 	ApiService *SpendControlsBetaApiService
-	accountId *string
-	paymentType *PaymentType
-	amountLimit *int64
-	amountLimitGte *int32
-	amountLimitLte *int32
-	numRelatedAccounts *int32
-	numRelatedAccountsGte *int32
-	numRelatedAccountsLte *int32
-	isActive *bool
-	name *string
-	direction *SpendControlDirection
-	id *[]string
-	sortBy *[]string
+	accountId  *string
+	customerId *string
+	businessId *string
+	status     *string
 }
 
 // return results matching this account ID
-func (r ApiListSpendControlsRequest) AccountId(accountId string) ApiListSpendControlsRequest {
+func (r ApiListSpendControlsBetaRequest) AccountId(accountId string) ApiListSpendControlsBetaRequest {
 	r.accountId = &accountId
 	return r
 }
 
-func (r ApiListSpendControlsRequest) PaymentType(paymentType PaymentType) ApiListSpendControlsRequest {
-	r.paymentType = &paymentType
+func (r ApiListSpendControlsBetaRequest) CustomerId(customerId string) ApiListSpendControlsBetaRequest {
+	r.customerId = &customerId
 	return r
 }
 
-// return results matching this amount limit
-func (r ApiListSpendControlsRequest) AmountLimit(amountLimit int64) ApiListSpendControlsRequest {
-	r.amountLimit = &amountLimit
+func (r ApiListSpendControlsBetaRequest) BusinessId(businessId string) ApiListSpendControlsBetaRequest {
+	r.businessId = &businessId
 	return r
 }
 
-// return results with an amount limit greater than or equal to this
-func (r ApiListSpendControlsRequest) AmountLimitGte(amountLimitGte int32) ApiListSpendControlsRequest {
-	r.amountLimitGte = &amountLimitGte
+// return results that match this status
+func (r ApiListSpendControlsBetaRequest) Status(status string) ApiListSpendControlsBetaRequest {
+	r.status = &status
 	return r
 }
 
-// return results with an amount limit less than or equal to this
-func (r ApiListSpendControlsRequest) AmountLimitLte(amountLimitLte int32) ApiListSpendControlsRequest {
-	r.amountLimitLte = &amountLimitLte
-	return r
-}
-
-// return results that are associated with this many accounts
-func (r ApiListSpendControlsRequest) NumRelatedAccounts(numRelatedAccounts int32) ApiListSpendControlsRequest {
-	r.numRelatedAccounts = &numRelatedAccounts
-	return r
-}
-
-// return results that are associated with at least this many accounts
-func (r ApiListSpendControlsRequest) NumRelatedAccountsGte(numRelatedAccountsGte int32) ApiListSpendControlsRequest {
-	r.numRelatedAccountsGte = &numRelatedAccountsGte
-	return r
-}
-
-// return results that are associated with at most this many accounts
-func (r ApiListSpendControlsRequest) NumRelatedAccountsLte(numRelatedAccountsLte int32) ApiListSpendControlsRequest {
-	r.numRelatedAccountsLte = &numRelatedAccountsLte
-	return r
-}
-
-// return results that match this active status
-func (r ApiListSpendControlsRequest) IsActive(isActive bool) ApiListSpendControlsRequest {
-	r.isActive = &isActive
-	return r
-}
-
-// return results that match this name
-func (r ApiListSpendControlsRequest) Name(name string) ApiListSpendControlsRequest {
-	r.name = &name
-	return r
-}
-
-func (r ApiListSpendControlsRequest) Direction(direction SpendControlDirection) ApiListSpendControlsRequest {
-	r.direction = &direction
-	return r
-}
-
-// return results with these comma-separated IDs
-func (r ApiListSpendControlsRequest) Id(id []string) ApiListSpendControlsRequest {
-	r.id = &id
-	return r
-}
-
-// Specifies the sort order for returned Spend Controls. 
-func (r ApiListSpendControlsRequest) SortBy(sortBy []string) ApiListSpendControlsRequest {
-	r.sortBy = &sortBy
-	return r
-}
-
-func (r ApiListSpendControlsRequest) Execute() (*SpendControlResponseList, *http.Response, error) {
+func (r ApiListSpendControlsBetaRequest) Execute() (*SpendControlResponseList, *http.Response, error) {
 	return r.ApiService.ListSpendControlsExecute(r)
 }
 
 /*
 ListSpendControls List Spend Controls
 
-List spend controls
+# List spend controls
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListSpendControlsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListSpendControlsBetaRequest
 */
-func (a *SpendControlsBetaApiService) ListSpendControls(ctx context.Context) ApiListSpendControlsRequest {
-	return ApiListSpendControlsRequest{
+func (a *SpendControlsBetaApiService) ListSpendControls(ctx context.Context) ApiListSpendControlsBetaRequest {
+	return ApiListSpendControlsBetaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return SpendControlResponseList
-func (a *SpendControlsBetaApiService) ListSpendControlsExecute(r ApiListSpendControlsRequest) (*SpendControlResponseList, *http.Response, error) {
+//
+//	@return SpendControlResponseList
+func (a *SpendControlsBetaApiService) ListSpendControlsExecute(r ApiListSpendControlsBetaRequest) (*SpendControlResponseList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SpendControlResponseList
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SpendControlResponseList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SpendControlsBetaApiService.ListSpendControls")
@@ -475,41 +411,14 @@ func (a *SpendControlsBetaApiService) ListSpendControlsExecute(r ApiListSpendCon
 	if r.accountId != nil {
 		localVarQueryParams.Add("account_id", parameterToString(*r.accountId, ""))
 	}
-	if r.paymentType != nil {
-		localVarQueryParams.Add("payment_type", parameterToString(*r.paymentType, ""))
+	if r.customerId != nil {
+		localVarQueryParams.Add("customer_id", parameterToString(*r.customerId, ""))
 	}
-	if r.amountLimit != nil {
-		localVarQueryParams.Add("amount_limit", parameterToString(*r.amountLimit, ""))
+	if r.businessId != nil {
+		localVarQueryParams.Add("business_id", parameterToString(*r.businessId, ""))
 	}
-	if r.amountLimitGte != nil {
-		localVarQueryParams.Add("amount_limit_gte", parameterToString(*r.amountLimitGte, ""))
-	}
-	if r.amountLimitLte != nil {
-		localVarQueryParams.Add("amount_limit_lte", parameterToString(*r.amountLimitLte, ""))
-	}
-	if r.numRelatedAccounts != nil {
-		localVarQueryParams.Add("num_related_accounts", parameterToString(*r.numRelatedAccounts, ""))
-	}
-	if r.numRelatedAccountsGte != nil {
-		localVarQueryParams.Add("num_related_accounts_gte", parameterToString(*r.numRelatedAccountsGte, ""))
-	}
-	if r.numRelatedAccountsLte != nil {
-		localVarQueryParams.Add("num_related_accounts_lte", parameterToString(*r.numRelatedAccountsLte, ""))
-	}
-	if r.isActive != nil {
-		localVarQueryParams.Add("is_active", parameterToString(*r.isActive, ""))
-	}
-	if r.name != nil {
-		localVarQueryParams.Add("name", parameterToString(*r.name, ""))
-	}
-	if r.direction != nil {
-		localVarQueryParams.Add("direction", parameterToString(*r.direction, ""))
-	}
-	if r.id != nil {
-		localVarQueryParams.Add("id", parameterToString(*r.id, "csv"))
-	}
-	if r.sortBy != nil {
-		localVarQueryParams.Add("sort_by", parameterToString(*r.sortBy, "csv"))
+	if r.status != nil {
+		localVarQueryParams.Add("status", parameterToString(*r.status, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -614,49 +523,49 @@ func (a *SpendControlsBetaApiService) ListSpendControlsExecute(r ApiListSpendCon
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateSpendControlRequest struct {
-	ctx context.Context
-	ApiService *SpendControlsBetaApiService
-	spendControlId string
+type ApiUpdateSpendControlBetaRequest struct {
+	ctx                       context.Context
+	ApiService                *SpendControlsBetaApiService
+	spendControlId            string
 	spendControlUpdateRequest *SpendControlUpdateRequest
 }
 
 // Fields to update
-func (r ApiUpdateSpendControlRequest) SpendControlUpdateRequest(spendControlUpdateRequest SpendControlUpdateRequest) ApiUpdateSpendControlRequest {
+func (r ApiUpdateSpendControlBetaRequest) SpendControlUpdateRequest(spendControlUpdateRequest SpendControlUpdateRequest) ApiUpdateSpendControlBetaRequest {
 	r.spendControlUpdateRequest = &spendControlUpdateRequest
 	return r
 }
 
-func (r ApiUpdateSpendControlRequest) Execute() (*SpendControlResponse, *http.Response, error) {
+func (r ApiUpdateSpendControlBetaRequest) Execute() (*SpendControlResponse, *http.Response, error) {
 	return r.ApiService.UpdateSpendControlExecute(r)
 }
 
 /*
 UpdateSpendControl Update Spend Control
 
-Update spend control
+# Update spend control
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param spendControlId
- @return ApiUpdateSpendControlRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param spendControlId
+	@return ApiUpdateSpendControlBetaRequest
 */
-func (a *SpendControlsBetaApiService) UpdateSpendControl(ctx context.Context, spendControlId string) ApiUpdateSpendControlRequest {
-	return ApiUpdateSpendControlRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *SpendControlsBetaApiService) UpdateSpendControl(ctx context.Context, spendControlId string) ApiUpdateSpendControlBetaRequest {
+	return ApiUpdateSpendControlBetaRequest{
+		ApiService:     a,
+		ctx:            ctx,
 		spendControlId: spendControlId,
 	}
 }
 
 // Execute executes the request
-//  @return SpendControlResponse
-func (a *SpendControlsBetaApiService) UpdateSpendControlExecute(r ApiUpdateSpendControlRequest) (*SpendControlResponse, *http.Response, error) {
+//
+//	@return SpendControlResponse
+func (a *SpendControlsBetaApiService) UpdateSpendControlExecute(r ApiUpdateSpendControlBetaRequest) (*SpendControlResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SpendControlResponse
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SpendControlResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SpendControlsBetaApiService.UpdateSpendControl")

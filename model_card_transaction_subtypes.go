@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -20,25 +20,25 @@ type CardTransactionSubtypes string
 
 // List of card_transaction_subtypes
 const (
-	CARDTRANSACTIONSUBTYPES_ATM_WITHDRAWAL CardTransactionSubtypes = "ATM_WITHDRAWAL"
-	CARDTRANSACTIONSUBTYPES_ATM_WITHDRAWAL_REVERSAL CardTransactionSubtypes = "ATM_WITHDRAWAL_REVERSAL"
-	CARDTRANSACTIONSUBTYPES_BALANCE_INQUIRY CardTransactionSubtypes = "BALANCE_INQUIRY"
-	CARDTRANSACTIONSUBTYPES_CARD_TRANSACTION CardTransactionSubtypes = "CARD_TRANSACTION"
-	CARDTRANSACTIONSUBTYPES_CARD_TRANSACTION_REVERSAL CardTransactionSubtypes = "CARD_TRANSACTION_REVERSAL"
-	CARDTRANSACTIONSUBTYPES_CREDIT CardTransactionSubtypes = "CREDIT"
-	CARDTRANSACTIONSUBTYPES_CREDIT_REVERSAL CardTransactionSubtypes = "CREDIT_REVERSAL"
-	CARDTRANSACTIONSUBTYPES_DIRECTPOST CardTransactionSubtypes = "DIRECTPOST"
-	CARDTRANSACTIONSUBTYPES_DIRECTPOST_REVERSAL CardTransactionSubtypes = "DIRECTPOST_REVERSAL"
-	CARDTRANSACTIONSUBTYPES_POS_CASHBACK CardTransactionSubtypes = "POS_CASHBACK"
-	CARDTRANSACTIONSUBTYPES_POS_CASHBACK_REVERSAL CardTransactionSubtypes = "POS_CASHBACK_REVERSAL"
-	CARDTRANSACTIONSUBTYPES_POS_PURCHASE CardTransactionSubtypes = "POS_PURCHASE"
-	CARDTRANSACTIONSUBTYPES_POS_PURCHASE_REFUND CardTransactionSubtypes = "POS_PURCHASE_REFUND"
+	CARDTRANSACTIONSUBTYPES_ATM_WITHDRAWAL               CardTransactionSubtypes = "ATM_WITHDRAWAL"
+	CARDTRANSACTIONSUBTYPES_ATM_WITHDRAWAL_REVERSAL      CardTransactionSubtypes = "ATM_WITHDRAWAL_REVERSAL"
+	CARDTRANSACTIONSUBTYPES_BALANCE_INQUIRY              CardTransactionSubtypes = "BALANCE_INQUIRY"
+	CARDTRANSACTIONSUBTYPES_CARD_TRANSACTION             CardTransactionSubtypes = "CARD_TRANSACTION"
+	CARDTRANSACTIONSUBTYPES_CARD_TRANSACTION_REVERSAL    CardTransactionSubtypes = "CARD_TRANSACTION_REVERSAL"
+	CARDTRANSACTIONSUBTYPES_CREDIT                       CardTransactionSubtypes = "CREDIT"
+	CARDTRANSACTIONSUBTYPES_CREDIT_REVERSAL              CardTransactionSubtypes = "CREDIT_REVERSAL"
+	CARDTRANSACTIONSUBTYPES_DIRECTPOST                   CardTransactionSubtypes = "DIRECTPOST"
+	CARDTRANSACTIONSUBTYPES_DIRECTPOST_REVERSAL          CardTransactionSubtypes = "DIRECTPOST_REVERSAL"
+	CARDTRANSACTIONSUBTYPES_POS_CASHBACK                 CardTransactionSubtypes = "POS_CASHBACK"
+	CARDTRANSACTIONSUBTYPES_POS_CASHBACK_REVERSAL        CardTransactionSubtypes = "POS_CASHBACK_REVERSAL"
+	CARDTRANSACTIONSUBTYPES_POS_PURCHASE                 CardTransactionSubtypes = "POS_PURCHASE"
+	CARDTRANSACTIONSUBTYPES_POS_PURCHASE_REFUND          CardTransactionSubtypes = "POS_PURCHASE_REFUND"
 	CARDTRANSACTIONSUBTYPES_POS_PURCHASE_REFUND_REVERSAL CardTransactionSubtypes = "POS_PURCHASE_REFUND_REVERSAL"
-	CARDTRANSACTIONSUBTYPES_POS_PURCHASE_REVERSAL CardTransactionSubtypes = "POS_PURCHASE_REVERSAL"
-	CARDTRANSACTIONSUBTYPES_POS_REFUND CardTransactionSubtypes = "POS_REFUND"
-	CARDTRANSACTIONSUBTYPES_POS_REFUND_REVERSAL CardTransactionSubtypes = "POS_REFUND_REVERSAL"
-	CARDTRANSACTIONSUBTYPES_PROVISIONAL_CREDIT CardTransactionSubtypes = "PROVISIONAL_CREDIT"
-	CARDTRANSACTIONSUBTYPES_PROVISIONAL_CREDIT_REVERSAL CardTransactionSubtypes = "PROVISIONAL_CREDIT_REVERSAL"
+	CARDTRANSACTIONSUBTYPES_POS_PURCHASE_REVERSAL        CardTransactionSubtypes = "POS_PURCHASE_REVERSAL"
+	CARDTRANSACTIONSUBTYPES_POS_REFUND                   CardTransactionSubtypes = "POS_REFUND"
+	CARDTRANSACTIONSUBTYPES_POS_REFUND_REVERSAL          CardTransactionSubtypes = "POS_REFUND_REVERSAL"
+	CARDTRANSACTIONSUBTYPES_PROVISIONAL_CREDIT           CardTransactionSubtypes = "PROVISIONAL_CREDIT"
+	CARDTRANSACTIONSUBTYPES_PROVISIONAL_CREDIT_REVERSAL  CardTransactionSubtypes = "PROVISIONAL_CREDIT_REVERSAL"
 )
 
 // All allowed values of CardTransactionSubtypes enum
@@ -142,4 +142,3 @@ func (v *NullableCardTransactionSubtypes) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **IsEnabled** | **bool** | Whether this template can be used for account creation | 
 **Name** | **string** | Unique account template name | 
 **Template** | [**TemplateFieldsGenericResponse**](TemplateFieldsGenericResponse.md) |  | 
-**Tenant** | Pointer to **string** | The id of the tenant containing the resource.  | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 
 ## Methods
 

@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.20.0
 */
@@ -19,15 +19,14 @@ import (
 	"strings"
 )
 
-
 // WatchlistApiService WatchlistApi service
 type WatchlistApiService service
 
 type ApiGetWatchlistAlertRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *WatchlistApiService
 	customerId string
-	alertId string
+	alertId    string
 }
 
 func (r ApiGetWatchlistAlertRequest) Execute() (*WatchlistAlert, *http.Response, error) {
@@ -37,31 +36,33 @@ func (r ApiGetWatchlistAlertRequest) Execute() (*WatchlistAlert, *http.Response,
 /*
 GetWatchlistAlert Retrieve watchlist monitoring alert
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customerId The customer's unique identifier
- @param alertId Unique identifier for this watchlist alert.
- @return ApiGetWatchlistAlertRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customerId The customer's unique identifier
+	@param alertId Unique identifier for this watchlist alert.
+	@return ApiGetWatchlistAlertRequest
 
 Deprecated
 */
 func (a *WatchlistApiService) GetWatchlistAlert(ctx context.Context, customerId string, alertId string) ApiGetWatchlistAlertRequest {
 	return ApiGetWatchlistAlertRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		customerId: customerId,
-		alertId: alertId,
+		alertId:    alertId,
 	}
 }
 
 // Execute executes the request
-//  @return WatchlistAlert
+//
+//	@return WatchlistAlert
+//
 // Deprecated
 func (a *WatchlistApiService) GetWatchlistAlertExecute(r ApiGetWatchlistAlertRequest) (*WatchlistAlert, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *WatchlistAlert
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *WatchlistAlert
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WatchlistApiService.GetWatchlistAlert")
@@ -181,9 +182,9 @@ func (a *WatchlistApiService) GetWatchlistAlertExecute(r ApiGetWatchlistAlertReq
 }
 
 type ApiGetWatchlistSubscriptionRequest struct {
-	ctx context.Context
-	ApiService *WatchlistApiService
-	customerId string
+	ctx            context.Context
+	ApiService     *WatchlistApiService
+	customerId     string
 	subscriptionId string
 }
 
@@ -194,31 +195,33 @@ func (r ApiGetWatchlistSubscriptionRequest) Execute() (*WatchlistSubscription, *
 /*
 GetWatchlistSubscription Retrieve watchlist monitoring subscription
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customerId The customer's unique identifier
- @param subscriptionId Watchlist monitoring subscription ID
- @return ApiGetWatchlistSubscriptionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customerId The customer's unique identifier
+	@param subscriptionId Watchlist monitoring subscription ID
+	@return ApiGetWatchlistSubscriptionRequest
 
 Deprecated
 */
 func (a *WatchlistApiService) GetWatchlistSubscription(ctx context.Context, customerId string, subscriptionId string) ApiGetWatchlistSubscriptionRequest {
 	return ApiGetWatchlistSubscriptionRequest{
-		ApiService: a,
-		ctx: ctx,
-		customerId: customerId,
+		ApiService:     a,
+		ctx:            ctx,
+		customerId:     customerId,
 		subscriptionId: subscriptionId,
 	}
 }
 
 // Execute executes the request
-//  @return WatchlistSubscription
+//
+//	@return WatchlistSubscription
+//
 // Deprecated
 func (a *WatchlistApiService) GetWatchlistSubscriptionExecute(r ApiGetWatchlistSubscriptionRequest) (*WatchlistSubscription, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *WatchlistSubscription
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *WatchlistSubscription
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WatchlistApiService.GetWatchlistSubscription")
@@ -338,7 +341,7 @@ func (a *WatchlistApiService) GetWatchlistSubscriptionExecute(r ApiGetWatchlistS
 }
 
 type ApiListWatchlistAlertsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *WatchlistApiService
 	customerId string
 }
@@ -350,29 +353,31 @@ func (r ApiListWatchlistAlertsRequest) Execute() (*WatchlistAlertList, *http.Res
 /*
 ListWatchlistAlerts List watchlist monitoring alerts for a customer
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customerId The customer's unique identifier
- @return ApiListWatchlistAlertsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customerId The customer's unique identifier
+	@return ApiListWatchlistAlertsRequest
 
 Deprecated
 */
 func (a *WatchlistApiService) ListWatchlistAlerts(ctx context.Context, customerId string) ApiListWatchlistAlertsRequest {
 	return ApiListWatchlistAlertsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		customerId: customerId,
 	}
 }
 
 // Execute executes the request
-//  @return WatchlistAlertList
+//
+//	@return WatchlistAlertList
+//
 // Deprecated
 func (a *WatchlistApiService) ListWatchlistAlertsExecute(r ApiListWatchlistAlertsRequest) (*WatchlistAlertList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *WatchlistAlertList
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *WatchlistAlertList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WatchlistApiService.ListWatchlistAlerts")
@@ -491,7 +496,7 @@ func (a *WatchlistApiService) ListWatchlistAlertsExecute(r ApiListWatchlistAlert
 }
 
 type ApiListWatchlistSubscriptionsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *WatchlistApiService
 	customerId string
 }
@@ -503,29 +508,31 @@ func (r ApiListWatchlistSubscriptionsRequest) Execute() (*WatchlistSubscriptionL
 /*
 ListWatchlistSubscriptions List watchlist monitoring subscriptions for a customer
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customerId The customer's unique identifier
- @return ApiListWatchlistSubscriptionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customerId The customer's unique identifier
+	@return ApiListWatchlistSubscriptionsRequest
 
 Deprecated
 */
 func (a *WatchlistApiService) ListWatchlistSubscriptions(ctx context.Context, customerId string) ApiListWatchlistSubscriptionsRequest {
 	return ApiListWatchlistSubscriptionsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		customerId: customerId,
 	}
 }
 
 // Execute executes the request
-//  @return WatchlistSubscriptionList
+//
+//	@return WatchlistSubscriptionList
+//
 // Deprecated
 func (a *WatchlistApiService) ListWatchlistSubscriptionsExecute(r ApiListWatchlistSubscriptionsRequest) (*WatchlistSubscriptionList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *WatchlistSubscriptionList
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *WatchlistSubscriptionList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WatchlistApiService.ListWatchlistSubscriptions")
@@ -644,11 +651,11 @@ func (a *WatchlistApiService) ListWatchlistSubscriptionsExecute(r ApiListWatchli
 }
 
 type ApiSuppressWatchlistEntityAlertRequest struct {
-	ctx context.Context
-	ApiService *WatchlistApiService
-	customerId string
+	ctx               context.Context
+	ApiService        *WatchlistApiService
+	customerId        string
 	watchlistSuppress *WatchlistSuppress
-	idempotencyKey *string
+	idempotencyKey    *string
 }
 
 // A watchlist suppression object
@@ -670,16 +677,16 @@ func (r ApiSuppressWatchlistEntityAlertRequest) Execute() (*http.Response, error
 /*
 SuppressWatchlistEntityAlert Suppress entity alert
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customerId The customer's unique identifier
- @return ApiSuppressWatchlistEntityAlertRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customerId The customer's unique identifier
+	@return ApiSuppressWatchlistEntityAlertRequest
 
 Deprecated
 */
 func (a *WatchlistApiService) SuppressWatchlistEntityAlert(ctx context.Context, customerId string) ApiSuppressWatchlistEntityAlertRequest {
 	return ApiSuppressWatchlistEntityAlertRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		customerId: customerId,
 	}
 }
@@ -688,9 +695,9 @@ func (a *WatchlistApiService) SuppressWatchlistEntityAlert(ctx context.Context, 
 // Deprecated
 func (a *WatchlistApiService) SuppressWatchlistEntityAlertExecute(r ApiSuppressWatchlistEntityAlertRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPost
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WatchlistApiService.SuppressWatchlistEntityAlert")
@@ -808,10 +815,10 @@ func (a *WatchlistApiService) SuppressWatchlistEntityAlertExecute(r ApiSuppressW
 }
 
 type ApiUpdateWatchlistAlertRequest struct {
-	ctx context.Context
-	ApiService *WatchlistApiService
-	customerId string
-	alertId string
+	ctx            context.Context
+	ApiService     *WatchlistApiService
+	customerId     string
+	alertId        string
 	watchlistAlert *WatchlistAlert
 }
 
@@ -828,19 +835,19 @@ func (r ApiUpdateWatchlistAlertRequest) Execute() (*http.Response, error) {
 /*
 UpdateWatchlistAlert Update watchlist alert
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customerId The customer's unique identifier
- @param alertId Unique identifier for this watchlist alert.
- @return ApiUpdateWatchlistAlertRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customerId The customer's unique identifier
+	@param alertId Unique identifier for this watchlist alert.
+	@return ApiUpdateWatchlistAlertRequest
 
 Deprecated
 */
 func (a *WatchlistApiService) UpdateWatchlistAlert(ctx context.Context, customerId string, alertId string) ApiUpdateWatchlistAlertRequest {
 	return ApiUpdateWatchlistAlertRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		customerId: customerId,
-		alertId: alertId,
+		alertId:    alertId,
 	}
 }
 
@@ -848,9 +855,9 @@ func (a *WatchlistApiService) UpdateWatchlistAlert(ctx context.Context, customer
 // Deprecated
 func (a *WatchlistApiService) UpdateWatchlistAlertExecute(r ApiUpdateWatchlistAlertRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WatchlistApiService.UpdateWatchlistAlert")
@@ -966,14 +973,14 @@ func (a *WatchlistApiService) UpdateWatchlistAlertExecute(r ApiUpdateWatchlistAl
 }
 
 type ApiUpdateWatchlistSubscriptionRequest struct {
-	ctx context.Context
-	ApiService *WatchlistApiService
-	customerId string
-	subscriptionId string
+	ctx                   context.Context
+	ApiService            *WatchlistApiService
+	customerId            string
+	subscriptionId        string
 	watchlistSubscription *WatchlistSubscription
 }
 
-// Watchlist monitoring subscription to be updated. The only field that matters is &#x60;status&#x60;; all other fields are ignored. 
+// Watchlist monitoring subscription to be updated. The only field that matters is &#x60;status&#x60;; all other fields are ignored.
 func (r ApiUpdateWatchlistSubscriptionRequest) WatchlistSubscription(watchlistSubscription WatchlistSubscription) ApiUpdateWatchlistSubscriptionRequest {
 	r.watchlistSubscription = &watchlistSubscription
 	return r
@@ -986,31 +993,33 @@ func (r ApiUpdateWatchlistSubscriptionRequest) Execute() (*WatchlistSubscription
 /*
 UpdateWatchlistSubscription Update watchlist monitoring subscription
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customerId The customer's unique identifier
- @param subscriptionId Watchlist monitoring subscription ID
- @return ApiUpdateWatchlistSubscriptionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customerId The customer's unique identifier
+	@param subscriptionId Watchlist monitoring subscription ID
+	@return ApiUpdateWatchlistSubscriptionRequest
 
 Deprecated
 */
 func (a *WatchlistApiService) UpdateWatchlistSubscription(ctx context.Context, customerId string, subscriptionId string) ApiUpdateWatchlistSubscriptionRequest {
 	return ApiUpdateWatchlistSubscriptionRequest{
-		ApiService: a,
-		ctx: ctx,
-		customerId: customerId,
+		ApiService:     a,
+		ctx:            ctx,
+		customerId:     customerId,
 		subscriptionId: subscriptionId,
 	}
 }
 
 // Execute executes the request
-//  @return WatchlistSubscription
+//
+//	@return WatchlistSubscription
+//
 // Deprecated
 func (a *WatchlistApiService) UpdateWatchlistSubscriptionExecute(r ApiUpdateWatchlistSubscriptionRequest) (*WatchlistSubscription, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *WatchlistSubscription
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *WatchlistSubscription
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WatchlistApiService.UpdateWatchlistSubscription")
@@ -1135,11 +1144,11 @@ func (a *WatchlistApiService) UpdateWatchlistSubscriptionExecute(r ApiUpdateWatc
 }
 
 type ApiWatchlistSubscribeRequest struct {
-	ctx context.Context
-	ApiService *WatchlistApiService
-	customerId string
+	ctx                   context.Context
+	ApiService            *WatchlistApiService
+	customerId            string
 	watchlistSubscription *WatchlistSubscription
-	idempotencyKey *string
+	idempotencyKey        *string
 }
 
 // A watchlist subscription
@@ -1161,29 +1170,31 @@ func (r ApiWatchlistSubscribeRequest) Execute() (*WatchlistSubscription, *http.R
 /*
 WatchlistSubscribe Subscribe a customer to watchlist monitoring
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customerId The customer's unique identifier
- @return ApiWatchlistSubscribeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customerId The customer's unique identifier
+	@return ApiWatchlistSubscribeRequest
 
 Deprecated
 */
 func (a *WatchlistApiService) WatchlistSubscribe(ctx context.Context, customerId string) ApiWatchlistSubscribeRequest {
 	return ApiWatchlistSubscribeRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		customerId: customerId,
 	}
 }
 
 // Execute executes the request
-//  @return WatchlistSubscription
+//
+//	@return WatchlistSubscription
+//
 // Deprecated
 func (a *WatchlistApiService) WatchlistSubscribeExecute(r ApiWatchlistSubscribeRequest) (*WatchlistSubscription, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *WatchlistSubscription
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *WatchlistSubscription
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WatchlistApiService.WatchlistSubscribe")

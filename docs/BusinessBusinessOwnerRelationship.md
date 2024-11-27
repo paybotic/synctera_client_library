@@ -10,14 +10,15 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | Relationship unique identifier. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 
-**RelationshipType** | **string** | The relationship type. One of the following: * &#x60;BENEFICIAL_OWNER_OF&#x60; – a person who directly or indirectly owns a portion of the business. * &#x60;MANAGING_PERSON_OF&#x60; – a person who is an officer, director, or other notable person of an organization. * &#x60;OWNER_OF&#x60; – a business with ownership of another business.  | 
+**RelationshipType** | [**RelationshipTypes**](RelationshipTypes.md) |  | 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 **ToBusinessId** | **string** | Unique ID for the related business.  | 
 
 ## Methods
 
 ### NewBusinessBusinessOwnerRelationship
 
-`func NewBusinessBusinessOwnerRelationship(additionalData AdditionalOwnerData, fromBusinessId string, relationshipType string, toBusinessId string, ) *BusinessBusinessOwnerRelationship`
+`func NewBusinessBusinessOwnerRelationship(additionalData AdditionalOwnerData, fromBusinessId string, relationshipType RelationshipTypes, toBusinessId string, ) *BusinessBusinessOwnerRelationship`
 
 NewBusinessBusinessOwnerRelationship instantiates a new BusinessBusinessOwnerRelationship object
 This constructor will assign default values to properties that have it defined,
@@ -174,23 +175,48 @@ HasMetadata returns a boolean if a field has been set.
 
 ### GetRelationshipType
 
-`func (o *BusinessBusinessOwnerRelationship) GetRelationshipType() string`
+`func (o *BusinessBusinessOwnerRelationship) GetRelationshipType() RelationshipTypes`
 
 GetRelationshipType returns the RelationshipType field if non-nil, zero value otherwise.
 
 ### GetRelationshipTypeOk
 
-`func (o *BusinessBusinessOwnerRelationship) GetRelationshipTypeOk() (*string, bool)`
+`func (o *BusinessBusinessOwnerRelationship) GetRelationshipTypeOk() (*RelationshipTypes, bool)`
 
 GetRelationshipTypeOk returns a tuple with the RelationshipType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRelationshipType
 
-`func (o *BusinessBusinessOwnerRelationship) SetRelationshipType(v string)`
+`func (o *BusinessBusinessOwnerRelationship) SetRelationshipType(v RelationshipTypes)`
 
 SetRelationshipType sets RelationshipType field to given value.
 
+
+### GetTenant
+
+`func (o *BusinessBusinessOwnerRelationship) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *BusinessBusinessOwnerRelationship) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *BusinessBusinessOwnerRelationship) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *BusinessBusinessOwnerRelationship) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetToBusinessId
 

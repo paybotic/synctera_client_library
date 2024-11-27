@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CardStatus** | [**CardStatus**](CardStatus.md) |  | 
 **Memo** | Pointer to **string** | Additional details about the reason for the status change | [optional] 
+**PendingReasons** | Pointer to [**CardStatusPendingReasons**](CardStatusPendingReasons.md) |  | [optional] 
 **StatusReason** | Pointer to [**CardStatusReasonCode**](CardStatusReasonCode.md) |  | [optional] 
 
 ## Methods
@@ -71,6 +72,31 @@ SetMemo sets Memo field to given value.
 `func (o *CardStatusObject) HasMemo() bool`
 
 HasMemo returns a boolean if a field has been set.
+
+### GetPendingReasons
+
+`func (o *CardStatusObject) GetPendingReasons() CardStatusPendingReasons`
+
+GetPendingReasons returns the PendingReasons field if non-nil, zero value otherwise.
+
+### GetPendingReasonsOk
+
+`func (o *CardStatusObject) GetPendingReasonsOk() (*CardStatusPendingReasons, bool)`
+
+GetPendingReasonsOk returns a tuple with the PendingReasons field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPendingReasons
+
+`func (o *CardStatusObject) SetPendingReasons(v CardStatusPendingReasons)`
+
+SetPendingReasons sets PendingReasons field to given value.
+
+### HasPendingReasons
+
+`func (o *CardStatusObject) HasPendingReasons() bool`
+
+HasPendingReasons returns a boolean if a field has been set.
 
 ### GetStatusReason
 

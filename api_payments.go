@@ -19,34 +19,36 @@ import (
 	"strings"
 )
 
-
 // PaymentsApiService PaymentsApi service
-type PaymentsApiService service
+type PaymentsApiService struct {
+	*ACHAPIService // Embed ACHAPIService
+	client *APIClient
+}
 
 /*
 AddTransactionOut Create an outgoing ACH
 
-Create an outgoing ACH
+# Create an outgoing ACH
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAddTransactionOutRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAddTransactionOutRequest
 */
 func (a *PaymentsApiService) AddTransactionOut(ctx context.Context) ApiAddTransactionOutRequest {
 	return ApiAddTransactionOutRequest{
-		ApiService: (*ACHApiService)(a),
+		ApiService: a.ACHAPIService,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return OutgoingAch
+//
+//	@return OutgoingAch
 func (a *PaymentsApiService) AddTransactionOutExecute(r ApiAddTransactionOutRequest) (*OutgoingAch, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OutgoingAch
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OutgoingAch
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PaymentsApiService.AddTransactionOut")
@@ -173,26 +175,27 @@ GetTransactionOut Get an outgoing ACH transaction
 
 Get a single outgoing ACH transaction
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param transactionId Transaction ID in the ledger
- @return ApiGetTransactionOutRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param transactionId Transaction ID in the ledger
+	@return ApiGetTransactionOutRequest
 */
 func (a *PaymentsApiService) GetTransactionOut(ctx context.Context, transactionId string) ApiGetTransactionOutRequest {
 	return ApiGetTransactionOutRequest{
-		ApiService: (*ACHApiService)(a),
+		ApiService:    a.ACHAPIService,
 		ctx:           ctx,
 		transactionId: transactionId,
 	}
 }
 
 // Execute executes the request
-//  @return OutgoingAch
+//
+//	@return OutgoingAch
 func (a *PaymentsApiService) GetTransactionOutExecute(r ApiGetTransactionOutRequest) (*OutgoingAch, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OutgoingAch
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OutgoingAch
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PaymentsApiService.GetTransactionOut")
@@ -315,24 +318,25 @@ ListTransactionsOut List outgoing ACH transactions
 
 List outgoing ACH transactions
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListTransactionsOutRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListTransactionsOutRequest
 */
 func (a *PaymentsApiService) ListTransactionsOut(ctx context.Context) ApiListTransactionsOutRequest {
 	return ApiListTransactionsOutRequest{
-		ApiService: (*ACHApiService)(a),
+		ApiService: a.ACHAPIService,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return OutgoingAchList
+//
+//	@return OutgoingAchList
 func (a *PaymentsApiService) ListTransactionsOutExecute(r ApiListTransactionsOutRequest) (*OutgoingAchList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OutgoingAchList
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OutgoingAchList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PaymentsApiService.ListTransactionsOut")
@@ -440,13 +444,13 @@ PatchTransactionOut Update outgoing ACH transaction
 
 Update outgoing ACH transaction (either status or funds availability)
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param transactionId Transaction ID in the ledger
- @return ApiPatchTransactionOutRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param transactionId Transaction ID in the ledger
+	@return ApiPatchTransactionOutRequest
 */
 func (a *PaymentsApiService) PatchTransactionOut(ctx context.Context, transactionId string) ApiPatchTransactionOutRequest {
 	return ApiPatchTransactionOutRequest{
-		ApiService: (*ACHApiService)(a),
+		ApiService:    a.ACHAPIService,
 		ctx:           ctx,
 		transactionId: transactionId,
 	}
@@ -455,9 +459,9 @@ func (a *PaymentsApiService) PatchTransactionOut(ctx context.Context, transactio
 // Execute executes the request
 func (a *PaymentsApiService) PatchTransactionOutExecute(r ApiPatchTransactionOutRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPatch
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PaymentsApiService.PatchTransactionOut")

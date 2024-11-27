@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -16,13 +16,13 @@ import (
 
 // BaseStatementAllOf struct for BaseStatementAllOf
 type BaseStatementAllOf struct {
-	AccountSummary *AccountSummary `json:"account_summary,omitempty"`
-	AuthorizedSigner []Person1 `json:"authorized_signer,omitempty"`
-	Disclosure *string `json:"disclosure,omitempty"`
-	JointAccountHolders []Person1 `json:"joint_account_holders,omitempty"`
-	PrimaryAccountHolderBusiness *Business1 `json:"primary_account_holder_business,omitempty"`
-	PrimaryAccountHolderPersonal *Person1 `json:"primary_account_holder_personal,omitempty"`
-	Transactions []Transaction `json:"transactions,omitempty"`
+	AccountSummary               *AccountSummary `json:"account_summary,omitempty"`
+	AuthorizedSigner             []Person1       `json:"authorized_signer,omitempty"`
+	Disclosure                   *string         `json:"disclosure,omitempty"`
+	JointAccountHolders          []Person1       `json:"joint_account_holders,omitempty"`
+	PrimaryAccountHolderBusiness *Business1      `json:"primary_account_holder_business,omitempty"`
+	PrimaryAccountHolderPersonal *Person1        `json:"primary_account_holder_personal,omitempty"`
+	Transactions                 []Transaction   `json:"transactions,omitempty"`
 }
 
 // NewBaseStatementAllOf instantiates a new BaseStatementAllOf object
@@ -327,5 +327,3 @@ func (v *NullableBaseStatementAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

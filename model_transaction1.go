@@ -17,12 +17,12 @@ import (
 
 // Transaction1 - struct for Transaction1
 type Transaction1 struct {
-	AchTransaction *AchTransaction
-	CardTransaction *CardTransaction
-	CheckTransaction *CheckTransaction
-	ExternalCardTransaction *ExternalCardTransaction
+	AchTransaction              *AchTransaction
+	CardTransaction             *CardTransaction
+	CheckTransaction            *CheckTransaction
+	ExternalCardTransaction     *ExternalCardTransaction
 	InternalTransferTransaction *InternalTransferTransaction
-	WireTransaction *WireTransaction
+	WireTransaction             *WireTransaction
 }
 
 // AchTransactionAsTransaction1 is a convenience function that returns AchTransaction wrapped in Transaction1
@@ -66,7 +66,6 @@ func WireTransactionAsTransaction1(v *WireTransaction) Transaction1 {
 		WireTransaction: v,
 	}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *Transaction1) UnmarshalJSON(data []byte) error {
@@ -255,7 +254,7 @@ func (src Transaction1) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *Transaction1) GetActualInstance() (interface{}) {
+func (obj *Transaction1) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -322,5 +321,3 @@ func (v *NullableTransaction1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

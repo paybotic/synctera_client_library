@@ -4,18 +4,24 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AccountId** | Pointer to **string** | Receiving account uuid. This links to the external account resource (represented by &#39;receiving_account_id&#39; in the request to send outgoing ACH). | [optional] 
 **AccountName** | Pointer to **string** | Receiving account name | [optional] 
 **AccountNo** | **string** | Receiving account number | 
 **Amount** | **int32** | Transaction amount in cents | 
 **BankId** | **int32** |  | 
+**CompanyEntryDescription** | Pointer to **string** | Company Entry Description field in ACH batch header. Originator inserts this field&#39;s value to provide the Receiver with a description of the entry&#39;s purpose. | [optional] 
+**CompanyName** | Pointer to **string** | Company Name field in ACH batch header. | [optional] 
 **EffectiveDate** | **string** | Effective date of the transaction | 
 **ExternalId** | **string** | Transaction ID in the ledger | 
 **Hold** | Pointer to [**HoldData**](HoldData.md) |  | [optional] 
 **Id** | **string** |  | 
+**IncomingAchId** | Pointer to **string** | ID of the linked incoming ACH entry. This is filled only for outgoing ACH entries that are returns and links to the originally received incoming entry. | [optional] 
 **IsSameDay** | **bool** | Was initiated as same-day ACH transaction | 
 **Memo** | **string** |  | 
 **PartnerId** | **int32** |  | 
 **ReferenceInfo** | Pointer to **string** | Transaction reference info | [optional] 
+**ReturnData** | Pointer to [**ReturnData**](ReturnData.md) |  | [optional] 
+**SourceAccountId** | Pointer to **string** | Originating account uuid. This links to the customer account on Synctera platform (represented by &#39;originating_account_id&#39; in the request to send outgoing ACH). | [optional] 
 **SourceAccountName** | Pointer to **string** | Originating account name | [optional] 
 **SourceAccountNo** | **string** | Originating account number | 
 **Status** | **string** |  | 
@@ -39,6 +45,31 @@ will change when the set of required properties is changed
 NewOutgoingAchWithDefaults instantiates a new OutgoingAch object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAccountId
+
+`func (o *OutgoingAch) GetAccountId() string`
+
+GetAccountId returns the AccountId field if non-nil, zero value otherwise.
+
+### GetAccountIdOk
+
+`func (o *OutgoingAch) GetAccountIdOk() (*string, bool)`
+
+GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountId
+
+`func (o *OutgoingAch) SetAccountId(v string)`
+
+SetAccountId sets AccountId field to given value.
+
+### HasAccountId
+
+`func (o *OutgoingAch) HasAccountId() bool`
+
+HasAccountId returns a boolean if a field has been set.
 
 ### GetAccountName
 
@@ -125,6 +156,56 @@ and a boolean to check if the value has been set.
 SetBankId sets BankId field to given value.
 
 
+### GetCompanyEntryDescription
+
+`func (o *OutgoingAch) GetCompanyEntryDescription() string`
+
+GetCompanyEntryDescription returns the CompanyEntryDescription field if non-nil, zero value otherwise.
+
+### GetCompanyEntryDescriptionOk
+
+`func (o *OutgoingAch) GetCompanyEntryDescriptionOk() (*string, bool)`
+
+GetCompanyEntryDescriptionOk returns a tuple with the CompanyEntryDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompanyEntryDescription
+
+`func (o *OutgoingAch) SetCompanyEntryDescription(v string)`
+
+SetCompanyEntryDescription sets CompanyEntryDescription field to given value.
+
+### HasCompanyEntryDescription
+
+`func (o *OutgoingAch) HasCompanyEntryDescription() bool`
+
+HasCompanyEntryDescription returns a boolean if a field has been set.
+
+### GetCompanyName
+
+`func (o *OutgoingAch) GetCompanyName() string`
+
+GetCompanyName returns the CompanyName field if non-nil, zero value otherwise.
+
+### GetCompanyNameOk
+
+`func (o *OutgoingAch) GetCompanyNameOk() (*string, bool)`
+
+GetCompanyNameOk returns a tuple with the CompanyName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompanyName
+
+`func (o *OutgoingAch) SetCompanyName(v string)`
+
+SetCompanyName sets CompanyName field to given value.
+
+### HasCompanyName
+
+`func (o *OutgoingAch) HasCompanyName() bool`
+
+HasCompanyName returns a boolean if a field has been set.
+
 ### GetEffectiveDate
 
 `func (o *OutgoingAch) GetEffectiveDate() string`
@@ -210,6 +291,31 @@ and a boolean to check if the value has been set.
 SetId sets Id field to given value.
 
 
+### GetIncomingAchId
+
+`func (o *OutgoingAch) GetIncomingAchId() string`
+
+GetIncomingAchId returns the IncomingAchId field if non-nil, zero value otherwise.
+
+### GetIncomingAchIdOk
+
+`func (o *OutgoingAch) GetIncomingAchIdOk() (*string, bool)`
+
+GetIncomingAchIdOk returns a tuple with the IncomingAchId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIncomingAchId
+
+`func (o *OutgoingAch) SetIncomingAchId(v string)`
+
+SetIncomingAchId sets IncomingAchId field to given value.
+
+### HasIncomingAchId
+
+`func (o *OutgoingAch) HasIncomingAchId() bool`
+
+HasIncomingAchId returns a boolean if a field has been set.
+
 ### GetIsSameDay
 
 `func (o *OutgoingAch) GetIsSameDay() bool`
@@ -294,6 +400,56 @@ SetReferenceInfo sets ReferenceInfo field to given value.
 `func (o *OutgoingAch) HasReferenceInfo() bool`
 
 HasReferenceInfo returns a boolean if a field has been set.
+
+### GetReturnData
+
+`func (o *OutgoingAch) GetReturnData() ReturnData`
+
+GetReturnData returns the ReturnData field if non-nil, zero value otherwise.
+
+### GetReturnDataOk
+
+`func (o *OutgoingAch) GetReturnDataOk() (*ReturnData, bool)`
+
+GetReturnDataOk returns a tuple with the ReturnData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReturnData
+
+`func (o *OutgoingAch) SetReturnData(v ReturnData)`
+
+SetReturnData sets ReturnData field to given value.
+
+### HasReturnData
+
+`func (o *OutgoingAch) HasReturnData() bool`
+
+HasReturnData returns a boolean if a field has been set.
+
+### GetSourceAccountId
+
+`func (o *OutgoingAch) GetSourceAccountId() string`
+
+GetSourceAccountId returns the SourceAccountId field if non-nil, zero value otherwise.
+
+### GetSourceAccountIdOk
+
+`func (o *OutgoingAch) GetSourceAccountIdOk() (*string, bool)`
+
+GetSourceAccountIdOk returns a tuple with the SourceAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceAccountId
+
+`func (o *OutgoingAch) SetSourceAccountId(v string)`
+
+SetSourceAccountId sets SourceAccountId field to given value.
+
+### HasSourceAccountId
+
+`func (o *OutgoingAch) HasSourceAccountId() bool`
+
+HasSourceAccountId returns a boolean if a field has been set.
 
 ### GetSourceAccountName
 

@@ -1,24 +1,88 @@
-# \WebhooksApi
+# \WebhooksAPI
 
-All URIs are relative to *https://api.synctera.com/v0*
+All URIs are relative to *https://api-sandbox.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateWebhook1**](WebhooksApi.md#CreateWebhook1) | **Post** /webhooks | Create a webhook
-[**DeleteWebhook**](WebhooksApi.md#DeleteWebhook) | **Delete** /webhooks/{webhook_id} | Delete a webhook
-[**GetEvent**](WebhooksApi.md#GetEvent) | **Get** /webhooks/{webhook_id}/events/{event_id} | Get webhook event
-[**GetWebhook1**](WebhooksApi.md#GetWebhook1) | **Get** /webhooks/{webhook_id} | Get a webhook
-[**ListEvents**](WebhooksApi.md#ListEvents) | **Get** /webhooks/{webhook_id}/events | List webhook events
-[**ListWebhooks1**](WebhooksApi.md#ListWebhooks1) | **Get** /webhooks | List webhooks
-[**ResendEvent**](WebhooksApi.md#ResendEvent) | **Post** /webhooks/{webhook_id}/events/{event_id}/resend | Resend an event
-[**TriggerEvent**](WebhooksApi.md#TriggerEvent) | **Post** /webhooks/trigger | Trigger an event
-[**UpdateWebhook**](WebhooksApi.md#UpdateWebhook) | **Put** /webhooks/{webhook_id} | Update a webhook
+[**CreateSecret**](WebhooksAPI.md#CreateSecret) | **Post** /webhook_secrets | Create a secret
+[**CreateWebhook**](WebhooksAPI.md#CreateWebhook) | **Post** /webhooks | Create a webhook
+[**DeleteWebhook**](WebhooksAPI.md#DeleteWebhook) | **Delete** /webhooks/{webhook_id} | Delete a webhook
+[**GetEvent**](WebhooksAPI.md#GetEvent) | **Get** /webhooks/{webhook_id}/events/{event_id} | Get webhook event
+[**GetWebhook**](WebhooksAPI.md#GetWebhook) | **Get** /webhooks/{webhook_id} | Get a webhook
+[**ListEvents**](WebhooksAPI.md#ListEvents) | **Get** /webhooks/{webhook_id}/events | List webhook events
+[**ListWebhooks**](WebhooksAPI.md#ListWebhooks) | **Get** /webhooks | List webhooks
+[**ReplaceSecret**](WebhooksAPI.md#ReplaceSecret) | **Put** /webhook_secrets | Replace an existing secret
+[**ResendEvent**](WebhooksAPI.md#ResendEvent) | **Post** /webhooks/{webhook_id}/events/{event_id}/resend | Resend an event
+[**RevokeSecret**](WebhooksAPI.md#RevokeSecret) | **Delete** /webhook_secrets | Revoke the secret
+[**TriggerEvent**](WebhooksAPI.md#TriggerEvent) | **Post** /webhooks/trigger | Trigger an event
+[**UpdateWebhook**](WebhooksAPI.md#UpdateWebhook) | **Put** /webhooks/{webhook_id} | Update a webhook
 
 
 
-## CreateWebhook1
+## CreateSecret
 
-> Webhook CreateWebhook1(ctx).Webhook(webhook).Execute()
+> CreateSecret201Response CreateSecret(ctx).Execute()
+
+Create a secret
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksAPI.CreateSecret(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.CreateSecret``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateSecret`: CreateSecret201Response
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.CreateSecret`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateSecretRequest struct via the builder pattern
+
+
+### Return type
+
+[**CreateSecret201Response**](CreateSecret201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateWebhook
+
+> Webhook CreateWebhook(ctx).Webhook(webhook).Execute()
 
 Create a webhook
 
@@ -30,24 +94,24 @@ Create a webhook
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    webhook := *openapiclient.NewWebhook([]openapiclient.EventType1{openapiclient.event_type1{EventTypeExplicit: penapiclient.event_type_explicit("ACCOUNT.CREATED")}}, false, "Url_example") // Webhook | Webhook to create
+	webhook := *openapiclient.NewWebhook([]openapiclient.EventType{openapiclient.event_type{EventTypeExplicit: openapiclient.event_type_explicit("ACCOUNT.CREATED")}}, false, "Url_example") // Webhook | Webhook to create
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.CreateWebhook1(context.Background()).Webhook(webhook).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.CreateWebhook1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateWebhook1`: Webhook
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.CreateWebhook1`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksAPI.CreateWebhook(context.Background()).Webhook(webhook).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.CreateWebhook``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateWebhook`: Webhook
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.CreateWebhook`: %v\n", resp)
 }
 ```
 
@@ -57,7 +121,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateWebhook1Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateWebhookRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -96,24 +160,24 @@ Delete a webhook
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    webhookId := "3fa12d3f-6436-482c-a8a1-d65e9761dc2d" // string | Webhook ID
+	webhookId := "b01db9c7-78f2-4a99-8aca-1231d32f9b96" // string | Webhook ID
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.DeleteWebhook(context.Background(), webhookId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.DeleteWebhook``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `DeleteWebhook`: DeleteResponse
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.DeleteWebhook`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksAPI.DeleteWebhook(context.Background(), webhookId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.DeleteWebhook``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteWebhook`: DeleteResponse
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.DeleteWebhook`: %v\n", resp)
 }
 ```
 
@@ -154,7 +218,7 @@ Name | Type | Description  | Notes
 
 ## GetEvent
 
-> Event GetEvent(ctx, webhookId, eventId).Execute()
+> Event GetEvent(ctx, eventId, webhookId).Execute()
 
 Get webhook event
 
@@ -166,25 +230,25 @@ Get webhook event
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    webhookId := "3fa12d3f-6436-482c-a8a1-d65e9761dc2d" // string | Webhook ID
-    eventId := "68281b01-5d95-4830-a312-eb1b7767fe7d" // string | Webhook event ID
+	eventId := "b01db9c7-78f2-4a99-8aca-1231d32f9b96" // string | Webhook event ID
+	webhookId := "b01db9c7-78f2-4a99-8aca-1231d32f9b96" // string | Webhook ID
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.GetEvent(context.Background(), webhookId, eventId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.GetEvent``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetEvent`: Event
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.GetEvent`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksAPI.GetEvent(context.Background(), eventId, webhookId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.GetEvent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetEvent`: Event
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.GetEvent`: %v\n", resp)
 }
 ```
 
@@ -194,8 +258,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**webhookId** | **string** | Webhook ID | 
 **eventId** | **string** | Webhook event ID | 
+**webhookId** | **string** | Webhook ID | 
 
 ### Other Parameters
 
@@ -225,9 +289,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetWebhook1
+## GetWebhook
 
-> Webhook GetWebhook1(ctx, webhookId).Execute()
+> Webhook GetWebhook(ctx, webhookId).Execute()
 
 Get a webhook
 
@@ -239,24 +303,24 @@ Get a webhook
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    webhookId := "3fa12d3f-6436-482c-a8a1-d65e9761dc2d" // string | Webhook ID
+	webhookId := "b01db9c7-78f2-4a99-8aca-1231d32f9b96" // string | Webhook ID
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.GetWebhook1(context.Background(), webhookId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.GetWebhook1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWebhook1`: Webhook
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.GetWebhook1`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksAPI.GetWebhook(context.Background(), webhookId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.GetWebhook``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetWebhook`: Webhook
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.GetWebhook`: %v\n", resp)
 }
 ```
 
@@ -270,7 +334,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetWebhook1Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetWebhookRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -297,7 +361,7 @@ Name | Type | Description  | Notes
 
 ## ListEvents
 
-> EventList ListEvents(ctx, webhookId).StartDate(startDate).EndDate(endDate).StartTime(startTime).EndTime(endTime).Limit(limit).PageToken(pageToken).Execute()
+> EventList ListEvents(ctx, webhookId).StartTime(startTime).EndDate(endDate).EndTime(endTime).PageToken(pageToken).ResourceId(resourceId).Limit(limit).StartDate(startDate).Execute()
 
 List webhook events
 
@@ -309,31 +373,32 @@ List webhook events
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
+	"context"
+	"fmt"
+	"os"
     "time"
-    openapiclient "./openapi"
+	openapiclient "./openapi"
 )
 
 func main() {
-    webhookId := "3fa12d3f-6436-482c-a8a1-d65e9761dc2d" // string | Webhook ID
-    startDate := time.Now() // string | Start date of date range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.. start_date is alias of start_time and is deprecated. Please use start_time instead. (optional)
-    endDate := time.Now() // string | End date of date range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.. end_date is alias of end_time and is deprecated. Please use end_time instead. (optional)
-    startTime := time.Now() // time.Time | Start time of date-time range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00. (optional)
-    endTime := time.Now() // time.Time | End time of date-time range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00. (optional)
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "a8937a0d" // string |  (optional)
+	webhookId := "b01db9c7-78f2-4a99-8aca-1231d32f9b96" // string | Webhook ID
+	startTime := time.Now() // time.Time | Start time of date-time range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00. (optional)
+	endDate := time.Now() // string | End date of date range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.. end_date is alias of end_time and is deprecated. Please use end_time instead. (optional)
+	endTime := time.Now() // time.Time | End time of date-time range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00. (optional)
+	pageToken := "a8937a0d" // string |  (optional)
+	resourceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Limit returned events to those that occurred on the specified resource. (optional)
+	limit := int32(100) // int32 |  (optional) (default to 100)
+	startDate := time.Now() // string | Start date of date range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.. start_date is alias of start_time and is deprecated. Please use start_time instead. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.ListEvents(context.Background(), webhookId).StartDate(startDate).EndDate(endDate).StartTime(startTime).EndTime(endTime).Limit(limit).PageToken(pageToken).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.ListEvents``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListEvents`: EventList
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.ListEvents`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksAPI.ListEvents(context.Background(), webhookId).StartTime(startTime).EndDate(endDate).EndTime(endTime).PageToken(pageToken).ResourceId(resourceId).Limit(limit).StartDate(startDate).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.ListEvents``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListEvents`: EventList
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.ListEvents`: %v\n", resp)
 }
 ```
 
@@ -353,12 +418,13 @@ Other parameters are passed through a pointer to a apiListEventsRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **startDate** | **string** | Start date of date range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.. start_date is alias of start_time and is deprecated. Please use start_time instead. | 
- **endDate** | **string** | End date of date range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.. end_date is alias of end_time and is deprecated. Please use end_time instead. | 
  **startTime** | **time.Time** | Start time of date-time range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00. | 
+ **endDate** | **string** | End date of date range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.. end_date is alias of end_time and is deprecated. Please use end_time instead. | 
  **endTime** | **time.Time** | End time of date-time range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00. | 
- **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
+ **resourceId** | **string** | Limit returned events to those that occurred on the specified resource. | 
+ **limit** | **int32** |  | [default to 100]
+ **startDate** | **string** | Start date of date range filtering for events. Date is inclusive and should be in UTC timezone 00:00:00.. start_date is alias of start_time and is deprecated. Please use start_time instead. | 
 
 ### Return type
 
@@ -378,9 +444,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListWebhooks1
+## ListWebhooks
 
-> WebhookList ListWebhooks1(ctx).Limit(limit).PageToken(pageToken).IsEnabledOnly(isEnabledOnly).Execute()
+> WebhookList ListWebhooks(ctx).PageToken(pageToken).IsEnabledOnly(isEnabledOnly).Limit(limit).Execute()
 
 List webhooks
 
@@ -392,26 +458,26 @@ List webhooks
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "a8937a0d" // string |  (optional)
-    isEnabledOnly := true // bool |  (optional)
+	pageToken := "a8937a0d" // string |  (optional)
+	isEnabledOnly := true // bool |  (optional)
+	limit := int32(100) // int32 |  (optional) (default to 100)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.ListWebhooks1(context.Background()).Limit(limit).PageToken(pageToken).IsEnabledOnly(isEnabledOnly).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.ListWebhooks1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListWebhooks1`: WebhookList
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.ListWebhooks1`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksAPI.ListWebhooks(context.Background()).PageToken(pageToken).IsEnabledOnly(isEnabledOnly).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.ListWebhooks``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListWebhooks`: WebhookList
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.ListWebhooks`: %v\n", resp)
 }
 ```
 
@@ -421,14 +487,14 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListWebhooks1Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiListWebhooksRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
  **isEnabledOnly** | **bool** |  | 
+ **limit** | **int32** |  | [default to 100]
 
 ### Return type
 
@@ -448,9 +514,75 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## ReplaceSecret
+
+> ReplaceSecret200Response ReplaceSecret(ctx).ReplaceSecretRequest(replaceSecretRequest).Execute()
+
+Replace an existing secret
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
+)
+
+func main() {
+	replaceSecretRequest := *openapiclient.NewReplaceSecretRequest() // ReplaceSecretRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksAPI.ReplaceSecret(context.Background()).ReplaceSecretRequest(replaceSecretRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.ReplaceSecret``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReplaceSecret`: ReplaceSecret200Response
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.ReplaceSecret`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReplaceSecretRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **replaceSecretRequest** | [**ReplaceSecretRequest**](ReplaceSecretRequest.md) |  | 
+
+### Return type
+
+[**ReplaceSecret200Response**](ReplaceSecret200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ResendEvent
 
-> Event ResendEvent(ctx, webhookId, eventId).Delay(delay).Execute()
+> Event ResendEvent(ctx, eventId, webhookId).Delay(delay).Execute()
 
 Resend an event
 
@@ -462,26 +594,26 @@ Resend an event
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    webhookId := "3fa12d3f-6436-482c-a8a1-d65e9761dc2d" // string | Webhook ID
-    eventId := "cd3d505c-fc43-492b-b3e8-3050653b5afb" // string | Webhook event ID
-    delay := int32(56) // int32 | Delay the event triggering in seconds (optional)
+	eventId := "b01db9c7-78f2-4a99-8aca-1231d32f9b96" // string | Webhook event ID
+	webhookId := "b01db9c7-78f2-4a99-8aca-1231d32f9b96" // string | Webhook ID
+	delay := int32(56) // int32 | Delay the event triggering in seconds. Events are checked once a minute, so a short delay may not result in an immediate resend. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.ResendEvent(context.Background(), webhookId, eventId).Delay(delay).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.ResendEvent``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ResendEvent`: Event
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.ResendEvent`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksAPI.ResendEvent(context.Background(), eventId, webhookId).Delay(delay).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.ResendEvent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResendEvent`: Event
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.ResendEvent`: %v\n", resp)
 }
 ```
 
@@ -491,8 +623,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**webhookId** | **string** | Webhook ID | 
 **eventId** | **string** | Webhook event ID | 
+**webhookId** | **string** | Webhook ID | 
 
 ### Other Parameters
 
@@ -503,7 +635,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **delay** | **int32** | Delay the event triggering in seconds | 
+ **delay** | **int32** | Delay the event triggering in seconds. Events are checked once a minute, so a short delay may not result in an immediate resend. | 
 
 ### Return type
 
@@ -517,6 +649,70 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RevokeSecret
+
+> RevokeSecret(ctx).OldSecretOnly(oldSecretOnly).Execute()
+
+Revoke the secret
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
+)
+
+func main() {
+	oldSecretOnly := true // bool |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.RevokeSecret(context.Background()).OldSecretOnly(oldSecretOnly).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.RevokeSecret``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRevokeSecretRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **oldSecretOnly** | **bool** |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/problem+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -537,24 +733,24 @@ Trigger an event
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    triggerEventRequest := *openapiclient.NewTriggerEventRequest() // TriggerEventRequest | Provide an event type to trigger
+	triggerEventRequest := *openapiclient.NewTriggerEventRequest() // TriggerEventRequest | Provide an event type to trigger
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.TriggerEvent(context.Background()).TriggerEventRequest(triggerEventRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.TriggerEvent``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `TriggerEvent`: EventTrigger
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.TriggerEvent`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksAPI.TriggerEvent(context.Background()).TriggerEventRequest(triggerEventRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.TriggerEvent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TriggerEvent`: EventTrigger
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.TriggerEvent`: %v\n", resp)
 }
 ```
 
@@ -603,25 +799,25 @@ Update a webhook
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    webhookId := "3fa12d3f-6436-482c-a8a1-d65e9761dc2d" // string | Webhook ID
-    webhook := *openapiclient.NewWebhook([]openapiclient.EventType1{openapiclient.event_type1{EventTypeExplicit: penapiclient.event_type_explicit("ACCOUNT.CREATED")}}, false, "Url_example") // Webhook | Webhook to update
+	webhookId := "b01db9c7-78f2-4a99-8aca-1231d32f9b96" // string | Webhook ID
+	webhook := *openapiclient.NewWebhook([]openapiclient.EventType{openapiclient.event_type{EventTypeExplicit: openapiclient.event_type_explicit("ACCOUNT.CREATED")}}, false, "Url_example") // Webhook | Webhook to update
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.UpdateWebhook(context.Background(), webhookId).Webhook(webhook).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.UpdateWebhook``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateWebhook`: Webhook
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.UpdateWebhook`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksAPI.UpdateWebhook(context.Background(), webhookId).Webhook(webhook).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.UpdateWebhook``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateWebhook`: Webhook
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.UpdateWebhook`: %v\n", resp)
 }
 ```
 

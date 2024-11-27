@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Gateways** | Pointer to [**[]GatewayResponse**](GatewayResponse.md) | Array of Authorization gateway configuration | [optional] 
 **NextPageToken** | Pointer to **string** | If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows. | [optional] 
+**Gateways** | Pointer to [**[]GatewayResponse**](GatewayResponse.md) | Array of Authorization gateway configuration | [optional] 
 
 ## Methods
 
@@ -25,31 +25,6 @@ will change when the set of required properties is changed
 NewGatewayListResponseWithDefaults instantiates a new GatewayListResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetGateways
-
-`func (o *GatewayListResponse) GetGateways() []GatewayResponse`
-
-GetGateways returns the Gateways field if non-nil, zero value otherwise.
-
-### GetGatewaysOk
-
-`func (o *GatewayListResponse) GetGatewaysOk() (*[]GatewayResponse, bool)`
-
-GetGatewaysOk returns a tuple with the Gateways field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetGateways
-
-`func (o *GatewayListResponse) SetGateways(v []GatewayResponse)`
-
-SetGateways sets Gateways field to given value.
-
-### HasGateways
-
-`func (o *GatewayListResponse) HasGateways() bool`
-
-HasGateways returns a boolean if a field has been set.
 
 ### GetNextPageToken
 
@@ -75,6 +50,31 @@ SetNextPageToken sets NextPageToken field to given value.
 `func (o *GatewayListResponse) HasNextPageToken() bool`
 
 HasNextPageToken returns a boolean if a field has been set.
+
+### GetGateways
+
+`func (o *GatewayListResponse) GetGateways() []GatewayResponse`
+
+GetGateways returns the Gateways field if non-nil, zero value otherwise.
+
+### GetGatewaysOk
+
+`func (o *GatewayListResponse) GetGatewaysOk() (*[]GatewayResponse, bool)`
+
+GetGatewaysOk returns a tuple with the Gateways field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGateways
+
+`func (o *GatewayListResponse) SetGateways(v []GatewayResponse)`
+
+SetGateways sets Gateways field to given value.
+
+### HasGateways
+
+`func (o *GatewayListResponse) HasGateways() bool`
+
+HasGateways returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

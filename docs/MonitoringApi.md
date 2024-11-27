@@ -1,16 +1,16 @@
-# \MonitoringApi
+# \MonitoringAPI
 
-All URIs are relative to *https://api.synctera.com/v0*
+All URIs are relative to *https://api-sandbox.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateSubscription**](MonitoringApi.md#CreateSubscription) | **Post** /monitoring/subscriptions | Subscribe a customer or business to monitoring
-[**DeleteSubscription**](MonitoringApi.md#DeleteSubscription) | **Delete** /monitoring/subscriptions/{subscription_id} | Delete monitoring subscription
-[**GetAlert**](MonitoringApi.md#GetAlert) | **Get** /monitoring/alerts/{alert_id} | Retrieve a monitoring alert
-[**GetSubscription**](MonitoringApi.md#GetSubscription) | **Get** /monitoring/subscriptions/{subscription_id} | Retrieve monitoring subscription
-[**ListAlerts**](MonitoringApi.md#ListAlerts) | **Get** /monitoring/alerts | List monitoring alerts
-[**ListSubscriptions**](MonitoringApi.md#ListSubscriptions) | **Get** /monitoring/subscriptions | List monitoring subscriptions
-[**UpdateAlert**](MonitoringApi.md#UpdateAlert) | **Patch** /monitoring/alerts/{alert_id} | Update a monitoring alert
+[**CreateSubscription**](MonitoringAPI.md#CreateSubscription) | **Post** /monitoring/subscriptions | Subscribe a customer or business to monitoring
+[**DeleteSubscription**](MonitoringAPI.md#DeleteSubscription) | **Delete** /monitoring/subscriptions/{subscription_id} | Delete monitoring subscription
+[**GetAlert**](MonitoringAPI.md#GetAlert) | **Get** /monitoring/alerts/{alert_id} | Retrieve a monitoring alert
+[**GetSubscription**](MonitoringAPI.md#GetSubscription) | **Get** /monitoring/subscriptions/{subscription_id} | Retrieve monitoring subscription
+[**ListAlerts**](MonitoringAPI.md#ListAlerts) | **Get** /monitoring/alerts | List monitoring alerts
+[**ListSubscriptions**](MonitoringAPI.md#ListSubscriptions) | **Get** /monitoring/subscriptions | List monitoring subscriptions
+[**UpdateAlert**](MonitoringAPI.md#UpdateAlert) | **Patch** /monitoring/alerts/{alert_id} | Update a monitoring alert
 
 
 
@@ -28,24 +28,24 @@ Subscribe a customer or business to monitoring
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    monitoringSubscription := *openapiclient.NewMonitoringSubscription() // MonitoringSubscription | The monitoring subscription.
+	monitoringSubscription := *openapiclient.NewMonitoringSubscription() // MonitoringSubscription | The monitoring subscription.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MonitoringApi.CreateSubscription(context.Background()).MonitoringSubscription(monitoringSubscription).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MonitoringApi.CreateSubscription``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateSubscription`: MonitoringSubscription
-    fmt.Fprintf(os.Stdout, "Response from `MonitoringApi.CreateSubscription`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MonitoringAPI.CreateSubscription(context.Background()).MonitoringSubscription(monitoringSubscription).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MonitoringAPI.CreateSubscription``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateSubscription`: MonitoringSubscription
+	fmt.Fprintf(os.Stdout, "Response from `MonitoringAPI.CreateSubscription`: %v\n", resp)
 }
 ```
 
@@ -92,24 +92,24 @@ Delete monitoring subscription
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    subscriptionId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for monitoring subscription.
+	subscriptionId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for monitoring subscription.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MonitoringApi.DeleteSubscription(context.Background(), subscriptionId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MonitoringApi.DeleteSubscription``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `DeleteSubscription`: DeleteResponse
-    fmt.Fprintf(os.Stdout, "Response from `MonitoringApi.DeleteSubscription`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MonitoringAPI.DeleteSubscription(context.Background(), subscriptionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MonitoringAPI.DeleteSubscription``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteSubscription`: DeleteResponse
+	fmt.Fprintf(os.Stdout, "Response from `MonitoringAPI.DeleteSubscription`: %v\n", resp)
 }
 ```
 
@@ -160,24 +160,24 @@ Retrieve a monitoring alert
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    alertId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for this monitoring alert.
+	alertId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for this monitoring alert.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MonitoringApi.GetAlert(context.Background(), alertId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MonitoringApi.GetAlert``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetAlert`: MonitoringAlert
-    fmt.Fprintf(os.Stdout, "Response from `MonitoringApi.GetAlert`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MonitoringAPI.GetAlert(context.Background(), alertId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MonitoringAPI.GetAlert``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAlert`: MonitoringAlert
+	fmt.Fprintf(os.Stdout, "Response from `MonitoringAPI.GetAlert`: %v\n", resp)
 }
 ```
 
@@ -228,24 +228,24 @@ Retrieve monitoring subscription
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    subscriptionId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for monitoring subscription.
+	subscriptionId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for monitoring subscription.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MonitoringApi.GetSubscription(context.Background(), subscriptionId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MonitoringApi.GetSubscription``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSubscription`: MonitoringSubscription
-    fmt.Fprintf(os.Stdout, "Response from `MonitoringApi.GetSubscription`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MonitoringAPI.GetSubscription(context.Background(), subscriptionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MonitoringAPI.GetSubscription``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSubscription`: MonitoringSubscription
+	fmt.Fprintf(os.Stdout, "Response from `MonitoringAPI.GetSubscription`: %v\n", resp)
 }
 ```
 
@@ -286,7 +286,7 @@ Name | Type | Description  | Notes
 
 ## ListAlerts
 
-> MonitoringAlertList ListAlerts(ctx).Id(id).PersonId(personId).BusinessId(businessId).Limit(limit).PageToken(pageToken).Execute()
+> MonitoringAlertList ListAlerts(ctx).Id(id).BusinessId(businessId).PageToken(pageToken).PersonId(personId).Limit(limit).Execute()
 
 List monitoring alerts
 
@@ -296,28 +296,28 @@ List monitoring alerts
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    id := []string{"Inner_example"} // []string | Unique identifier for the resource. Multiple IDs can be provided as a comma-separated list.  (optional)
-    personId := []string{"Inner_example"} // []string | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  (optional)
-    businessId := []string{"Inner_example"} // []string | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  (optional)
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "a8937a0d" // string |  (optional)
+	id := []string{"Inner_example"} // []string | Unique identifier for the resource. Multiple IDs can be provided as a comma-separated list.  (optional)
+	businessId := []string{"Inner_example"} // []string | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  (optional)
+	pageToken := "a8937a0d" // string |  (optional)
+	personId := []string{"Inner_example"} // []string | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  (optional)
+	limit := int32(100) // int32 |  (optional) (default to 100)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MonitoringApi.ListAlerts(context.Background()).Id(id).PersonId(personId).BusinessId(businessId).Limit(limit).PageToken(pageToken).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MonitoringApi.ListAlerts``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListAlerts`: MonitoringAlertList
-    fmt.Fprintf(os.Stdout, "Response from `MonitoringApi.ListAlerts`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MonitoringAPI.ListAlerts(context.Background()).Id(id).BusinessId(businessId).PageToken(pageToken).PersonId(personId).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MonitoringAPI.ListAlerts``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListAlerts`: MonitoringAlertList
+	fmt.Fprintf(os.Stdout, "Response from `MonitoringAPI.ListAlerts`: %v\n", resp)
 }
 ```
 
@@ -333,10 +333,10 @@ Other parameters are passed through a pointer to a apiListAlertsRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **[]string** | Unique identifier for the resource. Multiple IDs can be provided as a comma-separated list.  | 
- **personId** | **[]string** | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  | 
  **businessId** | **[]string** | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  | 
- **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
+ **personId** | **[]string** | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  | 
+ **limit** | **int32** |  | [default to 100]
 
 ### Return type
 
@@ -358,7 +358,7 @@ Name | Type | Description  | Notes
 
 ## ListSubscriptions
 
-> MonitoringSubscriptionList ListSubscriptions(ctx).Id(id).PersonId(personId).BusinessId(businessId).Limit(limit).PageToken(pageToken).Execute()
+> MonitoringSubscriptionList ListSubscriptions(ctx).Id(id).BusinessId(businessId).PageToken(pageToken).PersonId(personId).Limit(limit).Execute()
 
 List monitoring subscriptions
 
@@ -368,28 +368,28 @@ List monitoring subscriptions
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    id := []string{"Inner_example"} // []string | Unique identifier for the resource. Multiple IDs can be provided as a comma-separated list.  (optional)
-    personId := []string{"Inner_example"} // []string | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  (optional)
-    businessId := []string{"Inner_example"} // []string | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  (optional)
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "a8937a0d" // string |  (optional)
+	id := []string{"Inner_example"} // []string | Unique identifier for the resource. Multiple IDs can be provided as a comma-separated list.  (optional)
+	businessId := []string{"Inner_example"} // []string | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  (optional)
+	pageToken := "a8937a0d" // string |  (optional)
+	personId := []string{"Inner_example"} // []string | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  (optional)
+	limit := int32(100) // int32 |  (optional) (default to 100)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MonitoringApi.ListSubscriptions(context.Background()).Id(id).PersonId(personId).BusinessId(businessId).Limit(limit).PageToken(pageToken).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MonitoringApi.ListSubscriptions``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListSubscriptions`: MonitoringSubscriptionList
-    fmt.Fprintf(os.Stdout, "Response from `MonitoringApi.ListSubscriptions`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MonitoringAPI.ListSubscriptions(context.Background()).Id(id).BusinessId(businessId).PageToken(pageToken).PersonId(personId).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MonitoringAPI.ListSubscriptions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListSubscriptions`: MonitoringSubscriptionList
+	fmt.Fprintf(os.Stdout, "Response from `MonitoringAPI.ListSubscriptions`: %v\n", resp)
 }
 ```
 
@@ -405,10 +405,10 @@ Other parameters are passed through a pointer to a apiListSubscriptionsRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **[]string** | Unique identifier for the resource. Multiple IDs can be provided as a comma-separated list.  | 
- **personId** | **[]string** | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  | 
  **businessId** | **[]string** | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  | 
- **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
+ **personId** | **[]string** | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  | 
+ **limit** | **int32** |  | [default to 100]
 
 ### Return type
 
@@ -440,23 +440,23 @@ Update a monitoring alert
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    alertId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for this monitoring alert.
-    monitoringAlert := *openapiclient.NewMonitoringAlert() // MonitoringAlert | Monitoring alert to update.
+	alertId := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for this monitoring alert.
+	monitoringAlert := *openapiclient.NewMonitoringAlert() // MonitoringAlert | Monitoring alert to update.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MonitoringApi.UpdateAlert(context.Background(), alertId).MonitoringAlert(monitoringAlert).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MonitoringApi.UpdateAlert``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.MonitoringAPI.UpdateAlert(context.Background(), alertId).MonitoringAlert(monitoringAlert).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MonitoringAPI.UpdateAlert``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
