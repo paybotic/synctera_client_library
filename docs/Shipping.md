@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | Pointer to [**Address1**](Address1.md) |  | [optional] 
+**Address** | Pointer to [**Address1**](Address1.md) | The address to which the card will be shipped - Defaults to account shipping address if none supplied | [optional] 
 **CareOfLine** | Pointer to **string** | The name of the person to send in care of | [optional] 
 **IsExpeditedFulfillment** | Pointer to **bool** | Is the shipment expedited | [optional] [default to false]
-**Method** | Pointer to **string** | The shipping method | [optional] [default to "LOCAL_MAIL"]
+**Method** | Pointer to **string** | The shipping method. * &#x60;INTERNATIONAL_GROUND&#x60; is only available for addresses in Canada and Mexico.  | [optional] [default to "LOCAL_MAIL"]
 **PhoneNumber** | Pointer to **string** | The phone number of the recipient | [optional] 
 **RecipientName** | Pointer to [**RecipientName**](RecipientName.md) |  | [optional] 
 

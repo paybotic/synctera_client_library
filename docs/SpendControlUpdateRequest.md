@@ -9,7 +9,9 @@ Name | Type | Description | Notes
 **AmountLimit** | Pointer to **int64** | Monetary limit for the spend control in the smallest currency unit (eg cents) | [optional] 
 **Direction** | Pointer to [**SpendControlDirection**](SpendControlDirection.md) |  | [optional] 
 **IsActive** | Pointer to **bool** | Indicates if spend control is active | [optional] 
+**MerchantCategoryCodes** | Pointer to **[]string** | merchant category codes for spend control | [optional] 
 **Name** | Pointer to **string** | Name assigned to spend control | [optional] 
+**PaymentSubTypes** | Pointer to [**[]PaymentSubType**](PaymentSubType.md) | A list of payment sub-types to which a spend control will apply, if set. If not set or the array is empty, then the spend control will apply to all sub-types. | [optional] 
 **PaymentTypes** | Pointer to [**[]PaymentType**](PaymentType.md) | A list of payment types to which a spend control will apply, if set. If not set or the array is empty, then the spend control will apply to all types of payments. | [optional] 
 **TimeRange** | Pointer to [**SpendControlTimeRange**](SpendControlTimeRange.md) |  | [optional] 
 
@@ -157,6 +159,31 @@ SetIsActive sets IsActive field to given value.
 
 HasIsActive returns a boolean if a field has been set.
 
+### GetMerchantCategoryCodes
+
+`func (o *SpendControlUpdateRequest) GetMerchantCategoryCodes() []string`
+
+GetMerchantCategoryCodes returns the MerchantCategoryCodes field if non-nil, zero value otherwise.
+
+### GetMerchantCategoryCodesOk
+
+`func (o *SpendControlUpdateRequest) GetMerchantCategoryCodesOk() (*[]string, bool)`
+
+GetMerchantCategoryCodesOk returns a tuple with the MerchantCategoryCodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantCategoryCodes
+
+`func (o *SpendControlUpdateRequest) SetMerchantCategoryCodes(v []string)`
+
+SetMerchantCategoryCodes sets MerchantCategoryCodes field to given value.
+
+### HasMerchantCategoryCodes
+
+`func (o *SpendControlUpdateRequest) HasMerchantCategoryCodes() bool`
+
+HasMerchantCategoryCodes returns a boolean if a field has been set.
+
 ### GetName
 
 `func (o *SpendControlUpdateRequest) GetName() string`
@@ -181,6 +208,31 @@ SetName sets Name field to given value.
 `func (o *SpendControlUpdateRequest) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetPaymentSubTypes
+
+`func (o *SpendControlUpdateRequest) GetPaymentSubTypes() []PaymentSubType`
+
+GetPaymentSubTypes returns the PaymentSubTypes field if non-nil, zero value otherwise.
+
+### GetPaymentSubTypesOk
+
+`func (o *SpendControlUpdateRequest) GetPaymentSubTypesOk() (*[]PaymentSubType, bool)`
+
+GetPaymentSubTypesOk returns a tuple with the PaymentSubTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentSubTypes
+
+`func (o *SpendControlUpdateRequest) SetPaymentSubTypes(v []PaymentSubType)`
+
+SetPaymentSubTypes sets PaymentSubTypes field to given value.
+
+### HasPaymentSubTypes
+
+`func (o *SpendControlUpdateRequest) HasPaymentSubTypes() bool`
+
+HasPaymentSubTypes returns a boolean if a field has been set.
 
 ### GetPaymentTypes
 

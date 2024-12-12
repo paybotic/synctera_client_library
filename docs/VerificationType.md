@@ -3,31 +3,17 @@
 ## Enum
 
 
-* `FRAUD` (value: `"fraud"`)
+* `DOCUMENT_VERIFICATION` (value: `"DOCUMENT_VERIFICATION"`)
 
-* `SYNTHETIC` (value: `"synthetic"`)
+* `IDENTITY` (value: `"IDENTITY"`)
 
-* `EMAILRISK` (value: `"emailrisk"`)
+* `LICENSE` (value: `"LICENSE"`)
 
-* `PHONERISK` (value: `"phonerisk"`)
+* `MANUAL_REVIEW` (value: `"MANUAL_REVIEW"`)
 
-* `ADDRESSRISK` (value: `"addressrisk"`)
+* `RELATED_ENTITIES` (value: `"RELATED_ENTITIES"`)
 
-* `KYC` (value: `"kyc"`)
-
-* `SOCIAL` (value: `"social"`)
-
-* `WATCHLISTSTANDARD` (value: `"watchliststandard"`)
-
-* `WATCHLISTPREMIER` (value: `"watchlistpremier"`)
-
-* `WATCHLISTPLUS` (value: `"watchlistplus"`)
-
-* `DOCUMENTVERIFICATION` (value: `"documentverification"`)
-
-* `ALERTLIST` (value: `"alertlist"`)
-
-* `DECISION` (value: `"decision"`)
+* `WATCHLIST` (value: `"WATCHLIST"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

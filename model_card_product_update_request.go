@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -17,7 +17,7 @@ import (
 // CardProductUpdateRequest struct for CardProductUpdateRequest
 type CardProductUpdateRequest struct {
 	DigitalWalletTokenization *DigitalWalletTokenization `json:"digital_wallet_tokenization,omitempty"`
-	// Allow issuing cards on this product without requiring KYC (customer and account statuses must still be valid, and the customer must still be associated to the account). If set to true on a virtual card product, activation of newly issued cards on that product will no longer be created in an activated state automatically. With this setting enabled, cards will be issued in an unactivated state, and activation of the cards will be blocked until the customer has passed KYC. 
+	// Allow issuing cards on this product without requiring KYC (customer and account statuses must still be valid, and the customer must still be associated to the account). If set to true on a virtual card product, activation of newly issued cards on that product will no longer be created in an activated state automatically. With this setting enabled, cards will be issued in an unactivated state, and activation of the cards will be blocked until the customer has passed KYC.
 	IssueWithoutKyc *bool `json:"issue_without_kyc,omitempty"`
 }
 
@@ -148,5 +148,3 @@ func (v *NullableCardProductUpdateRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

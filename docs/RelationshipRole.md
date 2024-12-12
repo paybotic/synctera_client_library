@@ -3,9 +3,9 @@
 ## Enum
 
 
-* `CUSTODIAN` (value: `"CUSTODIAN"`)
-
 * `BENEFICIARY` (value: `"BENEFICIARY"`)
+
+* `CUSTODIAN` (value: `"CUSTODIAN"`)
 
 * `PARTNER` (value: `"PARTNER"`)
 

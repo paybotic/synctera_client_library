@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.20.0
 */
@@ -19,14 +19,13 @@ import (
 	"strings"
 )
 
-
 // ApplicationsApiService ApplicationsApi service
 type ApplicationsApiService service
 
 type ApiCreateApplicationRequest struct {
-	ctx context.Context
-	ApiService *ApplicationsApiService
-	application *Application
+	ctx            context.Context
+	ApiService     *ApplicationsApiService
+	application    *Application
 	idempotencyKey *string
 }
 
@@ -51,25 +50,25 @@ CreateApplication Create a credit application.
 
 Create a credit application.
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateApplicationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateApplicationRequest
 */
 func (a *ApplicationsApiService) CreateApplication(ctx context.Context) ApiCreateApplicationRequest {
 	return ApiCreateApplicationRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ApplicationResponse
+//
+//	@return ApplicationResponse
 func (a *ApplicationsApiService) CreateApplicationExecute(r ApiCreateApplicationRequest) (*ApplicationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ApplicationResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ApplicationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplicationsApiService.CreateApplication")
@@ -205,8 +204,8 @@ func (a *ApplicationsApiService) CreateApplicationExecute(r ApiCreateApplication
 }
 
 type ApiGetApplicationRequest struct {
-	ctx context.Context
-	ApiService *ApplicationsApiService
+	ctx           context.Context
+	ApiService    *ApplicationsApiService
 	applicationId string
 }
 
@@ -219,27 +218,27 @@ GetApplication Get Application
 
 Get application by ID.
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param applicationId Unique identifier for the application.
- @return ApiGetApplicationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param applicationId Unique identifier for the application.
+	@return ApiGetApplicationRequest
 */
 func (a *ApplicationsApiService) GetApplication(ctx context.Context, applicationId string) ApiGetApplicationRequest {
 	return ApiGetApplicationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:    a,
+		ctx:           ctx,
 		applicationId: applicationId,
 	}
 }
 
 // Execute executes the request
-//  @return ApplicationResponse
+//
+//	@return ApplicationResponse
 func (a *ApplicationsApiService) GetApplicationExecute(r ApiGetApplicationRequest) (*ApplicationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ApplicationResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ApplicationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplicationsApiService.GetApplication")
@@ -358,10 +357,10 @@ func (a *ApplicationsApiService) GetApplicationExecute(r ApiGetApplicationReques
 }
 
 type ApiListApplicationsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ApplicationsApiService
 	customerId *[]string
-	status *ApplicationStatus
+	status     *ApplicationStatus
 }
 
 // A list of customer unique identifiers, with a comma separating any values.
@@ -370,7 +369,7 @@ func (r ApiListApplicationsRequest) CustomerId(customerId []string) ApiListAppli
 	return r
 }
 
-// Status of the credit application 
+// Status of the credit application
 func (r ApiListApplicationsRequest) Status(status ApplicationStatus) ApiListApplicationsRequest {
 	r.status = &status
 	return r
@@ -385,25 +384,25 @@ ListApplications List credit applications.
 
 List credit applications.
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListApplicationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListApplicationsRequest
 */
 func (a *ApplicationsApiService) ListApplications(ctx context.Context) ApiListApplicationsRequest {
 	return ApiListApplicationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ApplicationList
+//
+//	@return ApplicationList
 func (a *ApplicationsApiService) ListApplicationsExecute(r ApiListApplicationsRequest) (*ApplicationList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ApplicationList
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ApplicationList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplicationsApiService.ListApplications")
@@ -517,11 +516,11 @@ func (a *ApplicationsApiService) ListApplicationsExecute(r ApiListApplicationsRe
 }
 
 type ApiPatchApplicationRequest struct {
-	ctx context.Context
-	ApiService *ApplicationsApiService
-	applicationId string
+	ctx              context.Context
+	ApiService       *ApplicationsApiService
+	applicationId    string
 	applicationPatch *ApplicationPatch
-	idempotencyKey *string
+	idempotencyKey   *string
 }
 
 // Application fields to be patched
@@ -545,27 +544,27 @@ PatchApplication Patch Application
 
 Patch Application.
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param applicationId Unique identifier for the application.
- @return ApiPatchApplicationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param applicationId Unique identifier for the application.
+	@return ApiPatchApplicationRequest
 */
 func (a *ApplicationsApiService) PatchApplication(ctx context.Context, applicationId string) ApiPatchApplicationRequest {
 	return ApiPatchApplicationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:    a,
+		ctx:           ctx,
 		applicationId: applicationId,
 	}
 }
 
 // Execute executes the request
-//  @return ApplicationResponse
+//
+//	@return ApplicationResponse
 func (a *ApplicationsApiService) PatchApplicationExecute(r ApiPatchApplicationRequest) (*ApplicationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ApplicationResponse
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ApplicationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplicationsApiService.PatchApplication")

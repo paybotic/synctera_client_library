@@ -5,9 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AchRoutingNumber** | Pointer to **string** | The routing number used for US ACH payments. Only appears if &#x60;bank_countries&#x60; contains &#x60;US&#x60;. Value may be masked, in which case only the last four digits are returned.  | [optional] 
+**BankAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
 **BankCountries** | **[]string** | The countries that this bank operates the account in | 
 **BankName** | **string** | The name of the bank managing the account | 
-**EftRoutingNumber** | Pointer to **string** | The routing number used for EFT payments, identifying a Canadian bank, consisting of the institution number and the branch number. Only appears if &#x60;bank_countries&#x60; contains &#x60;CA&#x60;. Value may be masked, in which case only the last four digits are returned.  | [optional] 
+**CorrespondentBankDetails** | Pointer to [**[]CorrespondentBankDetails**](CorrespondentBankDetails.md) | The details of the correspondent banks for the account.  | [optional] 
+**EftCaRoutingNumber** | Pointer to **string** | &gt; 🚧 Alpha &gt; This is an Alpha property. Feedback from the community is welcome. We may make breaking changes to this property. The 9 digit routing number used for EFT CA payments, identifying a Canadian bank. The format is 0xxxyyyyy where xxx is the institution number and yyyyy is the transit number. On write, Synctera will store the entire routing number; on read, we only return the last 4 characters. Value may be masked, in which case only the last four digits are returned.  | [optional] 
+**EftRoutingNumber** | Pointer to **string** | The routing number used for EFT payments, identifying a Canadian bank, consisting of the institution number and the branch number. Only appears if &#x60;bank_countries&#x60; contains &#x60;CA&#x60;. Value may be masked, in which case only the last four digits are returned. This attribute is deprecated and will be removed in a future API version. Use eft_ca_routing_number instead.  | [optional] 
 **SwiftCode** | Pointer to **string** | The SWIFT code for the bank. Value may be masked, in which case only the last four characters are returned.  | [optional] 
 **WireRoutingNumber** | Pointer to **string** | The routing number used for domestic wire payments. Only appears if &#x60;bank_countries&#x60; contains &#x60;US&#x60;. Value may be masked, in which case only the last four digits are returned.  | [optional] 
 
@@ -55,6 +58,31 @@ SetAchRoutingNumber sets AchRoutingNumber field to given value.
 
 HasAchRoutingNumber returns a boolean if a field has been set.
 
+### GetBankAddress
+
+`func (o *AccountRouting) GetBankAddress() Address`
+
+GetBankAddress returns the BankAddress field if non-nil, zero value otherwise.
+
+### GetBankAddressOk
+
+`func (o *AccountRouting) GetBankAddressOk() (*Address, bool)`
+
+GetBankAddressOk returns a tuple with the BankAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBankAddress
+
+`func (o *AccountRouting) SetBankAddress(v Address)`
+
+SetBankAddress sets BankAddress field to given value.
+
+### HasBankAddress
+
+`func (o *AccountRouting) HasBankAddress() bool`
+
+HasBankAddress returns a boolean if a field has been set.
+
 ### GetBankCountries
 
 `func (o *AccountRouting) GetBankCountries() []string`
@@ -94,6 +122,66 @@ and a boolean to check if the value has been set.
 
 SetBankName sets BankName field to given value.
 
+
+### GetCorrespondentBankDetails
+
+`func (o *AccountRouting) GetCorrespondentBankDetails() []CorrespondentBankDetails`
+
+GetCorrespondentBankDetails returns the CorrespondentBankDetails field if non-nil, zero value otherwise.
+
+### GetCorrespondentBankDetailsOk
+
+`func (o *AccountRouting) GetCorrespondentBankDetailsOk() (*[]CorrespondentBankDetails, bool)`
+
+GetCorrespondentBankDetailsOk returns a tuple with the CorrespondentBankDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCorrespondentBankDetails
+
+`func (o *AccountRouting) SetCorrespondentBankDetails(v []CorrespondentBankDetails)`
+
+SetCorrespondentBankDetails sets CorrespondentBankDetails field to given value.
+
+### HasCorrespondentBankDetails
+
+`func (o *AccountRouting) HasCorrespondentBankDetails() bool`
+
+HasCorrespondentBankDetails returns a boolean if a field has been set.
+
+### SetCorrespondentBankDetailsNil
+
+`func (o *AccountRouting) SetCorrespondentBankDetailsNil(b bool)`
+
+ SetCorrespondentBankDetailsNil sets the value for CorrespondentBankDetails to be an explicit nil
+
+### UnsetCorrespondentBankDetails
+`func (o *AccountRouting) UnsetCorrespondentBankDetails()`
+
+UnsetCorrespondentBankDetails ensures that no value is present for CorrespondentBankDetails, not even an explicit nil
+### GetEftCaRoutingNumber
+
+`func (o *AccountRouting) GetEftCaRoutingNumber() string`
+
+GetEftCaRoutingNumber returns the EftCaRoutingNumber field if non-nil, zero value otherwise.
+
+### GetEftCaRoutingNumberOk
+
+`func (o *AccountRouting) GetEftCaRoutingNumberOk() (*string, bool)`
+
+GetEftCaRoutingNumberOk returns a tuple with the EftCaRoutingNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEftCaRoutingNumber
+
+`func (o *AccountRouting) SetEftCaRoutingNumber(v string)`
+
+SetEftCaRoutingNumber sets EftCaRoutingNumber field to given value.
+
+### HasEftCaRoutingNumber
+
+`func (o *AccountRouting) HasEftCaRoutingNumber() bool`
+
+HasEftCaRoutingNumber returns a boolean if a field has been set.
 
 ### GetEftRoutingNumber
 

@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **Network** | **string** | The network this transaction is associated with | 
 **RelatedLine** | **int32** |  | 
 **Seq** | **int32** |  | 
-**Tenant** | **string** | The tenant associated with this transaction, in the form \&quot;&lt;bankid&gt;_&lt;partnerid&gt;\&quot; | 
+**Tenant** | **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | 
 **Updated** | **time.Time** | The date the transaction was last updated | 
 **Uuid** | **string** |  | 
 

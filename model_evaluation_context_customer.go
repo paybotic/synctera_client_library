@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -18,14 +18,14 @@ import (
 type EvaluationContextCustomer struct {
 	// bank ID of the customer being evaluated
 	BankId int32 `json:"bank_id"`
-	// Evaluate rules matching this email address. 
+	// Evaluate rules matching this email address.
 	Email *string `json:"email,omitempty"`
 	// partner ID of the customer being evaluated
 	PartnerId int32 `json:"partner_id"`
-	// Evaluate rules matching this phone number. Use E.164 format, with a leading \"+\" and a country code. 
-	PhoneNumber *string `json:"phone_number,omitempty"`
+	// Evaluate rules matching this phone number. Use E.164 format, with a leading \"+\" and a country code.
+	PhoneNumber  *string      `json:"phone_number,omitempty"`
 	ResourceType ResourceType `json:"resource_type"`
-	// Evaluate rules matching for the SSN represented by this token. 
+	// Evaluate rules matching for the SSN represented by this token.
 	SsnToken *string `json:"ssn_token,omitempty"`
 }
 
@@ -275,5 +275,3 @@ func (v *NullableEvaluationContextCustomer) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

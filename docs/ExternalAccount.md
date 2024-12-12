@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **AccountOwnerNames** | **[]string** | The names of the account owners. Values may be masked, in which case the array will be empty.  | 
 **BusinessId** | Pointer to **string** | The identifier for the business customer associated with this external account. Exactly one of &#x60;business_id&#x60; or &#x60;customer_id&#x60; will be returned.  | [optional] 
 **CreationTime** | **time.Time** |  | 
+**Currency** | Pointer to **string** | ISO 4217 alphabetic currency code | [optional] 
 **CustomerId** | Pointer to **string** | The identifier for the personal customer associated with this external account. Exactly one of &#x60;customer_id&#x60; or &#x60;business_id&#x60; will be returned.  | [optional] 
 **DeletionTime** | Pointer to **time.Time** |  | [optional] 
 **Id** | **string** | External account unique identifier | [readonly] 
@@ -17,6 +18,7 @@ Name | Type | Description | Notes
 **Nickname** | Pointer to **NullableString** | A user-meaningful name for the account | [optional] 
 **RoutingIdentifiers** | [**AccountRouting**](AccountRouting.md) |  | 
 **Status** | **string** | The current state of the account | 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 **Type** | **string** | The type of the account | 
 **VendorData** | Pointer to [**ExternalAccountVendorData**](ExternalAccountVendorData.md) |  | [optional] 
 **VendorInfo** | Pointer to [**VendorInfo**](VendorInfo.md) |  | [optional] 
@@ -125,6 +127,31 @@ and a boolean to check if the value has been set.
 
 SetCreationTime sets CreationTime field to given value.
 
+
+### GetCurrency
+
+`func (o *ExternalAccount) GetCurrency() string`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *ExternalAccount) GetCurrencyOk() (*string, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *ExternalAccount) SetCurrency(v string)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *ExternalAccount) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
 
 ### GetCustomerId
 
@@ -340,6 +367,31 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
+
+### GetTenant
+
+`func (o *ExternalAccount) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *ExternalAccount) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *ExternalAccount) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *ExternalAccount) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetType
 

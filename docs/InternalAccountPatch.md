@@ -5,8 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountType** | Pointer to [**InternalAccountType**](InternalAccountType.md) |  | [optional] 
+**BankAccountId** | Pointer to **string** | The ID of the bank account associated with this internal account. It will be auto-filled if the account type has only one matching bank account in the system.  | [optional] 
 **Description** | Pointer to **string** | A user provided description for the current account | [optional] 
-**Purpose** | Pointer to [**InternalAccountPurpose**](InternalAccountPurpose.md) |  | [optional] [default to INTERNALACCOUNTPURPOSE_PROFIT_AND_LOSS]
+**Purpose** | Pointer to [**InternalAccountPurpose**](InternalAccountPurpose.md) |  | [optional] 
 
 ## Methods
 
@@ -51,6 +52,31 @@ SetAccountType sets AccountType field to given value.
 `func (o *InternalAccountPatch) HasAccountType() bool`
 
 HasAccountType returns a boolean if a field has been set.
+
+### GetBankAccountId
+
+`func (o *InternalAccountPatch) GetBankAccountId() string`
+
+GetBankAccountId returns the BankAccountId field if non-nil, zero value otherwise.
+
+### GetBankAccountIdOk
+
+`func (o *InternalAccountPatch) GetBankAccountIdOk() (*string, bool)`
+
+GetBankAccountIdOk returns a tuple with the BankAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBankAccountId
+
+`func (o *InternalAccountPatch) SetBankAccountId(v string)`
+
+SetBankAccountId sets BankAccountId field to given value.
+
+### HasBankAccountId
+
+`func (o *InternalAccountPatch) HasBankAccountId() bool`
+
+HasBankAccountId returns a boolean if a field has been set.
 
 ### GetDescription
 

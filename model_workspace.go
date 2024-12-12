@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -19,17 +19,17 @@ type Workspace struct {
 	// Bank ID
 	BankId int32 `json:"bank_id"`
 	// First Name
-	BankName string `json:"bank_name"`
+	BankName    string      `json:"bank_name"`
 	Environment Environment `json:"environment"`
 	// Partner ID
 	PartnerId int32 `json:"partner_id"`
 	// Last Name
 	PartnerName string `json:"partner_name"`
-	// Each workspace has a rank. The highest-ranked (lowest numerical value) workspace is intended to be presented first within its environment. 
+	// Each workspace has a rank. The highest-ranked (lowest numerical value) workspace is intended to be presented first within its environment.
 	Rank int32 `json:"rank"`
-	// The id of the tenant containing the resource. 
-	Tenant *string `json:"tenant,omitempty"`
-	VerificationStatus string `json:"verification_status"`
+	// The id of the tenant containing the resource.
+	Tenant             *string `json:"tenant,omitempty"`
+	VerificationStatus string  `json:"verification_status"`
 }
 
 // NewWorkspace instantiates a new Workspace object
@@ -320,5 +320,3 @@ func (v *NullableWorkspace) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

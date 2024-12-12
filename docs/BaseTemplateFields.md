@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountType** | [**AccountType**](AccountType.md) |  | 
+**BankAccountId** | Pointer to **string** | The bank account ID for this account. This is a unique identifier for the bank side account that this Synctera account belongs to. This field can be auto filled if only one bank account of the appropriate type exist for the tenant of concern.  | [optional] 
 **BankCountry** | **string** | Bank country of the account. ISO 3166-1 Alpha-2 or Alpha-3 country code. | 
 **Currency** | **string** | Account currency. ISO 4217 alphabetic currency code | 
 
@@ -46,6 +47,31 @@ and a boolean to check if the value has been set.
 
 SetAccountType sets AccountType field to given value.
 
+
+### GetBankAccountId
+
+`func (o *BaseTemplateFields) GetBankAccountId() string`
+
+GetBankAccountId returns the BankAccountId field if non-nil, zero value otherwise.
+
+### GetBankAccountIdOk
+
+`func (o *BaseTemplateFields) GetBankAccountIdOk() (*string, bool)`
+
+GetBankAccountIdOk returns a tuple with the BankAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBankAccountId
+
+`func (o *BaseTemplateFields) SetBankAccountId(v string)`
+
+SetBankAccountId sets BankAccountId field to given value.
+
+### HasBankAccountId
+
+`func (o *BaseTemplateFields) HasBankAccountId() bool`
+
+HasBankAccountId returns a boolean if a field has been set.
 
 ### GetBankCountry
 

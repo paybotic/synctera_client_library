@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Alerts** | [**[]MonitoringAlert**](MonitoringAlert.md) |  | 
 **NextPageToken** | Pointer to **string** | If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows. | [optional] 
+**Alerts** | [**[]MonitoringAlert**](MonitoringAlert.md) |  | 
 
 ## Methods
 
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewMonitoringAlertListWithDefaults instantiates a new MonitoringAlertList object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAlerts
-
-`func (o *MonitoringAlertList) GetAlerts() []MonitoringAlert`
-
-GetAlerts returns the Alerts field if non-nil, zero value otherwise.
-
-### GetAlertsOk
-
-`func (o *MonitoringAlertList) GetAlertsOk() (*[]MonitoringAlert, bool)`
-
-GetAlertsOk returns a tuple with the Alerts field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAlerts
-
-`func (o *MonitoringAlertList) SetAlerts(v []MonitoringAlert)`
-
-SetAlerts sets Alerts field to given value.
-
 
 ### GetNextPageToken
 
@@ -70,6 +50,26 @@ SetNextPageToken sets NextPageToken field to given value.
 `func (o *MonitoringAlertList) HasNextPageToken() bool`
 
 HasNextPageToken returns a boolean if a field has been set.
+
+### GetAlerts
+
+`func (o *MonitoringAlertList) GetAlerts() []MonitoringAlert`
+
+GetAlerts returns the Alerts field if non-nil, zero value otherwise.
+
+### GetAlertsOk
+
+`func (o *MonitoringAlertList) GetAlertsOk() (*[]MonitoringAlert, bool)`
+
+GetAlertsOk returns a tuple with the Alerts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlerts
+
+`func (o *MonitoringAlertList) SetAlerts(v []MonitoringAlert)`
+
+SetAlerts sets Alerts field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

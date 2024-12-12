@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Frequency** | **string** |  | 
 **Interval** | **int32** | Interval between recurrences, e.g. interval &#x3D; 2 with frequency &#x3D; WEEKLY means every other week. | 
 **StartDate** | **string** | Start date of the schedule (inclusive) | 
+**StartSearch** | Pointer to **string** | start_search determines the direction of the search for a start date that falls on a banking day. If &#39;BACKWARD&#39; is selected, the search begins from the specified start date and checks each preceding day, up to a month. Conversely, if &#39;FORWARD&#39; is selected, the search commences from the specified start date and checks each subsequent day, for up to a month.  | [optional] 
 
 ## Methods
 
@@ -138,6 +139,31 @@ and a boolean to check if the value has been set.
 
 SetStartDate sets StartDate field to given value.
 
+
+### GetStartSearch
+
+`func (o *ScheduleConfig) GetStartSearch() string`
+
+GetStartSearch returns the StartSearch field if non-nil, zero value otherwise.
+
+### GetStartSearchOk
+
+`func (o *ScheduleConfig) GetStartSearchOk() (*string, bool)`
+
+GetStartSearchOk returns a tuple with the StartSearch field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartSearch
+
+`func (o *ScheduleConfig) SetStartSearch(v string)`
+
+SetStartSearch sets StartSearch field to given value.
+
+### HasStartSearch
+
+`func (o *ScheduleConfig) HasStartSearch() bool`
+
+HasStartSearch returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

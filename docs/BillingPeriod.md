@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Frequency** | **string** | The frequency of billing cycles. Along with the start date, this will determine the start and end of each cycle.  | 
-**StartDate** | **time.Time** | The first day of the first billing cycle for this account. For a monthly billing cycle, this would determine the day of the month each billing cycle will start on.  | 
+**Frequency** | [**BillingFrequency**](BillingFrequency.md) |  | 
+**StartDate** | **time.Time** | The first day of the first billing cycle for this account. For a monthly billing cycle, this would determine the day of the month each billing cycle will start on. Note that, although this is returned as a UTC timestamp, the date always corresponds to the bank&#39;s calendar, and therefore the time and timezone should be ignored.  | 
 
 ## Methods
 
 ### NewBillingPeriod
 
-`func NewBillingPeriod(frequency string, startDate time.Time, ) *BillingPeriod`
+`func NewBillingPeriod(frequency BillingFrequency, startDate time.Time, ) *BillingPeriod`
 
 NewBillingPeriod instantiates a new BillingPeriod object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetFrequency
 
-`func (o *BillingPeriod) GetFrequency() string`
+`func (o *BillingPeriod) GetFrequency() BillingFrequency`
 
 GetFrequency returns the Frequency field if non-nil, zero value otherwise.
 
 ### GetFrequencyOk
 
-`func (o *BillingPeriod) GetFrequencyOk() (*string, bool)`
+`func (o *BillingPeriod) GetFrequencyOk() (*BillingFrequency, bool)`
 
 GetFrequencyOk returns a tuple with the Frequency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFrequency
 
-`func (o *BillingPeriod) SetFrequency(v string)`
+`func (o *BillingPeriod) SetFrequency(v BillingFrequency)`
 
 SetFrequency sets Frequency field to given value.
 

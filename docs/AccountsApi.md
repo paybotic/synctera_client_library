@@ -1,27 +1,29 @@
-# \AccountsApi
+# \AccountsAPI
 
-All URIs are relative to *https://api.synctera.com/v0*
+All URIs are relative to *https://api-sandbox.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateAccount**](AccountsApi.md#CreateAccount) | **Post** /accounts | Create an account
-[**CreateAccountRelationship**](AccountsApi.md#CreateAccountRelationship) | **Post** /accounts/{account_id}/relationships | Create account relationship
-[**CreateAccountResourceProduct**](AccountsApi.md#CreateAccountResourceProduct) | **Post** /accounts/products | Create an account product
-[**CreateAccountTemplate**](AccountsApi.md#CreateAccountTemplate) | **Post** /accounts/templates | Create an account template
-[**DeleteAccountRelationship**](AccountsApi.md#DeleteAccountRelationship) | **Delete** /accounts/{account_id}/relationships/{relationship_id} | Delete account relationship
-[**DeleteAccountTemplate**](AccountsApi.md#DeleteAccountTemplate) | **Delete** /accounts/templates/{template_id} | Delete account template
-[**GetAccount**](AccountsApi.md#GetAccount) | **Get** /accounts/{account_id} | Get account
-[**GetAccountRelationship**](AccountsApi.md#GetAccountRelationship) | **Get** /accounts/{account_id}/relationships/{relationship_id} | Get account relationship
-[**GetAccountTemplate**](AccountsApi.md#GetAccountTemplate) | **Get** /accounts/templates/{template_id} | Get account template
-[**ListAccountRelationship**](AccountsApi.md#ListAccountRelationship) | **Get** /accounts/{account_id}/relationships | List account relationships
-[**ListAccountResourceProducts**](AccountsApi.md#ListAccountResourceProducts) | **Get** /accounts/products | List account products
-[**ListAccountTemplates**](AccountsApi.md#ListAccountTemplates) | **Get** /accounts/templates | List account templates
-[**ListAccounts**](AccountsApi.md#ListAccounts) | **Get** /accounts | List accounts
-[**PatchAccount**](AccountsApi.md#PatchAccount) | **Patch** /accounts/{account_id} | Patch account
-[**PatchAccountProduct**](AccountsApi.md#PatchAccountProduct) | **Patch** /accounts/products/{product_id} | Patch account product
-[**UpdateAccount**](AccountsApi.md#UpdateAccount) | **Put** /accounts/{account_id} | Update account
-[**UpdateAccountRelationship**](AccountsApi.md#UpdateAccountRelationship) | **Put** /accounts/{account_id}/relationships/{relationship_id} | Update account relationship
-[**UpdateAccountTemplate**](AccountsApi.md#UpdateAccountTemplate) | **Put** /accounts/templates/{template_id} | Update account template
+[**CreateAccount**](AccountsAPI.md#CreateAccount) | **Post** /accounts | Create an account
+[**CreateAccountRelationship**](AccountsAPI.md#CreateAccountRelationship) | **Post** /accounts/{account_id}/relationships | Create account relationship
+[**CreateAccountResourceProduct**](AccountsAPI.md#CreateAccountResourceProduct) | **Post** /accounts/products | Create an account product
+[**CreateAccountTemplate**](AccountsAPI.md#CreateAccountTemplate) | **Post** /accounts/templates | Create an account template
+[**DeleteAccountRelationship**](AccountsAPI.md#DeleteAccountRelationship) | **Delete** /accounts/{account_id}/relationships/{relationship_id} | Delete account relationship
+[**DeleteAccountTemplate**](AccountsAPI.md#DeleteAccountTemplate) | **Delete** /accounts/templates/{template_id} | Delete account template
+[**GetAccount**](AccountsAPI.md#GetAccount) | **Get** /accounts/{account_id} | Get account
+[**GetAccountRelationship**](AccountsAPI.md#GetAccountRelationship) | **Get** /accounts/{account_id}/relationships/{relationship_id} | Get account relationship
+[**GetAccountTemplate**](AccountsAPI.md#GetAccountTemplate) | **Get** /accounts/templates/{template_id} | Get account template
+[**InitiateAccountClosure**](AccountsAPI.md#InitiateAccountClosure) | **Post** /accounts/{account_id}/initiate_closure | Initiate account closure
+[**ListAccountRelationship**](AccountsAPI.md#ListAccountRelationship) | **Get** /accounts/{account_id}/relationships | List account relationships
+[**ListAccountResourceProducts**](AccountsAPI.md#ListAccountResourceProducts) | **Get** /accounts/products | List account products
+[**ListAccountTemplates**](AccountsAPI.md#ListAccountTemplates) | **Get** /accounts/templates | List account templates
+[**ListAccounts**](AccountsAPI.md#ListAccounts) | **Get** /accounts | List accounts
+[**ListStopPayment**](AccountsAPI.md#ListStopPayment) | **Get** /accounts/stop_payments | List stop payments
+[**PatchAccount**](AccountsAPI.md#PatchAccount) | **Patch** /accounts/{account_id} | Patch account
+[**PatchAccountProduct**](AccountsAPI.md#PatchAccountProduct) | **Patch** /accounts/products/{product_id} | Patch account product
+[**UpdateAccount**](AccountsAPI.md#UpdateAccount) | **Put** /accounts/{account_id} | Update account
+[**UpdateAccountRelationship**](AccountsAPI.md#UpdateAccountRelationship) | **Put** /accounts/{account_id}/relationships/{relationship_id} | Update account relationship
+[**UpdateAccountTemplate**](AccountsAPI.md#UpdateAccountTemplate) | **Put** /accounts/templates/{template_id} | Update account template
 
 
 
@@ -39,25 +41,25 @@ Create an account
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    accountCreation := *openapiclient.NewAccountCreation() // AccountCreation | Account to create
-    idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
+	accountCreation := *openapiclient.NewAccountCreation() // AccountCreation | Account to create
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.CreateAccount(context.Background()).AccountCreation(accountCreation).IdempotencyKey(idempotencyKey).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.CreateAccount``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateAccount`: AccountGenericResponse
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.CreateAccount`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.CreateAccount(context.Background()).AccountCreation(accountCreation).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.CreateAccount``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateAccount`: AccountGenericResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.CreateAccount`: %v\n", resp)
 }
 ```
 
@@ -95,7 +97,7 @@ Name | Type | Description  | Notes
 
 ## CreateAccountRelationship
 
-> Relationship CreateAccountRelationship(ctx, accountId).Relationship(relationship).IdempotencyKey(idempotencyKey).Execute()
+> RelationshipResponse CreateAccountRelationship(ctx, accountId).AccountRelationship(accountRelationship).IdempotencyKey(idempotencyKey).Execute()
 
 Create account relationship
 
@@ -107,26 +109,26 @@ Create account relationship
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
-    relationship := *openapiclient.NewRelationship(openapiclient.account_relationship_type("PRIMARY_ACCOUNT_HOLDER")) // Relationship | Account relationship object
-    idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
+	accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
+	accountRelationship := *openapiclient.NewAccountRelationship(openapiclient.account_relationship_type("ACCOUNT_HOLDER")) // AccountRelationship | Account relationship object
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.CreateAccountRelationship(context.Background(), accountId).Relationship(relationship).IdempotencyKey(idempotencyKey).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.CreateAccountRelationship``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateAccountRelationship`: Relationship
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.CreateAccountRelationship`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.CreateAccountRelationship(context.Background(), accountId).AccountRelationship(accountRelationship).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.CreateAccountRelationship``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateAccountRelationship`: RelationshipResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.CreateAccountRelationship`: %v\n", resp)
 }
 ```
 
@@ -146,12 +148,12 @@ Other parameters are passed through a pointer to a apiCreateAccountRelationshipR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **relationship** | [**Relationship**](Relationship.md) | Account relationship object | 
+ **accountRelationship** | [**AccountRelationship**](AccountRelationship.md) | Account relationship object | 
  **idempotencyKey** | **string** | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. | 
 
 ### Return type
 
-[**Relationship**](Relationship.md)
+[**RelationshipResponse**](RelationshipResponse.md)
 
 ### Authorization
 
@@ -181,25 +183,25 @@ Create an account product
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    accountProduct := openapiclient.account_product{Fee: openapiclient.NewFee(int64(123), "Currency_example", "FeeType_example", "ProductType_example")} // AccountProduct | Account product to create
-    idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
+	accountProduct := openapiclient.account_product{Fee: openapiclient.NewFee(int64(123), "Currency_example", "FeeType_example", "ProductType_example")} // AccountProduct | Account product to create
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.CreateAccountResourceProduct(context.Background()).AccountProduct(accountProduct).IdempotencyKey(idempotencyKey).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.CreateAccountResourceProduct``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateAccountResourceProduct`: AccountProduct
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.CreateAccountResourceProduct`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.CreateAccountResourceProduct(context.Background()).AccountProduct(accountProduct).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.CreateAccountResourceProduct``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateAccountResourceProduct`: AccountProduct
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.CreateAccountResourceProduct`: %v\n", resp)
 }
 ```
 
@@ -249,25 +251,25 @@ Create an account template
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    accountTemplate := *openapiclient.NewAccountTemplate(false, "Name_example", openapiclient.template_fields{TemplateFieldsChargeSecured: openapiclient.NewTemplateFieldsChargeSecured(openapiclient.account_type("SAVING"), "US", "USD", "InterestProductId_example", openapiclient.minimum_payment_full{MinimumPaymentTypeFull: openapiclient.NewMinimumPaymentTypeFull(openapiclient.minimum_payment_type("RATE_OR_AMOUNT"))})}) // AccountTemplate | Account template to create
-    idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
+	accountTemplate := *openapiclient.NewAccountTemplate(false, "Name_example", openapiclient.template_fields{TemplateFieldsChargeSecured: openapiclient.NewTemplateFieldsChargeSecured(openapiclient.account_type("CHARGE_SECURED"), "US", "USD", openapiclient.minimum_payment_full{MinimumPaymentTypeFull: openapiclient.NewMinimumPaymentTypeFull(openapiclient.minimum_payment_type("FULL"))})}) // AccountTemplate | Account template to create
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.CreateAccountTemplate(context.Background()).AccountTemplate(accountTemplate).IdempotencyKey(idempotencyKey).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.CreateAccountTemplate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateAccountTemplate`: AccountTemplateResponse
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.CreateAccountTemplate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.CreateAccountTemplate(context.Background()).AccountTemplate(accountTemplate).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.CreateAccountTemplate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateAccountTemplate`: AccountTemplateResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.CreateAccountTemplate`: %v\n", resp)
 }
 ```
 
@@ -305,7 +307,7 @@ Name | Type | Description  | Notes
 
 ## DeleteAccountRelationship
 
-> DeleteResponse DeleteAccountRelationship(ctx, accountId, relationshipId).Execute()
+> DeleteResponse DeleteAccountRelationship(ctx, relationshipId, accountId).Execute()
 
 Delete account relationship
 
@@ -317,25 +319,25 @@ Delete account relationship
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
-    relationshipId := "1a582c51-e4ff-4e57-9558-08cab6b963aa" // string | Relationship ID of the account associate with the account entity
+	relationshipId := "1a582c51-e4ff-4e57-9558-08cab6b963aa" // string | Relationship ID of the account associate with the account entity
+	accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.DeleteAccountRelationship(context.Background(), accountId, relationshipId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.DeleteAccountRelationship``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `DeleteAccountRelationship`: DeleteResponse
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.DeleteAccountRelationship`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.DeleteAccountRelationship(context.Background(), relationshipId, accountId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.DeleteAccountRelationship``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteAccountRelationship`: DeleteResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.DeleteAccountRelationship`: %v\n", resp)
 }
 ```
 
@@ -345,8 +347,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** | Unique identifier for the account. | 
 **relationshipId** | **string** | Relationship ID of the account associate with the account entity | 
+**accountId** | **string** | Unique identifier for the account. | 
 
 ### Other Parameters
 
@@ -390,24 +392,24 @@ Delete account template
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    templateId := "a8943c51-e4ff-4e57-9558-08cab6b963c0" // string | Account Template ID
+	templateId := "a8943c51-e4ff-4e57-9558-08cab6b963c0" // string | Account Template ID
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.DeleteAccountTemplate(context.Background(), templateId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.DeleteAccountTemplate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `DeleteAccountTemplate`: DeleteResponse
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.DeleteAccountTemplate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.DeleteAccountTemplate(context.Background(), templateId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.DeleteAccountTemplate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteAccountTemplate`: DeleteResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.DeleteAccountTemplate`: %v\n", resp)
 }
 ```
 
@@ -460,24 +462,24 @@ Get account
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
+	accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.GetAccount(context.Background(), accountId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.GetAccount``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetAccount`: AccountGenericResponse
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.GetAccount`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.GetAccount(context.Background(), accountId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.GetAccount``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAccount`: AccountGenericResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.GetAccount`: %v\n", resp)
 }
 ```
 
@@ -518,7 +520,7 @@ Name | Type | Description  | Notes
 
 ## GetAccountRelationship
 
-> Relationship GetAccountRelationship(ctx, accountId, relationshipId).Execute()
+> RelationshipResponse GetAccountRelationship(ctx, relationshipId, accountId).Execute()
 
 Get account relationship
 
@@ -530,25 +532,25 @@ Get account relationship
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
-    relationshipId := "1a582c51-e4ff-4e57-9558-08cab6b963aa" // string | Relationship ID of the account associate with the account entity
+	relationshipId := "1a582c51-e4ff-4e57-9558-08cab6b963aa" // string | Relationship ID of the account associate with the account entity
+	accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.GetAccountRelationship(context.Background(), accountId, relationshipId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.GetAccountRelationship``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetAccountRelationship`: Relationship
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.GetAccountRelationship`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.GetAccountRelationship(context.Background(), relationshipId, accountId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.GetAccountRelationship``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAccountRelationship`: RelationshipResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.GetAccountRelationship`: %v\n", resp)
 }
 ```
 
@@ -558,8 +560,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** | Unique identifier for the account. | 
 **relationshipId** | **string** | Relationship ID of the account associate with the account entity | 
+**accountId** | **string** | Unique identifier for the account. | 
 
 ### Other Parameters
 
@@ -573,7 +575,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Relationship**](Relationship.md)
+[**RelationshipResponse**](RelationshipResponse.md)
 
 ### Authorization
 
@@ -603,24 +605,24 @@ Get account template
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    templateId := "a8943c51-e4ff-4e57-9558-08cab6b963c0" // string | Account Template ID
+	templateId := "a8943c51-e4ff-4e57-9558-08cab6b963c0" // string | Account Template ID
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.GetAccountTemplate(context.Background(), templateId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.GetAccountTemplate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetAccountTemplate`: AccountTemplateResponse
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.GetAccountTemplate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.GetAccountTemplate(context.Background(), templateId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.GetAccountTemplate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAccountTemplate`: AccountTemplateResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.GetAccountTemplate`: %v\n", resp)
 }
 ```
 
@@ -659,9 +661,83 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## InitiateAccountClosure
+
+> AccountGenericResponse InitiateAccountClosure(ctx, accountId).AccountClosure(accountClosure).IdempotencyKey(idempotencyKey).Execute()
+
+Initiate account closure
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
+)
+
+func main() {
+	accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
+	accountClosure := *openapiclient.NewAccountClosure("DestinationId_example", "PaymentMethod_example", openapiclient.account_closure_reason("BANK_REQUEST_FRAUD"), "ReasonDetails_example") // AccountClosure | Account to close
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.InitiateAccountClosure(context.Background(), accountId).AccountClosure(accountClosure).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.InitiateAccountClosure``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `InitiateAccountClosure`: AccountGenericResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.InitiateAccountClosure`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**accountId** | **string** | Unique identifier for the account. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiInitiateAccountClosureRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **accountClosure** | [**AccountClosure**](AccountClosure.md) | Account to close | 
+ **idempotencyKey** | **string** | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. | 
+
+### Return type
+
+[**AccountGenericResponse**](AccountGenericResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListAccountRelationship
 
-> RelationshipList ListAccountRelationship(ctx, accountId).Limit(limit).PageToken(pageToken).Execute()
+> RelationshipList ListAccountRelationship(ctx, accountId).PageToken(pageToken).Limit(limit).Execute()
 
 List account relationships
 
@@ -673,26 +749,26 @@ List account relationships
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "a8937a0d" // string |  (optional)
+	accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
+	pageToken := "a8937a0d" // string |  (optional)
+	limit := int32(100) // int32 |  (optional) (default to 100)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.ListAccountRelationship(context.Background(), accountId).Limit(limit).PageToken(pageToken).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.ListAccountRelationship``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListAccountRelationship`: RelationshipList
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.ListAccountRelationship`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.ListAccountRelationship(context.Background(), accountId).PageToken(pageToken).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.ListAccountRelationship``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListAccountRelationship`: RelationshipList
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.ListAccountRelationship`: %v\n", resp)
 }
 ```
 
@@ -712,8 +788,8 @@ Other parameters are passed through a pointer to a apiListAccountRelationshipReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
+ **limit** | **int32** |  | [default to 100]
 
 ### Return type
 
@@ -735,7 +811,7 @@ Name | Type | Description  | Notes
 
 ## ListAccountResourceProducts
 
-> AccountProductList ListAccountResourceProducts(ctx).ProductType(productType).Limit(limit).PageToken(pageToken).StartDate(startDate).EndDate(endDate).Execute()
+> AccountProductList ListAccountResourceProducts(ctx).ProductType(productType).EndDate(endDate).PageToken(pageToken).Id(id).Limit(limit).StartDate(startDate).Execute()
 
 List account products
 
@@ -747,29 +823,30 @@ List account products
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
+	"context"
+	"fmt"
+	"os"
     "time"
-    openapiclient "./openapi"
+	openapiclient "./openapi"
 )
 
 func main() {
-    productType := "productType_example" // string | Type of account product
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "a8937a0d" // string |  (optional)
-    startDate := time.Now() // string | Date range filtering for type INTEREST. All rates in interest resource have to have valid_from later or equal to start_date. (optional)
-    endDate := time.Now() // string | Date range filtering for type INTEREST. All rates in interest resource have to have valid_to earlier or equal to end_date. (optional)
+	productType := "productType_example" // string | Type of account product
+	endDate := time.Now() // string | Date range filtering for type INTEREST. All rates in interest resource have to have valid_to earlier or equal to end_date. (optional)
+	pageToken := "a8937a0d" // string |  (optional)
+	id := "id_example" // string | ID of account product. Multiple IDs can be provided as a comma-separated list. (optional)
+	limit := int32(100) // int32 |  (optional) (default to 100)
+	startDate := time.Now() // string | Date range filtering for type INTEREST. All rates in interest resource have to have valid_from later or equal to start_date. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.ListAccountResourceProducts(context.Background()).ProductType(productType).Limit(limit).PageToken(pageToken).StartDate(startDate).EndDate(endDate).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.ListAccountResourceProducts``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListAccountResourceProducts`: AccountProductList
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.ListAccountResourceProducts`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.ListAccountResourceProducts(context.Background()).ProductType(productType).EndDate(endDate).PageToken(pageToken).Id(id).Limit(limit).StartDate(startDate).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.ListAccountResourceProducts``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListAccountResourceProducts`: AccountProductList
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.ListAccountResourceProducts`: %v\n", resp)
 }
 ```
 
@@ -785,10 +862,11 @@ Other parameters are passed through a pointer to a apiListAccountResourceProduct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **productType** | **string** | Type of account product | 
- **limit** | **int32** |  | [default to 100]
- **pageToken** | **string** |  | 
- **startDate** | **string** | Date range filtering for type INTEREST. All rates in interest resource have to have valid_from later or equal to start_date. | 
  **endDate** | **string** | Date range filtering for type INTEREST. All rates in interest resource have to have valid_to earlier or equal to end_date. | 
+ **pageToken** | **string** |  | 
+ **id** | **string** | ID of account product. Multiple IDs can be provided as a comma-separated list. | 
+ **limit** | **int32** |  | [default to 100]
+ **startDate** | **string** | Date range filtering for type INTEREST. All rates in interest resource have to have valid_from later or equal to start_date. | 
 
 ### Return type
 
@@ -810,7 +888,7 @@ Name | Type | Description  | Notes
 
 ## ListAccountTemplates
 
-> TemplateList ListAccountTemplates(ctx).AccountType(accountType).Limit(limit).PageToken(pageToken).Execute()
+> TemplateList ListAccountTemplates(ctx).AccountType(accountType).PageToken(pageToken).Limit(limit).Execute()
 
 List account templates
 
@@ -822,26 +900,26 @@ List account templates
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    accountType := openapiclient.account_type("SAVING") // AccountType | The type of the account  (optional)
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "a8937a0d" // string |  (optional)
+	accountType := openapiclient.account_type("CHARGE_SECURED") // AccountType | The type of the account  (optional)
+	pageToken := "a8937a0d" // string |  (optional)
+	limit := int32(100) // int32 |  (optional) (default to 100)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.ListAccountTemplates(context.Background()).AccountType(accountType).Limit(limit).PageToken(pageToken).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.ListAccountTemplates``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListAccountTemplates`: TemplateList
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.ListAccountTemplates`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.ListAccountTemplates(context.Background()).AccountType(accountType).PageToken(pageToken).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.ListAccountTemplates``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListAccountTemplates`: TemplateList
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.ListAccountTemplates`: %v\n", resp)
 }
 ```
 
@@ -857,8 +935,8 @@ Other parameters are passed through a pointer to a apiListAccountTemplatesReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **accountType** | [**AccountType**](AccountType.md) | The type of the account  | 
- **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
+ **limit** | **int32** |  | [default to 100]
 
 ### Return type
 
@@ -880,7 +958,7 @@ Name | Type | Description  | Notes
 
 ## ListAccounts
 
-> AccountList ListAccounts(ctx).Id(id).AccountType(accountType).LinkedAccountId(linkedAccountId).OverdraftAccountId(overdraftAccountId).OverflowAccountId(overflowAccountId).AccountNumber(accountNumber).Status(status).InterestProductId(interestProductId).CustomerType(customerType).SpendControlIds(spendControlIds).CustomerId(customerId).BusinessId(businessId).PersonId(personId).FirstName(firstName).LastName(lastName).Limit(limit).PageToken(pageToken).SortBy(sortBy).Execute()
+> AccountList ListAccounts(ctx).Nickname(nickname).AccountNumber(accountNumber).LastName(lastName).GeneralLedgerType(generalLedgerType).Status(status).FirstName(firstName).OverflowAccountId(overflowAccountId).AccountType(accountType).BusinessId(businessId).OverdraftAccountId(overdraftAccountId).SpendControlIds(spendControlIds).PageToken(pageToken).PersonId(personId).CustomerType(customerType).Limit(limit).CustomerId(customerId).InterestProductId(interestProductId).LinkedAccountId(linkedAccountId).Id(id).SortBy(sortBy).Execute()
 
 List accounts
 
@@ -892,41 +970,43 @@ List accounts
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    id := []string{"Inner_example"} // []string | Account ID(s). Multiple IDs can be provided as a comma-separated list.  (optional)
-    accountType := openapiclient.account_type("SAVING") // AccountType | The type of the account  (optional)
-    linkedAccountId := []string{"Inner_example"} // []string | Return only resources that are linked to the specified backing account in balance_floor or balance_ceiling. Multiple IDs can be provided as a comma-separated list.  (optional)
-    overdraftAccountId := []string{"Inner_example"} // []string | Overdraft account ID(s). Multiple IDs can be provided as a comma-separated list. This parameter is deprecated and will be removed in a future API version. Use linked_account_id instead.  (optional)
-    overflowAccountId := []string{"Inner_example"} // []string | Overflow account ID(s). Multiple IDs can be provided as a comma-separated list. This parameter is deprecated and will be removed in a future API version. Use linked_account_id instead.  (optional)
-    accountNumber := []string{"Inner_example"} // []string | Account number(s). Multiple account numbers can be provided as a comma-separated list. When only a single account number is provided, any * characters in the string are wildcards, and match any characters.  (optional)
-    status := openapiclient.status("APPLICATION_SUBMITTED") // Status |  (optional)
-    interestProductId := "interestProductId_example" // string | Interest product ID that accounts associate with. Multiple IDs can be provided as a comma-separated list. (optional)
-    customerType := openapiclient.customer_type("BUSINESS") // CustomerType | Customer type of the account, BUSINESS or PERSONAL  (optional)
-    spendControlIds := []string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"} // []string | Spend Control ID(s). Multiple IDs can be provided as a comma-separated list. Return only resources that use the specified Spend Controls.  (optional)
-    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier (optional)
-    businessId := []string{"Inner_example"} // []string | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  (optional)
-    personId := []string{"Inner_example"} // []string | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  (optional)
-    firstName := "Alice" // string |  (optional)
-    lastName := "Smith" // string |  (optional)
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "a8937a0d" // string |  (optional)
-    sortBy := []string{"SortBy_example"} // []string | Specifies the sort order for the returned accounts.  (optional)
+	nickname := "nickname_example" // string | Nickname of the account  (optional)
+	accountNumber := []string{"Inner_example"} // []string | Account number(s). Multiple account numbers can be provided as a comma-separated list. When only a single account number is provided, any * characters in the string are wildcards, and match any characters.  (optional)
+	lastName := "Smith" // string |  (optional)
+	generalLedgerType := openapiclient.general_ledger_type("ACH_SETTLEMENT") // GeneralLedgerType | The type of the general ledger account  (optional)
+	status := openapiclient.account_status("ACCOUNT_NEVER_ACTIVE") // AccountStatus |  (optional)
+	firstName := "Alice" // string |  (optional)
+	overflowAccountId := []string{"Inner_example"} // []string | Overflow account ID(s). Multiple IDs can be provided as a comma-separated list. This parameter is deprecated and will be removed in a future API version. Use linked_account_id instead.  (optional)
+	accountType := openapiclient.account_type("CHARGE_SECURED") // AccountType | The type of the account  (optional)
+	businessId := []string{"Inner_example"} // []string | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  (optional)
+	overdraftAccountId := []string{"Inner_example"} // []string | Overdraft account ID(s). Multiple IDs can be provided as a comma-separated list. This parameter is deprecated and will be removed in a future API version. Use linked_account_id instead.  (optional)
+	spendControlIds := []string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"} // []string | Spend Control ID(s). Multiple IDs can be provided as a comma-separated list. Return only resources that use the specified Spend Controls.  (optional)
+	pageToken := "a8937a0d" // string |  (optional)
+	personId := []string{"Inner_example"} // []string | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  (optional)
+	customerType := openapiclient.customer_type("BUSINESS") // CustomerType | Customer type of the account, BUSINESS or PERSONAL  (optional)
+	limit := int32(100) // int32 |  (optional) (default to 100)
+	customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The customer's unique identifier (optional)
+	interestProductId := "interestProductId_example" // string | Interest product ID that accounts associate with. Multiple IDs can be provided as a comma-separated list. (optional)
+	linkedAccountId := []string{"Inner_example"} // []string | Return only resources that are linked to the specified backing account in balance_floor or balance_ceiling. Multiple IDs can be provided as a comma-separated list.  (optional)
+	id := []string{"Inner_example"} // []string | Account ID(s). Multiple IDs can be provided as a comma-separated list.  (optional)
+	sortBy := []string{"SortBy_example"} // []string | Specifies the sort order for the returned accounts.  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.ListAccounts(context.Background()).Id(id).AccountType(accountType).LinkedAccountId(linkedAccountId).OverdraftAccountId(overdraftAccountId).OverflowAccountId(overflowAccountId).AccountNumber(accountNumber).Status(status).InterestProductId(interestProductId).CustomerType(customerType).SpendControlIds(spendControlIds).CustomerId(customerId).BusinessId(businessId).PersonId(personId).FirstName(firstName).LastName(lastName).Limit(limit).PageToken(pageToken).SortBy(sortBy).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.ListAccounts``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListAccounts`: AccountList
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.ListAccounts`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.ListAccounts(context.Background()).Nickname(nickname).AccountNumber(accountNumber).LastName(lastName).GeneralLedgerType(generalLedgerType).Status(status).FirstName(firstName).OverflowAccountId(overflowAccountId).AccountType(accountType).BusinessId(businessId).OverdraftAccountId(overdraftAccountId).SpendControlIds(spendControlIds).PageToken(pageToken).PersonId(personId).CustomerType(customerType).Limit(limit).CustomerId(customerId).InterestProductId(interestProductId).LinkedAccountId(linkedAccountId).Id(id).SortBy(sortBy).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.ListAccounts``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListAccounts`: AccountList
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.ListAccounts`: %v\n", resp)
 }
 ```
 
@@ -941,23 +1021,25 @@ Other parameters are passed through a pointer to a apiListAccountsRequest struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **[]string** | Account ID(s). Multiple IDs can be provided as a comma-separated list.  | 
- **accountType** | [**AccountType**](AccountType.md) | The type of the account  | 
- **linkedAccountId** | **[]string** | Return only resources that are linked to the specified backing account in balance_floor or balance_ceiling. Multiple IDs can be provided as a comma-separated list.  | 
- **overdraftAccountId** | **[]string** | Overdraft account ID(s). Multiple IDs can be provided as a comma-separated list. This parameter is deprecated and will be removed in a future API version. Use linked_account_id instead.  | 
- **overflowAccountId** | **[]string** | Overflow account ID(s). Multiple IDs can be provided as a comma-separated list. This parameter is deprecated and will be removed in a future API version. Use linked_account_id instead.  | 
+ **nickname** | **string** | Nickname of the account  | 
  **accountNumber** | **[]string** | Account number(s). Multiple account numbers can be provided as a comma-separated list. When only a single account number is provided, any * characters in the string are wildcards, and match any characters.  | 
- **status** | [**Status**](Status.md) |  | 
- **interestProductId** | **string** | Interest product ID that accounts associate with. Multiple IDs can be provided as a comma-separated list. | 
- **customerType** | [**CustomerType**](CustomerType.md) | Customer type of the account, BUSINESS or PERSONAL  | 
- **spendControlIds** | **[]string** | Spend Control ID(s). Multiple IDs can be provided as a comma-separated list. Return only resources that use the specified Spend Controls.  | 
- **customerId** | **string** | The customer&#39;s unique identifier | 
- **businessId** | **[]string** | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  | 
- **personId** | **[]string** | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  | 
- **firstName** | **string** |  | 
  **lastName** | **string** |  | 
- **limit** | **int32** |  | [default to 100]
+ **generalLedgerType** | [**GeneralLedgerType**](GeneralLedgerType.md) | The type of the general ledger account  | 
+ **status** | [**AccountStatus**](AccountStatus.md) |  | 
+ **firstName** | **string** |  | 
+ **overflowAccountId** | **[]string** | Overflow account ID(s). Multiple IDs can be provided as a comma-separated list. This parameter is deprecated and will be removed in a future API version. Use linked_account_id instead.  | 
+ **accountType** | [**AccountType**](AccountType.md) | The type of the account  | 
+ **businessId** | **[]string** | Unique identifier for the business. Multiple IDs can be provided as a comma-separated list.  | 
+ **overdraftAccountId** | **[]string** | Overdraft account ID(s). Multiple IDs can be provided as a comma-separated list. This parameter is deprecated and will be removed in a future API version. Use linked_account_id instead.  | 
+ **spendControlIds** | **[]string** | Spend Control ID(s). Multiple IDs can be provided as a comma-separated list. Return only resources that use the specified Spend Controls.  | 
  **pageToken** | **string** |  | 
+ **personId** | **[]string** | Unique identifier for the person. Multiple IDs can be provided as a comma-separated list.  | 
+ **customerType** | [**CustomerType**](CustomerType.md) | Customer type of the account, BUSINESS or PERSONAL  | 
+ **limit** | **int32** |  | [default to 100]
+ **customerId** | **string** | The customer&#39;s unique identifier | 
+ **interestProductId** | **string** | Interest product ID that accounts associate with. Multiple IDs can be provided as a comma-separated list. | 
+ **linkedAccountId** | **[]string** | Return only resources that are linked to the specified backing account in balance_floor or balance_ceiling. Multiple IDs can be provided as a comma-separated list.  | 
+ **id** | **[]string** | Account ID(s). Multiple IDs can be provided as a comma-separated list.  | 
  **sortBy** | **[]string** | Specifies the sort order for the returned accounts.  | 
 
 ### Return type
@@ -978,9 +1060,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## ListStopPayment
+
+> StopPaymentList ListStopPayment(ctx).TransactionId(transactionId).OriginatorName(originatorName).AccountId(accountId).StopPaymentId(stopPaymentId).Execute()
+
+List stop payments
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
+)
+
+func main() {
+	transactionId := []string{"Inner_example"} // []string | A list of centinel transaction ids to filter on. (optional)
+	originatorName := []string{"Inner_example"} // []string | A list of originator names to filter on when listing stop payments. (optional)
+	accountId := []string{"Inner_example"} // []string | A list of account ids to filter on. (optional)
+	stopPaymentId := []string{"Inner_example"} // []string | A list of stop payments to filter on. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.ListStopPayment(context.Background()).TransactionId(transactionId).OriginatorName(originatorName).AccountId(accountId).StopPaymentId(stopPaymentId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.ListStopPayment``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListStopPayment`: StopPaymentList
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.ListStopPayment`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListStopPaymentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **transactionId** | **[]string** | A list of centinel transaction ids to filter on. | 
+ **originatorName** | **[]string** | A list of originator names to filter on when listing stop payments. | 
+ **accountId** | **[]string** | A list of account ids to filter on. | 
+ **stopPaymentId** | **[]string** | A list of stop payments to filter on. | 
+
+### Return type
+
+[**StopPaymentList**](StopPaymentList.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchAccount
 
-> AccountGenericResponse PatchAccount(ctx, accountId).Account(account).IdempotencyKey(idempotencyKey).Execute()
+> AccountGenericResponse PatchAccount(ctx, accountId).PatchAccount(patchAccount).IdempotencyKey(idempotencyKey).Execute()
 
 Patch account
 
@@ -992,26 +1146,26 @@ Patch account
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
-    account := *openapiclient.NewAccount() // Account | Account fields to be patched
-    idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
+	accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
+	patchAccount := *openapiclient.NewPatchAccount() // PatchAccount | Account fields to be patched
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.PatchAccount(context.Background(), accountId).Account(account).IdempotencyKey(idempotencyKey).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.PatchAccount``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PatchAccount`: AccountGenericResponse
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.PatchAccount`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.PatchAccount(context.Background(), accountId).PatchAccount(patchAccount).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.PatchAccount``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchAccount`: AccountGenericResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.PatchAccount`: %v\n", resp)
 }
 ```
 
@@ -1031,7 +1185,7 @@ Other parameters are passed through a pointer to a apiPatchAccountRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **account** | [**Account**](Account.md) | Account fields to be patched | 
+ **patchAccount** | [**PatchAccount**](PatchAccount.md) | Account fields to be patched | 
  **idempotencyKey** | **string** | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. | 
 
 ### Return type
@@ -1066,26 +1220,26 @@ Patch account product
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    productId := "92113c51-e4ff-4e57-9558-08cab6b963dd" // string | Account Product ID
-    patchAccountProduct := openapiclient.patch_account_product{Fee: openapiclient.NewFee(int64(123), "Currency_example", "FeeType_example", "ProductType_example")} // PatchAccountProduct | Account product fields to be patched
-    idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
+	productId := "92113c51-e4ff-4e57-9558-08cab6b963dd" // string | Account Product ID
+	patchAccountProduct := openapiclient.patch_account_product{Fee: openapiclient.NewFee(int64(123), "Currency_example", "FeeType_example", "ProductType_example")} // PatchAccountProduct | Account product fields to be patched
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.PatchAccountProduct(context.Background(), productId).PatchAccountProduct(patchAccountProduct).IdempotencyKey(idempotencyKey).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.PatchAccountProduct``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PatchAccountProduct`: AccountProduct
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.PatchAccountProduct`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.PatchAccountProduct(context.Background(), productId).PatchAccountProduct(patchAccountProduct).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.PatchAccountProduct``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchAccountProduct`: AccountProduct
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.PatchAccountProduct`: %v\n", resp)
 }
 ```
 
@@ -1128,7 +1282,7 @@ Name | Type | Description  | Notes
 
 ## UpdateAccount
 
-> AccountGenericResponse UpdateAccount(ctx, accountId).Account(account).Execute()
+> AccountGenericResponse UpdateAccount(ctx, accountId).UpdateAccount(updateAccount).Execute()
 
 Update account
 
@@ -1140,25 +1294,25 @@ Update account
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
-    account := *openapiclient.NewAccount() // Account | Account to update
+	accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
+	updateAccount := *openapiclient.NewUpdateAccount() // UpdateAccount | Account to update
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.UpdateAccount(context.Background(), accountId).Account(account).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.UpdateAccount``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateAccount`: AccountGenericResponse
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.UpdateAccount`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.UpdateAccount(context.Background(), accountId).UpdateAccount(updateAccount).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.UpdateAccount``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateAccount`: AccountGenericResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.UpdateAccount`: %v\n", resp)
 }
 ```
 
@@ -1178,7 +1332,7 @@ Other parameters are passed through a pointer to a apiUpdateAccountRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **account** | [**Account**](Account.md) | Account to update | 
+ **updateAccount** | [**UpdateAccount**](UpdateAccount.md) | Account to update | 
 
 ### Return type
 
@@ -1200,7 +1354,7 @@ Name | Type | Description  | Notes
 
 ## UpdateAccountRelationship
 
-> Relationship UpdateAccountRelationship(ctx, accountId, relationshipId).Relationship(relationship).Execute()
+> RelationshipResponse UpdateAccountRelationship(ctx, relationshipId, accountId).AccountRelationship(accountRelationship).Execute()
 
 Update account relationship
 
@@ -1212,26 +1366,26 @@ Update account relationship
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
-    relationshipId := "1a582c51-e4ff-4e57-9558-08cab6b963aa" // string | Relationship ID of the account associate with the account entity
-    relationship := *openapiclient.NewRelationship(openapiclient.account_relationship_type("PRIMARY_ACCOUNT_HOLDER")) // Relationship | Account relationship to be updated
+	relationshipId := "1a582c51-e4ff-4e57-9558-08cab6b963aa" // string | Relationship ID of the account associate with the account entity
+	accountId := "57826c51-e4ff-4e57-9558-08cab6b963c7" // string | Unique identifier for the account.
+	accountRelationship := *openapiclient.NewAccountRelationship(openapiclient.account_relationship_type("ACCOUNT_HOLDER")) // AccountRelationship | Account relationship to be updated
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.UpdateAccountRelationship(context.Background(), accountId, relationshipId).Relationship(relationship).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.UpdateAccountRelationship``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateAccountRelationship`: Relationship
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.UpdateAccountRelationship`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.UpdateAccountRelationship(context.Background(), relationshipId, accountId).AccountRelationship(accountRelationship).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.UpdateAccountRelationship``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateAccountRelationship`: RelationshipResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.UpdateAccountRelationship`: %v\n", resp)
 }
 ```
 
@@ -1241,8 +1395,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** | Unique identifier for the account. | 
 **relationshipId** | **string** | Relationship ID of the account associate with the account entity | 
+**accountId** | **string** | Unique identifier for the account. | 
 
 ### Other Parameters
 
@@ -1253,11 +1407,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **relationship** | [**Relationship**](Relationship.md) | Account relationship to be updated | 
+ **accountRelationship** | [**AccountRelationship**](AccountRelationship.md) | Account relationship to be updated | 
 
 ### Return type
 
-[**Relationship**](Relationship.md)
+[**RelationshipResponse**](RelationshipResponse.md)
 
 ### Authorization
 
@@ -1287,25 +1441,25 @@ Update account template
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    templateId := "a8943c51-e4ff-4e57-9558-08cab6b963c0" // string | Account Template ID
-    accountTemplate := *openapiclient.NewAccountTemplate(false, "Name_example", openapiclient.template_fields{TemplateFieldsChargeSecured: openapiclient.NewTemplateFieldsChargeSecured(openapiclient.account_type("SAVING"), "US", "USD", "InterestProductId_example", openapiclient.minimum_payment_full{MinimumPaymentTypeFull: openapiclient.NewMinimumPaymentTypeFull(openapiclient.minimum_payment_type("RATE_OR_AMOUNT"))})}) // AccountTemplate | Account template to update
+	templateId := "a8943c51-e4ff-4e57-9558-08cab6b963c0" // string | Account Template ID
+	accountTemplate := *openapiclient.NewAccountTemplate(false, "Name_example", openapiclient.template_fields{TemplateFieldsChargeSecured: openapiclient.NewTemplateFieldsChargeSecured(openapiclient.account_type("CHARGE_SECURED"), "US", "USD", openapiclient.minimum_payment_full{MinimumPaymentTypeFull: openapiclient.NewMinimumPaymentTypeFull(openapiclient.minimum_payment_type("FULL"))})}) // AccountTemplate | Account template to update
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountsApi.UpdateAccountTemplate(context.Background(), templateId).AccountTemplate(accountTemplate).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountsApi.UpdateAccountTemplate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateAccountTemplate`: AccountTemplateResponse
-    fmt.Fprintf(os.Stdout, "Response from `AccountsApi.UpdateAccountTemplate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.UpdateAccountTemplate(context.Background(), templateId).AccountTemplate(accountTemplate).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.UpdateAccountTemplate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateAccountTemplate`: AccountTemplateResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.UpdateAccountTemplate`: %v\n", resp)
 }
 ```
 

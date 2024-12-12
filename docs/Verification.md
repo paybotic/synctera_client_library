@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BusinessId** | Pointer to **string** | Unique ID for the business. Exactly one of &#x60;business_id&#x60; or &#x60;person_id&#x60; must be set.  | [optional] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
-**Details** | Pointer to [**[]Detail**](Detail.md) | A list of individual checks done as part of the due diligence process for the verification type.  | [optional] [readonly] 
+**Details** | Pointer to [**[]Detail**](Detail.md) | A list of individual checks done as part of the due diligence process for the verification type.  | [optional] 
 **Id** | Pointer to **string** | Unique ID for this verification result. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
 **Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 
@@ -14,13 +14,13 @@ Name | Type | Description | Notes
 **Result** | [**VerificationResult**](VerificationResult.md) |  | 
 **VendorInfo** | Pointer to [**VendorInfo**](VendorInfo.md) |  | [optional] 
 **VerificationTime** | **time.Time** | The date and time the verification was completed. | 
-**VerificationType** | [**VerificationType1**](VerificationType1.md) |  | 
+**VerificationType** | [**VerificationType**](VerificationType.md) |  | 
 
 ## Methods
 
 ### NewVerification
 
-`func NewVerification(result VerificationResult, verificationTime time.Time, verificationType VerificationType1, ) *Verification`
+`func NewVerification(result VerificationResult, verificationTime time.Time, verificationType VerificationType, ) *Verification`
 
 NewVerification instantiates a new Verification object
 This constructor will assign default values to properties that have it defined,
@@ -277,20 +277,20 @@ SetVerificationTime sets VerificationTime field to given value.
 
 ### GetVerificationType
 
-`func (o *Verification) GetVerificationType() VerificationType1`
+`func (o *Verification) GetVerificationType() VerificationType`
 
 GetVerificationType returns the VerificationType field if non-nil, zero value otherwise.
 
 ### GetVerificationTypeOk
 
-`func (o *Verification) GetVerificationTypeOk() (*VerificationType1, bool)`
+`func (o *Verification) GetVerificationTypeOk() (*VerificationType, bool)`
 
 GetVerificationTypeOk returns a tuple with the VerificationType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVerificationType
 
-`func (o *Verification) SetVerificationType(v VerificationType1)`
+`func (o *Verification) SetVerificationType(v VerificationType)`
 
 SetVerificationType sets VerificationType field to given value.
 

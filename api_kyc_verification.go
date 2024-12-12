@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.20.0
 */
@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // KYCVerificationApiService KYCVerificationApi service
 type KYCVerificationApiService service
 
 type ApiCreateCustomerVerificationResultRequest struct {
-	ctx context.Context
-	ApiService *KYCVerificationApiService
-	customerId string
+	ctx                        context.Context
+	ApiService                 *KYCVerificationApiService
+	customerId                 string
 	customerVerificationResult *CustomerVerificationResult
-	idempotencyKey *string
+	idempotencyKey             *string
 }
 
 // Customer verification result to create.
@@ -53,30 +52,31 @@ CreateCustomerVerificationResult Create a customer verification result
 Create a verification result for a customer.
 This endpoint will be removed in API v1. Use `POST /v0/verifications` instead.
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customerId The customer's unique identifier
- @return ApiCreateCustomerVerificationResultRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customerId The customer's unique identifier
+	@return ApiCreateCustomerVerificationResultRequest
 
 Deprecated
 */
 func (a *KYCVerificationApiService) CreateCustomerVerificationResult(ctx context.Context, customerId string) ApiCreateCustomerVerificationResultRequest {
 	return ApiCreateCustomerVerificationResultRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		customerId: customerId,
 	}
 }
 
 // Execute executes the request
-//  @return CustomerVerificationResult
+//
+//	@return CustomerVerificationResult
+//
 // Deprecated
 func (a *KYCVerificationApiService) CreateCustomerVerificationResultExecute(r ApiCreateCustomerVerificationResultRequest) (*CustomerVerificationResult, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CustomerVerificationResult
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CustomerVerificationResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KYCVerificationApiService.CreateCustomerVerificationResult")
@@ -203,9 +203,9 @@ func (a *KYCVerificationApiService) CreateCustomerVerificationResultExecute(r Ap
 }
 
 type ApiGetVerificationRequest struct {
-	ctx context.Context
-	ApiService *KYCVerificationApiService
-	customerId string
+	ctx            context.Context
+	ApiService     *KYCVerificationApiService
+	customerId     string
 	verificationId string
 }
 
@@ -220,32 +220,33 @@ Get verification result by ID.
 
 This endpoint will be removed in API v1. Use `GET /v0/verifications/{verification_id}` instead.
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customerId The customer's unique identifier
- @param verificationId Unique identifier for the verification.
- @return ApiGetVerificationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customerId The customer's unique identifier
+	@param verificationId Unique identifier for the verification.
+	@return ApiGetVerificationRequest
 
 Deprecated
 */
 func (a *KYCVerificationApiService) GetVerification(ctx context.Context, customerId string, verificationId string) ApiGetVerificationRequest {
 	return ApiGetVerificationRequest{
-		ApiService: a,
-		ctx: ctx,
-		customerId: customerId,
+		ApiService:     a,
+		ctx:            ctx,
+		customerId:     customerId,
 		verificationId: verificationId,
 	}
 }
 
 // Execute executes the request
-//  @return CustomerVerificationResult
+//
+//	@return CustomerVerificationResult
+//
 // Deprecated
 func (a *KYCVerificationApiService) GetVerificationExecute(r ApiGetVerificationRequest) (*CustomerVerificationResult, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CustomerVerificationResult
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CustomerVerificationResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KYCVerificationApiService.GetVerification")
@@ -365,12 +366,12 @@ func (a *KYCVerificationApiService) GetVerificationExecute(r ApiGetVerificationR
 }
 
 type ApiListVerificationsRequest struct {
-	ctx context.Context
-	ApiService *KYCVerificationApiService
-	customerId string
+	ctx            context.Context
+	ApiService     *KYCVerificationApiService
+	customerId     string
 	includeHistory *bool
-	limit *int32
-	pageToken *string
+	limit          *int32
+	pageToken      *string
 }
 
 // If true, include old (inactive) records as well.
@@ -400,30 +401,31 @@ List verification results.
 
 This endpoint will be removed in API v1. Use `GET /v0/verifications?customer_id={customer_id}` instead.
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customerId The customer's unique identifier
- @return ApiListVerificationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customerId The customer's unique identifier
+	@return ApiListVerificationsRequest
 
 Deprecated
 */
 func (a *KYCVerificationApiService) ListVerifications(ctx context.Context, customerId string) ApiListVerificationsRequest {
 	return ApiListVerificationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		customerId: customerId,
 	}
 }
 
 // Execute executes the request
-//  @return CustomerVerificationResultList
+//
+//	@return CustomerVerificationResultList
+//
 // Deprecated
 func (a *KYCVerificationApiService) ListVerificationsExecute(r ApiListVerificationsRequest) (*CustomerVerificationResultList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CustomerVerificationResultList
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CustomerVerificationResultList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KYCVerificationApiService.ListVerifications")
@@ -551,11 +553,11 @@ func (a *KYCVerificationApiService) ListVerificationsExecute(r ApiListVerificati
 }
 
 type ApiVerifyCustomerRequest struct {
-	ctx context.Context
-	ApiService *KYCVerificationApiService
-	customerId string
+	ctx                  context.Context
+	ApiService           *KYCVerificationApiService
+	customerId           string
 	customerVerification *CustomerVerification
-	idempotencyKey *string
+	idempotencyKey       *string
 }
 
 // Customer verification request.
@@ -590,30 +592,31 @@ Verifying a personal customer requires that the following fields already be set:
 
 This endpoint will be removed in API v1. Use `POST /v0/verifications/verify` instead.
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customerId The customer's unique identifier
- @return ApiVerifyCustomerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customerId The customer's unique identifier
+	@return ApiVerifyCustomerRequest
 
 Deprecated
 */
 func (a *KYCVerificationApiService) VerifyCustomer(ctx context.Context, customerId string) ApiVerifyCustomerRequest {
 	return ApiVerifyCustomerRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		customerId: customerId,
 	}
 }
 
 // Execute executes the request
-//  @return CustomerVerifyResponse
+//
+//	@return CustomerVerifyResponse
+//
 // Deprecated
 func (a *KYCVerificationApiService) VerifyCustomerExecute(r ApiVerifyCustomerRequest) (*CustomerVerifyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CustomerVerifyResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CustomerVerifyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KYCVerificationApiService.VerifyCustomer")

@@ -19,34 +19,40 @@ import (
 	"strings"
 )
 
-
 // RemoteCheckDepositApiService RemoteCheckDepositApi service
 type RemoteCheckDepositApiService service
+
+// Keep only RdcDeposit type if needed
+type RdcDeposit struct {
+	Amount      float64 `json:"amount"`
+	AccountId   string  `json:"account_id"`
+	CustomerId  string  `json:"customer_id"`
+}
 
 /*
 CreateRdcDeposit Create a Remote Check Deposit
 
-Create a new deposit using remote deposit capture to an account
+# Create a new deposit using remote deposit capture to an account
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateRdcDepositRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateRdcDepositRequest
 */
 func (a *RemoteCheckDepositApiService) CreateRdcDeposit(ctx context.Context) ApiCreateRdcDepositRequest {
 	return ApiCreateRdcDepositRequest{
-		ApiService: (*RemoteCheckDepositBetaApiService)(a),
+		ApiService: (*RemoteCheckDepositBetaAPIService)(a),
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return Deposit
+//
+//	@return Deposit
 func (a *RemoteCheckDepositApiService) CreateRdcDepositExecute(r ApiCreateRdcDepositRequest) (*Deposit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Deposit
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Deposit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RemoteCheckDepositApiService.CreateRdcDeposit")
@@ -78,7 +84,7 @@ func (a *RemoteCheckDepositApiService) CreateRdcDepositExecute(r ApiCreateRdcDep
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.deposit
+	localVarPostBody = r.depositPost
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -150,26 +156,27 @@ GetRdcDeposit Get Remote Check Deposit
 
 Retrieves one deposit made using remote deposit capture associated with an account
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param depositId ID of a deposit for a remote deposit capture
- @return ApiGetRdcDepositRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param depositId ID of a deposit for a remote deposit capture
+	@return ApiGetRdcDepositRequest
 */
 func (a *RemoteCheckDepositApiService) GetRdcDeposit(ctx context.Context, depositId string) ApiGetRdcDepositRequest {
 	return ApiGetRdcDepositRequest{
-		ApiService: (*RemoteCheckDepositBetaApiService)(a),
+		ApiService: (*RemoteCheckDepositBetaAPIService)(a),
 		ctx:        ctx,
 		depositId:  depositId,
 	}
 }
 
 // Execute executes the request
-//  @return Deposit
+//
+//	@return Deposit
 func (a *RemoteCheckDepositApiService) GetRdcDepositExecute(r ApiGetRdcDepositRequest) (*Deposit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Deposit
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Deposit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RemoteCheckDepositApiService.GetRdcDeposit")
@@ -272,24 +279,25 @@ ListRdcDeposits List Remote Check Deposits
 
 Retrieves a paginated list of the deposits made using remote deposit capture associated with an account
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListRdcDepositsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListRdcDepositsRequest
 */
 func (a *RemoteCheckDepositApiService) ListRdcDeposits(ctx context.Context) ApiListRdcDepositsRequest {
 	return ApiListRdcDepositsRequest{
-		ApiService: (*RemoteCheckDepositBetaApiService)(a),
+		ApiService: (*RemoteCheckDepositBetaAPIService)(a),
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return DepositList
+//
+//	@return DepositList
 func (a *RemoteCheckDepositApiService) ListRdcDepositsExecute(r ApiListRdcDepositsRequest) (*DepositList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DepositList
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DepositList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RemoteCheckDepositApiService.ListRdcDeposits")

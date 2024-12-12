@@ -7,11 +7,13 @@ Name | Type | Description | Notes
 **AccountIdentifiers** | [**AddAccountsRequestAccountIdentifiers**](AddAccountsRequestAccountIdentifiers.md) |  | 
 **AccountOwnerNames** | **[]string** | The names of the account owners. | 
 **BusinessId** | Pointer to **string** | The identifier for the business customer associated with this external account. Exactly one of &#x60;business_id&#x60; or &#x60;customer_id&#x60; must be specified.  | [optional] 
+**Currency** | Pointer to **string** | ISO 4217 alphabetic currency code | [optional] 
 **CustomerId** | Pointer to **string** | The identifier for the personal customer associated with this external account. Exactly one of &#x60;customer_id&#x60; or &#x60;business_id&#x60; must be specified.  | [optional] 
 **CustomerType** | [**ExtAccountCustomerType**](ExtAccountCustomerType.md) |  | 
 **Metadata** | Pointer to **map[string]interface{}** | User-supplied metadata | [optional] 
 **Nickname** | Pointer to **string** | A user-meaningful name for the account | [optional] 
 **RoutingIdentifiers** | [**AddAccountsRequestRoutingIdentifiers**](AddAccountsRequestRoutingIdentifiers.md) |  | 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 **Type** | **string** | The type of the account | 
 **VendorAccountId** | Pointer to **string** | The ID of the vendor account, will be empty for MANUAL vendor | [optional] 
 **Verification** | Pointer to [**NullableAccountVerification**](AccountVerification.md) |  | [optional] 
@@ -99,6 +101,31 @@ SetBusinessId sets BusinessId field to given value.
 `func (o *AddAccountsRequest) HasBusinessId() bool`
 
 HasBusinessId returns a boolean if a field has been set.
+
+### GetCurrency
+
+`func (o *AddAccountsRequest) GetCurrency() string`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *AddAccountsRequest) GetCurrencyOk() (*string, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *AddAccountsRequest) SetCurrency(v string)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *AddAccountsRequest) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
 
 ### GetCustomerId
 
@@ -214,6 +241,31 @@ and a boolean to check if the value has been set.
 
 SetRoutingIdentifiers sets RoutingIdentifiers field to given value.
 
+
+### GetTenant
+
+`func (o *AddAccountsRequest) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *AddAccountsRequest) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *AddAccountsRequest) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *AddAccountsRequest) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetType
 

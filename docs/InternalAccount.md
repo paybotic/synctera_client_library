@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AccountNumber** | Pointer to **string** | Generated internal account number | [optional] [readonly] 
 **AccountType** | Pointer to [**InternalAccountType**](InternalAccountType.md) |  | [optional] 
 **Balances** | Pointer to [**[]Balance**](Balance.md) | A list of balances for internal account based on different type | [optional] [readonly] 
+**BankAccountId** | Pointer to **string** | The ID of the bank account associated with this internal account. It will be auto-filled if the account type has only one matching bank account in the system.  | [optional] 
 **BankRouting** | Pointer to **string** | Bank routing number | [optional] [readonly] 
 **CreationTime** | Pointer to **time.Time** | The date and time the resource was created. | [optional] [readonly] 
 **Currency** | **string** | Account currency or account settlement currency. ISO 4217 alphabetic currency code. | 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | Generated ID for internal account | [optional] [readonly] 
 **IsSystemAcc** | Pointer to **bool** | Is a system-controlled internal account. When this field is true, this internal account will be reserved exclusively for internal use by the Synctera platform and any internal transfers to or from this internal account will be declined. | [optional] [default to false]
 **LastUpdatedTime** | Pointer to **time.Time** | The date and time the resource was last updated. | [optional] [readonly] 
-**Purpose** | Pointer to [**InternalAccountPurpose**](InternalAccountPurpose.md) |  | [optional] [default to INTERNALACCOUNTPURPOSE_PROFIT_AND_LOSS]
+**Purpose** | Pointer to [**InternalAccountPurpose**](InternalAccountPurpose.md) |  | [optional] 
 **Status** | **string** |  | 
 
 ## Methods
@@ -111,6 +112,31 @@ SetBalances sets Balances field to given value.
 `func (o *InternalAccount) HasBalances() bool`
 
 HasBalances returns a boolean if a field has been set.
+
+### GetBankAccountId
+
+`func (o *InternalAccount) GetBankAccountId() string`
+
+GetBankAccountId returns the BankAccountId field if non-nil, zero value otherwise.
+
+### GetBankAccountIdOk
+
+`func (o *InternalAccount) GetBankAccountIdOk() (*string, bool)`
+
+GetBankAccountIdOk returns a tuple with the BankAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBankAccountId
+
+`func (o *InternalAccount) SetBankAccountId(v string)`
+
+SetBankAccountId sets BankAccountId field to given value.
+
+### HasBankAccountId
+
+`func (o *InternalAccount) HasBankAccountId() bool`
+
+HasBankAccountId returns a boolean if a field has been set.
 
 ### GetBankRouting
 

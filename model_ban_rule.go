@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -18,24 +18,24 @@ import (
 // BanRule struct for BanRule
 type BanRule struct {
 	// What action this rule performs
-	Action *string `json:"action,omitempty"`
+	Action       *string    `json:"action,omitempty"`
 	CreationTime *time.Time `json:"creation_time,omitempty"`
-	// This rule will match requests for customers with this email address. May contain a \"*\" as a wildcard. 
+	// This rule will match requests for customers with this email address. May contain a \"*\" as a wildcard.
 	Email *string `json:"email,omitempty"`
 	// ban rule ID
-	Id *string `json:"id,omitempty"`
+	Id              *string    `json:"id,omitempty"`
 	LastUpdatedTime *time.Time `json:"last_updated_time,omitempty"`
-	// This rule will match requests for customers with this phone number. Use E.164 format, with a leading \"+\" and a country code. 
+	// This rule will match requests for customers with this phone number. Use E.164 format, with a leading \"+\" and a country code.
 	PhoneNumber *string `json:"phone_number,omitempty"`
 	// The reason why the rule was added
-	Reason *string `json:"reason,omitempty"`
+	Reason       *string       `json:"reason,omitempty"`
 	ResourceType *ResourceType `json:"resource_type,omitempty"`
 	// The source of the rule
 	Source *string `json:"source,omitempty"`
-	// This rule will match requests for customers with an SSN that matches this value when hashed. 
-	SsnHash *string `json:"ssn_hash,omitempty"`
-	Status *BanRuleStatus `json:"status,omitempty"`
-	// The tenant the rule applies to, with a format of \"b_p\" where \"b\" is the bank_id and \"p\" is the fintech partner_id. Bank requesters can specify a the fintech partner id as \"*\" to indicate the rule applies to all their fintechs. Synctera requesters can specify \"*_*\" to indicate the rule applies globally. The requester must have access to the specified tenant. If not supplied, the tenant defaults to the requester's tenant. 
+	// This rule will match requests for customers with an SSN that matches this value when hashed.
+	SsnHash *string        `json:"ssn_hash,omitempty"`
+	Status  *BanRuleStatus `json:"status,omitempty"`
+	// The tenant the rule applies to, with a format of \"b_p\" where \"b\" is the bank_id and \"p\" is the fintech partner_id. Bank requesters can specify a the fintech partner id as \"*\" to indicate the rule applies to all their fintechs. Synctera requesters can specify \"*_*\" to indicate the rule applies globally. The requester must have access to the specified tenant. If not supplied, the tenant defaults to the requester's tenant.
 	Tenant *string `json:"tenant,omitempty"`
 }
 
@@ -516,5 +516,3 @@ func (v *NullableBanRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

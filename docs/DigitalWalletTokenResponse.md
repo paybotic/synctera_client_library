@@ -10,9 +10,12 @@ Name | Type | Description | Notes
 **DeviceType** | Pointer to **string** | Type of the device where the Digital Wallet Token is used in | [optional] 
 **Id** | Pointer to **string** | Digital Wallet Token ID | [optional] 
 **LastModifiedTime** | Pointer to **time.Time** |  | [optional] 
+**ProcessorData** | Pointer to **map[string]interface{}** | Raw data from processor. | [optional] 
+**RemovedFromWalletTime** | Pointer to **time.Time** | The time that the token was removed from a wallet. Tokens make remain active after being removed from a wallet. | [optional] 
 **RequestedTime** | Pointer to **time.Time** |  | [optional] 
 **State** | Pointer to [**DigitalWalletTokenState**](DigitalWalletTokenState.md) |  | [optional] 
-**Type** | Pointer to **string** | Type of the Digital Wallet | [optional] 
+**TokenReferenceId** | Pointer to **string** | Unique identifier of the digital wallet token within the card network. | [optional] 
+**Type** | Pointer to **string** | Type of the Digital Wallet. Can be one of APPLE_PAY, ANDROID_PAY, SAMSUNG_PAY or something else when cards are added on file to a merchant. | [optional] 
 
 ## Methods
 
@@ -183,6 +186,56 @@ SetLastModifiedTime sets LastModifiedTime field to given value.
 
 HasLastModifiedTime returns a boolean if a field has been set.
 
+### GetProcessorData
+
+`func (o *DigitalWalletTokenResponse) GetProcessorData() map[string]interface{}`
+
+GetProcessorData returns the ProcessorData field if non-nil, zero value otherwise.
+
+### GetProcessorDataOk
+
+`func (o *DigitalWalletTokenResponse) GetProcessorDataOk() (*map[string]interface{}, bool)`
+
+GetProcessorDataOk returns a tuple with the ProcessorData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProcessorData
+
+`func (o *DigitalWalletTokenResponse) SetProcessorData(v map[string]interface{})`
+
+SetProcessorData sets ProcessorData field to given value.
+
+### HasProcessorData
+
+`func (o *DigitalWalletTokenResponse) HasProcessorData() bool`
+
+HasProcessorData returns a boolean if a field has been set.
+
+### GetRemovedFromWalletTime
+
+`func (o *DigitalWalletTokenResponse) GetRemovedFromWalletTime() time.Time`
+
+GetRemovedFromWalletTime returns the RemovedFromWalletTime field if non-nil, zero value otherwise.
+
+### GetRemovedFromWalletTimeOk
+
+`func (o *DigitalWalletTokenResponse) GetRemovedFromWalletTimeOk() (*time.Time, bool)`
+
+GetRemovedFromWalletTimeOk returns a tuple with the RemovedFromWalletTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemovedFromWalletTime
+
+`func (o *DigitalWalletTokenResponse) SetRemovedFromWalletTime(v time.Time)`
+
+SetRemovedFromWalletTime sets RemovedFromWalletTime field to given value.
+
+### HasRemovedFromWalletTime
+
+`func (o *DigitalWalletTokenResponse) HasRemovedFromWalletTime() bool`
+
+HasRemovedFromWalletTime returns a boolean if a field has been set.
+
 ### GetRequestedTime
 
 `func (o *DigitalWalletTokenResponse) GetRequestedTime() time.Time`
@@ -232,6 +285,31 @@ SetState sets State field to given value.
 `func (o *DigitalWalletTokenResponse) HasState() bool`
 
 HasState returns a boolean if a field has been set.
+
+### GetTokenReferenceId
+
+`func (o *DigitalWalletTokenResponse) GetTokenReferenceId() string`
+
+GetTokenReferenceId returns the TokenReferenceId field if non-nil, zero value otherwise.
+
+### GetTokenReferenceIdOk
+
+`func (o *DigitalWalletTokenResponse) GetTokenReferenceIdOk() (*string, bool)`
+
+GetTokenReferenceIdOk returns a tuple with the TokenReferenceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTokenReferenceId
+
+`func (o *DigitalWalletTokenResponse) SetTokenReferenceId(v string)`
+
+SetTokenReferenceId sets TokenReferenceId field to given value.
+
+### HasTokenReferenceId
+
+`func (o *DigitalWalletTokenResponse) HasTokenReferenceId() bool`
+
+HasTokenReferenceId returns a boolean if a field has been set.
 
 ### GetType
 

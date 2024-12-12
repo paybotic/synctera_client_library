@@ -5,21 +5,22 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amount** | **int32** | Amount to transfer in ISO 4217 minor currency units | 
-**CompanyEntryDescription** | Pointer to **string** | Company entry description ACH field. Originator inserts this field&#39;s value to provide the Receiver with a description of the entry&#39;s purpose. | [optional] 
+**CompanyEntryDescription** | Pointer to **NullableString** | Company Entry Description field in ACH batch header. Originator inserts this field&#39;s value to provide the Receiver with a description of the entry&#39;s purpose. | [optional] 
+**CompanyName** | Pointer to **string** | Overrides the &#39;Company Name&#39; field in ACH batch header, which otherwise defaults to the configured partner name. The provided name will be prepended with the Bank&#39;s configured prefix and a *. It will then be truncated to 16 characters. | [optional] 
 **Currency** | **string** | ISO 4217 alphabetic currency code of the transfer amount | 
 **CustomerId** | **string** | The customer&#39;s unique identifier | 
 **DcSign** | **string** | The type of transaction (debit or credit). A debit is a transfer in and a credit is a transfer out of the originating account | 
-**EffectiveDate** | Pointer to **string** | Effective date transaction proccesses (is_same_day needs to be false or not present at all) | [optional] 
+**EffectiveDate** | Pointer to **NullableString** | Effective date transaction proccesses (is_same_day needs to be false or not present at all) | [optional] 
 **ExternalData** | Pointer to **map[string]interface{}** | Additional transfer metadata structured as key-value pairs | [optional] 
-**FinalCustomerId** | Pointer to **string** | ID of the international customer that receives the final remittance transfer (required for OFAC enabled payments) | [optional] 
-**Hold** | Pointer to [**AchRequestHoldData**](AchRequestHoldData.md) |  | [optional] 
-**Id** | Pointer to **string** |  | [optional] [readonly] 
-**IsSameDay** | Pointer to **bool** | Send as same day ACH transaction (use only is_same_day without specific effective_date) | [optional] 
-**Memo** | Pointer to **string** | Memo for the payment | [optional] 
+**FinalCustomerId** | Pointer to **NullableString** | ID of the international customer that receives the final remittance transfer (required for OFAC enabled payments) | [optional] 
+**Hold** | Pointer to [**NullableAchRequestHoldData**](AchRequestHoldData.md) |  | [optional] 
+**IsSameDay** | Pointer to **NullableBool** | Send as same day ACH transaction (use only is_same_day without specific effective_date) | [optional] 
+**Memo** | Pointer to **NullableString** | Memo for the payment | [optional] 
 **OriginatingAccountId** | **string** | The unique identifier for an originating account | 
 **ReceivingAccountId** | **string** | The unique identifier for an receiving account | 
-**ReferenceInfo** | Pointer to **string** | Will be sent to the ACH network and maps to Addenda record 05 - the recipient bank will receive this info | [optional] 
-**Risk** | Pointer to [**RiskData**](RiskData.md) |  | [optional] 
+**ReferenceInfo** | Pointer to **NullableString** | Will be sent to the ACH network and maps to Addenda record 05 - the recipient bank will receive this info | [optional] 
+**Risk** | Pointer to [**NullableRiskData**](RiskData.md) |  | [optional] 
+**SecCode** | Pointer to **string** | Standard Entry Class Code: * WEB: Internet initiated / Mobile Entry (default if empty) * CCD: Corporate Credit or Debit * PPD: Pre-arranged Payment or Deposit (only deposits currently supported) | [optional] [default to "WEB"]
 
 ## Methods
 
@@ -84,6 +85,41 @@ SetCompanyEntryDescription sets CompanyEntryDescription field to given value.
 `func (o *OutgoingAchRequest) HasCompanyEntryDescription() bool`
 
 HasCompanyEntryDescription returns a boolean if a field has been set.
+
+### SetCompanyEntryDescriptionNil
+
+`func (o *OutgoingAchRequest) SetCompanyEntryDescriptionNil(b bool)`
+
+ SetCompanyEntryDescriptionNil sets the value for CompanyEntryDescription to be an explicit nil
+
+### UnsetCompanyEntryDescription
+`func (o *OutgoingAchRequest) UnsetCompanyEntryDescription()`
+
+UnsetCompanyEntryDescription ensures that no value is present for CompanyEntryDescription, not even an explicit nil
+### GetCompanyName
+
+`func (o *OutgoingAchRequest) GetCompanyName() string`
+
+GetCompanyName returns the CompanyName field if non-nil, zero value otherwise.
+
+### GetCompanyNameOk
+
+`func (o *OutgoingAchRequest) GetCompanyNameOk() (*string, bool)`
+
+GetCompanyNameOk returns a tuple with the CompanyName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompanyName
+
+`func (o *OutgoingAchRequest) SetCompanyName(v string)`
+
+SetCompanyName sets CompanyName field to given value.
+
+### HasCompanyName
+
+`func (o *OutgoingAchRequest) HasCompanyName() bool`
+
+HasCompanyName returns a boolean if a field has been set.
 
 ### GetCurrency
 
@@ -170,6 +206,16 @@ SetEffectiveDate sets EffectiveDate field to given value.
 
 HasEffectiveDate returns a boolean if a field has been set.
 
+### SetEffectiveDateNil
+
+`func (o *OutgoingAchRequest) SetEffectiveDateNil(b bool)`
+
+ SetEffectiveDateNil sets the value for EffectiveDate to be an explicit nil
+
+### UnsetEffectiveDate
+`func (o *OutgoingAchRequest) UnsetEffectiveDate()`
+
+UnsetEffectiveDate ensures that no value is present for EffectiveDate, not even an explicit nil
 ### GetExternalData
 
 `func (o *OutgoingAchRequest) GetExternalData() map[string]interface{}`
@@ -195,6 +241,16 @@ SetExternalData sets ExternalData field to given value.
 
 HasExternalData returns a boolean if a field has been set.
 
+### SetExternalDataNil
+
+`func (o *OutgoingAchRequest) SetExternalDataNil(b bool)`
+
+ SetExternalDataNil sets the value for ExternalData to be an explicit nil
+
+### UnsetExternalData
+`func (o *OutgoingAchRequest) UnsetExternalData()`
+
+UnsetExternalData ensures that no value is present for ExternalData, not even an explicit nil
 ### GetFinalCustomerId
 
 `func (o *OutgoingAchRequest) GetFinalCustomerId() string`
@@ -220,6 +276,16 @@ SetFinalCustomerId sets FinalCustomerId field to given value.
 
 HasFinalCustomerId returns a boolean if a field has been set.
 
+### SetFinalCustomerIdNil
+
+`func (o *OutgoingAchRequest) SetFinalCustomerIdNil(b bool)`
+
+ SetFinalCustomerIdNil sets the value for FinalCustomerId to be an explicit nil
+
+### UnsetFinalCustomerId
+`func (o *OutgoingAchRequest) UnsetFinalCustomerId()`
+
+UnsetFinalCustomerId ensures that no value is present for FinalCustomerId, not even an explicit nil
 ### GetHold
 
 `func (o *OutgoingAchRequest) GetHold() AchRequestHoldData`
@@ -245,31 +311,16 @@ SetHold sets Hold field to given value.
 
 HasHold returns a boolean if a field has been set.
 
-### GetId
+### SetHoldNil
 
-`func (o *OutgoingAchRequest) GetId() string`
+`func (o *OutgoingAchRequest) SetHoldNil(b bool)`
 
-GetId returns the Id field if non-nil, zero value otherwise.
+ SetHoldNil sets the value for Hold to be an explicit nil
 
-### GetIdOk
+### UnsetHold
+`func (o *OutgoingAchRequest) UnsetHold()`
 
-`func (o *OutgoingAchRequest) GetIdOk() (*string, bool)`
-
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetId
-
-`func (o *OutgoingAchRequest) SetId(v string)`
-
-SetId sets Id field to given value.
-
-### HasId
-
-`func (o *OutgoingAchRequest) HasId() bool`
-
-HasId returns a boolean if a field has been set.
-
+UnsetHold ensures that no value is present for Hold, not even an explicit nil
 ### GetIsSameDay
 
 `func (o *OutgoingAchRequest) GetIsSameDay() bool`
@@ -295,6 +346,16 @@ SetIsSameDay sets IsSameDay field to given value.
 
 HasIsSameDay returns a boolean if a field has been set.
 
+### SetIsSameDayNil
+
+`func (o *OutgoingAchRequest) SetIsSameDayNil(b bool)`
+
+ SetIsSameDayNil sets the value for IsSameDay to be an explicit nil
+
+### UnsetIsSameDay
+`func (o *OutgoingAchRequest) UnsetIsSameDay()`
+
+UnsetIsSameDay ensures that no value is present for IsSameDay, not even an explicit nil
 ### GetMemo
 
 `func (o *OutgoingAchRequest) GetMemo() string`
@@ -320,6 +381,16 @@ SetMemo sets Memo field to given value.
 
 HasMemo returns a boolean if a field has been set.
 
+### SetMemoNil
+
+`func (o *OutgoingAchRequest) SetMemoNil(b bool)`
+
+ SetMemoNil sets the value for Memo to be an explicit nil
+
+### UnsetMemo
+`func (o *OutgoingAchRequest) UnsetMemo()`
+
+UnsetMemo ensures that no value is present for Memo, not even an explicit nil
 ### GetOriginatingAccountId
 
 `func (o *OutgoingAchRequest) GetOriginatingAccountId() string`
@@ -385,6 +456,16 @@ SetReferenceInfo sets ReferenceInfo field to given value.
 
 HasReferenceInfo returns a boolean if a field has been set.
 
+### SetReferenceInfoNil
+
+`func (o *OutgoingAchRequest) SetReferenceInfoNil(b bool)`
+
+ SetReferenceInfoNil sets the value for ReferenceInfo to be an explicit nil
+
+### UnsetReferenceInfo
+`func (o *OutgoingAchRequest) UnsetReferenceInfo()`
+
+UnsetReferenceInfo ensures that no value is present for ReferenceInfo, not even an explicit nil
 ### GetRisk
 
 `func (o *OutgoingAchRequest) GetRisk() RiskData`
@@ -409,6 +490,41 @@ SetRisk sets Risk field to given value.
 `func (o *OutgoingAchRequest) HasRisk() bool`
 
 HasRisk returns a boolean if a field has been set.
+
+### SetRiskNil
+
+`func (o *OutgoingAchRequest) SetRiskNil(b bool)`
+
+ SetRiskNil sets the value for Risk to be an explicit nil
+
+### UnsetRisk
+`func (o *OutgoingAchRequest) UnsetRisk()`
+
+UnsetRisk ensures that no value is present for Risk, not even an explicit nil
+### GetSecCode
+
+`func (o *OutgoingAchRequest) GetSecCode() string`
+
+GetSecCode returns the SecCode field if non-nil, zero value otherwise.
+
+### GetSecCodeOk
+
+`func (o *OutgoingAchRequest) GetSecCodeOk() (*string, bool)`
+
+GetSecCodeOk returns a tuple with the SecCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecCode
+
+`func (o *OutgoingAchRequest) SetSecCode(v string)`
+
+SetSecCode sets SecCode field to given value.
+
+### HasSecCode
+
+`func (o *OutgoingAchRequest) HasSecCode() bool`
+
+HasSecCode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -19,23 +19,22 @@ import (
 	"strings"
 )
 
-
 // ExternalCardsAlphaApiService ExternalCardsAlphaApi service
 type ExternalCardsAlphaApiService service
 
-type ApiCreateExternalCardFromTokenRequest struct {
-	ctx context.Context
-	ApiService *ExternalCardsAlphaApiService
+type ApiCreateExternalCardFromTokenAlphaRequest struct {
+	ctx                 context.Context
+	ApiService          *ExternalCardsAlphaApiService
 	externalCardRequest *ExternalCardRequest
 }
 
 // Details of the External Card to create
-func (r ApiCreateExternalCardFromTokenRequest) ExternalCardRequest(externalCardRequest ExternalCardRequest) ApiCreateExternalCardFromTokenRequest {
+func (r ApiCreateExternalCardFromTokenAlphaRequest) ExternalCardRequest(externalCardRequest ExternalCardRequest) ApiCreateExternalCardFromTokenAlphaRequest {
 	r.externalCardRequest = &externalCardRequest
 	return r
 }
 
-func (r ApiCreateExternalCardFromTokenRequest) Execute() (*ExternalCardResponse, *http.Response, error) {
+func (r ApiCreateExternalCardFromTokenAlphaRequest) Execute() (*ExternalCardResponse, *http.Response, error) {
 	return r.ApiService.CreateExternalCardFromTokenExecute(r)
 }
 
@@ -44,25 +43,25 @@ CreateExternalCardFromToken Create External Card from token
 
 Create an external card from token - You must first tokenize the external card using the external card iframe. You will receive a token for the external card upon successful completion. This endpoint will persist the external card and associate it to a customer. The customer's name and address should match that of the external card as entered in the iframe. <br>NB: Tokens should be associated right away. Tokens not associated within 30 mins of creation will be invalidated.</br> NB: If a valid business_id is provided, the address verification for the external card will be done against the address of the business. Otherwise, the address of the customer will be used. In either case, the name of the customer will be used to match the name of the cardholder.
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateExternalCardFromTokenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateExternalCardFromTokenAlphaRequest
 */
-func (a *ExternalCardsAlphaApiService) CreateExternalCardFromToken(ctx context.Context) ApiCreateExternalCardFromTokenRequest {
-	return ApiCreateExternalCardFromTokenRequest{
+func (a *ExternalCardsAlphaApiService) CreateExternalCardFromToken(ctx context.Context) ApiCreateExternalCardFromTokenAlphaRequest {
+	return ApiCreateExternalCardFromTokenAlphaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ExternalCardResponse
-func (a *ExternalCardsAlphaApiService) CreateExternalCardFromTokenExecute(r ApiCreateExternalCardFromTokenRequest) (*ExternalCardResponse, *http.Response, error) {
+//
+//	@return ExternalCardResponse
+func (a *ExternalCardsAlphaApiService) CreateExternalCardFromTokenExecute(r ApiCreateExternalCardFromTokenAlphaRequest) (*ExternalCardResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ExternalCardResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ExternalCardResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExternalCardsAlphaApiService.CreateExternalCardFromToken")
@@ -184,46 +183,46 @@ func (a *ExternalCardsAlphaApiService) CreateExternalCardFromTokenExecute(r ApiC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateExternalCardTransferRequest struct {
-	ctx context.Context
-	ApiService *ExternalCardsAlphaApiService
+type ApiCreateExternalCardTransferAlphaRequest struct {
+	ctx             context.Context
+	ApiService      *ExternalCardsAlphaApiService
 	transferRequest *TransferRequest
 }
 
 // Details of the External Card Transfer to create
-func (r ApiCreateExternalCardTransferRequest) TransferRequest(transferRequest TransferRequest) ApiCreateExternalCardTransferRequest {
+func (r ApiCreateExternalCardTransferAlphaRequest) TransferRequest(transferRequest TransferRequest) ApiCreateExternalCardTransferAlphaRequest {
 	r.transferRequest = &transferRequest
 	return r
 }
 
-func (r ApiCreateExternalCardTransferRequest) Execute() (*TransferResponse, *http.Response, error) {
+func (r ApiCreateExternalCardTransferAlphaRequest) Execute() (*TransferResponse, *http.Response, error) {
 	return r.ApiService.CreateExternalCardTransferExecute(r)
 }
 
 /*
 CreateExternalCardTransfer Create External Card Transfer
 
-Create External Card Transfer
+# Create External Card Transfer
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateExternalCardTransferRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateExternalCardTransferAlphaRequest
 */
-func (a *ExternalCardsAlphaApiService) CreateExternalCardTransfer(ctx context.Context) ApiCreateExternalCardTransferRequest {
-	return ApiCreateExternalCardTransferRequest{
+func (a *ExternalCardsAlphaApiService) CreateExternalCardTransfer(ctx context.Context) ApiCreateExternalCardTransferAlphaRequest {
+	return ApiCreateExternalCardTransferAlphaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return TransferResponse
-func (a *ExternalCardsAlphaApiService) CreateExternalCardTransferExecute(r ApiCreateExternalCardTransferRequest) (*TransferResponse, *http.Response, error) {
+//
+//	@return TransferResponse
+func (a *ExternalCardsAlphaApiService) CreateExternalCardTransferExecute(r ApiCreateExternalCardTransferAlphaRequest) (*TransferResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *TransferResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TransferResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExternalCardsAlphaApiService.CreateExternalCardTransfer")
@@ -345,49 +344,49 @@ func (a *ExternalCardsAlphaApiService) CreateExternalCardTransferExecute(r ApiCr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateExternalCardTransferReversalRequest struct {
-	ctx context.Context
-	ApiService *ExternalCardsAlphaApiService
-	transferId string
+type ApiCreateExternalCardTransferReversalAlphaRequest struct {
+	ctx                     context.Context
+	ApiService              *ExternalCardsAlphaApiService
+	transferId              string
 	transferReversalRequest *TransferReversalRequest
 }
 
 // Details of the External Card Transfer Reversal to create
-func (r ApiCreateExternalCardTransferReversalRequest) TransferReversalRequest(transferReversalRequest TransferReversalRequest) ApiCreateExternalCardTransferReversalRequest {
+func (r ApiCreateExternalCardTransferReversalAlphaRequest) TransferReversalRequest(transferReversalRequest TransferReversalRequest) ApiCreateExternalCardTransferReversalAlphaRequest {
 	r.transferReversalRequest = &transferReversalRequest
 	return r
 }
 
-func (r ApiCreateExternalCardTransferReversalRequest) Execute() (*TransferResponse, *http.Response, error) {
+func (r ApiCreateExternalCardTransferReversalAlphaRequest) Execute() (*TransferResponse, *http.Response, error) {
 	return r.ApiService.CreateExternalCardTransferReversalExecute(r)
 }
 
 /*
 CreateExternalCardTransferReversal Create External Card Transfer Reversal
 
-Create External Card Transfer Reversal
+# Create External Card Transfer Reversal
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param transferId The unique identifier of a transfer
- @return ApiCreateExternalCardTransferReversalRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param transferId The unique identifier of a transfer
+	@return ApiCreateExternalCardTransferReversalAlphaRequest
 */
-func (a *ExternalCardsAlphaApiService) CreateExternalCardTransferReversal(ctx context.Context, transferId string) ApiCreateExternalCardTransferReversalRequest {
-	return ApiCreateExternalCardTransferReversalRequest{
+func (a *ExternalCardsAlphaApiService) CreateExternalCardTransferReversal(ctx context.Context, transferId string) ApiCreateExternalCardTransferReversalAlphaRequest {
+	return ApiCreateExternalCardTransferReversalAlphaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		transferId: transferId,
 	}
 }
 
 // Execute executes the request
-//  @return TransferResponse
-func (a *ExternalCardsAlphaApiService) CreateExternalCardTransferReversalExecute(r ApiCreateExternalCardTransferReversalRequest) (*TransferResponse, *http.Response, error) {
+//
+//	@return TransferResponse
+func (a *ExternalCardsAlphaApiService) CreateExternalCardTransferReversalExecute(r ApiCreateExternalCardTransferReversalAlphaRequest) (*TransferResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *TransferResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TransferResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExternalCardsAlphaApiService.CreateExternalCardTransferReversal")
@@ -510,42 +509,42 @@ func (a *ExternalCardsAlphaApiService) CreateExternalCardTransferReversalExecute
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetExternalCardRequest struct {
-	ctx context.Context
-	ApiService *ExternalCardsAlphaApiService
+type ApiGetExternalCardAlphaRequest struct {
+	ctx            context.Context
+	ApiService     *ExternalCardsAlphaApiService
 	externalCardId string
 }
 
-func (r ApiGetExternalCardRequest) Execute() (*ExternalCardResponse, *http.Response, error) {
+func (r ApiGetExternalCardAlphaRequest) Execute() (*ExternalCardResponse, *http.Response, error) {
 	return r.ApiService.GetExternalCardExecute(r)
 }
 
 /*
 GetExternalCard Get External Card
 
-Get External Card
+# Get External Card
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param externalCardId The unique identifier of an external card
- @return ApiGetExternalCardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param externalCardId The unique identifier of an external card
+	@return ApiGetExternalCardAlphaRequest
 */
-func (a *ExternalCardsAlphaApiService) GetExternalCard(ctx context.Context, externalCardId string) ApiGetExternalCardRequest {
-	return ApiGetExternalCardRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExternalCardsAlphaApiService) GetExternalCard(ctx context.Context, externalCardId string) ApiGetExternalCardAlphaRequest {
+	return ApiGetExternalCardAlphaRequest{
+		ApiService:     a,
+		ctx:            ctx,
 		externalCardId: externalCardId,
 	}
 }
 
 // Execute executes the request
-//  @return ExternalCardResponse
-func (a *ExternalCardsAlphaApiService) GetExternalCardExecute(r ApiGetExternalCardRequest) (*ExternalCardResponse, *http.Response, error) {
+//
+//	@return ExternalCardResponse
+func (a *ExternalCardsAlphaApiService) GetExternalCardExecute(r ApiGetExternalCardAlphaRequest) (*ExternalCardResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ExternalCardResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ExternalCardResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExternalCardsAlphaApiService.GetExternalCard")
@@ -663,42 +662,42 @@ func (a *ExternalCardsAlphaApiService) GetExternalCardExecute(r ApiGetExternalCa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetExternalCardTransferRequest struct {
-	ctx context.Context
+type ApiGetExternalCardTransferAlphaRequest struct {
+	ctx        context.Context
 	ApiService *ExternalCardsAlphaApiService
 	transferId string
 }
 
-func (r ApiGetExternalCardTransferRequest) Execute() (*TransferResponse, *http.Response, error) {
+func (r ApiGetExternalCardTransferAlphaRequest) Execute() (*TransferResponse, *http.Response, error) {
 	return r.ApiService.GetExternalCardTransferExecute(r)
 }
 
 /*
 GetExternalCardTransfer Get External Card Transfer
 
-Get External Card Transfer
+# Get External Card Transfer
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param transferId The unique identifier of a transfer
- @return ApiGetExternalCardTransferRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param transferId The unique identifier of a transfer
+	@return ApiGetExternalCardTransferAlphaRequest
 */
-func (a *ExternalCardsAlphaApiService) GetExternalCardTransfer(ctx context.Context, transferId string) ApiGetExternalCardTransferRequest {
-	return ApiGetExternalCardTransferRequest{
+func (a *ExternalCardsAlphaApiService) GetExternalCardTransfer(ctx context.Context, transferId string) ApiGetExternalCardTransferAlphaRequest {
+	return ApiGetExternalCardTransferAlphaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		transferId: transferId,
 	}
 }
 
 // Execute executes the request
-//  @return TransferResponse
-func (a *ExternalCardsAlphaApiService) GetExternalCardTransferExecute(r ApiGetExternalCardTransferRequest) (*TransferResponse, *http.Response, error) {
+//
+//	@return TransferResponse
+func (a *ExternalCardsAlphaApiService) GetExternalCardTransferExecute(r ApiGetExternalCardTransferAlphaRequest) (*TransferResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *TransferResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TransferResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExternalCardsAlphaApiService.GetExternalCardTransfer")
@@ -816,76 +815,75 @@ func (a *ExternalCardsAlphaApiService) GetExternalCardTransferExecute(r ApiGetEx
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListExternalCardTransfersRequest struct {
-	ctx context.Context
-	ApiService *ExternalCardsAlphaApiService
-	limit *int32
-	pageToken *string
-	customerId *[]string
-	externalCardId *string
+type ApiListExternalCardTransfersAlphaRequest struct {
+	ctx                  context.Context
+	ApiService           *ExternalCardsAlphaApiService
+	limit                *int32
+	pageToken            *string
+	customerId           *[]string
+	externalCardId       *string
 	originatingAccountId *[]string
-	type_ *TransferType
+	type_                *TransferType
 }
 
-func (r ApiListExternalCardTransfersRequest) Limit(limit int32) ApiListExternalCardTransfersRequest {
+func (r ApiListExternalCardTransfersAlphaRequest) Limit(limit int32) ApiListExternalCardTransfersAlphaRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiListExternalCardTransfersRequest) PageToken(pageToken string) ApiListExternalCardTransfersRequest {
+func (r ApiListExternalCardTransfersAlphaRequest) PageToken(pageToken string) ApiListExternalCardTransfersAlphaRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListExternalCardTransfersRequest) CustomerId(customerId []string) ApiListExternalCardTransfersRequest {
+func (r ApiListExternalCardTransfersAlphaRequest) CustomerId(customerId []string) ApiListExternalCardTransfersAlphaRequest {
 	r.customerId = &customerId
 	return r
 }
 
-func (r ApiListExternalCardTransfersRequest) ExternalCardId(externalCardId string) ApiListExternalCardTransfersRequest {
+func (r ApiListExternalCardTransfersAlphaRequest) ExternalCardId(externalCardId string) ApiListExternalCardTransfersAlphaRequest {
 	r.externalCardId = &externalCardId
 	return r
 }
 
-func (r ApiListExternalCardTransfersRequest) OriginatingAccountId(originatingAccountId []string) ApiListExternalCardTransfersRequest {
+func (r ApiListExternalCardTransfersAlphaRequest) OriginatingAccountId(originatingAccountId []string) ApiListExternalCardTransfersAlphaRequest {
 	r.originatingAccountId = &originatingAccountId
 	return r
 }
 
-// The type of an external transfer
-func (r ApiListExternalCardTransfersRequest) Type_(type_ TransferType) ApiListExternalCardTransfersRequest {
+func (r ApiListExternalCardTransfersAlphaRequest) Type_(type_ TransferType) ApiListExternalCardTransfersAlphaRequest {
 	r.type_ = &type_
 	return r
 }
 
-func (r ApiListExternalCardTransfersRequest) Execute() (*TransferListResponse, *http.Response, error) {
+func (r ApiListExternalCardTransfersAlphaRequest) Execute() (*TransferListResponse, *http.Response, error) {
 	return r.ApiService.ListExternalCardTransfersExecute(r)
 }
 
 /*
 ListExternalCardTransfers List External Card Transfers
 
-List External Card Transfers
+# List External Card Transfers
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListExternalCardTransfersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListExternalCardTransfersAlphaRequest
 */
-func (a *ExternalCardsAlphaApiService) ListExternalCardTransfers(ctx context.Context) ApiListExternalCardTransfersRequest {
-	return ApiListExternalCardTransfersRequest{
+func (a *ExternalCardsAlphaApiService) ListExternalCardTransfers(ctx context.Context) ApiListExternalCardTransfersAlphaRequest {
+	return ApiListExternalCardTransfersAlphaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return TransferListResponse
-func (a *ExternalCardsAlphaApiService) ListExternalCardTransfersExecute(r ApiListExternalCardTransfersRequest) (*TransferListResponse, *http.Response, error) {
+//
+//	@return TransferListResponse
+func (a *ExternalCardsAlphaApiService) ListExternalCardTransfersExecute(r ApiListExternalCardTransfersAlphaRequest) (*TransferListResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *TransferListResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TransferListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExternalCardsAlphaApiService.ListExternalCardTransfers")
@@ -1020,63 +1018,63 @@ func (a *ExternalCardsAlphaApiService) ListExternalCardTransfersExecute(r ApiLis
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListExternalCardsRequest struct {
-	ctx context.Context
+type ApiListExternalCardsAlphaRequest struct {
+	ctx        context.Context
 	ApiService *ExternalCardsAlphaApiService
-	limit *int32
-	pageToken *string
+	limit      *int32
+	pageToken  *string
 	customerId *string
 	businessId *string
 }
 
-func (r ApiListExternalCardsRequest) Limit(limit int32) ApiListExternalCardsRequest {
+func (r ApiListExternalCardsAlphaRequest) Limit(limit int32) ApiListExternalCardsAlphaRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiListExternalCardsRequest) PageToken(pageToken string) ApiListExternalCardsRequest {
+func (r ApiListExternalCardsAlphaRequest) PageToken(pageToken string) ApiListExternalCardsAlphaRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListExternalCardsRequest) CustomerId(customerId string) ApiListExternalCardsRequest {
+func (r ApiListExternalCardsAlphaRequest) CustomerId(customerId string) ApiListExternalCardsAlphaRequest {
 	r.customerId = &customerId
 	return r
 }
 
-func (r ApiListExternalCardsRequest) BusinessId(businessId string) ApiListExternalCardsRequest {
+func (r ApiListExternalCardsAlphaRequest) BusinessId(businessId string) ApiListExternalCardsAlphaRequest {
 	r.businessId = &businessId
 	return r
 }
 
-func (r ApiListExternalCardsRequest) Execute() (*ExternalCardListResponse, *http.Response, error) {
+func (r ApiListExternalCardsAlphaRequest) Execute() (*ExternalCardListResponse, *http.Response, error) {
 	return r.ApiService.ListExternalCardsExecute(r)
 }
 
 /*
 ListExternalCards List External Cards
 
-List External Cards
+# List External Cards
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListExternalCardsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListExternalCardsAlphaRequest
 */
-func (a *ExternalCardsAlphaApiService) ListExternalCards(ctx context.Context) ApiListExternalCardsRequest {
-	return ApiListExternalCardsRequest{
+func (a *ExternalCardsAlphaApiService) ListExternalCards(ctx context.Context) ApiListExternalCardsAlphaRequest {
+	return ApiListExternalCardsAlphaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ExternalCardListResponse
-func (a *ExternalCardsAlphaApiService) ListExternalCardsExecute(r ApiListExternalCardsRequest) (*ExternalCardListResponse, *http.Response, error) {
+//
+//	@return ExternalCardListResponse
+func (a *ExternalCardsAlphaApiService) ListExternalCardsExecute(r ApiListExternalCardsAlphaRequest) (*ExternalCardListResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ExternalCardListResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+			formFiles           []formFile
+		localVarReturnValue *ExternalCardListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExternalCardsAlphaApiService.ListExternalCards")

@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.5.0
 */
@@ -16,100 +16,99 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"strings"
 	"os"
+	"strings"
 )
-
 
 // DocumentsAlphaApiService DocumentsAlphaApi service
 type DocumentsAlphaApiService service
 
-type ApiCreateDocumentRequest struct {
-	ctx context.Context
-	ApiService *DocumentsAlphaApiService
-	file **os.File
-	description *string
-	encryption *Encryption
-	metadata *map[string]interface{}
-	name *string
-	relatedResourceId *string
+type ApiCreateDocumentAlphaRequest struct {
+	ctx                 context.Context
+	ApiService          *DocumentsAlphaApiService
+	file                **os.File
+	description         *string
+	encryption          *Encryption
+	metadata            *map[string]interface{}
+	name                *string
+	relatedResourceId   *string
 	relatedResourceType *RelatedResourceType
-	type_ *DocumentType
+	type_               *DocumentType
 }
 
 // The file contents
-func (r ApiCreateDocumentRequest) File(file *os.File) ApiCreateDocumentRequest {
+func (r ApiCreateDocumentAlphaRequest) File(file *os.File) ApiCreateDocumentAlphaRequest {
 	r.file = &file
 	return r
 }
 
 // A description of the attached document
-func (r ApiCreateDocumentRequest) Description(description string) ApiCreateDocumentRequest {
+func (r ApiCreateDocumentAlphaRequest) Description(description string) ApiCreateDocumentAlphaRequest {
 	r.description = &description
 	return r
 }
 
-func (r ApiCreateDocumentRequest) Encryption(encryption Encryption) ApiCreateDocumentRequest {
+func (r ApiCreateDocumentAlphaRequest) Encryption(encryption Encryption) ApiCreateDocumentAlphaRequest {
 	r.encryption = &encryption
 	return r
 }
 
-// Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data. 
-func (r ApiCreateDocumentRequest) Metadata(metadata map[string]interface{}) ApiCreateDocumentRequest {
+// Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.
+func (r ApiCreateDocumentAlphaRequest) Metadata(metadata map[string]interface{}) ApiCreateDocumentAlphaRequest {
 	r.metadata = &metadata
 	return r
 }
 
 // A user-friendly name for the document
-func (r ApiCreateDocumentRequest) Name(name string) ApiCreateDocumentRequest {
+func (r ApiCreateDocumentAlphaRequest) Name(name string) ApiCreateDocumentAlphaRequest {
 	r.name = &name
 	return r
 }
 
 // The ID of the resource related to the document
-func (r ApiCreateDocumentRequest) RelatedResourceId(relatedResourceId string) ApiCreateDocumentRequest {
+func (r ApiCreateDocumentAlphaRequest) RelatedResourceId(relatedResourceId string) ApiCreateDocumentAlphaRequest {
 	r.relatedResourceId = &relatedResourceId
 	return r
 }
 
-func (r ApiCreateDocumentRequest) RelatedResourceType(relatedResourceType RelatedResourceType) ApiCreateDocumentRequest {
+func (r ApiCreateDocumentAlphaRequest) RelatedResourceType(relatedResourceType RelatedResourceType) ApiCreateDocumentAlphaRequest {
 	r.relatedResourceType = &relatedResourceType
 	return r
 }
 
-func (r ApiCreateDocumentRequest) Type_(type_ DocumentType) ApiCreateDocumentRequest {
+func (r ApiCreateDocumentAlphaRequest) Type_(type_ DocumentType) ApiCreateDocumentAlphaRequest {
 	r.type_ = &type_
 	return r
 }
 
-func (r ApiCreateDocumentRequest) Execute() (*Document, *http.Response, error) {
+func (r ApiCreateDocumentAlphaRequest) Execute() (*Document, *http.Response, error) {
 	return r.ApiService.CreateDocumentExecute(r)
 }
 
 /*
 CreateDocument Create a document
 
-Docs
+# Docs
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateDocumentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateDocumentRequest
 */
-func (a *DocumentsAlphaApiService) CreateDocument(ctx context.Context) ApiCreateDocumentRequest {
-	return ApiCreateDocumentRequest{
+func (a *DocumentsAlphaApiService) CreateDocument(ctx context.Context) ApiCreateDocumentAlphaRequest {
+	return ApiCreateDocumentAlphaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return Document
-func (a *DocumentsAlphaApiService) CreateDocumentExecute(r ApiCreateDocumentRequest) (*Document, *http.Response, error) {
+//
+//	@return Document
+func (a *DocumentsAlphaApiService) CreateDocumentExecute(r ApiCreateDocumentAlphaRequest) (*Document, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Document
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Document
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocumentsAlphaApiService.CreateDocument")
@@ -150,8 +149,8 @@ func (a *DocumentsAlphaApiService) CreateDocumentExecute(r ApiCreateDocumentRequ
 		localVarFormParams.Add("encryption", parameterToString(*r.encryption, ""))
 	}
 	var fileLocalVarFormFileName string
-	var fileLocalVarFileName     string
-	var fileLocalVarFileBytes    []byte
+	var fileLocalVarFileName string
+	var fileLocalVarFileBytes []byte
 
 	fileLocalVarFormFileName = "file"
 
@@ -264,13 +263,13 @@ func (a *DocumentsAlphaApiService) CreateDocumentExecute(r ApiCreateDocumentRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetDocumentRequest struct {
-	ctx context.Context
+type ApiGetDocumentAlphaRequest struct {
+	ctx        context.Context
 	ApiService *DocumentsAlphaApiService
 	documentId string
 }
 
-func (r ApiGetDocumentRequest) Execute() (**os.File, *http.Response, error) {
+func (r ApiGetDocumentAlphaRequest) Execute() (**os.File, *http.Response, error) {
 	return r.ApiService.GetDocumentExecute(r)
 }
 
@@ -279,29 +278,31 @@ GetDocument Get a document
 
 Returns the bytes of the requested document. This endpoint is deprecated. Use /documents/{document_id}/contents instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param documentId The unique identifier of the document.
- @return ApiGetDocumentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param documentId The unique identifier of the document.
+	@return ApiGetDocumentRequest
 
 Deprecated
 */
-func (a *DocumentsAlphaApiService) GetDocument(ctx context.Context, documentId string) ApiGetDocumentRequest {
-	return ApiGetDocumentRequest{
+func (a *DocumentsAlphaApiService) GetDocument(ctx context.Context, documentId string) ApiGetDocumentAlphaRequest {
+	return ApiGetDocumentAlphaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		documentId: documentId,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
+//
+//	@return *os.File
+//
 // Deprecated
-func (a *DocumentsAlphaApiService) GetDocumentExecute(r ApiGetDocumentRequest) (**os.File, *http.Response, error) {
+func (a *DocumentsAlphaApiService) GetDocumentExecute(r ApiGetDocumentAlphaRequest) (**os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  **os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue **os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocumentsAlphaApiService.GetDocument")
@@ -409,13 +410,13 @@ func (a *DocumentsAlphaApiService) GetDocumentExecute(r ApiGetDocumentRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetDocumentContentsRequest struct {
-	ctx context.Context
+type ApiGetDocumentContentsAlphaRequest struct {
+	ctx        context.Context
 	ApiService *DocumentsAlphaApiService
 	documentId string
 }
 
-func (r ApiGetDocumentContentsRequest) Execute() (**os.File, *http.Response, error) {
+func (r ApiGetDocumentContentsAlphaRequest) Execute() (**os.File, *http.Response, error) {
 	return r.ApiService.GetDocumentContentsExecute(r)
 }
 
@@ -424,26 +425,27 @@ GetDocumentContents Get document contents
 
 Returns the bytes of the requested document.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param documentId The unique identifier of the document.
- @return ApiGetDocumentContentsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param documentId The unique identifier of the document.
+	@return ApiGetDocumentContentsRequest
 */
-func (a *DocumentsAlphaApiService) GetDocumentContents(ctx context.Context, documentId string) ApiGetDocumentContentsRequest {
-	return ApiGetDocumentContentsRequest{
+func (a *DocumentsAlphaApiService) GetDocumentContents(ctx context.Context, documentId string) ApiGetDocumentContentsAlphaRequest {
+	return ApiGetDocumentContentsAlphaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		documentId: documentId,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *DocumentsAlphaApiService) GetDocumentContentsExecute(r ApiGetDocumentContentsRequest) (**os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *DocumentsAlphaApiService) GetDocumentContentsExecute(r ApiGetDocumentContentsAlphaRequest) (**os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  **os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue **os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocumentsAlphaApiService.GetDocumentContents")
@@ -551,59 +553,59 @@ func (a *DocumentsAlphaApiService) GetDocumentContentsExecute(r ApiGetDocumentCo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListDocumentsRequest struct {
-	ctx context.Context
-	ApiService *DocumentsAlphaApiService
-	id *[]string
-	limit *int32
-	pageToken *string
+type ApiListDocumentsAlphaRequest struct {
+	ctx                 context.Context
+	ApiService          *DocumentsAlphaApiService
+	id                  *[]string
+	limit               *int32
+	pageToken           *string
 	relatedResourceType *RelatedResourceType
-	relatedResourceId *string
-	encryption *string
-	type_ *DocumentType
+	relatedResourceId   *string
+	encryption          *string
+	type_               *DocumentType
 }
 
 // Unique resource identifier
-func (r ApiListDocumentsRequest) Id(id []string) ApiListDocumentsRequest {
+func (r ApiListDocumentsAlphaRequest) Id(id []string) ApiListDocumentsAlphaRequest {
 	r.id = &id
 	return r
 }
 
-func (r ApiListDocumentsRequest) Limit(limit int32) ApiListDocumentsRequest {
+func (r ApiListDocumentsAlphaRequest) Limit(limit int32) ApiListDocumentsAlphaRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiListDocumentsRequest) PageToken(pageToken string) ApiListDocumentsRequest {
+func (r ApiListDocumentsAlphaRequest) PageToken(pageToken string) ApiListDocumentsAlphaRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Return documents that are related to resources of the specified type
-func (r ApiListDocumentsRequest) RelatedResourceType(relatedResourceType RelatedResourceType) ApiListDocumentsRequest {
+func (r ApiListDocumentsAlphaRequest) RelatedResourceType(relatedResourceType RelatedResourceType) ApiListDocumentsAlphaRequest {
 	r.relatedResourceType = &relatedResourceType
 	return r
 }
 
 // Return documents that are related to resources with the specified ID
-func (r ApiListDocumentsRequest) RelatedResourceId(relatedResourceId string) ApiListDocumentsRequest {
+func (r ApiListDocumentsAlphaRequest) RelatedResourceId(relatedResourceId string) ApiListDocumentsAlphaRequest {
 	r.relatedResourceId = &relatedResourceId
 	return r
 }
 
 // Whether the file should be encrypted and access restricted, e.g. if the file contains PII
-func (r ApiListDocumentsRequest) Encryption(encryption string) ApiListDocumentsRequest {
+func (r ApiListDocumentsAlphaRequest) Encryption(encryption string) ApiListDocumentsAlphaRequest {
 	r.encryption = &encryption
 	return r
 }
 
 // The type of documents
-func (r ApiListDocumentsRequest) Type_(type_ DocumentType) ApiListDocumentsRequest {
+func (r ApiListDocumentsAlphaRequest) Type_(type_ DocumentType) ApiListDocumentsAlphaRequest {
 	r.type_ = &type_
 	return r
 }
 
-func (r ApiListDocumentsRequest) Execute() (*DocumentList, *http.Response, error) {
+func (r ApiListDocumentsAlphaRequest) Execute() (*DocumentList, *http.Response, error) {
 	return r.ApiService.ListDocumentsExecute(r)
 }
 
@@ -612,24 +614,25 @@ ListDocuments List documents
 
 Returns a paginated list of documents.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListDocumentsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListDocumentsRequest
 */
-func (a *DocumentsAlphaApiService) ListDocuments(ctx context.Context) ApiListDocumentsRequest {
-	return ApiListDocumentsRequest{
+func (a *DocumentsAlphaApiService) ListDocuments(ctx context.Context) ApiListDocumentsAlphaRequest {
+	return ApiListDocumentsAlphaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return DocumentList
-func (a *DocumentsAlphaApiService) ListDocumentsExecute(r ApiListDocumentsRequest) (*DocumentList, *http.Response, error) {
+//
+//	@return DocumentList
+func (a *DocumentsAlphaApiService) ListDocumentsExecute(r ApiListDocumentsAlphaRequest) (*DocumentList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DocumentList
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DocumentList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocumentsAlphaApiService.ListDocuments")
@@ -767,19 +770,19 @@ func (a *DocumentsAlphaApiService) ListDocumentsExecute(r ApiListDocumentsReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateDocumentRequest struct {
-	ctx context.Context
-	ApiService *DocumentsAlphaApiService
-	documentId string
+type ApiUpdateDocumentAlphaRequest struct {
+	ctx           context.Context
+	ApiService    *DocumentsAlphaApiService
+	documentId    string
 	patchDocument *PatchDocument
 }
 
-func (r ApiUpdateDocumentRequest) PatchDocument(patchDocument PatchDocument) ApiUpdateDocumentRequest {
+func (r ApiUpdateDocumentAlphaRequest) PatchDocument(patchDocument PatchDocument) ApiUpdateDocumentAlphaRequest {
 	r.patchDocument = &patchDocument
 	return r
 }
 
-func (r ApiUpdateDocumentRequest) Execute() (*Document, *http.Response, error) {
+func (r ApiUpdateDocumentAlphaRequest) Execute() (*Document, *http.Response, error) {
 	return r.ApiService.UpdateDocumentExecute(r)
 }
 
@@ -788,26 +791,27 @@ UpdateDocument Update a document
 
 Update document attributes by document ID
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param documentId The unique identifier of the document.
- @return ApiUpdateDocumentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param documentId The unique identifier of the document.
+	@return ApiUpdateDocumentRequest
 */
-func (a *DocumentsAlphaApiService) UpdateDocument(ctx context.Context, documentId string) ApiUpdateDocumentRequest {
-	return ApiUpdateDocumentRequest{
+func (a *DocumentsAlphaApiService) UpdateDocument(ctx context.Context, documentId string) ApiUpdateDocumentAlphaRequest {
+	return ApiUpdateDocumentAlphaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		documentId: documentId,
 	}
 }
 
 // Execute executes the request
-//  @return Document
-func (a *DocumentsAlphaApiService) UpdateDocumentExecute(r ApiUpdateDocumentRequest) (*Document, *http.Response, error) {
+//
+//	@return Document
+func (a *DocumentsAlphaApiService) UpdateDocumentExecute(r ApiUpdateDocumentAlphaRequest) (*Document, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Document
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Document
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocumentsAlphaApiService.UpdateDocument")

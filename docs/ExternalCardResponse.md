@@ -4,22 +4,25 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Bin** | Pointer to **string** | Bank Identification Number | [optional] 
 **CreatedTime** | Pointer to **time.Time** |  | [optional] 
 **Currency** | **string** | ISO 4217  Alpha-3 currency code | 
 **CustomerId** | **string** | The unique identifier of a customer | 
 **ExpirationMonth** | **string** |  | [readonly] 
 **ExpirationYear** | **string** |  | [readonly] 
 **Id** | **string** | External card ID | 
+**Issuer** | Pointer to **string** | Name of issuing financial institution | [optional] 
 **LastFour** | **string** | The last 4 digits of the card PAN | [readonly] 
 **LastModifiedTime** | Pointer to **time.Time** |  | [optional] 
 **Name** | **string** | The cardholder name | 
+**Status** | [**ExternalCardStatus**](ExternalCardStatus.md) |  | 
 **Verifications** | Pointer to [**ExternalCardVerifications**](ExternalCardVerifications.md) |  | [optional] 
 
 ## Methods
 
 ### NewExternalCardResponse
 
-`func NewExternalCardResponse(currency string, customerId string, expirationMonth string, expirationYear string, id string, lastFour string, name string, ) *ExternalCardResponse`
+`func NewExternalCardResponse(currency string, customerId string, expirationMonth string, expirationYear string, id string, lastFour string, name string, status ExternalCardStatus, ) *ExternalCardResponse`
 
 NewExternalCardResponse instantiates a new ExternalCardResponse object
 This constructor will assign default values to properties that have it defined,
@@ -33,6 +36,31 @@ will change when the set of required properties is changed
 NewExternalCardResponseWithDefaults instantiates a new ExternalCardResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBin
+
+`func (o *ExternalCardResponse) GetBin() string`
+
+GetBin returns the Bin field if non-nil, zero value otherwise.
+
+### GetBinOk
+
+`func (o *ExternalCardResponse) GetBinOk() (*string, bool)`
+
+GetBinOk returns a tuple with the Bin field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBin
+
+`func (o *ExternalCardResponse) SetBin(v string)`
+
+SetBin sets Bin field to given value.
+
+### HasBin
+
+`func (o *ExternalCardResponse) HasBin() bool`
+
+HasBin returns a boolean if a field has been set.
 
 ### GetCreatedTime
 
@@ -159,6 +187,31 @@ and a boolean to check if the value has been set.
 SetId sets Id field to given value.
 
 
+### GetIssuer
+
+`func (o *ExternalCardResponse) GetIssuer() string`
+
+GetIssuer returns the Issuer field if non-nil, zero value otherwise.
+
+### GetIssuerOk
+
+`func (o *ExternalCardResponse) GetIssuerOk() (*string, bool)`
+
+GetIssuerOk returns a tuple with the Issuer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIssuer
+
+`func (o *ExternalCardResponse) SetIssuer(v string)`
+
+SetIssuer sets Issuer field to given value.
+
+### HasIssuer
+
+`func (o *ExternalCardResponse) HasIssuer() bool`
+
+HasIssuer returns a boolean if a field has been set.
+
 ### GetLastFour
 
 `func (o *ExternalCardResponse) GetLastFour() string`
@@ -222,6 +275,26 @@ and a boolean to check if the value has been set.
 `func (o *ExternalCardResponse) SetName(v string)`
 
 SetName sets Name field to given value.
+
+
+### GetStatus
+
+`func (o *ExternalCardResponse) GetStatus() ExternalCardStatus`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *ExternalCardResponse) GetStatusOk() (*ExternalCardStatus, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *ExternalCardResponse) SetStatus(v ExternalCardStatus)`
+
+SetStatus sets Status field to given value.
 
 
 ### GetVerifications

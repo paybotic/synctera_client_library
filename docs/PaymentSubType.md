@@ -1,0 +1,19 @@
+# PaymentSubType
+
+## Enum
+
+
+* `CARD_ATM_WITHDRAWAL` (value: `"CARD.ATM_WITHDRAWAL"`)
+
+* `CARD_POS_CASHBACK` (value: `"CARD.POS_CASHBACK"`)
+
+* `SYNCTERA_PAY_INCOMING_INTERAC_AUTODEPOSIT` (value: `"SYNCTERA_PAY.INCOMING_INTERAC_AUTODEPOSIT"`)
+
+* `SYNCTERA_PAY_OUTGOING_BILL_PAYMENT` (value: `"SYNCTERA_PAY.OUTGOING_BILL_PAYMENT"`)
+
+* `SYNCTERA_PAY_OUTGOING_INTERAC_E_TRANSFER` (value: `"SYNCTERA_PAY.OUTGOING_INTERAC_E_TRANSFER"`)
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

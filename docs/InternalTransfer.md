@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **ReceivingAccountAlias** | Pointer to **string** | An alias representing a GL account to credit. This is an alternative to specifying by account id | [optional] 
 **ReceivingAccountCustomerId** | Pointer to **string** | The customer id of the owner of the receiving account. | [optional] 
 **ReceivingAccountId** | Pointer to **string** | The UUID of the account being credited | [optional] 
+**ReferenceId** | Pointer to **string** | Network reference id | [optional] 
+**Tenant** | Pointer to **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | [optional] 
 **Type** | **string** | The desired transaction type to use for this transfer | 
 
 ## Methods
@@ -352,6 +354,56 @@ SetReceivingAccountId sets ReceivingAccountId field to given value.
 `func (o *InternalTransfer) HasReceivingAccountId() bool`
 
 HasReceivingAccountId returns a boolean if a field has been set.
+
+### GetReferenceId
+
+`func (o *InternalTransfer) GetReferenceId() string`
+
+GetReferenceId returns the ReferenceId field if non-nil, zero value otherwise.
+
+### GetReferenceIdOk
+
+`func (o *InternalTransfer) GetReferenceIdOk() (*string, bool)`
+
+GetReferenceIdOk returns a tuple with the ReferenceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReferenceId
+
+`func (o *InternalTransfer) SetReferenceId(v string)`
+
+SetReferenceId sets ReferenceId field to given value.
+
+### HasReferenceId
+
+`func (o *InternalTransfer) HasReferenceId() bool`
+
+HasReferenceId returns a boolean if a field has been set.
+
+### GetTenant
+
+`func (o *InternalTransfer) GetTenant() string`
+
+GetTenant returns the Tenant field if non-nil, zero value otherwise.
+
+### GetTenantOk
+
+`func (o *InternalTransfer) GetTenantOk() (*string, bool)`
+
+GetTenantOk returns a tuple with the Tenant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenant
+
+`func (o *InternalTransfer) SetTenant(v string)`
+
+SetTenant sets Tenant field to given value.
+
+### HasTenant
+
+`func (o *InternalTransfer) HasTenant() bool`
+
+HasTenant returns a boolean if a field has been set.
 
 ### GetType
 

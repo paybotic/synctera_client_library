@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -18,16 +18,15 @@ import (
 	"net/url"
 )
 
-
 // SandboxWipeAlphaApiService SandboxWipeAlphaApi service
 type SandboxWipeAlphaApiService service
 
-type ApiWipeWorkspaceRequest struct {
-	ctx context.Context
+type ApiWipeWorkspaceAlphaRequest struct {
+	ctx        context.Context
 	ApiService *SandboxWipeAlphaApiService
 }
 
-func (r ApiWipeWorkspaceRequest) Execute() (*http.Response, error) {
+func (r ApiWipeWorkspaceAlphaRequest) Execute() (*http.Response, error) {
 	return r.ApiService.WipeWorkspaceExecute(r)
 }
 
@@ -55,35 +54,45 @@ Data associated with below resources will be deleted:
   - Verifications
 
 Data associated with below resources will be retained:
+
   - Account Templates
+
   - API Keys
+
   - Bank/Partner data
+
   - Card product
+
   - Disclosure document records
+
   - Egress config
+
   - Groups
+
   - PII contract with vault
+
   - Roles
+
   - Users
+
   - Webhooks
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiWipeWorkspaceRequest
+    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @return ApiWipeWorkspaceAlphaRequest
 */
-func (a *SandboxWipeAlphaApiService) WipeWorkspace(ctx context.Context) ApiWipeWorkspaceRequest {
-	return ApiWipeWorkspaceRequest{
+func (a *SandboxWipeAlphaApiService) WipeWorkspace(ctx context.Context) ApiWipeWorkspaceAlphaRequest {
+	return ApiWipeWorkspaceAlphaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-func (a *SandboxWipeAlphaApiService) WipeWorkspaceExecute(r ApiWipeWorkspaceRequest) (*http.Response, error) {
+func (a *SandboxWipeAlphaApiService) WipeWorkspaceExecute(r ApiWipeWorkspaceAlphaRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPost
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SandboxWipeAlphaApiService.WipeWorkspace")

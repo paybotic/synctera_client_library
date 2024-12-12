@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -19,24 +19,24 @@ import (
 type BaseCashPickup struct {
 	AccountId string `json:"account_id"`
 	// The amount (in cents) of the transaction
-	Amount int32 `json:"amount"`
-	BusinessId *string `json:"business_id,omitempty"`
-	CreationTime *time.Time `json:"creation_time,omitempty"`
-	Currency *string `json:"currency,omitempty"`
-	EmployeeCustomerId *string `json:"employee_customer_id,omitempty"`
-	Id *string `json:"id,omitempty"`
-	LastUpdatedTime *time.Time `json:"last_updated_time,omitempty"`
-	Metadata *map[string]string `json:"metadata,omitempty"`
+	Amount             int32              `json:"amount"`
+	BusinessId         *string            `json:"business_id,omitempty"`
+	CreationTime       *time.Time         `json:"creation_time,omitempty"`
+	Currency           *string            `json:"currency,omitempty"`
+	EmployeeCustomerId *string            `json:"employee_customer_id,omitempty"`
+	Id                 *string            `json:"id,omitempty"`
+	LastUpdatedTime    *time.Time         `json:"last_updated_time,omitempty"`
+	Metadata           *map[string]string `json:"metadata,omitempty"`
 	// the date when the money was actually picked up
-	PickupTime *time.Time `json:"pickup_time,omitempty"`
-	PostedAmount *int32 `json:"posted_amount,omitempty"`
+	PickupTime   *time.Time `json:"pickup_time,omitempty"`
+	PostedAmount *int32     `json:"posted_amount,omitempty"`
 	// The date the transaction was posted. This is the date any money is considered to be added or removed from an account.
 	PostedDate *string `json:"posted_date,omitempty"`
 	// An external ID provided by the partner. This is not guaranteed to be globally unique.
 	ReferenceId string `json:"reference_id"`
 	// the date when the money was expected to be picked up
 	ScheduledPickupDate *string `json:"scheduled_pickup_date,omitempty"`
-	TransactionId *string `json:"transaction_id,omitempty"`
+	TransactionId       *string `json:"transaction_id,omitempty"`
 }
 
 // NewBaseCashPickup instantiates a new BaseCashPickup object
@@ -600,5 +600,3 @@ func (v *NullableBaseCashPickup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

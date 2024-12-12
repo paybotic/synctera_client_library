@@ -3,13 +3,13 @@
 ## Enum
 
 
-* `MAGNETIC_STRIPE` (value: `"MAGNETIC_STRIPE"`)
-
 * `CHIP` (value: `"CHIP"`)
 
 * `CONTACT` (value: `"CONTACT"`)
 
 * `CONTACTLESS` (value: `"CONTACTLESS"`)
+
+* `MAGNETIC_STRIPE` (value: `"MAGNETIC_STRIPE"`)
 
 * `PHYSICAL_COMBO` (value: `"PHYSICAL_COMBO"`)
 

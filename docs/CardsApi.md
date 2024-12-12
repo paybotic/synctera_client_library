@@ -1,36 +1,36 @@
-# \CardsApi
+# \CardsAPI
 
-All URIs are relative to *https://api.synctera.com/v0*
+All URIs are relative to *https://api-sandbox.synctera.com/v0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ActivateCard**](CardsApi.md#ActivateCard) | **Post** /cards/activate | Activate a card
-[**CreateCardImage**](CardsApi.md#CreateCardImage) | **Post** /cards/images | Create Card Image
-[**CreateGateway**](CardsApi.md#CreateGateway) | **Post** /cards/gateways | Create Gateway
-[**GetCard**](CardsApi.md#GetCard) | **Get** /cards/{card_id} | Get Card
-[**GetCardBarcode**](CardsApi.md#GetCardBarcode) | **Get** /cards/{card_id}/barcodes | Get Card Barcode
-[**GetCardImageData**](CardsApi.md#GetCardImageData) | **Get** /cards/images/{card_image_id}/data | Get Card Image Data
-[**GetCardImageDetails**](CardsApi.md#GetCardImageDetails) | **Get** /cards/images/{card_image_id} | Get Card Image Details
-[**GetCardWidgetURL**](CardsApi.md#GetCardWidgetURL) | **Get** /cards/card_widget_url | Get card widget URL
-[**GetClientAccessToken**](CardsApi.md#GetClientAccessToken) | **Post** /cards/{card_id}/client_token | Get a client token
-[**GetClientSingleUseToken**](CardsApi.md#GetClientSingleUseToken) | **Post** /cards/single_use_token | Get single-use token
-[**GetGateway**](CardsApi.md#GetGateway) | **Get** /cards/gateways/{gateway_id} | Get Gateway
-[**IssueCard**](CardsApi.md#IssueCard) | **Post** /cards | Issue a Card
-[**ListCardImageDetails**](CardsApi.md#ListCardImageDetails) | **Get** /cards/images | List Card Image Details
-[**ListCardProducts**](CardsApi.md#ListCardProducts) | **Get** /cards/products | List Card Products
-[**ListCards**](CardsApi.md#ListCards) | **Get** /cards | List Cards
-[**ListChanges**](CardsApi.md#ListChanges) | **Get** /cards/{card_id}/changes | List Card Changes
-[**ListGateways**](CardsApi.md#ListGateways) | **Get** /cards/gateways | List Gateways
-[**UpdateCard**](CardsApi.md#UpdateCard) | **Patch** /cards/{card_id} | Update Card
-[**UpdateCardImageDetails**](CardsApi.md#UpdateCardImageDetails) | **Patch** /cards/images/{card_image_id} | Update Card Image Details
-[**UpdateGateway**](CardsApi.md#UpdateGateway) | **Patch** /cards/gateways/{gateway_id} | Update Gateway
-[**UploadCardImageData**](CardsApi.md#UploadCardImageData) | **Post** /cards/images/{card_image_id}/data | Upload Card Image
+[**ActivateCard**](CardsAPI.md#ActivateCard) | **Post** /cards/activate | Activate a card
+[**CreateCardImage**](CardsAPI.md#CreateCardImage) | **Post** /cards/images | Create Card Image
+[**CreateGateway**](CardsAPI.md#CreateGateway) | **Post** /cards/gateways | Create Gateway
+[**GetCard**](CardsAPI.md#GetCard) | **Get** /cards/{card_id} | Get Card
+[**GetCardBarcode**](CardsAPI.md#GetCardBarcode) | **Get** /cards/{card_id}/barcodes | Get Card Barcode
+[**GetCardImageData**](CardsAPI.md#GetCardImageData) | **Get** /cards/images/{card_image_id}/data | Get Card Image Data
+[**GetCardImageDetails**](CardsAPI.md#GetCardImageDetails) | **Get** /cards/images/{card_image_id} | Get Card Image Details
+[**GetCardWidgetURL**](CardsAPI.md#GetCardWidgetURL) | **Get** /cards/card_widget_url | Get card widget URL
+[**GetClientAccessToken**](CardsAPI.md#GetClientAccessToken) | **Post** /cards/{card_id}/client_token | Get a client token
+[**GetClientSingleUseToken**](CardsAPI.md#GetClientSingleUseToken) | **Post** /cards/single_use_token | Get single-use token
+[**GetGateway**](CardsAPI.md#GetGateway) | **Get** /cards/gateways/{gateway_id} | Get Gateway
+[**IssueCard**](CardsAPI.md#IssueCard) | **Post** /cards | Issue a Card
+[**ListCardImageDetails**](CardsAPI.md#ListCardImageDetails) | **Get** /cards/images | List Card Image Details
+[**ListCardProducts**](CardsAPI.md#ListCardProducts) | **Get** /cards/products | List Card Products
+[**ListCards**](CardsAPI.md#ListCards) | **Get** /cards | List Cards
+[**ListChanges**](CardsAPI.md#ListChanges) | **Get** /cards/{card_id}/changes | List Card Changes
+[**ListGateways**](CardsAPI.md#ListGateways) | **Get** /cards/gateways | List Gateways
+[**UpdateCard**](CardsAPI.md#UpdateCard) | **Patch** /cards/{card_id} | Update Card
+[**UpdateCardImageDetails**](CardsAPI.md#UpdateCardImageDetails) | **Patch** /cards/images/{card_image_id} | Update Card Image Details
+[**UpdateGateway**](CardsAPI.md#UpdateGateway) | **Patch** /cards/gateways/{gateway_id} | Update Gateway
+[**UploadCardImageData**](CardsAPI.md#UploadCardImageData) | **Post** /cards/images/{card_image_id}/data | Upload Card Image
 
 
 
 ## ActivateCard
 
-> CardResponse ActivateCard(ctx).CardActivationRequest(cardActivationRequest).Execute()
+> CardResponse ActivateCard(ctx).CardActivationRequest(cardActivationRequest).IdempotencyKey(idempotencyKey).Execute()
 
 Activate a card
 
@@ -42,24 +42,25 @@ Activate a card
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    cardActivationRequest := *openapiclient.NewCardActivationRequest("ActivationCode_example", "7d943c51-e4ff-4e57-9558-08cab6b963c7") // CardActivationRequest | Card activation code
+	cardActivationRequest := *openapiclient.NewCardActivationRequest("ActivationCode_example", "7d943c51-e4ff-4e57-9558-08cab6b963c7") // CardActivationRequest | Card activation code
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.ActivateCard(context.Background()).CardActivationRequest(cardActivationRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.ActivateCard``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ActivateCard`: CardResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.ActivateCard`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.ActivateCard(context.Background()).CardActivationRequest(cardActivationRequest).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.ActivateCard``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ActivateCard`: CardResponse
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.ActivateCard`: %v\n", resp)
 }
 ```
 
@@ -75,6 +76,7 @@ Other parameters are passed through a pointer to a apiActivateCardRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cardActivationRequest** | [**CardActivationRequest**](CardActivationRequest.md) | Card activation code | 
+ **idempotencyKey** | **string** | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. | 
 
 ### Return type
 
@@ -96,7 +98,7 @@ Name | Type | Description  | Notes
 
 ## CreateCardImage
 
-> CardImageDetails CreateCardImage(ctx).CreateCardImageRequest(createCardImageRequest).Execute()
+> CardImageDetails CreateCardImage(ctx).CreateCardImageRequest(createCardImageRequest).IdempotencyKey(idempotencyKey).Execute()
 
 Create Card Image
 
@@ -108,24 +110,25 @@ Create Card Image
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    createCardImageRequest := *openapiclient.NewCreateCardImageRequest("7d943c51-e4ff-4e57-9558-08cab6b963c7", "7d943c51-e4ff-4e57-9558-08cab6b963c7") // CreateCardImageRequest | Details of the image to create
+	createCardImageRequest := *openapiclient.NewCreateCardImageRequest("7d943c51-e4ff-4e57-9558-08cab6b963c7", "7d943c51-e4ff-4e57-9558-08cab6b963c7") // CreateCardImageRequest | Details of the image to create
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.CreateCardImage(context.Background()).CreateCardImageRequest(createCardImageRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.CreateCardImage``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateCardImage`: CardImageDetails
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.CreateCardImage`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.CreateCardImage(context.Background()).CreateCardImageRequest(createCardImageRequest).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.CreateCardImage``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateCardImage`: CardImageDetails
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.CreateCardImage`: %v\n", resp)
 }
 ```
 
@@ -141,6 +144,7 @@ Other parameters are passed through a pointer to a apiCreateCardImageRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **createCardImageRequest** | [**CreateCardImageRequest**](CreateCardImageRequest.md) | Details of the image to create | 
+ **idempotencyKey** | **string** | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. | 
 
 ### Return type
 
@@ -162,7 +166,7 @@ Name | Type | Description  | Notes
 
 ## CreateGateway
 
-> GatewayResponse CreateGateway(ctx).CreateGatewayRequest(createGatewayRequest).Execute()
+> GatewayResponse CreateGateway(ctx).CreateGatewayRequest(createGatewayRequest).IdempotencyKey(idempotencyKey).Execute()
 
 Create Gateway
 
@@ -174,24 +178,25 @@ Create Gateway
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    createGatewayRequest := *openapiclient.NewCreateGatewayRequest([]string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"}, "Url_example") // CreateGatewayRequest | Create a new Authorization Gateway Configuration
+	createGatewayRequest := *openapiclient.NewCreateGatewayRequest([]string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"}, "Url_example") // CreateGatewayRequest | Create a new Authorization Gateway Configuration
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.CreateGateway(context.Background()).CreateGatewayRequest(createGatewayRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.CreateGateway``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateGateway`: GatewayResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.CreateGateway`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.CreateGateway(context.Background()).CreateGatewayRequest(createGatewayRequest).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.CreateGateway``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateGateway`: GatewayResponse
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.CreateGateway`: %v\n", resp)
 }
 ```
 
@@ -207,6 +212,7 @@ Other parameters are passed through a pointer to a apiCreateGatewayRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **createGatewayRequest** | [**CreateGatewayRequest**](CreateGatewayRequest.md) | Create a new Authorization Gateway Configuration | 
+ **idempotencyKey** | **string** | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. | 
 
 ### Return type
 
@@ -240,24 +246,24 @@ Get Card
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetCard(context.Background(), cardId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetCard``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetCard`: CardResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetCard`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.GetCard(context.Background(), cardId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.GetCard``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCard`: CardResponse
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.GetCard`: %v\n", resp)
 }
 ```
 
@@ -310,24 +316,24 @@ Get Card Barcode
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetCardBarcode(context.Background(), cardId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetCardBarcode``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetCardBarcode`: GetCardBarcode200Response
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetCardBarcode`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.GetCardBarcode(context.Background(), cardId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.GetCardBarcode``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCardBarcode`: GetCardBarcode200Response
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.GetCardBarcode`: %v\n", resp)
 }
 ```
 
@@ -380,24 +386,24 @@ Get Card Image Data
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    cardImageId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	cardImageId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetCardImageData(context.Background(), cardImageId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetCardImageData``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetCardImageData`: *os.File
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetCardImageData`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.GetCardImageData(context.Background(), cardImageId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.GetCardImageData``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCardImageData`: *os.File
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.GetCardImageData`: %v\n", resp)
 }
 ```
 
@@ -450,24 +456,24 @@ Get Card Image Details
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    cardImageId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	cardImageId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetCardImageDetails(context.Background(), cardImageId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetCardImageDetails``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetCardImageDetails`: CardImageDetails
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetCardImageDetails`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.GetCardImageDetails(context.Background(), cardImageId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.GetCardImageDetails``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCardImageDetails`: CardImageDetails
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.GetCardImageDetails`: %v\n", resp)
 }
 ```
 
@@ -508,7 +514,7 @@ Name | Type | Description  | Notes
 
 ## GetCardWidgetURL
 
-> CardWidgetUrlResponse GetCardWidgetURL(ctx).WidgetType(widgetType).CustomerId(customerId).AccountId(accountId).CardId(cardId).Execute()
+> CardWidgetUrlResponse GetCardWidgetURL(ctx).AccountId(accountId).CustomerId(customerId).WidgetType(widgetType).CardId(cardId).Execute()
 
 Get card widget URL
 
@@ -520,27 +526,27 @@ Get card widget URL
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    widgetType := openapiclient.widget_type("set_pin") // WidgetType | The type of widget for which to construct the URL
-    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the card (required for set PIN widget) (optional)
+	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	widgetType := openapiclient.widget_type("activate_card") // WidgetType | The type of widget for which to construct the URL
+	cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the card (required for set PIN widget) (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetCardWidgetURL(context.Background()).WidgetType(widgetType).CustomerId(customerId).AccountId(accountId).CardId(cardId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetCardWidgetURL``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetCardWidgetURL`: CardWidgetUrlResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetCardWidgetURL`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.GetCardWidgetURL(context.Background()).AccountId(accountId).CustomerId(customerId).WidgetType(widgetType).CardId(cardId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.GetCardWidgetURL``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCardWidgetURL`: CardWidgetUrlResponse
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.GetCardWidgetURL`: %v\n", resp)
 }
 ```
 
@@ -555,9 +561,9 @@ Other parameters are passed through a pointer to a apiGetCardWidgetURLRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **widgetType** | [**WidgetType**](WidgetType.md) | The type of widget for which to construct the URL | 
- **customerId** | **string** |  | 
  **accountId** | **string** |  | 
+ **customerId** | **string** |  | 
+ **widgetType** | [**WidgetType**](WidgetType.md) | The type of widget for which to construct the URL | 
  **cardId** | **string** | The ID of the card (required for set PIN widget) | 
 
 ### Return type
@@ -580,7 +586,7 @@ Name | Type | Description  | Notes
 
 ## GetClientAccessToken
 
-> ClientToken GetClientAccessToken(ctx, cardId).Execute()
+> ClientToken GetClientAccessToken(ctx, cardId).IdempotencyKey(idempotencyKey).Execute()
 
 Get a client token
 
@@ -592,24 +598,25 @@ Get a client token
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetClientAccessToken(context.Background(), cardId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetClientAccessToken``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetClientAccessToken`: ClientToken
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetClientAccessToken`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.GetClientAccessToken(context.Background(), cardId).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.GetClientAccessToken``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetClientAccessToken`: ClientToken
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.GetClientAccessToken`: %v\n", resp)
 }
 ```
 
@@ -629,6 +636,7 @@ Other parameters are passed through a pointer to a apiGetClientAccessTokenReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **idempotencyKey** | **string** | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. | 
 
 ### Return type
 
@@ -650,7 +658,7 @@ Name | Type | Description  | Notes
 
 ## GetClientSingleUseToken
 
-> SingleUseTokenResponse GetClientSingleUseToken(ctx).SingleUseTokenRequest(singleUseTokenRequest).Execute()
+> SingleUseTokenResponse GetClientSingleUseToken(ctx).SingleUseTokenRequest(singleUseTokenRequest).IdempotencyKey(idempotencyKey).Execute()
 
 Get single-use token
 
@@ -662,24 +670,25 @@ Get single-use token
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    singleUseTokenRequest := *openapiclient.NewSingleUseTokenRequest("7d943c51-e4ff-4e57-9558-08cab6b963c7", "7d943c51-e4ff-4e57-9558-08cab6b963c7") // SingleUseTokenRequest | User token details
+	singleUseTokenRequest := *openapiclient.NewSingleUseTokenRequest("7d943c51-e4ff-4e57-9558-08cab6b963c7", "7d943c51-e4ff-4e57-9558-08cab6b963c7") // SingleUseTokenRequest | User token details
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetClientSingleUseToken(context.Background()).SingleUseTokenRequest(singleUseTokenRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetClientSingleUseToken``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetClientSingleUseToken`: SingleUseTokenResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetClientSingleUseToken`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.GetClientSingleUseToken(context.Background()).SingleUseTokenRequest(singleUseTokenRequest).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.GetClientSingleUseToken``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetClientSingleUseToken`: SingleUseTokenResponse
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.GetClientSingleUseToken`: %v\n", resp)
 }
 ```
 
@@ -695,6 +704,7 @@ Other parameters are passed through a pointer to a apiGetClientSingleUseTokenReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **singleUseTokenRequest** | [**SingleUseTokenRequest**](SingleUseTokenRequest.md) | User token details | 
+ **idempotencyKey** | **string** | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. | 
 
 ### Return type
 
@@ -728,24 +738,24 @@ Get Gateway
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    gatewayId := "gatewayId_example" // string | 
+	gatewayId := "gatewayId_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.GetGateway(context.Background(), gatewayId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.GetGateway``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetGateway`: GatewayResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.GetGateway`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.GetGateway(context.Background(), gatewayId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.GetGateway``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGateway`: GatewayResponse
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.GetGateway`: %v\n", resp)
 }
 ```
 
@@ -786,7 +796,7 @@ Name | Type | Description  | Notes
 
 ## IssueCard
 
-> CardResponse IssueCard(ctx).CardIssuanceRequest(cardIssuanceRequest).Execute()
+> CardResponse IssueCard(ctx).CardIssuanceRequest(cardIssuanceRequest).IdempotencyKey(idempotencyKey).Execute()
 
 Issue a Card
 
@@ -798,24 +808,25 @@ Issue a Card
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    cardIssuanceRequest := openapiclient.card_issuance_request{PhysicalCardIssuanceRequest: openapiclient.NewPhysicalCardIssuanceRequest("Form_example", "7d943c51-e4ff-4e57-9558-08cab6b963c7", "7d943c51-e4ff-4e57-9558-08cab6b963c7", "7d943c51-e4ff-4e57-9558-08cab6b963c7", "Type_example")} // CardIssuanceRequest | Card to issue
+	cardIssuanceRequest := openapiclient.card_issuance_request{PhysicalCardIssuanceRequest: openapiclient.NewPhysicalCardIssuanceRequest("7d943c51-e4ff-4e57-9558-08cab6b963c7", "7d943c51-e4ff-4e57-9558-08cab6b963c7", openapiclient.card_type("DEBIT"), "Form_example")} // CardIssuanceRequest | Card to issue
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.IssueCard(context.Background()).CardIssuanceRequest(cardIssuanceRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.IssueCard``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `IssueCard`: CardResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.IssueCard`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.IssueCard(context.Background()).CardIssuanceRequest(cardIssuanceRequest).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.IssueCard``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `IssueCard`: CardResponse
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.IssueCard`: %v\n", resp)
 }
 ```
 
@@ -831,6 +842,7 @@ Other parameters are passed through a pointer to a apiIssueCardRequest struct vi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cardIssuanceRequest** | [**CardIssuanceRequest**](CardIssuanceRequest.md) | Card to issue | 
+ **idempotencyKey** | **string** | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. | 
 
 ### Return type
 
@@ -864,24 +876,24 @@ List Card Image Details
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.ListCardImageDetails(context.Background()).CustomerId(customerId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.ListCardImageDetails``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListCardImageDetails`: CardImageDetailsList
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.ListCardImageDetails`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.ListCardImageDetails(context.Background()).CustomerId(customerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.ListCardImageDetails``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListCardImageDetails`: CardImageDetailsList
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.ListCardImageDetails`: %v\n", resp)
 }
 ```
 
@@ -918,7 +930,7 @@ Name | Type | Description  | Notes
 
 ## ListCardProducts
 
-> CardProductListResponse ListCardProducts(ctx).Limit(limit).PageToken(pageToken).Form(form).Execute()
+> CardProductListResponse ListCardProducts(ctx).Form(form).PageToken(pageToken).Limit(limit).Execute()
 
 List Card Products
 
@@ -928,26 +940,26 @@ List Card Products
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "a8937a0d" // string |  (optional)
-    form := openapiclient.form("PHYSICAL") // Form | The format of the card (optional)
+	form := openapiclient.form("PHYSICAL") // Form | The format of the card (optional)
+	pageToken := "a8937a0d" // string |  (optional)
+	limit := int32(100) // int32 |  (optional) (default to 100)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.ListCardProducts(context.Background()).Limit(limit).PageToken(pageToken).Form(form).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.ListCardProducts``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListCardProducts`: CardProductListResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.ListCardProducts`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.ListCardProducts(context.Background()).Form(form).PageToken(pageToken).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.ListCardProducts``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListCardProducts`: CardProductListResponse
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.ListCardProducts`: %v\n", resp)
 }
 ```
 
@@ -962,9 +974,9 @@ Other parameters are passed through a pointer to a apiListCardProductsRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int32** |  | [default to 100]
- **pageToken** | **string** |  | 
  **form** | [**Form**](Form.md) | The format of the card | 
+ **pageToken** | **string** |  | 
+ **limit** | **int32** |  | [default to 100]
 
 ### Return type
 
@@ -986,7 +998,7 @@ Name | Type | Description  | Notes
 
 ## ListCards
 
-> CardListResponse ListCards(ctx).CustomerId(customerId).AccountId(accountId).EmbossName(embossName).LastFour(lastFour).ExpirationDate(expirationDate).CardType(cardType).CardBrand(cardBrand).Form(form).CardProductId(cardProductId).CardStatus(cardStatus).PostalCode(postalCode).Limit(limit).PageToken(pageToken).SortBy(sortBy).Execute()
+> CardListResponse ListCards(ctx).LastFour(lastFour).PostalCode(postalCode).CustomerId(customerId).CardBrand(cardBrand).BinPrefix(binPrefix).EmbossName(embossName).CardType(cardType).Form(form).PageToken(pageToken).CardStatus(cardStatus).CardProductId(cardProductId).AccountId(accountId).Limit(limit).Barcode(barcode).ExpirationDate(expirationDate).SortBy(sortBy).Execute()
 
 List Cards
 
@@ -998,38 +1010,40 @@ List Cards
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
+	"context"
+	"fmt"
+	"os"
     "time"
-    openapiclient "./openapi"
+	openapiclient "./openapi"
 )
 
 func main() {
-    customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
-    accountId := []string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"} // []string | Account ID(s). Multiple IDs can be provided as a comma-separated list. (optional)
-    embossName := "embossName_example" // string | emboss name (optional)
-    lastFour := "1234" // string | The last 4 digits of the card PAN (optional)
-    expirationDate := time.Now() // string | The date representing when the card would expire at (optional)
-    cardType := "cardType_example" // string | Indicates the type of card (optional)
-    cardBrand := openapiclient.card_brand("MASTERCARD") // CardBrand | The brand of a card product (optional)
-    form := openapiclient.form("PHYSICAL") // Form | The format of the card (optional)
-    cardProductId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
-    cardStatus := openapiclient.card_status("ACTIVE") // CardStatus | The status of a card (optional)
-    postalCode := "49633" // string | The postal code of a card user (optional)
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "a8937a0d" // string |  (optional)
-    sortBy := []string{"SortBy_example"} // []string | Specifies the sort order for the returned cards.  (optional)
+	lastFour := "1234" // string | The last 4 digits of the card PAN (optional)
+	postalCode := "49633" // string | The postal code of a card user (optional)
+	customerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+	cardBrand := openapiclient.card_brand("MASTERCARD") // CardBrand | The brand of a card product (optional)
+	binPrefix := "binPrefix_example" // string |  (optional)
+	embossName := "embossName_example" // string | emboss name (optional)
+	cardType := openapiclient.card_type("DEBIT") // CardType | Indicates the type of card (optional)
+	form := openapiclient.form("PHYSICAL") // Form | The format of the card (optional)
+	pageToken := "a8937a0d" // string |  (optional)
+	cardStatus := openapiclient.card_status("ACTIVE") // CardStatus | The status of a card (optional)
+	cardProductId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+	accountId := []string{"7d943c51-e4ff-4e57-9558-08cab6b963c7"} // []string | Account ID(s). Multiple IDs can be provided as a comma-separated list. (optional)
+	limit := int32(100) // int32 |  (optional) (default to 100)
+	barcode := "barcode_example" // string |  (optional)
+	expirationDate := time.Now() // string | The date representing when the card would expire at (optional)
+	sortBy := []string{"SortBy_example"} // []string | Specifies the sort order for the returned cards.  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.ListCards(context.Background()).CustomerId(customerId).AccountId(accountId).EmbossName(embossName).LastFour(lastFour).ExpirationDate(expirationDate).CardType(cardType).CardBrand(cardBrand).Form(form).CardProductId(cardProductId).CardStatus(cardStatus).PostalCode(postalCode).Limit(limit).PageToken(pageToken).SortBy(sortBy).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.ListCards``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListCards`: CardListResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.ListCards`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.ListCards(context.Background()).LastFour(lastFour).PostalCode(postalCode).CustomerId(customerId).CardBrand(cardBrand).BinPrefix(binPrefix).EmbossName(embossName).CardType(cardType).Form(form).PageToken(pageToken).CardStatus(cardStatus).CardProductId(cardProductId).AccountId(accountId).Limit(limit).Barcode(barcode).ExpirationDate(expirationDate).SortBy(sortBy).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.ListCards``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListCards`: CardListResponse
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.ListCards`: %v\n", resp)
 }
 ```
 
@@ -1044,19 +1058,21 @@ Other parameters are passed through a pointer to a apiListCardsRequest struct vi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **customerId** | **string** |  | 
- **accountId** | **[]string** | Account ID(s). Multiple IDs can be provided as a comma-separated list. | 
- **embossName** | **string** | emboss name | 
  **lastFour** | **string** | The last 4 digits of the card PAN | 
- **expirationDate** | **string** | The date representing when the card would expire at | 
- **cardType** | **string** | Indicates the type of card | 
- **cardBrand** | [**CardBrand**](CardBrand.md) | The brand of a card product | 
- **form** | [**Form**](Form.md) | The format of the card | 
- **cardProductId** | **string** |  | 
- **cardStatus** | [**CardStatus**](CardStatus.md) | The status of a card | 
  **postalCode** | **string** | The postal code of a card user | 
- **limit** | **int32** |  | [default to 100]
+ **customerId** | **string** |  | 
+ **cardBrand** | [**CardBrand**](CardBrand.md) | The brand of a card product | 
+ **binPrefix** | **string** |  | 
+ **embossName** | **string** | emboss name | 
+ **cardType** | [**CardType**](CardType.md) | Indicates the type of card | 
+ **form** | [**Form**](Form.md) | The format of the card | 
  **pageToken** | **string** |  | 
+ **cardStatus** | [**CardStatus**](CardStatus.md) | The status of a card | 
+ **cardProductId** | **string** |  | 
+ **accountId** | **[]string** | Account ID(s). Multiple IDs can be provided as a comma-separated list. | 
+ **limit** | **int32** |  | [default to 100]
+ **barcode** | **string** |  | 
+ **expirationDate** | **string** | The date representing when the card would expire at | 
  **sortBy** | **[]string** | Specifies the sort order for the returned cards.  | 
 
 ### Return type
@@ -1091,24 +1107,24 @@ List Card Changes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.ListChanges(context.Background(), cardId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.ListChanges``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListChanges`: CardChangesList
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.ListChanges`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.ListChanges(context.Background(), cardId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.ListChanges``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListChanges`: CardChangesList
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.ListChanges`: %v\n", resp)
 }
 ```
 
@@ -1149,7 +1165,7 @@ Name | Type | Description  | Notes
 
 ## ListGateways
 
-> GatewayListResponse ListGateways(ctx).Limit(limit).PageToken(pageToken).Execute()
+> GatewayListResponse ListGateways(ctx).PageToken(pageToken).Limit(limit).Execute()
 
 List Gateways
 
@@ -1161,25 +1177,25 @@ List Gateways
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    limit := int32(100) // int32 |  (optional) (default to 100)
-    pageToken := "a8937a0d" // string |  (optional)
+	pageToken := "a8937a0d" // string |  (optional)
+	limit := int32(100) // int32 |  (optional) (default to 100)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.ListGateways(context.Background()).Limit(limit).PageToken(pageToken).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.ListGateways``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListGateways`: GatewayListResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.ListGateways`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.ListGateways(context.Background()).PageToken(pageToken).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.ListGateways``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListGateways`: GatewayListResponse
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.ListGateways`: %v\n", resp)
 }
 ```
 
@@ -1194,8 +1210,8 @@ Other parameters are passed through a pointer to a apiListGatewaysRequest struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int32** |  | [default to 100]
  **pageToken** | **string** |  | 
+ **limit** | **int32** |  | [default to 100]
 
 ### Return type
 
@@ -1217,7 +1233,7 @@ Name | Type | Description  | Notes
 
 ## UpdateCard
 
-> CardResponse UpdateCard(ctx, cardId).CardEditRequest(cardEditRequest).Execute()
+> CardResponse UpdateCard(ctx, cardId).CardEditRequest(cardEditRequest).IdempotencyKey(idempotencyKey).Execute()
 
 Update Card
 
@@ -1229,25 +1245,26 @@ Update Card
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    cardEditRequest := *openapiclient.NewCardEditRequest() // CardEditRequest | Card edits
+	cardId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	cardEditRequest := *openapiclient.NewCardEditRequest() // CardEditRequest | Card edits
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.UpdateCard(context.Background(), cardId).CardEditRequest(cardEditRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.UpdateCard``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateCard`: CardResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.UpdateCard`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.UpdateCard(context.Background(), cardId).CardEditRequest(cardEditRequest).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.UpdateCard``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateCard`: CardResponse
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.UpdateCard`: %v\n", resp)
 }
 ```
 
@@ -1268,6 +1285,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **cardEditRequest** | [**CardEditRequest**](CardEditRequest.md) | Card edits | 
+ **idempotencyKey** | **string** | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. | 
 
 ### Return type
 
@@ -1289,7 +1307,7 @@ Name | Type | Description  | Notes
 
 ## UpdateCardImageDetails
 
-> CardImageDetails UpdateCardImageDetails(ctx, cardImageId).UpdateCardImageRequest(updateCardImageRequest).Execute()
+> CardImageDetails UpdateCardImageDetails(ctx, cardImageId).UpdateCardImageRequest(updateCardImageRequest).IdempotencyKey(idempotencyKey).Execute()
 
 Update Card Image Details
 
@@ -1301,25 +1319,26 @@ Update Card Image Details
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    cardImageId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    updateCardImageRequest := *openapiclient.NewUpdateCardImageRequest(openapiclient.card_image_status("NOT_UPLOADED")) // UpdateCardImageRequest | Details of the image to create
+	cardImageId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	updateCardImageRequest := *openapiclient.NewUpdateCardImageRequest(openapiclient.card_image_status("APPROVED")) // UpdateCardImageRequest | Details of the image to create
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.UpdateCardImageDetails(context.Background(), cardImageId).UpdateCardImageRequest(updateCardImageRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.UpdateCardImageDetails``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateCardImageDetails`: CardImageDetails
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.UpdateCardImageDetails`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.UpdateCardImageDetails(context.Background(), cardImageId).UpdateCardImageRequest(updateCardImageRequest).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.UpdateCardImageDetails``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateCardImageDetails`: CardImageDetails
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.UpdateCardImageDetails`: %v\n", resp)
 }
 ```
 
@@ -1340,6 +1359,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **updateCardImageRequest** | [**UpdateCardImageRequest**](UpdateCardImageRequest.md) | Details of the image to create | 
+ **idempotencyKey** | **string** | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. | 
 
 ### Return type
 
@@ -1361,7 +1381,7 @@ Name | Type | Description  | Notes
 
 ## UpdateGateway
 
-> GatewayResponse UpdateGateway(ctx, gatewayId).UpdateGatewayRequest(updateGatewayRequest).Execute()
+> GatewayResponse UpdateGateway(ctx, gatewayId).UpdateGatewayRequest(updateGatewayRequest).IdempotencyKey(idempotencyKey).Execute()
 
 Update Gateway
 
@@ -1373,25 +1393,26 @@ Update Gateway
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    gatewayId := "gatewayId_example" // string | 
-    updateGatewayRequest := *openapiclient.NewUpdateGatewayRequest() // UpdateGatewayRequest | Gateway edits
+	gatewayId := "gatewayId_example" // string | 
+	updateGatewayRequest := *openapiclient.NewUpdateGatewayRequest() // UpdateGatewayRequest | Gateway edits
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.UpdateGateway(context.Background(), gatewayId).UpdateGatewayRequest(updateGatewayRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.UpdateGateway``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateGateway`: GatewayResponse
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.UpdateGateway`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.UpdateGateway(context.Background(), gatewayId).UpdateGatewayRequest(updateGatewayRequest).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.UpdateGateway``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateGateway`: GatewayResponse
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.UpdateGateway`: %v\n", resp)
 }
 ```
 
@@ -1412,6 +1433,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **updateGatewayRequest** | [**UpdateGatewayRequest**](UpdateGatewayRequest.md) | Gateway edits | 
+ **idempotencyKey** | **string** | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. | 
 
 ### Return type
 
@@ -1433,7 +1455,7 @@ Name | Type | Description  | Notes
 
 ## UploadCardImageData
 
-> CardImageDetails UploadCardImageData(ctx, cardImageId).Body(body).Execute()
+> CardImageDetails UploadCardImageData(ctx, cardImageId).Body(body).IdempotencyKey(idempotencyKey).Execute()
 
 Upload Card Image
 
@@ -1445,25 +1467,26 @@ Upload Card Image
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./openapi"
 )
 
 func main() {
-    cardImageId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-    body := os.NewFile(1234, "some_file") // *os.File | Binary image data
+	cardImageId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	body := os.NewFile(1234, "some_file") // *os.File | Binary image data
+	idempotencyKey := "7d943c51-e4ff-4e57-9558-08cab6b963c7" // string | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CardsApi.UploadCardImageData(context.Background(), cardImageId).Body(body).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CardsApi.UploadCardImageData``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UploadCardImageData`: CardImageDetails
-    fmt.Fprintf(os.Stdout, "Response from `CardsApi.UploadCardImageData`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CardsAPI.UploadCardImageData(context.Background(), cardImageId).Body(body).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CardsAPI.UploadCardImageData``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UploadCardImageData`: CardImageDetails
+	fmt.Fprintf(os.Stdout, "Response from `CardsAPI.UploadCardImageData`: %v\n", resp)
 }
 ```
 
@@ -1484,6 +1507,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **body** | ***os.File** | Binary image data | 
+ **idempotencyKey** | **string** | An idempotency key is an arbitrary unique value generated by client to detect subsequent retries of the same request. It is recommended that a UUID or a similar random identifier be used as an idempotency key. A different key must be used for each request, unless it is a retry. | 
 
 ### Return type
 

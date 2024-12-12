@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **CustomerConsent** | **bool** | Whether this customer has consented to a KYC check.  | 
 **CustomerIpAddress** | Pointer to **string** | IP address of the customer being verified. | [optional] 
 **DocumentId** | Pointer to **string** | The ID of the uploaded government-issued identification document provided by the Socure SDK.  | [optional] 
-**VerificationType** | Pointer to [**[]VerificationType**](VerificationType.md) | List of possible checks to run on a customer. This is a legacy field that is now ignored.  | [optional] 
+**VerificationType** | Pointer to [**[]KycVerificationType**](KycVerificationType.md) | List of possible checks to run on a customer. This is a legacy field that is now ignored.  | [optional] 
 
 ## Methods
 
@@ -100,20 +100,20 @@ HasDocumentId returns a boolean if a field has been set.
 
 ### GetVerificationType
 
-`func (o *CustomerVerification) GetVerificationType() []VerificationType`
+`func (o *CustomerVerification) GetVerificationType() []KycVerificationType`
 
 GetVerificationType returns the VerificationType field if non-nil, zero value otherwise.
 
 ### GetVerificationTypeOk
 
-`func (o *CustomerVerification) GetVerificationTypeOk() (*[]VerificationType, bool)`
+`func (o *CustomerVerification) GetVerificationTypeOk() (*[]KycVerificationType, bool)`
 
 GetVerificationTypeOk returns a tuple with the VerificationType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVerificationType
 
-`func (o *CustomerVerification) SetVerificationType(v []VerificationType)`
+`func (o *CustomerVerification) SetVerificationType(v []KycVerificationType)`
 
 SetVerificationType sets VerificationType field to given value.
 

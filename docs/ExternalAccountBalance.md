@@ -4,10 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Available** | Pointer to **NullableInt64** | The available balance of the account | [optional] 
+**Available** | Pointer to **NullableInt64** | The amount of funds available to be withdrawn from the account, as determined by the financial institution.  This is an integer in the minor currency unit (e.g. cents): 1025 means $10.25.  | [optional] 
+**CreationTime** | Pointer to **time.Time** |  | [optional] 
 **Currency** | **string** | ISO 4217 alphabetic currency code | 
-**Current** | Pointer to **NullableInt64** | The current balance of the account | [optional] 
-**Limit** | Pointer to **NullableInt64** | The limit on the balance amount | [optional] 
+**Current** | Pointer to **NullableInt64** | For a &#x60;DEPOSITORY&#x60; account, this is the total amount of funds in the account.  For a &#x60;CREDIT&#x60; account, this is the amount owing. If negative, the lender owes the account holder.  This is an integer in the minor currency unit (e.g. cents): -2500 means $25.00 owed to the account holder.  | [optional] 
+**LastUpdatedTime** | Pointer to **time.Time** | The last time Synctera has fetched this balance from a vendor | [optional] 
+**LastUpdatedTimeVendor** | Pointer to **time.Time** | Vendor timestamp of when the balance was last updated on the vendor side | [optional] 
+**Limit** | Pointer to **NullableInt64** | For &#x60;DEPOSITORY&#x60; accounts, this is the pre-arranged overdraft limit, commonly used in Europe. In North America this is typically not set for depository accounts.  For &#x60;CREDIT&#x60; accounts, this is the credit limit on the account.  This is an integer in the minor currency unit (e.g. cents): 10000 means $100.00  | [optional] 
+**TransactionsLastUpdatedTime** | Pointer to **time.Time** | The last time Synctera has fetched transactions from a vendor | [optional] 
 
 ## Methods
 
@@ -63,6 +67,31 @@ HasAvailable returns a boolean if a field has been set.
 `func (o *ExternalAccountBalance) UnsetAvailable()`
 
 UnsetAvailable ensures that no value is present for Available, not even an explicit nil
+### GetCreationTime
+
+`func (o *ExternalAccountBalance) GetCreationTime() time.Time`
+
+GetCreationTime returns the CreationTime field if non-nil, zero value otherwise.
+
+### GetCreationTimeOk
+
+`func (o *ExternalAccountBalance) GetCreationTimeOk() (*time.Time, bool)`
+
+GetCreationTimeOk returns a tuple with the CreationTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreationTime
+
+`func (o *ExternalAccountBalance) SetCreationTime(v time.Time)`
+
+SetCreationTime sets CreationTime field to given value.
+
+### HasCreationTime
+
+`func (o *ExternalAccountBalance) HasCreationTime() bool`
+
+HasCreationTime returns a boolean if a field has been set.
+
 ### GetCurrency
 
 `func (o *ExternalAccountBalance) GetCurrency() string`
@@ -118,6 +147,56 @@ HasCurrent returns a boolean if a field has been set.
 `func (o *ExternalAccountBalance) UnsetCurrent()`
 
 UnsetCurrent ensures that no value is present for Current, not even an explicit nil
+### GetLastUpdatedTime
+
+`func (o *ExternalAccountBalance) GetLastUpdatedTime() time.Time`
+
+GetLastUpdatedTime returns the LastUpdatedTime field if non-nil, zero value otherwise.
+
+### GetLastUpdatedTimeOk
+
+`func (o *ExternalAccountBalance) GetLastUpdatedTimeOk() (*time.Time, bool)`
+
+GetLastUpdatedTimeOk returns a tuple with the LastUpdatedTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastUpdatedTime
+
+`func (o *ExternalAccountBalance) SetLastUpdatedTime(v time.Time)`
+
+SetLastUpdatedTime sets LastUpdatedTime field to given value.
+
+### HasLastUpdatedTime
+
+`func (o *ExternalAccountBalance) HasLastUpdatedTime() bool`
+
+HasLastUpdatedTime returns a boolean if a field has been set.
+
+### GetLastUpdatedTimeVendor
+
+`func (o *ExternalAccountBalance) GetLastUpdatedTimeVendor() time.Time`
+
+GetLastUpdatedTimeVendor returns the LastUpdatedTimeVendor field if non-nil, zero value otherwise.
+
+### GetLastUpdatedTimeVendorOk
+
+`func (o *ExternalAccountBalance) GetLastUpdatedTimeVendorOk() (*time.Time, bool)`
+
+GetLastUpdatedTimeVendorOk returns a tuple with the LastUpdatedTimeVendor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastUpdatedTimeVendor
+
+`func (o *ExternalAccountBalance) SetLastUpdatedTimeVendor(v time.Time)`
+
+SetLastUpdatedTimeVendor sets LastUpdatedTimeVendor field to given value.
+
+### HasLastUpdatedTimeVendor
+
+`func (o *ExternalAccountBalance) HasLastUpdatedTimeVendor() bool`
+
+HasLastUpdatedTimeVendor returns a boolean if a field has been set.
+
 ### GetLimit
 
 `func (o *ExternalAccountBalance) GetLimit() int64`
@@ -153,6 +232,31 @@ HasLimit returns a boolean if a field has been set.
 `func (o *ExternalAccountBalance) UnsetLimit()`
 
 UnsetLimit ensures that no value is present for Limit, not even an explicit nil
+### GetTransactionsLastUpdatedTime
+
+`func (o *ExternalAccountBalance) GetTransactionsLastUpdatedTime() time.Time`
+
+GetTransactionsLastUpdatedTime returns the TransactionsLastUpdatedTime field if non-nil, zero value otherwise.
+
+### GetTransactionsLastUpdatedTimeOk
+
+`func (o *ExternalAccountBalance) GetTransactionsLastUpdatedTimeOk() (*time.Time, bool)`
+
+GetTransactionsLastUpdatedTimeOk returns a tuple with the TransactionsLastUpdatedTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransactionsLastUpdatedTime
+
+`func (o *ExternalAccountBalance) SetTransactionsLastUpdatedTime(v time.Time)`
+
+SetTransactionsLastUpdatedTime sets TransactionsLastUpdatedTime field to given value.
+
+### HasTransactionsLastUpdatedTime
+
+`func (o *ExternalAccountBalance) HasTransactionsLastUpdatedTime() bool`
+
+HasTransactionsLastUpdatedTime returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

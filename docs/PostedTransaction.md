@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Created** | **time.Time** | The creation date of the transaction | 
 **Data** | [**PostedTransactionData**](PostedTransactionData.md) |  | 
+**Disputes** | Pointer to [**[]TransactionDispute**](TransactionDispute.md) | The set of disputes related to this transaction. Since a dispute can be for a partial amount of a transaction, a single transaction can be involved in multiple disputes. | [optional] 
 **EffectiveDate** | **time.Time** | The \&quot;effective date\&quot; of a transaction. This may be earlier than posted_date in some cases (for example, a transaction that occurs on a Saturday may not be posted until the following Monday, but would have an effective date of Saturday) | 
 **Id** | **int64** |  | 
 **Idemkey** | **string** | The idempotency key used when initially creating this transaction. | 
@@ -13,9 +14,10 @@ Name | Type | Description | Notes
 **LeadMode** | **bool** | Whether or not this transaction was created operating in \&quot;lead ledger\&quot; mode | 
 **PostedDate** | **time.Time** | The date the transaction was posted. This is the date any money is considered to be added or removed from an account. | 
 **ReferenceId** | **NullableString** | An external ID provided by the payment network to represent this transaction. This will always be null for internal transfers. | 
+**SettlementDate** | Pointer to **string** | The date the transaction was settled according to Synctera&#39;s platform. Generally, this can be interpretted the date the transaction was actually processed and settlement by the payment network. | [optional] 
 **Status** | **string** |  | 
 **Subtype** | **string** | The specific transaction type. For example, for &#x60;ach&#x60;, this may be \&quot;outgoing_debit\&quot;. | 
-**Tenant** | **string** | The tenant associated with this transaction, in the form \&quot;&lt;bankid&gt;_&lt;partnerid&gt;\&quot; | 
+**Tenant** | **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | 
 **TransactionTime** | **time.Time** | The time the transaction occurred. | 
 **Type** | **string** | The general type of transaction. For example, \&quot;card\&quot; or \&quot;ach\&quot;. | 
 **Updated** | **time.Time** | The date the transaction was last updated | 
@@ -79,6 +81,31 @@ and a boolean to check if the value has been set.
 
 SetData sets Data field to given value.
 
+
+### GetDisputes
+
+`func (o *PostedTransaction) GetDisputes() []TransactionDispute`
+
+GetDisputes returns the Disputes field if non-nil, zero value otherwise.
+
+### GetDisputesOk
+
+`func (o *PostedTransaction) GetDisputesOk() (*[]TransactionDispute, bool)`
+
+GetDisputesOk returns a tuple with the Disputes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisputes
+
+`func (o *PostedTransaction) SetDisputes(v []TransactionDispute)`
+
+SetDisputes sets Disputes field to given value.
+
+### HasDisputes
+
+`func (o *PostedTransaction) HasDisputes() bool`
+
+HasDisputes returns a boolean if a field has been set.
 
 ### GetEffectiveDate
 
@@ -230,6 +257,31 @@ SetReferenceId sets ReferenceId field to given value.
 `func (o *PostedTransaction) UnsetReferenceId()`
 
 UnsetReferenceId ensures that no value is present for ReferenceId, not even an explicit nil
+### GetSettlementDate
+
+`func (o *PostedTransaction) GetSettlementDate() string`
+
+GetSettlementDate returns the SettlementDate field if non-nil, zero value otherwise.
+
+### GetSettlementDateOk
+
+`func (o *PostedTransaction) GetSettlementDateOk() (*string, bool)`
+
+GetSettlementDateOk returns a tuple with the SettlementDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSettlementDate
+
+`func (o *PostedTransaction) SetSettlementDate(v string)`
+
+SetSettlementDate sets SettlementDate field to given value.
+
+### HasSettlementDate
+
+`func (o *PostedTransaction) HasSettlementDate() bool`
+
+HasSettlementDate returns a boolean if a field has been set.
+
 ### GetStatus
 
 `func (o *PostedTransaction) GetStatus() string`

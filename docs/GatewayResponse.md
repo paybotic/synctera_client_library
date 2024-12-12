@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **CustomHeaders** | Pointer to **map[string]string** | Custom Headers of the Authorization gateway | [optional] 
 **Id** | **string** | Gateway ID | 
 **LastModifiedTime** | **time.Time** | The timestamp representing when the gateway config was last modified at | [readonly] 
+**Standin** | Pointer to [**GatewayStandin**](GatewayStandin.md) |  | [optional] 
 **Url** | **string** | URL of the Authorization gateway | 
 
 ## Methods
@@ -155,6 +156,31 @@ and a boolean to check if the value has been set.
 
 SetLastModifiedTime sets LastModifiedTime field to given value.
 
+
+### GetStandin
+
+`func (o *GatewayResponse) GetStandin() GatewayStandin`
+
+GetStandin returns the Standin field if non-nil, zero value otherwise.
+
+### GetStandinOk
+
+`func (o *GatewayResponse) GetStandinOk() (*GatewayStandin, bool)`
+
+GetStandinOk returns a tuple with the Standin field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStandin
+
+`func (o *GatewayResponse) SetStandin(v GatewayStandin)`
+
+SetStandin sets Standin field to given value.
+
+### HasStandin
+
+`func (o *GatewayResponse) HasStandin() bool`
+
+HasStandin returns a boolean if a field has been set.
 
 ### GetUrl
 

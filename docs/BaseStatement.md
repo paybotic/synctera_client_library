@@ -11,12 +11,16 @@ Name | Type | Description | Notes
 **IssueDate** | Pointer to **string** | The date when the statement has been issued | [optional] [readonly] 
 **StartDate** | Pointer to **string** | The date indicating the beginning of the time interval covered by the statement | [optional] [readonly] 
 **AccountSummary** | Pointer to [**AccountSummary**](AccountSummary.md) |  | [optional] 
-**AuthorizedSigner** | Pointer to [**[]Person1**](Person1.md) |  | [optional] [readonly] 
+**AuthorizedSigner** | Pointer to [**[]Person**](Person.md) |  | [optional] [readonly] 
+**ClosingBalance** | Pointer to **int64** | The account balance at the end of the statement period, in ISO 4217 minor currency units. | [optional] 
+**CustomerServiceDetails** | Pointer to [**CustomerServiceDetails**](CustomerServiceDetails.md) |  | [optional] 
 **Disclosure** | Pointer to **string** |  | [optional] 
-**JointAccountHolders** | Pointer to [**[]Person1**](Person1.md) |  | [optional] [readonly] 
+**JointAccountHolders** | Pointer to [**[]Person**](Person.md) |  | [optional] [readonly] 
+**OpeningBalance** | Pointer to **int64** | The account balance at the start of the statement period, in ISO 4217 minor currency units. | [optional] 
 **PrimaryAccountHolderBusiness** | Pointer to [**Business1**](Business1.md) |  | [optional] 
-**PrimaryAccountHolderPersonal** | Pointer to [**Person1**](Person1.md) |  | [optional] 
-**Transactions** | Pointer to [**[]Transaction**](Transaction.md) |  | [optional] 
+**PrimaryAccountHolderPersonal** | Pointer to [**Person**](Person.md) |  | [optional] 
+**Transactions** | Pointer to [**[]Transaction**](Transaction.md) | This attribute is deprecated and will be removed in a future API version. Use &#x60;GET /v0/statements/{statement_id}/transactions&#x60; instead.  | [optional] 
+**TransactionsOmitted** | Pointer to **bool** | Only appears in &#x60;statement.created&#x60; webhook payloads. Indicates that the &#x60;transactions&#x60; attribute was emptied due to webhook size constraints. If this attribute returns &#x60;true&#x60;, you may use  &#x60;GET /v0/statements/{statement_id}/transactions&#x60; to retrieve the full list.  | [optional] 
 
 ## Methods
 
@@ -214,20 +218,20 @@ HasAccountSummary returns a boolean if a field has been set.
 
 ### GetAuthorizedSigner
 
-`func (o *BaseStatement) GetAuthorizedSigner() []Person1`
+`func (o *BaseStatement) GetAuthorizedSigner() []Person`
 
 GetAuthorizedSigner returns the AuthorizedSigner field if non-nil, zero value otherwise.
 
 ### GetAuthorizedSignerOk
 
-`func (o *BaseStatement) GetAuthorizedSignerOk() (*[]Person1, bool)`
+`func (o *BaseStatement) GetAuthorizedSignerOk() (*[]Person, bool)`
 
 GetAuthorizedSignerOk returns a tuple with the AuthorizedSigner field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAuthorizedSigner
 
-`func (o *BaseStatement) SetAuthorizedSigner(v []Person1)`
+`func (o *BaseStatement) SetAuthorizedSigner(v []Person)`
 
 SetAuthorizedSigner sets AuthorizedSigner field to given value.
 
@@ -236,6 +240,56 @@ SetAuthorizedSigner sets AuthorizedSigner field to given value.
 `func (o *BaseStatement) HasAuthorizedSigner() bool`
 
 HasAuthorizedSigner returns a boolean if a field has been set.
+
+### GetClosingBalance
+
+`func (o *BaseStatement) GetClosingBalance() int64`
+
+GetClosingBalance returns the ClosingBalance field if non-nil, zero value otherwise.
+
+### GetClosingBalanceOk
+
+`func (o *BaseStatement) GetClosingBalanceOk() (*int64, bool)`
+
+GetClosingBalanceOk returns a tuple with the ClosingBalance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClosingBalance
+
+`func (o *BaseStatement) SetClosingBalance(v int64)`
+
+SetClosingBalance sets ClosingBalance field to given value.
+
+### HasClosingBalance
+
+`func (o *BaseStatement) HasClosingBalance() bool`
+
+HasClosingBalance returns a boolean if a field has been set.
+
+### GetCustomerServiceDetails
+
+`func (o *BaseStatement) GetCustomerServiceDetails() CustomerServiceDetails`
+
+GetCustomerServiceDetails returns the CustomerServiceDetails field if non-nil, zero value otherwise.
+
+### GetCustomerServiceDetailsOk
+
+`func (o *BaseStatement) GetCustomerServiceDetailsOk() (*CustomerServiceDetails, bool)`
+
+GetCustomerServiceDetailsOk returns a tuple with the CustomerServiceDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomerServiceDetails
+
+`func (o *BaseStatement) SetCustomerServiceDetails(v CustomerServiceDetails)`
+
+SetCustomerServiceDetails sets CustomerServiceDetails field to given value.
+
+### HasCustomerServiceDetails
+
+`func (o *BaseStatement) HasCustomerServiceDetails() bool`
+
+HasCustomerServiceDetails returns a boolean if a field has been set.
 
 ### GetDisclosure
 
@@ -264,20 +318,20 @@ HasDisclosure returns a boolean if a field has been set.
 
 ### GetJointAccountHolders
 
-`func (o *BaseStatement) GetJointAccountHolders() []Person1`
+`func (o *BaseStatement) GetJointAccountHolders() []Person`
 
 GetJointAccountHolders returns the JointAccountHolders field if non-nil, zero value otherwise.
 
 ### GetJointAccountHoldersOk
 
-`func (o *BaseStatement) GetJointAccountHoldersOk() (*[]Person1, bool)`
+`func (o *BaseStatement) GetJointAccountHoldersOk() (*[]Person, bool)`
 
 GetJointAccountHoldersOk returns a tuple with the JointAccountHolders field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetJointAccountHolders
 
-`func (o *BaseStatement) SetJointAccountHolders(v []Person1)`
+`func (o *BaseStatement) SetJointAccountHolders(v []Person)`
 
 SetJointAccountHolders sets JointAccountHolders field to given value.
 
@@ -286,6 +340,31 @@ SetJointAccountHolders sets JointAccountHolders field to given value.
 `func (o *BaseStatement) HasJointAccountHolders() bool`
 
 HasJointAccountHolders returns a boolean if a field has been set.
+
+### GetOpeningBalance
+
+`func (o *BaseStatement) GetOpeningBalance() int64`
+
+GetOpeningBalance returns the OpeningBalance field if non-nil, zero value otherwise.
+
+### GetOpeningBalanceOk
+
+`func (o *BaseStatement) GetOpeningBalanceOk() (*int64, bool)`
+
+GetOpeningBalanceOk returns a tuple with the OpeningBalance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpeningBalance
+
+`func (o *BaseStatement) SetOpeningBalance(v int64)`
+
+SetOpeningBalance sets OpeningBalance field to given value.
+
+### HasOpeningBalance
+
+`func (o *BaseStatement) HasOpeningBalance() bool`
+
+HasOpeningBalance returns a boolean if a field has been set.
 
 ### GetPrimaryAccountHolderBusiness
 
@@ -314,20 +393,20 @@ HasPrimaryAccountHolderBusiness returns a boolean if a field has been set.
 
 ### GetPrimaryAccountHolderPersonal
 
-`func (o *BaseStatement) GetPrimaryAccountHolderPersonal() Person1`
+`func (o *BaseStatement) GetPrimaryAccountHolderPersonal() Person`
 
 GetPrimaryAccountHolderPersonal returns the PrimaryAccountHolderPersonal field if non-nil, zero value otherwise.
 
 ### GetPrimaryAccountHolderPersonalOk
 
-`func (o *BaseStatement) GetPrimaryAccountHolderPersonalOk() (*Person1, bool)`
+`func (o *BaseStatement) GetPrimaryAccountHolderPersonalOk() (*Person, bool)`
 
 GetPrimaryAccountHolderPersonalOk returns a tuple with the PrimaryAccountHolderPersonal field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrimaryAccountHolderPersonal
 
-`func (o *BaseStatement) SetPrimaryAccountHolderPersonal(v Person1)`
+`func (o *BaseStatement) SetPrimaryAccountHolderPersonal(v Person)`
 
 SetPrimaryAccountHolderPersonal sets PrimaryAccountHolderPersonal field to given value.
 
@@ -361,6 +440,31 @@ SetTransactions sets Transactions field to given value.
 `func (o *BaseStatement) HasTransactions() bool`
 
 HasTransactions returns a boolean if a field has been set.
+
+### GetTransactionsOmitted
+
+`func (o *BaseStatement) GetTransactionsOmitted() bool`
+
+GetTransactionsOmitted returns the TransactionsOmitted field if non-nil, zero value otherwise.
+
+### GetTransactionsOmittedOk
+
+`func (o *BaseStatement) GetTransactionsOmittedOk() (*bool, bool)`
+
+GetTransactionsOmittedOk returns a tuple with the TransactionsOmitted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransactionsOmitted
+
+`func (o *BaseStatement) SetTransactionsOmitted(v bool)`
+
+SetTransactionsOmitted sets TransactionsOmitted field to given value.
+
+### HasTransactionsOmitted
+
+`func (o *BaseStatement) HasTransactionsOmitted() bool`
+
+HasTransactionsOmitted returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CardArtId** | Pointer to **string** | Specifies the digital wallet card art identifier for the card product. | [optional] 
 **ProvisioningControls** | Pointer to [**ProvisioningControls**](ProvisioningControls.md) |  | [optional] 
 
 ## Methods
@@ -24,6 +25,31 @@ will change when the set of required properties is changed
 NewDigitalWalletTokenizationWithDefaults instantiates a new DigitalWalletTokenization object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCardArtId
+
+`func (o *DigitalWalletTokenization) GetCardArtId() string`
+
+GetCardArtId returns the CardArtId field if non-nil, zero value otherwise.
+
+### GetCardArtIdOk
+
+`func (o *DigitalWalletTokenization) GetCardArtIdOk() (*string, bool)`
+
+GetCardArtIdOk returns a tuple with the CardArtId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCardArtId
+
+`func (o *DigitalWalletTokenization) SetCardArtId(v string)`
+
+SetCardArtId sets CardArtId field to given value.
+
+### HasCardArtId
+
+`func (o *DigitalWalletTokenization) HasCardArtId() bool`
+
+HasCardArtId returns a boolean if a field has been set.
 
 ### GetProvisioningControls
 

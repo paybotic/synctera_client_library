@@ -10,13 +10,13 @@ Name | Type | Description | Notes
 **Result** | **string** | The determination of this verification. | 
 **VendorInfo** | Pointer to [**VerificationVendorInfo**](VerificationVendorInfo.md) |  | [optional] 
 **VerificationTime** | **time.Time** | The date and time the verification was completed. | 
-**VerificationType** | [**VerificationType**](VerificationType.md) |  | 
+**VerificationType** | [**KycVerificationType**](KycVerificationType.md) |  | 
 
 ## Methods
 
 ### NewCustomerVerificationResult
 
-`func NewCustomerVerificationResult(result string, verificationTime time.Time, verificationType VerificationType, ) *CustomerVerificationResult`
+`func NewCustomerVerificationResult(result string, verificationTime time.Time, verificationType KycVerificationType, ) *CustomerVerificationResult`
 
 NewCustomerVerificationResult instantiates a new CustomerVerificationResult object
 This constructor will assign default values to properties that have it defined,
@@ -173,20 +173,20 @@ SetVerificationTime sets VerificationTime field to given value.
 
 ### GetVerificationType
 
-`func (o *CustomerVerificationResult) GetVerificationType() VerificationType`
+`func (o *CustomerVerificationResult) GetVerificationType() KycVerificationType`
 
 GetVerificationType returns the VerificationType field if non-nil, zero value otherwise.
 
 ### GetVerificationTypeOk
 
-`func (o *CustomerVerificationResult) GetVerificationTypeOk() (*VerificationType, bool)`
+`func (o *CustomerVerificationResult) GetVerificationTypeOk() (*KycVerificationType, bool)`
 
 GetVerificationTypeOk returns a tuple with the VerificationType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVerificationType
 
-`func (o *CustomerVerificationResult) SetVerificationType(v VerificationType)`
+`func (o *CustomerVerificationResult) SetVerificationType(v KycVerificationType)`
 
 SetVerificationType sets VerificationType field to given value.
 

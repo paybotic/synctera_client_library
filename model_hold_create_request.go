@@ -1,7 +1,7 @@
 /*
 Synctera API
 
-<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p> 
+<h2>Let's build something great.</h2><p>Welcome to the official reference documentation for Synctera APIs. Our APIs are the best way to automate your company's banking needs and are designed to be easy to understand and implement.</p><p>We're continuously growing this library and what you see here is just the start, but if you need something specific or have a question, <a class='text-blue-600' href='https://synctera.com/contact' target='_blank' rel='noreferrer'>contact us</a>.</p>
 
 API version: 0.32.0
 */
@@ -20,15 +20,15 @@ type HoldCreateRequest struct {
 	// The uuid of the account associated with the hold. Note: account_no and account_id are mutually exclusive
 	AccountId *string `json:"account_id,omitempty"`
 	// The account number associated with the hold
-	AccountNo *string `json:"account_no,omitempty"`
-	AllowPartial bool `json:"allow_partial"`
+	AccountNo    *string `json:"account_no,omitempty"`
+	AllowPartial bool    `json:"allow_partial"`
 	// The amount of the hold.
 	Amount int64 `json:"amount"`
 	// The time the transaction will be automatically posted.
 	AutoPostAt time.Time `json:"auto_post_at"`
 	// ISO 4217 alphabetic currency code of the transfer amount
 	Currency string `json:"currency"`
-	DcSign DcSign `json:"dc_sign"`
+	DcSign   DcSign `json:"dc_sign"`
 	// The reason for the decline, if any
 	DeclineReason string `json:"decline_reason"`
 	// The description of the transaction
@@ -54,8 +54,8 @@ type HoldCreateRequest struct {
 	// The description of the offset transaction
 	OffsetDescription *string `json:"offset_description,omitempty"`
 	// An external ID provided by the payment network to represent this transaction. This will always be null for internal transfers.
-	ReferenceId string `json:"reference_id"`
-	Status HoldCreateRequestStatus `json:"status"`
+	ReferenceId string                  `json:"reference_id"`
+	Status      HoldCreateRequestStatus `json:"status"`
 	// The specific transaction type. For example, for `ach`, this may be \"outgoing_debit\".
 	Subtype string `json:"subtype"`
 	// The time the transaction occurred.
@@ -889,5 +889,3 @@ func (v *NullableHoldCreateRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

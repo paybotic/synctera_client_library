@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **OffsetAccountId** | Pointer to **string** | The offset account id associated with the hold | [optional] 
 **OffsetAccountNo** | Pointer to **string** | The offset account number associated with the hold | [optional] 
 **ReferenceId** | **NullableString** | An external ID provided by the payment network to represent this transaction. | 
-**Tenant** | **string** | The tenant associated with this hold, in the form \&quot;&lt;bankid&gt;_&lt;partnerid&gt;\&quot; | 
+**Tenant** | **string** | The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.  | 
 **Updated** | **time.Time** | The date the hold was last update | 
 **Uuid** | **string** | The unique identifier of the hold transaction. | 
 

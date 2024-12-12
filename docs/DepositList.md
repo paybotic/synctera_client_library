@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Deposits** | [**[]Deposit**](Deposit.md) | Array of  Remote Check Deposits | 
 **NextPageToken** | Pointer to **string** | If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows. | [optional] 
+**Deposits** | [**[]DepositGet**](DepositGet.md) | Array of  Remote Check Deposits | 
 
 ## Methods
 
 ### NewDepositList
 
-`func NewDepositList(deposits []Deposit, ) *DepositList`
+`func NewDepositList(deposits []DepositGet, ) *DepositList`
 
 NewDepositList instantiates a new DepositList object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewDepositListWithDefaults instantiates a new DepositList object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetDeposits
-
-`func (o *DepositList) GetDeposits() []Deposit`
-
-GetDeposits returns the Deposits field if non-nil, zero value otherwise.
-
-### GetDepositsOk
-
-`func (o *DepositList) GetDepositsOk() (*[]Deposit, bool)`
-
-GetDepositsOk returns a tuple with the Deposits field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDeposits
-
-`func (o *DepositList) SetDeposits(v []Deposit)`
-
-SetDeposits sets Deposits field to given value.
-
 
 ### GetNextPageToken
 
@@ -70,6 +50,26 @@ SetNextPageToken sets NextPageToken field to given value.
 `func (o *DepositList) HasNextPageToken() bool`
 
 HasNextPageToken returns a boolean if a field has been set.
+
+### GetDeposits
+
+`func (o *DepositList) GetDeposits() []DepositGet`
+
+GetDeposits returns the Deposits field if non-nil, zero value otherwise.
+
+### GetDepositsOk
+
+`func (o *DepositList) GetDepositsOk() (*[]DepositGet, bool)`
+
+GetDepositsOk returns a tuple with the Deposits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeposits
+
+`func (o *DepositList) SetDeposits(v []DepositGet)`
+
+SetDeposits sets Deposits field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

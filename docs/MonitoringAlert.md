@@ -11,7 +11,8 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to **map[string]interface{}** | Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.  | [optional] 
 **PersonId** | Pointer to **string** | Unique ID for the person. Exactly one of &#x60;person_id&#x60; or &#x60;business_id&#x60; must be set.  | [optional] 
 **Status** | Pointer to [**MonitoringStatus**](MonitoringStatus.md) |  | [optional] 
-**Type** | Pointer to **string** | The type of customer alert. Any of the following: * &#x60;WATCHLIST&#x60; – the customer was added to a known watchlist. * &#x60;BANKRUPTCY&#x60; – the customer filed for bankruptcy.  | [optional] [readonly] 
+**Title** | Pointer to **string** | A description of the monitoring alert. | [optional] 
+**Type** | Pointer to **string** | The type of customer alert. Any of the following: * &#x60;WATCHLIST&#x60; – the customer was added to a known watchlist. * &#x60;BANKRUPTCY&#x60; – the customer filed for bankruptcy. * &#x60;NEGATIVE_NEWS&#x60; – the customer was mentioned in negative news articles. * &#x60;LICENSE_VALIDITY&#x60; – the license is no longer valid. Exmaple of this would be if a license was suspended  | [optional] [readonly] 
 **Urls** | Pointer to **[]string** | Where to get more information about this alert. | [optional] [readonly] 
 **VendorInfo** | Pointer to [**VendorInfo**](VendorInfo.md) |  | [optional] 
 
@@ -208,6 +209,31 @@ SetStatus sets Status field to given value.
 `func (o *MonitoringAlert) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetTitle
+
+`func (o *MonitoringAlert) GetTitle() string`
+
+GetTitle returns the Title field if non-nil, zero value otherwise.
+
+### GetTitleOk
+
+`func (o *MonitoringAlert) GetTitleOk() (*string, bool)`
+
+GetTitleOk returns a tuple with the Title field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTitle
+
+`func (o *MonitoringAlert) SetTitle(v string)`
+
+SetTitle sets Title field to given value.
+
+### HasTitle
+
+`func (o *MonitoringAlert) HasTitle() bool`
+
+HasTitle returns a boolean if a field has been set.
 
 ### GetType
 
