@@ -31,6 +31,7 @@ type AccountGenericResponse struct {
 	// Purpose of the account
 	AccountPurpose *string      `json:"account_purpose,omitempty"`
 	AccountType    *AccountType `json:"account_type,omitempty"`
+	AccountTemplateId *string `json:"account_template_id,omitempty"`
 	// The application ID for this account.
 	ApplicationId *string `json:"application_id,omitempty"`
 	// The number of days past the billing period to initiate an auto payment. Only applicable for accounts with type `CHARGE_SECURED`, where the account holder has opted in for auto payment functionality. This value must be lower than or equal the `grace_period` setting on the account. If this value is 0, the auto payment will happen on the same day as the statement is generated. Auto payment only occurs if regular payments are not received on time.
