@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -22,8 +21,9 @@ var _ MappedNullable = &HoldData{}
 
 // HoldData struct for HoldData
 type HoldData struct {
-	Amount           int32     `json:"amount"`
-	AvailabilityTime time.Time `json:"availability_time"`
+	Amount               int32     `json:"amount"`
+	AvailabilityTime     time.Time `json:"availability_time"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _HoldData HoldData
@@ -107,6 +107,11 @@ func (o HoldData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["amount"] = o.Amount
 	toSerialize["availability_time"] = o.AvailabilityTime
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *HoldData) UnmarshalJSON(data []byte) (err error) {
 
 	varHoldData := _HoldData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHoldData)
+	err = json.Unmarshal(data, &varHoldData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = HoldData(varHoldData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "availability_time")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

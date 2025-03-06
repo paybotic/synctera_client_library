@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,7 +23,8 @@ type CardListResponse struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of Cards
-	Cards []CardResponse `json:"cards"`
+	Cards                []CardResponse `json:"cards"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CardListResponse CardListResponse
@@ -117,6 +117,11 @@ func (o CardListResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["cards"] = o.Cards
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *CardListResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varCardListResponse := _CardListResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCardListResponse)
+	err = json.Unmarshal(data, &varCardListResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CardListResponse(varCardListResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "cards")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

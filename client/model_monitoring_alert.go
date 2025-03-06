@@ -38,9 +38,12 @@ type MonitoringAlert struct {
 	// The type of customer alert. Any of the following: * `WATCHLIST` – the customer was added to a known watchlist. * `BANKRUPTCY` – the customer filed for bankruptcy. * `NEGATIVE_NEWS` – the customer was mentioned in negative news articles. * `LICENSE_VALIDITY` – the license is no longer valid. Exmaple of this would be if a license was suspended
 	Type *string `json:"type,omitempty"`
 	// Where to get more information about this alert.
-	Urls       []string    `json:"urls,omitempty"`
-	VendorInfo *VendorInfo `json:"vendor_info,omitempty"`
+	Urls                 []string    `json:"urls,omitempty"`
+	VendorInfo           *VendorInfo `json:"vendor_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MonitoringAlert MonitoringAlert
 
 // NewMonitoringAlert instantiates a new MonitoringAlert object
 // This constructor will assign default values to properties that have it defined,
@@ -454,7 +457,43 @@ func (o MonitoringAlert) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VendorInfo) {
 		toSerialize["vendor_info"] = o.VendorInfo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MonitoringAlert) UnmarshalJSON(data []byte) (err error) {
+	varMonitoringAlert := _MonitoringAlert{}
+
+	err = json.Unmarshal(data, &varMonitoringAlert)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MonitoringAlert(varMonitoringAlert)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "business_id")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "person_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "urls")
+		delete(additionalProperties, "vendor_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMonitoringAlert struct {

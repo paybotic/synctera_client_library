@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -26,6 +25,7 @@ type AuthorizationAdviceModel struct {
 	NetworkFees           []NetworkFeeModel   `json:"network_fees,omitempty"`
 	OriginalTransactionId string              `json:"original_transaction_id"`
 	TransactionOptions    *TransactionOptions `json:"transaction_options,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _AuthorizationAdviceModel AuthorizationAdviceModel
@@ -179,6 +179,11 @@ func (o AuthorizationAdviceModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TransactionOptions) {
 		toSerialize["transaction_options"] = o.TransactionOptions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -207,15 +212,23 @@ func (o *AuthorizationAdviceModel) UnmarshalJSON(data []byte) (err error) {
 
 	varAuthorizationAdviceModel := _AuthorizationAdviceModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAuthorizationAdviceModel)
+	err = json.Unmarshal(data, &varAuthorizationAdviceModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AuthorizationAdviceModel(varAuthorizationAdviceModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "network_fees")
+		delete(additionalProperties, "original_transaction_id")
+		delete(additionalProperties, "transaction_options")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

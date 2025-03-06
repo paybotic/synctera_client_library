@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -31,6 +30,7 @@ type TransferRequestBase struct {
 	// The ID of the account to which the transfer will be initiated/received
 	OriginatingAccountId string              `json:"originating_account_id"`
 	Type                 TransferTypeRequest `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TransferRequestBase TransferRequestBase
@@ -227,6 +227,11 @@ func (o TransferRequestBase) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["originating_account_id"] = o.OriginatingAccountId
 	toSerialize["type"] = o.Type
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -258,15 +263,25 @@ func (o *TransferRequestBase) UnmarshalJSON(data []byte) (err error) {
 
 	varTransferRequestBase := _TransferRequestBase{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTransferRequestBase)
+	err = json.Unmarshal(data, &varTransferRequestBase)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TransferRequestBase(varTransferRequestBase)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "external_card_id")
+		delete(additionalProperties, "merchant")
+		delete(additionalProperties, "originating_account_id")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

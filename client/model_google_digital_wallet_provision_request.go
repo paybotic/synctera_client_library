@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -27,7 +26,8 @@ type GoogleDigitalWalletProvisionRequest struct {
 	// Version of the application making the provisioning request.
 	ProvisioningAppVersion string `json:"provisioning_app_version"`
 	// The user’s Google wallet account ID.
-	WalletAccountId string `json:"wallet_account_id"`
+	WalletAccountId      string `json:"wallet_account_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GoogleDigitalWalletProvisionRequest GoogleDigitalWalletProvisionRequest
@@ -163,6 +163,11 @@ func (o GoogleDigitalWalletProvisionRequest) ToMap() (map[string]interface{}, er
 	toSerialize["device_type"] = o.DeviceType
 	toSerialize["provisioning_app_version"] = o.ProvisioningAppVersion
 	toSerialize["wallet_account_id"] = o.WalletAccountId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -193,15 +198,23 @@ func (o *GoogleDigitalWalletProvisionRequest) UnmarshalJSON(data []byte) (err er
 
 	varGoogleDigitalWalletProvisionRequest := _GoogleDigitalWalletProvisionRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGoogleDigitalWalletProvisionRequest)
+	err = json.Unmarshal(data, &varGoogleDigitalWalletProvisionRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GoogleDigitalWalletProvisionRequest(varGoogleDigitalWalletProvisionRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "device_id")
+		delete(additionalProperties, "device_type")
+		delete(additionalProperties, "provisioning_app_version")
+		delete(additionalProperties, "wallet_account_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

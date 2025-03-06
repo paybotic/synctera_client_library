@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -56,8 +55,9 @@ type BaseCard struct {
 	// If this card was reissued, this ID refers to the card that replaced it.
 	ReissuedToId *string `json:"reissued_to_id,omitempty"`
 	// Time when the PIN was last set or changed.
-	TimestampPinSet *time.Time `json:"timestamp_pin_set,omitempty"`
-	Type            *CardType  `json:"type,omitempty"`
+	TimestampPinSet      *time.Time `json:"timestamp_pin_set,omitempty"`
+	Type                 *CardType  `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BaseCard BaseCard
@@ -780,6 +780,11 @@ func (o BaseCard) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -807,15 +812,39 @@ func (o *BaseCard) UnmarshalJSON(data []byte) (err error) {
 
 	varBaseCard := _BaseCard{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBaseCard)
+	err = json.Unmarshal(data, &varBaseCard)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BaseCard(varBaseCard)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "form")
+		delete(additionalProperties, "account_id")
+		delete(additionalProperties, "business_id")
+		delete(additionalProperties, "card_product_id")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "customer_id")
+		delete(additionalProperties, "emboss_name")
+		delete(additionalProperties, "expiration_month")
+		delete(additionalProperties, "expiration_time")
+		delete(additionalProperties, "expiration_year")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_pin_set")
+		delete(additionalProperties, "last_four")
+		delete(additionalProperties, "last_modified_time")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "reissue_reason")
+		delete(additionalProperties, "reissued_from_id")
+		delete(additionalProperties, "reissued_to_id")
+		delete(additionalProperties, "timestamp_pin_set")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

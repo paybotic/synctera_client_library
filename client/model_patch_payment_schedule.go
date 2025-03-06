@@ -20,8 +20,11 @@ var _ MappedNullable = &PatchPaymentSchedule{}
 // PatchPaymentSchedule Patch request for payment schedule
 type PatchPaymentSchedule struct {
 	// Target payment schedule status
-	Status *string `json:"status,omitempty"`
+	Status               *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PatchPaymentSchedule PatchPaymentSchedule
 
 // NewPatchPaymentSchedule instantiates a new PatchPaymentSchedule object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o PatchPaymentSchedule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PatchPaymentSchedule) UnmarshalJSON(data []byte) (err error) {
+	varPatchPaymentSchedule := _PatchPaymentSchedule{}
+
+	err = json.Unmarshal(data, &varPatchPaymentSchedule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PatchPaymentSchedule(varPatchPaymentSchedule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePatchPaymentSchedule struct {

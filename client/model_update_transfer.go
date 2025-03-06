@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,7 +21,8 @@ var _ MappedNullable = &UpdateTransfer{}
 // UpdateTransfer struct for UpdateTransfer
 type UpdateTransfer struct {
 	// Field value must be set to CANCELED. It can only be changed when status is PENDING.
-	Status string `json:"status"`
+	Status               string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateTransfer UpdateTransfer
@@ -80,6 +80,11 @@ func (o UpdateTransfer) MarshalJSON() ([]byte, error) {
 func (o UpdateTransfer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UpdateTransfer) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateTransfer := _UpdateTransfer{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateTransfer)
+	err = json.Unmarshal(data, &varUpdateTransfer)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateTransfer(varUpdateTransfer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

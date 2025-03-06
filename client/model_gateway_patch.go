@@ -26,8 +26,11 @@ type GatewayPatch struct {
 	// Maximum amount of time in milliseconds that we will wait for the response from Gateway URL request
 	MaxWaitMs *int32 `json:"max_wait_ms,omitempty"`
 	// The URL address which will be used for the ACH in Auth Flow requests to get authorization from the fintech to process the transaction
-	Url *string `json:"url,omitempty"`
+	Url                  *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GatewayPatch GatewayPatch
 
 // NewGatewayPatch instantiates a new GatewayPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -197,7 +200,36 @@ func (o GatewayPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GatewayPatch) UnmarshalJSON(data []byte) (err error) {
+	varGatewayPatch := _GatewayPatch{}
+
+	err = json.Unmarshal(data, &varGatewayPatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GatewayPatch(varGatewayPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "custom_headers")
+		delete(additionalProperties, "disabled")
+		delete(additionalProperties, "max_wait_ms")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGatewayPatch struct {

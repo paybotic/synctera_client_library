@@ -22,8 +22,11 @@ type ExternalAccountVendorData struct {
 	// The last alphanumeric characters of an account's official account number. Note that the mask may be non-unique between accounts, and it may also not match the mask that the bank displays to the user.
 	AccountNumberMask *string `json:"account_number_mask,omitempty"`
 	// The ID of the institution external account belongs
-	InstitutionId *string `json:"institution_id,omitempty"`
+	InstitutionId        *string `json:"institution_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExternalAccountVendorData ExternalAccountVendorData
 
 // NewExternalAccountVendorData instantiates a new ExternalAccountVendorData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ExternalAccountVendorData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InstitutionId) {
 		toSerialize["institution_id"] = o.InstitutionId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExternalAccountVendorData) UnmarshalJSON(data []byte) (err error) {
+	varExternalAccountVendorData := _ExternalAccountVendorData{}
+
+	err = json.Unmarshal(data, &varExternalAccountVendorData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExternalAccountVendorData(varExternalAccountVendorData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_number_mask")
+		delete(additionalProperties, "institution_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExternalAccountVendorData struct {

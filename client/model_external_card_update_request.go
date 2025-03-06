@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,7 +20,8 @@ var _ MappedNullable = &ExternalCardUpdateRequest{}
 
 // ExternalCardUpdateRequest struct for ExternalCardUpdateRequest
 type ExternalCardUpdateRequest struct {
-	Status ExternalCardStatus `json:"status"`
+	Status               ExternalCardStatus `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ExternalCardUpdateRequest ExternalCardUpdateRequest
@@ -79,6 +79,11 @@ func (o ExternalCardUpdateRequest) MarshalJSON() ([]byte, error) {
 func (o ExternalCardUpdateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *ExternalCardUpdateRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varExternalCardUpdateRequest := _ExternalCardUpdateRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExternalCardUpdateRequest)
+	err = json.Unmarshal(data, &varExternalCardUpdateRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExternalCardUpdateRequest(varExternalCardUpdateRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

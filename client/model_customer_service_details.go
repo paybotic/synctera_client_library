@@ -23,8 +23,11 @@ type CustomerServiceDetails struct {
 	// The customer service email address
 	Email *string `json:"email,omitempty"`
 	// The customer service phone number
-	PhoneNumber *string `json:"phone_number,omitempty"`
+	PhoneNumber          *string `json:"phone_number,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CustomerServiceDetails CustomerServiceDetails
 
 // NewCustomerServiceDetails instantiates a new CustomerServiceDetails object
 // This constructor will assign default values to properties that have it defined,
@@ -158,7 +161,35 @@ func (o CustomerServiceDetails) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PhoneNumber) {
 		toSerialize["phone_number"] = o.PhoneNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CustomerServiceDetails) UnmarshalJSON(data []byte) (err error) {
+	varCustomerServiceDetails := _CustomerServiceDetails{}
+
+	err = json.Unmarshal(data, &varCustomerServiceDetails)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CustomerServiceDetails(varCustomerServiceDetails)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "phone_number")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCustomerServiceDetails struct {

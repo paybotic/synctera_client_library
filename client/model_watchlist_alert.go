@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -37,8 +36,9 @@ type WatchlistAlert struct {
 	// The status of this alert
 	Status string `json:"status"`
 	// Where to get more information about this alert (according to our third-party data provider).
-	Urls       []string    `json:"urls,omitempty"`
-	VendorInfo *VendorInfo `json:"vendor_info,omitempty"`
+	Urls                 []string    `json:"urls,omitempty"`
+	VendorInfo           *VendorInfo `json:"vendor_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WatchlistAlert WatchlistAlert
@@ -376,6 +376,11 @@ func (o WatchlistAlert) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VendorInfo) {
 		toSerialize["vendor_info"] = o.VendorInfo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -403,15 +408,28 @@ func (o *WatchlistAlert) UnmarshalJSON(data []byte) (err error) {
 
 	varWatchlistAlert := _WatchlistAlert{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWatchlistAlert)
+	err = json.Unmarshal(data, &varWatchlistAlert)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WatchlistAlert(varWatchlistAlert)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "created")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "provider_info")
+		delete(additionalProperties, "provider_subject_id")
+		delete(additionalProperties, "provider_subscription_id")
+		delete(additionalProperties, "provider_watchlist_name")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "urls")
+		delete(additionalProperties, "vendor_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

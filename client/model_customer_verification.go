@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,7 +27,8 @@ type CustomerVerification struct {
 	// The ID of the uploaded government-issued identification document provided by the Socure SDK.
 	DocumentId *string `json:"document_id,omitempty"`
 	// List of possible checks to run on a customer. This is a legacy field that is now ignored.
-	VerificationType []KycVerificationType `json:"verification_type,omitempty"`
+	VerificationType     []KycVerificationType `json:"verification_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CustomerVerification CustomerVerification
@@ -191,6 +191,11 @@ func (o CustomerVerification) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VerificationType) {
 		toSerialize["verification_type"] = o.VerificationType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *CustomerVerification) UnmarshalJSON(data []byte) (err error) {
 
 	varCustomerVerification := _CustomerVerification{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCustomerVerification)
+	err = json.Unmarshal(data, &varCustomerVerification)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CustomerVerification(varCustomerVerification)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customer_consent")
+		delete(additionalProperties, "customer_ip_address")
+		delete(additionalProperties, "document_id")
+		delete(additionalProperties, "verification_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

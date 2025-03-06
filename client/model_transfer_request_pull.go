@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -32,7 +31,8 @@ type TransferRequestPull struct {
 	OriginatingAccountId string              `json:"originating_account_id"`
 	Type                 TransferTypeRequest `json:"type"`
 	// Unique identifier of an External Card Transfer 3-D Secure Authorization - conditionally required according to your program's 3DS policy
-	ThreeDsId *string `json:"three_ds_id,omitempty"`
+	ThreeDsId            *string `json:"three_ds_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TransferRequestPull TransferRequestPull
@@ -264,6 +264,11 @@ func (o TransferRequestPull) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ThreeDsId) {
 		toSerialize["three_ds_id"] = o.ThreeDsId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -295,15 +300,26 @@ func (o *TransferRequestPull) UnmarshalJSON(data []byte) (err error) {
 
 	varTransferRequestPull := _TransferRequestPull{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTransferRequestPull)
+	err = json.Unmarshal(data, &varTransferRequestPull)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TransferRequestPull(varTransferRequestPull)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "external_card_id")
+		delete(additionalProperties, "merchant")
+		delete(additionalProperties, "originating_account_id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "three_ds_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -27,7 +26,8 @@ type Merchant struct {
 	// Merchant's name
 	Name string `json:"name"`
 	// Merchant's phone number with country code in E.164 format. Must have a valid country code. Area code and local phone number are not validated.
-	PhoneNumber *string `json:"phone_number,omitempty" validate:"regexp=^\\\\+[1-9]\\\\d{1,14}$"`
+	PhoneNumber          *string `json:"phone_number,omitempty" validate:"regexp=^\\\\+[1-9]\\\\d{1,14}$"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Merchant Merchant
@@ -181,6 +181,11 @@ func (o Merchant) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PhoneNumber) {
 		toSerialize["phone_number"] = o.PhoneNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -209,15 +214,23 @@ func (o *Merchant) UnmarshalJSON(data []byte) (err error) {
 
 	varMerchant := _Merchant{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMerchant)
+	err = json.Unmarshal(data, &varMerchant)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Merchant(varMerchant)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "phone_number")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

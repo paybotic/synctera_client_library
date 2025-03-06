@@ -59,8 +59,11 @@ type AccountBase struct {
 	Nickname *string        `json:"nickname,omitempty"`
 	Status   *AccountStatus `json:"status,omitempty"`
 	// SWIFT code
-	SwiftCode *string `json:"swift_code,omitempty"`
+	SwiftCode            *string `json:"swift_code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AccountBase AccountBase
 
 // NewAccountBase instantiates a new AccountBase object
 // This constructor will assign default values to properties that have it defined,
@@ -859,7 +862,54 @@ func (o AccountBase) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SwiftCode) {
 		toSerialize["swift_code"] = o.SwiftCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AccountBase) UnmarshalJSON(data []byte) (err error) {
+	varAccountBase := _AccountBase{}
+
+	err = json.Unmarshal(data, &varAccountBase)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AccountBase(varAccountBase)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access_status")
+		delete(additionalProperties, "account_number")
+		delete(additionalProperties, "account_number_masked")
+		delete(additionalProperties, "account_purpose")
+		delete(additionalProperties, "account_type")
+		delete(additionalProperties, "application_id")
+		delete(additionalProperties, "balances")
+		delete(additionalProperties, "bank_routing")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "customer_ids")
+		delete(additionalProperties, "customer_type")
+		delete(additionalProperties, "exchange_rate_type")
+		delete(additionalProperties, "iban")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_account_pool")
+		delete(additionalProperties, "is_sar_enabled")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "nickname")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "swift_code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAccountBase struct {

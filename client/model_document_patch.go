@@ -26,9 +26,12 @@ type DocumentPatch struct {
 	// A description of the document
 	Description *string `json:"description,omitempty"`
 	// A user-friendly name for the document
-	Name *string       `json:"name,omitempty"`
-	Type *DocumentType `json:"type,omitempty"`
+	Name                 *string       `json:"name,omitempty"`
+	Type                 *DocumentType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DocumentPatch DocumentPatch
 
 // NewDocumentPatch instantiates a new DocumentPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -232,7 +235,37 @@ func (o DocumentPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DocumentPatch) UnmarshalJSON(data []byte) (err error) {
+	varDocumentPatch := _DocumentPatch{}
+
+	err = json.Unmarshal(data, &varDocumentPatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DocumentPatch(varDocumentPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "batch_id")
+		delete(additionalProperties, "deletion_reason")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDocumentPatch struct {

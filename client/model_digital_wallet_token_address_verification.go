@@ -19,8 +19,11 @@ var _ MappedNullable = &DigitalWalletTokenAddressVerification{}
 
 // DigitalWalletTokenAddressVerification struct for DigitalWalletTokenAddressVerification
 type DigitalWalletTokenAddressVerification struct {
-	Validate *bool `json:"validate,omitempty"`
+	Validate             *bool `json:"validate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DigitalWalletTokenAddressVerification DigitalWalletTokenAddressVerification
 
 // NewDigitalWalletTokenAddressVerification instantiates a new DigitalWalletTokenAddressVerification object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o DigitalWalletTokenAddressVerification) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Validate) {
 		toSerialize["validate"] = o.Validate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DigitalWalletTokenAddressVerification) UnmarshalJSON(data []byte) (err error) {
+	varDigitalWalletTokenAddressVerification := _DigitalWalletTokenAddressVerification{}
+
+	err = json.Unmarshal(data, &varDigitalWalletTokenAddressVerification)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DigitalWalletTokenAddressVerification(varDigitalWalletTokenAddressVerification)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "validate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDigitalWalletTokenAddressVerification struct {

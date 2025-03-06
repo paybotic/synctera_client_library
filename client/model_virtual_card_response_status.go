@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,9 +22,10 @@ var _ MappedNullable = &VirtualCardResponseStatus{}
 type VirtualCardResponseStatus struct {
 	CardStatus CardStatus `json:"card_status"`
 	// Additional details about the reason for the status change
-	Memo           *string                   `json:"memo,omitempty"`
-	PendingReasons *CardStatusPendingReasons `json:"pending_reasons,omitempty"`
-	StatusReason   CardStatusReasonCode      `json:"status_reason"`
+	Memo                 *string                   `json:"memo,omitempty"`
+	PendingReasons       *CardStatusPendingReasons `json:"pending_reasons,omitempty"`
+	StatusReason         CardStatusReasonCode      `json:"status_reason"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _VirtualCardResponseStatus VirtualCardResponseStatus
@@ -179,6 +179,11 @@ func (o VirtualCardResponseStatus) ToMap() (map[string]interface{}, error) {
 		toSerialize["pending_reasons"] = o.PendingReasons
 	}
 	toSerialize["status_reason"] = o.StatusReason
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -207,15 +212,23 @@ func (o *VirtualCardResponseStatus) UnmarshalJSON(data []byte) (err error) {
 
 	varVirtualCardResponseStatus := _VirtualCardResponseStatus{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varVirtualCardResponseStatus)
+	err = json.Unmarshal(data, &varVirtualCardResponseStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = VirtualCardResponseStatus(varVirtualCardResponseStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "card_status")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "pending_reasons")
+		delete(additionalProperties, "status_reason")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

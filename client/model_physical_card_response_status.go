@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -30,7 +29,8 @@ type PhysicalCardResponseStatus struct {
 	FulfillmentDetails    *FulfillmentDetails       `json:"fulfillment_details,omitempty"`
 	// This contains all shipping details as provided by the card fulfillment provider, including the tracking number. This field is deprecated. Instead, please use the fulfillment_details object, which includes a field for just the tracking number.
 	// Deprecated
-	TrackingNumber *string `json:"tracking_number,omitempty"`
+	TrackingNumber       *string `json:"tracking_number,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PhysicalCardResponseStatus PhysicalCardResponseStatus
@@ -283,6 +283,11 @@ func (o PhysicalCardResponseStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TrackingNumber) {
 		toSerialize["tracking_number"] = o.TrackingNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -312,15 +317,26 @@ func (o *PhysicalCardResponseStatus) UnmarshalJSON(data []byte) (err error) {
 
 	varPhysicalCardResponseStatus := _PhysicalCardResponseStatus{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPhysicalCardResponseStatus)
+	err = json.Unmarshal(data, &varPhysicalCardResponseStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PhysicalCardResponseStatus(varPhysicalCardResponseStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "card_status")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "pending_reasons")
+		delete(additionalProperties, "status_reason")
+		delete(additionalProperties, "card_fulfillment_status")
+		delete(additionalProperties, "fulfillment_details")
+		delete(additionalProperties, "tracking_number")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

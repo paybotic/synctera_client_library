@@ -45,8 +45,11 @@ type EventTrigger struct {
 	Url *string `json:"url,omitempty"`
 	// Webhook the current event belongs to
 	// Deprecated
-	WebhookId *string `json:"webhook_id,omitempty"`
+	WebhookId            *string `json:"webhook_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EventTrigger EventTrigger
 
 // NewEventTrigger instantiates a new EventTrigger object
 // This constructor will assign default values to properties that have it defined,
@@ -446,7 +449,42 @@ func (o EventTrigger) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WebhookId) {
 		toSerialize["webhook_id"] = o.WebhookId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EventTrigger) UnmarshalJSON(data []byte) (err error) {
+	varEventTrigger := _EventTrigger{}
+
+	err = json.Unmarshal(data, &varEventTrigger)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EventTrigger(varEventTrigger)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "event_resource")
+		delete(additionalProperties, "event_resource_changed_fields")
+		delete(additionalProperties, "event_time")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "response_history")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "webhook_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEventTrigger struct {

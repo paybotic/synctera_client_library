@@ -79,8 +79,11 @@ type PatchAccountChargeUnsecured struct {
 	// Add an optional note when patching a charge unsecured account. A note is required when setting the status to or from SUSPENDED.
 	Note *string `json:"note,omitempty"`
 	// List of spend control IDs to control spending for the account
-	SpendControlIds []string `json:"spend_control_ids,omitempty"`
+	SpendControlIds      []string `json:"spend_control_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PatchAccountChargeUnsecured PatchAccountChargeUnsecured
 
 // NewPatchAccountChargeUnsecured instantiates a new PatchAccountChargeUnsecured object
 // This constructor will assign default values to properties that have it defined,
@@ -1229,7 +1232,64 @@ func (o PatchAccountChargeUnsecured) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SpendControlIds) {
 		toSerialize["spend_control_ids"] = o.SpendControlIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PatchAccountChargeUnsecured) UnmarshalJSON(data []byte) (err error) {
+	varPatchAccountChargeUnsecured := _PatchAccountChargeUnsecured{}
+
+	err = json.Unmarshal(data, &varPatchAccountChargeUnsecured)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PatchAccountChargeUnsecured(varPatchAccountChargeUnsecured)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access_status")
+		delete(additionalProperties, "account_number")
+		delete(additionalProperties, "account_number_masked")
+		delete(additionalProperties, "account_purpose")
+		delete(additionalProperties, "account_type")
+		delete(additionalProperties, "application_id")
+		delete(additionalProperties, "balances")
+		delete(additionalProperties, "bank_routing")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "customer_ids")
+		delete(additionalProperties, "customer_type")
+		delete(additionalProperties, "exchange_rate_type")
+		delete(additionalProperties, "iban")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_account_pool")
+		delete(additionalProperties, "is_sar_enabled")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "nickname")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "swift_code")
+		delete(additionalProperties, "is_ach_enabled")
+		delete(additionalProperties, "is_card_enabled")
+		delete(additionalProperties, "is_eft_ca_enabled")
+		delete(additionalProperties, "is_p2p_enabled")
+		delete(additionalProperties, "is_synctera_pay_enabled")
+		delete(additionalProperties, "is_wire_enabled")
+		delete(additionalProperties, "credit_limit")
+		delete(additionalProperties, "grace_period")
+		delete(additionalProperties, "note")
+		delete(additionalProperties, "spend_control_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePatchAccountChargeUnsecured struct {

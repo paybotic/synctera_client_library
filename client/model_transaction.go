@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -34,7 +33,8 @@ type Transaction struct {
 	// The general type of transaction. For example, \"card\" or \"ach\".
 	Type string `json:"type"`
 	// The unique identifier of the transaction.
-	Uuid string `json:"uuid"`
+	Uuid                 string `json:"uuid"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Transaction Transaction
@@ -274,6 +274,11 @@ func (o Transaction) ToMap() (map[string]interface{}, error) {
 	toSerialize["subtype"] = o.Subtype
 	toSerialize["type"] = o.Type
 	toSerialize["uuid"] = o.Uuid
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -308,15 +313,27 @@ func (o *Transaction) UnmarshalJSON(data []byte) (err error) {
 
 	varTransaction := _Transaction{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTransaction)
+	err = json.Unmarshal(data, &varTransaction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Transaction(varTransaction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "effective_date")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "posted_date")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "subtype")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "uuid")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -23,9 +23,12 @@ type FinancialInstitution1 struct {
 	// A code describing the type of identifier in the \"identifier\" field.
 	IdCode *string `json:"id_code,omitempty"`
 	// The identifier for the Financial Institution. See \"id_code\" for possible values.
-	Identifier *string `json:"identifier,omitempty"`
-	Name       *string `json:"name,omitempty"`
+	Identifier           *string `json:"identifier,omitempty"`
+	Name                 *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FinancialInstitution1 FinancialInstitution1
 
 // NewFinancialInstitution1 instantiates a new FinancialInstitution1 object
 // This constructor will assign default values to properties that have it defined,
@@ -194,7 +197,36 @@ func (o FinancialInstitution1) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FinancialInstitution1) UnmarshalJSON(data []byte) (err error) {
+	varFinancialInstitution1 := _FinancialInstitution1{}
+
+	err = json.Unmarshal(data, &varFinancialInstitution1)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FinancialInstitution1(varFinancialInstitution1)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "id_code")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFinancialInstitution1 struct {

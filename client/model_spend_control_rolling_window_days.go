@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,7 +22,8 @@ var _ MappedNullable = &SpendControlRollingWindowDays{}
 type SpendControlRollingWindowDays struct {
 	TimeRangeType string `json:"time_range_type"`
 	// The number of days to define a rolling window for a spend control
-	Days int32 `json:"days"`
+	Days                 int32 `json:"days"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SpendControlRollingWindowDays SpendControlRollingWindowDays
@@ -107,6 +107,11 @@ func (o SpendControlRollingWindowDays) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["time_range_type"] = o.TimeRangeType
 	toSerialize["days"] = o.Days
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *SpendControlRollingWindowDays) UnmarshalJSON(data []byte) (err error) {
 
 	varSpendControlRollingWindowDays := _SpendControlRollingWindowDays{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSpendControlRollingWindowDays)
+	err = json.Unmarshal(data, &varSpendControlRollingWindowDays)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SpendControlRollingWindowDays(varSpendControlRollingWindowDays)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "time_range_type")
+		delete(additionalProperties, "days")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,6 +21,7 @@ var _ MappedNullable = &SimulateCardFulfillment{}
 // SimulateCardFulfillment struct for SimulateCardFulfillment
 type SimulateCardFulfillment struct {
 	CardFulfillmentStatus CardFulfillmentStatus `json:"card_fulfillment_status"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _SimulateCardFulfillment SimulateCardFulfillment
@@ -79,6 +79,11 @@ func (o SimulateCardFulfillment) MarshalJSON() ([]byte, error) {
 func (o SimulateCardFulfillment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["card_fulfillment_status"] = o.CardFulfillmentStatus
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *SimulateCardFulfillment) UnmarshalJSON(data []byte) (err error) {
 
 	varSimulateCardFulfillment := _SimulateCardFulfillment{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSimulateCardFulfillment)
+	err = json.Unmarshal(data, &varSimulateCardFulfillment)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SimulateCardFulfillment(varSimulateCardFulfillment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "card_fulfillment_status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

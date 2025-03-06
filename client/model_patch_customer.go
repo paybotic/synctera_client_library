@@ -41,8 +41,11 @@ type PatchCustomer struct {
 	// Customer's full tax ID eg SSN formatted with hyphens. This optional parameter is required when running KYC on a customer. Must be compiled with ^\\d{3}-\\d{2}-\\d{4}$. Response contains the last 4 digits only (e.g. 6789).
 	Ssn *string `json:"ssn,omitempty"`
 	// Customer's status
-	Status *string `json:"status,omitempty"`
+	Status               *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PatchCustomer PatchCustomer
 
 // NewPatchCustomer instantiates a new PatchCustomer object
 // This constructor will assign default values to properties that have it defined,
@@ -526,7 +529,45 @@ func (o PatchCustomer) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PatchCustomer) UnmarshalJSON(data []byte) (err error) {
+	varPatchCustomer := _PatchCustomer{}
+
+	err = json.Unmarshal(data, &varPatchCustomer)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PatchCustomer(varPatchCustomer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ban_status")
+		delete(additionalProperties, "dob")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "last_name")
+		delete(additionalProperties, "legal_address")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "middle_name")
+		delete(additionalProperties, "note")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "shipping_address")
+		delete(additionalProperties, "ssn")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePatchCustomer struct {

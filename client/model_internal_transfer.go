@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -53,7 +52,8 @@ type InternalTransfer struct {
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
 	Tenant *string `json:"tenant,omitempty"`
 	// The desired transaction type to use for this transfer
-	Type string `json:"type"`
+	Type                 string `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InternalTransfer InternalTransfer
@@ -622,6 +622,11 @@ func (o InternalTransfer) ToMap() (map[string]interface{}, error) {
 		toSerialize["tenant"] = o.Tenant
 	}
 	toSerialize["type"] = o.Type
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -651,15 +656,35 @@ func (o *InternalTransfer) UnmarshalJSON(data []byte) (err error) {
 
 	varInternalTransfer := _InternalTransfer{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInternalTransfer)
+	err = json.Unmarshal(data, &varInternalTransfer)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InternalTransfer(varInternalTransfer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "capture_mode")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "expires_at")
+		delete(additionalProperties, "final_customer_id")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "originating_account_alias")
+		delete(additionalProperties, "originating_account_customer_id")
+		delete(additionalProperties, "originating_account_id")
+		delete(additionalProperties, "receiving_account_alias")
+		delete(additionalProperties, "receiving_account_customer_id")
+		delete(additionalProperties, "receiving_account_id")
+		delete(additionalProperties, "reference_id")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

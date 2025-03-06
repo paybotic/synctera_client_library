@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -32,7 +31,8 @@ type TransactionDispute struct {
 	InternalCaseReference *string `json:"internal_case_reference,omitempty"`
 	Status                string  `json:"status"`
 	// The time the dispute was last updated
-	Updated time.Time `json:"updated"`
+	Updated              time.Time `json:"updated"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TransactionDispute TransactionDispute
@@ -238,6 +238,11 @@ func (o TransactionDispute) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["status"] = o.Status
 	toSerialize["updated"] = o.Updated
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -268,15 +273,25 @@ func (o *TransactionDispute) UnmarshalJSON(data []byte) (err error) {
 
 	varTransactionDispute := _TransactionDispute{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTransactionDispute)
+	err = json.Unmarshal(data, &varTransactionDispute)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TransactionDispute(varTransactionDispute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "created")
+		delete(additionalProperties, "external_case_reference")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "internal_case_reference")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "updated")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

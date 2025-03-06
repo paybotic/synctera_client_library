@@ -55,9 +55,12 @@ type Deposit struct {
 	// The status of the deposit
 	Status *string `json:"status,omitempty"`
 	// The ID of the transaction associated with this deposit
-	TransactionId *string     `json:"transaction_id,omitempty"`
-	VendorInfo    *VendorInfo `json:"vendor_info,omitempty"`
+	TransactionId        *string     `json:"transaction_id,omitempty"`
+	VendorInfo           *VendorInfo `json:"vendor_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Deposit Deposit
 
 // NewDeposit instantiates a new Deposit object
 // This constructor will assign default values to properties that have it defined,
@@ -786,7 +789,52 @@ func (o Deposit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VendorInfo) {
 		toSerialize["vendor_info"] = o.VendorInfo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Deposit) UnmarshalJSON(data []byte) (err error) {
+	varDeposit := _Deposit{}
+
+	err = json.Unmarshal(data, &varDeposit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Deposit(varDeposit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_id")
+		delete(additionalProperties, "back_image_id")
+		delete(additionalProperties, "business_id")
+		delete(additionalProperties, "check_amount")
+		delete(additionalProperties, "deposit_currency")
+		delete(additionalProperties, "front_image_id")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "person_id")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "date_captured")
+		delete(additionalProperties, "date_processed")
+		delete(additionalProperties, "deposit_amount")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "ocr_account_number")
+		delete(additionalProperties, "ocr_check_number")
+		delete(additionalProperties, "ocr_routing_number")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "transaction_id")
+		delete(additionalProperties, "vendor_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDeposit struct {

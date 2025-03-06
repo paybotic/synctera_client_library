@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -31,7 +30,8 @@ type EddBaseReport struct {
 	RelatedResourceId   string               `json:"related_resource_id"`
 	RelatedResourceType RelatedResourceType1 `json:"related_resource_type"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant *string `json:"tenant,omitempty"`
+	Tenant               *string `json:"tenant,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EddBaseReport EddBaseReport
@@ -246,6 +246,11 @@ func (o EddBaseReport) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tenant) {
 		toSerialize["tenant"] = o.Tenant
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -275,15 +280,25 @@ func (o *EddBaseReport) UnmarshalJSON(data []byte) (err error) {
 
 	varEddBaseReport := _EddBaseReport{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEddBaseReport)
+	err = json.Unmarshal(data, &varEddBaseReport)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EddBaseReport(varEddBaseReport)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "additional_questions")
+		delete(additionalProperties, "case_id")
+		delete(additionalProperties, "reason")
+		delete(additionalProperties, "related_resource_id")
+		delete(additionalProperties, "related_resource_type")
+		delete(additionalProperties, "tenant")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

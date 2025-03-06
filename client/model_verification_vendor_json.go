@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,7 +27,8 @@ type VerificationVendorJson struct {
 	// Data representation in JSON.
 	Json map[string]interface{} `json:"json"`
 	// Name of the vendor used.
-	Vendor string `json:"vendor"`
+	Vendor               string `json:"vendor"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _VerificationVendorJson VerificationVendorJson
@@ -173,6 +173,11 @@ func (o VerificationVendorJson) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["json"] = o.Json
 	toSerialize["vendor"] = o.Vendor
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -202,15 +207,23 @@ func (o *VerificationVendorJson) UnmarshalJSON(data []byte) (err error) {
 
 	varVerificationVendorJson := _VerificationVendorJson{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varVerificationVendorJson)
+	err = json.Unmarshal(data, &varVerificationVendorJson)
 
 	if err != nil {
 		return err
 	}
 
 	*o = VerificationVendorJson(varVerificationVendorJson)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "content_type")
+		delete(additionalProperties, "details")
+		delete(additionalProperties, "json")
+		delete(additionalProperties, "vendor")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

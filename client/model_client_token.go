@@ -19,8 +19,11 @@ var _ MappedNullable = &ClientToken{}
 
 // ClientToken A short-lived, one-time token used for accessing client PINs/PANs
 type ClientToken struct {
-	ClientToken *string `json:"client_token,omitempty"`
+	ClientToken          *string `json:"client_token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ClientToken ClientToken
 
 // NewClientToken instantiates a new ClientToken object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o ClientToken) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ClientToken) {
 		toSerialize["client_token"] = o.ClientToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ClientToken) UnmarshalJSON(data []byte) (err error) {
+	varClientToken := _ClientToken{}
+
+	err = json.Unmarshal(data, &varClientToken)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ClientToken(varClientToken)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "client_token")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableClientToken struct {

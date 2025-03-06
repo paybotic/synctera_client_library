@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -69,8 +68,9 @@ type CardProductResponse struct {
 	StartDate   time.Time    `json:"start_date"`
 	TxnEnhancer *TxnEnhancer `json:"txn_enhancer,omitempty"`
 	// PHYSICAL or VIRTUAL.
-	Form          string        `json:"form"`
-	ThreeDsPolicy ThreeDsPolicy `json:"three_ds_policy"`
+	Form                 string        `json:"form"`
+	ThreeDsPolicy        ThreeDsPolicy `json:"three_ds_policy"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CardProductResponse CardProductResponse
@@ -1065,6 +1065,11 @@ func (o CardProductResponse) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["form"] = o.Form
 	toSerialize["three_ds_policy"] = o.ThreeDsPolicy
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1102,15 +1107,49 @@ func (o *CardProductResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varCardProductResponse := _CardProductResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCardProductResponse)
+	err = json.Unmarshal(data, &varCardProductResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CardProductResponse(varCardProductResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "active")
+		delete(additionalProperties, "bin_country")
+		delete(additionalProperties, "bypass_risk_errors")
+		delete(additionalProperties, "card_brand")
+		delete(additionalProperties, "card_category")
+		delete(additionalProperties, "card_fulfillment_country")
+		delete(additionalProperties, "card_fulfillment_provider")
+		delete(additionalProperties, "card_program_id")
+		delete(additionalProperties, "card_type")
+		delete(additionalProperties, "color")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "cross_border_enabled")
+		delete(additionalProperties, "digital_wallet_tokenization")
+		delete(additionalProperties, "end_date")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "image")
+		delete(additionalProperties, "image_mode")
+		delete(additionalProperties, "issue_without_kyc")
+		delete(additionalProperties, "l2l3_enabled")
+		delete(additionalProperties, "last_modified_time")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "notification_language")
+		delete(additionalProperties, "orientation")
+		delete(additionalProperties, "package_id")
+		delete(additionalProperties, "physical_card_format")
+		delete(additionalProperties, "return_address")
+		delete(additionalProperties, "start_date")
+		delete(additionalProperties, "txn_enhancer")
+		delete(additionalProperties, "form")
+		delete(additionalProperties, "three_ds_policy")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

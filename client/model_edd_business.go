@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -42,7 +41,8 @@ type EddBusiness struct {
 	RecurringWireUsage  *bool                `json:"recurring_wire_usage,omitempty"`
 	SpecificInvolvement *SpecificInvolvement `json:"specific_involvement,omitempty"`
 	// Array of transaction volumes.
-	TransactionVolume []TransactionVolume `json:"transaction_volume,omitempty"`
+	TransactionVolume    []TransactionVolume `json:"transaction_volume,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EddBusiness EddBusiness
@@ -502,6 +502,11 @@ func (o EddBusiness) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TransactionVolume) {
 		toSerialize["transaction_volume"] = o.TransactionVolume
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -531,15 +536,32 @@ func (o *EddBusiness) UnmarshalJSON(data []byte) (err error) {
 
 	varEddBusiness := _EddBusiness{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEddBusiness)
+	err = json.Unmarshal(data, &varEddBusiness)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EddBusiness(varEddBusiness)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "additional_questions")
+		delete(additionalProperties, "case_id")
+		delete(additionalProperties, "reason")
+		delete(additionalProperties, "related_resource_id")
+		delete(additionalProperties, "related_resource_type")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "estimated_revenue")
+		delete(additionalProperties, "industry_type")
+		delete(additionalProperties, "negative_news_findings")
+		delete(additionalProperties, "recurring_wire_usage")
+		delete(additionalProperties, "specific_involvement")
+		delete(additionalProperties, "transaction_volume")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

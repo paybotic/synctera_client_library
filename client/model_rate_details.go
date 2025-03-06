@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,7 +27,8 @@ type RateDetails struct {
 	// Rate effective start date. Inclusive.
 	ValidFrom string `json:"valid_from"`
 	// Rate effective end date. Exclusive.
-	ValidTo *string `json:"valid_to,omitempty"`
+	ValidTo              *string `json:"valid_to,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RateDetails RateDetails
@@ -173,6 +173,11 @@ func (o RateDetails) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ValidTo) {
 		toSerialize["valid_to"] = o.ValidTo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -202,15 +207,23 @@ func (o *RateDetails) UnmarshalJSON(data []byte) (err error) {
 
 	varRateDetails := _RateDetails{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRateDetails)
+	err = json.Unmarshal(data, &varRateDetails)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RateDetails(varRateDetails)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "accrual_period")
+		delete(additionalProperties, "rate")
+		delete(additionalProperties, "valid_from")
+		delete(additionalProperties, "valid_to")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

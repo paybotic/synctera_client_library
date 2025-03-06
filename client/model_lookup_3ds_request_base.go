@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,8 +24,9 @@ type Lookup3dsRequestBase struct {
 	// Channel through which Device Data Collection was performed  Channel | Description --- | --- `BROWSER` | Internet browser `SDK` | Mobile app
 	DeviceChannel string `json:"device_channel"`
 	// The unique identifier of the 3DS authentication
-	Id              string `json:"id"`
-	TransactionMode string `json:"transaction_mode"`
+	Id                   string `json:"id"`
+	TransactionMode      string `json:"transaction_mode"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Lookup3dsRequestBase Lookup3dsRequestBase
@@ -162,6 +162,11 @@ func (o Lookup3dsRequestBase) ToMap() (map[string]interface{}, error) {
 	toSerialize["device_channel"] = o.DeviceChannel
 	toSerialize["id"] = o.Id
 	toSerialize["transaction_mode"] = o.TransactionMode
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -192,15 +197,23 @@ func (o *Lookup3dsRequestBase) UnmarshalJSON(data []byte) (err error) {
 
 	varLookup3dsRequestBase := _Lookup3dsRequestBase{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLookup3dsRequestBase)
+	err = json.Unmarshal(data, &varLookup3dsRequestBase)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Lookup3dsRequestBase(varLookup3dsRequestBase)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "authentication_indicator")
+		delete(additionalProperties, "device_channel")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "transaction_mode")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -65,7 +64,8 @@ type PostPerson struct {
 	// Array of personal identifiers
 	PersonalIds []PostPersonalId `json:"personal_ids,omitempty"`
 	// Text to be added to a note when creating a person. A note is required when creating a person with a ban_status of SUSPENDED.
-	Note *string `json:"note,omitempty"`
+	Note                 *string `json:"note,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PostPerson PostPerson
@@ -954,6 +954,11 @@ func (o PostPerson) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Note) {
 		toSerialize["note"] = o.Note
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -982,15 +987,44 @@ func (o *PostPerson) UnmarshalJSON(data []byte) (err error) {
 
 	varPostPerson := _PostPerson{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPostPerson)
+	err = json.Unmarshal(data, &varPostPerson)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PostPerson(varPostPerson)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ban_status")
+		delete(additionalProperties, "chosen_name")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "dob")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "has_accounts")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_customer")
+		delete(additionalProperties, "is_user")
+		delete(additionalProperties, "last_name")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "legal_address")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "middle_name")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "shipping_address")
+		delete(additionalProperties, "ssn")
+		delete(additionalProperties, "ssn_source")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "verification_last_run")
+		delete(additionalProperties, "verification_status")
+		delete(additionalProperties, "personal_ids")
+		delete(additionalProperties, "note")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

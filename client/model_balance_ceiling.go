@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -27,7 +26,8 @@ type BalanceCeiling struct {
 	LinkedAccountId *string `json:"linked_account_id,omitempty"`
 	// ID of linked backing account for just-in-time (JIT) funding of transactions to maintain the balance ceiling This attribute is a deprecated alias for linked_account_id.
 	// Deprecated
-	OverflowAccountId *string `json:"overflow_account_id,omitempty"`
+	OverflowAccountId    *string `json:"overflow_account_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BalanceCeiling BalanceCeiling
@@ -158,6 +158,11 @@ func (o BalanceCeiling) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OverflowAccountId) {
 		toSerialize["overflow_account_id"] = o.OverflowAccountId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -185,15 +190,22 @@ func (o *BalanceCeiling) UnmarshalJSON(data []byte) (err error) {
 
 	varBalanceCeiling := _BalanceCeiling{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBalanceCeiling)
+	err = json.Unmarshal(data, &varBalanceCeiling)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BalanceCeiling(varBalanceCeiling)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "balance")
+		delete(additionalProperties, "linked_account_id")
+		delete(additionalProperties, "overflow_account_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

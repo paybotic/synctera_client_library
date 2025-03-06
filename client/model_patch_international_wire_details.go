@@ -23,8 +23,11 @@ type PatchInternationalWireDetails struct {
 	// Correspondent banks details used for international payments. Note that in a patch request, the entirity of the correspondent_banks_details array will be updated.
 	CorrespondentBanksDetails []CorrespondentBankDetails `json:"correspondent_banks_details,omitempty"`
 	// The SWIFT code (also known as BIC code) used for international payments.
-	SwiftCode *string `json:"swift_code,omitempty" validate:"regexp=^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$"`
+	SwiftCode            *string `json:"swift_code,omitempty" validate:"regexp=^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PatchInternationalWireDetails PatchInternationalWireDetails
 
 // NewPatchInternationalWireDetails instantiates a new PatchInternationalWireDetails object
 // This constructor will assign default values to properties that have it defined,
@@ -158,7 +161,35 @@ func (o PatchInternationalWireDetails) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SwiftCode) {
 		toSerialize["swift_code"] = o.SwiftCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PatchInternationalWireDetails) UnmarshalJSON(data []byte) (err error) {
+	varPatchInternationalWireDetails := _PatchInternationalWireDetails{}
+
+	err = json.Unmarshal(data, &varPatchInternationalWireDetails)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PatchInternationalWireDetails(varPatchInternationalWireDetails)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bank_address")
+		delete(additionalProperties, "correspondent_banks_details")
+		delete(additionalProperties, "swift_code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePatchInternationalWireDetails struct {
