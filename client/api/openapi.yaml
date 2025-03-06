@@ -7,7 +7,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   title: Synctera API
-  version: 0.150.0
+  version: 0.153.0
 servers:
 - description: Sandbox (no real world financial impact)
   url: https://api-sandbox.synctera.com/v0
@@ -26033,22 +26033,24 @@ components:
         \ consent from a consumer to conduct ACH and pre-authorized\n    electronic\
         \ transactions to and from their account. Record of obtaining this\n    consent\
         \ should be retained, in accordance with Reg E, for no less than 2 years\n\
-        \    from the date the disclosure was made to the consumer.\n\n* `CARDHOLDER_AGREEMENT`\
-        \ –\n    [US] The Cardholder Agreement is a legal document that details the\
-        \ terms of a card\n    agreement between either a consumer or a business,\
-        \ and the financial\n    institution that issues the card. The Agreement governs\
-        \ the use of the\n    account.\n\n    [CA] A legal document that details the\
-        \ terms of a customer’s use of a card and their relationship\n    with the\
-        \ issuing financial institution, Synctera (if applicable), and the Distributor\n\
-        \    of the Card (the FinTech). The Agreement governs the customer’s use of\
-        \ the Card and the account,\n    including their rights and obligations.\n\
-        \n\n* `CARD_DISCLOSURE` – \n    [CA] Part of the Cardholder Agreement, the\
-        \ Disclosure highlights prescribed terms and\n    conditions that apply to\
-        \ the customer's use of the Card. The Disclosure can be \n    incorporated\
-        \ into the Agreement itself, but is often shown separately to ensure\n   \
-        \ clear understanding of the regulated terms.\n\n* `E_SIGN` –\n    [US] US\
-        \ law with rules around electronic agreements/documents/disclosures:\n   \
-        \ used to obtain consent from consumers to receive electronic communications\n\
+        \    from the date the disclosure was made to the consumer.\n\n* `DIRECT_BILLING_AUTHORIZATION`\
+        \ –\n    [US] Disclosure to certify that the user has authorized Synctera\
+        \ to initiate ACH debits/credits to the specified settlement account.\n\n\
+        * `CARDHOLDER_AGREEMENT` –\n    [US] The Cardholder Agreement is a legal document\
+        \ that details the terms of a card\n    agreement between either a consumer\
+        \ or a business, and the financial\n    institution that issues the card.\
+        \ The Agreement governs the use of the\n    account.\n\n    [CA] A legal document\
+        \ that details the terms of a customer’s use of a card and their relationship\n\
+        \    with the issuing financial institution, Synctera (if applicable), and\
+        \ the Distributor\n    of the Card (the FinTech). The Agreement governs the\
+        \ customer’s use of the Card and the account,\n    including their rights\
+        \ and obligations.\n\n\n* `CARD_DISCLOSURE` – \n    [CA] Part of the Cardholder\
+        \ Agreement, the Disclosure highlights prescribed terms and\n    conditions\
+        \ that apply to the customer's use of the Card. The Disclosure can be \n \
+        \   incorporated into the Agreement itself, but is often shown separately\
+        \ to ensure\n    clear understanding of the regulated terms.\n\n* `E_SIGN`\
+        \ –\n    [US] US law with rules around electronic agreements/documents/disclosures:\n\
+        \    used to obtain consent from consumers to receive electronic communications\n\
         \    (agreements, disclosures, statements, etc) about their accounts.\n\n\
         \    [CA] In order for you to send customers regulatory notices, disclosures,\
         \ and\n    documents electronically and to collect their consent electronically,\
@@ -26097,6 +26099,7 @@ components:
       - ACH_AUTHORIZATION
       - CARDHOLDER_AGREEMENT
       - CARD_DISCLOSURE
+      - DIRECT_BILLING_AUTHORIZATION
       - E_SIGN
       - KYC_DATA_COLLECTION
       - OWNER_CERTIFICATION
@@ -29937,6 +29940,7 @@ components:
           enum:
           - BASIC_FUNDS_TRANSFER
           - PRIOR_DAY_TRANSFER_REVERSAL
+          - RETURN
           - SAME_DAY_TRANSFER_REVERSAL
           example: BASIC_FUNDS_TRANSFER
           type: string
