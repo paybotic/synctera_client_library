@@ -1,0 +1,37 @@
+# DocumentType
+
+## Enum
+
+
+* `ADDRESS_VERIFICATION` (value: `"ADDRESS_VERIFICATION"`)
+
+* `APPLICATION_DOCUMENTATION` (value: `"APPLICATION_DOCUMENTATION"`)
+
+* `BILLING_DOCUMENT` (value: `"BILLING_DOCUMENT"`)
+
+* `CHECK_IMAGE` (value: `"CHECK_IMAGE"`)
+
+* `COMPANY_PROFILE_DOCUMENT` (value: `"COMPANY_PROFILE_DOCUMENT"`)
+
+* `COMPLIANCE_REPORT` (value: `"COMPLIANCE_REPORT"`)
+
+* `DATE_OF_BIRTH_VERIFICATION` (value: `"DATE_OF_BIRTH_VERIFICATION"`)
+
+* `FINANCIAL_FILE` (value: `"FINANCIAL_FILE"`)
+
+* `IDENTITY_DOCUMENTATION` (value: `"IDENTITY_DOCUMENTATION"`)
+
+* `INCOME_DOCUMENTATION` (value: `"INCOME_DOCUMENTATION"`)
+
+* `STATEMENT` (value: `"STATEMENT"`)
+
+* `STATEMENT_DISCLOSURE` (value: `"STATEMENT_DISCLOSURE"`)
+
+* `TAX_FORM` (value: `"TAX_FORM"`)
+
+* `TERMS_OF_SERVICE` (value: `"TERMS_OF_SERVICE"`)
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
