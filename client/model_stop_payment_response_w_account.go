@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -37,7 +36,8 @@ type StopPaymentResponseWAccount struct {
 	// Timestamp when stop payment was updated.
 	LastUpdatedTime *time.Time `json:"last_updated_time,omitempty"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant *string `json:"tenant,omitempty"`
+	Tenant               *string `json:"tenant,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StopPaymentResponseWAccount StopPaymentResponseWAccount
@@ -366,6 +366,11 @@ func (o StopPaymentResponseWAccount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tenant) {
 		toSerialize["tenant"] = o.Tenant
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -394,15 +399,28 @@ func (o *StopPaymentResponseWAccount) UnmarshalJSON(data []byte) (err error) {
 
 	varStopPaymentResponseWAccount := _StopPaymentResponseWAccount{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStopPaymentResponseWAccount)
+	err = json.Unmarshal(data, &varStopPaymentResponseWAccount)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StopPaymentResponseWAccount(varStopPaymentResponseWAccount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dispute_id")
+		delete(additionalProperties, "expires_on")
+		delete(additionalProperties, "originator_name")
+		delete(additionalProperties, "stop_payment_id")
+		delete(additionalProperties, "transaction_id")
+		delete(additionalProperties, "account_id")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "tenant")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

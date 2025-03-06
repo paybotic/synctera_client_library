@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +20,10 @@ var _ MappedNullable = &AddVendorAccountsResponse{}
 
 // AddVendorAccountsResponse struct for AddVendorAccountsResponse
 type AddVendorAccountsResponse struct {
-	AddedAccounts   []ExternalAccount         `json:"added_accounts"`
-	DeletedAccounts []ExternalAccount         `json:"deleted_accounts,omitempty"`
-	FailedAccounts  []AddVendorAccountFailure `json:"failed_accounts"`
+	AddedAccounts        []ExternalAccount         `json:"added_accounts"`
+	DeletedAccounts      []ExternalAccount         `json:"deleted_accounts,omitempty"`
+	FailedAccounts       []AddVendorAccountFailure `json:"failed_accounts"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AddVendorAccountsResponse AddVendorAccountsResponse
@@ -142,6 +142,11 @@ func (o AddVendorAccountsResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["deleted_accounts"] = o.DeletedAccounts
 	}
 	toSerialize["failed_accounts"] = o.FailedAccounts
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -170,15 +175,22 @@ func (o *AddVendorAccountsResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varAddVendorAccountsResponse := _AddVendorAccountsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddVendorAccountsResponse)
+	err = json.Unmarshal(data, &varAddVendorAccountsResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddVendorAccountsResponse(varAddVendorAccountsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "added_accounts")
+		delete(additionalProperties, "deleted_accounts")
+		delete(additionalProperties, "failed_accounts")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

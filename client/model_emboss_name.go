@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,7 +23,8 @@ type EmbossName struct {
 	// line 1
 	Line1 string `json:"line_1"`
 	// line 2
-	Line2 *string `json:"line_2,omitempty"`
+	Line2                *string `json:"line_2,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EmbossName EmbossName
@@ -117,6 +117,11 @@ func (o EmbossName) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Line2) {
 		toSerialize["line_2"] = o.Line2
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *EmbossName) UnmarshalJSON(data []byte) (err error) {
 
 	varEmbossName := _EmbossName{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEmbossName)
+	err = json.Unmarshal(data, &varEmbossName)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EmbossName(varEmbossName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "line_1")
+		delete(additionalProperties, "line_2")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

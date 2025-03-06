@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -63,7 +62,8 @@ type Business struct {
 	VerificationLastRun *time.Time          `json:"verification_last_run,omitempty"`
 	VerificationStatus  *VerificationStatus `json:"verification_status,omitempty"`
 	// Business's website.
-	Website *string `json:"website,omitempty"`
+	Website              *string `json:"website,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Business Business
@@ -847,6 +847,11 @@ func (o Business) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Website) {
 		toSerialize["website"] = o.Website
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -875,15 +880,41 @@ func (o *Business) UnmarshalJSON(data []byte) (err error) {
 
 	varBusiness := _Business{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBusiness)
+	err = json.Unmarshal(data, &varBusiness)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Business(varBusiness)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "addresses")
+		delete(additionalProperties, "compliance_restrictions")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "ein")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "entity_name")
+		delete(additionalProperties, "formation_date")
+		delete(additionalProperties, "formation_state")
+		delete(additionalProperties, "has_accounts")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_customer")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "legal_address")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "structure")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "trade_names")
+		delete(additionalProperties, "verification_last_run")
+		delete(additionalProperties, "verification_status")
+		delete(additionalProperties, "website")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

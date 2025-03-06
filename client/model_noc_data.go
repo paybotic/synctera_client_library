@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,7 +27,8 @@ type NocData struct {
 	// Receiving financial institution of the original entry.
 	OriginalDfiNo string `json:"original_dfi_no"`
 	// Trace number of the original entry that is being corrected.
-	OriginalTrace string `json:"original_trace"`
+	OriginalTrace        string `json:"original_trace"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _NocData NocData
@@ -164,6 +164,11 @@ func (o NocData) ToMap() (map[string]interface{}, error) {
 	toSerialize["corrected_data"] = o.CorrectedData
 	toSerialize["original_dfi_no"] = o.OriginalDfiNo
 	toSerialize["original_trace"] = o.OriginalTrace
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *NocData) UnmarshalJSON(data []byte) (err error) {
 
 	varNocData := _NocData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varNocData)
+	err = json.Unmarshal(data, &varNocData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = NocData(varNocData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "change_code")
+		delete(additionalProperties, "corrected_data")
+		delete(additionalProperties, "original_dfi_no")
+		delete(additionalProperties, "original_trace")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

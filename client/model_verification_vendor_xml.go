@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,7 +27,8 @@ type VerificationVendorXml struct {
 	// Name of the vendor used.
 	Vendor string `json:"vendor"`
 	// Data representaion in XML.
-	Xml string `json:"xml"`
+	Xml                  string `json:"xml"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _VerificationVendorXml VerificationVendorXml
@@ -173,6 +173,11 @@ func (o VerificationVendorXml) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["vendor"] = o.Vendor
 	toSerialize["xml"] = o.Xml
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -202,15 +207,23 @@ func (o *VerificationVendorXml) UnmarshalJSON(data []byte) (err error) {
 
 	varVerificationVendorXml := _VerificationVendorXml{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varVerificationVendorXml)
+	err = json.Unmarshal(data, &varVerificationVendorXml)
 
 	if err != nil {
 		return err
 	}
 
 	*o = VerificationVendorXml(varVerificationVendorXml)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "content_type")
+		delete(additionalProperties, "details")
+		delete(additionalProperties, "vendor")
+		delete(additionalProperties, "xml")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -44,7 +43,8 @@ type WebhookRequestObject struct {
 	// URL that you specified for the webhook and where this request will be sent
 	Url string `json:"url"`
 	// Id of the Webhook the current request belongs to
-	WebhookId string `json:"webhook_id"`
+	WebhookId            string `json:"webhook_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WebhookRequestObject WebhookRequestObject
@@ -413,6 +413,11 @@ func (o WebhookRequestObject) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	toSerialize["url"] = o.Url
 	toSerialize["webhook_id"] = o.WebhookId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -445,15 +450,30 @@ func (o *WebhookRequestObject) UnmarshalJSON(data []byte) (err error) {
 
 	varWebhookRequestObject := _WebhookRequestObject{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWebhookRequestObject)
+	err = json.Unmarshal(data, &varWebhookRequestObject)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WebhookRequestObject(varWebhookRequestObject)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "event_resource")
+		delete(additionalProperties, "event_resource_changed_fields")
+		delete(additionalProperties, "event_time")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "resource_id")
+		delete(additionalProperties, "response_history")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "webhook_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

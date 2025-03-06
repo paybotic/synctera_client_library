@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,7 +23,8 @@ type StatementList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of statements
-	Statements []StatementSummary `json:"statements"`
+	Statements           []StatementSummary `json:"statements"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StatementList StatementList
@@ -117,6 +117,11 @@ func (o StatementList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["statements"] = o.Statements
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *StatementList) UnmarshalJSON(data []byte) (err error) {
 
 	varStatementList := _StatementList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStatementList)
+	err = json.Unmarshal(data, &varStatementList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StatementList(varStatementList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "statements")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

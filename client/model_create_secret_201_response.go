@@ -20,8 +20,11 @@ var _ MappedNullable = &CreateSecret201Response{}
 // CreateSecret201Response struct for CreateSecret201Response
 type CreateSecret201Response struct {
 	// Generated secret. Do not share. This secret will be used to verify that webhook requests were sent from Synctera.
-	Secret *string `json:"secret,omitempty"`
+	Secret               *string `json:"secret,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateSecret201Response CreateSecret201Response
 
 // NewCreateSecret201Response instantiates a new CreateSecret201Response object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreateSecret201Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Secret) {
 		toSerialize["secret"] = o.Secret
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateSecret201Response) UnmarshalJSON(data []byte) (err error) {
+	varCreateSecret201Response := _CreateSecret201Response{}
+
+	err = json.Unmarshal(data, &varCreateSecret201Response)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateSecret201Response(varCreateSecret201Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "secret")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateSecret201Response struct {

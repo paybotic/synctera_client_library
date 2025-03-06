@@ -28,8 +28,11 @@ type SavingsSummary struct {
 	// The total interest earned by the depository account in the previous year in ISO 4217 minor currency units. For example, $100 USD of interest will be displayed as 10000.
 	InterestEarnedPreviousYear *int64 `json:"interest_earned_previous_year,omitempty"`
 	// The total interest earned by the depository account for this year to date in ISO 4217 minor currency units. For example, $100 USD of interest will be displayed as 10000.
-	InterestEarnedYtd *int64 `json:"interest_earned_ytd,omitempty"`
+	InterestEarnedYtd    *int64 `json:"interest_earned_ytd,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SavingsSummary SavingsSummary
 
 // NewSavingsSummary instantiates a new SavingsSummary object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o SavingsSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InterestEarnedYtd) {
 		toSerialize["interest_earned_ytd"] = o.InterestEarnedYtd
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SavingsSummary) UnmarshalJSON(data []byte) (err error) {
+	varSavingsSummary := _SavingsSummary{}
+
+	err = json.Unmarshal(data, &varSavingsSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SavingsSummary(varSavingsSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "apy")
+		delete(additionalProperties, "interest_earned")
+		delete(additionalProperties, "interest_earned_previous_month")
+		delete(additionalProperties, "interest_earned_previous_year")
+		delete(additionalProperties, "interest_earned_ytd")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSavingsSummary struct {

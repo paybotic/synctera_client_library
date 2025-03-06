@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,7 +21,8 @@ var _ MappedNullable = &Security{}
 // Security struct for Security
 type Security struct {
 	// ID of linked backing account for use as a security, e.g. for use in a Smart Charge Card offering. Must be of type CHECKING or SAVING.
-	LinkedAccountId string `json:"linked_account_id"`
+	LinkedAccountId      string `json:"linked_account_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Security Security
@@ -80,6 +80,11 @@ func (o Security) MarshalJSON() ([]byte, error) {
 func (o Security) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["linked_account_id"] = o.LinkedAccountId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *Security) UnmarshalJSON(data []byte) (err error) {
 
 	varSecurity := _Security{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSecurity)
+	err = json.Unmarshal(data, &varSecurity)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Security(varSecurity)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "linked_account_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

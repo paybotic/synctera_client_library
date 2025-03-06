@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,9 +23,10 @@ type AdhocVerificationResponse struct {
 	// Unique ID for this verification result.
 	Id string `json:"id"`
 	// list of watchlists that the subject of the request matched
-	MatchingWatchlists []string           `json:"matching_watchlists"`
-	Result             VerificationResult `json:"result"`
-	VendorInfo         *VendorInfo        `json:"vendor_info,omitempty"`
+	MatchingWatchlists   []string           `json:"matching_watchlists"`
+	Result               VerificationResult `json:"result"`
+	VendorInfo           *VendorInfo        `json:"vendor_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AdhocVerificationResponse AdhocVerificationResponse
@@ -171,6 +171,11 @@ func (o AdhocVerificationResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VendorInfo) {
 		toSerialize["vendor_info"] = o.VendorInfo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -200,15 +205,23 @@ func (o *AdhocVerificationResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varAdhocVerificationResponse := _AdhocVerificationResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAdhocVerificationResponse)
+	err = json.Unmarshal(data, &varAdhocVerificationResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AdhocVerificationResponse(varAdhocVerificationResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "matching_watchlists")
+		delete(additionalProperties, "result")
+		delete(additionalProperties, "vendor_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,8 +21,9 @@ var _ MappedNullable = &WatchlistSubscriptionList{}
 // WatchlistSubscriptionList struct for WatchlistSubscriptionList
 type WatchlistSubscriptionList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
-	NextPageToken *string                 `json:"next_page_token,omitempty"`
-	Subscriptions []WatchlistSubscription `json:"subscriptions"`
+	NextPageToken        *string                 `json:"next_page_token,omitempty"`
+	Subscriptions        []WatchlistSubscription `json:"subscriptions"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WatchlistSubscriptionList WatchlistSubscriptionList
@@ -116,6 +116,11 @@ func (o WatchlistSubscriptionList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["subscriptions"] = o.Subscriptions
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -143,15 +148,21 @@ func (o *WatchlistSubscriptionList) UnmarshalJSON(data []byte) (err error) {
 
 	varWatchlistSubscriptionList := _WatchlistSubscriptionList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWatchlistSubscriptionList)
+	err = json.Unmarshal(data, &varWatchlistSubscriptionList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WatchlistSubscriptionList(varWatchlistSubscriptionList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "subscriptions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

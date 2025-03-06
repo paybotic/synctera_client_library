@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -40,7 +39,8 @@ type ReturnData struct {
 	// Settlement date of the original return. Filled only if this is a dishonored return. Formatted as an ordinal date, a single day-of-year number between 1-366.
 	ReturnSettlementDate *string `json:"return_settlement_date,omitempty"`
 	// Trace number of the original return. Filled only if this is a dishonored return.
-	ReturnTrace *string `json:"return_trace,omitempty"`
+	ReturnTrace          *string `json:"return_trace,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReturnData ReturnData
@@ -395,6 +395,11 @@ func (o ReturnData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReturnTrace) {
 		toSerialize["return_trace"] = o.ReturnTrace
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -424,15 +429,29 @@ func (o *ReturnData) UnmarshalJSON(data []byte) (err error) {
 
 	varReturnData := _ReturnData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReturnData)
+	err = json.Unmarshal(data, &varReturnData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReturnData(varReturnData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "dishonored_return_code")
+		delete(additionalProperties, "dishonored_return_settlement_date")
+		delete(additionalProperties, "dishonored_return_trace")
+		delete(additionalProperties, "field_errors")
+		delete(additionalProperties, "original_dfi_no")
+		delete(additionalProperties, "original_trace")
+		delete(additionalProperties, "return_code")
+		delete(additionalProperties, "return_settlement_date")
+		delete(additionalProperties, "return_trace")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

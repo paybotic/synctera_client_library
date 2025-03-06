@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -41,7 +40,8 @@ type PatchPayerPayeeRelationship struct {
 	// Unique ID for the related business.
 	ToBusinessId *string `json:"to_business_id,omitempty"`
 	// Unique ID for the related person.
-	ToPersonId *string `json:"to_person_id,omitempty"`
+	ToPersonId           *string `json:"to_person_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PatchPayerPayeeRelationship PatchPayerPayeeRelationship
@@ -449,6 +449,11 @@ func (o PatchPayerPayeeRelationship) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ToPersonId) {
 		toSerialize["to_person_id"] = o.ToPersonId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -476,15 +481,30 @@ func (o *PatchPayerPayeeRelationship) UnmarshalJSON(data []byte) (err error) {
 
 	varPatchPayerPayeeRelationship := _PatchPayerPayeeRelationship{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPatchPayerPayeeRelationship)
+	err = json.Unmarshal(data, &varPatchPayerPayeeRelationship)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PatchPayerPayeeRelationship(varPatchPayerPayeeRelationship)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "additional_data")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "from_business_id")
+		delete(additionalProperties, "from_person_id")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "relationship_type")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "to_business_id")
+		delete(additionalProperties, "to_person_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

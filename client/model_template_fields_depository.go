@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -56,7 +55,8 @@ type TemplateFieldsDepository struct {
 	// List of spend control IDs to control spending for the account
 	SpendControlIds []string `json:"spend_control_ids,omitempty"`
 	// Deprecated
-	SpendingLimits *SpendingLimits `json:"spending_limits,omitempty"`
+	SpendingLimits       *SpendingLimits `json:"spending_limits,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TemplateFieldsDepository TemplateFieldsDepository
@@ -736,6 +736,11 @@ func (o TemplateFieldsDepository) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SpendingLimits) {
 		toSerialize["spending_limits"] = o.SpendingLimits
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -765,15 +770,38 @@ func (o *TemplateFieldsDepository) UnmarshalJSON(data []byte) (err error) {
 
 	varTemplateFieldsDepository := _TemplateFieldsDepository{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTemplateFieldsDepository)
+	err = json.Unmarshal(data, &varTemplateFieldsDepository)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TemplateFieldsDepository(varTemplateFieldsDepository)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_type")
+		delete(additionalProperties, "bank_account_id")
+		delete(additionalProperties, "bank_country")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "is_ach_enabled")
+		delete(additionalProperties, "is_card_enabled")
+		delete(additionalProperties, "is_eft_ca_enabled")
+		delete(additionalProperties, "is_external_card_enabled")
+		delete(additionalProperties, "is_p2p_enabled")
+		delete(additionalProperties, "is_synctera_pay_enabled")
+		delete(additionalProperties, "is_wire_enabled")
+		delete(additionalProperties, "balance_ceiling")
+		delete(additionalProperties, "balance_floor")
+		delete(additionalProperties, "fee_product_ids")
+		delete(additionalProperties, "interest_product_id")
+		delete(additionalProperties, "is_sar_enabled")
+		delete(additionalProperties, "overdraft_limit")
+		delete(additionalProperties, "spend_control_ids")
+		delete(additionalProperties, "spending_limits")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

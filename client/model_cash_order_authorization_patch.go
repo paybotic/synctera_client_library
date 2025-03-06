@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -27,8 +26,9 @@ type CashOrderAuthorizationPatch struct {
 	// The name of the client business the cash order is for.
 	ClientName *string `json:"client_name,omitempty"`
 	// The date the cash order was placed with Empyreal
-	OrderDate *string `json:"order_date,omitempty"`
-	Status    *string `json:"status,omitempty"`
+	OrderDate            *string `json:"order_date,omitempty"`
+	Status               *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CashOrderAuthorizationPatch CashOrderAuthorizationPatch
@@ -226,6 +226,11 @@ func (o CashOrderAuthorizationPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -253,15 +258,24 @@ func (o *CashOrderAuthorizationPatch) UnmarshalJSON(data []byte) (err error) {
 
 	varCashOrderAuthorizationPatch := _CashOrderAuthorizationPatch{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCashOrderAuthorizationPatch)
+	err = json.Unmarshal(data, &varCashOrderAuthorizationPatch)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CashOrderAuthorizationPatch(varCashOrderAuthorizationPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_number")
+		delete(additionalProperties, "authorization_type")
+		delete(additionalProperties, "client_name")
+		delete(additionalProperties, "order_date")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

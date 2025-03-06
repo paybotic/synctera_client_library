@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,7 +21,8 @@ var _ MappedNullable = &AchReturnSimulationRequest{}
 // AchReturnSimulationRequest Simulate receiving an ACH return
 type AchReturnSimulationRequest struct {
 	// ID of an outgoing ACH transfer to be returned.
-	AchId string `json:"ach_id"`
+	AchId                string `json:"ach_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AchReturnSimulationRequest AchReturnSimulationRequest
@@ -80,6 +80,11 @@ func (o AchReturnSimulationRequest) MarshalJSON() ([]byte, error) {
 func (o AchReturnSimulationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["ach_id"] = o.AchId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *AchReturnSimulationRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varAchReturnSimulationRequest := _AchReturnSimulationRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAchReturnSimulationRequest)
+	err = json.Unmarshal(data, &varAchReturnSimulationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AchReturnSimulationRequest(varAchReturnSimulationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ach_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

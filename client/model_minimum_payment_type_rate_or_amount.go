@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,8 +23,9 @@ type MinimumPaymentTypeRateOrAmount struct {
 	// The minimum amount to charge as a minimum payment, in cents. For example, to set the minimum to $30, set this value to 3000. Note: despite setting this value, the minimum payment will never be greater than the statement balance.
 	MinAmount int64 `json:"min_amount"`
 	// The percentage of the balance to use, in basis points. For example, to set 12.5% of the balance, set this value to 1250.
-	Rate int32              `json:"rate"`
-	Type MinimumPaymentType `json:"type"`
+	Rate                 int32              `json:"rate"`
+	Type                 MinimumPaymentType `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MinimumPaymentTypeRateOrAmount MinimumPaymentTypeRateOrAmount
@@ -135,6 +135,11 @@ func (o MinimumPaymentTypeRateOrAmount) ToMap() (map[string]interface{}, error) 
 	toSerialize["min_amount"] = o.MinAmount
 	toSerialize["rate"] = o.Rate
 	toSerialize["type"] = o.Type
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -164,15 +169,22 @@ func (o *MinimumPaymentTypeRateOrAmount) UnmarshalJSON(data []byte) (err error) 
 
 	varMinimumPaymentTypeRateOrAmount := _MinimumPaymentTypeRateOrAmount{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMinimumPaymentTypeRateOrAmount)
+	err = json.Unmarshal(data, &varMinimumPaymentTypeRateOrAmount)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MinimumPaymentTypeRateOrAmount(varMinimumPaymentTypeRateOrAmount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min_amount")
+		delete(additionalProperties, "rate")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

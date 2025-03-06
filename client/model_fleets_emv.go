@@ -19,22 +19,25 @@ var _ MappedNullable = &FleetsEmv{}
 
 // FleetsEmv struct for FleetsEmv
 type FleetsEmv struct {
-	EmployeeNumber     *string              `json:"employee_number,omitempty"`
-	ExpandedFuelType   *string              `json:"expanded_fuel_type,omitempty"`
-	FuelGrossAmount    *int64               `json:"fuel_gross_amount,omitempty"`
-	FuelNetAmount      *int64               `json:"fuel_net_amount,omitempty"`
-	FuelQuantity       *float32             `json:"fuel_quantity,omitempty"`
-	FuelUnitOfMeasure  *string              `json:"fuel_unit_of_measure,omitempty"`
-	FuelUnitPrice      *float32             `json:"fuel_unit_price,omitempty"`
-	NonFuelGrossAmount *int64               `json:"non_fuel_gross_amount,omitempty"`
-	NonFuelItemDetails []NonFuelItemDetails `json:"non_fuel_item_details,omitempty"`
-	NonFuelNetAmount   *int64               `json:"non_fuel_net_amount,omitempty"`
-	OdometerReading    *string              `json:"odometer_reading,omitempty"`
-	ServiceType        *string              `json:"service_type,omitempty"`
-	TrailerNumber      *string              `json:"trailer_number,omitempty"`
-	TypeOfPurchase     *string              `json:"type_of_purchase,omitempty"`
-	VatTaxRate         *float32             `json:"vat_tax_rate,omitempty"`
+	EmployeeNumber       *string              `json:"employee_number,omitempty"`
+	ExpandedFuelType     *string              `json:"expanded_fuel_type,omitempty"`
+	FuelGrossAmount      *int64               `json:"fuel_gross_amount,omitempty"`
+	FuelNetAmount        *int64               `json:"fuel_net_amount,omitempty"`
+	FuelQuantity         *float32             `json:"fuel_quantity,omitempty"`
+	FuelUnitOfMeasure    *string              `json:"fuel_unit_of_measure,omitempty"`
+	FuelUnitPrice        *float32             `json:"fuel_unit_price,omitempty"`
+	NonFuelGrossAmount   *int64               `json:"non_fuel_gross_amount,omitempty"`
+	NonFuelItemDetails   []NonFuelItemDetails `json:"non_fuel_item_details,omitempty"`
+	NonFuelNetAmount     *int64               `json:"non_fuel_net_amount,omitempty"`
+	OdometerReading      *string              `json:"odometer_reading,omitempty"`
+	ServiceType          *string              `json:"service_type,omitempty"`
+	TrailerNumber        *string              `json:"trailer_number,omitempty"`
+	TypeOfPurchase       *string              `json:"type_of_purchase,omitempty"`
+	VatTaxRate           *float32             `json:"vat_tax_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FleetsEmv FleetsEmv
 
 // NewFleetsEmv instantiates a new FleetsEmv object
 // This constructor will assign default values to properties that have it defined,
@@ -588,7 +591,47 @@ func (o FleetsEmv) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VatTaxRate) {
 		toSerialize["vat_tax_rate"] = o.VatTaxRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FleetsEmv) UnmarshalJSON(data []byte) (err error) {
+	varFleetsEmv := _FleetsEmv{}
+
+	err = json.Unmarshal(data, &varFleetsEmv)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FleetsEmv(varFleetsEmv)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "employee_number")
+		delete(additionalProperties, "expanded_fuel_type")
+		delete(additionalProperties, "fuel_gross_amount")
+		delete(additionalProperties, "fuel_net_amount")
+		delete(additionalProperties, "fuel_quantity")
+		delete(additionalProperties, "fuel_unit_of_measure")
+		delete(additionalProperties, "fuel_unit_price")
+		delete(additionalProperties, "non_fuel_gross_amount")
+		delete(additionalProperties, "non_fuel_item_details")
+		delete(additionalProperties, "non_fuel_net_amount")
+		delete(additionalProperties, "odometer_reading")
+		delete(additionalProperties, "service_type")
+		delete(additionalProperties, "trailer_number")
+		delete(additionalProperties, "type_of_purchase")
+		delete(additionalProperties, "vat_tax_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFleetsEmv struct {

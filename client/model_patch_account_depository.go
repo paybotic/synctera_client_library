@@ -87,8 +87,11 @@ type PatchAccountDepository struct {
 	// List of spend control IDs to control spending for the account
 	SpendControlIds []string `json:"spend_control_ids,omitempty"`
 	// Deprecated
-	SpendingLimits *SpendingLimits `json:"spending_limits,omitempty"`
+	SpendingLimits       *SpendingLimits `json:"spending_limits,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PatchAccountDepository PatchAccountDepository
 
 // NewPatchAccountDepository instantiates a new PatchAccountDepository object
 // This constructor will assign default values to properties that have it defined,
@@ -1415,7 +1418,69 @@ func (o PatchAccountDepository) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SpendingLimits) {
 		toSerialize["spending_limits"] = o.SpendingLimits
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PatchAccountDepository) UnmarshalJSON(data []byte) (err error) {
+	varPatchAccountDepository := _PatchAccountDepository{}
+
+	err = json.Unmarshal(data, &varPatchAccountDepository)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PatchAccountDepository(varPatchAccountDepository)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_ach_enabled")
+		delete(additionalProperties, "is_card_enabled")
+		delete(additionalProperties, "is_eft_ca_enabled")
+		delete(additionalProperties, "is_external_card_enabled")
+		delete(additionalProperties, "is_p2p_enabled")
+		delete(additionalProperties, "is_synctera_pay_enabled")
+		delete(additionalProperties, "is_wire_enabled")
+		delete(additionalProperties, "access_status")
+		delete(additionalProperties, "account_number")
+		delete(additionalProperties, "account_number_masked")
+		delete(additionalProperties, "account_purpose")
+		delete(additionalProperties, "account_type")
+		delete(additionalProperties, "application_id")
+		delete(additionalProperties, "balances")
+		delete(additionalProperties, "bank_routing")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "customer_ids")
+		delete(additionalProperties, "customer_type")
+		delete(additionalProperties, "exchange_rate_type")
+		delete(additionalProperties, "iban")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_account_pool")
+		delete(additionalProperties, "is_sar_enabled")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "nickname")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "swift_code")
+		delete(additionalProperties, "balance_ceiling")
+		delete(additionalProperties, "balance_floor")
+		delete(additionalProperties, "fee_product_ids")
+		delete(additionalProperties, "interest_product_id")
+		delete(additionalProperties, "note")
+		delete(additionalProperties, "overdraft_limit")
+		delete(additionalProperties, "spend_control_ids")
+		delete(additionalProperties, "spending_limits")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePatchAccountDepository struct {

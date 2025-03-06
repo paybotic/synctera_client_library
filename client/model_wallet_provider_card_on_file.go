@@ -19,9 +19,12 @@ var _ MappedNullable = &WalletProviderCardOnFile{}
 
 // WalletProviderCardOnFile struct for WalletProviderCardOnFile
 type WalletProviderCardOnFile struct {
-	AddressVerification *DigitalWalletTokenAddressVerification `json:"address_verification,omitempty"`
-	Enabled             *bool                                  `json:"enabled,omitempty"`
+	AddressVerification  *DigitalWalletTokenAddressVerification `json:"address_verification,omitempty"`
+	Enabled              *bool                                  `json:"enabled,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WalletProviderCardOnFile WalletProviderCardOnFile
 
 // NewWalletProviderCardOnFile instantiates a new WalletProviderCardOnFile object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o WalletProviderCardOnFile) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WalletProviderCardOnFile) UnmarshalJSON(data []byte) (err error) {
+	varWalletProviderCardOnFile := _WalletProviderCardOnFile{}
+
+	err = json.Unmarshal(data, &varWalletProviderCardOnFile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WalletProviderCardOnFile(varWalletProviderCardOnFile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "address_verification")
+		delete(additionalProperties, "enabled")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWalletProviderCardOnFile struct {

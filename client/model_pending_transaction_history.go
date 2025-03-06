@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -43,7 +42,8 @@ type PendingTransactionHistory struct {
 	// The date the hold was last update
 	Updated time.Time `json:"updated"`
 	// The unique identifier of the hold transaction.
-	Uuid string `json:"uuid"`
+	Uuid                 string `json:"uuid"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PendingTransactionHistory PendingTransactionHistory
@@ -416,6 +416,11 @@ func (o PendingTransactionHistory) ToMap() (map[string]interface{}, error) {
 	toSerialize["tenant"] = o.Tenant
 	toSerialize["updated"] = o.Updated
 	toSerialize["uuid"] = o.Uuid
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -451,15 +456,31 @@ func (o *PendingTransactionHistory) UnmarshalJSON(data []byte) (err error) {
 
 	varPendingTransactionHistory := _PendingTransactionHistory{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPendingTransactionHistory)
+	err = json.Unmarshal(data, &varPendingTransactionHistory)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PendingTransactionHistory(varPendingTransactionHistory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_id")
+		delete(additionalProperties, "account_no")
+		delete(additionalProperties, "created")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "idemkey")
+		delete(additionalProperties, "offset_account_id")
+		delete(additionalProperties, "offset_account_no")
+		delete(additionalProperties, "reference_id")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "updated")
+		delete(additionalProperties, "uuid")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

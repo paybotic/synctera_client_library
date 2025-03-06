@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -57,7 +56,8 @@ type OutgoingAch struct {
 	SourceAccountNo string `json:"source_account_no"`
 	Status          string `json:"status"`
 	// Trace number of the transaction
-	TraceNo string `json:"trace_no"`
+	TraceNo              string `json:"trace_no"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OutgoingAch OutgoingAch
@@ -751,6 +751,11 @@ func (o OutgoingAch) ToMap() (map[string]interface{}, error) {
 	toSerialize["source_account_no"] = o.SourceAccountNo
 	toSerialize["status"] = o.Status
 	toSerialize["trace_no"] = o.TraceNo
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -789,15 +794,41 @@ func (o *OutgoingAch) UnmarshalJSON(data []byte) (err error) {
 
 	varOutgoingAch := _OutgoingAch{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOutgoingAch)
+	err = json.Unmarshal(data, &varOutgoingAch)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OutgoingAch(varOutgoingAch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_id")
+		delete(additionalProperties, "account_name")
+		delete(additionalProperties, "account_no")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "bank_id")
+		delete(additionalProperties, "company_entry_description")
+		delete(additionalProperties, "company_name")
+		delete(additionalProperties, "effective_date")
+		delete(additionalProperties, "external_id")
+		delete(additionalProperties, "hold")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "incoming_ach_id")
+		delete(additionalProperties, "is_same_day")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "partner_id")
+		delete(additionalProperties, "reference_info")
+		delete(additionalProperties, "return_data")
+		delete(additionalProperties, "source_account_id")
+		delete(additionalProperties, "source_account_name")
+		delete(additionalProperties, "source_account_no")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "trace_no")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

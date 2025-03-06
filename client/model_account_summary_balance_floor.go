@@ -20,8 +20,11 @@ var _ MappedNullable = &AccountSummaryBalanceFloor{}
 // AccountSummaryBalanceFloor struct for AccountSummaryBalanceFloor
 type AccountSummaryBalanceFloor struct {
 	// Minimum balance in the account's currency. Unit in cents.
-	Balance *int64 `json:"balance,omitempty"`
+	Balance              *int64 `json:"balance,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AccountSummaryBalanceFloor AccountSummaryBalanceFloor
 
 // NewAccountSummaryBalanceFloor instantiates a new AccountSummaryBalanceFloor object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o AccountSummaryBalanceFloor) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Balance) {
 		toSerialize["balance"] = o.Balance
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AccountSummaryBalanceFloor) UnmarshalJSON(data []byte) (err error) {
+	varAccountSummaryBalanceFloor := _AccountSummaryBalanceFloor{}
+
+	err = json.Unmarshal(data, &varAccountSummaryBalanceFloor)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AccountSummaryBalanceFloor(varAccountSummaryBalanceFloor)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "balance")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAccountSummaryBalanceFloor struct {

@@ -19,10 +19,13 @@ var _ MappedNullable = &FinancialInstitution{}
 
 // FinancialInstitution struct for FinancialInstitution
 type FinancialInstitution struct {
-	LegalAddress *Address2 `json:"legal_address,omitempty"`
-	Name         *string   `json:"name,omitempty"`
-	PhoneNumber  *string   `json:"phone_number,omitempty"`
+	LegalAddress         *Address2 `json:"legal_address,omitempty"`
+	Name                 *string   `json:"name,omitempty"`
+	PhoneNumber          *string   `json:"phone_number,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FinancialInstitution FinancialInstitution
 
 // NewFinancialInstitution instantiates a new FinancialInstitution object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o FinancialInstitution) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PhoneNumber) {
 		toSerialize["phone_number"] = o.PhoneNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FinancialInstitution) UnmarshalJSON(data []byte) (err error) {
+	varFinancialInstitution := _FinancialInstitution{}
+
+	err = json.Unmarshal(data, &varFinancialInstitution)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FinancialInstitution(varFinancialInstitution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "legal_address")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "phone_number")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFinancialInstitution struct {

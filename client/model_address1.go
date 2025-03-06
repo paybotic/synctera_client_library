@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -32,7 +31,8 @@ type Address1 struct {
 	// Postal code
 	PostalCode string `json:"postal_code"`
 	// State, region, province, or prefecture
-	State string `json:"state"`
+	State                string `json:"state"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Address1 Address1
@@ -229,6 +229,11 @@ func (o Address1) ToMap() (map[string]interface{}, error) {
 	toSerialize["country_code"] = o.CountryCode
 	toSerialize["postal_code"] = o.PostalCode
 	toSerialize["state"] = o.State
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -260,15 +265,25 @@ func (o *Address1) UnmarshalJSON(data []byte) (err error) {
 
 	varAddress1 := _Address1{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddress1)
+	err = json.Unmarshal(data, &varAddress1)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Address1(varAddress1)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "address_line_1")
+		delete(additionalProperties, "address_line_2")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "country_code")
+		delete(additionalProperties, "postal_code")
+		delete(additionalProperties, "state")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

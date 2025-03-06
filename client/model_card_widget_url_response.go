@@ -19,8 +19,11 @@ var _ MappedNullable = &CardWidgetUrlResponse{}
 
 // CardWidgetUrlResponse A URL for activate card and set pin widgets
 type CardWidgetUrlResponse struct {
-	Url *string `json:"url,omitempty"`
+	Url                  *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CardWidgetUrlResponse CardWidgetUrlResponse
 
 // NewCardWidgetUrlResponse instantiates a new CardWidgetUrlResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o CardWidgetUrlResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CardWidgetUrlResponse) UnmarshalJSON(data []byte) (err error) {
+	varCardWidgetUrlResponse := _CardWidgetUrlResponse{}
+
+	err = json.Unmarshal(data, &varCardWidgetUrlResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CardWidgetUrlResponse(varCardWidgetUrlResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCardWidgetUrlResponse struct {

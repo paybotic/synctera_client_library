@@ -25,7 +25,10 @@ type PushTokenizeRequestData struct {
 	OpaquePaymentCard    *string   `json:"opaque_payment_card,omitempty"`
 	TokenServiceProvider *string   `json:"token_service_provider,omitempty"`
 	UserAddress          *Address1 `json:"user_address,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PushTokenizeRequestData PushTokenizeRequestData
 
 // NewPushTokenizeRequestData instantiates a new PushTokenizeRequestData object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +267,38 @@ func (o PushTokenizeRequestData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UserAddress) {
 		toSerialize["user_address"] = o.UserAddress
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PushTokenizeRequestData) UnmarshalJSON(data []byte) (err error) {
+	varPushTokenizeRequestData := _PushTokenizeRequestData{}
+
+	err = json.Unmarshal(data, &varPushTokenizeRequestData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PushTokenizeRequestData(varPushTokenizeRequestData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "display_name")
+		delete(additionalProperties, "last_digits")
+		delete(additionalProperties, "network")
+		delete(additionalProperties, "opaque_payment_card")
+		delete(additionalProperties, "token_service_provider")
+		delete(additionalProperties, "user_address")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePushTokenizeRequestData struct {

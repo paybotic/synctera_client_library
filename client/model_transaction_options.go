@@ -29,7 +29,10 @@ type TransactionOptions struct {
 	SendTrackData                      *bool   `json:"send_track_data,omitempty"`
 	TransactionId                      *string `json:"transaction_id,omitempty"`
 	TransactionTimeoutThresholdSeconds *int64  `json:"transaction_timeout_threshold_seconds,omitempty"`
+	AdditionalProperties               map[string]interface{}
 }
+
+type _TransactionOptions TransactionOptions
 
 // NewTransactionOptions instantiates a new TransactionOptions object
 // This constructor will assign default values to properties that have it defined,
@@ -420,7 +423,42 @@ func (o TransactionOptions) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TransactionTimeoutThresholdSeconds) {
 		toSerialize["transaction_timeout_threshold_seconds"] = o.TransactionTimeoutThresholdSeconds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TransactionOptions) UnmarshalJSON(data []byte) (err error) {
+	varTransactionOptions := _TransactionOptions{}
+
+	err = json.Unmarshal(data, &varTransactionOptions)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TransactionOptions(varTransactionOptions)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "additional_data")
+		delete(additionalProperties, "card_expiration_date_yymm")
+		delete(additionalProperties, "database_transaction_timeout")
+		delete(additionalProperties, "encryption_key_id")
+		delete(additionalProperties, "is_async")
+		delete(additionalProperties, "pre_auth_time_limit")
+		delete(additionalProperties, "send_expiration_date")
+		delete(additionalProperties, "send_track_data")
+		delete(additionalProperties, "transaction_id")
+		delete(additionalProperties, "transaction_timeout_threshold_seconds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTransactionOptions struct {

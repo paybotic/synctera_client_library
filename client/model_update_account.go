@@ -90,8 +90,11 @@ type UpdateAccount struct {
 	Nickname *string        `json:"nickname,omitempty"`
 	Status   *AccountStatus `json:"status,omitempty"`
 	// SWIFT code
-	SwiftCode *string `json:"swift_code,omitempty"`
+	SwiftCode            *string `json:"swift_code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateAccount UpdateAccount
 
 // NewUpdateAccount instantiates a new UpdateAccount object
 // This constructor will assign default values to properties that have it defined,
@@ -1456,7 +1459,70 @@ func (o UpdateAccount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SwiftCode) {
 		toSerialize["swift_code"] = o.SwiftCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateAccount) UnmarshalJSON(data []byte) (err error) {
+	varUpdateAccount := _UpdateAccount{}
+
+	err = json.Unmarshal(data, &varUpdateAccount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateAccount(varUpdateAccount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_template_id")
+		delete(additionalProperties, "balance_ceiling")
+		delete(additionalProperties, "balance_floor")
+		delete(additionalProperties, "fee_product_ids")
+		delete(additionalProperties, "interest_product_id")
+		delete(additionalProperties, "note")
+		delete(additionalProperties, "overdraft_limit")
+		delete(additionalProperties, "spend_control_ids")
+		delete(additionalProperties, "spending_limits")
+		delete(additionalProperties, "is_ach_enabled")
+		delete(additionalProperties, "is_card_enabled")
+		delete(additionalProperties, "is_eft_ca_enabled")
+		delete(additionalProperties, "is_external_card_enabled")
+		delete(additionalProperties, "is_p2p_enabled")
+		delete(additionalProperties, "is_synctera_pay_enabled")
+		delete(additionalProperties, "is_wire_enabled")
+		delete(additionalProperties, "access_status")
+		delete(additionalProperties, "account_number")
+		delete(additionalProperties, "account_number_masked")
+		delete(additionalProperties, "account_purpose")
+		delete(additionalProperties, "account_type")
+		delete(additionalProperties, "application_id")
+		delete(additionalProperties, "balances")
+		delete(additionalProperties, "bank_routing")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "customer_ids")
+		delete(additionalProperties, "customer_type")
+		delete(additionalProperties, "exchange_rate_type")
+		delete(additionalProperties, "iban")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_account_pool")
+		delete(additionalProperties, "is_sar_enabled")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "nickname")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "swift_code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateAccount struct {

@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,8 +20,9 @@ var _ MappedNullable = &AchInstruction{}
 
 // AchInstruction struct for AchInstruction
 type AchInstruction struct {
-	Request OutgoingAchRequest `json:"request"`
-	Type    string             `json:"type"`
+	Request              OutgoingAchRequest `json:"request"`
+	Type                 string             `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AchInstruction AchInstruction
@@ -106,6 +106,11 @@ func (o AchInstruction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["request"] = o.Request
 	toSerialize["type"] = o.Type
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *AchInstruction) UnmarshalJSON(data []byte) (err error) {
 
 	varAchInstruction := _AchInstruction{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAchInstruction)
+	err = json.Unmarshal(data, &varAchInstruction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AchInstruction(varAchInstruction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "request")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

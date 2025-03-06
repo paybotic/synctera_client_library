@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -33,6 +32,7 @@ type TransferRequestPush struct {
 	Type                 TransferTypeRequest `json:"type"`
 	// For person-to-person PUSH transactions, this is the `customer_id` of the sender who must have privileges to access funds in the originating account in order to send funds to the recipient cardholder
 	OriginatingCustomerId *string `json:"originating_customer_id,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _TransferRequestPush TransferRequestPush
@@ -264,6 +264,11 @@ func (o TransferRequestPush) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OriginatingCustomerId) {
 		toSerialize["originating_customer_id"] = o.OriginatingCustomerId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -295,15 +300,26 @@ func (o *TransferRequestPush) UnmarshalJSON(data []byte) (err error) {
 
 	varTransferRequestPush := _TransferRequestPush{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTransferRequestPush)
+	err = json.Unmarshal(data, &varTransferRequestPush)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TransferRequestPush(varTransferRequestPush)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "external_card_id")
+		delete(additionalProperties, "merchant")
+		delete(additionalProperties, "originating_account_id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "originating_customer_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

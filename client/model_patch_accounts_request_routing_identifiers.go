@@ -27,8 +27,11 @@ type PatchAccountsRequestRoutingIdentifiers struct {
 	EftCaRoutingNumber       *string                        `json:"eft_ca_routing_number,omitempty"`
 	InternationalWireDetails *PatchInternationalWireDetails `json:"international_wire_details,omitempty"`
 	// The routing number used for domestic wire payments. On write, Synctera will store the entire routing number; on read, we only return the last 4 characters.
-	WireRoutingNumber *string `json:"wire_routing_number,omitempty"`
+	WireRoutingNumber    *string `json:"wire_routing_number,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PatchAccountsRequestRoutingIdentifiers PatchAccountsRequestRoutingIdentifiers
 
 // NewPatchAccountsRequestRoutingIdentifiers instantiates a new PatchAccountsRequestRoutingIdentifiers object
 // This constructor will assign default values to properties that have it defined,
@@ -232,7 +235,37 @@ func (o PatchAccountsRequestRoutingIdentifiers) ToMap() (map[string]interface{},
 	if !IsNil(o.WireRoutingNumber) {
 		toSerialize["wire_routing_number"] = o.WireRoutingNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PatchAccountsRequestRoutingIdentifiers) UnmarshalJSON(data []byte) (err error) {
+	varPatchAccountsRequestRoutingIdentifiers := _PatchAccountsRequestRoutingIdentifiers{}
+
+	err = json.Unmarshal(data, &varPatchAccountsRequestRoutingIdentifiers)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PatchAccountsRequestRoutingIdentifiers(varPatchAccountsRequestRoutingIdentifiers)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ach_routing_number")
+		delete(additionalProperties, "bank_name")
+		delete(additionalProperties, "eft_ca_routing_number")
+		delete(additionalProperties, "international_wire_details")
+		delete(additionalProperties, "wire_routing_number")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePatchAccountsRequestRoutingIdentifiers struct {

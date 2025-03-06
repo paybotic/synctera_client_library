@@ -21,8 +21,11 @@ var _ MappedNullable = &RawResponse{}
 type RawResponse struct {
 	Provider *ProviderType `json:"provider,omitempty"`
 	// Raw data from an external provider, as a JSON string.
-	RawData *string `json:"raw_data,omitempty"`
+	RawData              *string `json:"raw_data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RawResponse RawResponse
 
 // NewRawResponse instantiates a new RawResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o RawResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RawData) {
 		toSerialize["raw_data"] = o.RawData
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RawResponse) UnmarshalJSON(data []byte) (err error) {
+	varRawResponse := _RawResponse{}
+
+	err = json.Unmarshal(data, &varRawResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RawResponse(varRawResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "provider")
+		delete(additionalProperties, "raw_data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRawResponse struct {

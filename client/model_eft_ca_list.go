@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,7 +23,8 @@ type EftCaList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of transfers.
-	Transfers []EftCaResponse `json:"transfers"`
+	Transfers            []EftCaResponse `json:"transfers"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EftCaList EftCaList
@@ -117,6 +117,11 @@ func (o EftCaList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["transfers"] = o.Transfers
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *EftCaList) UnmarshalJSON(data []byte) (err error) {
 
 	varEftCaList := _EftCaList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEftCaList)
+	err = json.Unmarshal(data, &varEftCaList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EftCaList(varEftCaList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "transfers")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

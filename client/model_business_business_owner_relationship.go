@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -37,7 +36,8 @@ type BusinessBusinessOwnerRelationship struct {
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
 	Tenant *string `json:"tenant,omitempty"`
 	// Unique ID for the related business.
-	ToBusinessId string `json:"to_business_id"`
+	ToBusinessId         string `json:"to_business_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BusinessBusinessOwnerRelationship BusinessBusinessOwnerRelationship
@@ -348,6 +348,11 @@ func (o BusinessBusinessOwnerRelationship) ToMap() (map[string]interface{}, erro
 		toSerialize["tenant"] = o.Tenant
 	}
 	toSerialize["to_business_id"] = o.ToBusinessId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -378,15 +383,28 @@ func (o *BusinessBusinessOwnerRelationship) UnmarshalJSON(data []byte) (err erro
 
 	varBusinessBusinessOwnerRelationship := _BusinessBusinessOwnerRelationship{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBusinessBusinessOwnerRelationship)
+	err = json.Unmarshal(data, &varBusinessBusinessOwnerRelationship)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BusinessBusinessOwnerRelationship(varBusinessBusinessOwnerRelationship)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "additional_data")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "from_business_id")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "relationship_type")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "to_business_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

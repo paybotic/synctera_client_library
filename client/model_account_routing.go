@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -38,7 +37,8 @@ type AccountRouting struct {
 	// The SWIFT code for the bank. Value may be masked, in which case only the last four characters are returned.
 	SwiftCode *string `json:"swift_code,omitempty"`
 	// The routing number used for domestic wire payments. Only appears if `bank_countries` contains `US`. Value may be masked, in which case only the last four digits are returned.
-	WireRoutingNumber *string `json:"wire_routing_number,omitempty"`
+	WireRoutingNumber    *string `json:"wire_routing_number,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AccountRouting AccountRouting
@@ -371,6 +371,11 @@ func (o AccountRouting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WireRoutingNumber) {
 		toSerialize["wire_routing_number"] = o.WireRoutingNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -399,15 +404,28 @@ func (o *AccountRouting) UnmarshalJSON(data []byte) (err error) {
 
 	varAccountRouting := _AccountRouting{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAccountRouting)
+	err = json.Unmarshal(data, &varAccountRouting)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AccountRouting(varAccountRouting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ach_routing_number")
+		delete(additionalProperties, "bank_address")
+		delete(additionalProperties, "bank_countries")
+		delete(additionalProperties, "bank_name")
+		delete(additionalProperties, "correspondent_bank_details")
+		delete(additionalProperties, "eft_ca_routing_number")
+		delete(additionalProperties, "eft_routing_number")
+		delete(additionalProperties, "swift_code")
+		delete(additionalProperties, "wire_routing_number")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

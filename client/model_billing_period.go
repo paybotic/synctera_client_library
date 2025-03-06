@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -24,7 +23,8 @@ var _ MappedNullable = &BillingPeriod{}
 type BillingPeriod struct {
 	Frequency BillingFrequency `json:"frequency"`
 	// The first day of the first billing cycle for this account. For a monthly billing cycle, this would determine the day of the month each billing cycle will start on. Note that, although this is returned as a UTC timestamp, the date always corresponds to the bank's calendar, and therefore the time and timezone should be ignored.
-	StartDate time.Time `json:"start_date"`
+	StartDate            time.Time `json:"start_date"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BillingPeriod BillingPeriod
@@ -108,6 +108,11 @@ func (o BillingPeriod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["frequency"] = o.Frequency
 	toSerialize["start_date"] = o.StartDate
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *BillingPeriod) UnmarshalJSON(data []byte) (err error) {
 
 	varBillingPeriod := _BillingPeriod{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBillingPeriod)
+	err = json.Unmarshal(data, &varBillingPeriod)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BillingPeriod(varBillingPeriod)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "frequency")
+		delete(additionalProperties, "start_date")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -54,7 +53,8 @@ type PostedTransaction struct {
 	// The date the transaction was last updated
 	Updated time.Time `json:"updated"`
 	// The unique identifier of the transaction.
-	Uuid string `json:"uuid"`
+	Uuid                 string `json:"uuid"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PostedTransaction PostedTransaction
@@ -574,6 +574,11 @@ func (o PostedTransaction) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	toSerialize["updated"] = o.Updated
 	toSerialize["uuid"] = o.Uuid
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -616,15 +621,37 @@ func (o *PostedTransaction) UnmarshalJSON(data []byte) (err error) {
 
 	varPostedTransaction := _PostedTransaction{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPostedTransaction)
+	err = json.Unmarshal(data, &varPostedTransaction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PostedTransaction(varPostedTransaction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "created")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "disputes")
+		delete(additionalProperties, "effective_date")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "idemkey")
+		delete(additionalProperties, "info_only")
+		delete(additionalProperties, "lead_mode")
+		delete(additionalProperties, "posted_date")
+		delete(additionalProperties, "reference_id")
+		delete(additionalProperties, "settlement_date")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "subtype")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "transaction_time")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updated")
+		delete(additionalProperties, "uuid")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -37,7 +36,8 @@ type Webhook struct {
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
 	Tenant *string `json:"tenant,omitempty"`
 	// URL that the webhook will send request to
-	Url string `json:"url"`
+	Url                  string `json:"url"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Webhook Webhook
@@ -322,6 +322,11 @@ func (o Webhook) ToMap() (map[string]interface{}, error) {
 		toSerialize["tenant"] = o.Tenant
 	}
 	toSerialize["url"] = o.Url
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -351,15 +356,27 @@ func (o *Webhook) UnmarshalJSON(data []byte) (err error) {
 
 	varWebhook := _Webhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWebhook)
+	err = json.Unmarshal(data, &varWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Webhook(varWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled_events")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_enabled")
+		delete(additionalProperties, "last_updated")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

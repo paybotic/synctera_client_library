@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -49,7 +48,8 @@ type IatData struct {
 	// The accounting number by which the Originator is known to the Receiver for descriptive purposes.
 	ReceiverIdNumber string `json:"receiver_id_number"`
 	// Transaction Type Code Describes the type of payment ANN = Annuity, BUS = Business/Commercial, DEP = Deposit, LOA = Loan, MIS = Miscellaneous, MOR = Mortgage PEN = Pension, RLS = Rent/Lease, REM = Remittance2, SAL = Salary/Payroll, TAX = Tax, TEL = Telephone-Initiated Transaction WEB = Internet-Initiated Transaction, ARC = Accounts Receivable Entry, BOC = Back Office Conversion Entry, POP = Point of Purchase Entry, RCK = Re-presented Check Entry
-	TransactionTypeCode string `json:"transaction_type_code"`
+	TransactionTypeCode  string `json:"transaction_type_code"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IatData IatData
@@ -497,6 +497,11 @@ func (o IatData) ToMap() (map[string]interface{}, error) {
 	toSerialize["receiver_address"] = o.ReceiverAddress
 	toSerialize["receiver_id_number"] = o.ReceiverIdNumber
 	toSerialize["transaction_type_code"] = o.TransactionTypeCode
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -539,15 +544,35 @@ func (o *IatData) UnmarshalJSON(data []byte) (err error) {
 
 	varIatData := _IatData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIatData)
+	err = json.Unmarshal(data, &varIatData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = IatData(varIatData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "foreign_payment_amount")
+		delete(additionalProperties, "foreign_trace_number")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "odfi_branch_country_code")
+		delete(additionalProperties, "odfi_id_number_qualifier")
+		delete(additionalProperties, "odfi_identification")
+		delete(additionalProperties, "odfi_name")
+		delete(additionalProperties, "originator_address")
+		delete(additionalProperties, "originator_name")
+		delete(additionalProperties, "rdfi_branch_country_code")
+		delete(additionalProperties, "rdfi_id_number_qualifier")
+		delete(additionalProperties, "rdfi_identification")
+		delete(additionalProperties, "rdfi_name")
+		delete(additionalProperties, "receiver_address")
+		delete(additionalProperties, "receiver_id_number")
+		delete(additionalProperties, "transaction_type_code")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

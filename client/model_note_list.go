@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,7 +23,8 @@ type NoteList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of notes
-	Notes []NoteResponse `json:"notes"`
+	Notes                []NoteResponse `json:"notes"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _NoteList NoteList
@@ -117,6 +117,11 @@ func (o NoteList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["notes"] = o.Notes
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *NoteList) UnmarshalJSON(data []byte) (err error) {
 
 	varNoteList := _NoteList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varNoteList)
+	err = json.Unmarshal(data, &varNoteList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = NoteList(varNoteList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "notes")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

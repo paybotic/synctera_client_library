@@ -20,8 +20,11 @@ var _ MappedNullable = &GetCardBarcode200Response{}
 // GetCardBarcode200Response struct for GetCardBarcode200Response
 type GetCardBarcode200Response struct {
 	// Barcode of the card
-	Barcode *string `json:"barcode,omitempty"`
+	Barcode              *string `json:"barcode,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCardBarcode200Response GetCardBarcode200Response
 
 // NewGetCardBarcode200Response instantiates a new GetCardBarcode200Response object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCardBarcode200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Barcode) {
 		toSerialize["barcode"] = o.Barcode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCardBarcode200Response) UnmarshalJSON(data []byte) (err error) {
+	varGetCardBarcode200Response := _GetCardBarcode200Response{}
+
+	err = json.Unmarshal(data, &varGetCardBarcode200Response)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCardBarcode200Response(varGetCardBarcode200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "barcode")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCardBarcode200Response struct {

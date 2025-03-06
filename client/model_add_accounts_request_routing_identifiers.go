@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -31,7 +30,8 @@ type AddAccountsRequestRoutingIdentifiers struct {
 	EftCaRoutingNumber       *string                   `json:"eft_ca_routing_number,omitempty"`
 	InternationalWireDetails *InternationalWireDetails `json:"international_wire_details,omitempty"`
 	// The routing number used for US domestic wire payments.
-	WireRoutingNumber *string `json:"wire_routing_number,omitempty"`
+	WireRoutingNumber    *string `json:"wire_routing_number,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AddAccountsRequestRoutingIdentifiers AddAccountsRequestRoutingIdentifiers
@@ -255,6 +255,11 @@ func (o AddAccountsRequestRoutingIdentifiers) ToMap() (map[string]interface{}, e
 	if !IsNil(o.WireRoutingNumber) {
 		toSerialize["wire_routing_number"] = o.WireRoutingNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -283,15 +288,25 @@ func (o *AddAccountsRequestRoutingIdentifiers) UnmarshalJSON(data []byte) (err e
 
 	varAddAccountsRequestRoutingIdentifiers := _AddAccountsRequestRoutingIdentifiers{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddAccountsRequestRoutingIdentifiers)
+	err = json.Unmarshal(data, &varAddAccountsRequestRoutingIdentifiers)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddAccountsRequestRoutingIdentifiers(varAddAccountsRequestRoutingIdentifiers)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ach_routing_number")
+		delete(additionalProperties, "bank_countries")
+		delete(additionalProperties, "bank_name")
+		delete(additionalProperties, "eft_ca_routing_number")
+		delete(additionalProperties, "international_wire_details")
+		delete(additionalProperties, "wire_routing_number")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

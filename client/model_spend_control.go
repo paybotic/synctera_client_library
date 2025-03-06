@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -44,8 +43,9 @@ type SpendControl struct {
 	// A list of payment sub-types to which a spend control will apply, if set. If not set or the array is empty, then the spend control will apply to all sub-types.
 	PaymentSubTypes []PaymentSubType `json:"payment_sub_types,omitempty"`
 	// A list of payment types to which a spend control will apply, if set. If not set or the array is empty, then the spend control will apply to all types of payments.
-	PaymentTypes []PaymentType         `json:"payment_types,omitempty"`
-	TimeRange    SpendControlTimeRange `json:"time_range"`
+	PaymentTypes         []PaymentType         `json:"payment_types,omitempty"`
+	TimeRange            SpendControlTimeRange `json:"time_range"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SpendControl SpendControl
@@ -478,6 +478,11 @@ func (o SpendControl) ToMap() (map[string]interface{}, error) {
 		toSerialize["payment_types"] = o.PaymentTypes
 	}
 	toSerialize["time_range"] = o.TimeRange
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -510,15 +515,32 @@ func (o *SpendControl) UnmarshalJSON(data []byte) (err error) {
 
 	varSpendControl := _SpendControl{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSpendControl)
+	err = json.Unmarshal(data, &varSpendControl)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SpendControl(varSpendControl)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "action_case")
+		delete(additionalProperties, "action_decline")
+		delete(additionalProperties, "amount_limit")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "direction")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_active")
+		delete(additionalProperties, "last_modified_time")
+		delete(additionalProperties, "merchant_category_codes")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "payment_sub_types")
+		delete(additionalProperties, "payment_types")
+		delete(additionalProperties, "time_range")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

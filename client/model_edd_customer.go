@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -48,7 +47,8 @@ type EddCustomer struct {
 	ResidenceType      *string             `json:"residence_type,omitempty"`
 	ResidentialExpense *ResidentialExpense `json:"residential_expense,omitempty"`
 	// The sources of wealth for the customer.
-	SourceOfWealth []SourceOfWealth `json:"source_of_wealth,omitempty"`
+	SourceOfWealth       []SourceOfWealth `json:"source_of_wealth,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EddCustomer EddCustomer
@@ -613,6 +613,11 @@ func (o EddCustomer) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SourceOfWealth) {
 		toSerialize["source_of_wealth"] = o.SourceOfWealth
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -642,15 +647,35 @@ func (o *EddCustomer) UnmarshalJSON(data []byte) (err error) {
 
 	varEddCustomer := _EddCustomer{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEddCustomer)
+	err = json.Unmarshal(data, &varEddCustomer)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EddCustomer(varEddCustomer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "additional_questions")
+		delete(additionalProperties, "case_id")
+		delete(additionalProperties, "reason")
+		delete(additionalProperties, "related_resource_id")
+		delete(additionalProperties, "related_resource_type")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "citizenship_countries")
+		delete(additionalProperties, "employment_type")
+		delete(additionalProperties, "income")
+		delete(additionalProperties, "negative_news_findings")
+		delete(additionalProperties, "occupation")
+		delete(additionalProperties, "occupation_industry")
+		delete(additionalProperties, "recurring_direct_deposit")
+		delete(additionalProperties, "residence_type")
+		delete(additionalProperties, "residential_expense")
+		delete(additionalProperties, "source_of_wealth")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

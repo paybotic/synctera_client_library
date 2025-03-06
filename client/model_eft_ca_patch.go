@@ -20,9 +20,12 @@ var _ MappedNullable = &EftCaPatch{}
 // EftCaPatch Properties for updating a transfer
 type EftCaPatch struct {
 	// Additional information to be added to the transfer
-	SourceData map[string]interface{} `json:"source_data,omitempty"`
-	Status     *string                `json:"status,omitempty"`
+	SourceData           map[string]interface{} `json:"source_data,omitempty"`
+	Status               *string                `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EftCaPatch EftCaPatch
 
 // NewEftCaPatch instantiates a new EftCaPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o EftCaPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EftCaPatch) UnmarshalJSON(data []byte) (err error) {
+	varEftCaPatch := _EftCaPatch{}
+
+	err = json.Unmarshal(data, &varEftCaPatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EftCaPatch(varEftCaPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "source_data")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEftCaPatch struct {

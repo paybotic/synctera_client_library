@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -26,7 +25,8 @@ type Question struct {
 	// The question
 	Question string `json:"question"`
 	// The section of the question
-	Section *string `json:"section,omitempty"`
+	Section              *string `json:"section,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Question Question
@@ -145,6 +145,11 @@ func (o Question) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Section) {
 		toSerialize["section"] = o.Section
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -173,15 +178,22 @@ func (o *Question) UnmarshalJSON(data []byte) (err error) {
 
 	varQuestion := _Question{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varQuestion)
+	err = json.Unmarshal(data, &varQuestion)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Question(varQuestion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "answer")
+		delete(additionalProperties, "question")
+		delete(additionalProperties, "section")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
