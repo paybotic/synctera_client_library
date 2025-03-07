@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -29,8 +30,7 @@ type Lookup3dsResponse struct {
 	// Processor Transaction ID, returned if challenge is required
 	ProcessorTransactionId *string `json:"processor_transaction_id,omitempty"`
 	// Status of the 3DS authentication
-	Status               string `json:"status"`
-	AdditionalProperties map[string]interface{}
+	Status string `json:"status"`
 }
 
 type _Lookup3dsResponse Lookup3dsResponse
@@ -219,11 +219,6 @@ func (o Lookup3dsResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["processor_transaction_id"] = o.ProcessorTransactionId
 	}
 	toSerialize["status"] = o.Status
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -252,24 +247,15 @@ func (o *Lookup3dsResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varLookup3dsResponse := _Lookup3dsResponse{}
 
-	err = json.Unmarshal(data, &varLookup3dsResponse)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varLookup3dsResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Lookup3dsResponse(varLookup3dsResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "challenge_payload")
-		delete(additionalProperties, "challenge_url")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "processor_transaction_id")
-		delete(additionalProperties, "status")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

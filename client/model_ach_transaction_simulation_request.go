@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -27,8 +28,7 @@ type AchTransactionSimulationRequest struct {
 	// The type of transaction (debit or credit) in relation to the receiving account. A credit is a transfer in and a debit is a transfer pulling money out of the receiving account.
 	DcSign string `json:"dc_sign"`
 	// Effective date of the transaction. Transactions with the current date or date in the past are posted immediately. Future-dated transactions are scheduled to be posted on the chosen date.
-	EffectiveDate        string `json:"effective_date"`
-	AdditionalProperties map[string]interface{}
+	EffectiveDate string `json:"effective_date"`
 }
 
 type _AchTransactionSimulationRequest AchTransactionSimulationRequest
@@ -164,11 +164,6 @@ func (o AchTransactionSimulationRequest) ToMap() (map[string]interface{}, error)
 	toSerialize["amount"] = o.Amount
 	toSerialize["dc_sign"] = o.DcSign
 	toSerialize["effective_date"] = o.EffectiveDate
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -199,23 +194,15 @@ func (o *AchTransactionSimulationRequest) UnmarshalJSON(data []byte) (err error)
 
 	varAchTransactionSimulationRequest := _AchTransactionSimulationRequest{}
 
-	err = json.Unmarshal(data, &varAchTransactionSimulationRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAchTransactionSimulationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AchTransactionSimulationRequest(varAchTransactionSimulationRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_number")
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "dc_sign")
-		delete(additionalProperties, "effective_date")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

@@ -22,15 +22,12 @@ var _ MappedNullable = &AppleDigitalWalletProvisionResponse{}
 type AppleDigitalWalletProvisionResponse struct {
 	ActivationData *string `json:"activation_data,omitempty"`
 	// The unique identifier of a card
-	CardId               *string    `json:"card_id,omitempty"`
-	CreatedTime          *time.Time `json:"created_time,omitempty"`
-	EncryptedPassData    *string    `json:"encrypted_pass_data,omitempty"`
-	EphemeralPublicKey   *string    `json:"ephemeral_public_key,omitempty"`
-	LastModifiedTime     *time.Time `json:"last_modified_time,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CardId             *string    `json:"card_id,omitempty"`
+	CreatedTime        *time.Time `json:"created_time,omitempty"`
+	EncryptedPassData  *string    `json:"encrypted_pass_data,omitempty"`
+	EphemeralPublicKey *string    `json:"ephemeral_public_key,omitempty"`
+	LastModifiedTime   *time.Time `json:"last_modified_time,omitempty"`
 }
-
-type _AppleDigitalWalletProvisionResponse AppleDigitalWalletProvisionResponse
 
 // NewAppleDigitalWalletProvisionResponse instantiates a new AppleDigitalWalletProvisionResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -269,38 +266,7 @@ func (o AppleDigitalWalletProvisionResponse) ToMap() (map[string]interface{}, er
 	if !IsNil(o.LastModifiedTime) {
 		toSerialize["last_modified_time"] = o.LastModifiedTime
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *AppleDigitalWalletProvisionResponse) UnmarshalJSON(data []byte) (err error) {
-	varAppleDigitalWalletProvisionResponse := _AppleDigitalWalletProvisionResponse{}
-
-	err = json.Unmarshal(data, &varAppleDigitalWalletProvisionResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AppleDigitalWalletProvisionResponse(varAppleDigitalWalletProvisionResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "activation_data")
-		delete(additionalProperties, "card_id")
-		delete(additionalProperties, "created_time")
-		delete(additionalProperties, "encrypted_pass_data")
-		delete(additionalProperties, "ephemeral_public_key")
-		delete(additionalProperties, "last_modified_time")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableAppleDigitalWalletProvisionResponse struct {

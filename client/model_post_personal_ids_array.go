@@ -20,11 +20,8 @@ var _ MappedNullable = &PostPersonalIdsArray{}
 // PostPersonalIdsArray struct for PostPersonalIdsArray
 type PostPersonalIdsArray struct {
 	// Array of personal identifiers
-	PersonalIds          []PostPersonalId `json:"personal_ids,omitempty"`
-	AdditionalProperties map[string]interface{}
+	PersonalIds []PostPersonalId `json:"personal_ids,omitempty"`
 }
-
-type _PostPersonalIdsArray PostPersonalIdsArray
 
 // NewPostPersonalIdsArray instantiates a new PostPersonalIdsArray object
 // This constructor will assign default values to properties that have it defined,
@@ -88,33 +85,7 @@ func (o PostPersonalIdsArray) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PersonalIds) {
 		toSerialize["personal_ids"] = o.PersonalIds
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *PostPersonalIdsArray) UnmarshalJSON(data []byte) (err error) {
-	varPostPersonalIdsArray := _PostPersonalIdsArray{}
-
-	err = json.Unmarshal(data, &varPostPersonalIdsArray)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PostPersonalIdsArray(varPostPersonalIdsArray)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "personal_ids")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullablePostPersonalIdsArray struct {

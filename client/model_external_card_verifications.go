@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -31,9 +32,8 @@ type ExternalCardVerifications struct {
 	PullEnabled bool         `json:"pull_enabled"`
 	PushDetails *PushDetails `json:"push_details,omitempty"`
 	// Indicates if the card is able to perform PUSH transfers.
-	PushEnabled          bool   `json:"push_enabled"`
-	State                string `json:"state"`
-	AdditionalProperties map[string]interface{}
+	PushEnabled bool   `json:"push_enabled"`
+	State       string `json:"state"`
 }
 
 type _ExternalCardVerifications ExternalCardVerifications
@@ -291,11 +291,6 @@ func (o ExternalCardVerifications) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["push_enabled"] = o.PushEnabled
 	toSerialize["state"] = o.State
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -328,27 +323,15 @@ func (o *ExternalCardVerifications) UnmarshalJSON(data []byte) (err error) {
 
 	varExternalCardVerifications := _ExternalCardVerifications{}
 
-	err = json.Unmarshal(data, &varExternalCardVerifications)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varExternalCardVerifications)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExternalCardVerifications(varExternalCardVerifications)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "address_verification_result")
-		delete(additionalProperties, "cvv2_result")
-		delete(additionalProperties, "name_verification_result")
-		delete(additionalProperties, "pull_details")
-		delete(additionalProperties, "pull_enabled")
-		delete(additionalProperties, "push_details")
-		delete(additionalProperties, "push_enabled")
-		delete(additionalProperties, "state")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

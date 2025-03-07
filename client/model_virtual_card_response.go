@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -66,8 +67,7 @@ type VirtualCardResponse struct {
 	Bin       *string   `json:"bin,omitempty"`
 	CardBrand CardBrand `json:"card_brand"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant               string `json:"tenant"`
-	AdditionalProperties map[string]interface{}
+	Tenant string `json:"tenant"`
 }
 
 type _VirtualCardResponse VirtualCardResponse
@@ -918,11 +918,6 @@ func (o VirtualCardResponse) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["card_brand"] = o.CardBrand
 	toSerialize["tenant"] = o.Tenant
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -963,46 +958,15 @@ func (o *VirtualCardResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varVirtualCardResponse := _VirtualCardResponse{}
 
-	err = json.Unmarshal(data, &varVirtualCardResponse)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varVirtualCardResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = VirtualCardResponse(varVirtualCardResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "card_status")
-		delete(additionalProperties, "memo")
-		delete(additionalProperties, "pending_reasons")
-		delete(additionalProperties, "status_reason")
-		delete(additionalProperties, "account_id")
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "card_product_id")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "emboss_name")
-		delete(additionalProperties, "expiration_month")
-		delete(additionalProperties, "expiration_time")
-		delete(additionalProperties, "expiration_year")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "is_pin_set")
-		delete(additionalProperties, "last_four")
-		delete(additionalProperties, "last_modified_time")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "reissue_reason")
-		delete(additionalProperties, "reissued_from_id")
-		delete(additionalProperties, "reissued_to_id")
-		delete(additionalProperties, "timestamp_pin_set")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "form")
-		delete(additionalProperties, "bin")
-		delete(additionalProperties, "card_brand")
-		delete(additionalProperties, "tenant")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

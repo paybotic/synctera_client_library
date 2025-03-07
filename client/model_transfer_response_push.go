@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -49,7 +50,6 @@ type TransferResponsePush struct {
 	Type          TransferType `json:"type"`
 	// For person-to-person PUSH transactions, this is the `customer_id` of the sender who must have privileges to access funds in the originating account in order to send funds to the recipient cardholder
 	OriginatingCustomerId *string `json:"originating_customer_id,omitempty"`
-	AdditionalProperties  map[string]interface{}
 }
 
 type _TransferResponsePush TransferResponsePush
@@ -533,11 +533,6 @@ func (o TransferResponsePush) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OriginatingCustomerId) {
 		toSerialize["originating_customer_id"] = o.OriginatingCustomerId
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -576,35 +571,15 @@ func (o *TransferResponsePush) UnmarshalJSON(data []byte) (err error) {
 
 	varTransferResponsePush := _TransferResponsePush{}
 
-	err = json.Unmarshal(data, &varTransferResponsePush)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varTransferResponsePush)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TransferResponsePush(varTransferResponsePush)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_id")
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "country_code")
-		delete(additionalProperties, "created_time")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "external_card_id")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "last_modified_time")
-		delete(additionalProperties, "merchant")
-		delete(additionalProperties, "network_decline_details")
-		delete(additionalProperties, "reason")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "transaction_id")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "originating_customer_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

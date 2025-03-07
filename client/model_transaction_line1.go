@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -54,9 +55,8 @@ type TransactionLine1 struct {
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
 	Tenant string `json:"tenant"`
 	// The date the transaction was last updated
-	Updated              time.Time `json:"updated"`
-	Uuid                 string    `json:"uuid"`
-	AdditionalProperties map[string]interface{}
+	Updated time.Time `json:"updated"`
+	Uuid    string    `json:"uuid"`
 }
 
 type _TransactionLine1 TransactionLine1
@@ -612,11 +612,6 @@ func (o TransactionLine1) ToMap() (map[string]interface{}, error) {
 	toSerialize["tenant"] = o.Tenant
 	toSerialize["updated"] = o.Updated
 	toSerialize["uuid"] = o.Uuid
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -663,39 +658,15 @@ func (o *TransactionLine1) UnmarshalJSON(data []byte) (err error) {
 
 	varTransactionLine1 := _TransactionLine1{}
 
-	err = json.Unmarshal(data, &varTransactionLine1)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varTransactionLine1)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TransactionLine1(varTransactionLine1)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_id")
-		delete(additionalProperties, "account_no")
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "avail_balance")
-		delete(additionalProperties, "available_balance")
-		delete(additionalProperties, "balance")
-		delete(additionalProperties, "created")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "dc_sign")
-		delete(additionalProperties, "is_fee")
-		delete(additionalProperties, "is_gl_acc")
-		delete(additionalProperties, "is_offset")
-		delete(additionalProperties, "is_primary")
-		delete(additionalProperties, "meta")
-		delete(additionalProperties, "network")
-		delete(additionalProperties, "related_line")
-		delete(additionalProperties, "seq")
-		delete(additionalProperties, "tenant")
-		delete(additionalProperties, "updated")
-		delete(additionalProperties, "uuid")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

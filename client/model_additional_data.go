@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,8 +22,7 @@ var _ MappedNullable = &AdditionalData{}
 // AdditionalData Contains additional information about the relationship.
 type AdditionalData struct {
 	// The professional role or position the person holds at the related organization.
-	Title                string `json:"title"`
-	AdditionalProperties map[string]interface{}
+	Title string `json:"title"`
 }
 
 type _AdditionalData AdditionalData
@@ -80,11 +80,6 @@ func (o AdditionalData) MarshalJSON() ([]byte, error) {
 func (o AdditionalData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["title"] = o.Title
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -112,20 +107,15 @@ func (o *AdditionalData) UnmarshalJSON(data []byte) (err error) {
 
 	varAdditionalData := _AdditionalData{}
 
-	err = json.Unmarshal(data, &varAdditionalData)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAdditionalData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AdditionalData(varAdditionalData)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "title")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

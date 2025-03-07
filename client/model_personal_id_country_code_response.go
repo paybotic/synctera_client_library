@@ -20,11 +20,8 @@ var _ MappedNullable = &PersonalIdCountryCodeResponse{}
 // PersonalIdCountryCodeResponse struct for PersonalIdCountryCodeResponse
 type PersonalIdCountryCodeResponse struct {
 	// The ISO 3166 Alpha-2 country code for the country that issued the personal identifier.
-	CountryCode          *string `json:"country_code,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CountryCode *string `json:"country_code,omitempty"`
 }
-
-type _PersonalIdCountryCodeResponse PersonalIdCountryCodeResponse
 
 // NewPersonalIdCountryCodeResponse instantiates a new PersonalIdCountryCodeResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -88,33 +85,7 @@ func (o PersonalIdCountryCodeResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CountryCode) {
 		toSerialize["country_code"] = o.CountryCode
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *PersonalIdCountryCodeResponse) UnmarshalJSON(data []byte) (err error) {
-	varPersonalIdCountryCodeResponse := _PersonalIdCountryCodeResponse{}
-
-	err = json.Unmarshal(data, &varPersonalIdCountryCodeResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PersonalIdCountryCodeResponse(varPersonalIdCountryCodeResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "country_code")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullablePersonalIdCountryCodeResponse struct {

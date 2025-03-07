@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,9 +29,8 @@ type AccountClosure struct {
 	PaymentMethod NullableString       `json:"payment_method"`
 	Reason        AccountClosureReason `json:"reason"`
 	// Additional details about the reason for closing the account
-	ReasonDetails        string                             `json:"reason_details"`
-	ValidationResponses  []AccountClosureValidationResponse `json:"validation_responses,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ReasonDetails       string                             `json:"reason_details"`
+	ValidationResponses []AccountClosureValidationResponse `json:"validation_responses,omitempty"`
 }
 
 type _AccountClosure AccountClosure
@@ -240,11 +240,6 @@ func (o AccountClosure) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ValidationResponses) {
 		toSerialize["validation_responses"] = o.ValidationResponses
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -275,25 +270,15 @@ func (o *AccountClosure) UnmarshalJSON(data []byte) (err error) {
 
 	varAccountClosure := _AccountClosure{}
 
-	err = json.Unmarshal(data, &varAccountClosure)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAccountClosure)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AccountClosure(varAccountClosure)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "cases")
-		delete(additionalProperties, "destination_id")
-		delete(additionalProperties, "payment_method")
-		delete(additionalProperties, "reason")
-		delete(additionalProperties, "reason_details")
-		delete(additionalProperties, "validation_responses")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

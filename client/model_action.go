@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -20,10 +21,9 @@ var _ MappedNullable = &Action{}
 
 // Action struct for Action
 type Action struct {
-	Data                 map[string]interface{} `json:"data"`
-	Message              string                 `json:"message"`
-	Timestamp            interface{}            `json:"timestamp"`
-	AdditionalProperties map[string]interface{}
+	Data      map[string]interface{} `json:"data"`
+	Message   string                 `json:"message"`
+	Timestamp interface{}            `json:"timestamp"`
 }
 
 type _Action Action
@@ -137,11 +137,6 @@ func (o Action) ToMap() (map[string]interface{}, error) {
 	if o.Timestamp != nil {
 		toSerialize["timestamp"] = o.Timestamp
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -171,22 +166,15 @@ func (o *Action) UnmarshalJSON(data []byte) (err error) {
 
 	varAction := _Action{}
 
-	err = json.Unmarshal(data, &varAction)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Action(varAction)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "data")
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "timestamp")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

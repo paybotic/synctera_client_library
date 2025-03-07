@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type InternalAccountsList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of internal accounts
-	InternalAccounts     []InternalAccountResponse `json:"internal_accounts"`
-	AdditionalProperties map[string]interface{}
+	InternalAccounts []InternalAccountResponse `json:"internal_accounts"`
 }
 
 type _InternalAccountsList InternalAccountsList
@@ -117,11 +117,6 @@ func (o InternalAccountsList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["internal_accounts"] = o.InternalAccounts
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -149,21 +144,15 @@ func (o *InternalAccountsList) UnmarshalJSON(data []byte) (err error) {
 
 	varInternalAccountsList := _InternalAccountsList{}
 
-	err = json.Unmarshal(data, &varInternalAccountsList)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varInternalAccountsList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InternalAccountsList(varInternalAccountsList)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "next_page_token")
-		delete(additionalProperties, "internal_accounts")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

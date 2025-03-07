@@ -45,10 +45,7 @@ type Fleets struct {
 	TypeOfPurchase            *string              `json:"type_of_purchase,omitempty"`
 	VatTaxRate                *float32             `json:"vat_tax_rate,omitempty"`
 	VehicleId                 *string              `json:"vehicle_id,omitempty"`
-	AdditionalProperties      map[string]interface{}
 }
-
-type _Fleets Fleets
 
 // NewFleets instantiates a new Fleets object
 // This constructor will assign default values to properties that have it defined,
@@ -987,58 +984,7 @@ func (o Fleets) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VehicleId) {
 		toSerialize["vehicle_id"] = o.VehicleId
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *Fleets) UnmarshalJSON(data []byte) (err error) {
-	varFleets := _Fleets{}
-
-	err = json.Unmarshal(data, &varFleets)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Fleets(varFleets)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "driver_id")
-		delete(additionalProperties, "expanded_fuel_type")
-		delete(additionalProperties, "fleet_number")
-		delete(additionalProperties, "fuel_gross_amount")
-		delete(additionalProperties, "fuel_net_amount")
-		delete(additionalProperties, "fuel_product_qualifier")
-		delete(additionalProperties, "fuel_purchase_type")
-		delete(additionalProperties, "fuel_quantity")
-		delete(additionalProperties, "fuel_service_type")
-		delete(additionalProperties, "fuel_tax_amount")
-		delete(additionalProperties, "fuel_tax_exemption_status")
-		delete(additionalProperties, "fuel_type")
-		delete(additionalProperties, "fuel_unit_of_measure")
-		delete(additionalProperties, "fuel_unit_price")
-		delete(additionalProperties, "job_number")
-		delete(additionalProperties, "non_fuel_gross_amount")
-		delete(additionalProperties, "non_fuel_item_details")
-		delete(additionalProperties, "non_fuel_net_amount")
-		delete(additionalProperties, "non_fuel_tax_amount")
-		delete(additionalProperties, "non_fuel_tax_exemption_status")
-		delete(additionalProperties, "odometer_reading")
-		delete(additionalProperties, "sales_tax_amount")
-		delete(additionalProperties, "service_type")
-		delete(additionalProperties, "type_of_purchase")
-		delete(additionalProperties, "vat_tax_rate")
-		delete(additionalProperties, "vehicle_id")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableFleets struct {

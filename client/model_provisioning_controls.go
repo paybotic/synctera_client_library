@@ -22,10 +22,7 @@ type ProvisioningControls struct {
 	InAppProvisioning        *InAppProvisioning        `json:"in_app_provisioning,omitempty"`
 	ManualEntry              *ManualEntry              `json:"manual_entry,omitempty"`
 	WalletProviderCardOnFile *WalletProviderCardOnFile `json:"wallet_provider_card_on_file,omitempty"`
-	AdditionalProperties     map[string]interface{}
 }
-
-type _ProvisioningControls ProvisioningControls
 
 // NewProvisioningControls instantiates a new ProvisioningControls object
 // This constructor will assign default values to properties that have it defined,
@@ -159,35 +156,7 @@ func (o ProvisioningControls) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WalletProviderCardOnFile) {
 		toSerialize["wallet_provider_card_on_file"] = o.WalletProviderCardOnFile
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *ProvisioningControls) UnmarshalJSON(data []byte) (err error) {
-	varProvisioningControls := _ProvisioningControls{}
-
-	err = json.Unmarshal(data, &varProvisioningControls)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ProvisioningControls(varProvisioningControls)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "in_app_provisioning")
-		delete(additionalProperties, "manual_entry")
-		delete(additionalProperties, "wallet_provider_card_on_file")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableProvisioningControls struct {

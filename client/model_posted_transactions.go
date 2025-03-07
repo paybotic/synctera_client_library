@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type PostedTransactions struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken NullableString `json:"next_page_token"`
 	// List of posted transactions
-	Result               []PostedTransaction `json:"result"`
-	AdditionalProperties map[string]interface{}
+	Result []PostedTransaction `json:"result"`
 }
 
 type _PostedTransactions PostedTransactions
@@ -110,11 +110,6 @@ func (o PostedTransactions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["next_page_token"] = o.NextPageToken.Get()
 	toSerialize["result"] = o.Result
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -143,21 +138,15 @@ func (o *PostedTransactions) UnmarshalJSON(data []byte) (err error) {
 
 	varPostedTransactions := _PostedTransactions{}
 
-	err = json.Unmarshal(data, &varPostedTransactions)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPostedTransactions)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PostedTransactions(varPostedTransactions)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "next_page_token")
-		delete(additionalProperties, "result")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

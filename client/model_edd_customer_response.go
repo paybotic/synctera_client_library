@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -52,8 +53,7 @@ type EddCustomerResponse struct {
 	CreationTime time.Time    `json:"creation_time"`
 	DeletionTime NullableTime `json:"deletion_time"`
 	// EDD record unique identifier
-	Id                   string `json:"id"`
-	AdditionalProperties map[string]interface{}
+	Id string `json:"id"`
 }
 
 type _EddCustomerResponse EddCustomerResponse
@@ -698,11 +698,6 @@ func (o EddCustomerResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["creation_time"] = o.CreationTime
 	toSerialize["deletion_time"] = o.DeletionTime.Get()
 	toSerialize["id"] = o.Id
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -735,38 +730,15 @@ func (o *EddCustomerResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varEddCustomerResponse := _EddCustomerResponse{}
 
-	err = json.Unmarshal(data, &varEddCustomerResponse)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varEddCustomerResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EddCustomerResponse(varEddCustomerResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "citizenship_countries")
-		delete(additionalProperties, "employment_type")
-		delete(additionalProperties, "income")
-		delete(additionalProperties, "negative_news_findings")
-		delete(additionalProperties, "occupation")
-		delete(additionalProperties, "occupation_industry")
-		delete(additionalProperties, "recurring_direct_deposit")
-		delete(additionalProperties, "residence_type")
-		delete(additionalProperties, "residential_expense")
-		delete(additionalProperties, "source_of_wealth")
-		delete(additionalProperties, "additional_questions")
-		delete(additionalProperties, "case_id")
-		delete(additionalProperties, "reason")
-		delete(additionalProperties, "related_resource_id")
-		delete(additionalProperties, "related_resource_type")
-		delete(additionalProperties, "tenant")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "deletion_time")
-		delete(additionalProperties, "id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type AdhocVerificationRequest struct {
 	// Synctera party (non-customer) who is receiving money from a customer (the payer)
 	PayeeId string `json:"payee_id"`
 	// Synctera customer who is sending money to a non-customer (the payee)
-	PayerId              string `json:"payer_id"`
-	AdditionalProperties map[string]interface{}
+	PayerId string `json:"payer_id"`
 }
 
 type _AdhocVerificationRequest AdhocVerificationRequest
@@ -108,11 +108,6 @@ func (o AdhocVerificationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["payee_id"] = o.PayeeId
 	toSerialize["payer_id"] = o.PayerId
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -141,21 +136,15 @@ func (o *AdhocVerificationRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varAdhocVerificationRequest := _AdhocVerificationRequest{}
 
-	err = json.Unmarshal(data, &varAdhocVerificationRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAdhocVerificationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AdhocVerificationRequest(varAdhocVerificationRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "payee_id")
-		delete(additionalProperties, "payer_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

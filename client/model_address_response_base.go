@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -28,9 +29,8 @@ type AddressResponseBase struct {
 	// The identifier for the personal customer associated with address.
 	CustomerId *string `json:"customer_id,omitempty"`
 	// Whether the address is active or not
-	IsActive             bool      `json:"is_active"`
-	LastUpdatedTime      time.Time `json:"last_updated_time"`
-	AdditionalProperties map[string]interface{}
+	IsActive        bool      `json:"is_active"`
+	LastUpdatedTime time.Time `json:"last_updated_time"`
 }
 
 type _AddressResponseBase AddressResponseBase
@@ -210,11 +210,6 @@ func (o AddressResponseBase) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["is_active"] = o.IsActive
 	toSerialize["last_updated_time"] = o.LastUpdatedTime
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -244,24 +239,15 @@ func (o *AddressResponseBase) UnmarshalJSON(data []byte) (err error) {
 
 	varAddressResponseBase := _AddressResponseBase{}
 
-	err = json.Unmarshal(data, &varAddressResponseBase)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAddressResponseBase)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddressResponseBase(varAddressResponseBase)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "creation_date")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "is_active")
-		delete(additionalProperties, "last_updated_time")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

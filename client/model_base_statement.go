@@ -46,11 +46,8 @@ type BaseStatement struct {
 	// Deprecated
 	Transactions []Transaction `json:"transactions,omitempty"`
 	// Only appears in `statement.created` webhook payloads. Indicates that the `transactions` attribute was emptied due to webhook size constraints. If this attribute returns `true`, you may use  `GET /v0/statements/{statement_id}/transactions` to retrieve the full list.
-	TransactionsOmitted  *bool `json:"transactions_omitted,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TransactionsOmitted *bool `json:"transactions_omitted,omitempty"`
 }
-
-type _BaseStatement BaseStatement
 
 // NewBaseStatement instantiates a new BaseStatement object
 // This constructor will assign default values to properties that have it defined,
@@ -677,49 +674,7 @@ func (o BaseStatement) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TransactionsOmitted) {
 		toSerialize["transactions_omitted"] = o.TransactionsOmitted
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *BaseStatement) UnmarshalJSON(data []byte) (err error) {
-	varBaseStatement := _BaseStatement{}
-
-	err = json.Unmarshal(data, &varBaseStatement)
-
-	if err != nil {
-		return err
-	}
-
-	*o = BaseStatement(varBaseStatement)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_id")
-		delete(additionalProperties, "due_date")
-		delete(additionalProperties, "end_date")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "issue_date")
-		delete(additionalProperties, "start_date")
-		delete(additionalProperties, "account_summary")
-		delete(additionalProperties, "authorized_signer")
-		delete(additionalProperties, "closing_balance")
-		delete(additionalProperties, "customer_service_details")
-		delete(additionalProperties, "disclosure")
-		delete(additionalProperties, "joint_account_holders")
-		delete(additionalProperties, "opening_balance")
-		delete(additionalProperties, "primary_account_holder_business")
-		delete(additionalProperties, "primary_account_holder_personal")
-		delete(additionalProperties, "transactions")
-		delete(additionalProperties, "transactions_omitted")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableBaseStatement struct {

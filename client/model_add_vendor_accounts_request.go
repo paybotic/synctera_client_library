@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -33,8 +34,7 @@ type AddVendorAccountsRequest struct {
 	// The identifier provided by the vendor for the customer associated with this external account.
 	VendorCustomerId *string `json:"vendor_customer_id,omitempty"`
 	// If true, Synctera will attempt to verify that the external account owner is the same as the customer by comparing external account data to customer data. At least 2 of the following fields must match: name, phone number, email, address. Verification is disabled by default.
-	VerifyOwner          *bool `json:"verify_owner,omitempty"`
-	AdditionalProperties map[string]interface{}
+	VerifyOwner *bool `json:"verify_owner,omitempty"`
 }
 
 type _AddVendorAccountsRequest AddVendorAccountsRequest
@@ -332,11 +332,6 @@ func (o AddVendorAccountsRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VerifyOwner) {
 		toSerialize["verify_owner"] = o.VerifyOwner
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -365,27 +360,15 @@ func (o *AddVendorAccountsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varAddVendorAccountsRequest := _AddVendorAccountsRequest{}
 
-	err = json.Unmarshal(data, &varAddVendorAccountsRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAddVendorAccountsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddVendorAccountsRequest(varAddVendorAccountsRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "customer_type")
-		delete(additionalProperties, "vendor")
-		delete(additionalProperties, "vendor_access_token")
-		delete(additionalProperties, "vendor_account_ids")
-		delete(additionalProperties, "vendor_customer_id")
-		delete(additionalProperties, "verify_owner")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

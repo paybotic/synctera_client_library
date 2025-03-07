@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,8 +22,7 @@ var _ MappedNullable = &AdditionalOwnerData{}
 // AdditionalOwnerData Contains additional information about the relationship.
 type AdditionalOwnerData struct {
 	// Percentage ownership of the related business.
-	PercentOwnership     float64 `json:"percent_ownership"`
-	AdditionalProperties map[string]interface{}
+	PercentOwnership float64 `json:"percent_ownership"`
 }
 
 type _AdditionalOwnerData AdditionalOwnerData
@@ -80,11 +80,6 @@ func (o AdditionalOwnerData) MarshalJSON() ([]byte, error) {
 func (o AdditionalOwnerData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["percent_ownership"] = o.PercentOwnership
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -112,20 +107,15 @@ func (o *AdditionalOwnerData) UnmarshalJSON(data []byte) (err error) {
 
 	varAdditionalOwnerData := _AdditionalOwnerData{}
 
-	err = json.Unmarshal(data, &varAdditionalOwnerData)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAdditionalOwnerData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AdditionalOwnerData(varAdditionalOwnerData)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "percent_ownership")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

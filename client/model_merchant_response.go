@@ -19,16 +19,13 @@ var _ MappedNullable = &MerchantResponse{}
 
 // MerchantResponse struct for MerchantResponse
 type MerchantResponse struct {
-	CreatedAt            NullableString `json:"created_at,omitempty"`
-	Guid                 NullableString `json:"guid,omitempty"`
-	LogoUrl              NullableString `json:"logo_url,omitempty"`
-	Name                 NullableString `json:"name,omitempty"`
-	UpdatedAt            NullableString `json:"updated_at,omitempty"`
-	WebsiteUrl           NullableString `json:"website_url,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CreatedAt  NullableString `json:"created_at,omitempty"`
+	Guid       NullableString `json:"guid,omitempty"`
+	LogoUrl    NullableString `json:"logo_url,omitempty"`
+	Name       NullableString `json:"name,omitempty"`
+	UpdatedAt  NullableString `json:"updated_at,omitempty"`
+	WebsiteUrl NullableString `json:"website_url,omitempty"`
 }
-
-type _MerchantResponse MerchantResponse
 
 // NewMerchantResponse instantiates a new MerchantResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -333,38 +330,7 @@ func (o MerchantResponse) ToMap() (map[string]interface{}, error) {
 	if o.WebsiteUrl.IsSet() {
 		toSerialize["website_url"] = o.WebsiteUrl.Get()
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *MerchantResponse) UnmarshalJSON(data []byte) (err error) {
-	varMerchantResponse := _MerchantResponse{}
-
-	err = json.Unmarshal(data, &varMerchantResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = MerchantResponse(varMerchantResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "created_at")
-		delete(additionalProperties, "guid")
-		delete(additionalProperties, "logo_url")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "updated_at")
-		delete(additionalProperties, "website_url")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableMerchantResponse struct {

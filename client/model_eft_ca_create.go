@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -42,7 +43,6 @@ type EftCaCreate struct {
 	OriginatingAccountId string `json:"originating_account_id"`
 	// The official name of the account owner of the originating account. This must exactly match one of the account_owner_names in the destination external account.
 	OriginatingAccountOwnerName string `json:"originating_account_owner_name"`
-	AdditionalProperties        map[string]interface{}
 }
 
 type _EftCaCreate EftCaCreate
@@ -387,11 +387,6 @@ func (o EftCaCreate) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["originating_account_id"] = o.OriginatingAccountId
 	toSerialize["originating_account_owner_name"] = o.OriginatingAccountOwnerName
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -426,30 +421,15 @@ func (o *EftCaCreate) UnmarshalJSON(data []byte) (err error) {
 
 	varEftCaCreate := _EftCaCreate{}
 
-	err = json.Unmarshal(data, &varEftCaCreate)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varEftCaCreate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EftCaCreate(varEftCaCreate)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "dc_sign")
-		delete(additionalProperties, "source_data")
-		delete(additionalProperties, "transaction_code")
-		delete(additionalProperties, "destination_account_id")
-		delete(additionalProperties, "destination_account_owner_name")
-		delete(additionalProperties, "effective_date")
-		delete(additionalProperties, "is_same_day")
-		delete(additionalProperties, "originating_account_id")
-		delete(additionalProperties, "originating_account_owner_name")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

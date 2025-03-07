@@ -32,11 +32,8 @@ type Payment struct {
 	PaymentScheduleId *string        `json:"payment_schedule_id,omitempty"`
 	Status            *PaymentStatus `json:"status,omitempty"`
 	// Transaction ID. It will be included only when status is COMPLETED
-	TransactionId        *string `json:"transaction_id,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TransactionId *string `json:"transaction_id,omitempty"`
 }
-
-type _Payment Payment
 
 // NewPayment instantiates a new Payment object
 // This constructor will assign default values to properties that have it defined,
@@ -380,41 +377,7 @@ func (o Payment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TransactionId) {
 		toSerialize["transaction_id"] = o.TransactionId
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *Payment) UnmarshalJSON(data []byte) (err error) {
-	varPayment := _Payment{}
-
-	err = json.Unmarshal(data, &varPayment)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Payment(varPayment)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "error_details")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "payment_date")
-		delete(additionalProperties, "payment_instruction")
-		delete(additionalProperties, "payment_schedule_id")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "transaction_id")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullablePayment struct {

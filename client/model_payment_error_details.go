@@ -19,12 +19,9 @@ var _ MappedNullable = &PaymentErrorDetails{}
 
 // PaymentErrorDetails Payment error details. It will be included only when status is ERROR
 type PaymentErrorDetails struct {
-	Code                 *string `json:"code,omitempty"`
-	Details              *string `json:"details,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Code    *string `json:"code,omitempty"`
+	Details *string `json:"details,omitempty"`
 }
-
-type _PaymentErrorDetails PaymentErrorDetails
 
 // NewPaymentErrorDetails instantiates a new PaymentErrorDetails object
 // This constructor will assign default values to properties that have it defined,
@@ -123,34 +120,7 @@ func (o PaymentErrorDetails) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Details) {
 		toSerialize["details"] = o.Details
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *PaymentErrorDetails) UnmarshalJSON(data []byte) (err error) {
-	varPaymentErrorDetails := _PaymentErrorDetails{}
-
-	err = json.Unmarshal(data, &varPaymentErrorDetails)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PaymentErrorDetails(varPaymentErrorDetails)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "code")
-		delete(additionalProperties, "details")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullablePaymentErrorDetails struct {

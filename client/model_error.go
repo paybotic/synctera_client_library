@@ -28,11 +28,8 @@ type ModelError struct {
 	// A human-readable string for this general category of error, which corresponds 1-to-1 with error types (`title` is the human-readable version of `type`). There can be multiple distinct titles for the same HTTP status code, and the same `title` can result in many different `detail` strings. This field will be removed in API v1.
 	Title *string `json:"title,omitempty"`
 	// A machine-readable string that identifies the error for programmatic use. This is a URI, i.e. a globally unique identifier. It is _not_ necessarily a URL, so do not expect it to resolve to a web page. You can use this whole string as an error code, or just everything after the last slash. This field will be removed in API v1.
-	Type                 *string `json:"type,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Type *string `json:"type,omitempty"`
 }
-
-type _ModelError ModelError
 
 // NewModelError instantiates a new ModelError object
 // This constructor will assign default values to properties that have it defined,
@@ -236,37 +233,7 @@ func (o ModelError) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *ModelError) UnmarshalJSON(data []byte) (err error) {
-	varModelError := _ModelError{}
-
-	err = json.Unmarshal(data, &varModelError)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ModelError(varModelError)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "code")
-		delete(additionalProperties, "detail")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "title")
-		delete(additionalProperties, "type")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableModelError struct {

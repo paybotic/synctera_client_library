@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -47,8 +48,7 @@ type InternalAccountResponse struct {
 	Purpose         *InternalAccountPurpose `json:"purpose,omitempty"`
 	Status          string                  `json:"status"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant               *string `json:"tenant,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Tenant *string `json:"tenant,omitempty"`
 }
 
 type _InternalAccountResponse InternalAccountResponse
@@ -591,11 +591,6 @@ func (o InternalAccountResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tenant) {
 		toSerialize["tenant"] = o.Tenant
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -624,34 +619,15 @@ func (o *InternalAccountResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varInternalAccountResponse := _InternalAccountResponse{}
 
-	err = json.Unmarshal(data, &varInternalAccountResponse)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varInternalAccountResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InternalAccountResponse(varInternalAccountResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_number")
-		delete(additionalProperties, "account_type")
-		delete(additionalProperties, "balances")
-		delete(additionalProperties, "bank_account_id")
-		delete(additionalProperties, "bank_routing")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "gl_type")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "is_system_acc")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "purpose")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "tenant")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

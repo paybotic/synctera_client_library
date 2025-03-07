@@ -40,11 +40,8 @@ type AccountSummary struct {
 	// Account last modification time
 	LastUpdatedTime *time.Time `json:"last_updated_time,omitempty"`
 	// User provided account nickname
-	Nickname             *string `json:"nickname,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Nickname *string `json:"nickname,omitempty"`
 }
-
-type _AccountSummary AccountSummary
 
 // NewAccountSummary instantiates a new AccountSummary object
 // This constructor will assign default values to properties that have it defined,
@@ -493,44 +490,7 @@ func (o AccountSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Nickname) {
 		toSerialize["nickname"] = o.Nickname
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *AccountSummary) UnmarshalJSON(data []byte) (err error) {
-	varAccountSummary := _AccountSummary{}
-
-	err = json.Unmarshal(data, &varAccountSummary)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AccountSummary(varAccountSummary)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_number")
-		delete(additionalProperties, "account_status")
-		delete(additionalProperties, "account_type")
-		delete(additionalProperties, "balance_ceiling")
-		delete(additionalProperties, "balance_floor")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "customer_type")
-		delete(additionalProperties, "financial_institution")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "nickname")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableAccountSummary struct {

@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type PersonList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of persons.
-	Persons              []ResponsePerson `json:"persons"`
-	AdditionalProperties map[string]interface{}
+	Persons []ResponsePerson `json:"persons"`
 }
 
 type _PersonList PersonList
@@ -117,11 +117,6 @@ func (o PersonList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["persons"] = o.Persons
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -149,21 +144,15 @@ func (o *PersonList) UnmarshalJSON(data []byte) (err error) {
 
 	varPersonList := _PersonList{}
 
-	err = json.Unmarshal(data, &varPersonList)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPersonList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PersonList(varPersonList)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "next_page_token")
-		delete(additionalProperties, "persons")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

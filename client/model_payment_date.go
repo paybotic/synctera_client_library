@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type PaymentDate struct {
 	// Execution date for the next payment
 	ExecutionDate string `json:"execution_date"`
 	// Scheduled date for the next payment
-	ScheduledDate        string `json:"scheduled_date"`
-	AdditionalProperties map[string]interface{}
+	ScheduledDate string `json:"scheduled_date"`
 }
 
 type _PaymentDate PaymentDate
@@ -108,11 +108,6 @@ func (o PaymentDate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["execution_date"] = o.ExecutionDate
 	toSerialize["scheduled_date"] = o.ScheduledDate
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -141,21 +136,15 @@ func (o *PaymentDate) UnmarshalJSON(data []byte) (err error) {
 
 	varPaymentDate := _PaymentDate{}
 
-	err = json.Unmarshal(data, &varPaymentDate)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPaymentDate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PaymentDate(varPaymentDate)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "execution_date")
-		delete(additionalProperties, "scheduled_date")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,8 +26,7 @@ type RoutingIdentifier struct {
 	// The supported payment types by the routing number specified in routing_identifier
 	PaymentRails []string `json:"payment_rails,omitempty"`
 	// A sequence of digits used to identify specific financial institution
-	RoutingNumber        string `json:"routing_number"`
-	AdditionalProperties map[string]interface{}
+	RoutingNumber string `json:"routing_number"`
 }
 
 type _RoutingIdentifier RoutingIdentifier
@@ -154,11 +154,6 @@ func (o RoutingIdentifier) ToMap() (map[string]interface{}, error) {
 		toSerialize["payment_rails"] = o.PaymentRails
 	}
 	toSerialize["routing_number"] = o.RoutingNumber
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -186,22 +181,15 @@ func (o *RoutingIdentifier) UnmarshalJSON(data []byte) (err error) {
 
 	varRoutingIdentifier := _RoutingIdentifier{}
 
-	err = json.Unmarshal(data, &varRoutingIdentifier)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRoutingIdentifier)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RoutingIdentifier(varRoutingIdentifier)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "location")
-		delete(additionalProperties, "payment_rails")
-		delete(additionalProperties, "routing_number")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type AccountIdentifiers struct {
 	// The IBAN of the account. Value may be masked, in which case only the last four digits are returned.
 	Iban *string `json:"iban,omitempty"`
 	// The account number. Value may be masked, in which case only the last four digits are returned.
-	Number               string `json:"number"`
-	AdditionalProperties map[string]interface{}
+	Number string `json:"number"`
 }
 
 type _AccountIdentifiers AccountIdentifiers
@@ -117,11 +117,6 @@ func (o AccountIdentifiers) ToMap() (map[string]interface{}, error) {
 		toSerialize["iban"] = o.Iban
 	}
 	toSerialize["number"] = o.Number
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -149,21 +144,15 @@ func (o *AccountIdentifiers) UnmarshalJSON(data []byte) (err error) {
 
 	varAccountIdentifiers := _AccountIdentifiers{}
 
-	err = json.Unmarshal(data, &varAccountIdentifiers)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAccountIdentifiers)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AccountIdentifiers(varAccountIdentifiers)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "iban")
-		delete(additionalProperties, "number")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

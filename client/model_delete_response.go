@@ -22,11 +22,8 @@ type DeleteResponse struct {
 	// Object ID
 	Id *string `json:"id,omitempty"`
 	// The resource name
-	Resource             *string `json:"resource,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Resource *string `json:"resource,omitempty"`
 }
-
-type _DeleteResponse DeleteResponse
 
 // NewDeleteResponse instantiates a new DeleteResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -125,34 +122,7 @@ func (o DeleteResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Resource) {
 		toSerialize["resource"] = o.Resource
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *DeleteResponse) UnmarshalJSON(data []byte) (err error) {
-	varDeleteResponse := _DeleteResponse{}
-
-	err = json.Unmarshal(data, &varDeleteResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = DeleteResponse(varDeleteResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "resource")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableDeleteResponse struct {

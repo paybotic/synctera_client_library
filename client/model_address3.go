@@ -30,11 +30,8 @@ type Address3 struct {
 	// postal code
 	PostalCode *string `json:"postal_code,omitempty"`
 	// state
-	State                *string `json:"state,omitempty"`
-	AdditionalProperties map[string]interface{}
+	State *string `json:"state,omitempty"`
 }
-
-type _Address3 Address3
 
 // NewAddress3 instantiates a new Address3 object
 // This constructor will assign default values to properties that have it defined,
@@ -273,38 +270,7 @@ func (o Address3) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.State) {
 		toSerialize["state"] = o.State
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *Address3) UnmarshalJSON(data []byte) (err error) {
-	varAddress3 := _Address3{}
-
-	err = json.Unmarshal(data, &varAddress3)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Address3(varAddress3)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "address_line_1")
-		delete(additionalProperties, "address_line_2")
-		delete(additionalProperties, "city")
-		delete(additionalProperties, "country_code")
-		delete(additionalProperties, "postal_code")
-		delete(additionalProperties, "state")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableAddress3 struct {

@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -28,8 +29,7 @@ type PlaidAccountVerification struct {
 	// The status of verification
 	Status string `json:"status"`
 	// The vendor used for verifying the account
-	Vendor               string `json:"vendor"`
-	AdditionalProperties map[string]interface{}
+	Vendor string `json:"vendor"`
 }
 
 type _PlaidAccountVerification PlaidAccountVerification
@@ -183,11 +183,6 @@ func (o PlaidAccountVerification) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["status"] = o.Status
 	toSerialize["vendor"] = o.Vendor
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -216,23 +211,15 @@ func (o *PlaidAccountVerification) UnmarshalJSON(data []byte) (err error) {
 
 	varPlaidAccountVerification := _PlaidAccountVerification{}
 
-	err = json.Unmarshal(data, &varPlaidAccountVerification)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPlaidAccountVerification)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PlaidAccountVerification(varPlaidAccountVerification)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "vendor")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

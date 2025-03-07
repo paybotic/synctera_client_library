@@ -29,12 +29,9 @@ type Shipping struct {
 	// The shipping method. * `INTERNATIONAL_GROUND` is only available for addresses in Canada and Mexico.
 	Method *string `json:"method,omitempty"`
 	// The phone number of the recipient
-	PhoneNumber          *string        `json:"phone_number,omitempty" validate:"regexp=^\\\\+[1-9]\\\\d{1,14}$"`
-	RecipientName        *RecipientName `json:"recipient_name,omitempty"`
-	AdditionalProperties map[string]interface{}
+	PhoneNumber   *string        `json:"phone_number,omitempty" validate:"regexp=^\\\\+[1-9]\\\\d{1,14}$"`
+	RecipientName *RecipientName `json:"recipient_name,omitempty"`
 }
-
-type _Shipping Shipping
 
 // NewShipping instantiates a new Shipping object
 // This constructor will assign default values to properties that have it defined,
@@ -284,38 +281,7 @@ func (o Shipping) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RecipientName) {
 		toSerialize["recipient_name"] = o.RecipientName
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *Shipping) UnmarshalJSON(data []byte) (err error) {
-	varShipping := _Shipping{}
-
-	err = json.Unmarshal(data, &varShipping)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Shipping(varShipping)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "address")
-		delete(additionalProperties, "care_of_line")
-		delete(additionalProperties, "is_expedited_fulfillment")
-		delete(additionalProperties, "method")
-		delete(additionalProperties, "phone_number")
-		delete(additionalProperties, "recipient_name")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableShipping struct {

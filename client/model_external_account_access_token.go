@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -33,8 +34,7 @@ type ExternalAccountAccessToken struct {
 	// The ID of the institution the access token is requested for
 	VendorInstitutionId string `json:"vendor_institution_id"`
 	// The user's public token obtained from successful link login.
-	VendorPublicToken    string `json:"vendor_public_token"`
-	AdditionalProperties map[string]interface{}
+	VendorPublicToken string `json:"vendor_public_token"`
 }
 
 type _ExternalAccountAccessToken ExternalAccountAccessToken
@@ -293,11 +293,6 @@ func (o ExternalAccountAccessToken) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["vendor_institution_id"] = o.VendorInstitutionId
 	toSerialize["vendor_public_token"] = o.VendorPublicToken
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -326,26 +321,15 @@ func (o *ExternalAccountAccessToken) UnmarshalJSON(data []byte) (err error) {
 
 	varExternalAccountAccessToken := _ExternalAccountAccessToken{}
 
-	err = json.Unmarshal(data, &varExternalAccountAccessToken)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varExternalAccountAccessToken)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExternalAccountAccessToken(varExternalAccountAccessToken)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "request_id")
-		delete(additionalProperties, "vendor_access_token")
-		delete(additionalProperties, "vendor_customer_id")
-		delete(additionalProperties, "vendor_institution_id")
-		delete(additionalProperties, "vendor_public_token")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

@@ -20,11 +20,8 @@ var _ MappedNullable = &ReplaceSecretRequest{}
 // ReplaceSecretRequest struct for ReplaceSecretRequest
 type ReplaceSecretRequest struct {
 	// Set true to let the current secret expire in the next 24 hours. Set false to let the current secret expire immediately.
-	IsRollingSecret      *bool `json:"is_rolling_secret,omitempty"`
-	AdditionalProperties map[string]interface{}
+	IsRollingSecret *bool `json:"is_rolling_secret,omitempty"`
 }
-
-type _ReplaceSecretRequest ReplaceSecretRequest
 
 // NewReplaceSecretRequest instantiates a new ReplaceSecretRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -88,33 +85,7 @@ func (o ReplaceSecretRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsRollingSecret) {
 		toSerialize["is_rolling_secret"] = o.IsRollingSecret
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *ReplaceSecretRequest) UnmarshalJSON(data []byte) (err error) {
-	varReplaceSecretRequest := _ReplaceSecretRequest{}
-
-	err = json.Unmarshal(data, &varReplaceSecretRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ReplaceSecretRequest(varReplaceSecretRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "is_rolling_secret")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableReplaceSecretRequest struct {

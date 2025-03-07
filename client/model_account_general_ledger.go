@@ -76,11 +76,8 @@ type AccountGeneralLedger struct {
 	AccountTemplateId *string            `json:"account_template_id,omitempty"`
 	GeneralLedgerType *GeneralLedgerType `json:"general_ledger_type,omitempty"`
 	// Add an optional note when creating or updating an account. A note is required when updating the status to or from SUSPENDED
-	Note                 *string `json:"note,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Note *string `json:"note,omitempty"`
 }
-
-type _AccountGeneralLedger AccountGeneralLedger
 
 // NewAccountGeneralLedger instantiates a new AccountGeneralLedger object
 // This constructor will assign default values to properties that have it defined,
@@ -1194,63 +1191,7 @@ func (o AccountGeneralLedger) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Note) {
 		toSerialize["note"] = o.Note
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *AccountGeneralLedger) UnmarshalJSON(data []byte) (err error) {
-	varAccountGeneralLedger := _AccountGeneralLedger{}
-
-	err = json.Unmarshal(data, &varAccountGeneralLedger)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AccountGeneralLedger(varAccountGeneralLedger)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "is_ach_enabled")
-		delete(additionalProperties, "is_card_enabled")
-		delete(additionalProperties, "is_eft_ca_enabled")
-		delete(additionalProperties, "is_p2p_enabled")
-		delete(additionalProperties, "is_synctera_pay_enabled")
-		delete(additionalProperties, "is_wire_enabled")
-		delete(additionalProperties, "access_status")
-		delete(additionalProperties, "account_number")
-		delete(additionalProperties, "account_number_masked")
-		delete(additionalProperties, "account_purpose")
-		delete(additionalProperties, "account_type")
-		delete(additionalProperties, "application_id")
-		delete(additionalProperties, "balances")
-		delete(additionalProperties, "bank_routing")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "customer_ids")
-		delete(additionalProperties, "customer_type")
-		delete(additionalProperties, "exchange_rate_type")
-		delete(additionalProperties, "iban")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "is_account_pool")
-		delete(additionalProperties, "is_sar_enabled")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "nickname")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "swift_code")
-		delete(additionalProperties, "account_template_id")
-		delete(additionalProperties, "general_ledger_type")
-		delete(additionalProperties, "note")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableAccountGeneralLedger struct {

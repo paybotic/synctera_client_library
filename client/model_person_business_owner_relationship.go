@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -36,8 +37,7 @@ type PersonBusinessOwnerRelationship struct {
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
 	Tenant *string `json:"tenant,omitempty"`
 	// Unique ID for the related business.
-	ToBusinessId         string `json:"to_business_id"`
-	AdditionalProperties map[string]interface{}
+	ToBusinessId string `json:"to_business_id"`
 }
 
 type _PersonBusinessOwnerRelationship PersonBusinessOwnerRelationship
@@ -348,11 +348,6 @@ func (o PersonBusinessOwnerRelationship) ToMap() (map[string]interface{}, error)
 		toSerialize["tenant"] = o.Tenant
 	}
 	toSerialize["to_business_id"] = o.ToBusinessId
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -383,28 +378,15 @@ func (o *PersonBusinessOwnerRelationship) UnmarshalJSON(data []byte) (err error)
 
 	varPersonBusinessOwnerRelationship := _PersonBusinessOwnerRelationship{}
 
-	err = json.Unmarshal(data, &varPersonBusinessOwnerRelationship)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPersonBusinessOwnerRelationship)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PersonBusinessOwnerRelationship(varPersonBusinessOwnerRelationship)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "additional_data")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "from_person_id")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "relationship_type")
-		delete(additionalProperties, "tenant")
-		delete(additionalProperties, "to_business_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

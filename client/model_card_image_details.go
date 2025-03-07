@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,11 +26,10 @@ type CardImageDetails struct {
 	// The unique identifier of a customer
 	CustomerId string `json:"customer_id"`
 	// The unique identifier of a card image
-	Id                   string                    `json:"id"`
-	RejectionMemo        *string                   `json:"rejection_memo,omitempty"`
-	RejectionReason      *CardImageRejectionReason `json:"rejection_reason,omitempty"`
-	Status               CardImageStatus           `json:"status"`
-	AdditionalProperties map[string]interface{}
+	Id              string                    `json:"id"`
+	RejectionMemo   *string                   `json:"rejection_memo,omitempty"`
+	RejectionReason *CardImageRejectionReason `json:"rejection_reason,omitempty"`
+	Status          CardImageStatus           `json:"status"`
 }
 
 type _CardImageDetails CardImageDetails
@@ -235,11 +235,6 @@ func (o CardImageDetails) ToMap() (map[string]interface{}, error) {
 		toSerialize["rejection_reason"] = o.RejectionReason
 	}
 	toSerialize["status"] = o.Status
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -270,25 +265,15 @@ func (o *CardImageDetails) UnmarshalJSON(data []byte) (err error) {
 
 	varCardImageDetails := _CardImageDetails{}
 
-	err = json.Unmarshal(data, &varCardImageDetails)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCardImageDetails)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CardImageDetails(varCardImageDetails)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "card_product_id")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "rejection_memo")
-		delete(additionalProperties, "rejection_reason")
-		delete(additionalProperties, "status")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

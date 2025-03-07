@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -40,9 +41,8 @@ type AddAccountsRequest struct {
 	// The type of the account
 	Type string `json:"type"`
 	// The ID of the vendor account, will be empty for MANUAL vendor
-	VendorAccountId      *string                     `json:"vendor_account_id,omitempty"`
-	Verification         NullableAccountVerification `json:"verification,omitempty"`
-	AdditionalProperties map[string]interface{}
+	VendorAccountId *string                     `json:"vendor_account_id,omitempty"`
+	Verification    NullableAccountVerification `json:"verification,omitempty"`
 }
 
 type _AddAccountsRequest AddAccountsRequest
@@ -495,11 +495,6 @@ func (o AddAccountsRequest) ToMap() (map[string]interface{}, error) {
 	if o.Verification.IsSet() {
 		toSerialize["verification"] = o.Verification.Get()
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -531,32 +526,15 @@ func (o *AddAccountsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varAddAccountsRequest := _AddAccountsRequest{}
 
-	err = json.Unmarshal(data, &varAddAccountsRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAddAccountsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddAccountsRequest(varAddAccountsRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_identifiers")
-		delete(additionalProperties, "account_owner_names")
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "customer_type")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "nickname")
-		delete(additionalProperties, "routing_identifiers")
-		delete(additionalProperties, "tenant")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "vendor_account_id")
-		delete(additionalProperties, "verification")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

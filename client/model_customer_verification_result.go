@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -32,9 +33,8 @@ type CustomerVerificationResult struct {
 	Result     string                  `json:"result"`
 	VendorInfo *VerificationVendorInfo `json:"vendor_info,omitempty"`
 	// The date and time the verification was completed.
-	VerificationTime     time.Time           `json:"verification_time"`
-	VerificationType     KycVerificationType `json:"verification_type"`
-	AdditionalProperties map[string]interface{}
+	VerificationTime time.Time           `json:"verification_time"`
+	VerificationType KycVerificationType `json:"verification_type"`
 }
 
 type _CustomerVerificationResult CustomerVerificationResult
@@ -290,11 +290,6 @@ func (o CustomerVerificationResult) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["verification_time"] = o.VerificationTime
 	toSerialize["verification_type"] = o.VerificationType
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -324,26 +319,15 @@ func (o *CustomerVerificationResult) UnmarshalJSON(data []byte) (err error) {
 
 	varCustomerVerificationResult := _CustomerVerificationResult{}
 
-	err = json.Unmarshal(data, &varCustomerVerificationResult)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCustomerVerificationResult)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CustomerVerificationResult(varCustomerVerificationResult)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "issues")
-		delete(additionalProperties, "raw_response")
-		delete(additionalProperties, "result")
-		delete(additionalProperties, "vendor_info")
-		delete(additionalProperties, "verification_time")
-		delete(additionalProperties, "verification_type")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

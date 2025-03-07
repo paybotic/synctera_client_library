@@ -22,10 +22,7 @@ var _ MappedNullable = &OutgoingAchPatch{}
 type OutgoingAchPatch struct {
 	FundsAvailabilityTime NullableTime   `json:"funds_availability_time,omitempty"`
 	Status                NullableString `json:"status,omitempty"`
-	AdditionalProperties  map[string]interface{}
 }
-
-type _OutgoingAchPatch OutgoingAchPatch
 
 // NewOutgoingAchPatch instantiates a new OutgoingAchPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -146,34 +143,7 @@ func (o OutgoingAchPatch) ToMap() (map[string]interface{}, error) {
 	if o.Status.IsSet() {
 		toSerialize["status"] = o.Status.Get()
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *OutgoingAchPatch) UnmarshalJSON(data []byte) (err error) {
-	varOutgoingAchPatch := _OutgoingAchPatch{}
-
-	err = json.Unmarshal(data, &varOutgoingAchPatch)
-
-	if err != nil {
-		return err
-	}
-
-	*o = OutgoingAchPatch(varOutgoingAchPatch)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "funds_availability_time")
-		delete(additionalProperties, "status")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableOutgoingAchPatch struct {

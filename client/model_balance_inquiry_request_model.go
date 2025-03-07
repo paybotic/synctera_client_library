@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -20,13 +21,12 @@ var _ MappedNullable = &BalanceInquiryRequestModel{}
 
 // BalanceInquiryRequestModel struct for BalanceInquiryRequestModel
 type BalanceInquiryRequestModel struct {
-	AccountType          string            `json:"account_type"`
-	CardAcceptor         CardAcceptorModel `json:"card_acceptor"`
-	CardId               string            `json:"card_id"`
-	Mid                  string            `json:"mid"`
-	NetworkFees          []NetworkFeeModel `json:"network_fees,omitempty"`
-	Pin                  *string           `json:"pin,omitempty"`
-	AdditionalProperties map[string]interface{}
+	AccountType  string            `json:"account_type"`
+	CardAcceptor CardAcceptorModel `json:"card_acceptor"`
+	CardId       string            `json:"card_id"`
+	Mid          string            `json:"mid"`
+	NetworkFees  []NetworkFeeModel `json:"network_fees,omitempty"`
+	Pin          *string           `json:"pin,omitempty"`
 }
 
 type _BalanceInquiryRequestModel BalanceInquiryRequestModel
@@ -232,11 +232,6 @@ func (o BalanceInquiryRequestModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Pin) {
 		toSerialize["pin"] = o.Pin
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -267,25 +262,15 @@ func (o *BalanceInquiryRequestModel) UnmarshalJSON(data []byte) (err error) {
 
 	varBalanceInquiryRequestModel := _BalanceInquiryRequestModel{}
 
-	err = json.Unmarshal(data, &varBalanceInquiryRequestModel)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varBalanceInquiryRequestModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BalanceInquiryRequestModel(varBalanceInquiryRequestModel)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_type")
-		delete(additionalProperties, "card_acceptor")
-		delete(additionalProperties, "card_id")
-		delete(additionalProperties, "mid")
-		delete(additionalProperties, "network_fees")
-		delete(additionalProperties, "pin")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

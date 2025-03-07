@@ -40,11 +40,8 @@ type Event struct {
 	// URL that the current event will be sent to
 	Url *string `json:"url,omitempty"`
 	// Webhook the current event belongs to
-	WebhookId            *string `json:"webhook_id,omitempty"`
-	AdditionalProperties map[string]interface{}
+	WebhookId *string `json:"webhook_id,omitempty"`
 }
-
-type _Event Event
 
 // NewEvent instantiates a new Event object
 // This constructor will assign default values to properties that have it defined,
@@ -458,43 +455,7 @@ func (o Event) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WebhookId) {
 		toSerialize["webhook_id"] = o.WebhookId
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *Event) UnmarshalJSON(data []byte) (err error) {
-	varEvent := _Event{}
-
-	err = json.Unmarshal(data, &varEvent)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Event(varEvent)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "event_resource")
-		delete(additionalProperties, "event_resource_changed_fields")
-		delete(additionalProperties, "event_time")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "resource_id")
-		delete(additionalProperties, "response_history")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "url")
-		delete(additionalProperties, "webhook_id")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableEvent struct {

@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -43,10 +44,9 @@ type InternalAccountPost struct {
 	// Is a system-controlled internal account. When this field is true, this internal account will be reserved exclusively for internal use by the Synctera platform and any internal transfers to or from this internal account will be declined.
 	IsSystemAcc *bool `json:"is_system_acc,omitempty"`
 	// The date and time the resource was last updated.
-	LastUpdatedTime      *time.Time              `json:"last_updated_time,omitempty"`
-	Purpose              *InternalAccountPurpose `json:"purpose,omitempty"`
-	Status               string                  `json:"status"`
-	AdditionalProperties map[string]interface{}
+	LastUpdatedTime *time.Time              `json:"last_updated_time,omitempty"`
+	Purpose         *InternalAccountPurpose `json:"purpose,omitempty"`
+	Status          string                  `json:"status"`
 }
 
 type _InternalAccountPost InternalAccountPost
@@ -554,11 +554,6 @@ func (o InternalAccountPost) ToMap() (map[string]interface{}, error) {
 		toSerialize["purpose"] = o.Purpose
 	}
 	toSerialize["status"] = o.Status
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -587,33 +582,15 @@ func (o *InternalAccountPost) UnmarshalJSON(data []byte) (err error) {
 
 	varInternalAccountPost := _InternalAccountPost{}
 
-	err = json.Unmarshal(data, &varInternalAccountPost)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varInternalAccountPost)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InternalAccountPost(varInternalAccountPost)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_number")
-		delete(additionalProperties, "account_type")
-		delete(additionalProperties, "balances")
-		delete(additionalProperties, "bank_account_id")
-		delete(additionalProperties, "bank_routing")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "gl_type")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "is_system_acc")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "purpose")
-		delete(additionalProperties, "status")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

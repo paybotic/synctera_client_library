@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -38,8 +39,7 @@ type PostedTransactionData struct {
 	// Information received by the transaction risk/fraud service related to this transaction
 	RiskInfo map[string]interface{} `json:"risk_info,omitempty"`
 	// An unstructured JSON blob representing additional transaction information specific to each payment rail.
-	UserData             map[string]interface{} `json:"user_data,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UserData map[string]interface{} `json:"user_data,omitempty"`
 }
 
 type _PostedTransactionData PostedTransactionData
@@ -392,11 +392,6 @@ func (o PostedTransactionData) ToMap() (map[string]interface{}, error) {
 	if o.UserData != nil {
 		toSerialize["user_data"] = o.UserData
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -427,29 +422,15 @@ func (o *PostedTransactionData) UnmarshalJSON(data []byte) (err error) {
 
 	varPostedTransactionData := _PostedTransactionData{}
 
-	err = json.Unmarshal(data, &varPostedTransactionData)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPostedTransactionData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PostedTransactionData(varPostedTransactionData)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "external_data")
-		delete(additionalProperties, "force_post")
-		delete(additionalProperties, "hold_id")
-		delete(additionalProperties, "lines")
-		delete(additionalProperties, "memo")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "original_trx")
-		delete(additionalProperties, "parent_trx")
-		delete(additionalProperties, "risk_info")
-		delete(additionalProperties, "user_data")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

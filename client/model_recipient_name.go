@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -20,10 +21,9 @@ var _ MappedNullable = &RecipientName{}
 
 // RecipientName The name of the recipient to whom the card will be shipped
 type RecipientName struct {
-	FirstName            string  `json:"first_name"`
-	LastName             string  `json:"last_name"`
-	MiddleName           *string `json:"middle_name,omitempty"`
-	AdditionalProperties map[string]interface{}
+	FirstName  string  `json:"first_name"`
+	LastName   string  `json:"last_name"`
+	MiddleName *string `json:"middle_name,omitempty"`
 }
 
 type _RecipientName RecipientName
@@ -142,11 +142,6 @@ func (o RecipientName) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MiddleName) {
 		toSerialize["middle_name"] = o.MiddleName
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -175,22 +170,15 @@ func (o *RecipientName) UnmarshalJSON(data []byte) (err error) {
 
 	varRecipientName := _RecipientName{}
 
-	err = json.Unmarshal(data, &varRecipientName)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRecipientName)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RecipientName(varRecipientName)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "first_name")
-		delete(additionalProperties, "last_name")
-		delete(additionalProperties, "middle_name")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -35,8 +36,7 @@ type DepositPost struct {
 	// Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	// Unique ID for the person. Exactly one of `person_id` or `business_id` must be set.
-	PersonId             *string `json:"person_id,omitempty"`
-	AdditionalProperties map[string]interface{}
+	PersonId *string `json:"person_id,omitempty"`
 }
 
 type _DepositPost DepositPost
@@ -303,11 +303,6 @@ func (o DepositPost) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PersonId) {
 		toSerialize["person_id"] = o.PersonId
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -339,27 +334,15 @@ func (o *DepositPost) UnmarshalJSON(data []byte) (err error) {
 
 	varDepositPost := _DepositPost{}
 
-	err = json.Unmarshal(data, &varDepositPost)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varDepositPost)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DepositPost(varDepositPost)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_id")
-		delete(additionalProperties, "back_image_id")
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "check_amount")
-		delete(additionalProperties, "deposit_currency")
-		delete(additionalProperties, "front_image_id")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "person_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

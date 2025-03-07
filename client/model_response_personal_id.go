@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,8 +29,7 @@ type ResponsePersonalId struct {
 	// The personal identifier. Format varies by personal identifier type.
 	Identifier string `json:"identifier"`
 	// True if the identifier was provided by the system, e.g. via SSN Prefill.
-	SystemProvided       bool `json:"system_provided"`
-	AdditionalProperties map[string]interface{}
+	SystemProvided bool `json:"system_provided"`
 }
 
 type _ResponsePersonalId ResponsePersonalId
@@ -191,11 +191,6 @@ func (o ResponsePersonalId) ToMap() (map[string]interface{}, error) {
 	toSerialize["id_type"] = o.IdType
 	toSerialize["identifier"] = o.Identifier
 	toSerialize["system_provided"] = o.SystemProvided
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -227,24 +222,15 @@ func (o *ResponsePersonalId) UnmarshalJSON(data []byte) (err error) {
 
 	varResponsePersonalId := _ResponsePersonalId{}
 
-	err = json.Unmarshal(data, &varResponsePersonalId)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varResponsePersonalId)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResponsePersonalId(varResponsePersonalId)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "country_code")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "id_type")
-		delete(additionalProperties, "identifier")
-		delete(additionalProperties, "system_provided")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

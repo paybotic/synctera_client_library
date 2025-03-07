@@ -25,10 +25,7 @@ type ItemDetailTaxes struct {
 	DetailTaxRate                     *int64  `json:"detail_tax_rate,omitempty"`
 	DetailTaxTypeApplied              *string `json:"detail_tax_type_applied,omitempty"`
 	DetailTaxTypeIdentifier           *string `json:"detail_tax_type_identifier,omitempty"`
-	AdditionalProperties              map[string]interface{}
 }
-
-type _ItemDetailTaxes ItemDetailTaxes
 
 // NewItemDetailTaxes instantiates a new ItemDetailTaxes object
 // This constructor will assign default values to properties that have it defined,
@@ -267,38 +264,7 @@ func (o ItemDetailTaxes) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DetailTaxTypeIdentifier) {
 		toSerialize["detail_tax_type_identifier"] = o.DetailTaxTypeIdentifier
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *ItemDetailTaxes) UnmarshalJSON(data []byte) (err error) {
-	varItemDetailTaxes := _ItemDetailTaxes{}
-
-	err = json.Unmarshal(data, &varItemDetailTaxes)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ItemDetailTaxes(varItemDetailTaxes)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "detail_tax_amount")
-		delete(additionalProperties, "detail_tax_amount_inclusion_indicator")
-		delete(additionalProperties, "detail_tax_amount_indicator")
-		delete(additionalProperties, "detail_tax_rate")
-		delete(additionalProperties, "detail_tax_type_applied")
-		delete(additionalProperties, "detail_tax_type_identifier")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableItemDetailTaxes struct {

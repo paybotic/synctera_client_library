@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,8 +22,7 @@ var _ MappedNullable = &CardFormat{}
 // CardFormat struct for CardFormat
 type CardFormat struct {
 	// PHYSICAL or VIRTUAL.
-	Form                 string `json:"form"`
-	AdditionalProperties map[string]interface{}
+	Form string `json:"form"`
 }
 
 type _CardFormat CardFormat
@@ -80,11 +80,6 @@ func (o CardFormat) MarshalJSON() ([]byte, error) {
 func (o CardFormat) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["form"] = o.Form
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -112,20 +107,15 @@ func (o *CardFormat) UnmarshalJSON(data []byte) (err error) {
 
 	varCardFormat := _CardFormat{}
 
-	err = json.Unmarshal(data, &varCardFormat)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCardFormat)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CardFormat(varCardFormat)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "form")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

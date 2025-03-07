@@ -20,11 +20,8 @@ var _ MappedNullable = &DisclosureResponse{}
 // DisclosureResponse Represents all customer disclosures
 type DisclosureResponse struct {
 	// List of the customer's disclosures
-	Disclosures          []Disclosure1 `json:"disclosures,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Disclosures []Disclosure1 `json:"disclosures,omitempty"`
 }
-
-type _DisclosureResponse DisclosureResponse
 
 // NewDisclosureResponse instantiates a new DisclosureResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -88,33 +85,7 @@ func (o DisclosureResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Disclosures) {
 		toSerialize["disclosures"] = o.Disclosures
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *DisclosureResponse) UnmarshalJSON(data []byte) (err error) {
-	varDisclosureResponse := _DisclosureResponse{}
-
-	err = json.Unmarshal(data, &varDisclosureResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = DisclosureResponse(varDisclosureResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "disclosures")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableDisclosureResponse struct {

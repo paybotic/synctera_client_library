@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -27,8 +28,7 @@ type ReturnData1 struct {
 	// Wire reference ID of the original wire that was returned
 	PreviousMessageId string `json:"previous_message_id"`
 	// The cause of the return
-	Reason               *string `json:"reason,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Reason *string `json:"reason,omitempty"`
 }
 
 type _ReturnData1 ReturnData1
@@ -191,11 +191,6 @@ func (o ReturnData1) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -223,23 +218,15 @@ func (o *ReturnData1) UnmarshalJSON(data []byte) (err error) {
 
 	varReturnData1 := _ReturnData1{}
 
-	err = json.Unmarshal(data, &varReturnData1)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varReturnData1)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReturnData1(varReturnData1)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "original_id")
-		delete(additionalProperties, "original_transaction_id")
-		delete(additionalProperties, "previous_message_id")
-		delete(additionalProperties, "reason")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

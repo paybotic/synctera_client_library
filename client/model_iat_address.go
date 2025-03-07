@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,8 +26,7 @@ type IatAddress struct {
 	// Country and Postal Code. Should be separated with an asterisk (*) as a delimiter.
 	CountryPostalCode string `json:"country_postal_code"`
 	// The street address
-	Street               string `json:"street"`
-	AdditionalProperties map[string]interface{}
+	Street string `json:"street"`
 }
 
 type _IatAddress IatAddress
@@ -136,11 +136,6 @@ func (o IatAddress) ToMap() (map[string]interface{}, error) {
 	toSerialize["city_state_province"] = o.CityStateProvince
 	toSerialize["country_postal_code"] = o.CountryPostalCode
 	toSerialize["street"] = o.Street
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -170,22 +165,15 @@ func (o *IatAddress) UnmarshalJSON(data []byte) (err error) {
 
 	varIatAddress := _IatAddress{}
 
-	err = json.Unmarshal(data, &varIatAddress)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varIatAddress)
 
 	if err != nil {
 		return err
 	}
 
 	*o = IatAddress(varIatAddress)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "city_state_province")
-		delete(additionalProperties, "country_postal_code")
-		delete(additionalProperties, "street")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

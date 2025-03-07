@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -32,8 +33,7 @@ type PostPersonalIdWCust struct {
 	// The ISO 3166 Alpha-2 country code for the country that issued the personal identifier. This is optional for personal identifier types that have an implicit country, e.g. SSN. This is required for other types, e.g. PASSPORT_NUMBER.
 	CountryCode *string `json:"country_code,omitempty"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant               *string `json:"tenant,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Tenant *string `json:"tenant,omitempty"`
 }
 
 type _PostPersonalIdWCust PostPersonalIdWCust
@@ -283,11 +283,6 @@ func (o PostPersonalIdWCust) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tenant) {
 		toSerialize["tenant"] = o.Tenant
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -317,26 +312,15 @@ func (o *PostPersonalIdWCust) UnmarshalJSON(data []byte) (err error) {
 
 	varPostPersonalIdWCust := _PostPersonalIdWCust{}
 
-	err = json.Unmarshal(data, &varPostPersonalIdWCust)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPostPersonalIdWCust)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PostPersonalIdWCust(varPostPersonalIdWCust)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "id_type")
-		delete(additionalProperties, "identifier")
-		delete(additionalProperties, "system_provided")
-		delete(additionalProperties, "country_code")
-		delete(additionalProperties, "tenant")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

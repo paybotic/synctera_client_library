@@ -61,11 +61,8 @@ type PatchBusiness struct {
 	VerificationLastRun *time.Time          `json:"verification_last_run,omitempty"`
 	VerificationStatus  *VerificationStatus `json:"verification_status,omitempty"`
 	// Business's website.
-	Website              *string `json:"website,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Website *string `json:"website,omitempty"`
 }
-
-type _PatchBusiness PatchBusiness
 
 // NewPatchBusiness instantiates a new PatchBusiness object
 // This constructor will assign default values to properties that have it defined,
@@ -864,54 +861,7 @@ func (o PatchBusiness) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Website) {
 		toSerialize["website"] = o.Website
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *PatchBusiness) UnmarshalJSON(data []byte) (err error) {
-	varPatchBusiness := _PatchBusiness{}
-
-	err = json.Unmarshal(data, &varPatchBusiness)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PatchBusiness(varPatchBusiness)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "addresses")
-		delete(additionalProperties, "compliance_restrictions")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "ein")
-		delete(additionalProperties, "email")
-		delete(additionalProperties, "entity_name")
-		delete(additionalProperties, "formation_date")
-		delete(additionalProperties, "formation_state")
-		delete(additionalProperties, "has_accounts")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "is_customer")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "legal_address")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "phone_number")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "structure")
-		delete(additionalProperties, "tenant")
-		delete(additionalProperties, "trade_names")
-		delete(additionalProperties, "verification_last_run")
-		delete(additionalProperties, "verification_status")
-		delete(additionalProperties, "website")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullablePatchBusiness struct {

@@ -19,14 +19,11 @@ var _ MappedNullable = &CardOptions{}
 
 // CardOptions struct for CardOptions
 type CardOptions struct {
-	BillingAddress       *BillingAddress `json:"billing_address,omitempty"`
-	CardPresent          *bool           `json:"card_present,omitempty"`
-	Cvv                  *string         `json:"cvv,omitempty"`
-	Expiration           *string         `json:"expiration,omitempty"`
-	AdditionalProperties map[string]interface{}
+	BillingAddress *BillingAddress `json:"billing_address,omitempty"`
+	CardPresent    *bool           `json:"card_present,omitempty"`
+	Cvv            *string         `json:"cvv,omitempty"`
+	Expiration     *string         `json:"expiration,omitempty"`
 }
-
-type _CardOptions CardOptions
 
 // NewCardOptions instantiates a new CardOptions object
 // This constructor will assign default values to properties that have it defined,
@@ -199,36 +196,7 @@ func (o CardOptions) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Expiration) {
 		toSerialize["expiration"] = o.Expiration
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *CardOptions) UnmarshalJSON(data []byte) (err error) {
-	varCardOptions := _CardOptions{}
-
-	err = json.Unmarshal(data, &varCardOptions)
-
-	if err != nil {
-		return err
-	}
-
-	*o = CardOptions(varCardOptions)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "billing_address")
-		delete(additionalProperties, "card_present")
-		delete(additionalProperties, "cvv")
-		delete(additionalProperties, "expiration")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableCardOptions struct {

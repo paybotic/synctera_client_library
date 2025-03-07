@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type Authenticate3dsResponse struct {
 	// The unique identifier of the 3DS authentication
 	Id string `json:"id"`
 	// Status of the 3DS authentication
-	Status               string `json:"status"`
-	AdditionalProperties map[string]interface{}
+	Status string `json:"status"`
 }
 
 type _Authenticate3dsResponse Authenticate3dsResponse
@@ -108,11 +108,6 @@ func (o Authenticate3dsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["status"] = o.Status
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -141,21 +136,15 @@ func (o *Authenticate3dsResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varAuthenticate3dsResponse := _Authenticate3dsResponse{}
 
-	err = json.Unmarshal(data, &varAuthenticate3dsResponse)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAuthenticate3dsResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Authenticate3dsResponse(varAuthenticate3dsResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "status")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

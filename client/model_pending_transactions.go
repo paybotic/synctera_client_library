@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type PendingTransactions struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken NullableString `json:"next_page_token"`
 	// List of pending transactions
-	Result               []PendingTransaction `json:"result"`
-	AdditionalProperties map[string]interface{}
+	Result []PendingTransaction `json:"result"`
 }
 
 type _PendingTransactions PendingTransactions
@@ -110,11 +110,6 @@ func (o PendingTransactions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["next_page_token"] = o.NextPageToken.Get()
 	toSerialize["result"] = o.Result
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -143,21 +138,15 @@ func (o *PendingTransactions) UnmarshalJSON(data []byte) (err error) {
 
 	varPendingTransactions := _PendingTransactions{}
 
-	err = json.Unmarshal(data, &varPendingTransactions)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPendingTransactions)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PendingTransactions(varPendingTransactions)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "next_page_token")
-		delete(additionalProperties, "result")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

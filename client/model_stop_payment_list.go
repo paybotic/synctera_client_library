@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +22,8 @@ var _ MappedNullable = &StopPaymentList{}
 // StopPaymentList struct for StopPaymentList
 type StopPaymentList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
-	NextPageToken        *string                       `json:"next_page_token,omitempty"`
-	StopPayments         []StopPaymentResponseWAccount `json:"stop_payments"`
-	AdditionalProperties map[string]interface{}
+	NextPageToken *string                       `json:"next_page_token,omitempty"`
+	StopPayments  []StopPaymentResponseWAccount `json:"stop_payments"`
 }
 
 type _StopPaymentList StopPaymentList
@@ -116,11 +116,6 @@ func (o StopPaymentList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["stop_payments"] = o.StopPayments
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -148,21 +143,15 @@ func (o *StopPaymentList) UnmarshalJSON(data []byte) (err error) {
 
 	varStopPaymentList := _StopPaymentList{}
 
-	err = json.Unmarshal(data, &varStopPaymentList)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varStopPaymentList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StopPaymentList(varStopPaymentList)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "next_page_token")
-		delete(additionalProperties, "stop_payments")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

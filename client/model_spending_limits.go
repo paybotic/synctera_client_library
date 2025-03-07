@@ -21,15 +21,12 @@ var _ MappedNullable = &SpendingLimits{}
 type SpendingLimits struct {
 	Day *SpendingLimitWithTime `json:"day,omitempty"`
 	// User provided description on the spending limits
-	Description          *string                    `json:"description,omitempty"`
-	Lifetime             *SpendingLimitWithTime     `json:"lifetime,omitempty"`
-	Month                *SpendingLimitWithTime     `json:"month,omitempty"`
-	Transaction          *SpendingLimitsTransaction `json:"transaction,omitempty"`
-	Week                 *SpendingLimitWithTime     `json:"week,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Description *string                    `json:"description,omitempty"`
+	Lifetime    *SpendingLimitWithTime     `json:"lifetime,omitempty"`
+	Month       *SpendingLimitWithTime     `json:"month,omitempty"`
+	Transaction *SpendingLimitsTransaction `json:"transaction,omitempty"`
+	Week        *SpendingLimitWithTime     `json:"week,omitempty"`
 }
-
-type _SpendingLimits SpendingLimits
 
 // NewSpendingLimits instantiates a new SpendingLimits object
 // This constructor will assign default values to properties that have it defined,
@@ -268,38 +265,7 @@ func (o SpendingLimits) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Week) {
 		toSerialize["week"] = o.Week
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *SpendingLimits) UnmarshalJSON(data []byte) (err error) {
-	varSpendingLimits := _SpendingLimits{}
-
-	err = json.Unmarshal(data, &varSpendingLimits)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SpendingLimits(varSpendingLimits)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "day")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "lifetime")
-		delete(additionalProperties, "month")
-		delete(additionalProperties, "transaction")
-		delete(additionalProperties, "week")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableSpendingLimits struct {

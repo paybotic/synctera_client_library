@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -26,8 +27,7 @@ type BaseTemplateFields struct {
 	// Bank country of the account. ISO 3166-1 Alpha-2 or Alpha-3 country code.
 	BankCountry string `json:"bank_country" validate:"regexp=^[A-Z]{2,3}$"`
 	// Account currency. ISO 4217 alphabetic currency code
-	Currency             string `json:"currency" validate:"regexp=^[A-Z]{3}$"`
-	AdditionalProperties map[string]interface{}
+	Currency string `json:"currency" validate:"regexp=^[A-Z]{3}$"`
 }
 
 type _BaseTemplateFields BaseTemplateFields
@@ -172,11 +172,6 @@ func (o BaseTemplateFields) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["bank_country"] = o.BankCountry
 	toSerialize["currency"] = o.Currency
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -206,23 +201,15 @@ func (o *BaseTemplateFields) UnmarshalJSON(data []byte) (err error) {
 
 	varBaseTemplateFields := _BaseTemplateFields{}
 
-	err = json.Unmarshal(data, &varBaseTemplateFields)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varBaseTemplateFields)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BaseTemplateFields(varBaseTemplateFields)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_type")
-		delete(additionalProperties, "bank_account_id")
-		delete(additionalProperties, "bank_country")
-		delete(additionalProperties, "currency")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

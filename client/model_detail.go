@@ -32,11 +32,8 @@ type Detail struct {
 	// A URL containing supporting information for this individual check.
 	Url *string `json:"url,omitempty"`
 	// Machine-readable description of the individual check. This field contains vendor-specific terms and may not be populated in all cases.
-	VendorCode           *string `json:"vendor_code,omitempty"`
-	AdditionalProperties map[string]interface{}
+	VendorCode *string `json:"vendor_code,omitempty"`
 }
-
-type _Detail Detail
 
 // NewDetail instantiates a new Detail object
 // This constructor will assign default values to properties that have it defined,
@@ -310,39 +307,7 @@ func (o Detail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VendorCode) {
 		toSerialize["vendor_code"] = o.VendorCode
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *Detail) UnmarshalJSON(data []byte) (err error) {
-	varDetail := _Detail{}
-
-	err = json.Unmarshal(data, &varDetail)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Detail(varDetail)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "category")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "label")
-		delete(additionalProperties, "result")
-		delete(additionalProperties, "score")
-		delete(additionalProperties, "url")
-		delete(additionalProperties, "vendor_code")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableDetail struct {

@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -68,8 +69,7 @@ type IncomingWire struct {
 	// ID of the resulting transaction resource
 	TransactionId *string `json:"transaction_id,omitempty"`
 	// The fedwire label associated with the subtype code
-	TypeSubtype          *string `json:"type_subtype,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TypeSubtype *string `json:"type_subtype,omitempty"`
 }
 
 type _IncomingWire IncomingWire
@@ -921,11 +921,6 @@ func (o IncomingWire) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TypeSubtype) {
 		toSerialize["type_subtype"] = o.TypeSubtype
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -962,45 +957,15 @@ func (o *IncomingWire) UnmarshalJSON(data []byte) (err error) {
 
 	varIncomingWire := _IncomingWire{}
 
-	err = json.Unmarshal(data, &varIncomingWire)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varIncomingWire)
 
 	if err != nil {
 		return err
 	}
 
 	*o = IncomingWire(varIncomingWire)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_id")
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "bank_message")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "decline_reason")
-		delete(additionalProperties, "effective_date")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "input_message_accountability_data")
-		delete(additionalProperties, "is_return")
-		delete(additionalProperties, "network")
-		delete(additionalProperties, "originating_account_number")
-		delete(additionalProperties, "receiver")
-		delete(additionalProperties, "receiving_account_id")
-		delete(additionalProperties, "receiving_account_number")
-		delete(additionalProperties, "recipient_message")
-		delete(additionalProperties, "return_data")
-		delete(additionalProperties, "return_reason")
-		delete(additionalProperties, "sender")
-		delete(additionalProperties, "sender_reference_id")
-		delete(additionalProperties, "settlement_date")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "tenant")
-		delete(additionalProperties, "transaction_id")
-		delete(additionalProperties, "type_subtype")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

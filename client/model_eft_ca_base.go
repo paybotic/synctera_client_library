@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -29,8 +30,7 @@ type EftCaBase struct {
 	// Additional information to be added to the transfer
 	SourceData map[string]interface{} `json:"source_data,omitempty"`
 	// The three digit transaction code that identifies the type of transaction. More information can be found here: https://www.payments.ca/sites/default/files/standard007eng.pdf.
-	TransactionCode      string `json:"transaction_code"`
-	AdditionalProperties map[string]interface{}
+	TransactionCode string `json:"transaction_code"`
 }
 
 type _EftCaBase EftCaBase
@@ -201,11 +201,6 @@ func (o EftCaBase) ToMap() (map[string]interface{}, error) {
 		toSerialize["source_data"] = o.SourceData
 	}
 	toSerialize["transaction_code"] = o.TransactionCode
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -236,24 +231,15 @@ func (o *EftCaBase) UnmarshalJSON(data []byte) (err error) {
 
 	varEftCaBase := _EftCaBase{}
 
-	err = json.Unmarshal(data, &varEftCaBase)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varEftCaBase)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EftCaBase(varEftCaBase)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "dc_sign")
-		delete(additionalProperties, "source_data")
-		delete(additionalProperties, "transaction_code")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

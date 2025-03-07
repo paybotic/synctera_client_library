@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -52,8 +53,7 @@ type ResponseLicense struct {
 	// The status of the license
 	Status string `json:"status"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant               string `json:"tenant"`
-	AdditionalProperties map[string]interface{}
+	Tenant string `json:"tenant"`
 }
 
 type _ResponseLicense ResponseLicense
@@ -617,11 +617,6 @@ func (o ResponseLicense) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["status"] = o.Status
 	toSerialize["tenant"] = o.Tenant
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -655,36 +650,15 @@ func (o *ResponseLicense) UnmarshalJSON(data []byte) (err error) {
 
 	varResponseLicense := _ResponseLicense{}
 
-	err = json.Unmarshal(data, &varResponseLicense)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varResponseLicense)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResponseLicense(varResponseLicense)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "last_verified_time")
-		delete(additionalProperties, "license_classification")
-		delete(additionalProperties, "license_expiration_date")
-		delete(additionalProperties, "license_issuance_date")
-		delete(additionalProperties, "license_number")
-		delete(additionalProperties, "license_type")
-		delete(additionalProperties, "license_type_description")
-		delete(additionalProperties, "licensee_address")
-		delete(additionalProperties, "licensee_name")
-		delete(additionalProperties, "licensing_authority")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "tenant")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

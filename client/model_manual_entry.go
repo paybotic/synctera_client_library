@@ -19,12 +19,9 @@ var _ MappedNullable = &ManualEntry{}
 
 // ManualEntry struct for ManualEntry
 type ManualEntry struct {
-	AddressVerification  *DigitalWalletTokenAddressVerification `json:"address_verification,omitempty"`
-	Enabled              *bool                                  `json:"enabled,omitempty"`
-	AdditionalProperties map[string]interface{}
+	AddressVerification *DigitalWalletTokenAddressVerification `json:"address_verification,omitempty"`
+	Enabled             *bool                                  `json:"enabled,omitempty"`
 }
-
-type _ManualEntry ManualEntry
 
 // NewManualEntry instantiates a new ManualEntry object
 // This constructor will assign default values to properties that have it defined,
@@ -123,34 +120,7 @@ func (o ManualEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *ManualEntry) UnmarshalJSON(data []byte) (err error) {
-	varManualEntry := _ManualEntry{}
-
-	err = json.Unmarshal(data, &varManualEntry)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ManualEntry(varManualEntry)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "address_verification")
-		delete(additionalProperties, "enabled")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableManualEntry struct {

@@ -30,11 +30,8 @@ type RailsChargeUnsecured struct {
 	// A flag to indicate whether Synctera Pay transactions are enabled.
 	IsSyncteraPayEnabled *bool `json:"is_synctera_pay_enabled,omitempty"`
 	// A flag to indicate whether wire transactions are enabled.
-	IsWireEnabled        *bool `json:"is_wire_enabled,omitempty"`
-	AdditionalProperties map[string]interface{}
+	IsWireEnabled *bool `json:"is_wire_enabled,omitempty"`
 }
-
-type _RailsChargeUnsecured RailsChargeUnsecured
 
 // NewRailsChargeUnsecured instantiates a new RailsChargeUnsecured object
 // This constructor will assign default values to properties that have it defined,
@@ -273,38 +270,7 @@ func (o RailsChargeUnsecured) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsWireEnabled) {
 		toSerialize["is_wire_enabled"] = o.IsWireEnabled
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *RailsChargeUnsecured) UnmarshalJSON(data []byte) (err error) {
-	varRailsChargeUnsecured := _RailsChargeUnsecured{}
-
-	err = json.Unmarshal(data, &varRailsChargeUnsecured)
-
-	if err != nil {
-		return err
-	}
-
-	*o = RailsChargeUnsecured(varRailsChargeUnsecured)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "is_ach_enabled")
-		delete(additionalProperties, "is_card_enabled")
-		delete(additionalProperties, "is_eft_ca_enabled")
-		delete(additionalProperties, "is_p2p_enabled")
-		delete(additionalProperties, "is_synctera_pay_enabled")
-		delete(additionalProperties, "is_wire_enabled")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableRailsChargeUnsecured struct {

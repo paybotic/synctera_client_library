@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type Authenticate3dsRequest struct {
 	// The JWT recieved from the 3DS challenge
 	ChallengeJwt string `json:"challenge_jwt"`
 	// The unique identifier of the 3DS authentication
-	Id                   string `json:"id"`
-	AdditionalProperties map[string]interface{}
+	Id string `json:"id"`
 }
 
 type _Authenticate3dsRequest Authenticate3dsRequest
@@ -108,11 +108,6 @@ func (o Authenticate3dsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["challenge_jwt"] = o.ChallengeJwt
 	toSerialize["id"] = o.Id
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -141,21 +136,15 @@ func (o *Authenticate3dsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varAuthenticate3dsRequest := _Authenticate3dsRequest{}
 
-	err = json.Unmarshal(data, &varAuthenticate3dsRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAuthenticate3dsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Authenticate3dsRequest(varAuthenticate3dsRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "challenge_jwt")
-		delete(additionalProperties, "id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

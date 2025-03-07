@@ -22,11 +22,8 @@ type PatchAccountsRequestAccountIdentifiers struct {
 	// The IBAN of the account. On write, Synctera will store the entire IBAN number; on read, we only return the last 4 characters.
 	Iban *string `json:"iban,omitempty"`
 	// The account number.
-	Number               *string `json:"number,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Number *string `json:"number,omitempty"`
 }
-
-type _PatchAccountsRequestAccountIdentifiers PatchAccountsRequestAccountIdentifiers
 
 // NewPatchAccountsRequestAccountIdentifiers instantiates a new PatchAccountsRequestAccountIdentifiers object
 // This constructor will assign default values to properties that have it defined,
@@ -125,34 +122,7 @@ func (o PatchAccountsRequestAccountIdentifiers) ToMap() (map[string]interface{},
 	if !IsNil(o.Number) {
 		toSerialize["number"] = o.Number
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *PatchAccountsRequestAccountIdentifiers) UnmarshalJSON(data []byte) (err error) {
-	varPatchAccountsRequestAccountIdentifiers := _PatchAccountsRequestAccountIdentifiers{}
-
-	err = json.Unmarshal(data, &varPatchAccountsRequestAccountIdentifiers)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PatchAccountsRequestAccountIdentifiers(varPatchAccountsRequestAccountIdentifiers)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "iban")
-		delete(additionalProperties, "number")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullablePatchAccountsRequestAccountIdentifiers struct {

@@ -27,11 +27,8 @@ type PullDetails struct {
 	Network     *string                  `json:"network,omitempty"`
 	ProductType *ExternalCardProductType `json:"product_type,omitempty"`
 	// Exemption status from debit card interchange fee standards
-	Regulated            *bool `json:"regulated,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Regulated *bool `json:"regulated,omitempty"`
 }
-
-type _PullDetails PullDetails
 
 // NewPullDetails instantiates a new PullDetails object
 // This constructor will assign default values to properties that have it defined,
@@ -235,37 +232,7 @@ func (o PullDetails) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Regulated) {
 		toSerialize["regulated"] = o.Regulated
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *PullDetails) UnmarshalJSON(data []byte) (err error) {
-	varPullDetails := _PullDetails{}
-
-	err = json.Unmarshal(data, &varPullDetails)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PullDetails(varPullDetails)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "country")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "network")
-		delete(additionalProperties, "product_type")
-		delete(additionalProperties, "regulated")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullablePullDetails struct {

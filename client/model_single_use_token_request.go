@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type SingleUseTokenRequest struct {
 	// The ID of the account to which the token will be linked
 	AccountId string `json:"account_id"`
 	// The ID of the customer to whom the token will be issued
-	CustomerId           string `json:"customer_id"`
-	AdditionalProperties map[string]interface{}
+	CustomerId string `json:"customer_id"`
 }
 
 type _SingleUseTokenRequest SingleUseTokenRequest
@@ -108,11 +108,6 @@ func (o SingleUseTokenRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["account_id"] = o.AccountId
 	toSerialize["customer_id"] = o.CustomerId
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -141,21 +136,15 @@ func (o *SingleUseTokenRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varSingleUseTokenRequest := _SingleUseTokenRequest{}
 
-	err = json.Unmarshal(data, &varSingleUseTokenRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSingleUseTokenRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SingleUseTokenRequest(varSingleUseTokenRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_id")
-		delete(additionalProperties, "customer_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

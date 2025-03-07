@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type CardActivationRequest struct {
 	// An activation code provided with the card required to prove possession of the card
 	ActivationCode string `json:"activation_code"`
 	// The ID of the customer for which card is being activated
-	CustomerId           string `json:"customer_id"`
-	AdditionalProperties map[string]interface{}
+	CustomerId string `json:"customer_id"`
 }
 
 type _CardActivationRequest CardActivationRequest
@@ -108,11 +108,6 @@ func (o CardActivationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["activation_code"] = o.ActivationCode
 	toSerialize["customer_id"] = o.CustomerId
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -141,21 +136,15 @@ func (o *CardActivationRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCardActivationRequest := _CardActivationRequest{}
 
-	err = json.Unmarshal(data, &varCardActivationRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCardActivationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CardActivationRequest(varCardActivationRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "activation_code")
-		delete(additionalProperties, "customer_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,12 +26,11 @@ type FinancialRequestModel struct {
 	CardAcceptor CardAcceptorModel `json:"card_acceptor"`
 	CardId       string            `json:"card_id"`
 	// Cash back amount in the smallest whole denomination of the applicable currency (eg. For USD use cents)
-	CashBackAmount       *int32              `json:"cash_back_amount,omitempty"`
-	IsPreAuth            *bool               `json:"is_pre_auth,omitempty"`
-	Mid                  string              `json:"mid"`
-	Pin                  *string             `json:"pin,omitempty"`
-	TransactionOptions   *TransactionOptions `json:"transaction_options,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CashBackAmount     *int32              `json:"cash_back_amount,omitempty"`
+	IsPreAuth          *bool               `json:"is_pre_auth,omitempty"`
+	Mid                string              `json:"mid"`
+	Pin                *string             `json:"pin,omitempty"`
+	TransactionOptions *TransactionOptions `json:"transaction_options,omitempty"`
 }
 
 type _FinancialRequestModel FinancialRequestModel
@@ -310,11 +310,6 @@ func (o FinancialRequestModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TransactionOptions) {
 		toSerialize["transaction_options"] = o.TransactionOptions
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -345,27 +340,15 @@ func (o *FinancialRequestModel) UnmarshalJSON(data []byte) (err error) {
 
 	varFinancialRequestModel := _FinancialRequestModel{}
 
-	err = json.Unmarshal(data, &varFinancialRequestModel)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varFinancialRequestModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FinancialRequestModel(varFinancialRequestModel)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "card_acceptor")
-		delete(additionalProperties, "card_id")
-		delete(additionalProperties, "cash_back_amount")
-		delete(additionalProperties, "is_pre_auth")
-		delete(additionalProperties, "mid")
-		delete(additionalProperties, "pin")
-		delete(additionalProperties, "transaction_options")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

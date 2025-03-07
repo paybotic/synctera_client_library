@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -68,8 +69,7 @@ type CashResponse struct {
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
 	TenantId string `json:"tenant_id"`
 	// The related transaction id of the transfer.
-	TransactionId        *string `json:"transaction_id,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TransactionId *string `json:"transaction_id,omitempty"`
 }
 
 type _CashResponse CashResponse
@@ -930,11 +930,6 @@ func (o CashResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TransactionId) {
 		toSerialize["transaction_id"] = o.TransactionId
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -970,45 +965,15 @@ func (o *CashResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varCashResponse := _CashResponse{}
 
-	err = json.Unmarshal(data, &varCashResponse)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCashResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CashResponse(varCashResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "dc_sign")
-		delete(additionalProperties, "source_data")
-		delete(additionalProperties, "client_bank_account")
-		delete(additionalProperties, "client_name")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "destination_account_id")
-		delete(additionalProperties, "destination_account_number")
-		delete(additionalProperties, "destination_account_owner_name")
-		delete(additionalProperties, "effective_date")
-		delete(additionalProperties, "failed")
-		delete(additionalProperties, "history")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "is_same_day")
-		delete(additionalProperties, "network_status")
-		delete(additionalProperties, "original_reference_id")
-		delete(additionalProperties, "originating_account_id")
-		delete(additionalProperties, "originating_account_number")
-		delete(additionalProperties, "originating_account_owner_name")
-		delete(additionalProperties, "posting_date")
-		delete(additionalProperties, "reference_id")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "subtype")
-		delete(additionalProperties, "suspended")
-		delete(additionalProperties, "tenant_id")
-		delete(additionalProperties, "transaction_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

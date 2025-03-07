@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -23,9 +24,8 @@ var _ MappedNullable = &SingleUseTokenResponse{}
 type SingleUseTokenResponse struct {
 	CustomerAccountMappingId *string `json:"customer_account_mapping_id,omitempty"`
 	// yyyy-MM-ddTHH:mm:ssZ
-	Expires              time.Time `json:"expires"`
-	Token                *string   `json:"token,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Expires time.Time `json:"expires"`
+	Token   *string   `json:"token,omitempty"`
 }
 
 type _SingleUseTokenResponse SingleUseTokenResponse
@@ -153,11 +153,6 @@ func (o SingleUseTokenResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Token) {
 		toSerialize["token"] = o.Token
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -185,22 +180,15 @@ func (o *SingleUseTokenResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varSingleUseTokenResponse := _SingleUseTokenResponse{}
 
-	err = json.Unmarshal(data, &varSingleUseTokenResponse)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSingleUseTokenResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SingleUseTokenResponse(varSingleUseTokenResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "customer_account_mapping_id")
-		delete(additionalProperties, "expires")
-		delete(additionalProperties, "token")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

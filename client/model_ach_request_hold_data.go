@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -20,9 +21,8 @@ var _ MappedNullable = &AchRequestHoldData{}
 
 // AchRequestHoldData struct for AchRequestHoldData
 type AchRequestHoldData struct {
-	Amount               int32 `json:"amount"`
-	Duration             int32 `json:"duration"`
-	AdditionalProperties map[string]interface{}
+	Amount   int32 `json:"amount"`
+	Duration int32 `json:"duration"`
 }
 
 type _AchRequestHoldData AchRequestHoldData
@@ -106,11 +106,6 @@ func (o AchRequestHoldData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["amount"] = o.Amount
 	toSerialize["duration"] = o.Duration
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -139,21 +134,15 @@ func (o *AchRequestHoldData) UnmarshalJSON(data []byte) (err error) {
 
 	varAchRequestHoldData := _AchRequestHoldData{}
 
-	err = json.Unmarshal(data, &varAchRequestHoldData)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAchRequestHoldData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AchRequestHoldData(varAchRequestHoldData)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "duration")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

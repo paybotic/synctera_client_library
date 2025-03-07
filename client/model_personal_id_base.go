@@ -25,11 +25,8 @@ type PersonalIdBase struct {
 	// The personal identifier. Format varies by personal identifier type.
 	Identifier *string `json:"identifier,omitempty"`
 	// True if the identifier was provided by the system, e.g. via SSN Prefill.
-	SystemProvided       *bool `json:"system_provided,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SystemProvided *bool `json:"system_provided,omitempty"`
 }
-
-type _PersonalIdBase PersonalIdBase
 
 // NewPersonalIdBase instantiates a new PersonalIdBase object
 // This constructor will assign default values to properties that have it defined,
@@ -198,36 +195,7 @@ func (o PersonalIdBase) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SystemProvided) {
 		toSerialize["system_provided"] = o.SystemProvided
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *PersonalIdBase) UnmarshalJSON(data []byte) (err error) {
-	varPersonalIdBase := _PersonalIdBase{}
-
-	err = json.Unmarshal(data, &varPersonalIdBase)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PersonalIdBase(varPersonalIdBase)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "id_type")
-		delete(additionalProperties, "identifier")
-		delete(additionalProperties, "system_provided")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullablePersonalIdBase struct {

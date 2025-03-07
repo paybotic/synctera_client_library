@@ -20,11 +20,8 @@ var _ MappedNullable = &SpendingLimitsTransaction{}
 // SpendingLimitsTransaction Individual transaction limit
 type SpendingLimitsTransaction struct {
 	// Maximum amount allowed. Unit in cents.
-	Amount               *int64 `json:"amount,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Amount *int64 `json:"amount,omitempty"`
 }
-
-type _SpendingLimitsTransaction SpendingLimitsTransaction
 
 // NewSpendingLimitsTransaction instantiates a new SpendingLimitsTransaction object
 // This constructor will assign default values to properties that have it defined,
@@ -88,33 +85,7 @@ func (o SpendingLimitsTransaction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *SpendingLimitsTransaction) UnmarshalJSON(data []byte) (err error) {
-	varSpendingLimitsTransaction := _SpendingLimitsTransaction{}
-
-	err = json.Unmarshal(data, &varSpendingLimitsTransaction)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SpendingLimitsTransaction(varSpendingLimitsTransaction)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableSpendingLimitsTransaction struct {

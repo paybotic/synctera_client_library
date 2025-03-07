@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type WebhookList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of webhooks
-	Webhooks             []Webhook `json:"webhooks"`
-	AdditionalProperties map[string]interface{}
+	Webhooks []Webhook `json:"webhooks"`
 }
 
 type _WebhookList WebhookList
@@ -117,11 +117,6 @@ func (o WebhookList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["webhooks"] = o.Webhooks
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -149,21 +144,15 @@ func (o *WebhookList) UnmarshalJSON(data []byte) (err error) {
 
 	varWebhookList := _WebhookList{}
 
-	err = json.Unmarshal(data, &varWebhookList)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varWebhookList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WebhookList(varWebhookList)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "next_page_token")
-		delete(additionalProperties, "webhooks")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

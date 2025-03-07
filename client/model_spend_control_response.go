@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -47,7 +48,6 @@ type SpendControlResponse struct {
 	TimeRange    SpendControlTimeRange `json:"time_range"`
 	// A count of how many accounts are using this spend control
 	NumberOfRelatedAccounts int32 `json:"number_of_related_accounts"`
-	AdditionalProperties    map[string]interface{}
 }
 
 type _SpendControlResponse SpendControlResponse
@@ -479,11 +479,6 @@ func (o SpendControlResponse) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["time_range"] = o.TimeRange
 	toSerialize["number_of_related_accounts"] = o.NumberOfRelatedAccounts
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -520,33 +515,15 @@ func (o *SpendControlResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varSpendControlResponse := _SpendControlResponse{}
 
-	err = json.Unmarshal(data, &varSpendControlResponse)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSpendControlResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SpendControlResponse(varSpendControlResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "action_case")
-		delete(additionalProperties, "action_decline")
-		delete(additionalProperties, "amount_limit")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "direction")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "is_active")
-		delete(additionalProperties, "last_modified_time")
-		delete(additionalProperties, "merchant_category_codes")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "payment_sub_types")
-		delete(additionalProperties, "payment_types")
-		delete(additionalProperties, "time_range")
-		delete(additionalProperties, "number_of_related_accounts")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

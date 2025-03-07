@@ -20,11 +20,8 @@ var _ MappedNullable = &InternalTransferPatch{}
 // InternalTransferPatch struct for InternalTransferPatch
 type InternalTransferPatch struct {
 	// The desired status of the internal transfer auth
-	Status               *string `json:"status,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Status *string `json:"status,omitempty"`
 }
-
-type _InternalTransferPatch InternalTransferPatch
 
 // NewInternalTransferPatch instantiates a new InternalTransferPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -88,33 +85,7 @@ func (o InternalTransferPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *InternalTransferPatch) UnmarshalJSON(data []byte) (err error) {
-	varInternalTransferPatch := _InternalTransferPatch{}
-
-	err = json.Unmarshal(data, &varInternalTransferPatch)
-
-	if err != nil {
-		return err
-	}
-
-	*o = InternalTransferPatch(varInternalTransferPatch)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "status")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableInternalTransferPatch struct {

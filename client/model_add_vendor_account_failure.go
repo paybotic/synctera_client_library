@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,8 +29,7 @@ type AddVendorAccountFailure struct {
 	// The display_message returned by the vendor. Only returned if reason is set to `PROVIDER_ERROR`. For Plaid, this is the `display_message`.
 	VendorErrorMessage *string `json:"vendor_error_message,omitempty"`
 	// A unique identifier for the request from the vendor, which can be used for troubleshooting. Only returned if reason is set to `PROVIDER_ERROR`.
-	VendorRequestId      *string `json:"vendor_request_id,omitempty"`
-	AdditionalProperties map[string]interface{}
+	VendorRequestId *string `json:"vendor_request_id,omitempty"`
 }
 
 type _AddVendorAccountFailure AddVendorAccountFailure
@@ -209,11 +209,6 @@ func (o AddVendorAccountFailure) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VendorRequestId) {
 		toSerialize["vendor_request_id"] = o.VendorRequestId
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -243,24 +238,15 @@ func (o *AddVendorAccountFailure) UnmarshalJSON(data []byte) (err error) {
 
 	varAddVendorAccountFailure := _AddVendorAccountFailure{}
 
-	err = json.Unmarshal(data, &varAddVendorAccountFailure)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAddVendorAccountFailure)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddVendorAccountFailure(varAddVendorAccountFailure)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "reason")
-		delete(additionalProperties, "reason_description")
-		delete(additionalProperties, "vendor_account_id")
-		delete(additionalProperties, "vendor_error_message")
-		delete(additionalProperties, "vendor_request_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

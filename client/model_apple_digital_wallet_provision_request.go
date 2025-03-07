@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -29,7 +30,6 @@ type AppleDigitalWalletProvisionRequest struct {
 	NonceSignature string `json:"nonce_signature"`
 	// Version of the application making the provisioning request.
 	ProvisioningAppVersion string `json:"provisioning_app_version"`
-	AdditionalProperties   map[string]interface{}
 }
 
 type _AppleDigitalWalletProvisionRequest AppleDigitalWalletProvisionRequest
@@ -191,11 +191,6 @@ func (o AppleDigitalWalletProvisionRequest) ToMap() (map[string]interface{}, err
 	toSerialize["nonce"] = o.Nonce
 	toSerialize["nonce_signature"] = o.NonceSignature
 	toSerialize["provisioning_app_version"] = o.ProvisioningAppVersion
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -227,24 +222,15 @@ func (o *AppleDigitalWalletProvisionRequest) UnmarshalJSON(data []byte) (err err
 
 	varAppleDigitalWalletProvisionRequest := _AppleDigitalWalletProvisionRequest{}
 
-	err = json.Unmarshal(data, &varAppleDigitalWalletProvisionRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAppleDigitalWalletProvisionRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AppleDigitalWalletProvisionRequest(varAppleDigitalWalletProvisionRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "certificates")
-		delete(additionalProperties, "device_type")
-		delete(additionalProperties, "nonce")
-		delete(additionalProperties, "nonce_signature")
-		delete(additionalProperties, "provisioning_app_version")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

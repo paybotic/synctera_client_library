@@ -26,11 +26,8 @@ type PostLicense struct {
 	LicenseNumber *string      `json:"license_number,omitempty"`
 	LicenseType   *LicenseType `json:"license_type,omitempty"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant               *string `json:"tenant,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Tenant *string `json:"tenant,omitempty"`
 }
-
-type _PostLicense PostLicense
 
 // NewPostLicense instantiates a new PostLicense object
 // This constructor will assign default values to properties that have it defined,
@@ -234,37 +231,7 @@ func (o PostLicense) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tenant) {
 		toSerialize["tenant"] = o.Tenant
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *PostLicense) UnmarshalJSON(data []byte) (err error) {
-	varPostLicense := _PostLicense{}
-
-	err = json.Unmarshal(data, &varPostLicense)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PostLicense(varPostLicense)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "license_number")
-		delete(additionalProperties, "license_type")
-		delete(additionalProperties, "tenant")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullablePostLicense struct {

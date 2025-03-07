@@ -22,10 +22,7 @@ type DigitalWalletTokenization struct {
 	// Specifies the digital wallet card art identifier for the card product.
 	CardArtId            *string               `json:"card_art_id,omitempty"`
 	ProvisioningControls *ProvisioningControls `json:"provisioning_controls,omitempty"`
-	AdditionalProperties map[string]interface{}
 }
-
-type _DigitalWalletTokenization DigitalWalletTokenization
 
 // NewDigitalWalletTokenization instantiates a new DigitalWalletTokenization object
 // This constructor will assign default values to properties that have it defined,
@@ -124,34 +121,7 @@ func (o DigitalWalletTokenization) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProvisioningControls) {
 		toSerialize["provisioning_controls"] = o.ProvisioningControls
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *DigitalWalletTokenization) UnmarshalJSON(data []byte) (err error) {
-	varDigitalWalletTokenization := _DigitalWalletTokenization{}
-
-	err = json.Unmarshal(data, &varDigitalWalletTokenization)
-
-	if err != nil {
-		return err
-	}
-
-	*o = DigitalWalletTokenization(varDigitalWalletTokenization)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "card_art_id")
-		delete(additionalProperties, "provisioning_controls")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableDigitalWalletTokenization struct {
