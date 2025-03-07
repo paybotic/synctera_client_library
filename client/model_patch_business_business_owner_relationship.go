@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -37,7 +36,8 @@ type PatchBusinessBusinessOwnerRelationship struct {
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
 	Tenant *string `json:"tenant,omitempty"`
 	// Unique ID for the related business.
-	ToBusinessId *string `json:"to_business_id,omitempty"`
+	ToBusinessId         *string `json:"to_business_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PatchBusinessBusinessOwnerRelationship PatchBusinessBusinessOwnerRelationship
@@ -375,6 +375,11 @@ func (o PatchBusinessBusinessOwnerRelationship) ToMap() (map[string]interface{},
 	if !IsNil(o.ToBusinessId) {
 		toSerialize["to_business_id"] = o.ToBusinessId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -402,15 +407,28 @@ func (o *PatchBusinessBusinessOwnerRelationship) UnmarshalJSON(data []byte) (err
 
 	varPatchBusinessBusinessOwnerRelationship := _PatchBusinessBusinessOwnerRelationship{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPatchBusinessBusinessOwnerRelationship)
+	err = json.Unmarshal(data, &varPatchBusinessBusinessOwnerRelationship)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PatchBusinessBusinessOwnerRelationship(varPatchBusinessBusinessOwnerRelationship)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "additional_data")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "from_business_id")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "relationship_type")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "to_business_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

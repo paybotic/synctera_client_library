@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -63,7 +62,8 @@ type ResponsePerson struct {
 	VerificationLastRun *time.Time         `json:"verification_last_run,omitempty"`
 	VerificationStatus  VerificationStatus `json:"verification_status"`
 	// Array of personal identifiers
-	PersonalIds []ResponsePersonalId `json:"personal_ids,omitempty"`
+	PersonalIds          []ResponsePersonalId `json:"personal_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResponsePerson ResponsePerson
@@ -863,6 +863,11 @@ func (o ResponsePerson) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PersonalIds) {
 		toSerialize["personal_ids"] = o.PersonalIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -897,15 +902,43 @@ func (o *ResponsePerson) UnmarshalJSON(data []byte) (err error) {
 
 	varResponsePerson := _ResponsePerson{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResponsePerson)
+	err = json.Unmarshal(data, &varResponsePerson)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResponsePerson(varResponsePerson)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ban_status")
+		delete(additionalProperties, "chosen_name")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "dob")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "has_accounts")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_customer")
+		delete(additionalProperties, "is_user")
+		delete(additionalProperties, "last_name")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "legal_address")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "middle_name")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "shipping_address")
+		delete(additionalProperties, "ssn")
+		delete(additionalProperties, "ssn_source")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "verification_last_run")
+		delete(additionalProperties, "verification_status")
+		delete(additionalProperties, "personal_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

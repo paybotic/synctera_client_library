@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,8 +21,9 @@ var _ MappedNullable = &MonitoringAlertList{}
 // MonitoringAlertList struct for MonitoringAlertList
 type MonitoringAlertList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
-	NextPageToken *string           `json:"next_page_token,omitempty"`
-	Alerts        []MonitoringAlert `json:"alerts"`
+	NextPageToken        *string           `json:"next_page_token,omitempty"`
+	Alerts               []MonitoringAlert `json:"alerts"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MonitoringAlertList MonitoringAlertList
@@ -116,6 +116,11 @@ func (o MonitoringAlertList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["alerts"] = o.Alerts
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -143,15 +148,21 @@ func (o *MonitoringAlertList) UnmarshalJSON(data []byte) (err error) {
 
 	varMonitoringAlertList := _MonitoringAlertList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMonitoringAlertList)
+	err = json.Unmarshal(data, &varMonitoringAlertList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MonitoringAlertList(varMonitoringAlertList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "alerts")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

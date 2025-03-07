@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -70,7 +69,8 @@ type PhysicalCardPlusStatus struct {
 	FulfillmentDetails    *FulfillmentDetails       `json:"fulfillment_details,omitempty"`
 	// This contains all shipping details as provided by the card fulfillment provider, including the tracking number. This field is deprecated. Instead, please use the fulfillment_details object, which includes a field for just the tracking number.
 	// Deprecated
-	TrackingNumber *string `json:"tracking_number,omitempty"`
+	TrackingNumber       *string `json:"tracking_number,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PhysicalCardPlusStatus PhysicalCardPlusStatus
@@ -1084,6 +1084,11 @@ func (o PhysicalCardPlusStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TrackingNumber) {
 		toSerialize["tracking_number"] = o.TrackingNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1114,15 +1119,48 @@ func (o *PhysicalCardPlusStatus) UnmarshalJSON(data []byte) (err error) {
 
 	varPhysicalCardPlusStatus := _PhysicalCardPlusStatus{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPhysicalCardPlusStatus)
+	err = json.Unmarshal(data, &varPhysicalCardPlusStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PhysicalCardPlusStatus(varPhysicalCardPlusStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_id")
+		delete(additionalProperties, "business_id")
+		delete(additionalProperties, "card_product_id")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "customer_id")
+		delete(additionalProperties, "emboss_name")
+		delete(additionalProperties, "expiration_month")
+		delete(additionalProperties, "expiration_time")
+		delete(additionalProperties, "expiration_year")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_pin_set")
+		delete(additionalProperties, "last_four")
+		delete(additionalProperties, "last_modified_time")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "reissue_reason")
+		delete(additionalProperties, "reissued_from_id")
+		delete(additionalProperties, "reissued_to_id")
+		delete(additionalProperties, "timestamp_pin_set")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "form")
+		delete(additionalProperties, "card_image_id")
+		delete(additionalProperties, "shipping")
+		delete(additionalProperties, "card_status")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "pending_reasons")
+		delete(additionalProperties, "status_reason")
+		delete(additionalProperties, "card_fulfillment_status")
+		delete(additionalProperties, "fulfillment_details")
+		delete(additionalProperties, "tracking_number")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

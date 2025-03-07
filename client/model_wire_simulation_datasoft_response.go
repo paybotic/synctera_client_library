@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,7 +20,8 @@ var _ MappedNullable = &WireSimulationDatasoftResponse{}
 
 // WireSimulationDatasoftResponse Incoming Wire simulation result with the webhook ID
 type WireSimulationDatasoftResponse struct {
-	WebhookId string `json:"webhook_id"`
+	WebhookId            string `json:"webhook_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WireSimulationDatasoftResponse WireSimulationDatasoftResponse
@@ -79,6 +79,11 @@ func (o WireSimulationDatasoftResponse) MarshalJSON() ([]byte, error) {
 func (o WireSimulationDatasoftResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["webhook_id"] = o.WebhookId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *WireSimulationDatasoftResponse) UnmarshalJSON(data []byte) (err error) 
 
 	varWireSimulationDatasoftResponse := _WireSimulationDatasoftResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWireSimulationDatasoftResponse)
+	err = json.Unmarshal(data, &varWireSimulationDatasoftResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WireSimulationDatasoftResponse(varWireSimulationDatasoftResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "webhook_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -32,8 +32,11 @@ type Party struct {
 	// name of the person
 	Name *string `json:"name,omitempty"`
 	// routing number of the bank this person is a member of
-	RoutingNumber *string `json:"routing_number,omitempty"`
+	RoutingNumber        *string `json:"routing_number,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Party Party
 
 // NewParty instantiates a new Party object
 // This constructor will assign default values to properties that have it defined,
@@ -342,7 +345,40 @@ func (o Party) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RoutingNumber) {
 		toSerialize["routing_number"] = o.RoutingNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Party) UnmarshalJSON(data []byte) (err error) {
+	varParty := _Party{}
+
+	err = json.Unmarshal(data, &varParty)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Party(varParty)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_number")
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "address_lines")
+		delete(additionalProperties, "alternate_identifier")
+		delete(additionalProperties, "bank_name")
+		delete(additionalProperties, "identifier_type")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "routing_number")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableParty struct {

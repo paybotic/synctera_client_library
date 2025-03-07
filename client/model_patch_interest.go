@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -29,7 +28,8 @@ type PatchInterest struct {
 	Id          *string `json:"id,omitempty"`
 	ProductType string  `json:"product_type"`
 	// A list of interest rate. Date intervals between valid_from and valid_to expect to have no overlap.
-	Rates []RateDetails `json:"rates,omitempty"`
+	Rates                []RateDetails `json:"rates,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PatchInterest PatchInterest
@@ -262,6 +262,11 @@ func (o PatchInterest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Rates) {
 		toSerialize["rates"] = o.Rates
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -289,15 +294,25 @@ func (o *PatchInterest) UnmarshalJSON(data []byte) (err error) {
 
 	varPatchInterest := _PatchInterest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPatchInterest)
+	err = json.Unmarshal(data, &varPatchInterest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PatchInterest(varPatchInterest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "accrual_payout_schedule")
+		delete(additionalProperties, "calculation_method")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "product_type")
+		delete(additionalProperties, "rates")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

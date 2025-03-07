@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -27,6 +26,7 @@ type ReversalModel struct {
 	IsAdvice               *bool             `json:"is_advice,omitempty"`
 	NetworkFees            []NetworkFeeModel `json:"network_fees,omitempty"`
 	OriginalTransactionId  string            `json:"original_transaction_id"`
+	AdditionalProperties   map[string]interface{}
 }
 
 type _ReversalModel ReversalModel
@@ -219,6 +219,11 @@ func (o ReversalModel) ToMap() (map[string]interface{}, error) {
 		toSerialize["network_fees"] = o.NetworkFees
 	}
 	toSerialize["original_transaction_id"] = o.OriginalTransactionId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -247,15 +252,24 @@ func (o *ReversalModel) UnmarshalJSON(data []byte) (err error) {
 
 	varReversalModel := _ReversalModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReversalModel)
+	err = json.Unmarshal(data, &varReversalModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReversalModel(varReversalModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "find_original_window_days")
+		delete(additionalProperties, "is_advice")
+		delete(additionalProperties, "network_fees")
+		delete(additionalProperties, "original_transaction_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

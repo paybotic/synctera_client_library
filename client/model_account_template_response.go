@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -32,7 +31,8 @@ type AccountTemplateResponse struct {
 	Name     string                        `json:"name"`
 	Template TemplateFieldsGenericResponse `json:"template"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant *string `json:"tenant,omitempty"`
+	Tenant               *string `json:"tenant,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AccountTemplateResponse AccountTemplateResponse
@@ -282,6 +282,11 @@ func (o AccountTemplateResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tenant) {
 		toSerialize["tenant"] = o.Tenant
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -311,15 +316,26 @@ func (o *AccountTemplateResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varAccountTemplateResponse := _AccountTemplateResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAccountTemplateResponse)
+	err = json.Unmarshal(data, &varAccountTemplateResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AccountTemplateResponse(varAccountTemplateResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "application_type")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_enabled")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "template")
+		delete(additionalProperties, "tenant")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

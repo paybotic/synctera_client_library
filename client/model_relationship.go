@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,8 +21,9 @@ var _ MappedNullable = &Relationship{}
 // Relationship struct for Relationship
 type Relationship struct {
 	// ID of related entity
-	Id               string           `json:"id"`
-	RelationshipRole RelationshipRole `json:"relationship_role"`
+	Id                   string           `json:"id"`
+	RelationshipRole     RelationshipRole `json:"relationship_role"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Relationship Relationship
@@ -107,6 +107,11 @@ func (o Relationship) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["relationship_role"] = o.RelationshipRole
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *Relationship) UnmarshalJSON(data []byte) (err error) {
 
 	varRelationship := _Relationship{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRelationship)
+	err = json.Unmarshal(data, &varRelationship)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Relationship(varRelationship)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "relationship_role")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

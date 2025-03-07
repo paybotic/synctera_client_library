@@ -24,8 +24,11 @@ type AddressLines struct {
 	// address line 2 from wire file
 	AddressLine2 *string `json:"address_line_2,omitempty"`
 	// address line 3 from wire file
-	AddressLine3 *string `json:"address_line_3,omitempty"`
+	AddressLine3         *string `json:"address_line_3,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AddressLines AddressLines
 
 // NewAddressLines instantiates a new AddressLines object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o AddressLines) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AddressLine3) {
 		toSerialize["address_line_3"] = o.AddressLine3
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AddressLines) UnmarshalJSON(data []byte) (err error) {
+	varAddressLines := _AddressLines{}
+
+	err = json.Unmarshal(data, &varAddressLines)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AddressLines(varAddressLines)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "address_line_1")
+		delete(additionalProperties, "address_line_2")
+		delete(additionalProperties, "address_line_3")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAddressLines struct {

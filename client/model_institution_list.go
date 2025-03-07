@@ -20,9 +20,12 @@ var _ MappedNullable = &InstitutionList{}
 // InstitutionList struct for InstitutionList
 type InstitutionList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
-	NextPageToken *string       `json:"next_page_token,omitempty"`
-	Institutions  []Institution `json:"institutions,omitempty"`
+	NextPageToken        *string       `json:"next_page_token,omitempty"`
+	Institutions         []Institution `json:"institutions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InstitutionList InstitutionList
 
 // NewInstitutionList instantiates a new InstitutionList object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o InstitutionList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Institutions) {
 		toSerialize["institutions"] = o.Institutions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InstitutionList) UnmarshalJSON(data []byte) (err error) {
+	varInstitutionList := _InstitutionList{}
+
+	err = json.Unmarshal(data, &varInstitutionList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InstitutionList(varInstitutionList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "institutions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInstitutionList struct {

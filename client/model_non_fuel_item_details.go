@@ -19,12 +19,15 @@ var _ MappedNullable = &NonFuelItemDetails{}
 
 // NonFuelItemDetails struct for NonFuelItemDetails
 type NonFuelItemDetails struct {
-	Description   *string `json:"description,omitempty"`
-	ProductCode   *string `json:"product_code,omitempty"`
-	Quantity      *int64  `json:"quantity,omitempty"`
-	UnitOfMeasure *string `json:"unit_of_measure,omitempty"`
-	UnitPrice     *int64  `json:"unit_price,omitempty"`
+	Description          *string `json:"description,omitempty"`
+	ProductCode          *string `json:"product_code,omitempty"`
+	Quantity             *int64  `json:"quantity,omitempty"`
+	UnitOfMeasure        *string `json:"unit_of_measure,omitempty"`
+	UnitPrice            *int64  `json:"unit_price,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NonFuelItemDetails NonFuelItemDetails
 
 // NewNonFuelItemDetails instantiates a new NonFuelItemDetails object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o NonFuelItemDetails) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UnitPrice) {
 		toSerialize["unit_price"] = o.UnitPrice
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NonFuelItemDetails) UnmarshalJSON(data []byte) (err error) {
+	varNonFuelItemDetails := _NonFuelItemDetails{}
+
+	err = json.Unmarshal(data, &varNonFuelItemDetails)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NonFuelItemDetails(varNonFuelItemDetails)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "product_code")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "unit_of_measure")
+		delete(additionalProperties, "unit_price")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNonFuelItemDetails struct {

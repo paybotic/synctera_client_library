@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -37,7 +36,8 @@ type GatewayConfig struct {
 	// Time when Gateway Config object was updated
 	Updated *time.Time `json:"updated,omitempty"`
 	// The URL address which will be used for the ACH in Auth Flow requests to get authorization from the fintech to process the transaction
-	Url *string `json:"url,omitempty"`
+	Url                  *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GatewayConfig GatewayConfig
@@ -348,6 +348,11 @@ func (o GatewayConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -375,15 +380,27 @@ func (o *GatewayConfig) UnmarshalJSON(data []byte) (err error) {
 
 	varGatewayConfig := _GatewayConfig{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGatewayConfig)
+	err = json.Unmarshal(data, &varGatewayConfig)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GatewayConfig(varGatewayConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "created")
+		delete(additionalProperties, "custom_headers")
+		delete(additionalProperties, "disabled")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "max_wait_ms")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "updated")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

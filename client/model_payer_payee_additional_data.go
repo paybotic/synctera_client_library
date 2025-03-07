@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,7 +20,8 @@ var _ MappedNullable = &PayerPayeeAdditionalData{}
 
 // PayerPayeeAdditionalData Contains the type of transfer for the payer and payee relationship
 type PayerPayeeAdditionalData struct {
-	TransferType string `json:"transfer_type"`
+	TransferType         string `json:"transfer_type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PayerPayeeAdditionalData PayerPayeeAdditionalData
@@ -79,6 +79,11 @@ func (o PayerPayeeAdditionalData) MarshalJSON() ([]byte, error) {
 func (o PayerPayeeAdditionalData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["transfer_type"] = o.TransferType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *PayerPayeeAdditionalData) UnmarshalJSON(data []byte) (err error) {
 
 	varPayerPayeeAdditionalData := _PayerPayeeAdditionalData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPayerPayeeAdditionalData)
+	err = json.Unmarshal(data, &varPayerPayeeAdditionalData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PayerPayeeAdditionalData(varPayerPayeeAdditionalData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "transfer_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

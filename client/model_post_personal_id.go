@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -29,7 +28,8 @@ type PostPersonalId struct {
 	// True if the identifier was provided by the system, e.g. via SSN Prefill.
 	SystemProvided *bool `json:"system_provided,omitempty"`
 	// The ISO 3166 Alpha-2 country code for the country that issued the personal identifier. This is optional for personal identifier types that have an implicit country, e.g. SSN. This is required for other types, e.g. PASSPORT_NUMBER.
-	CountryCode *string `json:"country_code,omitempty"`
+	CountryCode          *string `json:"country_code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PostPersonalId PostPersonalId
@@ -218,6 +218,11 @@ func (o PostPersonalId) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CountryCode) {
 		toSerialize["country_code"] = o.CountryCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -246,15 +251,24 @@ func (o *PostPersonalId) UnmarshalJSON(data []byte) (err error) {
 
 	varPostPersonalId := _PostPersonalId{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPostPersonalId)
+	err = json.Unmarshal(data, &varPostPersonalId)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PostPersonalId(varPostPersonalId)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "id_type")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "system_provided")
+		delete(additionalProperties, "country_code")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

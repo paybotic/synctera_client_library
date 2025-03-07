@@ -20,8 +20,11 @@ var _ MappedNullable = &TokenList{}
 // TokenList struct for TokenList
 type TokenList struct {
 	// Array of Digital Wallet Token information of a Card
-	DigitalWalletTokens []DigitalWalletTokenResponse `json:"digital_wallet_tokens,omitempty"`
+	DigitalWalletTokens  []DigitalWalletTokenResponse `json:"digital_wallet_tokens,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TokenList TokenList
 
 // NewTokenList instantiates a new TokenList object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o TokenList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DigitalWalletTokens) {
 		toSerialize["digital_wallet_tokens"] = o.DigitalWalletTokens
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TokenList) UnmarshalJSON(data []byte) (err error) {
+	varTokenList := _TokenList{}
+
+	err = json.Unmarshal(data, &varTokenList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TokenList(varTokenList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "digital_wallet_tokens")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTokenList struct {

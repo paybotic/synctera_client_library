@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,7 +20,8 @@ var _ MappedNullable = &WireSimulationFedwireResponse{}
 
 // WireSimulationFedwireResponse Incoming Wire simulation result with the created file name
 type WireSimulationFedwireResponse struct {
-	FileName string `json:"file_name"`
+	FileName             string `json:"file_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WireSimulationFedwireResponse WireSimulationFedwireResponse
@@ -79,6 +79,11 @@ func (o WireSimulationFedwireResponse) MarshalJSON() ([]byte, error) {
 func (o WireSimulationFedwireResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["file_name"] = o.FileName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *WireSimulationFedwireResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varWireSimulationFedwireResponse := _WireSimulationFedwireResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWireSimulationFedwireResponse)
+	err = json.Unmarshal(data, &varWireSimulationFedwireResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WireSimulationFedwireResponse(varWireSimulationFedwireResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "file_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

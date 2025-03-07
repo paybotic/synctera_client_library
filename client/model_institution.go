@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,7 +27,8 @@ type Institution struct {
 	// The name of the financial institution
 	Name string `json:"name"`
 	// Array of routing identifier objects
-	RoutingIdentifiers []RoutingIdentifier `json:"routing_identifiers"`
+	RoutingIdentifiers   []RoutingIdentifier `json:"routing_identifiers"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Institution Institution
@@ -173,6 +173,11 @@ func (o Institution) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["name"] = o.Name
 	toSerialize["routing_identifiers"] = o.RoutingIdentifiers
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -202,15 +207,23 @@ func (o *Institution) UnmarshalJSON(data []byte) (err error) {
 
 	varInstitution := _Institution{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInstitution)
+	err = json.Unmarshal(data, &varInstitution)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Institution(varInstitution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "country_codes")
+		delete(additionalProperties, "logo")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "routing_identifiers")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

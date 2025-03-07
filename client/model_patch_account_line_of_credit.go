@@ -76,8 +76,11 @@ type PatchAccountLineOfCredit struct {
 	GracePeriod    *int32                 `json:"grace_period,omitempty"`
 	MinimumPayment *MinimumPaymentPartial `json:"minimum_payment,omitempty"`
 	// Add an optional note when patching a line of credit account. A note is required when setting the status to or from SUSPENDED.
-	Note *string `json:"note,omitempty"`
+	Note                 *string `json:"note,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PatchAccountLineOfCredit PatchAccountLineOfCredit
 
 // NewPatchAccountLineOfCredit instantiates a new PatchAccountLineOfCredit object
 // This constructor will assign default values to properties that have it defined,
@@ -1191,7 +1194,63 @@ func (o PatchAccountLineOfCredit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Note) {
 		toSerialize["note"] = o.Note
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PatchAccountLineOfCredit) UnmarshalJSON(data []byte) (err error) {
+	varPatchAccountLineOfCredit := _PatchAccountLineOfCredit{}
+
+	err = json.Unmarshal(data, &varPatchAccountLineOfCredit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PatchAccountLineOfCredit(varPatchAccountLineOfCredit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_ach_enabled")
+		delete(additionalProperties, "is_eft_ca_enabled")
+		delete(additionalProperties, "is_p2p_enabled")
+		delete(additionalProperties, "is_synctera_pay_enabled")
+		delete(additionalProperties, "is_wire_enabled")
+		delete(additionalProperties, "access_status")
+		delete(additionalProperties, "account_number")
+		delete(additionalProperties, "account_number_masked")
+		delete(additionalProperties, "account_purpose")
+		delete(additionalProperties, "account_type")
+		delete(additionalProperties, "application_id")
+		delete(additionalProperties, "balances")
+		delete(additionalProperties, "bank_routing")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "customer_ids")
+		delete(additionalProperties, "customer_type")
+		delete(additionalProperties, "exchange_rate_type")
+		delete(additionalProperties, "iban")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_account_pool")
+		delete(additionalProperties, "is_sar_enabled")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "nickname")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "swift_code")
+		delete(additionalProperties, "credit_limit")
+		delete(additionalProperties, "grace_period")
+		delete(additionalProperties, "minimum_payment")
+		delete(additionalProperties, "note")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePatchAccountLineOfCredit struct {

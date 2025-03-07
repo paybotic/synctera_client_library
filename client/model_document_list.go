@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,7 +23,8 @@ type DocumentList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of documents
-	Documents []DocumentResponse `json:"documents"`
+	Documents            []DocumentResponse `json:"documents"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DocumentList DocumentList
@@ -117,6 +117,11 @@ func (o DocumentList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["documents"] = o.Documents
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *DocumentList) UnmarshalJSON(data []byte) (err error) {
 
 	varDocumentList := _DocumentList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDocumentList)
+	err = json.Unmarshal(data, &varDocumentList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DocumentList(varDocumentList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "documents")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

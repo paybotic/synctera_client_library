@@ -19,8 +19,11 @@ var _ MappedNullable = &TriggerEventRequest{}
 
 // TriggerEventRequest struct for TriggerEventRequest
 type TriggerEventRequest struct {
-	Event *EventType `json:"event,omitempty"`
+	Event                *EventType `json:"event,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TriggerEventRequest TriggerEventRequest
 
 // NewTriggerEventRequest instantiates a new TriggerEventRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o TriggerEventRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Event) {
 		toSerialize["event"] = o.Event
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TriggerEventRequest) UnmarshalJSON(data []byte) (err error) {
+	varTriggerEventRequest := _TriggerEventRequest{}
+
+	err = json.Unmarshal(data, &varTriggerEventRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TriggerEventRequest(varTriggerEventRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "event")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTriggerEventRequest struct {

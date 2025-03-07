@@ -23,8 +23,11 @@ type ReplaceSecret200Response struct {
 	// Timestamp that the old secret is delete
 	DeletedAt *time.Time `json:"deleted_at,omitempty"`
 	// Generated secret. Do not share. This secret will be used to verify that webhook requests were sent from Synctera.
-	Secret *string `json:"secret,omitempty"`
+	Secret               *string `json:"secret,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplaceSecret200Response ReplaceSecret200Response
 
 // NewReplaceSecret200Response instantiates a new ReplaceSecret200Response object
 // This constructor will assign default values to properties that have it defined,
@@ -123,7 +126,34 @@ func (o ReplaceSecret200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Secret) {
 		toSerialize["secret"] = o.Secret
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplaceSecret200Response) UnmarshalJSON(data []byte) (err error) {
+	varReplaceSecret200Response := _ReplaceSecret200Response{}
+
+	err = json.Unmarshal(data, &varReplaceSecret200Response)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplaceSecret200Response(varReplaceSecret200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "deleted_at")
+		delete(additionalProperties, "secret")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplaceSecret200Response struct {

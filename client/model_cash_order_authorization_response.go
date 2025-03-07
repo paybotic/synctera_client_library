@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -40,7 +39,8 @@ type CashOrderAuthorizationResponse struct {
 	OriginatingAccountId string `json:"originating_account_id"`
 	Status               string `json:"status"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant string `json:"tenant"`
+	Tenant               string `json:"tenant"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CashOrderAuthorizationResponse CashOrderAuthorizationResponse
@@ -358,6 +358,11 @@ func (o CashOrderAuthorizationResponse) ToMap() (map[string]interface{}, error) 
 	toSerialize["originating_account_id"] = o.OriginatingAccountId
 	toSerialize["status"] = o.Status
 	toSerialize["tenant"] = o.Tenant
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -395,15 +400,30 @@ func (o *CashOrderAuthorizationResponse) UnmarshalJSON(data []byte) (err error) 
 
 	varCashOrderAuthorizationResponse := _CashOrderAuthorizationResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCashOrderAuthorizationResponse)
+	err = json.Unmarshal(data, &varCashOrderAuthorizationResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CashOrderAuthorizationResponse(varCashOrderAuthorizationResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "authorization_type")
+		delete(additionalProperties, "destination_account_id")
+		delete(additionalProperties, "order_date")
+		delete(additionalProperties, "account_number")
+		delete(additionalProperties, "client_name")
+		delete(additionalProperties, "hold_id")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "originating_account_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "tenant")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

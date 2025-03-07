@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,7 +23,8 @@ type AccountProductList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of account products
-	AccountProducts []AccountProduct `json:"account_products"`
+	AccountProducts      []AccountProduct `json:"account_products"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AccountProductList AccountProductList
@@ -117,6 +117,11 @@ func (o AccountProductList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["account_products"] = o.AccountProducts
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *AccountProductList) UnmarshalJSON(data []byte) (err error) {
 
 	varAccountProductList := _AccountProductList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAccountProductList)
+	err = json.Unmarshal(data, &varAccountProductList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AccountProductList(varAccountProductList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "account_products")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

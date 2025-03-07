@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,7 +27,8 @@ type ExternalCardRequest struct {
 	// The cardholder name
 	Name string `json:"name"`
 	// The token that was returned via tokenization iframe
-	Token string `json:"token"`
+	Token                string `json:"token"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ExternalCardRequest ExternalCardRequest
@@ -173,6 +173,11 @@ func (o ExternalCardRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["customer_id"] = o.CustomerId
 	toSerialize["name"] = o.Name
 	toSerialize["token"] = o.Token
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -202,15 +207,23 @@ func (o *ExternalCardRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varExternalCardRequest := _ExternalCardRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExternalCardRequest)
+	err = json.Unmarshal(data, &varExternalCardRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExternalCardRequest(varExternalCardRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "business_id")
+		delete(additionalProperties, "customer_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "token")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

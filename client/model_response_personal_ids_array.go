@@ -20,8 +20,11 @@ var _ MappedNullable = &ResponsePersonalIdsArray{}
 // ResponsePersonalIdsArray struct for ResponsePersonalIdsArray
 type ResponsePersonalIdsArray struct {
 	// Array of personal identifiers
-	PersonalIds []ResponsePersonalId `json:"personal_ids,omitempty"`
+	PersonalIds          []ResponsePersonalId `json:"personal_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ResponsePersonalIdsArray ResponsePersonalIdsArray
 
 // NewResponsePersonalIdsArray instantiates a new ResponsePersonalIdsArray object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o ResponsePersonalIdsArray) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PersonalIds) {
 		toSerialize["personal_ids"] = o.PersonalIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ResponsePersonalIdsArray) UnmarshalJSON(data []byte) (err error) {
+	varResponsePersonalIdsArray := _ResponsePersonalIdsArray{}
+
+	err = json.Unmarshal(data, &varResponsePersonalIdsArray)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ResponsePersonalIdsArray(varResponsePersonalIdsArray)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "personal_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableResponsePersonalIdsArray struct {

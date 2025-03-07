@@ -25,8 +25,11 @@ type Income struct {
 	Currency  *string           `json:"currency,omitempty" validate:"regexp=^[A-Z]{3}$"`
 	Frequency NullableFrequency `json:"frequency,omitempty"`
 	// The source of the income
-	Source NullableString `json:"source,omitempty"`
+	Source               NullableString `json:"source,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Income Income
 
 // NewIncome instantiates a new Income object
 // This constructor will assign default values to properties that have it defined,
@@ -217,7 +220,36 @@ func (o Income) ToMap() (map[string]interface{}, error) {
 	if o.Source.IsSet() {
 		toSerialize["source"] = o.Source.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Income) UnmarshalJSON(data []byte) (err error) {
+	varIncome := _Income{}
+
+	err = json.Unmarshal(data, &varIncome)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Income(varIncome)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "frequency")
+		delete(additionalProperties, "source")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncome struct {

@@ -20,7 +20,7 @@ go install golang.org/x/tools/cmd/goimports@latest
 5. Run the command:
 
 ```
-openapi-generator generate -i synctera_openapi.json -g go -o ./client --additional-properties=useOneOfDiscriminatorLookup=true,enumClassPrefix=true,packageName=synctera_client,additionalProperties=true --git-user-id paybotic --git-repo-id synctera_client_library/client --global-property=apiTests=false
+openapi-generator generate -i synctera_openapi.json -g go -o ./client --additional-properties=useOneOfDiscriminatorLookup=true,enumClassPrefix=true,packageName=synctera_client,disallowAdditionalPropertiesIfNotPresent=false --git-user-id paybotic --git-repo-id synctera_client_library/client --global-property=apiTests=false
 ```
 
 6. Switch to ./client directory

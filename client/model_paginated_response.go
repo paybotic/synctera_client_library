@@ -20,8 +20,11 @@ var _ MappedNullable = &PaginatedResponse{}
 // PaginatedResponse struct for PaginatedResponse
 type PaginatedResponse struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
-	NextPageToken *string `json:"next_page_token,omitempty"`
+	NextPageToken        *string `json:"next_page_token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PaginatedResponse PaginatedResponse
 
 // NewPaginatedResponse instantiates a new PaginatedResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o PaginatedResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NextPageToken) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PaginatedResponse) UnmarshalJSON(data []byte) (err error) {
+	varPaginatedResponse := _PaginatedResponse{}
+
+	err = json.Unmarshal(data, &varPaginatedResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PaginatedResponse(varPaginatedResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePaginatedResponse struct {

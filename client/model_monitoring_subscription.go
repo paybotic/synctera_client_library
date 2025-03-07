@@ -31,8 +31,11 @@ type MonitoringSubscription struct {
 	// Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	// Unique ID for the person. Exactly one of `person_id` or `business_id` must be set.
-	PersonId *string `json:"person_id,omitempty"`
+	PersonId             *string `json:"person_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MonitoringSubscription MonitoringSubscription
 
 // NewMonitoringSubscription instantiates a new MonitoringSubscription object
 // This constructor will assign default values to properties that have it defined,
@@ -271,7 +274,38 @@ func (o MonitoringSubscription) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PersonId) {
 		toSerialize["person_id"] = o.PersonId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MonitoringSubscription) UnmarshalJSON(data []byte) (err error) {
+	varMonitoringSubscription := _MonitoringSubscription{}
+
+	err = json.Unmarshal(data, &varMonitoringSubscription)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MonitoringSubscription(varMonitoringSubscription)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "business_id")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "person_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMonitoringSubscription struct {

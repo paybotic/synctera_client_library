@@ -58,9 +58,12 @@ type BasePerson struct {
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
 	Tenant *string `json:"tenant,omitempty"`
 	// Date and time KYC verification was last run on the person.
-	VerificationLastRun *time.Time          `json:"verification_last_run,omitempty"`
-	VerificationStatus  *VerificationStatus `json:"verification_status,omitempty"`
+	VerificationLastRun  *time.Time          `json:"verification_last_run,omitempty"`
+	VerificationStatus   *VerificationStatus `json:"verification_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BasePerson BasePerson
 
 // NewBasePerson instantiates a new BasePerson object
 // This constructor will assign default values to properties that have it defined,
@@ -894,7 +897,55 @@ func (o BasePerson) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VerificationStatus) {
 		toSerialize["verification_status"] = o.VerificationStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BasePerson) UnmarshalJSON(data []byte) (err error) {
+	varBasePerson := _BasePerson{}
+
+	err = json.Unmarshal(data, &varBasePerson)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BasePerson(varBasePerson)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ban_status")
+		delete(additionalProperties, "chosen_name")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "dob")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "has_accounts")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_customer")
+		delete(additionalProperties, "is_user")
+		delete(additionalProperties, "last_name")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "legal_address")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "middle_name")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "shipping_address")
+		delete(additionalProperties, "ssn")
+		delete(additionalProperties, "ssn_source")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "verification_last_run")
+		delete(additionalProperties, "verification_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBasePerson struct {

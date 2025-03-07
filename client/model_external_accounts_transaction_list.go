@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,7 +21,8 @@ var _ MappedNullable = &ExternalAccountsTransactionList{}
 // ExternalAccountsTransactionList struct for ExternalAccountsTransactionList
 type ExternalAccountsTransactionList struct {
 	// Array of transactions of a given external account
-	Transactions []ExternalAccountTransaction `json:"transactions"`
+	Transactions         []ExternalAccountTransaction `json:"transactions"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ExternalAccountsTransactionList ExternalAccountsTransactionList
@@ -80,6 +80,11 @@ func (o ExternalAccountsTransactionList) MarshalJSON() ([]byte, error) {
 func (o ExternalAccountsTransactionList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["transactions"] = o.Transactions
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *ExternalAccountsTransactionList) UnmarshalJSON(data []byte) (err error)
 
 	varExternalAccountsTransactionList := _ExternalAccountsTransactionList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExternalAccountsTransactionList)
+	err = json.Unmarshal(data, &varExternalAccountsTransactionList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExternalAccountsTransactionList(varExternalAccountsTransactionList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "transactions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

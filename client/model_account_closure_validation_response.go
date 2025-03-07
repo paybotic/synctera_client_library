@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -27,7 +26,8 @@ type AccountClosureValidationResponse struct {
 	// Name
 	Name string `json:"name"`
 	// Validation result
-	Validated bool `json:"validated"`
+	Validated            bool `json:"validated"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AccountClosureValidationResponse AccountClosureValidationResponse
@@ -163,6 +163,11 @@ func (o AccountClosureValidationResponse) ToMap() (map[string]interface{}, error
 	toSerialize["message"] = o.Message
 	toSerialize["name"] = o.Name
 	toSerialize["validated"] = o.Validated
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -193,15 +198,23 @@ func (o *AccountClosureValidationResponse) UnmarshalJSON(data []byte) (err error
 
 	varAccountClosureValidationResponse := _AccountClosureValidationResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAccountClosureValidationResponse)
+	err = json.Unmarshal(data, &varAccountClosureValidationResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AccountClosureValidationResponse(varAccountClosureValidationResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "details")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "validated")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
