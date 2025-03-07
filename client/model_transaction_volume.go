@@ -31,11 +31,8 @@ type TransactionVolume struct {
 	// Whether the transaction volume is on Synctera.
 	OnSynctera *bool `json:"on_synctera,omitempty"`
 	// The number of transactions.
-	TransactionCount     *int32 `json:"transaction_count,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TransactionCount *int32 `json:"transaction_count,omitempty"`
 }
-
-type _TransactionVolume TransactionVolume
 
 // NewTransactionVolume instantiates a new TransactionVolume object
 // This constructor will assign default values to properties that have it defined,
@@ -320,39 +317,7 @@ func (o TransactionVolume) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TransactionCount) {
 		toSerialize["transaction_count"] = o.TransactionCount
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *TransactionVolume) UnmarshalJSON(data []byte) (err error) {
-	varTransactionVolume := _TransactionVolume{}
-
-	err = json.Unmarshal(data, &varTransactionVolume)
-
-	if err != nil {
-		return err
-	}
-
-	*o = TransactionVolume(varTransactionVolume)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "channel")
-		delete(additionalProperties, "channel_coverage")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "frequency")
-		delete(additionalProperties, "on_synctera")
-		delete(additionalProperties, "transaction_count")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableTransactionVolume struct {

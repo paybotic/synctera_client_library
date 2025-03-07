@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,12 +23,11 @@ var _ MappedNullable = &WithdrawalRequestModel{}
 type WithdrawalRequestModel struct {
 	AccountType *string `json:"account_type,omitempty"`
 	// The amount of the transaction in the smallest whole denomination of the applicable currency (eg. For USD use cents)
-	Amount               int32              `json:"amount"`
-	CardAcceptor         *CardAcceptorModel `json:"card_acceptor,omitempty"`
-	CardId               string             `json:"card_id"`
-	Mid                  string             `json:"mid"`
-	Pin                  *string            `json:"pin,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Amount       int32              `json:"amount"`
+	CardAcceptor *CardAcceptorModel `json:"card_acceptor,omitempty"`
+	CardId       string             `json:"card_id"`
+	Mid          string             `json:"mid"`
+	Pin          *string            `json:"pin,omitempty"`
 }
 
 type _WithdrawalRequestModel WithdrawalRequestModel
@@ -242,11 +242,6 @@ func (o WithdrawalRequestModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Pin) {
 		toSerialize["pin"] = o.Pin
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -276,25 +271,15 @@ func (o *WithdrawalRequestModel) UnmarshalJSON(data []byte) (err error) {
 
 	varWithdrawalRequestModel := _WithdrawalRequestModel{}
 
-	err = json.Unmarshal(data, &varWithdrawalRequestModel)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varWithdrawalRequestModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WithdrawalRequestModel(varWithdrawalRequestModel)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_type")
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "card_acceptor")
-		delete(additionalProperties, "card_id")
-		delete(additionalProperties, "mid")
-		delete(additionalProperties, "pin")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

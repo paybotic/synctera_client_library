@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -51,8 +52,7 @@ type OutgoingAchRequest struct {
 	ReferenceInfo NullableString   `json:"reference_info,omitempty"`
 	Risk          NullableRiskData `json:"risk,omitempty"`
 	// Standard Entry Class Code: * WEB: Internet initiated / Mobile Entry (default if empty) * CCD: Corporate Credit or Debit * PPD: Pre-arranged Payment or Deposit (only deposits currently supported)
-	SecCode              *string `json:"sec_code,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SecCode *string `json:"sec_code,omitempty"`
 }
 
 type _OutgoingAchRequest OutgoingAchRequest
@@ -718,11 +718,6 @@ func (o OutgoingAchRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SecCode) {
 		toSerialize["sec_code"] = o.SecCode
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -755,36 +750,15 @@ func (o *OutgoingAchRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varOutgoingAchRequest := _OutgoingAchRequest{}
 
-	err = json.Unmarshal(data, &varOutgoingAchRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOutgoingAchRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OutgoingAchRequest(varOutgoingAchRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "company_entry_description")
-		delete(additionalProperties, "company_name")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "dc_sign")
-		delete(additionalProperties, "effective_date")
-		delete(additionalProperties, "external_data")
-		delete(additionalProperties, "final_customer_id")
-		delete(additionalProperties, "hold")
-		delete(additionalProperties, "is_same_day")
-		delete(additionalProperties, "memo")
-		delete(additionalProperties, "originating_account_id")
-		delete(additionalProperties, "receiving_account_id")
-		delete(additionalProperties, "reference_info")
-		delete(additionalProperties, "risk")
-		delete(additionalProperties, "sec_code")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

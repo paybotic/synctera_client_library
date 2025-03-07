@@ -43,10 +43,7 @@ type SpecificInvolvement struct {
 	ThirdPartyProcessor *bool `json:"third_party_processor,omitempty"`
 	// Defines if the business is a salon, massage clinic, spa, gift card retailer, or wholesaler.
 	WellnessGiftCardsWholesaler *bool `json:"wellness_gift_cards_wholesaler,omitempty"`
-	AdditionalProperties        map[string]interface{}
 }
-
-type _SpecificInvolvement SpecificInvolvement
 
 // NewSpecificInvolvement instantiates a new SpecificInvolvement object
 // This constructor will assign default values to properties that have it defined,
@@ -495,44 +492,7 @@ func (o SpecificInvolvement) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WellnessGiftCardsWholesaler) {
 		toSerialize["wellness_gift_cards_wholesaler"] = o.WellnessGiftCardsWholesaler
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *SpecificInvolvement) UnmarshalJSON(data []byte) (err error) {
-	varSpecificInvolvement := _SpecificInvolvement{}
-
-	err = json.Unmarshal(data, &varSpecificInvolvement)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SpecificInvolvement(varSpecificInvolvement)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "arms_defense_or_security")
-		delete(additionalProperties, "cannabis_industry")
-		delete(additionalProperties, "embassies_or_consulates")
-		delete(additionalProperties, "illegal_activities_prostitution_or_pirated_goods")
-		delete(additionalProperties, "law_firm_or_fiduciary")
-		delete(additionalProperties, "licensed_money_service_business")
-		delete(additionalProperties, "lotteries_crypto_currency_or_illegal_internet_gambling")
-		delete(additionalProperties, "ngo_or_nonprofit")
-		delete(additionalProperties, "precious_metals_stones_or_jewellery")
-		delete(additionalProperties, "shell_banks_or_unlicensed_money_service_business")
-		delete(additionalProperties, "third_party_processor")
-		delete(additionalProperties, "wellness_gift_cards_wholesaler")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableSpecificInvolvement struct {

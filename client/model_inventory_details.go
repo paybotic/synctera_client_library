@@ -40,10 +40,7 @@ type InventoryDetails struct {
 	UnitPrice                    *int32            `json:"unit_price,omitempty"`
 	VatTaxAmount                 *string           `json:"vat_tax_amount,omitempty"`
 	VatTaxRate                   *string           `json:"vat_tax_rate,omitempty"`
-	AdditionalProperties         map[string]interface{}
 }
-
-type _InventoryDetails InventoryDetails
 
 // NewInventoryDetails instantiates a new InventoryDetails object
 // This constructor will assign default values to properties that have it defined,
@@ -807,53 +804,7 @@ func (o InventoryDetails) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VatTaxRate) {
 		toSerialize["vat_tax_rate"] = o.VatTaxRate
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *InventoryDetails) UnmarshalJSON(data []byte) (err error) {
-	varInventoryDetails := _InventoryDetails{}
-
-	err = json.Unmarshal(data, &varInventoryDetails)
-
-	if err != nil {
-		return err
-	}
-
-	*o = InventoryDetails(varInventoryDetails)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "commodity_code")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "discount_amount")
-		delete(additionalProperties, "item_detail_taxes")
-		delete(additionalProperties, "item_discount_amount")
-		delete(additionalProperties, "item_discount_amount_indicator")
-		delete(additionalProperties, "item_discount_applied_indicator")
-		delete(additionalProperties, "item_discount_rate")
-		delete(additionalProperties, "item_extended_amount")
-		delete(additionalProperties, "item_extended_amount_indicator")
-		delete(additionalProperties, "item_total_amount")
-		delete(additionalProperties, "item_total_amount_indicator")
-		delete(additionalProperties, "item_vat_amount")
-		delete(additionalProperties, "item_vat_rate")
-		delete(additionalProperties, "product_code")
-		delete(additionalProperties, "quantity")
-		delete(additionalProperties, "total_amount")
-		delete(additionalProperties, "unit_of_measure")
-		delete(additionalProperties, "unit_price")
-		delete(additionalProperties, "vat_tax_amount")
-		delete(additionalProperties, "vat_tax_rate")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableInventoryDetails struct {

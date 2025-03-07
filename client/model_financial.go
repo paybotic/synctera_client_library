@@ -22,10 +22,7 @@ type Financial struct {
 	TaxId                   *string `json:"tax_id,omitempty"`
 	TotalTaxAmount          *int64  `json:"total_tax_amount,omitempty"`
 	TotalTaxAmountIndicator *string `json:"total_tax_amount_indicator,omitempty"`
-	AdditionalProperties    map[string]interface{}
 }
-
-type _Financial Financial
 
 // NewFinancial instantiates a new Financial object
 // This constructor will assign default values to properties that have it defined,
@@ -159,35 +156,7 @@ func (o Financial) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TotalTaxAmountIndicator) {
 		toSerialize["total_tax_amount_indicator"] = o.TotalTaxAmountIndicator
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *Financial) UnmarshalJSON(data []byte) (err error) {
-	varFinancial := _Financial{}
-
-	err = json.Unmarshal(data, &varFinancial)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Financial(varFinancial)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "tax_id")
-		delete(additionalProperties, "total_tax_amount")
-		delete(additionalProperties, "total_tax_amount_indicator")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableFinancial struct {

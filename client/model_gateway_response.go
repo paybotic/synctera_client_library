@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -35,8 +36,7 @@ type GatewayResponse struct {
 	LastModifiedTime time.Time       `json:"last_modified_time"`
 	Standin          *GatewayStandin `json:"standin,omitempty"`
 	// URL of the Authorization gateway
-	Url                  string `json:"url"`
-	AdditionalProperties map[string]interface{}
+	Url string `json:"url"`
 }
 
 type _GatewayResponse GatewayResponse
@@ -294,11 +294,6 @@ func (o GatewayResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["standin"] = o.Standin
 	}
 	toSerialize["url"] = o.Url
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -331,27 +326,15 @@ func (o *GatewayResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varGatewayResponse := _GatewayResponse{}
 
-	err = json.Unmarshal(data, &varGatewayResponse)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varGatewayResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GatewayResponse(varGatewayResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "active")
-		delete(additionalProperties, "card_products")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "custom_headers")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "last_modified_time")
-		delete(additionalProperties, "standin")
-		delete(additionalProperties, "url")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

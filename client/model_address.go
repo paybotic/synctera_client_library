@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -39,8 +40,7 @@ type Address struct {
 	// Postal code. For US, formats of 12345 or 12345-1234 are accepted. For CA, formats of A1A 1A1 or A1A1A1 (regardless of case) are accepted, and will be converted to A1A 1A1 format.
 	PostalCode *string `json:"postal_code,omitempty"`
 	// State, region, province, or prefecture. This is the ISO-3166-2 subdivision code, excluding the country prefix. For example, TX for Texas USA or TAM for Tamaulipas Mexico. Its length varies by country, e.g. 2 characters for US, 3 for MX.
-	State                *string `json:"state,omitempty"`
-	AdditionalProperties map[string]interface{}
+	State *string `json:"state,omitempty"`
 }
 
 type _Address Address
@@ -404,11 +404,6 @@ func (o Address) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.State) {
 		toSerialize["state"] = o.State
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -437,29 +432,15 @@ func (o *Address) UnmarshalJSON(data []byte) (err error) {
 
 	varAddress := _Address{}
 
-	err = json.Unmarshal(data, &varAddress)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAddress)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Address(varAddress)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "address_line_1")
-		delete(additionalProperties, "address_line_2")
-		delete(additionalProperties, "address_type")
-		delete(additionalProperties, "city")
-		delete(additionalProperties, "country_code")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "is_registered_agent")
-		delete(additionalProperties, "nickname")
-		delete(additionalProperties, "postal_code")
-		delete(additionalProperties, "state")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

@@ -27,11 +27,8 @@ type UpdateGatewayRequest struct {
 	CustomHeaders *map[string]string `json:"custom_headers,omitempty"`
 	Standin       *GatewayStandin    `json:"standin,omitempty"`
 	// URL of the Authorization gateway
-	Url                  *string `json:"url,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Url *string `json:"url,omitempty"`
 }
-
-type _UpdateGatewayRequest UpdateGatewayRequest
 
 // NewUpdateGatewayRequest instantiates a new UpdateGatewayRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -235,37 +232,7 @@ func (o UpdateGatewayRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *UpdateGatewayRequest) UnmarshalJSON(data []byte) (err error) {
-	varUpdateGatewayRequest := _UpdateGatewayRequest{}
-
-	err = json.Unmarshal(data, &varUpdateGatewayRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = UpdateGatewayRequest(varUpdateGatewayRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "active")
-		delete(additionalProperties, "card_products")
-		delete(additionalProperties, "custom_headers")
-		delete(additionalProperties, "standin")
-		delete(additionalProperties, "url")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableUpdateGatewayRequest struct {

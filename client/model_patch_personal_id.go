@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -26,8 +27,7 @@ type PatchPersonalId struct {
 	// The updated personal identifier
 	Identifier *string `json:"identifier,omitempty"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant               *string `json:"tenant,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Tenant *string `json:"tenant,omitempty"`
 }
 
 type _PatchPersonalId PatchPersonalId
@@ -190,11 +190,6 @@ func (o PatchPersonalId) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tenant) {
 		toSerialize["tenant"] = o.Tenant
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -222,23 +217,15 @@ func (o *PatchPersonalId) UnmarshalJSON(data []byte) (err error) {
 
 	varPatchPersonalId := _PatchPersonalId{}
 
-	err = json.Unmarshal(data, &varPatchPersonalId)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPatchPersonalId)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PatchPersonalId(varPatchPersonalId)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "country_code")
-		delete(additionalProperties, "id_type")
-		delete(additionalProperties, "identifier")
-		delete(additionalProperties, "tenant")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

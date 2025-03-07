@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,8 +22,7 @@ var _ MappedNullable = &DigitalWalletTokenEditRequest{}
 // DigitalWalletTokenEditRequest struct for DigitalWalletTokenEditRequest
 type DigitalWalletTokenEditRequest struct {
 	// The status indicating the digital wallet token lifecycle state
-	TokenStatus          string `json:"token_status"`
-	AdditionalProperties map[string]interface{}
+	TokenStatus string `json:"token_status"`
 }
 
 type _DigitalWalletTokenEditRequest DigitalWalletTokenEditRequest
@@ -80,11 +80,6 @@ func (o DigitalWalletTokenEditRequest) MarshalJSON() ([]byte, error) {
 func (o DigitalWalletTokenEditRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["token_status"] = o.TokenStatus
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -112,20 +107,15 @@ func (o *DigitalWalletTokenEditRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varDigitalWalletTokenEditRequest := _DigitalWalletTokenEditRequest{}
 
-	err = json.Unmarshal(data, &varDigitalWalletTokenEditRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varDigitalWalletTokenEditRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DigitalWalletTokenEditRequest(varDigitalWalletTokenEditRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "token_status")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

@@ -103,11 +103,8 @@ type AccountCreation struct {
 	// Manually supplied account number. Providing your own account number must be agreed upon by the bank and Synctera ahead of time. This number must not contain the institution or transit number.
 	ManualAccountNumber *string `json:"manual_account_number,omitempty" validate:"regexp=^[0-9]{7,12}$"`
 	// List of the relationship for this account to the parties, Primary account holders are inferred for accounts of type general ledger and should not be provided in this request.
-	Relationships        []AccountRelationship `json:"relationships,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Relationships []AccountRelationship `json:"relationships,omitempty"`
 }
-
-type _AccountCreation AccountCreation
 
 // NewAccountCreation instantiates a new AccountCreation object
 // This constructor will assign default values to properties that have it defined,
@@ -1756,78 +1753,7 @@ func (o AccountCreation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Relationships) {
 		toSerialize["relationships"] = o.Relationships
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *AccountCreation) UnmarshalJSON(data []byte) (err error) {
-	varAccountCreation := _AccountCreation{}
-
-	err = json.Unmarshal(data, &varAccountCreation)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AccountCreation(varAccountCreation)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_template_id")
-		delete(additionalProperties, "balance_ceiling")
-		delete(additionalProperties, "balance_floor")
-		delete(additionalProperties, "fee_product_ids")
-		delete(additionalProperties, "interest_product_id")
-		delete(additionalProperties, "note")
-		delete(additionalProperties, "overdraft_limit")
-		delete(additionalProperties, "spend_control_ids")
-		delete(additionalProperties, "spending_limits")
-		delete(additionalProperties, "is_ach_enabled")
-		delete(additionalProperties, "is_card_enabled")
-		delete(additionalProperties, "is_eft_ca_enabled")
-		delete(additionalProperties, "is_external_card_enabled")
-		delete(additionalProperties, "is_p2p_enabled")
-		delete(additionalProperties, "is_synctera_pay_enabled")
-		delete(additionalProperties, "is_wire_enabled")
-		delete(additionalProperties, "access_status")
-		delete(additionalProperties, "account_number")
-		delete(additionalProperties, "account_number_masked")
-		delete(additionalProperties, "account_purpose")
-		delete(additionalProperties, "account_type")
-		delete(additionalProperties, "application_id")
-		delete(additionalProperties, "balances")
-		delete(additionalProperties, "bank_routing")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "customer_ids")
-		delete(additionalProperties, "customer_type")
-		delete(additionalProperties, "exchange_rate_type")
-		delete(additionalProperties, "iban")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "is_account_pool")
-		delete(additionalProperties, "is_sar_enabled")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "nickname")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "swift_code")
-		delete(additionalProperties, "credit_limit")
-		delete(additionalProperties, "minimum_payment")
-		delete(additionalProperties, "general_ledger_type")
-		delete(additionalProperties, "is_system_auto_pay_enabled")
-		delete(additionalProperties, "security")
-		delete(additionalProperties, "grace_period")
-		delete(additionalProperties, "manual_account_number")
-		delete(additionalProperties, "relationships")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableAccountCreation struct {

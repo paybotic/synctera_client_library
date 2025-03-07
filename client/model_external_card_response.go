@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -38,10 +39,9 @@ type ExternalCardResponse struct {
 	LastFour         string     `json:"last_four"`
 	LastModifiedTime *time.Time `json:"last_modified_time,omitempty"`
 	// The cardholder name
-	Name                 string                     `json:"name"`
-	Status               ExternalCardStatus         `json:"status"`
-	Verifications        *ExternalCardVerifications `json:"verifications,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Name          string                     `json:"name"`
+	Status        ExternalCardStatus         `json:"status"`
+	Verifications *ExternalCardVerifications `json:"verifications,omitempty"`
 }
 
 type _ExternalCardResponse ExternalCardResponse
@@ -456,11 +456,6 @@ func (o ExternalCardResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Verifications) {
 		toSerialize["verifications"] = o.Verifications
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -495,32 +490,15 @@ func (o *ExternalCardResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varExternalCardResponse := _ExternalCardResponse{}
 
-	err = json.Unmarshal(data, &varExternalCardResponse)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varExternalCardResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExternalCardResponse(varExternalCardResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "bin")
-		delete(additionalProperties, "created_time")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "expiration_month")
-		delete(additionalProperties, "expiration_year")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "issuer")
-		delete(additionalProperties, "last_four")
-		delete(additionalProperties, "last_modified_time")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "verifications")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

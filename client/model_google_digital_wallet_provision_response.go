@@ -25,10 +25,7 @@ type GoogleDigitalWalletProvisionResponse struct {
 	CreatedTime             *time.Time               `json:"created_time,omitempty"`
 	LastModifiedTime        *time.Time               `json:"last_modified_time,omitempty"`
 	PushTokenizeRequestData *PushTokenizeRequestData `json:"push_tokenize_request_data,omitempty"`
-	AdditionalProperties    map[string]interface{}
 }
-
-type _GoogleDigitalWalletProvisionResponse GoogleDigitalWalletProvisionResponse
 
 // NewGoogleDigitalWalletProvisionResponse instantiates a new GoogleDigitalWalletProvisionResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -197,36 +194,7 @@ func (o GoogleDigitalWalletProvisionResponse) ToMap() (map[string]interface{}, e
 	if !IsNil(o.PushTokenizeRequestData) {
 		toSerialize["push_tokenize_request_data"] = o.PushTokenizeRequestData
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *GoogleDigitalWalletProvisionResponse) UnmarshalJSON(data []byte) (err error) {
-	varGoogleDigitalWalletProvisionResponse := _GoogleDigitalWalletProvisionResponse{}
-
-	err = json.Unmarshal(data, &varGoogleDigitalWalletProvisionResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GoogleDigitalWalletProvisionResponse(varGoogleDigitalWalletProvisionResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "card_id")
-		delete(additionalProperties, "created_time")
-		delete(additionalProperties, "last_modified_time")
-		delete(additionalProperties, "push_tokenize_request_data")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableGoogleDigitalWalletProvisionResponse struct {

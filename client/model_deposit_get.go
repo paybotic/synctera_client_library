@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -57,8 +58,7 @@ type DepositGet struct {
 	// Optional field to store additional information about the resource. Intended to be used by the integrator to store non-sensitive data.
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	// Unique ID for the person. Exactly one of `person_id` or `business_id` must be set.
-	PersonId             *string `json:"person_id,omitempty"`
-	AdditionalProperties map[string]interface{}
+	PersonId *string `json:"person_id,omitempty"`
 }
 
 type _DepositGet DepositGet
@@ -700,11 +700,6 @@ func (o DepositGet) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PersonId) {
 		toSerialize["person_id"] = o.PersonId
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -741,39 +736,15 @@ func (o *DepositGet) UnmarshalJSON(data []byte) (err error) {
 
 	varDepositGet := _DepositGet{}
 
-	err = json.Unmarshal(data, &varDepositGet)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varDepositGet)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DepositGet(varDepositGet)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "date_captured")
-		delete(additionalProperties, "date_processed")
-		delete(additionalProperties, "deposit_amount")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "ocr_account_number")
-		delete(additionalProperties, "ocr_check_number")
-		delete(additionalProperties, "ocr_routing_number")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "transaction_id")
-		delete(additionalProperties, "vendor_info")
-		delete(additionalProperties, "account_id")
-		delete(additionalProperties, "back_image_id")
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "check_amount")
-		delete(additionalProperties, "deposit_currency")
-		delete(additionalProperties, "front_image_id")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "person_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

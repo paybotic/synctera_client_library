@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -29,8 +30,7 @@ type VerificationRequest struct {
 	// The ID of the uploaded government-issued identification document provided by the Socure SDK.
 	DocumentId *string `json:"document_id,omitempty"`
 	// Unique ID for the person. Exactly one of `person_id` or `business_id` must be set.
-	PersonId             *string `json:"person_id,omitempty"`
-	AdditionalProperties map[string]interface{}
+	PersonId *string `json:"person_id,omitempty"`
 }
 
 type _VerificationRequest VerificationRequest
@@ -228,11 +228,6 @@ func (o VerificationRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PersonId) {
 		toSerialize["person_id"] = o.PersonId
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -260,24 +255,15 @@ func (o *VerificationRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varVerificationRequest := _VerificationRequest{}
 
-	err = json.Unmarshal(data, &varVerificationRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varVerificationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = VerificationRequest(varVerificationRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "customer_consent")
-		delete(additionalProperties, "customer_ip_address")
-		delete(additionalProperties, "document_id")
-		delete(additionalProperties, "person_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

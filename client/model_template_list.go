@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type TemplateList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of account templates
-	AccountTemplates     []AccountTemplateResponse `json:"account_templates"`
-	AdditionalProperties map[string]interface{}
+	AccountTemplates []AccountTemplateResponse `json:"account_templates"`
 }
 
 type _TemplateList TemplateList
@@ -117,11 +117,6 @@ func (o TemplateList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["account_templates"] = o.AccountTemplates
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -149,21 +144,15 @@ func (o *TemplateList) UnmarshalJSON(data []byte) (err error) {
 
 	varTemplateList := _TemplateList{}
 
-	err = json.Unmarshal(data, &varTemplateList)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varTemplateList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TemplateList(varTemplateList)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "next_page_token")
-		delete(additionalProperties, "account_templates")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

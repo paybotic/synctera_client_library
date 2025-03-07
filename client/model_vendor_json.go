@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,9 +24,8 @@ type VendorJson struct {
 	// Describes the content-type encoding received from the vendor
 	ContentType string `json:"content_type"`
 	// Data representation in JSON
-	Json                 map[string]interface{} `json:"json"`
-	Vendor               string                 `json:"vendor"`
-	AdditionalProperties map[string]interface{}
+	Json   map[string]interface{} `json:"json"`
+	Vendor string                 `json:"vendor"`
 }
 
 type _VendorJson VendorJson
@@ -135,11 +135,6 @@ func (o VendorJson) ToMap() (map[string]interface{}, error) {
 	toSerialize["content_type"] = o.ContentType
 	toSerialize["json"] = o.Json
 	toSerialize["vendor"] = o.Vendor
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -169,22 +164,15 @@ func (o *VendorJson) UnmarshalJSON(data []byte) (err error) {
 
 	varVendorJson := _VendorJson{}
 
-	err = json.Unmarshal(data, &varVendorJson)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varVendorJson)
 
 	if err != nil {
 		return err
 	}
 
 	*o = VendorJson(varVendorJson)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "content_type")
-		delete(additionalProperties, "json")
-		delete(additionalProperties, "vendor")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

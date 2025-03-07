@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type SpendControlResponseList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of Spend Controls
-	SpendControls        []SpendControlResponse `json:"spend_controls"`
-	AdditionalProperties map[string]interface{}
+	SpendControls []SpendControlResponse `json:"spend_controls"`
 }
 
 type _SpendControlResponseList SpendControlResponseList
@@ -117,11 +117,6 @@ func (o SpendControlResponseList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["spend_controls"] = o.SpendControls
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -149,21 +144,15 @@ func (o *SpendControlResponseList) UnmarshalJSON(data []byte) (err error) {
 
 	varSpendControlResponseList := _SpendControlResponseList{}
 
-	err = json.Unmarshal(data, &varSpendControlResponseList)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSpendControlResponseList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SpendControlResponseList(varSpendControlResponseList)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "next_page_token")
-		delete(additionalProperties, "spend_controls")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

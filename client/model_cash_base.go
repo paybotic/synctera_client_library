@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,8 +26,7 @@ type CashBase struct {
 	// Debit or credit sign
 	DcSign string `json:"dc_sign"`
 	// Additional information to be added to the transfer
-	SourceData           map[string]interface{} `json:"source_data,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SourceData map[string]interface{} `json:"source_data,omitempty"`
 }
 
 type _CashBase CashBase
@@ -145,11 +145,6 @@ func (o CashBase) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SourceData) {
 		toSerialize["source_data"] = o.SourceData
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -178,22 +173,15 @@ func (o *CashBase) UnmarshalJSON(data []byte) (err error) {
 
 	varCashBase := _CashBase{}
 
-	err = json.Unmarshal(data, &varCashBase)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCashBase)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CashBase(varCashBase)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "dc_sign")
-		delete(additionalProperties, "source_data")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

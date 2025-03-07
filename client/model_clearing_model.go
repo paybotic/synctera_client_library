@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -29,7 +30,6 @@ type ClearingModel struct {
 	NetworkFees  []NetworkFeeModel  `json:"network_fees,omitempty"`
 	// When you simulated a clearing the synchronous response would have included a `transaction.token`. That value should be used here.
 	OriginalTransactionId string `json:"original_transaction_id"`
-	AdditionalProperties  map[string]interface{}
 }
 
 type _ClearingModel ClearingModel
@@ -296,11 +296,6 @@ func (o ClearingModel) ToMap() (map[string]interface{}, error) {
 		toSerialize["network_fees"] = o.NetworkFees
 	}
 	toSerialize["original_transaction_id"] = o.OriginalTransactionId
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -329,26 +324,15 @@ func (o *ClearingModel) UnmarshalJSON(data []byte) (err error) {
 
 	varClearingModel := _ClearingModel{}
 
-	err = json.Unmarshal(data, &varClearingModel)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varClearingModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ClearingModel(varClearingModel)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "card_acceptor")
-		delete(additionalProperties, "force_post")
-		delete(additionalProperties, "is_refund")
-		delete(additionalProperties, "mid")
-		delete(additionalProperties, "network_fees")
-		delete(additionalProperties, "original_transaction_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

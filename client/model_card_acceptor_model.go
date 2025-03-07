@@ -27,12 +27,9 @@ type CardAcceptorModel struct {
 	Name                            *string `json:"name,omitempty"`
 	PartialApprovalCapable          *bool   `json:"partial_approval_capable,omitempty"`
 	// Two-Letter USPS State Abbreviation
-	State                *string `json:"state,omitempty" validate:"regexp=\\\\b(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|PA|RI|S[CD]|T[NX]|UT|V[AT]|W[AIVY])\\\\b"`
-	Zip                  *string `json:"zip,omitempty"`
-	AdditionalProperties map[string]interface{}
+	State *string `json:"state,omitempty" validate:"regexp=\\\\b(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|PA|RI|S[CD]|T[NX]|UT|V[AT]|W[AIVY])\\\\b"`
+	Zip   *string `json:"zip,omitempty"`
 }
-
-type _CardAcceptorModel CardAcceptorModel
 
 // NewCardAcceptorModel instantiates a new CardAcceptorModel object
 // This constructor will assign default values to properties that have it defined,
@@ -380,41 +377,7 @@ func (o CardAcceptorModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Zip) {
 		toSerialize["zip"] = o.Zip
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *CardAcceptorModel) UnmarshalJSON(data []byte) (err error) {
-	varCardAcceptorModel := _CardAcceptorModel{}
-
-	err = json.Unmarshal(data, &varCardAcceptorModel)
-
-	if err != nil {
-		return err
-	}
-
-	*o = CardAcceptorModel(varCardAcceptorModel)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "address")
-		delete(additionalProperties, "city")
-		delete(additionalProperties, "country")
-		delete(additionalProperties, "ecommerce_security_level_indicator")
-		delete(additionalProperties, "mcc")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "partial_approval_capable")
-		delete(additionalProperties, "state")
-		delete(additionalProperties, "zip")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableCardAcceptorModel struct {

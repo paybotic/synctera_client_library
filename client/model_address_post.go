@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -43,8 +44,7 @@ type AddressPost struct {
 	// The identifier for the business customer associated with address.
 	BusinessId *string `json:"business_id,omitempty"`
 	// The identifier for the personal customer associated with address.
-	CustomerId           *string `json:"customer_id,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CustomerId *string `json:"customer_id,omitempty"`
 }
 
 type _AddressPost AddressPost
@@ -451,11 +451,6 @@ func (o AddressPost) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomerId) {
 		toSerialize["customer_id"] = o.CustomerId
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -487,31 +482,15 @@ func (o *AddressPost) UnmarshalJSON(data []byte) (err error) {
 
 	varAddressPost := _AddressPost{}
 
-	err = json.Unmarshal(data, &varAddressPost)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAddressPost)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddressPost(varAddressPost)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "address_line_1")
-		delete(additionalProperties, "address_line_2")
-		delete(additionalProperties, "city")
-		delete(additionalProperties, "country_code")
-		delete(additionalProperties, "is_active")
-		delete(additionalProperties, "is_registered_agent")
-		delete(additionalProperties, "nickname")
-		delete(additionalProperties, "postal_code")
-		delete(additionalProperties, "state")
-		delete(additionalProperties, "address_type")
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "customer_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type CreateCardImageRequest struct {
 	// The unique identifier of a cards product
 	CardProductId string `json:"card_product_id"`
 	// The unique identifier of a customer
-	CustomerId           string `json:"customer_id"`
-	AdditionalProperties map[string]interface{}
+	CustomerId string `json:"customer_id"`
 }
 
 type _CreateCardImageRequest CreateCardImageRequest
@@ -108,11 +108,6 @@ func (o CreateCardImageRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["card_product_id"] = o.CardProductId
 	toSerialize["customer_id"] = o.CustomerId
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -141,21 +136,15 @@ func (o *CreateCardImageRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateCardImageRequest := _CreateCardImageRequest{}
 
-	err = json.Unmarshal(data, &varCreateCardImageRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCreateCardImageRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateCardImageRequest(varCreateCardImageRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "card_product_id")
-		delete(additionalProperties, "customer_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

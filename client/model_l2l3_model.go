@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,7 +29,6 @@ type L2l3Model struct {
 	// Value of the `transaction.token` returned in the simulated clearing response.
 	OriginalTransactionId string  `json:"original_transaction_id"`
 	PurchaseOrder         *string `json:"purchase_order,omitempty"`
-	AdditionalProperties  map[string]interface{}
 }
 
 type _L2l3Model L2l3Model
@@ -296,11 +296,6 @@ func (o L2l3Model) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PurchaseOrder) {
 		toSerialize["purchase_order"] = o.PurchaseOrder
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -328,26 +323,15 @@ func (o *L2l3Model) UnmarshalJSON(data []byte) (err error) {
 
 	varL2l3Model := _L2l3Model{}
 
-	err = json.Unmarshal(data, &varL2l3Model)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varL2l3Model)
 
 	if err != nil {
 		return err
 	}
 
 	*o = L2l3Model(varL2l3Model)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "enhanced_data_id")
-		delete(additionalProperties, "financial")
-		delete(additionalProperties, "fleet_emv")
-		delete(additionalProperties, "fleets")
-		delete(additionalProperties, "inventory_details")
-		delete(additionalProperties, "original_transaction_id")
-		delete(additionalProperties, "purchase_order")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

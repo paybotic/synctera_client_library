@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type ExternalAccountsList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of external accounts
-	ExternalAccounts     []ExternalAccount `json:"external_accounts"`
-	AdditionalProperties map[string]interface{}
+	ExternalAccounts []ExternalAccount `json:"external_accounts"`
 }
 
 type _ExternalAccountsList ExternalAccountsList
@@ -117,11 +117,6 @@ func (o ExternalAccountsList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["external_accounts"] = o.ExternalAccounts
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -149,21 +144,15 @@ func (o *ExternalAccountsList) UnmarshalJSON(data []byte) (err error) {
 
 	varExternalAccountsList := _ExternalAccountsList{}
 
-	err = json.Unmarshal(data, &varExternalAccountsList)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varExternalAccountsList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExternalAccountsList(varExternalAccountsList)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "next_page_token")
-		delete(additionalProperties, "external_accounts")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

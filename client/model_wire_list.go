@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type WireList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of wires
-	Wires                []Wire `json:"wires"`
-	AdditionalProperties map[string]interface{}
+	Wires []Wire `json:"wires"`
 }
 
 type _WireList WireList
@@ -117,11 +117,6 @@ func (o WireList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["wires"] = o.Wires
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -149,21 +144,15 @@ func (o *WireList) UnmarshalJSON(data []byte) (err error) {
 
 	varWireList := _WireList{}
 
-	err = json.Unmarshal(data, &varWireList)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varWireList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WireList(varWireList)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "next_page_token")
-		delete(additionalProperties, "wires")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

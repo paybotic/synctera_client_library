@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type PaymentScheduleList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of payment schedules.
-	PaymentSchedules     []PaymentSchedule `json:"payment_schedules"`
-	AdditionalProperties map[string]interface{}
+	PaymentSchedules []PaymentSchedule `json:"payment_schedules"`
 }
 
 type _PaymentScheduleList PaymentScheduleList
@@ -117,11 +117,6 @@ func (o PaymentScheduleList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["payment_schedules"] = o.PaymentSchedules
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -149,21 +144,15 @@ func (o *PaymentScheduleList) UnmarshalJSON(data []byte) (err error) {
 
 	varPaymentScheduleList := _PaymentScheduleList{}
 
-	err = json.Unmarshal(data, &varPaymentScheduleList)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPaymentScheduleList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PaymentScheduleList(varPaymentScheduleList)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "next_page_token")
-		delete(additionalProperties, "payment_schedules")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

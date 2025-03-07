@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type EventList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of events
-	EventList            []Event `json:"event_list"`
-	AdditionalProperties map[string]interface{}
+	EventList []Event `json:"event_list"`
 }
 
 type _EventList EventList
@@ -117,11 +117,6 @@ func (o EventList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["event_list"] = o.EventList
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -149,21 +144,15 @@ func (o *EventList) UnmarshalJSON(data []byte) (err error) {
 
 	varEventList := _EventList{}
 
-	err = json.Unmarshal(data, &varEventList)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varEventList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EventList(varEventList)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "next_page_token")
-		delete(additionalProperties, "event_list")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

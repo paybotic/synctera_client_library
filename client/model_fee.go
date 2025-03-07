@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -27,9 +28,8 @@ type Fee struct {
 	// Fee type
 	FeeType string `json:"fee_type"`
 	// Fee ID
-	Id                   *string `json:"id,omitempty"`
-	ProductType          string  `json:"product_type"`
-	AdditionalProperties map[string]interface{}
+	Id          *string `json:"id,omitempty"`
+	ProductType string  `json:"product_type"`
 }
 
 type _Fee Fee
@@ -200,11 +200,6 @@ func (o Fee) ToMap() (map[string]interface{}, error) {
 		toSerialize["id"] = o.Id
 	}
 	toSerialize["product_type"] = o.ProductType
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -235,24 +230,15 @@ func (o *Fee) UnmarshalJSON(data []byte) (err error) {
 
 	varFee := _Fee{}
 
-	err = json.Unmarshal(data, &varFee)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varFee)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Fee(varFee)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "fee_type")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "product_type")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

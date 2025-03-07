@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -31,8 +32,7 @@ type Disclosure1 struct {
 	// Disclosure Type
 	Type string `json:"type"`
 	// Disclosure Version
-	Version              string `json:"version"`
-	AdditionalProperties map[string]interface{}
+	Version string `json:"version"`
 }
 
 type _Disclosure1 Disclosure1
@@ -273,11 +273,6 @@ func (o Disclosure1) ToMap() (map[string]interface{}, error) {
 	toSerialize["timestamp"] = o.Timestamp
 	toSerialize["type"] = o.Type
 	toSerialize["version"] = o.Version
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -308,26 +303,15 @@ func (o *Disclosure1) UnmarshalJSON(data []byte) (err error) {
 
 	varDisclosure1 := _Disclosure1{}
 
-	err = json.Unmarshal(data, &varDisclosure1)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varDisclosure1)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Disclosure1(varDisclosure1)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "event_type")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "timestamp")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "version")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

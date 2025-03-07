@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,9 +29,8 @@ type AccountTemplate struct {
 	// Whether this template can be used for account creation
 	IsEnabled bool `json:"is_enabled"`
 	// Unique account template name
-	Name                 string         `json:"name"`
-	Template             TemplateFields `json:"template"`
-	AdditionalProperties map[string]interface{}
+	Name     string         `json:"name"`
+	Template TemplateFields `json:"template"`
 }
 
 type _AccountTemplate AccountTemplate
@@ -245,11 +245,6 @@ func (o AccountTemplate) ToMap() (map[string]interface{}, error) {
 	toSerialize["is_enabled"] = o.IsEnabled
 	toSerialize["name"] = o.Name
 	toSerialize["template"] = o.Template
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -279,25 +274,15 @@ func (o *AccountTemplate) UnmarshalJSON(data []byte) (err error) {
 
 	varAccountTemplate := _AccountTemplate{}
 
-	err = json.Unmarshal(data, &varAccountTemplate)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAccountTemplate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AccountTemplate(varAccountTemplate)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "application_type")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "is_enabled")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "template")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

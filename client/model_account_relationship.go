@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -36,8 +37,7 @@ type AccountRelationship struct {
 	PersonId         *string                 `json:"person_id,omitempty"`
 	RelationshipType AccountRelationshipType `json:"relationship_type"`
 	// Date and time when this association was last updated.
-	UpdatedAt            *time.Time `json:"updated_at,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 type _AccountRelationship AccountRelationship
@@ -343,11 +343,6 @@ func (o AccountRelationship) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -375,27 +370,15 @@ func (o *AccountRelationship) UnmarshalJSON(data []byte) (err error) {
 
 	varAccountRelationship := _AccountRelationship{}
 
-	err = json.Unmarshal(data, &varAccountRelationship)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAccountRelationship)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AccountRelationship(varAccountRelationship)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "created_at")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "deleted_at")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "person_id")
-		delete(additionalProperties, "relationship_type")
-		delete(additionalProperties, "updated_at")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

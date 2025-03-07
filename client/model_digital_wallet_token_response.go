@@ -39,11 +39,8 @@ type DigitalWalletTokenResponse struct {
 	// Unique identifier of the digital wallet token within the card network.
 	TokenReferenceId *string `json:"token_reference_id,omitempty"`
 	// Type of the Digital Wallet. Can be one of APPLE_PAY, ANDROID_PAY, SAMSUNG_PAY or something else when cards are added on file to a merchant.
-	Type                 *string `json:"type,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Type *string `json:"type,omitempty"`
 }
-
-type _DigitalWalletTokenResponse DigitalWalletTokenResponse
 
 // NewDigitalWalletTokenResponse instantiates a new DigitalWalletTokenResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -492,44 +489,7 @@ func (o DigitalWalletTokenResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *DigitalWalletTokenResponse) UnmarshalJSON(data []byte) (err error) {
-	varDigitalWalletTokenResponse := _DigitalWalletTokenResponse{}
-
-	err = json.Unmarshal(data, &varDigitalWalletTokenResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = DigitalWalletTokenResponse(varDigitalWalletTokenResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "approved_time")
-		delete(additionalProperties, "card_id")
-		delete(additionalProperties, "device_id")
-		delete(additionalProperties, "device_type")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "last_modified_time")
-		delete(additionalProperties, "processor_data")
-		delete(additionalProperties, "removed_from_wallet_time")
-		delete(additionalProperties, "requested_time")
-		delete(additionalProperties, "state")
-		delete(additionalProperties, "token_reference_id")
-		delete(additionalProperties, "type")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableDigitalWalletTokenResponse struct {

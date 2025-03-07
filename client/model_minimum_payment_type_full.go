@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -20,8 +21,7 @@ var _ MappedNullable = &MinimumPaymentTypeFull{}
 
 // MinimumPaymentTypeFull struct for MinimumPaymentTypeFull
 type MinimumPaymentTypeFull struct {
-	Type                 MinimumPaymentType `json:"type"`
-	AdditionalProperties map[string]interface{}
+	Type MinimumPaymentType `json:"type"`
 }
 
 type _MinimumPaymentTypeFull MinimumPaymentTypeFull
@@ -79,11 +79,6 @@ func (o MinimumPaymentTypeFull) MarshalJSON() ([]byte, error) {
 func (o MinimumPaymentTypeFull) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -111,20 +106,15 @@ func (o *MinimumPaymentTypeFull) UnmarshalJSON(data []byte) (err error) {
 
 	varMinimumPaymentTypeFull := _MinimumPaymentTypeFull{}
 
-	err = json.Unmarshal(data, &varMinimumPaymentTypeFull)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varMinimumPaymentTypeFull)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MinimumPaymentTypeFull(varMinimumPaymentTypeFull)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "type")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

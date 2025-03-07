@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -36,7 +37,6 @@ type WatchlistSubscription struct {
 	// External provider subscription id
 	ProviderSubscriptionId *string `json:"provider_subscription_id,omitempty"`
 	Status                 *string `json:"status,omitempty"`
-	AdditionalProperties   map[string]interface{}
 }
 
 type _WatchlistSubscription WatchlistSubscription
@@ -339,11 +339,6 @@ func (o WatchlistSubscription) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -371,27 +366,15 @@ func (o *WatchlistSubscription) UnmarshalJSON(data []byte) (err error) {
 
 	varWatchlistSubscription := _WatchlistSubscription{}
 
-	err = json.Unmarshal(data, &varWatchlistSubscription)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varWatchlistSubscription)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WatchlistSubscription(varWatchlistSubscription)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "auto_renew")
-		delete(additionalProperties, "created")
-		delete(additionalProperties, "customer_consent")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "period_end")
-		delete(additionalProperties, "period_start")
-		delete(additionalProperties, "provider_subscription_id")
-		delete(additionalProperties, "status")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

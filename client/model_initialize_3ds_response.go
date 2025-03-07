@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,8 +26,7 @@ type Initialize3dsResponse struct {
 	// URL used for device data collection
 	DeviceDataCollectionUrl string `json:"device_data_collection_url"`
 	// The unique identifier of the 3DS authentication
-	Id                   string `json:"id"`
-	AdditionalProperties map[string]interface{}
+	Id string `json:"id"`
 }
 
 type _Initialize3dsResponse Initialize3dsResponse
@@ -136,11 +136,6 @@ func (o Initialize3dsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["device_data_collection_jwt"] = o.DeviceDataCollectionJwt
 	toSerialize["device_data_collection_url"] = o.DeviceDataCollectionUrl
 	toSerialize["id"] = o.Id
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -170,22 +165,15 @@ func (o *Initialize3dsResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varInitialize3dsResponse := _Initialize3dsResponse{}
 
-	err = json.Unmarshal(data, &varInitialize3dsResponse)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varInitialize3dsResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Initialize3dsResponse(varInitialize3dsResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "device_data_collection_jwt")
-		delete(additionalProperties, "device_data_collection_url")
-		delete(additionalProperties, "id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

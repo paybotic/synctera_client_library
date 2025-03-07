@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -72,8 +73,7 @@ type PendingTransactionData struct {
 	// An unstructured JSON blob representing additional transaction information specific to each payment rail.
 	UserData map[string]interface{} `json:"user_data,omitempty"`
 	// Does this hold represent a partial debit (or credit)?
-	WasPartial           bool `json:"was_partial"`
-	AdditionalProperties map[string]interface{}
+	WasPartial bool `json:"was_partial"`
 }
 
 type _PendingTransactionData PendingTransactionData
@@ -846,11 +846,6 @@ func (o PendingTransactionData) ToMap() (map[string]interface{}, error) {
 		toSerialize["user_data"] = o.UserData
 	}
 	toSerialize["was_partial"] = o.WasPartial
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -900,46 +895,15 @@ func (o *PendingTransactionData) UnmarshalJSON(data []byte) (err error) {
 
 	varPendingTransactionData := _PendingTransactionData{}
 
-	err = json.Unmarshal(data, &varPendingTransactionData)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPendingTransactionData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PendingTransactionData(varPendingTransactionData)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "auto_post_at")
-		delete(additionalProperties, "avail_balance")
-		delete(additionalProperties, "available_balance")
-		delete(additionalProperties, "balance")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "dc_sign")
-		delete(additionalProperties, "effective_date")
-		delete(additionalProperties, "expires_at")
-		delete(additionalProperties, "external_data")
-		delete(additionalProperties, "force_post")
-		delete(additionalProperties, "history")
-		delete(additionalProperties, "idemkey")
-		delete(additionalProperties, "memo")
-		delete(additionalProperties, "network")
-		delete(additionalProperties, "operation")
-		delete(additionalProperties, "reason")
-		delete(additionalProperties, "req_amount")
-		delete(additionalProperties, "risk_info")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "subtype")
-		delete(additionalProperties, "total_amount")
-		delete(additionalProperties, "transaction_id")
-		delete(additionalProperties, "transaction_time")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "user_data")
-		delete(additionalProperties, "was_partial")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

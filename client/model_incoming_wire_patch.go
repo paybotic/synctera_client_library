@@ -19,11 +19,8 @@ var _ MappedNullable = &IncomingWirePatch{}
 
 // IncomingWirePatch Patch object for incoming wire
 type IncomingWirePatch struct {
-	ReturnData           *ReturnData1 `json:"return_data,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ReturnData *ReturnData1 `json:"return_data,omitempty"`
 }
-
-type _IncomingWirePatch IncomingWirePatch
 
 // NewIncomingWirePatch instantiates a new IncomingWirePatch object
 // This constructor will assign default values to properties that have it defined,
@@ -87,33 +84,7 @@ func (o IncomingWirePatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReturnData) {
 		toSerialize["return_data"] = o.ReturnData
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *IncomingWirePatch) UnmarshalJSON(data []byte) (err error) {
-	varIncomingWirePatch := _IncomingWirePatch{}
-
-	err = json.Unmarshal(data, &varIncomingWirePatch)
-
-	if err != nil {
-		return err
-	}
-
-	*o = IncomingWirePatch(varIncomingWirePatch)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "return_data")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableIncomingWirePatch struct {

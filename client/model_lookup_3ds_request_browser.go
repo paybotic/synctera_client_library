@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,10 +25,9 @@ type Lookup3dsRequestBrowser struct {
 	// Channel through which Device Data Collection was performed  Channel | Description --- | --- `BROWSER` | Internet browser `SDK` | Mobile app
 	DeviceChannel string `json:"device_channel"`
 	// The unique identifier of the 3DS authentication
-	Id                   string         `json:"id"`
-	TransactionMode      string         `json:"transaction_mode"`
-	DeviceDetails        *DeviceDetails `json:"device_details,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Id              string         `json:"id"`
+	TransactionMode string         `json:"transaction_mode"`
+	DeviceDetails   *DeviceDetails `json:"device_details,omitempty"`
 }
 
 type _Lookup3dsRequestBrowser Lookup3dsRequestBrowser
@@ -198,11 +198,6 @@ func (o Lookup3dsRequestBrowser) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DeviceDetails) {
 		toSerialize["device_details"] = o.DeviceDetails
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -233,24 +228,15 @@ func (o *Lookup3dsRequestBrowser) UnmarshalJSON(data []byte) (err error) {
 
 	varLookup3dsRequestBrowser := _Lookup3dsRequestBrowser{}
 
-	err = json.Unmarshal(data, &varLookup3dsRequestBrowser)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varLookup3dsRequestBrowser)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Lookup3dsRequestBrowser(varLookup3dsRequestBrowser)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "authentication_indicator")
-		delete(additionalProperties, "device_channel")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "transaction_mode")
-		delete(additionalProperties, "device_details")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

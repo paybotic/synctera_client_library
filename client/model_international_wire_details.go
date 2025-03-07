@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,8 +25,7 @@ type InternationalWireDetails struct {
 	// Correspondent banks details used for international payments.
 	CorrespondentBanksDetails []CorrespondentBankDetails `json:"correspondent_banks_details,omitempty"`
 	// The SWIFT code (also known as BIC code) used for international payments.
-	SwiftCode            string `json:"swift_code" validate:"regexp=^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$"`
-	AdditionalProperties map[string]interface{}
+	SwiftCode string `json:"swift_code" validate:"regexp=^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$"`
 }
 
 type _InternationalWireDetails InternationalWireDetails
@@ -144,11 +144,6 @@ func (o InternationalWireDetails) ToMap() (map[string]interface{}, error) {
 		toSerialize["correspondent_banks_details"] = o.CorrespondentBanksDetails
 	}
 	toSerialize["swift_code"] = o.SwiftCode
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -177,22 +172,15 @@ func (o *InternationalWireDetails) UnmarshalJSON(data []byte) (err error) {
 
 	varInternationalWireDetails := _InternationalWireDetails{}
 
-	err = json.Unmarshal(data, &varInternationalWireDetails)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varInternationalWireDetails)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InternationalWireDetails(varInternationalWireDetails)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "bank_address")
-		delete(additionalProperties, "correspondent_banks_details")
-		delete(additionalProperties, "swift_code")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

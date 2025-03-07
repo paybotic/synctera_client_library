@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,8 +29,7 @@ type CreateGatewayRequest struct {
 	CustomHeaders *map[string]string `json:"custom_headers,omitempty"`
 	Standin       *GatewayStandin    `json:"standin,omitempty"`
 	// URL of the Authorization gateway
-	Url                  string `json:"url"`
-	AdditionalProperties map[string]interface{}
+	Url string `json:"url"`
 }
 
 type _CreateGatewayRequest CreateGatewayRequest
@@ -222,11 +222,6 @@ func (o CreateGatewayRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["standin"] = o.Standin
 	}
 	toSerialize["url"] = o.Url
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -255,24 +250,15 @@ func (o *CreateGatewayRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateGatewayRequest := _CreateGatewayRequest{}
 
-	err = json.Unmarshal(data, &varCreateGatewayRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCreateGatewayRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateGatewayRequest(varCreateGatewayRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "active")
-		delete(additionalProperties, "card_products")
-		delete(additionalProperties, "custom_headers")
-		delete(additionalProperties, "standin")
-		delete(additionalProperties, "url")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

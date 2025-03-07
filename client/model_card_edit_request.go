@@ -26,12 +26,9 @@ type CardEditRequest struct {
 	// Additional details about the reason for the status change
 	Memo *string `json:"memo,omitempty"`
 	// Additional data to include in the request structured as key-value pairs
-	Metadata             *map[string]string    `json:"metadata,omitempty"`
-	Reason               *CardStatusReasonCode `json:"reason,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Metadata *map[string]string    `json:"metadata,omitempty"`
+	Reason   *CardStatusReasonCode `json:"reason,omitempty"`
 }
-
-type _CardEditRequest CardEditRequest
 
 // NewCardEditRequest instantiates a new CardEditRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -270,38 +267,7 @@ func (o CardEditRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *CardEditRequest) UnmarshalJSON(data []byte) (err error) {
-	varCardEditRequest := _CardEditRequest{}
-
-	err = json.Unmarshal(data, &varCardEditRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = CardEditRequest(varCardEditRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "card_status")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "emboss_name")
-		delete(additionalProperties, "memo")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "reason")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableCardEditRequest struct {

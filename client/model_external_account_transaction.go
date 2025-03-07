@@ -42,11 +42,8 @@ type ExternalAccountTransaction struct {
 	// case-sensitive transaction ID
 	TransactionId *string `json:"transaction_id,omitempty"`
 	// type of the transaction
-	TransactionType      *string `json:"transaction_type,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TransactionType *string `json:"transaction_type,omitempty"`
 }
-
-type _ExternalAccountTransaction ExternalAccountTransaction
 
 // NewExternalAccountTransaction instantiates a new ExternalAccountTransaction object
 // This constructor will assign default values to properties that have it defined,
@@ -506,44 +503,7 @@ func (o ExternalAccountTransaction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TransactionType) {
 		toSerialize["transaction_type"] = o.TransactionType
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *ExternalAccountTransaction) UnmarshalJSON(data []byte) (err error) {
-	varExternalAccountTransaction := _ExternalAccountTransaction{}
-
-	err = json.Unmarshal(data, &varExternalAccountTransaction)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ExternalAccountTransaction(varExternalAccountTransaction)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "authorized_date")
-		delete(additionalProperties, "category")
-		delete(additionalProperties, "check_number")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "date")
-		delete(additionalProperties, "is_pending")
-		delete(additionalProperties, "merchant_name")
-		delete(additionalProperties, "payment_channel")
-		delete(additionalProperties, "payment_method")
-		delete(additionalProperties, "transaction_id")
-		delete(additionalProperties, "transaction_type")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableExternalAccountTransaction struct {

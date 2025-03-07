@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,8 +22,7 @@ var _ MappedNullable = &WireReturnSimulationRequest{}
 // WireReturnSimulationRequest Simulate receiving a returned Wire transfer
 type WireReturnSimulationRequest struct {
 	// ID of an outgoing Wire transfer to be returned.
-	WireId               string `json:"wire_id"`
-	AdditionalProperties map[string]interface{}
+	WireId string `json:"wire_id"`
 }
 
 type _WireReturnSimulationRequest WireReturnSimulationRequest
@@ -80,11 +80,6 @@ func (o WireReturnSimulationRequest) MarshalJSON() ([]byte, error) {
 func (o WireReturnSimulationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["wire_id"] = o.WireId
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -112,20 +107,15 @@ func (o *WireReturnSimulationRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varWireReturnSimulationRequest := _WireReturnSimulationRequest{}
 
-	err = json.Unmarshal(data, &varWireReturnSimulationRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varWireReturnSimulationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WireReturnSimulationRequest(varWireReturnSimulationRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "wire_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

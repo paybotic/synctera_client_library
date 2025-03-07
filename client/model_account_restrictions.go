@@ -26,11 +26,8 @@ type AccountRestrictions struct {
 	// A flag to indicate whether a credit account is past due on minimum payments. Can only be set by the Synctera platform.
 	IsPastDue *bool `json:"is_past_due,omitempty"`
 	// A flag to indicates whether a credit account has been revoked (greater than 90 days past due). Revoked accounts will be unable to spend and no longer accrue interest. Can only be set by the Synctera platform.
-	IsRevoked            *bool `json:"is_revoked,omitempty"`
-	AdditionalProperties map[string]interface{}
+	IsRevoked *bool `json:"is_revoked,omitempty"`
 }
-
-type _AccountRestrictions AccountRestrictions
 
 // NewAccountRestrictions instantiates a new AccountRestrictions object
 // This constructor will assign default values to properties that have it defined,
@@ -199,36 +196,7 @@ func (o AccountRestrictions) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsRevoked) {
 		toSerialize["is_revoked"] = o.IsRevoked
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *AccountRestrictions) UnmarshalJSON(data []byte) (err error) {
-	varAccountRestrictions := _AccountRestrictions{}
-
-	err = json.Unmarshal(data, &varAccountRestrictions)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AccountRestrictions(varAccountRestrictions)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "is_account_out_of_area")
-		delete(additionalProperties, "is_delinquent")
-		delete(additionalProperties, "is_past_due")
-		delete(additionalProperties, "is_revoked")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableAccountRestrictions struct {

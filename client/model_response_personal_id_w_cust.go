@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -32,8 +33,7 @@ type ResponsePersonalIdWCust struct {
 	// True if the identifier was provided by the system, e.g. via SSN Prefill.
 	SystemProvided bool `json:"system_provided"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant               string `json:"tenant"`
-	AdditionalProperties map[string]interface{}
+	Tenant string `json:"tenant"`
 }
 
 type _ResponsePersonalIdWCust ResponsePersonalIdWCust
@@ -247,11 +247,6 @@ func (o ResponsePersonalIdWCust) ToMap() (map[string]interface{}, error) {
 	toSerialize["identifier"] = o.Identifier
 	toSerialize["system_provided"] = o.SystemProvided
 	toSerialize["tenant"] = o.Tenant
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -285,26 +280,15 @@ func (o *ResponsePersonalIdWCust) UnmarshalJSON(data []byte) (err error) {
 
 	varResponsePersonalIdWCust := _ResponsePersonalIdWCust{}
 
-	err = json.Unmarshal(data, &varResponsePersonalIdWCust)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varResponsePersonalIdWCust)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResponsePersonalIdWCust(varResponsePersonalIdWCust)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "country_code")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "id_type")
-		delete(additionalProperties, "identifier")
-		delete(additionalProperties, "system_provided")
-		delete(additionalProperties, "tenant")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

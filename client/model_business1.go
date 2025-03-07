@@ -20,24 +20,21 @@ var _ MappedNullable = &Business1{}
 
 // Business1 struct for Business1
 type Business1 struct {
-	CreationTime         *time.Time `json:"creation_time,omitempty"`
-	Ein                  *string    `json:"ein,omitempty"`
-	Email                *string    `json:"email,omitempty"`
-	EntityName           *string    `json:"entity_name,omitempty"`
-	FormationDate        *string    `json:"formation_date,omitempty"`
-	FormationState       *string    `json:"formation_state,omitempty"`
-	Id                   *string    `json:"id,omitempty"`
-	LastUpdatedTime      *time.Time `json:"last_updated_time,omitempty"`
-	PhoneNumber          *string    `json:"phone_number,omitempty"`
-	Status               *string    `json:"status,omitempty"`
-	Structure            *string    `json:"structure,omitempty"`
-	TradeNames           []string   `json:"trade_names,omitempty"`
-	VerificationLastRun  *time.Time `json:"verification_last_run,omitempty"`
-	VerificationStatus   *string    `json:"verification_status,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CreationTime        *time.Time `json:"creation_time,omitempty"`
+	Ein                 *string    `json:"ein,omitempty"`
+	Email               *string    `json:"email,omitempty"`
+	EntityName          *string    `json:"entity_name,omitempty"`
+	FormationDate       *string    `json:"formation_date,omitempty"`
+	FormationState      *string    `json:"formation_state,omitempty"`
+	Id                  *string    `json:"id,omitempty"`
+	LastUpdatedTime     *time.Time `json:"last_updated_time,omitempty"`
+	PhoneNumber         *string    `json:"phone_number,omitempty"`
+	Status              *string    `json:"status,omitempty"`
+	Structure           *string    `json:"structure,omitempty"`
+	TradeNames          []string   `json:"trade_names,omitempty"`
+	VerificationLastRun *time.Time `json:"verification_last_run,omitempty"`
+	VerificationStatus  *string    `json:"verification_status,omitempty"`
 }
-
-type _Business1 Business1
 
 // NewBusiness1 instantiates a new Business1 object
 // This constructor will assign default values to properties that have it defined,
@@ -556,46 +553,7 @@ func (o Business1) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VerificationStatus) {
 		toSerialize["verification_status"] = o.VerificationStatus
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *Business1) UnmarshalJSON(data []byte) (err error) {
-	varBusiness1 := _Business1{}
-
-	err = json.Unmarshal(data, &varBusiness1)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Business1(varBusiness1)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "ein")
-		delete(additionalProperties, "email")
-		delete(additionalProperties, "entity_name")
-		delete(additionalProperties, "formation_date")
-		delete(additionalProperties, "formation_state")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "phone_number")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "structure")
-		delete(additionalProperties, "trade_names")
-		delete(additionalProperties, "verification_last_run")
-		delete(additionalProperties, "verification_status")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableBusiness1 struct {

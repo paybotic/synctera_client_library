@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -40,9 +41,8 @@ type NoteResponse struct {
 	RelatedResourceType RelatedResourceType2 `json:"related_resource_type"`
 	Status              *NoteStatus          `json:"status,omitempty"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant               string     `json:"tenant"`
-	Type                 *ModelType `json:"type,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Tenant string     `json:"tenant"`
+	Type   *ModelType `json:"type,omitempty"`
 }
 
 type _NoteResponse NoteResponse
@@ -426,11 +426,6 @@ func (o NoteResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -465,31 +460,15 @@ func (o *NoteResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varNoteResponse := _NoteResponse{}
 
-	err = json.Unmarshal(data, &varNoteResponse)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varNoteResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = NoteResponse(varNoteResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "author")
-		delete(additionalProperties, "content")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "related_resource_field")
-		delete(additionalProperties, "related_resource_id")
-		delete(additionalProperties, "related_resource_type")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "tenant")
-		delete(additionalProperties, "type")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

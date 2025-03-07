@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -20,9 +21,8 @@ var _ MappedNullable = &InternalTransferInstruction{}
 
 // InternalTransferInstruction struct for InternalTransferInstruction
 type InternalTransferInstruction struct {
-	Request              InternalTransfer `json:"request"`
-	Type                 string           `json:"type"`
-	AdditionalProperties map[string]interface{}
+	Request InternalTransfer `json:"request"`
+	Type    string           `json:"type"`
 }
 
 type _InternalTransferInstruction InternalTransferInstruction
@@ -106,11 +106,6 @@ func (o InternalTransferInstruction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["request"] = o.Request
 	toSerialize["type"] = o.Type
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -139,21 +134,15 @@ func (o *InternalTransferInstruction) UnmarshalJSON(data []byte) (err error) {
 
 	varInternalTransferInstruction := _InternalTransferInstruction{}
 
-	err = json.Unmarshal(data, &varInternalTransferInstruction)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varInternalTransferInstruction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InternalTransferInstruction(varInternalTransferInstruction)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "request")
-		delete(additionalProperties, "type")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

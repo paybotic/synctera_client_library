@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -43,8 +44,7 @@ type Disclosure struct {
 	Tenant *string        `json:"tenant,omitempty"`
 	Type   DisclosureType `json:"type"`
 	// Version of the disclosure document.
-	Version              string `json:"version" validate:"regexp=^v?[0-9]+\\\\.[0-9]+$"`
-	AdditionalProperties map[string]interface{}
+	Version string `json:"version" validate:"regexp=^v?[0-9]+\\\\.[0-9]+$"`
 }
 
 type _Disclosure Disclosure
@@ -460,11 +460,6 @@ func (o Disclosure) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["type"] = o.Type
 	toSerialize["version"] = o.Version
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -495,31 +490,15 @@ func (o *Disclosure) UnmarshalJSON(data []byte) (err error) {
 
 	varDisclosure := _Disclosure{}
 
-	err = json.Unmarshal(data, &varDisclosure)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varDisclosure)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Disclosure(varDisclosure)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "acknowledging_person_id")
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "disclosure_date")
-		delete(additionalProperties, "event_type")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "person_id")
-		delete(additionalProperties, "tenant")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "version")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

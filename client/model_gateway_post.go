@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -27,8 +28,7 @@ type GatewayPost struct {
 	// Optional parameter that configures the maximum amount of time in milliseconds that we will wait for the response from Gateway URL request. Default value is used if empty
 	MaxWaitMs *int32 `json:"max_wait_ms,omitempty"`
 	// The URL address which will be used for the ACH in Auth Flow requests to get authorization from the fintech to process the transaction
-	Url                  string `json:"url"`
-	AdditionalProperties map[string]interface{}
+	Url string `json:"url"`
 }
 
 type _GatewayPost GatewayPost
@@ -199,11 +199,6 @@ func (o GatewayPost) ToMap() (map[string]interface{}, error) {
 		toSerialize["max_wait_ms"] = o.MaxWaitMs
 	}
 	toSerialize["url"] = o.Url
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -231,23 +226,15 @@ func (o *GatewayPost) UnmarshalJSON(data []byte) (err error) {
 
 	varGatewayPost := _GatewayPost{}
 
-	err = json.Unmarshal(data, &varGatewayPost)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varGatewayPost)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GatewayPost(varGatewayPost)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "custom_headers")
-		delete(additionalProperties, "disabled")
-		delete(additionalProperties, "max_wait_ms")
-		delete(additionalProperties, "url")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

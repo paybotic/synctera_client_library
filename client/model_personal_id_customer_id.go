@@ -20,11 +20,8 @@ var _ MappedNullable = &PersonalIdCustomerId{}
 // PersonalIdCustomerId struct for PersonalIdCustomerId
 type PersonalIdCustomerId struct {
 	// Id of the customer having this personal identifier
-	CustomerId           *string `json:"customer_id,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CustomerId *string `json:"customer_id,omitempty"`
 }
-
-type _PersonalIdCustomerId PersonalIdCustomerId
 
 // NewPersonalIdCustomerId instantiates a new PersonalIdCustomerId object
 // This constructor will assign default values to properties that have it defined,
@@ -88,33 +85,7 @@ func (o PersonalIdCustomerId) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomerId) {
 		toSerialize["customer_id"] = o.CustomerId
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *PersonalIdCustomerId) UnmarshalJSON(data []byte) (err error) {
-	varPersonalIdCustomerId := _PersonalIdCustomerId{}
-
-	err = json.Unmarshal(data, &varPersonalIdCustomerId)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PersonalIdCustomerId(varPersonalIdCustomerId)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "customer_id")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullablePersonalIdCustomerId struct {

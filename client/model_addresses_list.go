@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type AddressesList struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of Addresses
-	Addresses            []AddressResponse `json:"addresses"`
-	AdditionalProperties map[string]interface{}
+	Addresses []AddressResponse `json:"addresses"`
 }
 
 type _AddressesList AddressesList
@@ -117,11 +117,6 @@ func (o AddressesList) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["addresses"] = o.Addresses
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -149,21 +144,15 @@ func (o *AddressesList) UnmarshalJSON(data []byte) (err error) {
 
 	varAddressesList := _AddressesList{}
 
-	err = json.Unmarshal(data, &varAddressesList)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAddressesList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddressesList(varAddressesList)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "next_page_token")
-		delete(additionalProperties, "addresses")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

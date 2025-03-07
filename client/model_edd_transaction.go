@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -34,8 +35,7 @@ type EddTransaction struct {
 	// The source of funds for the transaction.
 	SourceOfFunds *string `json:"source_of_funds,omitempty"`
 	// The purpose of the transaction.
-	TransactionPurpose   *string `json:"transaction_purpose,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TransactionPurpose *string `json:"transaction_purpose,omitempty"`
 }
 
 type _EddTransaction EddTransaction
@@ -320,11 +320,6 @@ func (o EddTransaction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TransactionPurpose) {
 		toSerialize["transaction_purpose"] = o.TransactionPurpose
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -354,27 +349,15 @@ func (o *EddTransaction) UnmarshalJSON(data []byte) (err error) {
 
 	varEddTransaction := _EddTransaction{}
 
-	err = json.Unmarshal(data, &varEddTransaction)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varEddTransaction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EddTransaction(varEddTransaction)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "additional_questions")
-		delete(additionalProperties, "case_id")
-		delete(additionalProperties, "reason")
-		delete(additionalProperties, "related_resource_id")
-		delete(additionalProperties, "related_resource_type")
-		delete(additionalProperties, "tenant")
-		delete(additionalProperties, "source_of_funds")
-		delete(additionalProperties, "transaction_purpose")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

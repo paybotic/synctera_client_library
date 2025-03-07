@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,8 +24,7 @@ type ModelCase struct {
 	// Case ID
 	CaseId string `json:"case_id"`
 	// Case Reason
-	CaseReason           string `json:"case_reason"`
-	AdditionalProperties map[string]interface{}
+	CaseReason string `json:"case_reason"`
 }
 
 type _ModelCase ModelCase
@@ -108,11 +108,6 @@ func (o ModelCase) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["case_id"] = o.CaseId
 	toSerialize["case_reason"] = o.CaseReason
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -141,21 +136,15 @@ func (o *ModelCase) UnmarshalJSON(data []byte) (err error) {
 
 	varModelCase := _ModelCase{}
 
-	err = json.Unmarshal(data, &varModelCase)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varModelCase)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ModelCase(varModelCase)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "case_id")
-		delete(additionalProperties, "case_reason")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

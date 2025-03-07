@@ -27,11 +27,8 @@ type ResponseHistoryItem struct {
 	// Timestamp that the response is received
 	ResponseTime *time.Time `json:"response_time,omitempty"`
 	// Timestamp that the request is sent
-	SentTime             *time.Time `json:"sent_time,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SentTime *time.Time `json:"sent_time,omitempty"`
 }
-
-type _ResponseHistoryItem ResponseHistoryItem
 
 // NewResponseHistoryItem instantiates a new ResponseHistoryItem object
 // This constructor will assign default values to properties that have it defined,
@@ -200,36 +197,7 @@ func (o ResponseHistoryItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SentTime) {
 		toSerialize["sent_time"] = o.SentTime
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *ResponseHistoryItem) UnmarshalJSON(data []byte) (err error) {
-	varResponseHistoryItem := _ResponseHistoryItem{}
-
-	err = json.Unmarshal(data, &varResponseHistoryItem)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ResponseHistoryItem(varResponseHistoryItem)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "code")
-		delete(additionalProperties, "response_body")
-		delete(additionalProperties, "response_time")
-		delete(additionalProperties, "sent_time")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableResponseHistoryItem struct {

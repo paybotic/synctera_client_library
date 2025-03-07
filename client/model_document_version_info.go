@@ -27,11 +27,8 @@ type DocumentVersionInfo struct {
 	// The date and time the resource was last updated
 	LastUpdatedTime *time.Time `json:"last_updated_time,omitempty"`
 	// Positive integer representing the version of the document
-	Version              *int32 `json:"version,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Version *int32 `json:"version,omitempty"`
 }
-
-type _DocumentVersionInfo DocumentVersionInfo
 
 // NewDocumentVersionInfo instantiates a new DocumentVersionInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -200,36 +197,7 @@ func (o DocumentVersionInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *DocumentVersionInfo) UnmarshalJSON(data []byte) (err error) {
-	varDocumentVersionInfo := _DocumentVersionInfo{}
-
-	err = json.Unmarshal(data, &varDocumentVersionInfo)
-
-	if err != nil {
-		return err
-	}
-
-	*o = DocumentVersionInfo(varDocumentVersionInfo)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "file_name")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "version")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableDocumentVersionInfo struct {

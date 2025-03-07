@@ -19,12 +19,9 @@ var _ MappedNullable = &InAppProvisioning{}
 
 // InAppProvisioning struct for InAppProvisioning
 type InAppProvisioning struct {
-	AddressVerification  *DigitalWalletTokenAddressVerification `json:"address_verification,omitempty"`
-	Enabled              *bool                                  `json:"enabled,omitempty"`
-	AdditionalProperties map[string]interface{}
+	AddressVerification *DigitalWalletTokenAddressVerification `json:"address_verification,omitempty"`
+	Enabled             *bool                                  `json:"enabled,omitempty"`
 }
-
-type _InAppProvisioning InAppProvisioning
 
 // NewInAppProvisioning instantiates a new InAppProvisioning object
 // This constructor will assign default values to properties that have it defined,
@@ -123,34 +120,7 @@ func (o InAppProvisioning) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *InAppProvisioning) UnmarshalJSON(data []byte) (err error) {
-	varInAppProvisioning := _InAppProvisioning{}
-
-	err = json.Unmarshal(data, &varInAppProvisioning)
-
-	if err != nil {
-		return err
-	}
-
-	*o = InAppProvisioning(varInAppProvisioning)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "address_verification")
-		delete(additionalProperties, "enabled")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableInAppProvisioning struct {

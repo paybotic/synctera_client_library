@@ -19,15 +19,12 @@ var _ MappedNullable = &BillingAddress{}
 
 // BillingAddress struct for BillingAddress
 type BillingAddress struct {
-	Address              *string `json:"address,omitempty"`
-	CompressedZip        *string `json:"compressed_zip,omitempty"`
-	FirstName            *string `json:"first_name,omitempty"`
-	LastName             *string `json:"last_name,omitempty"`
-	Zip                  *string `json:"zip,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Address       *string `json:"address,omitempty"`
+	CompressedZip *string `json:"compressed_zip,omitempty"`
+	FirstName     *string `json:"first_name,omitempty"`
+	LastName      *string `json:"last_name,omitempty"`
+	Zip           *string `json:"zip,omitempty"`
 }
-
-type _BillingAddress BillingAddress
 
 // NewBillingAddress instantiates a new BillingAddress object
 // This constructor will assign default values to properties that have it defined,
@@ -231,37 +228,7 @@ func (o BillingAddress) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Zip) {
 		toSerialize["zip"] = o.Zip
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *BillingAddress) UnmarshalJSON(data []byte) (err error) {
-	varBillingAddress := _BillingAddress{}
-
-	err = json.Unmarshal(data, &varBillingAddress)
-
-	if err != nil {
-		return err
-	}
-
-	*o = BillingAddress(varBillingAddress)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "address")
-		delete(additionalProperties, "compressed_zip")
-		delete(additionalProperties, "first_name")
-		delete(additionalProperties, "last_name")
-		delete(additionalProperties, "zip")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableBillingAddress struct {

@@ -50,11 +50,8 @@ type DocumentResponse struct {
 	Tenant *string       `json:"tenant,omitempty"`
 	Type   *DocumentType `json:"type,omitempty"`
 	// Positive integer representing the version of the document
-	Version              *int32 `json:"version,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Version *int32 `json:"version,omitempty"`
 }
-
-type _DocumentResponse DocumentResponse
 
 // NewDocumentResponse instantiates a new DocumentResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -678,49 +675,7 @@ func (o DocumentResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *DocumentResponse) UnmarshalJSON(data []byte) (err error) {
-	varDocumentResponse := _DocumentResponse{}
-
-	err = json.Unmarshal(data, &varDocumentResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = DocumentResponse(varDocumentResponse)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "available_versions")
-		delete(additionalProperties, "available_versions_info")
-		delete(additionalProperties, "batch_id")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "deletion_reason")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "encryption")
-		delete(additionalProperties, "file_name")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "related_resource_id")
-		delete(additionalProperties, "related_resource_type")
-		delete(additionalProperties, "tenant")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "version")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableDocumentResponse struct {

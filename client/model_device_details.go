@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -39,8 +40,7 @@ type DeviceDetails struct {
 	// The offset from UTC of the device's local timezone, in minutes
 	Timezone int32 `json:"timezone"`
 	// The exact contents of the HTTP user agent header
-	UserAgent            string `json:"user_agent"`
-	AdditionalProperties map[string]interface{}
+	UserAgent string `json:"user_agent"`
 }
 
 type _DeviceDetails DeviceDetails
@@ -332,11 +332,6 @@ func (o DeviceDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["screen_width"] = o.ScreenWidth
 	toSerialize["timezone"] = o.Timezone
 	toSerialize["user_agent"] = o.UserAgent
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -373,29 +368,15 @@ func (o *DeviceDetails) UnmarshalJSON(data []byte) (err error) {
 
 	varDeviceDetails := _DeviceDetails{}
 
-	err = json.Unmarshal(data, &varDeviceDetails)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varDeviceDetails)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DeviceDetails(varDeviceDetails)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "color_depth")
-		delete(additionalProperties, "header")
-		delete(additionalProperties, "ip_address")
-		delete(additionalProperties, "java_enabled")
-		delete(additionalProperties, "javascript_enabled")
-		delete(additionalProperties, "language")
-		delete(additionalProperties, "screen_height")
-		delete(additionalProperties, "screen_width")
-		delete(additionalProperties, "timezone")
-		delete(additionalProperties, "user_agent")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

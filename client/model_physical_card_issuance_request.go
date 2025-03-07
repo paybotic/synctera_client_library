@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -58,9 +59,8 @@ type PhysicalCardIssuanceRequest struct {
 	// PHYSICAL or VIRTUAL.
 	Form string `json:"form"`
 	// The ID of the custom card image used for this card
-	CardImageId          *string   `json:"card_image_id,omitempty"`
-	Shipping             *Shipping `json:"shipping,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CardImageId *string   `json:"card_image_id,omitempty"`
+	Shipping    *Shipping `json:"shipping,omitempty"`
 }
 
 type _PhysicalCardIssuanceRequest PhysicalCardIssuanceRequest
@@ -826,11 +826,6 @@ func (o PhysicalCardIssuanceRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Shipping) {
 		toSerialize["shipping"] = o.Shipping
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -861,41 +856,15 @@ func (o *PhysicalCardIssuanceRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varPhysicalCardIssuanceRequest := _PhysicalCardIssuanceRequest{}
 
-	err = json.Unmarshal(data, &varPhysicalCardIssuanceRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPhysicalCardIssuanceRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PhysicalCardIssuanceRequest(varPhysicalCardIssuanceRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_id")
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "card_product_id")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "customer_id")
-		delete(additionalProperties, "emboss_name")
-		delete(additionalProperties, "expiration_month")
-		delete(additionalProperties, "expiration_time")
-		delete(additionalProperties, "expiration_year")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "is_pin_set")
-		delete(additionalProperties, "last_four")
-		delete(additionalProperties, "last_modified_time")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "reissue_reason")
-		delete(additionalProperties, "reissued_from_id")
-		delete(additionalProperties, "reissued_to_id")
-		delete(additionalProperties, "timestamp_pin_set")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "form")
-		delete(additionalProperties, "card_image_id")
-		delete(additionalProperties, "shipping")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

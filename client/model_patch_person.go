@@ -61,11 +61,8 @@ type PatchPerson struct {
 	VerificationLastRun *time.Time          `json:"verification_last_run,omitempty"`
 	VerificationStatus  *VerificationStatus `json:"verification_status,omitempty"`
 	// Text to be added to a note when updating a person. A note is required when changing a person's ban_status between SUSPENDED and ALLOWED.
-	Note                 *string `json:"note,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Note *string `json:"note,omitempty"`
 }
-
-type _PatchPerson PatchPerson
 
 // NewPatchPerson instantiates a new PatchPerson object
 // This constructor will assign default values to properties that have it defined,
@@ -934,56 +931,7 @@ func (o PatchPerson) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Note) {
 		toSerialize["note"] = o.Note
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *PatchPerson) UnmarshalJSON(data []byte) (err error) {
-	varPatchPerson := _PatchPerson{}
-
-	err = json.Unmarshal(data, &varPatchPerson)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PatchPerson(varPatchPerson)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "ban_status")
-		delete(additionalProperties, "chosen_name")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "dob")
-		delete(additionalProperties, "email")
-		delete(additionalProperties, "first_name")
-		delete(additionalProperties, "has_accounts")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "is_customer")
-		delete(additionalProperties, "is_user")
-		delete(additionalProperties, "last_name")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "legal_address")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "middle_name")
-		delete(additionalProperties, "phone_number")
-		delete(additionalProperties, "shipping_address")
-		delete(additionalProperties, "ssn")
-		delete(additionalProperties, "ssn_source")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "tenant")
-		delete(additionalProperties, "verification_last_run")
-		delete(additionalProperties, "verification_status")
-		delete(additionalProperties, "note")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullablePatchPerson struct {

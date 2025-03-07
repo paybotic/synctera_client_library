@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -38,9 +39,8 @@ type Verification struct {
 	Result     VerificationResult `json:"result"`
 	VendorInfo *VendorInfo        `json:"vendor_info,omitempty"`
 	// The date and time the verification was completed.
-	VerificationTime     time.Time        `json:"verification_time"`
-	VerificationType     VerificationType `json:"verification_type"`
-	AdditionalProperties map[string]interface{}
+	VerificationTime time.Time        `json:"verification_time"`
+	VerificationType VerificationType `json:"verification_type"`
 }
 
 type _Verification Verification
@@ -430,11 +430,6 @@ func (o Verification) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["verification_time"] = o.VerificationTime
 	toSerialize["verification_type"] = o.VerificationType
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -464,30 +459,15 @@ func (o *Verification) UnmarshalJSON(data []byte) (err error) {
 
 	varVerification := _Verification{}
 
-	err = json.Unmarshal(data, &varVerification)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varVerification)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Verification(varVerification)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "business_id")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "details")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "person_id")
-		delete(additionalProperties, "result")
-		delete(additionalProperties, "vendor_info")
-		delete(additionalProperties, "verification_time")
-		delete(additionalProperties, "verification_type")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

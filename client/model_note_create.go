@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -31,9 +32,8 @@ type NoteCreate struct {
 	RelatedResourceType RelatedResourceType2 `json:"related_resource_type"`
 	Status              *NoteStatus          `json:"status,omitempty"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant               *string    `json:"tenant,omitempty"`
-	Type                 *ModelType `json:"type,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Tenant *string    `json:"tenant,omitempty"`
+	Type   *ModelType `json:"type,omitempty"`
 }
 
 type _NoteCreate NoteCreate
@@ -322,11 +322,6 @@ func (o NoteCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -356,27 +351,15 @@ func (o *NoteCreate) UnmarshalJSON(data []byte) (err error) {
 
 	varNoteCreate := _NoteCreate{}
 
-	err = json.Unmarshal(data, &varNoteCreate)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varNoteCreate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = NoteCreate(varNoteCreate)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "content")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "related_resource_field")
-		delete(additionalProperties, "related_resource_id")
-		delete(additionalProperties, "related_resource_type")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "tenant")
-		delete(additionalProperties, "type")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

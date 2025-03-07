@@ -28,12 +28,9 @@ type PatchExternalAccount struct {
 	Nickname           *string                                 `json:"nickname,omitempty"`
 	RoutingIdentifiers *PatchAccountsRequestRoutingIdentifiers `json:"routing_identifiers,omitempty"`
 	// The type of the account
-	Type                 *string                     `json:"type,omitempty"`
-	Verification         NullableAccountVerification `json:"verification,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Type         *string                     `json:"type,omitempty"`
+	Verification NullableAccountVerification `json:"verification,omitempty"`
 }
-
-type _PatchExternalAccount PatchExternalAccount
 
 // NewPatchExternalAccount instantiates a new PatchExternalAccount object
 // This constructor will assign default values to properties that have it defined,
@@ -318,39 +315,7 @@ func (o PatchExternalAccount) ToMap() (map[string]interface{}, error) {
 	if o.Verification.IsSet() {
 		toSerialize["verification"] = o.Verification.Get()
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *PatchExternalAccount) UnmarshalJSON(data []byte) (err error) {
-	varPatchExternalAccount := _PatchExternalAccount{}
-
-	err = json.Unmarshal(data, &varPatchExternalAccount)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PatchExternalAccount(varPatchExternalAccount)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_identifiers")
-		delete(additionalProperties, "account_owner_names")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "nickname")
-		delete(additionalProperties, "routing_identifiers")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "verification")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullablePatchExternalAccount struct {

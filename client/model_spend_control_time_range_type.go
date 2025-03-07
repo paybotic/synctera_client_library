@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -20,8 +21,7 @@ var _ MappedNullable = &SpendControlTimeRangeType{}
 
 // SpendControlTimeRangeType struct for SpendControlTimeRangeType
 type SpendControlTimeRangeType struct {
-	TimeRangeType        string `json:"time_range_type"`
-	AdditionalProperties map[string]interface{}
+	TimeRangeType string `json:"time_range_type"`
 }
 
 type _SpendControlTimeRangeType SpendControlTimeRangeType
@@ -79,11 +79,6 @@ func (o SpendControlTimeRangeType) MarshalJSON() ([]byte, error) {
 func (o SpendControlTimeRangeType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["time_range_type"] = o.TimeRangeType
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -111,20 +106,15 @@ func (o *SpendControlTimeRangeType) UnmarshalJSON(data []byte) (err error) {
 
 	varSpendControlTimeRangeType := _SpendControlTimeRangeType{}
 
-	err = json.Unmarshal(data, &varSpendControlTimeRangeType)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSpendControlTimeRangeType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SpendControlTimeRangeType(varSpendControlTimeRangeType)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "time_range_type")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

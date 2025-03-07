@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,15 +22,14 @@ var _ MappedNullable = &OriginalCreditRequestModel{}
 // OriginalCreditRequestModel struct for OriginalCreditRequestModel
 type OriginalCreditRequestModel struct {
 	// The amount of the transaction in the smallest whole denomination of the applicable currency (eg. For USD use cents)
-	Amount               int32                     `json:"amount"`
-	CardAcceptor         *CardAcceptorModel        `json:"card_acceptor,omitempty"`
-	CardId               string                    `json:"card_id"`
-	Mid                  string                    `json:"mid"`
-	ScreeningScore       *string                   `json:"screening_score,omitempty"`
-	SenderData           *OriginalCreditSenderData `json:"sender_data,omitempty"`
-	TransactionPurpose   *string                   `json:"transactionPurpose,omitempty"`
-	Type                 string                    `json:"type"`
-	AdditionalProperties map[string]interface{}
+	Amount             int32                     `json:"amount"`
+	CardAcceptor       *CardAcceptorModel        `json:"card_acceptor,omitempty"`
+	CardId             string                    `json:"card_id"`
+	Mid                string                    `json:"mid"`
+	ScreeningScore     *string                   `json:"screening_score,omitempty"`
+	SenderData         *OriginalCreditSenderData `json:"sender_data,omitempty"`
+	TransactionPurpose *string                   `json:"transactionPurpose,omitempty"`
+	Type               string                    `json:"type"`
 }
 
 type _OriginalCreditRequestModel OriginalCreditRequestModel
@@ -305,11 +305,6 @@ func (o OriginalCreditRequestModel) ToMap() (map[string]interface{}, error) {
 		toSerialize["transactionPurpose"] = o.TransactionPurpose
 	}
 	toSerialize["type"] = o.Type
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -340,27 +335,15 @@ func (o *OriginalCreditRequestModel) UnmarshalJSON(data []byte) (err error) {
 
 	varOriginalCreditRequestModel := _OriginalCreditRequestModel{}
 
-	err = json.Unmarshal(data, &varOriginalCreditRequestModel)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOriginalCreditRequestModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OriginalCreditRequestModel(varOriginalCreditRequestModel)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "card_acceptor")
-		delete(additionalProperties, "card_id")
-		delete(additionalProperties, "mid")
-		delete(additionalProperties, "screening_score")
-		delete(additionalProperties, "sender_data")
-		delete(additionalProperties, "transactionPurpose")
-		delete(additionalProperties, "type")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

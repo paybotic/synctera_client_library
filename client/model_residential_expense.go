@@ -22,12 +22,9 @@ type ResidentialExpense struct {
 	// The amount paid in residential expenses at the specified frequency. For example, $112.35 USD is represented as 11235 cents).
 	Amount *int32 `json:"amount,omitempty"`
 	// The currency in ISO 4217 format.
-	Currency             *string           `json:"currency,omitempty" validate:"regexp=^[A-Z]{3}$"`
-	Frequency            NullableFrequency `json:"frequency,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Currency  *string           `json:"currency,omitempty" validate:"regexp=^[A-Z]{3}$"`
+	Frequency NullableFrequency `json:"frequency,omitempty"`
 }
-
-type _ResidentialExpense ResidentialExpense
 
 // NewResidentialExpense instantiates a new ResidentialExpense object
 // This constructor will assign default values to properties that have it defined,
@@ -172,35 +169,7 @@ func (o ResidentialExpense) ToMap() (map[string]interface{}, error) {
 	if o.Frequency.IsSet() {
 		toSerialize["frequency"] = o.Frequency.Get()
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *ResidentialExpense) UnmarshalJSON(data []byte) (err error) {
-	varResidentialExpense := _ResidentialExpense{}
-
-	err = json.Unmarshal(data, &varResidentialExpense)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ResidentialExpense(varResidentialExpense)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "frequency")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableResidentialExpense struct {

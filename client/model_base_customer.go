@@ -55,11 +55,8 @@ type BaseCustomer struct {
 	Ssn       *string    `json:"ssn,omitempty"`
 	SsnSource *SsnSource `json:"ssn_source,omitempty"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant               *string `json:"tenant,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Tenant *string `json:"tenant,omitempty"`
 }
-
-type _BaseCustomer BaseCustomer
 
 // NewBaseCustomer instantiates a new BaseCustomer object
 // This constructor will assign default values to properties that have it defined,
@@ -791,52 +788,7 @@ func (o BaseCustomer) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tenant) {
 		toSerialize["tenant"] = o.Tenant
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *BaseCustomer) UnmarshalJSON(data []byte) (err error) {
-	varBaseCustomer := _BaseCustomer{}
-
-	err = json.Unmarshal(data, &varBaseCustomer)
-
-	if err != nil {
-		return err
-	}
-
-	*o = BaseCustomer(varBaseCustomer)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "addresses")
-		delete(additionalProperties, "ban_status")
-		delete(additionalProperties, "creation_time")
-		delete(additionalProperties, "email")
-		delete(additionalProperties, "has_accounts")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "kyc_exempt")
-		delete(additionalProperties, "kyc_last_run")
-		delete(additionalProperties, "kyc_status")
-		delete(additionalProperties, "last_updated_time")
-		delete(additionalProperties, "legal_address")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "middle_name")
-		delete(additionalProperties, "note")
-		delete(additionalProperties, "phone_number")
-		delete(additionalProperties, "related_customers")
-		delete(additionalProperties, "shipping_address")
-		delete(additionalProperties, "ssn")
-		delete(additionalProperties, "ssn_source")
-		delete(additionalProperties, "tenant")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableBaseCustomer struct {

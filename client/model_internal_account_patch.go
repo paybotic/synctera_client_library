@@ -23,12 +23,9 @@ type InternalAccountPatch struct {
 	// The ID of the bank account associated with this internal account. It will be auto-filled if the account type has only one matching bank account in the system.
 	BankAccountId *string `json:"bank_account_id,omitempty"`
 	// A user provided description for the current account
-	Description          *string                 `json:"description,omitempty"`
-	Purpose              *InternalAccountPurpose `json:"purpose,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Description *string                 `json:"description,omitempty"`
+	Purpose     *InternalAccountPurpose `json:"purpose,omitempty"`
 }
-
-type _InternalAccountPatch InternalAccountPatch
 
 // NewInternalAccountPatch instantiates a new InternalAccountPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -197,36 +194,7 @@ func (o InternalAccountPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Purpose) {
 		toSerialize["purpose"] = o.Purpose
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
-}
-
-func (o *InternalAccountPatch) UnmarshalJSON(data []byte) (err error) {
-	varInternalAccountPatch := _InternalAccountPatch{}
-
-	err = json.Unmarshal(data, &varInternalAccountPatch)
-
-	if err != nil {
-		return err
-	}
-
-	*o = InternalAccountPatch(varInternalAccountPatch)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_type")
-		delete(additionalProperties, "bank_account_id")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "purpose")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableInternalAccountPatch struct {

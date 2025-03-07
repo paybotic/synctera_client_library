@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,8 +26,7 @@ type Initialize3dsRequest struct {
 	// ISO 4217  Alpha-3 currency code
 	Currency string `json:"currency"`
 	// The ID of the External Card for which the 3DS Authentication will be performed
-	ExternalCardId       string `json:"external_card_id"`
-	AdditionalProperties map[string]interface{}
+	ExternalCardId string `json:"external_card_id"`
 }
 
 type _Initialize3dsRequest Initialize3dsRequest
@@ -136,11 +136,6 @@ func (o Initialize3dsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["amount"] = o.Amount
 	toSerialize["currency"] = o.Currency
 	toSerialize["external_card_id"] = o.ExternalCardId
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -170,22 +165,15 @@ func (o *Initialize3dsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varInitialize3dsRequest := _Initialize3dsRequest{}
 
-	err = json.Unmarshal(data, &varInitialize3dsRequest)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varInitialize3dsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Initialize3dsRequest(varInitialize3dsRequest)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "external_card_id")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

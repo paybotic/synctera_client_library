@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -32,8 +33,7 @@ type CardChange struct {
 	// Date of change
 	UpdatedAt time.Time `json:"updated_at"`
 	// ID of user who initiated the change, if done via Synctera Admin System
-	UpdatedBy            string `json:"updated_by"`
-	AdditionalProperties map[string]interface{}
+	UpdatedBy string `json:"updated_by"`
 }
 
 type _CardChange CardChange
@@ -291,11 +291,6 @@ func (o CardChange) ToMap() (map[string]interface{}, error) {
 	toSerialize["state"] = o.State
 	toSerialize["updated_at"] = o.UpdatedAt
 	toSerialize["updated_by"] = o.UpdatedBy
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -328,27 +323,15 @@ func (o *CardChange) UnmarshalJSON(data []byte) (err error) {
 
 	varCardChange := _CardChange{}
 
-	err = json.Unmarshal(data, &varCardChange)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCardChange)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CardChange(varCardChange)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "change_type")
-		delete(additionalProperties, "channel")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "memo")
-		delete(additionalProperties, "reason")
-		delete(additionalProperties, "state")
-		delete(additionalProperties, "updated_at")
-		delete(additionalProperties, "updated_by")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }

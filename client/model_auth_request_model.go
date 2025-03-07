@@ -11,6 +11,7 @@ API version: 0.153.0
 package synctera_client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,17 +22,16 @@ var _ MappedNullable = &AuthRequestModel{}
 // AuthRequestModel struct for AuthRequestModel
 type AuthRequestModel struct {
 	// The amount of the transaction in the smallest whole denomination of the applicable currency (eg. For USD use cents)
-	Amount               int32               `json:"amount"`
-	CardAcceptor         *CardAcceptorModel  `json:"card_acceptor,omitempty"`
-	CardId               string              `json:"card_id"`
-	CardOptions          *CardOptions        `json:"card_options,omitempty"`
-	CashBackAmount       *int32              `json:"cash_back_amount,omitempty"`
-	IsPreAuth            *bool               `json:"is_pre_auth,omitempty"`
-	Mid                  string              `json:"mid"`
-	NetworkFees          []NetworkFeeModel   `json:"network_fees,omitempty"`
-	Pin                  *string             `json:"pin,omitempty"`
-	TransactionOptions   *TransactionOptions `json:"transaction_options,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Amount             int32               `json:"amount"`
+	CardAcceptor       *CardAcceptorModel  `json:"card_acceptor,omitempty"`
+	CardId             string              `json:"card_id"`
+	CardOptions        *CardOptions        `json:"card_options,omitempty"`
+	CashBackAmount     *int32              `json:"cash_back_amount,omitempty"`
+	IsPreAuth          *bool               `json:"is_pre_auth,omitempty"`
+	Mid                string              `json:"mid"`
+	NetworkFees        []NetworkFeeModel   `json:"network_fees,omitempty"`
+	Pin                *string             `json:"pin,omitempty"`
+	TransactionOptions *TransactionOptions `json:"transaction_options,omitempty"`
 }
 
 type _AuthRequestModel AuthRequestModel
@@ -390,11 +390,6 @@ func (o AuthRequestModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TransactionOptions) {
 		toSerialize["transaction_options"] = o.TransactionOptions
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return toSerialize, nil
 }
 
@@ -424,29 +419,15 @@ func (o *AuthRequestModel) UnmarshalJSON(data []byte) (err error) {
 
 	varAuthRequestModel := _AuthRequestModel{}
 
-	err = json.Unmarshal(data, &varAuthRequestModel)
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAuthRequestModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AuthRequestModel(varAuthRequestModel)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "card_acceptor")
-		delete(additionalProperties, "card_id")
-		delete(additionalProperties, "card_options")
-		delete(additionalProperties, "cash_back_amount")
-		delete(additionalProperties, "is_pre_auth")
-		delete(additionalProperties, "mid")
-		delete(additionalProperties, "network_fees")
-		delete(additionalProperties, "pin")
-		delete(additionalProperties, "transaction_options")
-		o.AdditionalProperties = additionalProperties
-	}
 
 	return err
 }
