@@ -30,8 +30,11 @@ type StatementSummary struct {
 	// The date when the statement has been issued
 	IssueDate *string `json:"issue_date,omitempty"`
 	// The date indicating the beginning of the time interval covered by the statement
-	StartDate *string `json:"start_date,omitempty"`
+	StartDate            *string `json:"start_date,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StatementSummary StatementSummary
 
 // NewStatementSummary instantiates a new StatementSummary object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o StatementSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StartDate) {
 		toSerialize["start_date"] = o.StartDate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StatementSummary) UnmarshalJSON(data []byte) (err error) {
+	varStatementSummary := _StatementSummary{}
+
+	err = json.Unmarshal(data, &varStatementSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StatementSummary(varStatementSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_id")
+		delete(additionalProperties, "due_date")
+		delete(additionalProperties, "end_date")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "issue_date")
+		delete(additionalProperties, "start_date")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStatementSummary struct {

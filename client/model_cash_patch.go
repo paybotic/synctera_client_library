@@ -22,9 +22,12 @@ type CashPatch struct {
 	// The UUID of the Synctera account resource that is the destination of the transfer for incoming transfers. This can only be updated if the transfer is suspended.
 	DestinationAccountId *string `json:"destination_account_id,omitempty"`
 	// Additional information to be added to the transfer
-	SourceData map[string]interface{} `json:"source_data,omitempty"`
-	Status     *string                `json:"status,omitempty"`
+	SourceData           map[string]interface{} `json:"source_data,omitempty"`
+	Status               *string                `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CashPatch CashPatch
 
 // NewCashPatch instantiates a new CashPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -158,7 +161,35 @@ func (o CashPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CashPatch) UnmarshalJSON(data []byte) (err error) {
+	varCashPatch := _CashPatch{}
+
+	err = json.Unmarshal(data, &varCashPatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CashPatch(varCashPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "destination_account_id")
+		delete(additionalProperties, "source_data")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCashPatch struct {

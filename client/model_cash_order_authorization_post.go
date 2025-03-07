@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -27,7 +26,8 @@ type CashOrderAuthorizationPost struct {
 	// The UUID of the Synctera account resource that is the destination of the transfer.
 	DestinationAccountId string `json:"destination_account_id"`
 	// The date the cash order was placed with cash distribution provider
-	OrderDate string `json:"order_date"`
+	OrderDate            string `json:"order_date"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CashOrderAuthorizationPost CashOrderAuthorizationPost
@@ -163,6 +163,11 @@ func (o CashOrderAuthorizationPost) ToMap() (map[string]interface{}, error) {
 	toSerialize["authorization_type"] = o.AuthorizationType
 	toSerialize["destination_account_id"] = o.DestinationAccountId
 	toSerialize["order_date"] = o.OrderDate
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -193,15 +198,23 @@ func (o *CashOrderAuthorizationPost) UnmarshalJSON(data []byte) (err error) {
 
 	varCashOrderAuthorizationPost := _CashOrderAuthorizationPost{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCashOrderAuthorizationPost)
+	err = json.Unmarshal(data, &varCashOrderAuthorizationPost)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CashOrderAuthorizationPost(varCashOrderAuthorizationPost)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "authorization_type")
+		delete(additionalProperties, "destination_account_id")
+		delete(additionalProperties, "order_date")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

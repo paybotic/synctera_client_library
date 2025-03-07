@@ -20,8 +20,11 @@ var _ MappedNullable = &RiskData{}
 // RiskData struct for RiskData
 type RiskData struct {
 	// Client IP
-	ClientIp *string `json:"client_ip,omitempty"`
+	ClientIp             *string `json:"client_ip,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RiskData RiskData
 
 // NewRiskData instantiates a new RiskData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o RiskData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ClientIp) {
 		toSerialize["client_ip"] = o.ClientIp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RiskData) UnmarshalJSON(data []byte) (err error) {
+	varRiskData := _RiskData{}
+
+	err = json.Unmarshal(data, &varRiskData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RiskData(varRiskData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "client_ip")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRiskData struct {

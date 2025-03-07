@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -36,7 +35,8 @@ type EddAccountResponse struct {
 	CreationTime time.Time    `json:"creation_time"`
 	DeletionTime NullableTime `json:"deletion_time"`
 	// EDD record unique identifier
-	Id string `json:"id"`
+	Id                   string `json:"id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EddAccountResponse EddAccountResponse
@@ -331,6 +331,11 @@ func (o EddAccountResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["creation_time"] = o.CreationTime
 	toSerialize["deletion_time"] = o.DeletionTime.Get()
 	toSerialize["id"] = o.Id
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -363,15 +368,28 @@ func (o *EddAccountResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varEddAccountResponse := _EddAccountResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEddAccountResponse)
+	err = json.Unmarshal(data, &varEddAccountResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EddAccountResponse(varEddAccountResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "additional_questions")
+		delete(additionalProperties, "case_id")
+		delete(additionalProperties, "reason")
+		delete(additionalProperties, "related_resource_id")
+		delete(additionalProperties, "related_resource_type")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "deletion_time")
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

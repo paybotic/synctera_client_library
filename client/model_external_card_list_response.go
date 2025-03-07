@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,7 +23,8 @@ type ExternalCardListResponse struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of External Cards
-	ExternalCards []ExternalCardResponse `json:"external_cards"`
+	ExternalCards        []ExternalCardResponse `json:"external_cards"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ExternalCardListResponse ExternalCardListResponse
@@ -117,6 +117,11 @@ func (o ExternalCardListResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
 	toSerialize["external_cards"] = o.ExternalCards
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *ExternalCardListResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varExternalCardListResponse := _ExternalCardListResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExternalCardListResponse)
+	err = json.Unmarshal(data, &varExternalCardListResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExternalCardListResponse(varExternalCardListResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "external_cards")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

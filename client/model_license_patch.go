@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,7 +21,8 @@ var _ MappedNullable = &LicensePatch{}
 // LicensePatch struct for LicensePatch
 type LicensePatch struct {
 	// The entity's license number
-	LicenseNumber string `json:"license_number"`
+	LicenseNumber        string `json:"license_number"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LicensePatch LicensePatch
@@ -80,6 +80,11 @@ func (o LicensePatch) MarshalJSON() ([]byte, error) {
 func (o LicensePatch) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["license_number"] = o.LicenseNumber
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *LicensePatch) UnmarshalJSON(data []byte) (err error) {
 
 	varLicensePatch := _LicensePatch{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLicensePatch)
+	err = json.Unmarshal(data, &varLicensePatch)
 
 	if err != nil {
 		return err
 	}
 
 	*o = LicensePatch(varLicensePatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "license_number")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

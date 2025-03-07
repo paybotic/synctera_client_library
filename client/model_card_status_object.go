@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,9 +22,10 @@ var _ MappedNullable = &CardStatusObject{}
 type CardStatusObject struct {
 	CardStatus CardStatus `json:"card_status"`
 	// Additional details about the reason for the status change
-	Memo           *string                   `json:"memo,omitempty"`
-	PendingReasons *CardStatusPendingReasons `json:"pending_reasons,omitempty"`
-	StatusReason   *CardStatusReasonCode     `json:"status_reason,omitempty"`
+	Memo                 *string                   `json:"memo,omitempty"`
+	PendingReasons       *CardStatusPendingReasons `json:"pending_reasons,omitempty"`
+	StatusReason         *CardStatusReasonCode     `json:"status_reason,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CardStatusObject CardStatusObject
@@ -188,6 +188,11 @@ func (o CardStatusObject) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StatusReason) {
 		toSerialize["status_reason"] = o.StatusReason
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -215,15 +220,23 @@ func (o *CardStatusObject) UnmarshalJSON(data []byte) (err error) {
 
 	varCardStatusObject := _CardStatusObject{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCardStatusObject)
+	err = json.Unmarshal(data, &varCardStatusObject)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CardStatusObject(varCardStatusObject)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "card_status")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "pending_reasons")
+		delete(additionalProperties, "status_reason")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

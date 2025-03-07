@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -31,7 +30,8 @@ type ScheduleConfig struct {
 	// Start date of the schedule (inclusive)
 	StartDate string `json:"start_date"`
 	// start_search determines the direction of the search for a start date that falls on a banking day. If 'BACKWARD' is selected, the search begins from the specified start date and checks each preceding day, up to a month. Conversely, if 'FORWARD' is selected, the search commences from the specified start date and checks each subsequent day, for up to a month.
-	StartSearch *string `json:"start_search,omitempty"`
+	StartSearch          *string `json:"start_search,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScheduleConfig ScheduleConfig
@@ -246,6 +246,11 @@ func (o ScheduleConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StartSearch) {
 		toSerialize["start_search"] = o.StartSearch
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -275,15 +280,25 @@ func (o *ScheduleConfig) UnmarshalJSON(data []byte) (err error) {
 
 	varScheduleConfig := _ScheduleConfig{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varScheduleConfig)
+	err = json.Unmarshal(data, &varScheduleConfig)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ScheduleConfig(varScheduleConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "end_date")
+		delete(additionalProperties, "frequency")
+		delete(additionalProperties, "interval")
+		delete(additionalProperties, "start_date")
+		delete(additionalProperties, "start_search")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -37,6 +36,7 @@ type ExternalAccountBalance struct {
 	Limit NullableInt64 `json:"limit,omitempty"`
 	// The last time Synctera has fetched transactions from a vendor
 	TransactionsLastUpdatedTime *time.Time `json:"transactions_last_updated_time,omitempty"`
+	AdditionalProperties        map[string]interface{}
 }
 
 type _ExternalAccountBalance ExternalAccountBalance
@@ -372,6 +372,11 @@ func (o ExternalAccountBalance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TransactionsLastUpdatedTime) {
 		toSerialize["transactions_last_updated_time"] = o.TransactionsLastUpdatedTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -399,15 +404,27 @@ func (o *ExternalAccountBalance) UnmarshalJSON(data []byte) (err error) {
 
 	varExternalAccountBalance := _ExternalAccountBalance{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExternalAccountBalance)
+	err = json.Unmarshal(data, &varExternalAccountBalance)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExternalAccountBalance(varExternalAccountBalance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "available")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "current")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "last_updated_time_vendor")
+		delete(additionalProperties, "limit")
+		delete(additionalProperties, "transactions_last_updated_time")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

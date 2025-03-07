@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,7 +21,8 @@ var _ MappedNullable = &ExternalAccountTransactionRefreshResponse{}
 // ExternalAccountTransactionRefreshResponse struct for ExternalAccountTransactionRefreshResponse
 type ExternalAccountTransactionRefreshResponse struct {
 	// Number of transactions synced for the access token associated with this external account.
-	TransactionsSynced int64 `json:"transactions_synced"`
+	TransactionsSynced   int64 `json:"transactions_synced"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ExternalAccountTransactionRefreshResponse ExternalAccountTransactionRefreshResponse
@@ -80,6 +80,11 @@ func (o ExternalAccountTransactionRefreshResponse) MarshalJSON() ([]byte, error)
 func (o ExternalAccountTransactionRefreshResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["transactions_synced"] = o.TransactionsSynced
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *ExternalAccountTransactionRefreshResponse) UnmarshalJSON(data []byte) (
 
 	varExternalAccountTransactionRefreshResponse := _ExternalAccountTransactionRefreshResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExternalAccountTransactionRefreshResponse)
+	err = json.Unmarshal(data, &varExternalAccountTransactionRefreshResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExternalAccountTransactionRefreshResponse(varExternalAccountTransactionRefreshResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "transactions_synced")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

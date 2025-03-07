@@ -121,8 +121,11 @@ type AccountGenericResponse struct {
 	// SWIFT code
 	SwiftCode *string `json:"swift_code,omitempty"`
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
-	Tenant *string `json:"tenant,omitempty"`
+	Tenant               *string `json:"tenant,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AccountGenericResponse AccountGenericResponse
 
 // NewAccountGenericResponse instantiates a new AccountGenericResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -2187,7 +2190,90 @@ func (o AccountGenericResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tenant) {
 		toSerialize["tenant"] = o.Tenant
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AccountGenericResponse) UnmarshalJSON(data []byte) (err error) {
+	varAccountGenericResponse := _AccountGenericResponse{}
+
+	err = json.Unmarshal(data, &varAccountGenericResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AccountGenericResponse(varAccountGenericResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access_status")
+		delete(additionalProperties, "access_status_last_updated_time")
+		delete(additionalProperties, "account_closure")
+		delete(additionalProperties, "account_number")
+		delete(additionalProperties, "account_number_masked")
+		delete(additionalProperties, "account_purpose")
+		delete(additionalProperties, "account_template_id")
+		delete(additionalProperties, "account_type")
+		delete(additionalProperties, "application_id")
+		delete(additionalProperties, "auto_payment_period")
+		delete(additionalProperties, "balance_ceiling")
+		delete(additionalProperties, "balance_floor")
+		delete(additionalProperties, "balances")
+		delete(additionalProperties, "bank_account_id")
+		delete(additionalProperties, "bank_routing")
+		delete(additionalProperties, "billing_period")
+		delete(additionalProperties, "business_ids")
+		delete(additionalProperties, "close_date")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "credit_limit")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "customer_ids")
+		delete(additionalProperties, "customer_type")
+		delete(additionalProperties, "days_past_due")
+		delete(additionalProperties, "exchange_rate_type")
+		delete(additionalProperties, "fee_product_ids")
+		delete(additionalProperties, "funds_ownership")
+		delete(additionalProperties, "general_ledger_category")
+		delete(additionalProperties, "general_ledger_type")
+		delete(additionalProperties, "grace_period")
+		delete(additionalProperties, "iban")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "interest_product_id")
+		delete(additionalProperties, "is_account_pool")
+		delete(additionalProperties, "is_ach_enabled")
+		delete(additionalProperties, "is_card_enabled")
+		delete(additionalProperties, "is_eft_ca_enabled")
+		delete(additionalProperties, "is_external_card_enabled")
+		delete(additionalProperties, "is_p2p_enabled")
+		delete(additionalProperties, "is_sar_enabled")
+		delete(additionalProperties, "is_security")
+		delete(additionalProperties, "is_synctera_pay_enabled")
+		delete(additionalProperties, "is_system_auto_pay_enabled")
+		delete(additionalProperties, "is_wire_enabled")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "minimum_payment")
+		delete(additionalProperties, "nickname")
+		delete(additionalProperties, "open_date")
+		delete(additionalProperties, "overdraft_limit")
+		delete(additionalProperties, "restrictions")
+		delete(additionalProperties, "security")
+		delete(additionalProperties, "spend_control_ids")
+		delete(additionalProperties, "spending_limits")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "stop_payments")
+		delete(additionalProperties, "swift_code")
+		delete(additionalProperties, "tenant")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAccountGenericResponse struct {

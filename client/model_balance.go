@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,8 +21,9 @@ var _ MappedNullable = &Balance{}
 // Balance struct for Balance
 type Balance struct {
 	// balance in ISO 4217 minor currency units. Unit in cents.
-	Balance int64       `json:"balance"`
-	Type    BalanceType `json:"type"`
+	Balance              int64       `json:"balance"`
+	Type                 BalanceType `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Balance Balance
@@ -107,6 +107,11 @@ func (o Balance) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["balance"] = o.Balance
 	toSerialize["type"] = o.Type
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *Balance) UnmarshalJSON(data []byte) (err error) {
 
 	varBalance := _Balance{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBalance)
+	err = json.Unmarshal(data, &varBalance)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Balance(varBalance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "balance")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

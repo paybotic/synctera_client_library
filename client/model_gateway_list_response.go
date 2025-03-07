@@ -22,8 +22,11 @@ type GatewayListResponse struct {
 	// If returned, use the next_page_token to query for the next page of results. Not returned if there are no more rows.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Array of Authorization gateway configuration
-	Gateways []GatewayResponse `json:"gateways,omitempty"`
+	Gateways             []GatewayResponse `json:"gateways,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GatewayListResponse GatewayListResponse
 
 // NewGatewayListResponse instantiates a new GatewayListResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GatewayListResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Gateways) {
 		toSerialize["gateways"] = o.Gateways
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GatewayListResponse) UnmarshalJSON(data []byte) (err error) {
+	varGatewayListResponse := _GatewayListResponse{}
+
+	err = json.Unmarshal(data, &varGatewayListResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GatewayListResponse(varGatewayListResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "gateways")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGatewayListResponse struct {

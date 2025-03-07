@@ -22,8 +22,11 @@ type SpendingLimitWithTime struct {
 	// Maximum amount allowed within the time range. Unit in cents.
 	Amount *int64 `json:"amount,omitempty"`
 	// Maximum number of transactions allowed within the time range
-	Transactions *int64 `json:"transactions,omitempty"`
+	Transactions         *int64 `json:"transactions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpendingLimitWithTime SpendingLimitWithTime
 
 // NewSpendingLimitWithTime instantiates a new SpendingLimitWithTime object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SpendingLimitWithTime) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Transactions) {
 		toSerialize["transactions"] = o.Transactions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SpendingLimitWithTime) UnmarshalJSON(data []byte) (err error) {
+	varSpendingLimitWithTime := _SpendingLimitWithTime{}
+
+	err = json.Unmarshal(data, &varSpendingLimitWithTime)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpendingLimitWithTime(varSpendingLimitWithTime)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "transactions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpendingLimitWithTime struct {

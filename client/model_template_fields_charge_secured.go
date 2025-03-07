@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -34,7 +33,8 @@ type TemplateFieldsChargeSecured struct {
 	GracePeriod    *int32             `json:"grace_period,omitempty"`
 	MinimumPayment MinimumPaymentFull `json:"minimum_payment"`
 	// List of spend control IDs to control spending for the account
-	SpendControlIds []string `json:"spend_control_ids,omitempty"`
+	SpendControlIds      []string `json:"spend_control_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TemplateFieldsChargeSecured TemplateFieldsChargeSecured
@@ -314,6 +314,11 @@ func (o TemplateFieldsChargeSecured) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SpendControlIds) {
 		toSerialize["spend_control_ids"] = o.SpendControlIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -344,15 +349,27 @@ func (o *TemplateFieldsChargeSecured) UnmarshalJSON(data []byte) (err error) {
 
 	varTemplateFieldsChargeSecured := _TemplateFieldsChargeSecured{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTemplateFieldsChargeSecured)
+	err = json.Unmarshal(data, &varTemplateFieldsChargeSecured)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TemplateFieldsChargeSecured(varTemplateFieldsChargeSecured)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_type")
+		delete(additionalProperties, "bank_account_id")
+		delete(additionalProperties, "bank_country")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "auto_payment_period")
+		delete(additionalProperties, "grace_period")
+		delete(additionalProperties, "minimum_payment")
+		delete(additionalProperties, "spend_control_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

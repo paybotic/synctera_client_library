@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -31,8 +30,9 @@ type TemplateFieldsLineOfCredit struct {
 	// The number of days past the billing period to allow for payment before it is considered due. This directly infers the due date for a payment. The default will be set to 21 days.
 	GracePeriod *int32 `json:"grace_period,omitempty"`
 	// An interest account product that the current account associates with. The account product must have its calculation_method set to COMPOUNDED_DAILY.
-	InterestProductId *string               `json:"interest_product_id,omitempty"`
-	MinimumPayment    MinimumPaymentPartial `json:"minimum_payment"`
+	InterestProductId    *string               `json:"interest_product_id,omitempty"`
+	MinimumPayment       MinimumPaymentPartial `json:"minimum_payment"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TemplateFieldsLineOfCredit TemplateFieldsLineOfCredit
@@ -277,6 +277,11 @@ func (o TemplateFieldsLineOfCredit) ToMap() (map[string]interface{}, error) {
 		toSerialize["interest_product_id"] = o.InterestProductId
 	}
 	toSerialize["minimum_payment"] = o.MinimumPayment
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -307,15 +312,26 @@ func (o *TemplateFieldsLineOfCredit) UnmarshalJSON(data []byte) (err error) {
 
 	varTemplateFieldsLineOfCredit := _TemplateFieldsLineOfCredit{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTemplateFieldsLineOfCredit)
+	err = json.Unmarshal(data, &varTemplateFieldsLineOfCredit)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TemplateFieldsLineOfCredit(varTemplateFieldsLineOfCredit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_type")
+		delete(additionalProperties, "bank_account_id")
+		delete(additionalProperties, "bank_country")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "grace_period")
+		delete(additionalProperties, "interest_product_id")
+		delete(additionalProperties, "minimum_payment")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -36,7 +35,8 @@ type WireRequest struct {
 	// The external account uuid representing the recipient of the wire.
 	ReceivingAccountId string `json:"receiving_account_id"`
 	// Information from the originator to the beneficiary (recipient).
-	RecipientMessage string `json:"recipient_message"`
+	RecipientMessage     string `json:"recipient_message"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WireRequest WireRequest
@@ -294,6 +294,11 @@ func (o WireRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["originating_account_id"] = o.OriginatingAccountId
 	toSerialize["receiving_account_id"] = o.ReceivingAccountId
 	toSerialize["recipient_message"] = o.RecipientMessage
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -326,15 +331,27 @@ func (o *WireRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varWireRequest := _WireRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWireRequest)
+	err = json.Unmarshal(data, &varWireRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WireRequest(varWireRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "bank_message")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "customer_id")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "originating_account_id")
+		delete(additionalProperties, "receiving_account_id")
+		delete(additionalProperties, "recipient_message")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

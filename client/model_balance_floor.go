@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -27,7 +26,8 @@ type BalanceFloor struct {
 	LinkedAccountId *string `json:"linked_account_id,omitempty"`
 	// ID of linked backing account for just-in-time (JIT) funding of transactions to maintain the balance floor This attribute is a deprecated alias for linked_account_id.
 	// Deprecated
-	OverdraftAccountId *string `json:"overdraft_account_id,omitempty"`
+	OverdraftAccountId   *string `json:"overdraft_account_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BalanceFloor BalanceFloor
@@ -158,6 +158,11 @@ func (o BalanceFloor) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OverdraftAccountId) {
 		toSerialize["overdraft_account_id"] = o.OverdraftAccountId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -185,15 +190,22 @@ func (o *BalanceFloor) UnmarshalJSON(data []byte) (err error) {
 
 	varBalanceFloor := _BalanceFloor{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBalanceFloor)
+	err = json.Unmarshal(data, &varBalanceFloor)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BalanceFloor(varBalanceFloor)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "balance")
+		delete(additionalProperties, "linked_account_id")
+		delete(additionalProperties, "overdraft_account_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

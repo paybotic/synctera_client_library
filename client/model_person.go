@@ -20,14 +20,17 @@ var _ MappedNullable = &Person{}
 
 // Person struct for Person
 type Person struct {
-	CreationTime     *time.Time `json:"creation_time,omitempty"`
-	FirstName        *string    `json:"first_name,omitempty"`
-	Id               *string    `json:"id,omitempty"`
-	LastName         *string    `json:"last_name,omitempty"`
-	LastUpdatedTime  *time.Time `json:"last_updated_time,omitempty"`
-	MiddleName       *string    `json:"middle_name,omitempty"`
-	RelationshipType *string    `json:"relationship_type,omitempty"`
+	CreationTime         *time.Time `json:"creation_time,omitempty"`
+	FirstName            *string    `json:"first_name,omitempty"`
+	Id                   *string    `json:"id,omitempty"`
+	LastName             *string    `json:"last_name,omitempty"`
+	LastUpdatedTime      *time.Time `json:"last_updated_time,omitempty"`
+	MiddleName           *string    `json:"middle_name,omitempty"`
+	RelationshipType     *string    `json:"relationship_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Person Person
 
 // NewPerson instantiates a new Person object
 // This constructor will assign default values to properties that have it defined,
@@ -301,7 +304,39 @@ func (o Person) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RelationshipType) {
 		toSerialize["relationship_type"] = o.RelationshipType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Person) UnmarshalJSON(data []byte) (err error) {
+	varPerson := _Person{}
+
+	err = json.Unmarshal(data, &varPerson)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Person(varPerson)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "last_name")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "middle_name")
+		delete(additionalProperties, "relationship_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePerson struct {

@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -48,10 +47,11 @@ type ExternalAccount struct {
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
 	Tenant *string `json:"tenant,omitempty"`
 	// The type of the account
-	Type         string                      `json:"type"`
-	VendorData   *ExternalAccountVendorData  `json:"vendor_data,omitempty"`
-	VendorInfo   *VendorInfo                 `json:"vendor_info,omitempty"`
-	Verification NullableAccountVerification `json:"verification"`
+	Type                 string                      `json:"type"`
+	VendorData           *ExternalAccountVendorData  `json:"vendor_data,omitempty"`
+	VendorInfo           *VendorInfo                 `json:"vendor_info,omitempty"`
+	Verification         NullableAccountVerification `json:"verification"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ExternalAccount ExternalAccount
@@ -680,6 +680,11 @@ func (o ExternalAccount) ToMap() (map[string]interface{}, error) {
 		toSerialize["vendor_info"] = o.VendorInfo
 	}
 	toSerialize["verification"] = o.Verification.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -715,15 +720,38 @@ func (o *ExternalAccount) UnmarshalJSON(data []byte) (err error) {
 
 	varExternalAccount := _ExternalAccount{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExternalAccount)
+	err = json.Unmarshal(data, &varExternalAccount)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExternalAccount(varExternalAccount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_identifiers")
+		delete(additionalProperties, "account_owner_names")
+		delete(additionalProperties, "business_id")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "customer_id")
+		delete(additionalProperties, "deletion_time")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "nickname")
+		delete(additionalProperties, "routing_identifiers")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "vendor_data")
+		delete(additionalProperties, "vendor_info")
+		delete(additionalProperties, "verification")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

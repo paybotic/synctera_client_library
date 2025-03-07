@@ -19,8 +19,11 @@ var _ MappedNullable = &PatchNote{}
 
 // PatchNote struct for PatchNote
 type PatchNote struct {
-	Status *NoteStatus `json:"status,omitempty"`
+	Status               *NoteStatus `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PatchNote PatchNote
 
 // NewPatchNote instantiates a new PatchNote object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o PatchNote) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PatchNote) UnmarshalJSON(data []byte) (err error) {
+	varPatchNote := _PatchNote{}
+
+	err = json.Unmarshal(data, &varPatchNote)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PatchNote(varPatchNote)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePatchNote struct {

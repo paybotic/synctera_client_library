@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -26,7 +25,8 @@ type WireTransactionSimulationRequest struct {
 	// Amount to transfer in cents (e.g. 100 = $1).
 	Amount int32 `json:"amount"`
 	// Network to use for the Wire transfer
-	Network *string `json:"network,omitempty"`
+	Network              *string `json:"network,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WireTransactionSimulationRequest WireTransactionSimulationRequest
@@ -149,6 +149,11 @@ func (o WireTransactionSimulationRequest) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Network) {
 		toSerialize["network"] = o.Network
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -177,15 +182,22 @@ func (o *WireTransactionSimulationRequest) UnmarshalJSON(data []byte) (err error
 
 	varWireTransactionSimulationRequest := _WireTransactionSimulationRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWireTransactionSimulationRequest)
+	err = json.Unmarshal(data, &varWireTransactionSimulationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WireTransactionSimulationRequest(varWireTransactionSimulationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_number")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "network")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

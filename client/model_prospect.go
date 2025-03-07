@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -65,7 +64,8 @@ type Prospect struct {
 	// Customer's last name
 	LastName *string `json:"last_name,omitempty"`
 	// Customer's status
-	Status string `json:"status"`
+	Status               string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Prospect Prospect
@@ -931,6 +931,11 @@ func (o Prospect) ToMap() (map[string]interface{}, error) {
 		toSerialize["last_name"] = o.LastName
 	}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -958,15 +963,43 @@ func (o *Prospect) UnmarshalJSON(data []byte) (err error) {
 
 	varProspect := _Prospect{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProspect)
+	err = json.Unmarshal(data, &varProspect)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Prospect(varProspect)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "addresses")
+		delete(additionalProperties, "ban_status")
+		delete(additionalProperties, "creation_time")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "has_accounts")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "kyc_exempt")
+		delete(additionalProperties, "kyc_last_run")
+		delete(additionalProperties, "kyc_status")
+		delete(additionalProperties, "last_updated_time")
+		delete(additionalProperties, "legal_address")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "middle_name")
+		delete(additionalProperties, "note")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "related_customers")
+		delete(additionalProperties, "shipping_address")
+		delete(additionalProperties, "ssn")
+		delete(additionalProperties, "ssn_source")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "dob")
+		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "last_name")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

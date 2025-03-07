@@ -28,8 +28,11 @@ type PushDetails struct {
 	Network     *string                  `json:"network,omitempty"`
 	ProductType *ExternalCardProductType `json:"product_type,omitempty"`
 	// Exemption status from debit card interchange fee standards
-	Regulated *bool `json:"regulated,omitempty"`
+	Regulated            *bool `json:"regulated,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PushDetails PushDetails
 
 // NewPushDetails instantiates a new PushDetails object
 // This constructor will assign default values to properties that have it defined,
@@ -268,7 +271,38 @@ func (o PushDetails) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Regulated) {
 		toSerialize["regulated"] = o.Regulated
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PushDetails) UnmarshalJSON(data []byte) (err error) {
+	varPushDetails := _PushDetails{}
+
+	err = json.Unmarshal(data, &varPushDetails)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PushDetails(varPushDetails)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "funds_availability")
+		delete(additionalProperties, "network")
+		delete(additionalProperties, "product_type")
+		delete(additionalProperties, "regulated")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePushDetails struct {

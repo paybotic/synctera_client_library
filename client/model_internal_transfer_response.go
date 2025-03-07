@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -55,8 +54,9 @@ type InternalTransferResponse struct {
 	// The desired transaction type to use for this transfer
 	Type string `json:"type"`
 	// The transaction id associated with the transfer
-	Id     string                         `json:"id"`
-	Status InternalTransferResponseStatus `json:"status"`
+	Id                   string                         `json:"id"`
+	Status               InternalTransferResponseStatus `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InternalTransferResponse InternalTransferResponse
@@ -677,6 +677,11 @@ func (o InternalTransferResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	toSerialize["id"] = o.Id
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -708,15 +713,37 @@ func (o *InternalTransferResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varInternalTransferResponse := _InternalTransferResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInternalTransferResponse)
+	err = json.Unmarshal(data, &varInternalTransferResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InternalTransferResponse(varInternalTransferResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "capture_mode")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "expires_at")
+		delete(additionalProperties, "final_customer_id")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "originating_account_alias")
+		delete(additionalProperties, "originating_account_customer_id")
+		delete(additionalProperties, "originating_account_id")
+		delete(additionalProperties, "receiving_account_alias")
+		delete(additionalProperties, "receiving_account_customer_id")
+		delete(additionalProperties, "receiving_account_id")
+		delete(additionalProperties, "reference_id")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

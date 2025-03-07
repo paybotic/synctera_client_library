@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,7 +23,8 @@ type TransferReversalRequest struct {
 	// Amount of the refund in cents (Amount can be up to the original amount)
 	Amount int32 `json:"amount"`
 	// ISO 4217  Alpha-3 currency code
-	Currency string `json:"currency"`
+	Currency             string `json:"currency"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TransferReversalRequest TransferReversalRequest
@@ -108,6 +108,11 @@ func (o TransferReversalRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["amount"] = o.Amount
 	toSerialize["currency"] = o.Currency
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *TransferReversalRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varTransferReversalRequest := _TransferReversalRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTransferReversalRequest)
+	err = json.Unmarshal(data, &varTransferReversalRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TransferReversalRequest(varTransferReversalRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

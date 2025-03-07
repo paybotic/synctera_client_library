@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,9 +27,10 @@ type TransactionLine struct {
 	// The amount (in cents) of the transaction
 	Amount int32 `json:"amount"`
 	// ISO 4217 alphabetic currency code of the transfer amount
-	Currency string `json:"currency"`
-	DcSign   DcSign `json:"dc_sign"`
-	Uuid     string `json:"uuid"`
+	Currency             string `json:"currency"`
+	DcSign               DcSign `json:"dc_sign"`
+	Uuid                 string `json:"uuid"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TransactionLine TransactionLine
@@ -218,6 +218,11 @@ func (o TransactionLine) ToMap() (map[string]interface{}, error) {
 	toSerialize["currency"] = o.Currency
 	toSerialize["dc_sign"] = o.DcSign
 	toSerialize["uuid"] = o.Uuid
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -250,15 +255,25 @@ func (o *TransactionLine) UnmarshalJSON(data []byte) (err error) {
 
 	varTransactionLine := _TransactionLine{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTransactionLine)
+	err = json.Unmarshal(data, &varTransactionLine)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TransactionLine(varTransactionLine)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_id")
+		delete(additionalProperties, "account_no")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "dc_sign")
+		delete(additionalProperties, "uuid")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

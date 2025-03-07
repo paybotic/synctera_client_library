@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -30,7 +29,8 @@ type StopPayment struct {
 	OriginatorName string `json:"originator_name"`
 	StopPaymentId  string `json:"stop_payment_id"`
 	// If this stop payment was created from a disputed transaction, transaction_id references the posted transaction.
-	TransactionId *string `json:"transaction_id,omitempty"`
+	TransactionId        *string `json:"transaction_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StopPayment StopPayment
@@ -219,6 +219,11 @@ func (o StopPayment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TransactionId) {
 		toSerialize["transaction_id"] = o.TransactionId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -247,15 +252,24 @@ func (o *StopPayment) UnmarshalJSON(data []byte) (err error) {
 
 	varStopPayment := _StopPayment{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStopPayment)
+	err = json.Unmarshal(data, &varStopPayment)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StopPayment(varStopPayment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dispute_id")
+		delete(additionalProperties, "expires_on")
+		delete(additionalProperties, "originator_name")
+		delete(additionalProperties, "stop_payment_id")
+		delete(additionalProperties, "transaction_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

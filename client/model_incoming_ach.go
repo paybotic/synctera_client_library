@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -62,7 +61,8 @@ type IncomingAch struct {
 	// The id of the tenant containing the resource. This is relevant for Fintechs that have multiple workspaces.
 	Tenant string `json:"tenant"`
 	// Trace number of the ACH entry
-	TraceNo string `json:"trace_no"`
+	TraceNo              string `json:"trace_no"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncomingAch IncomingAch
@@ -764,6 +764,11 @@ func (o IncomingAch) ToMap() (map[string]interface{}, error) {
 	toSerialize["status"] = o.Status
 	toSerialize["tenant"] = o.Tenant
 	toSerialize["trace_no"] = o.TraceNo
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -805,15 +810,42 @@ func (o *IncomingAch) UnmarshalJSON(data []byte) (err error) {
 
 	varIncomingAch := _IncomingAch{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIncomingAch)
+	err = json.Unmarshal(data, &varIncomingAch)
 
 	if err != nil {
 		return err
 	}
 
 	*o = IncomingAch(varIncomingAch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_id")
+		delete(additionalProperties, "account_no")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "company_entry_description")
+		delete(additionalProperties, "company_name")
+		delete(additionalProperties, "dc_sign")
+		delete(additionalProperties, "decline_reason")
+		delete(additionalProperties, "effective_date")
+		delete(additionalProperties, "external_id")
+		delete(additionalProperties, "iat_info")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identification_number")
+		delete(additionalProperties, "is_future_dated")
+		delete(additionalProperties, "notification_of_change")
+		delete(additionalProperties, "originating_routing_number")
+		delete(additionalProperties, "outgoing_ach_id")
+		delete(additionalProperties, "reference_info")
+		delete(additionalProperties, "return_data")
+		delete(additionalProperties, "sec_code")
+		delete(additionalProperties, "settlement_date")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "tenant")
+		delete(additionalProperties, "trace_no")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

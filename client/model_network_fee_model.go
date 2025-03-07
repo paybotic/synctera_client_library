@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,8 +23,9 @@ type NetworkFeeModel struct {
 	// The amount of the fee in the smallest whole denomination of the applicable currency (eg. For USD use cents)
 	Amount int32 `json:"amount"`
 	// C = credit; D = debit
-	CreditDebit *string `json:"credit_debit,omitempty"`
-	Type        string  `json:"type"`
+	CreditDebit          *string `json:"credit_debit,omitempty"`
+	Type                 string  `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _NetworkFeeModel NetworkFeeModel
@@ -144,6 +144,11 @@ func (o NetworkFeeModel) ToMap() (map[string]interface{}, error) {
 		toSerialize["credit_debit"] = o.CreditDebit
 	}
 	toSerialize["type"] = o.Type
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -172,15 +177,22 @@ func (o *NetworkFeeModel) UnmarshalJSON(data []byte) (err error) {
 
 	varNetworkFeeModel := _NetworkFeeModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varNetworkFeeModel)
+	err = json.Unmarshal(data, &varNetworkFeeModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = NetworkFeeModel(varNetworkFeeModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "credit_debit")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

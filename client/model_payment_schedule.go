@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -26,11 +25,12 @@ type PaymentSchedule struct {
 	// Payment schedule ID
 	Id *string `json:"id,omitempty"`
 	// User provided JSON format data
-	Metadata           map[string]interface{} `json:"metadata,omitempty"`
-	NextPaymentDate    *PaymentDate           `json:"next_payment_date,omitempty"`
-	PaymentInstruction PaymentInstruction     `json:"payment_instruction"`
-	Schedule           ScheduleConfig         `json:"schedule"`
-	Status             *PaymentScheduleStatus `json:"status,omitempty"`
+	Metadata             map[string]interface{} `json:"metadata,omitempty"`
+	NextPaymentDate      *PaymentDate           `json:"next_payment_date,omitempty"`
+	PaymentInstruction   PaymentInstruction     `json:"payment_instruction"`
+	Schedule             ScheduleConfig         `json:"schedule"`
+	Status               *PaymentScheduleStatus `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PaymentSchedule PaymentSchedule
@@ -280,6 +280,11 @@ func (o PaymentSchedule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -309,15 +314,26 @@ func (o *PaymentSchedule) UnmarshalJSON(data []byte) (err error) {
 
 	varPaymentSchedule := _PaymentSchedule{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPaymentSchedule)
+	err = json.Unmarshal(data, &varPaymentSchedule)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PaymentSchedule(varPaymentSchedule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "next_payment_date")
+		delete(additionalProperties, "payment_instruction")
+		delete(additionalProperties, "schedule")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

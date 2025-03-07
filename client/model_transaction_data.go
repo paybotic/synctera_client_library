@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,9 +23,10 @@ type TransactionData struct {
 	// an unstructured json blob representing additional transaction information supplied by the integrator.
 	ExternalData map[string]interface{} `json:"external_data,omitempty"`
 	// The set of accounting entries associated with this transaction. For example, a debit to a customer account will have a corresponding credit in a general ledger account.
-	Lines    []TransactionLine      `json:"lines"`
-	Memo     string                 `json:"memo"`
-	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	Lines                []TransactionLine      `json:"lines"`
+	Memo                 string                 `json:"memo"`
+	Metadata             map[string]interface{} `json:"metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TransactionData TransactionData
@@ -182,6 +182,11 @@ func (o TransactionData) ToMap() (map[string]interface{}, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -210,15 +215,23 @@ func (o *TransactionData) UnmarshalJSON(data []byte) (err error) {
 
 	varTransactionData := _TransactionData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTransactionData)
+	err = json.Unmarshal(data, &varTransactionData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TransactionData(varTransactionData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "external_data")
+		delete(additionalProperties, "lines")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "metadata")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

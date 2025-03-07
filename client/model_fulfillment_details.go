@@ -24,8 +24,11 @@ type FulfillmentDetails struct {
 	// The specific shipping method as reported by the card fulfillment provider
 	ShippingMethod *string `json:"shipping_method,omitempty"`
 	// The shipment tracking number
-	TrackingNumber *string `json:"tracking_number,omitempty"`
+	TrackingNumber       *string `json:"tracking_number,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FulfillmentDetails FulfillmentDetails
 
 // NewFulfillmentDetails instantiates a new FulfillmentDetails object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o FulfillmentDetails) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TrackingNumber) {
 		toSerialize["tracking_number"] = o.TrackingNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FulfillmentDetails) UnmarshalJSON(data []byte) (err error) {
+	varFulfillmentDetails := _FulfillmentDetails{}
+
+	err = json.Unmarshal(data, &varFulfillmentDetails)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FulfillmentDetails(varFulfillmentDetails)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ship_date")
+		delete(additionalProperties, "shipping_method")
+		delete(additionalProperties, "tracking_number")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFulfillmentDetails struct {

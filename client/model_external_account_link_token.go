@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -50,7 +49,8 @@ type ExternalAccountLinkToken struct {
 	// The ID of the institution the access token is requested for. If present the link token will be created in an update mode.
 	VendorInstitutionId *string `json:"vendor_institution_id,omitempty"`
 	// If true, Synctera will attempt to verify that the external account owner is the same as the customer by comparing external account data to customer data. At least 2 of the following fields must match: name, phone number, email, address. Verification is disabled by default.
-	VerifyOwner *bool `json:"verify_owner,omitempty"`
+	VerifyOwner          *bool `json:"verify_owner,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ExternalAccountLinkToken ExternalAccountLinkToken
@@ -579,6 +579,11 @@ func (o ExternalAccountLinkToken) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VerifyOwner) {
 		toSerialize["verify_owner"] = o.VerifyOwner
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -609,15 +614,34 @@ func (o *ExternalAccountLinkToken) UnmarshalJSON(data []byte) (err error) {
 
 	varExternalAccountLinkToken := _ExternalAccountLinkToken{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExternalAccountLinkToken)
+	err = json.Unmarshal(data, &varExternalAccountLinkToken)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExternalAccountLinkToken(varExternalAccountLinkToken)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "business_id")
+		delete(additionalProperties, "client_name")
+		delete(additionalProperties, "country_codes")
+		delete(additionalProperties, "customer_id")
+		delete(additionalProperties, "expiration")
+		delete(additionalProperties, "language")
+		delete(additionalProperties, "link_customization_name")
+		delete(additionalProperties, "link_token")
+		delete(additionalProperties, "redirect_uri")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "sdk_type")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "vendor_access_token")
+		delete(additionalProperties, "vendor_institution_id")
+		delete(additionalProperties, "verify_owner")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

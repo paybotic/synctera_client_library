@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -32,6 +31,7 @@ type OriginalCreditSenderData struct {
 	SenderState                      *string `json:"sender_state,omitempty"`
 	TransactionPurpose               *string `json:"transaction_purpose,omitempty"`
 	UniqueTransactionReferenceNumber *string `json:"unique_transaction_reference_number,omitempty"`
+	AdditionalProperties             map[string]interface{}
 }
 
 type _OriginalCreditSenderData OriginalCreditSenderData
@@ -439,6 +439,11 @@ func (o OriginalCreditSenderData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UniqueTransactionReferenceNumber) {
 		toSerialize["unique_transaction_reference_number"] = o.UniqueTransactionReferenceNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -466,15 +471,30 @@ func (o *OriginalCreditSenderData) UnmarshalJSON(data []byte) (err error) {
 
 	varOriginalCreditSenderData := _OriginalCreditSenderData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOriginalCreditSenderData)
+	err = json.Unmarshal(data, &varOriginalCreditSenderData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OriginalCreditSenderData(varOriginalCreditSenderData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "funding_source")
+		delete(additionalProperties, "sender_account_number")
+		delete(additionalProperties, "sender_account_type")
+		delete(additionalProperties, "sender_address")
+		delete(additionalProperties, "sender_city")
+		delete(additionalProperties, "sender_country")
+		delete(additionalProperties, "sender_name")
+		delete(additionalProperties, "sender_reference_number")
+		delete(additionalProperties, "sender_state")
+		delete(additionalProperties, "transaction_purpose")
+		delete(additionalProperties, "unique_transaction_reference_number")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

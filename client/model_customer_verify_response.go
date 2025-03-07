@@ -11,7 +11,6 @@ API version: 0.153.0
 package synctera_client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,7 +24,8 @@ type CustomerVerifyResponse struct {
 	NextPageToken *string           `json:"next_page_token,omitempty"`
 	KycStatus     CustomerKycStatus `json:"kyc_status"`
 	// Array of verification results.
-	Verifications []CustomerVerificationResult `json:"verifications"`
+	Verifications        []CustomerVerificationResult `json:"verifications"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CustomerVerifyResponse CustomerVerifyResponse
@@ -144,6 +144,11 @@ func (o CustomerVerifyResponse) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["kyc_status"] = o.KycStatus
 	toSerialize["verifications"] = o.Verifications
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -172,15 +177,22 @@ func (o *CustomerVerifyResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varCustomerVerifyResponse := _CustomerVerifyResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCustomerVerifyResponse)
+	err = json.Unmarshal(data, &varCustomerVerifyResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CustomerVerifyResponse(varCustomerVerifyResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "kyc_status")
+		delete(additionalProperties, "verifications")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
