@@ -1,0 +1,39 @@
+# CardLifecycleState
+
+## Enum
+
+
+* `DENIED` (value: `"DENIED"`)
+
+* `PENDING_ACTION` (value: `"PENDING_ACTION"`)
+
+* `WRITE_OFF` (value: `"WRITE_OFF"`)
+
+* `CHARGEBACK` (value: `"CHARGEBACK"`)
+
+* `NETWORK_REJECTED_CHARGEBACK` (value: `"NETWORK_REJECTED_CHARGEBACK"`)
+
+* `NETWORK_REJECTED_CHARGEBACK_REVERSAL` (value: `"NETWORK_REJECTED_CHARGEBACK_REVERSAL"`)
+
+* `REPRESENTMENT` (value: `"REPRESENTMENT"`)
+
+* `PRE_ARBITRATION` (value: `"PRE_ARBITRATION"`)
+
+* `PRE_ARBITRATION_RESPONSE` (value: `"PRE_ARBITRATION_RESPONSE"`)
+
+* `ARBITRATION` (value: `"ARBITRATION"`)
+
+* `ARBITRATION_RESPONSE` (value: `"ARBITRATION_RESPONSE"`)
+
+* `PRE_COMPLIANCE` (value: `"PRE_COMPLIANCE"`)
+
+* `PRE_COMPLIANCE_RESPONSE` (value: `"PRE_COMPLIANCE_RESPONSE"`)
+
+* `COMPLIANCE` (value: `"COMPLIANCE"`)
+
+* `COMPLIANCE_RESPONSE` (value: `"COMPLIANCE_RESPONSE"`)
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
