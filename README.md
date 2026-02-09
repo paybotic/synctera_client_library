@@ -30,3 +30,17 @@ openapi-generator generate -i synctera_openapi.json -g go -o ./client --addition
    ![alt text](image.png)
 10. Run `go build ./`
 11. Once go build runs without any errors push the changes
+
+# Synctera client v2
+
+Repeat steps as above, however the following steps will be different:
+
+3. Obtain the synctera v2 openapi from this link <https://docs.synctera.com/v2/reference/need-to-know> and name it `synctera_v2_openapi.json`
+4. Delete the client_v2 folder
+5. Run the following command
+
+```
+openapi-generator generate -i synctera_v2_openapi.json -g go -o ./client_v2 --additional-properties=useOneOfDiscriminatorLookup=true,enumClassPrefix=true,packageName=synctera_client,disallowAdditionalPropertiesIfNotPresent=false --git-user-id paybotic --git-repo-id synctera_client_library/client_v2 --global-property=apiTests=false
+```
+
+6. Switch to the client_v2 folder

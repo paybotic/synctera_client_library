@@ -1,0 +1,15 @@
+# ExternalCardsFundsAvailability
+
+## Enum
+
+
+* `NOW` (value: `"NOW"`)
+
+* `NEXT` (value: `"NEXT"`)
+
+* `FEW` (value: `"FEW"`)
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

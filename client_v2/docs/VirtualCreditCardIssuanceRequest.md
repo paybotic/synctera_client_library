@@ -1,0 +1,509 @@
+# VirtualCreditCardIssuanceRequest
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Form** | **string** | PHYSICAL or VIRTUAL. | 
+**AccountId** | **string** | The ID of the account to which the card will be linked | 
+**BusinessId** | Pointer to **string** | The business ID associated with this card. If no customer_id is supplied, a card can still be issued to a business, but cannot be activated or used until a customer is assigned via the PATCH /cards/{card_id} endpoint. | [optional] 
+**CardProductId** | **string** | The card product to which the card is attached | 
+**CreationTime** | Pointer to **time.Time** | The timestamp representing when the card issuance request was made | [optional] [readonly] 
+**CustomerId** | Pointer to **string** | The ID of the customer to whom the card will be issued. If this is not populated with a valid customer_id the card cannot be activated or used for spend until it&#39;s assigned to a human customer via the PATCH /cards/{card_id} endpoint. If no business_id is passed, a customer_id is required. | [optional] 
+**EmbossName** | Pointer to [**EmbossName**](EmbossName.md) |  | [optional] 
+**ExpirationMonth** | Pointer to **string** |  | [optional] [readonly] 
+**ExpirationTime** | Pointer to **time.Time** | The timestamp representing when the card would expire at | [optional] [readonly] 
+**ExpirationYear** | Pointer to **string** |  | [optional] [readonly] 
+**Id** | Pointer to **string** | Card ID | [optional] [readonly] 
+**IsPinSet** | Pointer to **bool** | indicates whether a pin has been set on the card | [optional] [readonly] [default to false]
+**LastFour** | Pointer to **string** | The last 4 digits of the card PAN | [optional] [readonly] 
+**LastUpdatedTime** | Pointer to **time.Time** | The timestamp representing when the card was last modified at | [optional] [readonly] 
+**Metadata** | Pointer to **map[string]string** | Additional data to include in the request structured as key-value pairs | [optional] 
+**ReissueReason** | Pointer to **string** | This is the reason the card needs to be reissued, if any. The reason determines several behaviours:   - whether or not the new card will use the same PAN as the original card   - the old card will be terminated and if so, when it will be terminated  Reason                 | Same PAN | Terminate Old Card ---------------------- | -------- | ------------------ APPEARANCE             | yes      | on activation BANK_MIGRATION         | yes      | on activation DAMAGED                | yes      | on activation EXPIRATION             | yes      | on activation LOST                   | no       | immediately PRODUCT_CHANGE         | yes      | on activation PROGRAM_CHANGE         | yes      | on activation STOLEN                 | no       | immediately  For all reasons, the new card will use the same PIN as the original card and digital wallet tokens will reassigned to the new card  | [optional] 
+**ReissuedFromId** | Pointer to **string** | When reissuing a card, specify the card to be replaced here. When getting a card&#39;s details, if this card was issued as a reissuance of another card, this ID refers to the card was replaced. If this field is set, then reissue_reason must also be set.  | [optional] 
+**ReissuedToId** | Pointer to **string** | If this card was reissued, this ID refers to the card that replaced it. | [optional] [readonly] 
+**TimestampPinSet** | Pointer to **time.Time** | Time when the PIN was last set or changed. | [optional] [readonly] 
+
+## Methods
+
+### NewVirtualCreditCardIssuanceRequest
+
+`func NewVirtualCreditCardIssuanceRequest(form string, accountId string, cardProductId string, ) *VirtualCreditCardIssuanceRequest`
+
+NewVirtualCreditCardIssuanceRequest instantiates a new VirtualCreditCardIssuanceRequest object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewVirtualCreditCardIssuanceRequestWithDefaults
+
+`func NewVirtualCreditCardIssuanceRequestWithDefaults() *VirtualCreditCardIssuanceRequest`
+
+NewVirtualCreditCardIssuanceRequestWithDefaults instantiates a new VirtualCreditCardIssuanceRequest object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetForm
+
+`func (o *VirtualCreditCardIssuanceRequest) GetForm() string`
+
+GetForm returns the Form field if non-nil, zero value otherwise.
+
+### GetFormOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetFormOk() (*string, bool)`
+
+GetFormOk returns a tuple with the Form field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetForm
+
+`func (o *VirtualCreditCardIssuanceRequest) SetForm(v string)`
+
+SetForm sets Form field to given value.
+
+
+### GetAccountId
+
+`func (o *VirtualCreditCardIssuanceRequest) GetAccountId() string`
+
+GetAccountId returns the AccountId field if non-nil, zero value otherwise.
+
+### GetAccountIdOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetAccountIdOk() (*string, bool)`
+
+GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountId
+
+`func (o *VirtualCreditCardIssuanceRequest) SetAccountId(v string)`
+
+SetAccountId sets AccountId field to given value.
+
+
+### GetBusinessId
+
+`func (o *VirtualCreditCardIssuanceRequest) GetBusinessId() string`
+
+GetBusinessId returns the BusinessId field if non-nil, zero value otherwise.
+
+### GetBusinessIdOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetBusinessIdOk() (*string, bool)`
+
+GetBusinessIdOk returns a tuple with the BusinessId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBusinessId
+
+`func (o *VirtualCreditCardIssuanceRequest) SetBusinessId(v string)`
+
+SetBusinessId sets BusinessId field to given value.
+
+### HasBusinessId
+
+`func (o *VirtualCreditCardIssuanceRequest) HasBusinessId() bool`
+
+HasBusinessId returns a boolean if a field has been set.
+
+### GetCardProductId
+
+`func (o *VirtualCreditCardIssuanceRequest) GetCardProductId() string`
+
+GetCardProductId returns the CardProductId field if non-nil, zero value otherwise.
+
+### GetCardProductIdOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetCardProductIdOk() (*string, bool)`
+
+GetCardProductIdOk returns a tuple with the CardProductId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCardProductId
+
+`func (o *VirtualCreditCardIssuanceRequest) SetCardProductId(v string)`
+
+SetCardProductId sets CardProductId field to given value.
+
+
+### GetCreationTime
+
+`func (o *VirtualCreditCardIssuanceRequest) GetCreationTime() time.Time`
+
+GetCreationTime returns the CreationTime field if non-nil, zero value otherwise.
+
+### GetCreationTimeOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetCreationTimeOk() (*time.Time, bool)`
+
+GetCreationTimeOk returns a tuple with the CreationTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreationTime
+
+`func (o *VirtualCreditCardIssuanceRequest) SetCreationTime(v time.Time)`
+
+SetCreationTime sets CreationTime field to given value.
+
+### HasCreationTime
+
+`func (o *VirtualCreditCardIssuanceRequest) HasCreationTime() bool`
+
+HasCreationTime returns a boolean if a field has been set.
+
+### GetCustomerId
+
+`func (o *VirtualCreditCardIssuanceRequest) GetCustomerId() string`
+
+GetCustomerId returns the CustomerId field if non-nil, zero value otherwise.
+
+### GetCustomerIdOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetCustomerIdOk() (*string, bool)`
+
+GetCustomerIdOk returns a tuple with the CustomerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomerId
+
+`func (o *VirtualCreditCardIssuanceRequest) SetCustomerId(v string)`
+
+SetCustomerId sets CustomerId field to given value.
+
+### HasCustomerId
+
+`func (o *VirtualCreditCardIssuanceRequest) HasCustomerId() bool`
+
+HasCustomerId returns a boolean if a field has been set.
+
+### GetEmbossName
+
+`func (o *VirtualCreditCardIssuanceRequest) GetEmbossName() EmbossName`
+
+GetEmbossName returns the EmbossName field if non-nil, zero value otherwise.
+
+### GetEmbossNameOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetEmbossNameOk() (*EmbossName, bool)`
+
+GetEmbossNameOk returns a tuple with the EmbossName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEmbossName
+
+`func (o *VirtualCreditCardIssuanceRequest) SetEmbossName(v EmbossName)`
+
+SetEmbossName sets EmbossName field to given value.
+
+### HasEmbossName
+
+`func (o *VirtualCreditCardIssuanceRequest) HasEmbossName() bool`
+
+HasEmbossName returns a boolean if a field has been set.
+
+### GetExpirationMonth
+
+`func (o *VirtualCreditCardIssuanceRequest) GetExpirationMonth() string`
+
+GetExpirationMonth returns the ExpirationMonth field if non-nil, zero value otherwise.
+
+### GetExpirationMonthOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetExpirationMonthOk() (*string, bool)`
+
+GetExpirationMonthOk returns a tuple with the ExpirationMonth field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpirationMonth
+
+`func (o *VirtualCreditCardIssuanceRequest) SetExpirationMonth(v string)`
+
+SetExpirationMonth sets ExpirationMonth field to given value.
+
+### HasExpirationMonth
+
+`func (o *VirtualCreditCardIssuanceRequest) HasExpirationMonth() bool`
+
+HasExpirationMonth returns a boolean if a field has been set.
+
+### GetExpirationTime
+
+`func (o *VirtualCreditCardIssuanceRequest) GetExpirationTime() time.Time`
+
+GetExpirationTime returns the ExpirationTime field if non-nil, zero value otherwise.
+
+### GetExpirationTimeOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetExpirationTimeOk() (*time.Time, bool)`
+
+GetExpirationTimeOk returns a tuple with the ExpirationTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpirationTime
+
+`func (o *VirtualCreditCardIssuanceRequest) SetExpirationTime(v time.Time)`
+
+SetExpirationTime sets ExpirationTime field to given value.
+
+### HasExpirationTime
+
+`func (o *VirtualCreditCardIssuanceRequest) HasExpirationTime() bool`
+
+HasExpirationTime returns a boolean if a field has been set.
+
+### GetExpirationYear
+
+`func (o *VirtualCreditCardIssuanceRequest) GetExpirationYear() string`
+
+GetExpirationYear returns the ExpirationYear field if non-nil, zero value otherwise.
+
+### GetExpirationYearOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetExpirationYearOk() (*string, bool)`
+
+GetExpirationYearOk returns a tuple with the ExpirationYear field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpirationYear
+
+`func (o *VirtualCreditCardIssuanceRequest) SetExpirationYear(v string)`
+
+SetExpirationYear sets ExpirationYear field to given value.
+
+### HasExpirationYear
+
+`func (o *VirtualCreditCardIssuanceRequest) HasExpirationYear() bool`
+
+HasExpirationYear returns a boolean if a field has been set.
+
+### GetId
+
+`func (o *VirtualCreditCardIssuanceRequest) GetId() string`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetIdOk() (*string, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *VirtualCreditCardIssuanceRequest) SetId(v string)`
+
+SetId sets Id field to given value.
+
+### HasId
+
+`func (o *VirtualCreditCardIssuanceRequest) HasId() bool`
+
+HasId returns a boolean if a field has been set.
+
+### GetIsPinSet
+
+`func (o *VirtualCreditCardIssuanceRequest) GetIsPinSet() bool`
+
+GetIsPinSet returns the IsPinSet field if non-nil, zero value otherwise.
+
+### GetIsPinSetOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetIsPinSetOk() (*bool, bool)`
+
+GetIsPinSetOk returns a tuple with the IsPinSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPinSet
+
+`func (o *VirtualCreditCardIssuanceRequest) SetIsPinSet(v bool)`
+
+SetIsPinSet sets IsPinSet field to given value.
+
+### HasIsPinSet
+
+`func (o *VirtualCreditCardIssuanceRequest) HasIsPinSet() bool`
+
+HasIsPinSet returns a boolean if a field has been set.
+
+### GetLastFour
+
+`func (o *VirtualCreditCardIssuanceRequest) GetLastFour() string`
+
+GetLastFour returns the LastFour field if non-nil, zero value otherwise.
+
+### GetLastFourOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetLastFourOk() (*string, bool)`
+
+GetLastFourOk returns a tuple with the LastFour field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastFour
+
+`func (o *VirtualCreditCardIssuanceRequest) SetLastFour(v string)`
+
+SetLastFour sets LastFour field to given value.
+
+### HasLastFour
+
+`func (o *VirtualCreditCardIssuanceRequest) HasLastFour() bool`
+
+HasLastFour returns a boolean if a field has been set.
+
+### GetLastUpdatedTime
+
+`func (o *VirtualCreditCardIssuanceRequest) GetLastUpdatedTime() time.Time`
+
+GetLastUpdatedTime returns the LastUpdatedTime field if non-nil, zero value otherwise.
+
+### GetLastUpdatedTimeOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetLastUpdatedTimeOk() (*time.Time, bool)`
+
+GetLastUpdatedTimeOk returns a tuple with the LastUpdatedTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastUpdatedTime
+
+`func (o *VirtualCreditCardIssuanceRequest) SetLastUpdatedTime(v time.Time)`
+
+SetLastUpdatedTime sets LastUpdatedTime field to given value.
+
+### HasLastUpdatedTime
+
+`func (o *VirtualCreditCardIssuanceRequest) HasLastUpdatedTime() bool`
+
+HasLastUpdatedTime returns a boolean if a field has been set.
+
+### GetMetadata
+
+`func (o *VirtualCreditCardIssuanceRequest) GetMetadata() map[string]string`
+
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+
+### GetMetadataOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetMetadataOk() (*map[string]string, bool)`
+
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadata
+
+`func (o *VirtualCreditCardIssuanceRequest) SetMetadata(v map[string]string)`
+
+SetMetadata sets Metadata field to given value.
+
+### HasMetadata
+
+`func (o *VirtualCreditCardIssuanceRequest) HasMetadata() bool`
+
+HasMetadata returns a boolean if a field has been set.
+
+### GetReissueReason
+
+`func (o *VirtualCreditCardIssuanceRequest) GetReissueReason() string`
+
+GetReissueReason returns the ReissueReason field if non-nil, zero value otherwise.
+
+### GetReissueReasonOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetReissueReasonOk() (*string, bool)`
+
+GetReissueReasonOk returns a tuple with the ReissueReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReissueReason
+
+`func (o *VirtualCreditCardIssuanceRequest) SetReissueReason(v string)`
+
+SetReissueReason sets ReissueReason field to given value.
+
+### HasReissueReason
+
+`func (o *VirtualCreditCardIssuanceRequest) HasReissueReason() bool`
+
+HasReissueReason returns a boolean if a field has been set.
+
+### GetReissuedFromId
+
+`func (o *VirtualCreditCardIssuanceRequest) GetReissuedFromId() string`
+
+GetReissuedFromId returns the ReissuedFromId field if non-nil, zero value otherwise.
+
+### GetReissuedFromIdOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetReissuedFromIdOk() (*string, bool)`
+
+GetReissuedFromIdOk returns a tuple with the ReissuedFromId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReissuedFromId
+
+`func (o *VirtualCreditCardIssuanceRequest) SetReissuedFromId(v string)`
+
+SetReissuedFromId sets ReissuedFromId field to given value.
+
+### HasReissuedFromId
+
+`func (o *VirtualCreditCardIssuanceRequest) HasReissuedFromId() bool`
+
+HasReissuedFromId returns a boolean if a field has been set.
+
+### GetReissuedToId
+
+`func (o *VirtualCreditCardIssuanceRequest) GetReissuedToId() string`
+
+GetReissuedToId returns the ReissuedToId field if non-nil, zero value otherwise.
+
+### GetReissuedToIdOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetReissuedToIdOk() (*string, bool)`
+
+GetReissuedToIdOk returns a tuple with the ReissuedToId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReissuedToId
+
+`func (o *VirtualCreditCardIssuanceRequest) SetReissuedToId(v string)`
+
+SetReissuedToId sets ReissuedToId field to given value.
+
+### HasReissuedToId
+
+`func (o *VirtualCreditCardIssuanceRequest) HasReissuedToId() bool`
+
+HasReissuedToId returns a boolean if a field has been set.
+
+### GetTimestampPinSet
+
+`func (o *VirtualCreditCardIssuanceRequest) GetTimestampPinSet() time.Time`
+
+GetTimestampPinSet returns the TimestampPinSet field if non-nil, zero value otherwise.
+
+### GetTimestampPinSetOk
+
+`func (o *VirtualCreditCardIssuanceRequest) GetTimestampPinSetOk() (*time.Time, bool)`
+
+GetTimestampPinSetOk returns a tuple with the TimestampPinSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimestampPinSet
+
+`func (o *VirtualCreditCardIssuanceRequest) SetTimestampPinSet(v time.Time)`
+
+SetTimestampPinSet sets TimestampPinSet field to given value.
+
+### HasTimestampPinSet
+
+`func (o *VirtualCreditCardIssuanceRequest) HasTimestampPinSet() bool`
+
+HasTimestampPinSet returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
